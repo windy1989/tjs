@@ -13,7 +13,7 @@ class CompanyController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Admin - Master Company',
+            'title'   => 'Master Company',
             'content' => 'admin.master_data.company'
         ];
 

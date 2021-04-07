@@ -18,5 +18,5 @@
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
    <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
    <script src="{{ asset('template/back-office/custom.js') }}"></script>
-   <title>{{ $title }}</title>
+   <title>SMB Admin - {{ $title }}</title>
 </head>
