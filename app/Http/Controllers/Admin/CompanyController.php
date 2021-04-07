@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller {
     
@@ -11,7 +14,7 @@ class CompanyController extends Controller {
     {
         $data = [
             'title'   => 'Admin - Master Company',
-            'content' => 'admin.master.company'
+            'content' => 'admin.master_data.company'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -21,8 +24,8 @@ class CompanyController extends Controller {
     {
         $column = [
             'id',
-            'image',
-            'caption',
+            'code',
+            'name',
             'status'
         ];
 
@@ -32,12 +35,13 @@ class CompanyController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Banner::count();
+        $total_data = Company::count();
         
-        $query_data = Banner::where(function($query) use ($search) {
+        $query_data = Company::where(function($query) use ($search) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->where('caption', 'like', "%$search%");
+                        $query->where('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     });
                 }            
             })
@@ -46,10 +50,11 @@ class CompanyController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Banner::where(function($query) use ($search) {
+        $total_filtered = Company::where(function($query) use ($search) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->where('caption', 'like', "%$search%");
+                        $query->where('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     });
                 }            
             })
@@ -59,24 +64,17 @@ class CompanyController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->image && Storage::exists($val->image)) {
-                    $image = '<a href="' . asset(Storage::url($val->image)) . '" data-lightbox="' . $val->caption . '" data-title="' . $val->caption . '"><img src="' . asset(Storage::url($val->image)) . '" style="max-width:100px;"></a>';     
-                } else {
-                    $image = '<a href="' . asset('website/user.png') . '" data-lightbox="' . $val->caption . '" data-title="' . $val->caption . '"><img src="' . asset('website/user.png') . '" style="max-width:100px;"></a>';
-                }
-
-                $caption = '<span data-toggle="tooltip" data-placement="top" title="' . $val->caption . '">' . Str::limit($val->caption, 30) . '</span>';
-
                 $response['data'][] = [
                     $nomor,
-                    $image,
-                    $caption,
+                    $val->code,
+                    $val->name,
                     $val->status(),
                     '
-                        <button type="button" class="btn btn-warning btn-sm" onclick="show(' . $val->id . ')"><i class="fas fa-edit"></i> Edit</button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="destroy(' . $val->id . ')"><i class="fas fa-trash"></i> Hapus</button>
+                        <button type="button" class="btn btn-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="fas fa-trash"></i></button>
                     '
                 ];
+
                 $nomor++;
             }
         }
@@ -97,16 +95,14 @@ class CompanyController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'image'   => 'required|max:1024|mimes:jpeg,jpg,png|dimensions:min_width:1920,min_height:450',
-            'caption' => 'required',
-            'status'  => 'required'
+            'code'   => 'required|unique:companies,code',
+            'name'   => 'required',
+            'status' => 'required'
         ], [
-            'caption.required' => 'Mohon mengisi caption.',
-            'image.required'   => 'Mohon mengisi gambar.',
-            'image.max'        => 'Gambar maksimal 1MB.',
-            'image.max'        => 'Gambar hanya boleh jpeg, jpg, png.',
-            'image.dimensions' => 'Dimensi gambar minimal 1920x450',
-            'status.required'  => 'Mohon memilih status.'
+            'code.required'   => 'Code cannot be empty.',
+            'code.unique'     => 'Code already exists.',
+            'name.required'   => 'Name cannot be empty.',
+            'status.required' => 'Please select a status.'
         ]);
 
         if($validation->fails()) {
@@ -115,32 +111,27 @@ class CompanyController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
-            $image   = $request->file('image')->store('public/banner');
-            $convert = Image::make(storage_path('app/' . $image))
-                ->resize(1920, 450)
-                ->save();
-
-            $query = Banner::create([
-                'image'   => $image,
-                'caption' => $request->caption,
-                'status'  => $request->status
+            $query = Company::create([
+                'code'   => $request->code,
+                'name'   => $request->name,
+                'status' => $request->status
             ]);
 
             if($query) {
                 activity()
-                    ->performedOn(new Banner())
+                    ->performedOn(new Company())
                     ->causedBy(session('id'))
                     ->withProperties($query)
-                    ->log('Menambah data master banner');
+                    ->log('Add master banner data');
 
                 $response = [
                     'status'  => 200,
-                    'message' => 'Data telah diproses.'
+                    'message' => 'Data added successfully.'
                 ];
             } else {
                 $response = [
                     'status'  => 500,
-                    'message' => 'Data gagal diproses.'
+                    'message' => 'Data failed to add.'
                 ];
             }
         }
@@ -150,27 +141,25 @@ class CompanyController extends Controller {
 
     public function show(Request $request)
     {
-        $data = Banner::find($request->id);
+        $data = Company::find($request->id);
         return response()->json([
-            'image'   => asset(Storage::url($data->image)),
-            'caption' => $data->caption,
-            'status'  => $data->status
+            'code'   => $data->code,
+            'name'   => $data->name,
+            'status' => $data->status
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $data       = Banner::find($id);
         $validation = Validator::make($request->all(), [
-            'image'   => 'max:1024|mimes:jpeg,jpg,png|dimensions:min_width:1920,min_height:450',
-            'caption' => 'required',
-            'status'  => 'required'
+            'code'   => ['required', Rule::unique('companies', 'code')->ignore($id)],
+            'name'   => 'required',
+            'status' => 'required'
         ], [
-            'caption.required' => 'Mohon mengisi caption.',
-            'image.max'        => 'Gambar maksimal 1MB.',
-            'image.max'        => 'Gambar hanya boleh jpeg, jpg, png.',
-            'image.dimensions' => 'Dimensi gambar minimal 1920x450',
-            'status.required'  => 'Mohon memilih status.'
+            'code.required'   => 'Code cannot be empty.',
+            'code.unique'     => 'Code already exists.',
+            'name.required'   => 'Name cannot be empty.',
+            'status.required' => 'Please select a status.'
         ]);
 
         if($validation->fails()) {
@@ -179,39 +168,26 @@ class CompanyController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
-            if($request->has('image')) {
-                if($data->image && Storage::exists($data->image)) {
-                    Storage::delete($data->image);
-                }
-
-                $image   = $request->file('image')->store('public/banner');
-                $convert = Image::make(storage_path('app/' . $image))
-                    ->resize(1920, 450)
-                    ->save();
-            } else {
-                $image = $data->image;
-            }
-
-            $query = Banner::where('id', $id)->update([
-                'image'   => $image,
-                'caption' => $request->caption,
-                'status'  => $request->status
+            $query = Company::where('id', $id)->update([
+                'code'   => $request->code,
+                'name'   => $request->name,
+                'status' => $request->status
             ]);
 
             if($query) {
                 activity()
-                    ->performedOn(new Banner())
+                    ->performedOn(new Company())
                     ->causedBy(session('id'))
-                    ->log('Mengubah data master banner');
+                    ->log('Change the banner master data');
 
                 $response = [
                     'status'  => 200,
-                    'message' => 'Data telah diproses.'
+                    'message' => 'Data updated successfully.'
                 ];
             } else {
                 $response = [
                     'status'  => 500,
-                    'message' => 'Data gagal diproses.'
+                    'message' => 'Data failed to update.'
                 ];
             }
         }
@@ -221,26 +197,21 @@ class CompanyController extends Controller {
 
     public function destroy(Request $request) 
     {
-        $data  = Banner::find($id);
-        $query = Banner::where('id', $request->id)->delete();
+        $query = Company::where('id', $request->id)->delete();
         if($query) {
-            if($data->image && Storage::exists($data->image)) {
-                Storage::delete($data->image);
-            }
-
             activity()
-                ->performedOn(new Banner())
+                ->performedOn(new Company())
                 ->causedBy(session('id'))
-                ->log('Menghapus data master banner');
+                ->log('Delete the banner master data');
 
             $response = [
                 'status'  => 200,
-                'message' => 'Data telah dihapus.'
+                'message' => 'Data deleted successfully.'
             ];
         } else {
             $response = [
                 'status'  => 500,
-                'message' => 'Data gagal dihapus.'
+                'message' => 'Data failed to delete.'
             ];
         }
 

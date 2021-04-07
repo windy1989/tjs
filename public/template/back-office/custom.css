@@ -1,4 +1,7 @@
 .active {
-   font-weight: bold;
    color: black !important;
+}
+
+li.nav-item .collapse-inner a.collapse-item {
+   font-weight: normal;
 }

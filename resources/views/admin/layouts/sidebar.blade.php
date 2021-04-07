@@ -2,7 +2,9 @@
     <div id="wrapper">
         <ul class="navbar-nav sidebar sidebar-dark accordion" style="background: #212529;" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('admin/dashboard') }}">
-                <div class="sidebar-brand-icon rotate-n-15 d-lg-none">SM</div>
+                <div class="sidebar-brand-icon d-lg-none d-md-none">
+                    <img src="{{ asset('website/icon.png') }}" style="max-width: 40px;" alt="Logo">
+                </div>
                 <div class="sidebar-brand-text mx-3">
                     <img src="{{ asset('website/logo-white.png') }}" style="max-width: 150px;" alt="Logo">
                 </div>
