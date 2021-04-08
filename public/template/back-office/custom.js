@@ -7,9 +7,7 @@ var swalInit = swal.mixin({
 $(function() {
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
-   $('.select2').select2({
-      placeholder: '-- Choose --'
-   });
+   $('.select2').select2();
 
    setInterval(function() {
       var d    = new Date();
@@ -47,7 +45,7 @@ $(function() {
 function loadingOpen(selector) {
    $(selector).waitMe({
       effect: 'timer',
-      text: 'Please Wati ...',
+      text: 'Please Wait ...',
       bg: 'rgba(255,255,255,0.7)',
       color: '#000',
       waitTime: -1,

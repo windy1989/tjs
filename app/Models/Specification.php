@@ -12,6 +12,7 @@ class Specification extends Model {
 
     protected $table      = 'specifications';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

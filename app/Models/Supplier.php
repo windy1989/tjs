@@ -12,6 +12,7 @@ class Supplier extends Model {
 
     protected $table      = 'suppliers';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'country_id',
         'code',
@@ -24,6 +25,22 @@ class Supplier extends Model {
         'term_of_payment',
         'status'
     ];
+
+    public static function generateCode()
+    {
+        $query = Supplier::selectRaw('RIGHT(code, 4) as code')
+            ->orderByDesc('id')
+            ->limit(1)
+            ->get();
+
+        if($query->count() > 0) {
+            $code = (int)$query[0]->code + 1;
+        } else {
+            $code = '0001';
+        }
+
+        return 'SUPP-' . str_pad($code, 4, 0, STR_PAD_LEFT);
+    }
 
     public function status() {
         switch($this->status) {
@@ -39,6 +56,16 @@ class Supplier extends Model {
         }
 
         return $status;
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country');
+    }
+
+    public function supplierCurrency()
+    {
+        return $this->hasMany('App\Models\SupplierCurrency');
     }
 
 }

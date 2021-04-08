@@ -12,6 +12,7 @@ class HsCode extends Model {
 
     protected $table      = 'hs_codes';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

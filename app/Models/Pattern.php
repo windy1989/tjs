@@ -12,6 +12,7 @@ class Pattern extends Model {
 
     protected $table      = 'patterns';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

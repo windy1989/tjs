@@ -12,6 +12,7 @@ class Category extends Model {
 
     protected $table      = 'categories';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

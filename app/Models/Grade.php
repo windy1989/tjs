@@ -12,6 +12,7 @@ class Grade extends Model {
 
     protected $table      = 'grades';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

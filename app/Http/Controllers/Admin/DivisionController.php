@@ -37,26 +37,34 @@ class DivisionController extends Controller {
 
         $total_data = Division::count();
         
-        $query_data = Division::where(function($query) use ($search) {
+        $query_data = Division::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }           
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->offset($start)
             ->limit($length)
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Division::where(function($query) use ($search) {
+        $total_filtered = Division::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }           
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->count();
 

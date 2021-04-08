@@ -12,6 +12,7 @@ class Company extends Model {
 
     protected $table      = 'companies';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

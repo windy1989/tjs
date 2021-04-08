@@ -37,26 +37,34 @@ class CurrencyController extends Controller {
 
         $total_data = Currency::count();
         
-        $query_data = Currency::where(function($query) use ($search) {
+        $query_data = Currency::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }        
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->offset($start)
             ->limit($length)
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Currency::where(function($query) use ($search) {
+        $total_filtered = Currency::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }       
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->count();
 
@@ -95,7 +103,7 @@ class CurrencyController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'code'   => 'required|unique:countries,code',
+            'code'   => 'required|unique:currencies,code',
             'name'   => 'required',
             'status' => 'required'
         ], [
@@ -152,7 +160,7 @@ class CurrencyController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'code'   => ['required', Rule::unique('countries', 'code')->ignore($id)],
+            'code'   => ['required', Rule::unique('currencies', 'code')->ignore($id)],
             'name'   => 'required',
             'status' => 'required'
         ], [

@@ -12,6 +12,7 @@ class Color extends Model {
 
     protected $table      = 'colors';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

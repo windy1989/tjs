@@ -38,7 +38,7 @@ class CountryController extends Controller {
 
         $total_data = Country::count();
         
-        $query_data = Country::where(function($query) use ($search) {
+        $query_data = Country::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
@@ -46,20 +46,28 @@ class CountryController extends Controller {
                             ->orWhere('phone_code', 'like', "%$search%");
                     });
                 }            
+
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->offset($start)
             ->limit($length)
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Country::where(function($query) use ($search) {
+        $total_filtered = Country::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%")
                             ->orWhere('phone_code', 'like', "%$search%");
                     });
-                }            
+                }           
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->count();
 

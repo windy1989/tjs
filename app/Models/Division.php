@@ -12,6 +12,7 @@ class Division extends Model {
 
     protected $table      = 'divisions';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

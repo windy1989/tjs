@@ -1,53 +1,68 @@
-   <div class="container-fluid">
-      <h1 class="h3 mb-4 text-gray-800">Master Supplier</h1>
-      <div class="card shadow">
-         <div class="card-header">
-            <div class="row">
-               <div class="col-md-6">
-                  <h6 class="m-0 font-weight-bold mt-2">List Master Supplier</h6>
-               </div>
-               <div class="col-md-6 text-right">
-                  <button type="button" class="btn btn-success btn-icon-split btn-sm" onclick="loadDataTable()">
-                     <span class="icon text-white">
-                        <i class="fas fa-sync"></i>
-                     </span>
-                     <span class="text">Refresh Data</span>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-icon-split btn-sm" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-                     <span class="icon text-white">
-                        <i class="fas fa-plus"></i>
-                     </span>
-                     <span class="text">Add Data</span>
-                  </button>
-               </div>
-            </div>
-         </div>
-         <div class="card-body">
-            <div class="table-responsive">
-               <table id="datatable_serverside" class="table table-hover table-striped table-bordered display nowrap" width="100%">
-                  <thead>
-                     <tr class="text-center">
-                        <th>No</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>Limit Credit</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                     </tr>
-                  </thead>
-               </table>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+<div class="content-wrapper">
+	<div class="page-header page-header-light">
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4>
+					<i class="icon-arrow-left52 mr-2"></i> 
+					<span class="font-weight-semibold">Master Supplier</span>
+				</h4>
+			</div>
+			<div class="header-elements d-none">
+				<div class="d-flex justify-content-center">
+					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
+						<b><i class="icon-sync"></i></b> Refresh Data
+					</button>
+					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+						<b><i class="icon-plus3"></i></b> Add Data
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+			<div class="d-flex">
+				<div class="breadcrumb">
+					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+					<a href="javascript:void(0);" class="breadcrumb-item">Master Data</a>
+					<span class="breadcrumb-item active">Supplier</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="card">
+			<div class="card-header header-elements-inline mb-3">
+				<h5 class="card-title">List Data Supplier</h5>
+				<div class="header-elements">
+               <select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
+						<option value="">All</option>
+						<option value="1">Active</option>
+						<option value="2">Not Active</option>
+					</select>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="datatable_serverside" class="table table-bordered table-striped display nowrap w-100">
+					<thead class="bg-dark">
+						<tr class="text-center">
+							<th>No</th>
+							<th>Code</th>
+							<th>Name</th>
+							<th>Country</th>
+							<th>Limit Credit</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
 
 <div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Form Currency</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form Supplier</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -76,7 +91,7 @@
                </div>
                <div class="form-group">
                   <label>Currency :<span class="text-danger">*</span></label>
-                  <select name="currency_id" id="currency_id" class="select2" multiple>
+                  <select name="currency_id[]" id="currency_id" class="select2" multiple>
                      @foreach($currency as $c)
                         <option value="{{ $c->id }}">{{ $c->code }}</option> 
                      @endforeach
@@ -118,23 +133,27 @@
                      </div>
                   </div>
                </div>
-               <div class="form-group text-center mb-0">
+               <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="status" id="status_not_active" value="2">
-                     <label class="form-check-label" for="status_not_active">Not Active</label>
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" data-fouc>
+                        Not Active
+                     </label>
                   </div>
                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="status" id="status_active" value="1" checked>
-                     <label class="form-check-label" for="status_active">Active</label>
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" checked data-fouc>
+                        Active
+                     </label>
                   </div>
                </div>
             </form>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off"></i> Close</button>
-            <button type="button" class="btn btn-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="fas fa-times"></i> Cancel</button>
-            <button type="button" class="btn btn-warning" id="btn_update" onclick="update()" style="display:none;"><i class="fas fa-save"></i> Save</button>
-            <button type="button" class="btn btn-primary" id="btn_create" onclick="create()"><i class="fas fa-plus"></i> Add</button>
+            <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
+            <button type="button" class="btn bg-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="icon-cross3"></i> Cancel</button>
+            <button type="button" class="btn bg-warning" id="btn_update" onclick="update()" style="display:none;"><i class="icon-pencil7"></i> Save</button>
+            <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Add</button>
          </div>
       </div>
    </div>
@@ -164,6 +183,8 @@
 
   function reset() {
       $('#form_data').trigger('reset');
+      $('#country_id').val(null).change();
+      $('#currency_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -188,6 +209,9 @@
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            data: {
+               status: $('#filter_status').val()
+            },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },
@@ -196,7 +220,11 @@
             },
             error: function() {
                loadingClose('#datatable_serverside');
-               Swal.fire('Server Error', 'Please contact developer', 'error');
+               swalInit({
+                  title: 'Server Error',
+                  text: 'Please contact developer',
+                  type: 'error'
+               });
             }
          },
          columns: [
@@ -229,16 +257,11 @@
             loadingClose('.modal-content');
             if(response.status == 200) {
                success();
-               Swal.fire({
-                  icon: 'success',
-                  title: 'Success',
-                  text: response.message,
-                  showConfirmButton: false,
-                  timer: 1000
-               });
+               notif('success', 'bg-success', response.message);
             } else if(response.status == 422) {
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
+               notif('warning', 'bg-warning', 'Validation');
                
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
@@ -248,13 +271,17 @@
                   });
                });
             } else {
-               Swal.fire('Server Error', response.message, 'error');
+               notif('error', 'bg-danger', response.message);
             }
          },
          error: function() {
             $('.modal-body').scrollTop(0);
             loadingClose('.modal-content');
-            Swal.fire('Server Error', 'Please contact developer', 'error');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
          }
       });
    }
@@ -276,15 +303,27 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
+            $('#country_id').val(response.country_id).change();
             $('#code').val(response.code);
             $('#name').val(response.name);
+            $('#email').val(response.email);
+            $('#phone').val(response.phone);
+            $('#address').val(response.address);
+            $('#pic').val(response.pic);
+            $('#limit_credit').val(response.limit_credit);
+            $('#term_of_payment').val(response.term_of_payment);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
+            $('#currency_id').val(response.currency_id).change();
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },
          error: function() {
             cancel();
             loadingClose('.modal-content');
-            Swal.fire('Server Error', 'Please contact developer', 'error');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
          }
       });
    }
@@ -307,16 +346,11 @@
             loadingClose('.modal-content');
             if(response.status == 200) {
                success();
-               Swal.fire({
-                  icon: 'success',
-                  title: 'Success',
-                  text: response.message,
-                  showConfirmButton: false,
-                  timer: 1000
-               });
+               notif('success', 'bg-success', response.message);
             } else if(response.status == 422) {
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
+               notif('warning', 'bg-warning', 'Validation');
                
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
@@ -326,58 +360,64 @@
                   });
                });
             } else {
-               Swal.fire('Server Error', response.message, 'error');
+               notif('error', 'bg-danger', response.message);
             }
          },
          error: function() {
             $('.modal-body').scrollTop(0);
             loadingClose('.modal-content');
-            Swal.fire('Server Error', 'Please contact developer', 'error');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
          }
       });
    }
 
    function destroy(id) {
-      Swal.fire({
-         title: 'Are sure you want to delete?',
-         text: 'Deleted data can no longer be recovered.',
-         icon: 'warning',
-         showCancelButton: true,
-         confirmButtonText: 'Yes, delete!',
-         cancelButtonText: 'Cancel!',
-         reverseButtons: true,
-         padding: '2em'
-      }).then(function(result) {
-         if(result.value) {
-            $.ajax({
-               url: '{{ url("admin/master_data/supplier/destroy") }}',
-               type: 'POST',
-               dataType: 'JSON',
-               data: {
-                  id: id
-               },
-               headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-               },
-               success: function(response) {
-                  if(response.status == 200) {
-                     $('#datatable_serverside').DataTable().ajax.reload(null, false);
-                     Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
-                        showConfirmButton: false,
-                        timer: 1000
+      var notyConfirm = new Noty({
+         theme: 'limitless',
+         text: '<h6 class="font-weight-bold mb-3">Are sure you want to delete?</h6><label>Deleted data can no longer be recovered.</label>',
+         timeout: false,
+         modal: true,
+         layout: 'center',
+         closeWith: 'button',
+         type: 'confirm',
+         buttons: [
+            Noty.button('<i class="icon-cross3"></i>', 'btn bg-danger', function() {
+               notyConfirm.close();
+            }),
+            Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
+               $.ajax({
+                  url: '{{ url("admin/master_data/supplier/destroy") }}',
+                  type: 'POST',
+                  dataType: 'JSON',
+                  data: {
+                     id: id
+                  },
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  success: function(response) {
+                     if(response.status == 200) {
+                        $('#datatable_serverside').DataTable().ajax.reload(null, false);
+                        notif('success', 'bg-success', response.message);
+                        notyConfirm.close();
+                     } else {
+                        notif('error', 'bg-danger', response.message);
+                     }
+                  },
+                  error: function() {
+                     swalInit({
+                        title: 'Server Error',
+                        text: 'Please contact developer',
+                        type: 'error'
                      });
-                  } else {
-                     Swal.fire('Error!', response.message, 'error');
                   }
-               },
-               error: function() {
-                  Swal.fire('Server Error', 'Please contact developer', 'error');
-               }
-            });
-         }
-      });
+               });
+            })
+         ]
+      }).show();
    }
 </script>

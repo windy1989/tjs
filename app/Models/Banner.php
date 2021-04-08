@@ -12,6 +12,7 @@ class Banner extends Model {
 
     protected $table      = 'banners';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'image',
         'title',
