@@ -37,26 +37,34 @@ class CompanyController extends Controller {
 
         $total_data = Company::count();
         
-        $query_data = Company::where(function($query) use ($search) {
+        $query_data = Company::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }         
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->offset($start)
             ->limit($length)
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Company::where(function($query) use ($search) {
+        $total_filtered = Company::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
-                }            
+                }       
+                
+                if($request->status) {
+                    $query->where('status', $request->status);
+                }
             })
             ->count();
 
@@ -70,8 +78,8 @@ class CompanyController extends Controller {
                     $val->name,
                     $val->status(),
                     '
-                        <button type="button" class="btn btn-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="fas fa-trash"></i></button>
+                        <button type="button" class="btn bg-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
+                        <button type="button" class="btn bg-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
 
@@ -122,7 +130,7 @@ class CompanyController extends Controller {
                     ->performedOn(new Company())
                     ->causedBy(session('id'))
                     ->withProperties($query)
-                    ->log('Add master banner data');
+                    ->log('Add master company data');
 
                 $response = [
                     'status'  => 200,
@@ -178,7 +186,7 @@ class CompanyController extends Controller {
                 activity()
                     ->performedOn(new Company())
                     ->causedBy(session('id'))
-                    ->log('Change the banner master data');
+                    ->log('Change the company master data');
 
                 $response = [
                     'status'  => 200,
@@ -202,7 +210,7 @@ class CompanyController extends Controller {
             activity()
                 ->performedOn(new Company())
                 ->causedBy(session('id'))
-                ->log('Delete the banner master data');
+                ->log('Delete the company master data');
 
             $response = [
                 'status'  => 200,

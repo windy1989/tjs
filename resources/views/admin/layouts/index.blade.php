@@ -1,5 +1,5 @@
 @include('admin.layouts.head', $data)
-@include('admin.layouts.sidebar', $data)
 @include('admin.layouts.header', $data)
+@include('admin.layouts.sidebar', $data)
 @include($data['content'], $data)
 @include('admin.layouts.footer', $data)

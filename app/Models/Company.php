@@ -21,13 +21,13 @@ class Company extends Model {
     public function status() {
         switch($this->status) {
             case '1':
-                $status = '<span class="text-success">Active</span>';
+                $status = '<span class="text-success font-weight-bold">Active</span>';
                 break;
             case '2':
-                $status = '<span class="text-danger">Not Active</span>';
+                $status = '<span class="text-danger font-weight-bold">Not Active</span>';
                 break;
             default:
-                $status = '<span class="text-warning">Invalid</span>';
+                $status = '<span class="text-warning font-weight-bold">Invalid</span>';
                 break;
         }
 
