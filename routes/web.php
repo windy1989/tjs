@@ -55,5 +55,95 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('update/{id}', 'SupplierController@update');
             Route::post('destroy', 'SupplierController@destroy');
         });
+
+        Route::prefix('brand')->group(function() {
+            Route::get('/', 'BrandController@index');
+            Route::post('datatable', 'BrandController@datatable');
+            Route::post('row_detail', 'BrandController@rowDetail');
+            Route::post('create', 'BrandController@create');
+            Route::post('show', 'BrandController@show');
+            Route::post('update/{id}', 'BrandController@update');
+            Route::post('destroy', 'BrandController@destroy');
+        });
+
+        Route::prefix('category')->group(function() {
+            Route::get('/', 'CategoryController@index');
+            Route::post('datatable', 'CategoryController@datatable');
+            Route::post('row_detail', 'CategoryController@rowDetail');
+            Route::post('create', 'CategoryController@create');
+            Route::post('show', 'CategoryController@show');
+            Route::post('update/{id}', 'CategoryController@update');
+            Route::post('destroy', 'CategoryController@destroy');
+        });
+
+        Route::prefix('surface')->group(function() {
+            Route::get('/', 'SurfaceController@index');
+            Route::post('datatable', 'SurfaceController@datatable');
+            Route::post('row_detail', 'SurfaceController@rowDetail');
+            Route::post('create', 'SurfaceController@create');
+            Route::post('show', 'SurfaceController@show');
+            Route::post('update/{id}', 'SurfaceController@update');
+            Route::post('destroy', 'SurfaceController@destroy');
+        });
+
+        Route::prefix('color')->group(function() {
+            Route::get('/', 'ColorController@index');
+            Route::post('datatable', 'ColorController@datatable');
+            Route::post('row_detail', 'ColorController@rowDetail');
+            Route::post('create', 'ColorController@create');
+            Route::post('show', 'ColorController@show');
+            Route::post('update/{id}', 'ColorController@update');
+            Route::post('destroy', 'ColorController@destroy');
+        });
+
+        Route::prefix('pattern')->group(function() {
+            Route::get('/', 'PatternController@index');
+            Route::post('datatable', 'PatternController@datatable');
+            Route::post('row_detail', 'PatternController@rowDetail');
+            Route::post('create', 'PatternController@create');
+            Route::post('show', 'PatternController@show');
+            Route::post('update/{id}', 'PatternController@update');
+            Route::post('destroy', 'PatternController@destroy');
+        });
+
+        Route::prefix('grade')->group(function() {
+            Route::get('/', 'GradeController@index');
+            Route::post('datatable', 'GradeController@datatable');
+            Route::post('row_detail', 'GradeController@rowDetail');
+            Route::post('create', 'GradeController@create');
+            Route::post('show', 'GradeController@show');
+            Route::post('update/{id}', 'GradeController@update');
+            Route::post('destroy', 'GradeController@destroy');
+        });
+
+        Route::prefix('hs_code')->group(function() {
+            Route::get('/', 'HsCodeController@index');
+            Route::post('datatable', 'HsCodeController@datatable');
+            Route::post('row_detail', 'HsCodeController@rowDetail');
+            Route::post('create', 'HsCodeController@create');
+            Route::post('show', 'HsCodeController@show');
+            Route::post('update/{id}', 'HsCodeController@update');
+            Route::post('destroy', 'HsCodeController@destroy');
+        });
+
+        Route::prefix('unit')->group(function() {
+            Route::get('/', 'UnitController@index');
+            Route::post('datatable', 'UnitController@datatable');
+            Route::post('row_detail', 'UnitController@rowDetail');
+            Route::post('create', 'UnitController@create');
+            Route::post('show', 'UnitController@show');
+            Route::post('update/{id}', 'UnitController@update');
+            Route::post('destroy', 'UnitController@destroy');
+        });
+
+        Route::prefix('specification')->group(function() {
+            Route::get('/', 'SpecificationController@index');
+            Route::post('datatable', 'SpecificationController@datatable');
+            Route::post('row_detail', 'SpecificationController@rowDetail');
+            Route::post('create', 'SpecificationController@create');
+            Route::post('show', 'SpecificationController@show');
+            Route::post('update/{id}', 'SpecificationController@update');
+            Route::post('destroy', 'SpecificationController@destroy');
+        });
     });
 });

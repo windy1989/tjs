@@ -4,6 +4,11 @@ var swalInit = swal.mixin({
    cancelButtonClass: 'btn bg-danger'
 });
 
+lightbox.option({
+   resizeDuration: 100,
+   wrapAround: true
+});
+
 $(function() {
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
@@ -41,6 +46,19 @@ $(function() {
       wrapperClass: 'border-indigo-600 text-indigo-800'
    });
 });
+
+function previewImage(event, selector) {
+   if(event.files && event.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+         $(selector).attr('href', e.target.result);
+         $(selector + ' img').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(event.files[0]);
+   }
+}
 
 function loadingOpen(selector) {
    $(selector).waitMe({

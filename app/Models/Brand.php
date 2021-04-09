@@ -14,6 +14,7 @@ class Brand extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
+        'image',
         'code',
         'name',
         'status'

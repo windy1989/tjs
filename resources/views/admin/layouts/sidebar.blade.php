@@ -62,7 +62,7 @@
                                 <a href="{{ url('admin/master_data/supplier') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'supplier' ? 'active' : '' }}">Supplier</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/master_data/supplier') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'brand' ? 'active' : '' }}">Brand</a>
+                                <a href="{{ url('admin/master_data/brand') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'brand' ? 'active' : '' }}">Brand</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/master_data/category') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'category' ? 'active' : '' }}">Category</a>

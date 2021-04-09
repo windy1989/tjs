@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model {
+class Unit extends Model {
 
     use HasFactory, SoftDeletes;
 
-    protected $table      = 'categories';
+    protected $table      = 'units';
     protected $primaryKey = 'id';
-    protected $dates      = ['deleted_at'];
     protected $fillable   = [
+        'code',
         'name',
-        'slug',
-        'parent_id',
         'status'
     ];
 
@@ -34,12 +32,6 @@ class Category extends Model {
         }
 
         return $status;
-    }
-
-    public function parent()
-    {
-        $query = Category::find($this->parent_id);
-        return $query;
     }
 
 }
