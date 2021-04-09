@@ -90,6 +90,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'product' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-box"></i> 
+                            <span>Product</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Product">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/product/type') }}" class="nav-link {{ Request::segment(2) == 'product' && Request::segment(3) == 'type' ? 'active' : '' }}">Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/product/code') }}" class="nav-link {{ Request::segment(2) == 'product' && Request::segment(3) == 'code' ? 'active' : '' }}">Code</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'cogs' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-price-tags"></i> 
@@ -124,20 +138,6 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/price/pricing_policy') }}" class="nav-link {{ Request::segment(2) == 'price' && Request::segment(3) == 'pricing_policy' ? 'active' : '' }}">Pricing Policy</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'product' ? 'nav-item-expanded nav-item-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="icon-box"></i> 
-                            <span>Product</span>
-                        </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Product">
-                            <li class="nav-item">
-                                <a href="{{ url('admin/product/type') }}" class="nav-link {{ Request::segment(2) == 'product' && Request::segment(3) == 'type' ? 'active' : '' }}">Type</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/product/code') }}" class="nav-link {{ Request::segment(2) == 'product' && Request::segment(3) == 'code' ? 'active' : '' }}">Code</a>
                             </li>
                         </ul>
                     </li>
