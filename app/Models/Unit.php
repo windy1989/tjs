@@ -12,6 +12,7 @@ class Unit extends Model {
 
     protected $table      = 'units';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',

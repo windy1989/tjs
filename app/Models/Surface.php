@@ -12,6 +12,7 @@ class Surface extends Model {
 
     protected $table      = 'surfaces';
     protected $primaryKey = 'id';
+    protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'code',
         'name',
