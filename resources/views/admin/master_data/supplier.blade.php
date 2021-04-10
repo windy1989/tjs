@@ -182,9 +182,8 @@
    }
 
   function reset() {
-      $('#form_data').trigger('reset');
+      $('#form_data').reset();
       $('#country_id').val(null).change();
-      $('#currency_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }

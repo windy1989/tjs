@@ -28,13 +28,14 @@ class CreateTypesTable extends Migration
             $table->string('image')->nullable();
             $table->string('code')->unique();
             $table->char('quality', 1);
+            $table->char('material', 1);
             $table->integer('faces')->nullable();
             $table->double('length')->nullable();
             $table->double('width')->nullable();
             $table->double('height')->nullable();
             $table->double('weight')->nullable();
             $table->double('thickness')->nullable();
-            $table->double('price')->nullable();
+            $table->double('conversion')->nullable();
             $table->boolean('stockable')->default(false);
             $table->integer('min_stock');
             $table->integer('max_stock');

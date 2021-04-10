@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
+use App\Models\Unit;
+use App\Models\Color;
+use App\Models\Company;
+use App\Models\Pattern;
+use App\Models\Surface;
 use App\Models\Category;
+use App\Models\Division;
 use Illuminate\Http\Request;
+use App\Models\Specification;
 use App\Http\Controllers\Controller;
 
 class TypeController extends Controller {
@@ -12,9 +19,8 @@ class TypeController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Product Type',
-            'category' => Category::where('status', 1)->where('parent_id', 0)->oldest('name')->get(),
-            'content'  => 'admin.product.type'
+            'title'   => 'Product Type',
+            'content' => 'admin.product.type'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -26,12 +32,6 @@ class TypeController extends Controller {
             'id',
             'code',
             'quality',
-            'length',
-            'width',
-            'height',
-            'weight',
-            'thickness',
-            'price',
             'surface_id',
             'color_id',
             'pattern_id',
@@ -101,17 +101,12 @@ class TypeController extends Controller {
                     $nomor,
                     $val->code,
                     $val->quality(),
-                    $val->length,
-                    $val->width,
-                    $val->weight,
-                    $val->height,
-                    $val->thickness,
-                    number_format($val->price),
                     $val->surface->name,
                     $val->color->name,
                     $val->pattern->name,
                     $val->status(),
                     '
+                        <button type="button" class="btn bg-info btn-sm" title="Info" onclick="show(' . $val->id . ')"><i class="icon-info22"></i></button>
                         <a href="' . url('admin/product/type/update/' . $val->id) . '" class="btn bg-warning btn-sm" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
@@ -180,8 +175,16 @@ class TypeController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Create New Product Type',
-                'content' => 'admin.product.type_create'
+                'title'         => 'Create New Product Type',
+                'category'      => Category::where('status', 1)->where('parent_id', 0)->oldest('name')->get(),
+                'company'       => Company::where('status', 1)->get(),
+                'division'      => Division::where('status', 1)->get(),
+                'surface'       => Surface::where('status', 1)->get(),
+                'color'         => Color::where('status', 1)->get(),
+                'pattern'       => Pattern::where('status', 1)->get(),
+                'specification' => Specification::where('status', 1)->get(),
+                'unit'          => Unit::where('status', 1)->get(),
+                'content'       => 'admin.product.type_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);

@@ -127,7 +127,7 @@
    }
 
   function reset() {
-      $('#form_data').trigger('reset');
+      $('#form_data').reset();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }

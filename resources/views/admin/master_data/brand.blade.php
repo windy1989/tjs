@@ -137,7 +137,7 @@
    }
 
   function reset() {
-      $('#form_data').trigger('reset');
+      $('#form_data').reset();
       $('#preview_image').attr('href', '{{ asset("website/empty.jpg") }}');
       $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
       $('#validation_alert').hide();

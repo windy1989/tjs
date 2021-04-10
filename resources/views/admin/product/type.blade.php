@@ -47,12 +47,6 @@
 							<th>No</th>
 							<th>Code</th>
 							<th>Quality</th>
-							<th>Length</th>
-							<th>Width</th>
-							<th>Height</th>
-							<th>Weight</th>
-							<th>Thickness</th>
-							<th>Convertion</th>
 							<th>Surface</th>
 							<th>Color</th>
 							<th>Pattern</th>
@@ -111,12 +105,6 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
             { name: 'quality', searchable: false, className: 'text-center align-middle' },
-            { name: 'length', searchable: false, className: 'text-center align-middle' },
-            { name: 'width', searchable: false, className: 'text-center align-middle' },
-            { name: 'height', searchable: false, className: 'text-center align-middle' },
-            { name: 'weight', searchable: false, className: 'text-center align-middle' },
-            { name: 'thickness', searchable: false, className: 'text-center align-middle' },
-            { name: 'price', searchable: false, className: 'text-center align-middle' },
             { name: 'surface_id', className: 'text-center align-middle' },
             { name: 'color_id', className: 'text-center align-middle' },
             { name: 'pattern_id', className: 'text-center align-middle' },

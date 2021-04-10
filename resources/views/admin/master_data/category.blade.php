@@ -132,7 +132,7 @@
    }
 
   function reset() {
-      $('#form_data').trigger('reset');
+      $('#form_data').reset();
       $('#parent_id').val(0).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
