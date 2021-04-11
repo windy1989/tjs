@@ -41,7 +41,8 @@ class Type extends Model {
         'status'
     ];
 
-    public function quality() {
+    public function quality() 
+    {
         switch($this->quality) {
             case '1':
                 $quality = 'Import';
@@ -57,7 +58,8 @@ class Type extends Model {
         return $quality;
     }
 
-    public function material() {
+    public function material() 
+    {
         switch($this->material) {
             case '1':
                 $material = 'Low';
@@ -76,7 +78,8 @@ class Type extends Model {
         return $material;
     }
 
-    public function status() {
+    public function status() 
+    {
         switch($this->status) {
             case '1':
                 $status = '<span class="text-success font-weight-bold">Active</span>';

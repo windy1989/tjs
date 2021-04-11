@@ -148,6 +148,11 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('update/{id}', 'SpecificationController@update');
             Route::post('destroy', 'SpecificationController@destroy');
         });
+
+        Route::prefix('warehouse')->group(function() {
+            Route::get('/', 'WarehouseController@index');
+            Route::post('datatable', 'WarehouseController@datatable');
+        });
     });
 
     Route::prefix('product')->group(function() {

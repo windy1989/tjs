@@ -20,7 +20,8 @@ class Brand extends Model {
         'status'
     ];
 
-    public function status() {
+    public function status() 
+    {
         switch($this->status) {
             case '1':
                 $status = '<span class="text-success font-weight-bold">Active</span>';

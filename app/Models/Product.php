@@ -44,7 +44,8 @@ class Product extends Model {
         return $company_code . $brand_code . $country_code . $type_code . $grade_code;
     }
 
-    public function status() {
+    public function status() 
+    {
         switch($this->status) {
             case '1':
                 $status = '<span class="text-success font-weight-bold">Active</span>';

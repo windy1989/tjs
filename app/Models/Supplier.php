@@ -42,7 +42,8 @@ class Supplier extends Model {
         return 'SUPP-' . str_pad($code, 4, 0, STR_PAD_LEFT);
     }
 
-    public function status() {
+    public function status() 
+    {
         switch($this->status) {
             case '1':
                 $status = '<span class="text-success font-weight-bold">Active</span>';

@@ -91,6 +91,9 @@
                             <li class="nav-item">
                                 <a href="{{ url('admin/master_data/specification') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'specification' ? 'active' : '' }}">Specification</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/master_data/warehouse') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'warehouse' ? 'active' : '' }}">Warehouse</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'product' ? 'nav-item-expanded nav-item-open' : '' }}">
