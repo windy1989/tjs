@@ -7,7 +7,7 @@
 					<span class="font-weight-semibold">Master Supplier</span>
 				</h4>
 			</div>
-			<div class="header-elements d-none">
+			<div class="header-elements">
 				<div class="d-flex justify-content-center">
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
@@ -41,19 +41,21 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<table id="datatable_serverside" class="table table-bordered table-striped display nowrap w-100">
-					<thead class="bg-dark">
-						<tr class="text-center">
-							<th>No</th>
-							<th>Code</th>
-							<th>Name</th>
-							<th>Country</th>
-							<th>Limit Credit</th>
-							<th>Status</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-				</table>
+            <div class="table-responsive">
+               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+                  <thead class="bg-dark">
+                     <tr class="text-center">
+                        <th>No</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Limit Credit</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+               </table>
+            </div>
 			</div>
 		</div>
 	</div>
@@ -182,8 +184,9 @@
    }
 
   function reset() {
-      $('#form_data').reset();
+      $('#form_data').trigger('reset');
       $('#country_id').val(null).change();
+      $('#currency_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -201,7 +204,6 @@
          destroy: true,
          iDisplayInLength: 10,
          order: [[0, 'asc']],
-         scrollX: true,
          ajax: {
             url: '{{ url("admin/master_data/supplier/datatable") }}',
             type: 'POST',
@@ -233,7 +235,7 @@
             { name: 'country_id', className: 'text-center align-middle' },
             { name: 'limit_credit', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
-            { name: 'action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }

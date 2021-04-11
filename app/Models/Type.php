@@ -15,7 +15,6 @@ class Type extends Model {
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'category_id',
-        'company_id',
         'division_id',
         'surface_id',
         'color_id',
@@ -42,22 +41,6 @@ class Type extends Model {
         'status'
     ];
 
-    public function status() {
-        switch($this->status) {
-            case '1':
-                $status = '<span class="text-success font-weight-bold">Active</span>';
-                break;
-            case '2':
-                $status = '<span class="text-danger font-weight-bold">Not Active</span>';
-                break;
-            default:
-                $status = '<span class="text-warning font-weight-bold">Invalid</span>';
-                break;
-        }
-
-        return $status;
-    }
-
     public function quality() {
         switch($this->quality) {
             case '1':
@@ -74,14 +57,44 @@ class Type extends Model {
         return $quality;
     }
 
+    public function material() {
+        switch($this->material) {
+            case '1':
+                $material = 'Low';
+                break;
+            case '2':
+                $material = 'Medium';
+                break;
+            case '3':
+                $material = 'High';
+                break;
+            default:
+                $material = 'Invalid';
+                break;
+        }
+
+        return $material;
+    }
+
+    public function status() {
+        switch($this->status) {
+            case '1':
+                $status = '<span class="text-success font-weight-bold">Active</span>';
+                break;
+            case '2':
+                $status = '<span class="text-danger font-weight-bold">Not Active</span>';
+                break;
+            default:
+                $status = '<span class="text-warning font-weight-bold">Invalid</span>';
+                break;
+        }
+
+        return $status;
+    }
+
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo('App\Models\Company');
     }
 
     public function division()
@@ -119,7 +132,7 @@ class Type extends Model {
         return $this->belongsTo('App\Models\Unit', 'stock_unit_id', 'id');
     }
 
-    public function sellingkUnit()
+    public function sellingUnit()
     {
         return $this->belongsTo('App\Models\Unit', 'selling_unit_id', 'id');
     }

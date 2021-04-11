@@ -14,7 +14,7 @@ class ColorSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/colors.php');
+        require public_path('backup/colors.php');
 
         foreach($colors as $c) {
             Color::create([

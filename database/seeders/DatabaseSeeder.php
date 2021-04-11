@@ -24,5 +24,11 @@ class DatabaseSeeder extends Seeder
         $this->call(HsCodeSeeder::class);
         $this->call(UnitSeeder::class);
         $this->call(SpecificationSeeder::class);
+        $this->call(CompanySeeder::class);
+        $this->call(DivisionSeeder::class);
+        $this->call(SupplierSeeder::class);
+        $this->call(BannerSeeder::class);
+        $this->call(TypeSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

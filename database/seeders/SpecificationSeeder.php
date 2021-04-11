@@ -14,7 +14,7 @@ class SpecificationSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/specifications.php');
+        require public_path('backup/specifications.php');
 
         foreach($specifications as $s) {
             Specification::create([

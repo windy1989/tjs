@@ -16,19 +16,20 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('type_id');
+            $table->bigInteger('company_id');
             $table->bigInteger('hs_code_id');
             $table->bigInteger('brand_id');
             $table->bigInteger('country_id');
             $table->bigInteger('supplier_id');
             $table->bigInteger('grade_id');
             $table->double('carton_pallet')->nullable();
-            $table->double('carton_pcs');
+            $table->double('carton_pcs')->nullable();
             $table->double('carton_sqm')->nullable();
-            $table->double('selling_unit')->nullable();
-            $table->double('cubic_stock')->nullable();
+            $table->double('selling_unit');
+            $table->double('cubic_meter');
             $table->double('container_standart');
-            $table->double('container_stock')->nullable();
-            $table->double('container_max_stock')->nullable();
+            $table->double('container_stock');
+            $table->double('container_max_stock');
             $table->text('description');
             $table->char('status', 1);
             $table->timestamps();

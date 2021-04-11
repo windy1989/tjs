@@ -7,7 +7,7 @@
 					<span class="font-weight-semibold">Master Brand</span>
 				</h4>
 			</div>
-			<div class="header-elements d-none">
+			<div class="header-elements">
 				<div class="d-flex justify-content-center">
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
@@ -41,18 +41,20 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<table id="datatable_serverside" class="table table-bordered table-striped display nowrap w-100">
-					<thead class="bg-dark">
-						<tr class="text-center">
-							<th>No</th>
-							<th>Image</th>
-                     <th>Code</th>
-							<th>Name</th>
-							<th>Status</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-				</table>
+            <div class="table-responsive">
+               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+                  <thead class="bg-dark">
+                     <tr class="text-center">
+                        <th>No</th>
+                        <th>Image</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+               </table>
+            </div>
 			</div>
 		</div>
 	</div>
@@ -137,7 +139,7 @@
    }
 
   function reset() {
-      $('#form_data').reset();
+      $('#form_data').trigger('reset');
       $('#preview_image').attr('href', '{{ asset("website/empty.jpg") }}');
       $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
       $('#validation_alert').hide();
@@ -157,7 +159,6 @@
          destroy: true,
          iDisplayInLength: 10,
          order: [[0, 'asc']],
-         scrollX: true,
          ajax: {
             url: '{{ url("admin/master_data/brand/datatable") }}',
             type: 'POST',
@@ -188,7 +189,7 @@
             { name: 'code', className: 'text-center align-middle' },
             { name: 'name', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
-            { name: 'action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }

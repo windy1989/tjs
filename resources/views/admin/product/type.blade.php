@@ -7,7 +7,7 @@
 					<span class="font-weight-semibold">Product Type</span>
 				</h4>
 			</div>
-			<div class="header-elements d-none">
+			<div class="header-elements">
 				<div class="d-flex justify-content-center">
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
@@ -32,7 +32,12 @@
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Type</h5>
-				<div class="header-elements">
+				<div class="header-elements form-inline">
+               <select name="filter_quality" id="filter_quality" class="form-control mr-3" onchange="loadDataTable()">
+						<option value="">All</option>
+						<option value="1">Import</option>
+						<option value="2">Local</option>
+					</select>
 					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
 						<option value="">All</option>
 						<option value="1">Active</option>
@@ -41,23 +46,195 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<table id="datatable_serverside" class="table table-bordered table-striped display nowrap w-100">
-					<thead class="bg-dark">
-						<tr class="text-center">
-							<th>No</th>
-							<th>Code</th>
-							<th>Quality</th>
-							<th>Surface</th>
-							<th>Color</th>
-							<th>Pattern</th>
-							<th>Status</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-				</table>
+            <div class="table-responsive">
+               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+                  <thead class="bg-dark">
+                     <tr class="text-center">
+                        <th>No</th>
+                        <th>Image</th>
+                        <th>Code</th>
+                        <th>Quality</th>
+                        <th>Surface</th>
+                        <th>Color</th>
+                        <th>Pattern</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+               </table>
+            </div>
 			</div>
 		</div>
 	</div>
+
+<div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
+   <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detail Product Type</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <ul class="nav nav-tabs nav-tabs-highlight nav-justified">
+               <li class="nav-item">
+                  <a href="#highlighted-justified-tab1" class="nav-link active" data-toggle="tab">Data</a>
+               </li>
+               <li class="nav-item">
+                  <a href="#highlighted-justified-tab2" class="nav-link" data-toggle="tab">Specification</a>
+               </li>
+               <li class="nav-item">
+                  <a href="#highlighted-justified-tab3" class="nav-link" data-toggle="tab">Stock</a>
+               </li>
+               <li class="nav-item">
+                  <a href="#highlighted-justified-tab4" class="nav-link" data-toggle="tab">Image</a>
+               </li>
+            </ul>
+            <div class="tab-content">
+               <div class="tab-pane fade show active" id="highlighted-justified-tab1">
+                  <p class="mt-4">
+                     <table cellpadding="10" cellspacing="0" width="100%">
+                        <tbody>
+                           <tr>
+                              <th width="20%" class="align-middle">Category</th>
+                              <td class="align-middle" id="detail_category"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Code</th>
+                              <td class="align-middle" id="detail_code"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Faces</th>
+                              <td class="align-middle" id="detail_faces"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Company</th>
+                              <td class="align-middle" id="detail_company"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Division</th>
+                              <td class="align-middle" id="detail_division"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Quality</th>
+                              <td class="align-middle" id="detail_quality"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Surface</th>
+                              <td class="align-middle" id="detail_surface"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Color</th>
+                              <td class="align-middle" id="detail_color"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Pattern</th>
+                              <td class="align-middle" id="detail_pattern"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Status</th>
+                              <td class="align-middle" id="detail_status"></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </p>
+               </div>
+               <div class="tab-pane fade" id="highlighted-justified-tab2">
+                  <p class="mt-4">
+                     <table cellpadding="10" cellspacing="0" width="100%">
+                        <tbody>
+                           <tr>
+                              <th width="20%" class="align-middle">Material</th>
+                              <td class="align-middle" id="detail_material"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Specification</th>
+                              <td class="align-middle" id="detail_specification"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Length</th>
+                              <td class="align-middle" id="detail_length"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Width</th>
+                              <td class="align-middle" id="detail_width"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Height</th>
+                              <td class="align-middle" id="detail_height"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Weight</th>
+                              <td class="align-middle" id="detail_weight"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Thickness</th>
+                              <td class="align-middle" id="detail_thickness"></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </p>
+               </div>
+               <div class="tab-pane fade" id="highlighted-justified-tab3">
+                  <p class="mt-4">
+                     <table cellpadding="10" cellspacing="0" width="100%">
+                        <tbody>
+                           <tr>
+                              <th width="20%" class="align-middle">Buy Unit</th>
+                              <td class="align-middle" id="detail_buy_unit"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Stock Unit</th>
+                              <td class="align-middle" id="detail_stock_unit"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Selling Unit</th>
+                              <td class="align-middle" id="detail_selling_unit"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Need To Stock</th>
+                              <td class="align-middle" id="detail_stockable"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Small Stock</th>
+                              <td class="align-middle" id="detail_small_stock"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Min Stock</th>
+                              <td class="align-middle" id="detail_min_stock"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Max Stock</th>
+                              <td class="align-middle" id="detail_max_stock"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Conversion</th>
+                              <td class="align-middle" id="detail_conversion"></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </p>
+               </div>
+               <div class="tab-pane fade" id="highlighted-justified-tab4">
+                  <p class="mt-4">
+                     <div class="form-group">
+                        <div class="text-center">
+                           <a href="" id="detail_image" data-lightbox="Image" data-title="Preview Image">
+                              <img src="" class="img-fluid img-thumbnail w-100" style="max-width:350px;">
+                           </a>
+                        </div>
+                     </div>
+                  </p>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
+         </div>
+      </div>
+   </div>
+</div>
 
 <script>
    $(function() {
@@ -65,7 +242,6 @@
    });
 
   function success() {
-      $('#modal_form').modal('hide');
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
    }
 
@@ -76,7 +252,6 @@
          destroy: true,
          iDisplayInLength: 10,
          order: [[0, 'asc']],
-         scrollX: true,
          ajax: {
             url: '{{ url("admin/product/type/datatable") }}',
             type: 'POST',
@@ -84,6 +259,7 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
+               quality: $('#filter_quality').val(),
                status: $('#filter_status').val()
             },
             beforeSend: function() {
@@ -103,15 +279,77 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
+            { name: 'image', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
             { name: 'quality', searchable: false, className: 'text-center align-middle' },
             { name: 'surface_id', className: 'text-center align-middle' },
             { name: 'color_id', className: 'text-center align-middle' },
             { name: 'pattern_id', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
-            { name: 'action', searchable: false, orderable: false, className: 'text-center align-middle' }
+            { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
+   }
+
+   function show(id) {
+      $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active')
+      $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
+      $('.tab-pane').removeClass('active')
+      $('.tab-pane#highlighted-justified-tab1').addClass('show active')
+      $('#modal_form').modal('show');
+      
+      $.ajax({
+         url: '{{ url("admin/product/type/show") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: {
+            id: id
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            loadingOpen('.modal-content');
+         },
+         success: function(response) {
+            loadingClose('.modal-content');
+            $('#detail_category').html(': ' + response.category);
+            $('#detail_company').html(': ' + response.company);
+            $('#detail_division').html(': ' + response.division);
+            $('#detail_surface').html(': ' + response.surface);
+            $('#detail_color').html(': ' + response.color);
+            $('#detail_pattern').html(': ' + response.pattern);
+            $('#detail_specification').html(': ' + response.specification);
+            $('#detail_buy_unit').html(': ' + response.buy_unit);
+            $('#detail_stock_unit').html(': ' + response.stock_unit);
+            $('#detail_selling_unit').html(': ' + response.selling_unit);
+            $('#detail_image').attr('href', response.image);
+            $('#detail_image img').attr('src', response.image);
+            $('#detail_code').html(': ' + response.code);
+            $('#detail_quality').html(': ' + response.quality);
+            $('#detail_material').html(': ' + response.material);
+            $('#detail_faces').html(': ' + response.faces);
+            $('#detail_length').html(': ' + response.lengths);
+            $('#detail_width').html(': ' + response.width);
+            $('#detail_height').html(': ' + response.height);
+            $('#detail_weight').html(': ' + response.weight);
+            $('#detail_thickness').html(': ' + response.thickness);
+            $('#detail_conversion').html(': ' + response.conversion);
+            $('#detail_stockable').html(': ' + response.stockable);
+            $('#detail_small_stock').html(': ' + response.small_stock);
+            $('#detail_min_stock').html(': ' + response.min_stock);
+            $('#detail_max_stock').html(': ' + response.max_stock);
+            $('#detail_status').html(': ' + response.status);
+         },
+         error: function() {
+            loadingClose('.modal-content');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
    }
 
    function destroy(id) {
@@ -129,7 +367,7 @@
             }),
             Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
                $.ajax({
-                  url: '{{ url("admin/master_data/category/destroy") }}',
+                  url: '{{ url("admin/product/type/destroy") }}',
                   type: 'POST',
                   dataType: 'JSON',
                   data: {

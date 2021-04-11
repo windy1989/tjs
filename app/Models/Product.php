@@ -15,6 +15,7 @@ class Product extends Model {
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'type_id',
+        'company_id',
         'hs_code_id',
         'brand_id',
         'country_id',
@@ -24,13 +25,24 @@ class Product extends Model {
         'carton_pcs',
         'carton_sqm',
         'selling_unit',
-        'cubic_stock',
+        'cubic_meter',
         'container_standart',
         'container_stock',
         'container_max_stock',
         'description',
         'status'
     ];
+
+    public function code()
+    {
+        $company_code = $this->company->code;
+        $brand_code   = $this->brand->code;
+        $country_code = $this->country->code;
+        $type_code    = $this->type->code;
+        $grade_code   = $this->grade->code;
+
+        return $company_code . $brand_code . $country_code . $type_code . $grade_code;
+    }
 
     public function status() {
         switch($this->status) {
@@ -51,6 +63,11 @@ class Product extends Model {
     public function type()
     {
         return $this->belongsTo('App\Models\Type');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
     }
 
     public function hsCode()
@@ -76,6 +93,11 @@ class Product extends Model {
     public function grade()
     {
         return $this->belongsTo('App\Models\Grade');
+    }
+
+    public function productShading()
+    {
+        return $this->hasMany('App\Models\ProductShading');
     }
 
 }

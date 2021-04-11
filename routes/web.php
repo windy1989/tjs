@@ -9,6 +9,10 @@ Route::get('/', function () {
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::get('dashboard', 'DashboardController@index');
 
+    Route::prefix('select2')->group(function() {
+        Route::post('type', 'Select2Controller@type');
+    });
+
     Route::prefix('master_data')->group(function() {
         Route::prefix('company')->group(function() {
             Route::get('/', 'CompanyController@index');
@@ -53,6 +57,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('show', 'SupplierController@show');
             Route::post('update/{id}', 'SupplierController@update');
             Route::post('destroy', 'SupplierController@destroy');
+        });
+
+        Route::prefix('banner')->group(function() {
+            Route::get('/', 'BannerController@index');
+            Route::post('datatable', 'BannerController@datatable');
+            Route::post('create', 'BannerController@create');
+            Route::post('show', 'BannerController@show');
+            Route::post('update/{id}', 'BannerController@update');
+            Route::post('destroy', 'BannerController@destroy');
         });
 
         Route::prefix('brand')->group(function() {
@@ -143,7 +156,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('datatable', 'TypeController@datatable');
             Route::match(['get', 'post'], 'create', 'TypeController@create');
             Route::match(['get', 'post'], 'update/{id}', 'TypeController@update');
+            Route::post('show', 'TypeController@show');
             Route::post('destroy', 'TypeController@destroy');
+        });
+
+        Route::prefix('code')->group(function() {
+            Route::get('/', 'CodeController@index');
+            Route::post('datatable', 'CodeController@datatable');
+            Route::post('generate_code', 'CodeController@generateCode');
+            Route::match(['get', 'post'], 'create', 'CodeController@create');
+            Route::match(['get', 'post'], 'update/{id}', 'CodeController@update');
+            Route::post('show', 'CodeController@show');
+            Route::post('destroy', 'CodeController@destroy');
         });
     });
 });

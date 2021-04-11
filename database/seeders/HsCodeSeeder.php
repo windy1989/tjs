@@ -15,7 +15,7 @@ class HsCodeSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/hs_codes.php');
+        require public_path('backup/hs_codes.php');
 
         foreach($hs_codes as $hc) {
             HsCode::create([

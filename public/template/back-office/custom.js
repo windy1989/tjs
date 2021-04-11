@@ -83,3 +83,31 @@ function notif(type, background, message) {
 function loadingClose(selector) {
    $(selector).waitMe('hide');
 }
+
+function select2ServerSide(selector, endpoint) {
+   $(selector).select2({
+      placeholder: '-- Choose --',
+      minimumInputLength: 3,
+      allowClear: true,
+      cache: true,
+      ajax: {
+         url: endpoint,
+         type: 'POST',
+         dataType: 'JSON',
+         delay: 250,
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         data: function(params) {
+            return {
+               search: params.term
+            };
+         },
+         processResults: function(data) {
+            return {
+               results: data.items
+            }
+         }
+      }
+   });
+}

@@ -15,7 +15,6 @@ class Banner extends Model {
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'image',
-        'title',
         'status'
     ];
 

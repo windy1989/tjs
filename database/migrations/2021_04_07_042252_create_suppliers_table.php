@@ -18,8 +18,8 @@ class CreateSuppliersTable extends Migration
             $table->bigInteger('country_id');
             $table->string('code')->unique();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('pic');
             $table->double('limit_credit')->default(0);

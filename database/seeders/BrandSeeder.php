@@ -14,7 +14,7 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/brands.php');
+        require public_path('backup/brands.php');
 
         foreach($brands as $b) {
             Brand::create([

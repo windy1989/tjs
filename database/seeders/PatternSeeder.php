@@ -14,7 +14,7 @@ class PatternSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/patterns.php');
+        require public_path('backup/patterns.php');
 
         foreach($patterns as $p) {
             Pattern::create([

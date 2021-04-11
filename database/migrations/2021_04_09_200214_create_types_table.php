@@ -16,9 +16,8 @@ class CreateTypesTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('category_id');
-            $table->bigInteger('company_id');
             $table->bigInteger('division_id');
-            $table->bigInteger('surface_id');
+            $table->bigInteger('surface_id')->nullable();
             $table->bigInteger('color_id');
             $table->bigInteger('pattern_id');
             $table->bigInteger('specification_id');
@@ -29,13 +28,13 @@ class CreateTypesTable extends Migration
             $table->string('code')->unique();
             $table->char('quality', 1);
             $table->char('material', 1);
-            $table->integer('faces')->nullable();
+            $table->string('faces')->nullable();
             $table->double('length')->nullable();
             $table->double('width')->nullable();
-            $table->double('height')->nullable();
-            $table->double('weight')->nullable();
-            $table->double('thickness')->nullable();
-            $table->double('conversion')->nullable();
+            $table->double('height');
+            $table->double('weight');
+            $table->double('thickness');
+            $table->double('conversion');
             $table->boolean('stockable')->default(false);
             $table->integer('min_stock');
             $table->integer('max_stock');

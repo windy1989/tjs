@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/categories.php');
+        require public_path('backup/categories.php');
 
         foreach($categories as $c) {
             Category::create([
