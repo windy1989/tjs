@@ -50,7 +50,7 @@ class CodeController extends Controller {
         $query_data = Product::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->where('type', function($query) use ($search) {
+                        $query->whereHas('type', function($query) use ($search) {
                                 $query->where('code', 'like', "%$search%");
                             })
                             ->orWhereHas('company', function($query) use ($search) {
@@ -84,7 +84,7 @@ class CodeController extends Controller {
         $total_filtered = Product::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->where('type', function($query) use ($search) {
+                        $query->whereHas('type', function($query) use ($search) {
                                 $query->where('code', 'like', "%$search%");
                             })
                             ->orWhereHas('company', function($query) use ($search) {
