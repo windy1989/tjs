@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAgentsTable extends Migration
+class CreateImportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAgentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('agents', function (Blueprint $table) {
+        Schema::create('imports', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('country_id');
-            $table->bigInteger('category_id');
-            $table->double('min_price')->default(0);
-            $table->double('max_price')->default(0);
-            $table->double('fee')->default(0);
+            $table->string('code');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });
@@ -32,6 +29,6 @@ class CreateAgentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agents');
+        Schema::dropIfExists('imports');
     }
 }
