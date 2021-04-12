@@ -11,6 +11,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
     Route::prefix('select2')->group(function() {
         Route::post('type', 'Select2Controller@type');
+        Route::post('product', 'Select2Controller@product');
     });
 
     Route::prefix('master_data')->group(function() {
@@ -39,6 +40,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('show', 'CountryController@show');
             Route::post('update/{id}', 'CountryController@update');
             Route::post('destroy', 'CountryController@destroy');
+        });
+
+        Route::prefix('city')->group(function() {
+            Route::get('/', 'CityController@index');
+            Route::post('datatable', 'CityController@datatable');
+            Route::post('create', 'CityController@create');
+            Route::post('show', 'CityController@show');
+            Route::post('update/{id}', 'CityController@update');
+            Route::post('destroy', 'CityController@destroy');
         });
 
         Route::prefix('currency')->group(function() {
@@ -173,6 +183,81 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::match(['get', 'post'], 'update/{id}', 'CodeController@update');
             Route::post('show', 'CodeController@show');
             Route::post('destroy', 'CodeController@destroy');
+        });
+    });
+
+    Route::prefix('cogs')->group(function() {
+        Route::prefix('rate')->group(function() {
+            Route::get('/', 'CurrencyRateController@index');
+            Route::post('datatable', 'CurrencyRateController@datatable');
+            Route::post('create', 'CurrencyRateController@create');
+            Route::post('show', 'CurrencyRateController@show');
+            Route::post('update/{id}', 'CurrencyRateController@update');
+            Route::post('destroy', 'CurrencyRateController@destroy');
+        });
+
+        Route::prefix('price')->group(function() {
+            Route::get('/', 'CurrencyPriceController@index');
+            Route::post('datatable', 'CurrencyPriceController@datatable');
+            Route::post('create', 'CurrencyPriceController@create');
+            Route::post('show', 'CurrencyPriceController@show');
+            Route::post('update/{id}', 'CurrencyPriceController@update');
+            Route::post('destroy', 'CurrencyPriceController@destroy');
+        });
+
+        Route::prefix('agent')->group(function() {
+            Route::get('/', 'AgentController@index');
+            Route::post('datatable', 'AgentController@datatable');
+            Route::post('create', 'AgentController@create');
+            Route::post('show', 'AgentController@show');
+            Route::post('update/{id}', 'AgentController@update');
+            Route::post('destroy', 'AgentController@destroy');
+        });
+
+        Route::prefix('freight')->group(function() {
+            Route::get('/', 'FreightController@index');
+            Route::post('datatable', 'FreightController@datatable');
+            Route::post('create', 'FreightController@create');
+            Route::post('show', 'FreightController@show');
+            Route::post('update/{id}', 'FreightController@update');
+            Route::post('destroy', 'FreightController@destroy');
+        });
+
+        Route::prefix('import')->group(function() {
+            Route::get('/', 'ImportController@index');
+            Route::post('datatable', 'ImportController@datatable');
+            Route::post('create', 'ImportController@create');
+            Route::post('show', 'ImportController@show');
+            Route::post('update/{id}', 'ImportController@update');
+            Route::post('destroy', 'ImportController@destroy');
+        });
+
+        Route::prefix('emkl')->group(function() {
+            Route::get('/', 'EmklController@index');
+            Route::post('datatable', 'EmklController@datatable');
+            Route::post('create', 'EmklController@create');
+            Route::post('show', 'EmklController@show');
+            Route::post('update/{id}', 'EmklController@update');
+            Route::post('destroy', 'EmklController@destroy');
+        });
+
+        Route::prefix('emkl_rate')->group(function() {
+            Route::get('/', 'EmklRateController@index');
+            Route::post('datatable', 'EmklRateController@datatable');
+            Route::post('create', 'EmklRateController@create');
+            Route::post('show', 'EmklRateController@show');
+            Route::post('update/{id}', 'EmklRateController@update');
+            Route::post('destroy', 'EmklRateController@destroy');
+        });
+
+        Route::prefix('marketing_structure')->group(function() {
+            Route::get('/', 'MarketingStructureController@index');
+            Route::post('datatable', 'MarketingStructureController@datatable');
+            Route::post('row_detail', 'MarketingStructureController@rowDetail');
+            Route::post('create', 'MarketingStructureController@create');
+            Route::post('show', 'MarketingStructureController@show');
+            Route::post('update/{id}', 'MarketingStructureController@update');
+            Route::post('destroy', 'MarketingStructureController@destroy');
         });
     });
 });

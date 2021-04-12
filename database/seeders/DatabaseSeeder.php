@@ -30,5 +30,12 @@ class DatabaseSeeder extends Seeder
         $this->call(BannerSeeder::class);
         $this->call(TypeSeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(CurrencyRateSeeder::class);
+        $this->call(AgentSeeder::class);
+        $this->call(ImportSeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(FreightSeeder::class);
+        $this->call(EmklSeeder::class);
+        $this->call(MarketingStructureSeeder::class);
     }
 }

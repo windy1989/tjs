@@ -56,6 +56,9 @@
                                 <a href="{{ url('admin/master_data/country') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'country' ? 'active' : '' }}">Country</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('admin/master_data/city') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'city' ? 'active' : '' }}">City</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('admin/master_data/currency') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'currency' ? 'active' : '' }}">Currency</a>
                             </li>
                             <li class="nav-item">
@@ -117,6 +120,12 @@
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Cogs">
                             <li class="nav-item">
+                                <a href="{{ url('admin/cogs/rate') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'rate' ? 'active' : '' }}">Rate</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/cogs/price') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'price' ? 'active' : '' }}">Price</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('admin/cogs/agent') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'agent' ? 'active' : '' }}">Agent</a>
                             </li>
                             <li class="nav-item">
@@ -126,7 +135,13 @@
                                 <a href="{{ url('admin/cogs/import') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'import' ? 'active' : '' }}">Import</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/cogs/structure') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'structure' ? 'active' : '' }}">Structure</a>
+                                <a href="{{ url('admin/cogs/emkl') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'emkl' ? 'active' : '' }}">Emkl</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/cogs/emkl_rate') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'emkl_rate' ? 'active' : '' }}">Emkl Rate</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/cogs/marketing_structure') }}" class="nav-link {{ Request::segment(2) == 'cogs' && Request::segment(3) == 'marketing_structure' ? 'active' : '' }}">Marketing Structure</a>
                             </li>
                         </ul>
                     </li>
