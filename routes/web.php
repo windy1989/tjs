@@ -260,4 +260,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('destroy', 'MarketingStructureController@destroy');
         });
     });
+
+    Route::prefix('price')->group(function() {
+        Route::prefix('cogs')->group(function() {
+            Route::get('/', 'CogsController@index');
+            Route::post('datatable', 'CogsController@datatable');
+            Route::post('create', 'CogsController@create');
+            Route::post('show', 'CogsController@show');
+            Route::post('update/{id}', 'CogsController@update');
+            Route::post('destroy', 'CogsController@destroy');
+        });
+    });
 });
