@@ -24,6 +24,7 @@ class MarketingStructureController extends Controller {
     public function datatable(Request $request) 
     {
         $column = [
+            'detail',
             'id',
             'company_id',
             'fixed_cost',

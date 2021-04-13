@@ -288,7 +288,7 @@
             }
          },
          columns: [
-            { name: null, orderable: false, searchable: false, className: 'text-center align-middle details-control' },
+            { name: 'detail', orderable: false, searchable: false, className: 'text-center align-middle details-control' },
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'company_id', className: 'text-center align-middle' },
             { name: 'fixed_cost', searchable: false, className: 'text-center align-middle' },
