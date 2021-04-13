@@ -25,7 +25,6 @@ class Type extends Model {
         'selling_unit_id',
         'image',
         'code',
-        'quality',
         'material',
         'faces',
         'length',
@@ -40,23 +39,6 @@ class Type extends Model {
         'small_stock',
         'status'
     ];
-
-    public function quality() 
-    {
-        switch($this->quality) {
-            case '1':
-                $quality = 'Import';
-                break;
-            case '2':
-                $quality = 'Local';
-                break;
-            default:
-                $quality = 'Invalid';
-                break;
-        }
-
-        return $quality;
-    }
 
     public function material() 
     {

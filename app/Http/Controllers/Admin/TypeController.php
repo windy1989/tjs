@@ -34,7 +34,6 @@ class TypeController extends Controller {
             'id',
             'image',
             'code',
-            'quality',
             'surface_id',
             'color_id',
             'pattern_id',
@@ -64,10 +63,6 @@ class TypeController extends Controller {
                             });
                     });
                 }         
-                
-                if($request->quality) {
-                    $query->where('quality', $request->quality);
-                }
 
                 if($request->status) {
                     $query->where('status', $request->status);
@@ -93,10 +88,6 @@ class TypeController extends Controller {
                             });
                     });
                 }       
-
-                if($request->quality) {
-                    $query->where('quality', $request->quality);
-                }
                 
                 if($request->status) {
                     $query->where('status', $request->status);
@@ -118,7 +109,6 @@ class TypeController extends Controller {
                     $nomor,
                     $image,
                     $val->code,
-                    $val->quality(),
                     $val->surface->name,
                     $val->color->name,
                     $val->pattern->name,
@@ -161,11 +151,8 @@ class TypeController extends Controller {
                 'selling_unit_id'  => 'required',
                 'image'            => 'mimes:jpg,jpeg,png|max:100|dimensions:width=400,height=400',
                 'code'             => 'required|unique:types,code',
-                'quality'          => 'required',
                 'material'         => 'required',
-                'height'           => 'required',
                 'weight'           => 'required',
-                'thickness'        => 'required',
                 'conversion'       => 'required',
                 'stockable'        => 'required',
                 'min_stock'        => 'required',
@@ -177,7 +164,7 @@ class TypeController extends Controller {
                 'division_id.required'      => 'Please select a division.',
                 'color_id.required'         => 'Please select a color.',
                 'pattern_id.required'       => 'Please select a pattern.',
-                'specification_id.required' => 'Please select a specification.',
+                'specification_id.required' => 'Please select a loading limit.',
                 'buy_unit_id.required'      => 'Please select a buy unit.',
                 'stock_unit_id.required'    => 'Please select a stock unit.',
                 'selling_unit_id.required'  => 'Please select a selling unit.',
@@ -187,11 +174,8 @@ class TypeController extends Controller {
                 'image.dimensions'          => 'Image size must be 400x400.',
                 'code.required'             => 'Code cannot be empty.',
                 'code.unique'               => 'Code already exists.',
-                'quality.required'          => 'Please select a quality.',
                 'material.required'         => 'Please select a material.',
-                'height.required'           => 'Height cannot be empty.',
                 'weight.required'           => 'Weight cannot be empty.',
-                'thickness.required'        => 'Thickness cannot be empty.',
                 'conversion.required'       => 'Conversion cannot be empty.',
                 'stockable.required'        => 'Please select a need stock.',
                 'min_stock.required'        => 'Min stock cannot be empty.',
@@ -215,7 +199,6 @@ class TypeController extends Controller {
                     'selling_unit_id'  => $request->selling_unit_id,
                     'image'            => $request->has('image') ? $request->file('image')->store('public/product') : null,
                     'code'             => $request->code,
-                    'quality'          => $request->quality,
                     'material'         => $request->material,
                     'faces'            => $request->faces,
                     'length'           => $request->length,
@@ -275,11 +258,8 @@ class TypeController extends Controller {
                 'selling_unit_id'  => 'required',
                 'image'            => 'mimes:jpg,jpeg,png|max:100|dimensions:width=400,height=400',
                 'code'             => ['required', Rule::unique('types', 'code')->ignore($id)],
-                'quality'          => 'required',
                 'material'         => 'required',
-                'height'           => 'required',
                 'weight'           => 'required',
-                'thickness'        => 'required',
                 'conversion'       => 'required',
                 'stockable'        => 'required',
                 'min_stock'        => 'required',
@@ -291,7 +271,7 @@ class TypeController extends Controller {
                 'division_id.required'      => 'Please select a division.',
                 'color_id.required'         => 'Please select a color.',
                 'pattern_id.required'       => 'Please select a pattern.',
-                'specification_id.required' => 'Please select a specification.',
+                'specification_id.required' => 'Please select a loading limit.',
                 'buy_unit_id.required'      => 'Please select a buy unit.',
                 'stock_unit_id.required'    => 'Please select a stock unit.',
                 'selling_unit_id.required'  => 'Please select a selling unit.',
@@ -301,11 +281,8 @@ class TypeController extends Controller {
                 'image.dimensions'          => 'Image size must be 400x400.',
                 'code.required'             => 'Code cannot be empty.',
                 'code.unique'               => 'Code already exists.',
-                'quality.required'          => 'Please select a quality.',
                 'material.required'         => 'Please select a material.',
-                'height.required'           => 'Height cannot be empty.',
                 'weight.required'           => 'Weight cannot be empty.',
-                'thickness.required'        => 'Thickness cannot be empty.',
                 'conversion.required'       => 'Conversion cannot be empty.',
                 'stockable.required'        => 'Please select a need stock.',
                 'min_stock.required'        => 'Min stock cannot be empty.',
@@ -339,7 +316,6 @@ class TypeController extends Controller {
                     'selling_unit_id'  => $request->selling_unit_id,
                     'image'            => $image,
                     'code'             => $request->code,
-                    'quality'          => $request->quality,
                     'material'         => $request->material,
                     'faces'            => $request->faces,
                     'length'           => $request->length,
@@ -406,14 +382,13 @@ class TypeController extends Controller {
             'selling_unit'  => $data->sellingUnit->name,
             'image'         => $image,
             'code'          => $data->code,
-            'quality'       => $data->quality(),
             'material'      => $data->material(),
             'faces'         => $data->faces ? $data->faces : 'Not Set',
-            'lengths'       => $data->length ? $data->length : 'Not Set',
-            'width'         => $data->width ? $data->width : 'Not Set',
-            'height'        => $data->height,
+            'lengths'       => $data->length ? $data->length . ' Cm' : 'Not Set',
+            'width'         => $data->width ? $data->width . ' Cm' : 'Not Set',
+            'height'        => $data->height ? $data->height . ' Cm' : 'Not Set',
             'weight'        => $data->weight . ' Kg',
-            'thickness'     => $data->thickness,
+            'thickness'     => $data->thickness ? $data->thickness . ' Cm' : 'Not Set',
             'conversion'    => $data->conversion,
             'stockable'     => $data->stockable ? 'Yes' : 'No',
             'small_stock'   => $data->small_stock,

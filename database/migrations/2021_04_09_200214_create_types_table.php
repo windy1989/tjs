@@ -26,14 +26,13 @@ class CreateTypesTable extends Migration
             $table->bigInteger('selling_unit_id');
             $table->string('image')->nullable();
             $table->string('code')->unique();
-            $table->char('quality', 1);
             $table->char('material', 1);
             $table->string('faces')->nullable();
             $table->double('length')->nullable();
             $table->double('width')->nullable();
-            $table->double('height');
+            $table->double('height')->nullable();
             $table->double('weight');
-            $table->double('thickness');
+            $table->double('thickness')->nullable();
             $table->double('conversion');
             $table->boolean('stockable')->default(false);
             $table->integer('min_stock');

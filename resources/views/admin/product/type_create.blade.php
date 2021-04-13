@@ -70,7 +70,7 @@
                      <p class="mt-4">
                         <div class="form-group">
                            <label>Category :<span class="text-danger">*</span></label>
-                           <select name="category_id" id="category_id" class="select2">
+                           <select name="category_id" id="category_id" class="select2" onchange="selectionField()">
                               <option value="">-- Choose --</option>
                               @foreach($category as $c)
                                  @php $sub_1 = App\Models\Category::where('parent_id', $c->id)->where('status', 1)->oldest('name')->get(); @endphp
@@ -92,20 +92,19 @@
                            </select>
                         </div>
                         <div class="row">
-                           <div class="col-md-6">
+                           <div class="col-md-4">
                               <div class="form-group">
                                  <label>Code :<span class="text-danger">*</span></label>
                                  <input type="text" name="code" id="code" class="form-control" value="{{ old('code') }}" placeholder="Enter code">
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-4">
                               <div class="form-group">
                                  <label>Faces :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <input type="text" name="faces" id="faces" class="form-control" value="{{ old('faces') }}" placeholder="Enter faces">
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-4">
                               <div class="form-group">
                                  <label>Division :<span class="text-danger">*</span></label>
                                  <select name="division_id" id="division_id" class="select2">
@@ -116,20 +115,9 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Quality :<span class="text-danger">*</span></label>
-                                 <select name="quality" id="quality" class="custom-select">
-                                    <option value="">-- Choose --</option>
-                                    <option value="1" {{ old('quality') == 1 ? 'selected' : '' }}>Import</option>
-                                    <option value="2" {{ old('quality') == 2 ? 'selected' : '' }}>Local</option>
-                                 </select>
-                              </div>
-                           </div>
                            <div class="col-md-4">
                               <div class="form-group">
                                  <label>Surface :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <select name="surface_id" id="surface_id" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($surface as $s)
@@ -179,7 +167,7 @@
                            </div>
                            <div class="col-md-6">
                               <div class="form-group">
-                                 <label>Specification :<span class="text-danger">*</span></label>
+                                 <label>Loading Limit :<span class="text-danger">*</span></label>
                                  <select name="specification_id" id="specification_id" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($specification as $s)
@@ -191,21 +179,34 @@
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Length :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
-                                 <input type="number" name="length" id="length" class="form-control" value="{{ old('length') }}" placeholder="Enter length">
+                                 <div class="input-group">
+                                    <input type="number" name="length" id="length" class="form-control" value="{{ old('length') }}" placeholder="Enter length">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Width :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
-                                 <input type="number" name="width" id="width" class="form-control" value="{{ old('width') }}" placeholder="Enter width">
+                                 <div class="input-group">
+                                    <input type="number" name="width" id="width" class="form-control" value="{{ old('width') }}" placeholder="Enter width">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
                            <div class="col-md-4">
                               <div class="form-group">
-                                 <label>Height :<span class="text-danger">*</span></label>
-                                 <input type="number" name="height" id="height" class="form-control" value="{{ old('height') }}" placeholder="Enter height">
+                                 <label>Height :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="height" id="height" class="form-control" value="{{ old('height') }}" placeholder="Enter height">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
                            <div class="col-md-4">
@@ -221,8 +222,13 @@
                            </div>
                            <div class="col-md-4">
                               <div class="form-group">
-                                 <label>Thickness :<span class="text-danger">*</span></label>
-                                 <input type="number" name="thickness" id="thickness" class="form-control" value="{{ old('thickness') }}" placeholder="Enter thickness">
+                                 <label>Thickness :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="thickness" id="thickness" class="form-control" value="{{ old('thickness') }}" placeholder="Enter thickness">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">mm</span>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -360,5 +366,20 @@
          $('#btn_submit').html('<b><i class="icon-spinner4 spinner"></i></b> Processed ...');
          $('#form_data').submit();
       });
+
+      selectionField();
    });
+
+   function selectionField() {
+      var category = $('#category_id option:selected').text();
+      if(category.toLowerCase().indexOf('sanitary') >= 0) {
+         $('#thickness').val(null);
+         $('#thickness').attr('disabled', true);
+         $('#height').attr('disabled', false);
+      } else if(category.toLowerCase().indexOf('tile') >= 0) {
+         $('#height').val(null);
+         $('#height').attr('disabled', true);
+         $('#thickness').attr('disabled', false);
+      }
+   }
 </script>

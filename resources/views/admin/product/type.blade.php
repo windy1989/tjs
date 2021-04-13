@@ -32,12 +32,7 @@
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Type</h5>
-				<div class="header-elements form-inline">
-               <select name="filter_quality" id="filter_quality" class="form-control mr-3" onchange="loadDataTable()">
-						<option value="">All</option>
-						<option value="1">Import</option>
-						<option value="2">Local</option>
-					</select>
+				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
 						<option value="">All</option>
 						<option value="1">Active</option>
@@ -53,7 +48,6 @@
                         <th>No</th>
                         <th>Image</th>
                         <th>Code</th>
-                        <th>Quality</th>
                         <th>Surface</th>
                         <th>Color</th>
                         <th>Pattern</th>
@@ -117,10 +111,6 @@
                               <td class="align-middle" id="detail_division"></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Quality</th>
-                              <td class="align-middle" id="detail_quality"></td>
-                           </tr>
-                           <tr>
                               <th width="20%" class="align-middle">Surface</th>
                               <td class="align-middle" id="detail_surface"></td>
                            </tr>
@@ -149,7 +139,7 @@
                               <td class="align-middle" id="detail_material"></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Specification</th>
+                              <th width="20%" class="align-middle">Loading Limit</th>
                               <td class="align-middle" id="detail_specification"></td>
                            </tr>
                            <tr>
@@ -259,7 +249,6 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-               quality: $('#filter_quality').val(),
                status: $('#filter_status').val()
             },
             beforeSend: function() {
@@ -281,7 +270,6 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'image', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
-            { name: 'quality', searchable: false, className: 'text-center align-middle' },
             { name: 'surface_id', className: 'text-center align-middle' },
             { name: 'color_id', className: 'text-center align-middle' },
             { name: 'pattern_id', className: 'text-center align-middle' },
@@ -326,7 +314,6 @@
             $('#detail_image').attr('href', response.image);
             $('#detail_image img').attr('src', response.image);
             $('#detail_code').html(': ' + response.code);
-            $('#detail_quality').html(': ' + response.quality);
             $('#detail_material').html(': ' + response.material);
             $('#detail_faces').html(': ' + response.faces);
             $('#detail_length').html(': ' + response.lengths);

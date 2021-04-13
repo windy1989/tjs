@@ -29,7 +29,6 @@ class TypeSeeder extends Seeder
                 'selling_unit_id'  => $t['selling_unit_id'],
                 'image'            => $t['image'],
                 'code'             => $t['code'],
-                'quality'          => $t['quality'],
                 'material'         => $t['material'],
                 'faces'            => $t['faces'],
                 'length'           => $t['length'],
