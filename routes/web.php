@@ -265,10 +265,9 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('cogs')->group(function() {
             Route::get('/', 'CogsController@index');
             Route::post('datatable', 'CogsController@datatable');
-            Route::post('create', 'CogsController@create');
+            Route::get('get_complete_data', 'CogsController@getCompleteData');
+            Route::match(['get', 'post'], 'create', 'CogsController@create');
             Route::post('show', 'CogsController@show');
-            Route::post('update/{id}', 'CogsController@update');
-            Route::post('destroy', 'CogsController@destroy');
         });
     });
 });

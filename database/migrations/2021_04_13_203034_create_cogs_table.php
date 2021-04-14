@@ -24,13 +24,6 @@ class CreateCogsTable extends Migration
             $table->char('shipping', 1);
             $table->double('ls_cost')->default(0);
             $table->double('number_container')->default(0);
-            $table->double('safe_guard_sqm')->default(0);
-            $table->double('financing_cost')->default(0);
-            $table->double('interest')->default(0);
-            $table->double('sni_cost_sqm')->default(0);
-            $table->double('cogs_idr_sqm')->default(0);
-            $table->double('cogs_idr_pta_sqm')->default(0);
-            $table->double('cogs_idr_smb_sqm')->default(0);
             $table->timestamps();
         });
     }
