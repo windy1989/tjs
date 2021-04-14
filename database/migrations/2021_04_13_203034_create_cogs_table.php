@@ -22,8 +22,9 @@ class CreateCogsTable extends Migration
             $table->double('price_profile_custom')->default(0);
             $table->double('agent_fee_usd')->default(0);
             $table->char('shipping', 1);
-            $table->double('ls_cost')->default(0);
+            $table->double('ls_cost_document')->default(0);
             $table->double('number_container')->default(0);
+            $table->double('sni_cost')->default(0);
             $table->timestamps();
         });
     }

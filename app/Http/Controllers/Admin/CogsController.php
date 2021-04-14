@@ -3,18 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
+use App\Models\Cogs;
+use App\Models\Emkl;
 use App\Models\Import;
+use App\Models\Freight;
+use App\Models\Product;
 use App\Models\Currency;
+use App\Models\CurrencyRate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CogsController extends Controller {
 
     public function index()
     {
         $data = [
-            'title'   => 'Product Code',
-            'content' => 'admin.product.code'
+            'title'   => 'Price Cogs',
+            'content' => 'admin.price.cogs'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -24,11 +30,10 @@ class CogsController extends Controller {
     {
         $column = [
             'id',
-            'type_id',
-            'code',
-            'brand_id',
-            'country_id',
-            'status'
+            'product_id',
+            'currency_id',
+            'city_id',
+            'shipping'
         ];
 
         $start  = $request->start;
@@ -37,29 +42,38 @@ class CogsController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Product::count();
+        $total_data = Cogs::count();
         
-        $query_data = Product::where(function($query) use ($search, $request) {
+        $query_data = Cogs::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->whereHas('type', function($query) use ($search) {
-                                $query->where('code', 'like', "%$search%");
+                        $query->whereHas('product', function($query) use ($search) {
+                                $query->whereHas('type', function($query) use ($search) {
+                                        $query->where('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('company', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('country', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('grade', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    });
                             })
-                            ->orWhereHas('company', function($query) use ($search) {
+                            ->orWhereHas('currency', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%")
                                     ->orWhere('code', 'like', "%$search%");
                             })
-                            ->orWhereHas('brand', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
-                            })
-                            ->orWhereHas('country', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
-                            })
-                            ->orWhereHas('grade', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
+                            ->orWhereHas('city', function($query) use ($search) {
+                                $query->where('name', 'like', "%$search%");
                             });
                     });
                 }         
@@ -73,27 +87,36 @@ class CogsController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Product::where(function($query) use ($search, $request) {
+        $total_filtered = Cogs::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->whereHas('type', function($query) use ($search) {
-                                $query->where('code', 'like', "%$search%");
+                        $query->whereHas('product', function($query) use ($search) {
+                                $query->whereHas('type', function($query) use ($search) {
+                                        $query->where('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('company', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('country', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    })
+                                    ->orWhereHas('grade', function($query) use ($search) {
+                                        $query->where('name', 'like', "%$search%")
+                                            ->orWhere('code', 'like', "%$search%");
+                                    });
                             })
-                            ->orWhereHas('company', function($query) use ($search) {
+                            ->orWhereHas('currency', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%")
                                     ->orWhere('code', 'like', "%$search%");
                             })
-                            ->orWhereHas('brand', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
-                            })
-                            ->orWhereHas('country', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
-                            })
-                            ->orWhereHas('grade', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%")
-                                    ->orWhere('code', 'like', "%$search%");
+                            ->orWhereHas('city', function($query) use ($search) {
+                                $query->where('name', 'like', "%$search%");
                             });
                     });
                 }         
@@ -110,15 +133,12 @@ class CogsController extends Controller {
             foreach($query_data as $val) {
                 $response['data'][] = [
                     $nomor,
-                    $val->type->code,
-                    $val->code(),
-                    $val->brand->name,
-                    $val->country->name,
-                    $val->status(),
+                    $val->product->code(),
+                    $val->currency->code,
+                    $val->city->name,
+                    $val->shipping(),
                     '
                         <button type="button" class="btn bg-info btn-sm" title="Info" onclick="show(' . $val->id . ')"><i class="icon-info22"></i></button>
-                        <a href="' . url('admin/product/code/update/' . $val->id) . '" class="btn bg-warning btn-sm" title="Edit"><i class="icon-pencil7"></i></a>
-                        <button type="button" class="btn bg-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
 
@@ -139,113 +159,165 @@ class CogsController extends Controller {
         return response()->json($response);
     }
 
-    public function generateCode(Request $request)
+    public function getCompleteData(Request $request)
     {
-        $name    = '';
-        $company = Company::find($request->company_id);
-        $brand   = Brand::find($request->brand_id);
-        $country = Country::find($request->country_id);
-        $type    = Type::find($request->type_id);
-        $grade   = Grade::find($request->grade_id);
+        $data           = Product::find($request->product_id);
+        $emkl           = Emkl::where('company_id', $data->company_id)->where('country_id', $data->country_id)->first();
+        $currency_rate  = CurrencyRate::where('company_id', $data->company_id)->latest()->limit(1)->get();
 
-        if($company) {
-            $name .= $company->code;
-        }
-     
-        if($brand) {
-            $name .= $brand->code;
-        }
-
-        if($country) {
-            $name .= $country->code;
+        if($emkl) {
+            $container = $emkl->container; 
+            $c         = $emkl->container();
+            $lcc       = $emkl->cost;
+        } else {
+            $container = 0;
+            $c         = 'Not Set';
+            $lcc       = 0;
         }
 
-        if($type) {
-            $name .= $type->code;
+        $freight = Freight::where('country_id', $data->country_id)
+            ->where('container', $container)
+            ->where('shipping', $request->shipping)
+            ->where('city_id', $request->city_id)
+            ->first();
+
+        if($data->currencyPrice) {
+            $pp = $data->currencyPrice->price;
+        } else {
+            $pp = 0;
         }
 
-        if($grade) {
-            $name .= $grade->code;
+        if($currency_rate->count() > 0) {
+            $ru = $currency_rate[0]->conversion;
+        } else {
+            $ru = 0;
         }
 
-        return response()->json($name);
+        if($freight) {
+            $fcu = $freight->cost;
+        } else {
+            $fcu = 0;
+        }
+        
+        $aou  = $request->agent_fee_usd ? $request->agent_fee_usd : 0;
+        $lcd  = $request->ls_cost_document ? $request->ls_cost_document : 0;
+        $nc   = $request->number_container ? $request->number_container : 0;
+        $ppc  = $request->price_profile_custom ? $request->price_profile_custom : 0;
+        $sc   = $request->sni_cost ? $request->sni_cost : 0;
+        $sg   = 11776;
+        $l    = $data->type->length ? $data->type->length : 0;
+        $wd   = $data->type->width ? $data->type->width : 0;
+        $cp   = $data->type->carton_pcs ? $data->type->carton_pcs : 0;
+        $t    = $data->type->thickness ? $data->type->thickness : 0;
+        $wg   = $data->type->weight;
+        $cu   = $data->type->conversion;
+        $lpi  = $ru * $cu * $pp;
+        $tsl  = ($l / 100) * ($wd / 100) * $cp * $data->container_standart;
+        $afus = @($aou  / $tsl);
+        $afi  = @($afus * $cu * $ru);
+        $cc   = ($l / 100) * ($wd / 100) * ($t / 1000) * $cp;
+        $twc  = $wg * $data->container_standart;
+        $toc  = $wg * $twc;
+        $sd   = ($l / 100) * ($wd / 100) * $cp;
+        $fc   = @($fcu * $ru * $toc / $sd);
+        $tlc  = @($lcc * $toc / $sd);
+        $lcs  = @($lcd * $ru * $toc / $sd / $nc);
+        $id   = ($ppc * 0.05) * $ru;
+        $vt   = ((($ppc * 0.05) + $ppc) * 0.1) * $ru;
+        $it   = ((($ppc * 0.05) + $ppc) * 0.075) * $ru;
+        $tit  = $vt + $id + $it;
+        $ci   = $lpi + $afi + $fc + $tlc + $lcd + $tit + $sc + $sg;
+        $cpi  = $ci * 1.1;
+        $csi  = $ci * 1.15;
+
+        return response()->json([
+            'origin_country'         => $data->country->code,
+            'lengths'                => number_format($l, 0, ',', '.') . ' Cm',
+            'width'                  => number_format($wd, 0, ',', '.') . ' Cm',
+            'pcs_ctn'                => number_format($cp, 0, ',', '.') . ' <sub>/ CARTON</sub>',
+            'thickness'              => number_format($t, 0, ',', '.') . ' mm',
+            'min_total_dos'          => number_format($data->container_standart, 0, ',', '.') . ' mm <sub>/ CONTAINER</sub>',
+            'container'              => $c,
+            'product_price'          => (!is_nan($pp) ? number_format($pp, 0, ',', '.') : 0),
+            'buying_unit'            => $data->type->buyUnit->code,
+            'selling_unit'           => $data->type->sellingUnit->code,
+            'conversion_unit'        => (!is_nan($cu) ? number_format($cu, 0, ',', '.') : 0),
+            'rate_unit'              => (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
+            'local_price_idr'        => (!is_nan($lpi) ? number_format($lpi, 0, ',', '.') : 0),
+            'total_sqm_load'         => (!is_nan($tsl) ? number_format(round($tsl), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'agent_fee_usd_sqm'      => (!is_nan($afus) ? number_format($afus, 3, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'agent_fee_idr'          => (!is_nan($afi) ? number_format($afi, 0, ',', '.') : 0),
+            'freight_cost_usd'       => (!is_nan($fcu) ? number_format($fcu, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'cbm_container'          => (!is_nan($cc) ? number_format(round($cc), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'kg_dos'                 => number_format($wg, 0, ',', '.') . ' Kg',
+            'total_weight_container' => (!is_nan($twc) ? number_format(round($twc), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'tonnage_of_container'   => (!is_nan($toc) ? number_format(round($toc), 0, ',', '.') : 0) . '%',
+            'sqm_dos'                => (!is_nan($sd) ? number_format(round($sd), 0, ',', '.') : 0) . ' <sub>/ DOS</sub>',
+            'freight_cost'           => (!is_nan($fc) ? number_format(round($fc), 0, ',', '.') : 0),
+            'landed_cost_container'  => (!is_nan($lcc) ? number_format($lcc, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'total_landed_cost'      => (!is_nan($tlc) ? number_format(round($tlc), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'rate_of_usd'            => (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
+            'ls_cost_sqm'            => (!is_nan($lcs) ? number_format(round($lcs), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'import_duty'            => (!is_nan($id) ? number_format(round($id), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'value_tax'              => (!is_nan($vt) ? number_format(round($vt), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'income_tax'             => (!is_nan($it) ? number_format(round($it), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'total_import_tax'       => (!is_nan($tit) ? number_format(round($tit), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'safe_guard'             => (!is_nan($sg) ? number_format($sg, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_idr'               => (!is_nan($ci) ? number_format($ci, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_pta_idr'           => (!is_nan($cpi) ? number_format($cpi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_smb_idr'           => (!is_nan($csi) ? number_format($csi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>'
+        ]);
     }
 
     public function create(Request $request)
     {
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
-                'type_id'             => 'required',
-                'company_id'          => 'required',
-                'hs_code_id'          => 'required',
-                'brand_id'            => 'required',
-                'country_id'          => 'required',
-                'supplier_id'         => 'required',
-                'grade_id'            => 'required',
-                'selling_unit'        => 'required',
-                'cubic_meter'         => 'required',
-                'container_standart'  => 'required',
-                'container_stock'     => 'required',
-                'container_max_stock' => 'required',
-                'description'         => 'required',
-                'status'              => 'required'
+                'product_id'           => 'required',
+                'currency_id'          => 'required',
+                'city_id'              => 'required',
+                'import_id'            => 'required',
+                'price_profile_custom' => 'required',
+                'agent_fee_usd'        => 'required',
+                'shipping'             => 'required',
+                'ls_cost_document'     => 'required',
+                'number_container'     => 'required',
+                'sni_cost'             => 'required'
             ], [
-                'type_id.required'             => 'Please select a type.',
-                'company_id.required'          => 'Please select a company.',
-                'hs_code_id.required'          => 'Please select a hs code.',
-                'brand_id.required'            => 'Please select a brand.',
-                'country_id.required'          => 'Please select a country.',
-                'supplier_id.required'         => 'Please select a supplier.',
-                'grade_id.required'            => 'Please select a grade.',
-                'selling_unit.required'        => 'Selling unit cannot be empty.',
-                'cubic_meter.required'         => 'Cubic meter cannot be empty.',
-                'container_standart.required'  => 'Container standar cannot be empty.',
-                'container_stock.required'     => 'Container stock cannot be empty.',
-                'container_max_stock.required' => 'Container max stock cannot be empty.',
-                'description.required'         => 'Description cannot be empty.',
-                'status.required'              => 'Please select a status.'
+                'type_id.required'              => 'Please select a product.',
+                'currency_id.required'          => 'Please select a unit currency.',
+                'city_id.required'              => 'Please select a destination port.',
+                'import_id.required'            => 'Please select a import.',
+                'price_profile_custom.required' => 'Price profile custom cannot be empty.',
+                'agent_fee_usd.required'        => 'Agent fee cannot be empty.',
+                'ls_cost_document.required'     => 'ls cost document cannot be empty.',
+                'container_stock.required'      => 'Container stock cannot be empty.',
+                'number_container.required'     => 'Number container cannot be empty.',
+                'sni_cost.required'             => 'SNI cost cannot be empty.'
             ]);
 
             if($validation->fails()) {
                 return redirect()->back()->withErrors($validation)->withInput();
             } else {
-                $query = Product::create([
-                    'type_id'             => $request->type_id,
-                    'company_id'          => $request->company_id,
-                    'hs_code_id'          => $request->hs_code_id,
-                    'brand_id'            => $request->brand_id,
-                    'country_id'          => $request->country_id,
-                    'supplier_id'         => $request->supplier_id,
-                    'grade_id'            => $request->grade_id,
-                    'carton_pallet'       => $request->carton_pallet,
-                    'carton_pcs'          => $request->carton_pcs,
-                    'carton_sqm'          => $request->carton_sqm,
-                    'selling_unit'        => $request->selling_unit,
-                    'cubic_meter'         => $request->cubic_meter,
-                    'container_standart'  => $request->container_standart,
-                    'container_stock'     => $request->container_stock,
-                    'container_max_stock' => $request->container_max_stock,
-                    'description'         => $request->description,
-                    'status'              => $request->status
+                $query = Cogs::create([
+                    'product_id'           => $request->product_id,
+                    'currency_id'          => $request->currency_id,
+                    'city_id'              => $request->city_id,
+                    'import_id'            => $request->import_id,
+                    'price_profile_custom' => $request->price_profile_custom,
+                    'agent_fee_usd'        => $request->agent_fee_usd,
+                    'shipping'             => $request->shipping,
+                    'ls_cost_document'     => $request->ls_cost_document,
+                    'number_container'     => $request->number_container,
+                    'sni_cost'             => $request->sni_cost
                 ]);
 
                 if($query) {
-                    if($request->shading_warehouse_code) {
-                        foreach($request->shading_warehouse_code as $key => $swc) {
-                            ProductShading::create([
-                                'product_id'     => $query->id,
-                                'warehouse_code' => $swc,
-                                'code'           => $request->shading_code[$key],
-                                'qty'            => $request->shading_qty[$key]
-                            ]);
-                        }
-                    }
-
                     activity()
-                        ->performedOn(new Product())
+                        ->performedOn(new Cogs())
                         ->causedBy(session('id'))
                         ->withProperties($query)
-                        ->log('Add product code data');
+                        ->log('Add price cogs data');
 
                     return redirect()->back()->with(['success' => 'Data added successfully.']);
                 } else {

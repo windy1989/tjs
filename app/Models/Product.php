@@ -101,4 +101,9 @@ class Product extends Model {
         return $this->hasMany('App\Models\ProductShading');
     }
 
+    public function currencyPrice()
+    {
+        return $this->hasOne('App\Models\CurrencyPrice');
+    }
+
 }
