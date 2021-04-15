@@ -142,12 +142,8 @@
                               <td class="align-middle" id="detail_carton_pallet"></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">SQM</th>
+                              <th width="20%" class="align-middle">Carton</th>
                               <td class="align-middle" id="detail_carton_sqm"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Selling Unit</th>
-                              <td class="align-middle" id="detail_selling_unit"></td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Cubic Meters</th>
@@ -289,7 +285,6 @@
             $('#detail_carton_pallet').html(': ' + response.carton_pallet);
             $('#detail_carton_pcs').html(': ' + response.carton_pcs);
             $('#detail_carton_sqm').html(': ' + response.carton_sqm);
-            $('#detail_selling_unit').html(': ' + response.selling_unit);
             $('#detail_cubic_meter').html(': ' + response.cubic_meter);
             $('#detail_container_standart').html(': ' + response.container_standart);
             $('#detail_container_stock').html(': ' + response.container_stock);

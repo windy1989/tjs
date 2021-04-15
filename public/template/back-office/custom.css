@@ -17,3 +17,11 @@
 .pointer-element {
    cursor: pointer;
 }
+
+.validation-select {
+   border: 1px solid red !important;
+}
+
+.field-gray {
+   background: lightgray !important;
+}

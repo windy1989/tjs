@@ -30,7 +30,6 @@ class ProductSeeder extends Seeder
                 'carton_pallet'       => $p['carton_pallet'],
                 'carton_pcs'          => $p['carton_pcs'],
                 'carton_sqm'          => $p['carton_sqm'],
-                'selling_unit'        => $p['selling_unit'],
                 'cubic_meter'         => $p['cubic_meter'],
                 'container_standart'  => $p['container_standart'],
                 'container_stock'     => $p['container_stock'],

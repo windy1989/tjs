@@ -24,7 +24,6 @@ class Product extends Model {
         'carton_pallet',
         'carton_pcs',
         'carton_sqm',
-        'selling_unit',
         'cubic_meter',
         'container_standart',
         'container_stock',

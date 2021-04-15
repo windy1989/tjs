@@ -87,7 +87,7 @@
                                  <select name="hs_code_id" id="hs_code_id" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($hs_code as $hs)
-                                       <option value="{{ $hs->id }}" {{ $product->hs_code_id == $hs->id ? 'selected' : '' }}>{{ $hs->name }}</option>
+                                       <option value="{{ $hs->id }}" {{ $product->hs_code_id == $hs->id ? 'selected' : '' }}>({{ $hs->code }}) {{ $hs->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -158,7 +158,7 @@
                                  <label>Carton :</label>
                                  <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" value="{{ $product->carton_pcs }}" placeholder="Enter number">
+                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formulaCubicMeter()" value="{{ $product->carton_pcs }}" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Pcs</span>
                                     </div>
@@ -179,39 +179,34 @@
                            </div>
                            <div class="col-md-4">
                               <div class="form-group">
-                                 <label>SQM :</label>
+                                 <label>Carton :</label>
                                  <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_sqm" id="carton_sqm" class="form-control" value="{{ $product->carton_sqm }}" placeholder="Enter number">
+                                    <input type="number" name="carton_sqm" id="carton_sqm" class="form-control" value="{{ $product->carton_sqm }}" onkeyup="formulaSqmCarton()" placeholder="Enter number">
                                     <div class="input-group-prepend">
-                                       <span class="input-group-text">Carton</span>
+                                       <span class="input-group-text">SQM</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text" id="result_formula_carton_sqm">0</span>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-4">
+                           <div class="col-md-3">
                               <div class="form-group">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
-                                    <input type="number" name="selling_unit" id="selling_unit" class="form-control" value="{{ $product->selling_unit }}" placeholder="Enter number">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Selling Unit</span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Stock Unit :<span class="text-danger">*</span></label>
-                                 <div class="input-group">
-                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" value="{{ $product->cubic_meter }}" placeholder="Enter number">
+                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" onkeyup="formulaCubicMeter()" value="{{ $product->cubic_meter }}" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Cubic Meters</span>
                                     </div>
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text" id="result_formula_cubic_meter">0</span>
+                                    </div>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-4">
+                           <div class="col-md-3">
                               <div class="form-group">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
@@ -222,7 +217,7 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-3">
                               <div class="form-group">
                                  <label>Standart Container :<span class="text-danger">*</span></label>
                                  <select name="container_standart" id="container_standart" class="custom-select">
@@ -232,7 +227,7 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-3">
                               <div class="form-group">
                                  <label>Max Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
@@ -379,8 +374,46 @@
          $('#form_data').submit();
       });
 
+      generateCode();
       select2ServerSide('#type_id', '{{ url("admin/select2/type") }}');
    });
+
+   function formulaSqmCarton() {
+      $.ajax({
+         url: '{{ url("admin/product/code/formula_sqm_carton") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: {
+            type_id: $('#type_id').val(),
+            carton_sqm: $('#carton_sqm').val()
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         success: function(response) {
+            $('#result_formula_carton_sqm').html(response);
+         }
+      });
+   }
+
+   function formulaCubicMeter() {
+      $.ajax({
+         url: '{{ url("admin/product/code/formula_cubic_meter") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: {
+            type_id: $('#type_id').val(),
+            carton_pcs: $('#carton_pcs').val(),
+            cubic_meter	: $('#cubic_meter').val()
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         success: function(response) {
+            $('#result_formula_cubic_meter').html(response);
+         }
+      });
+   }
 
    function generateCode() {
       $.ajax({
@@ -398,6 +431,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
+            formulaSqmCarton();
             $('#code').val(response);
          },
          error: function() {

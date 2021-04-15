@@ -179,6 +179,42 @@ class CodeController extends Controller {
         return response()->json($name);
     }
 
+    public function formulaSqmCarton(Request $request)
+    {
+        $type = Type::find($request->type_id);
+        if($type) {
+            $count = ($type->length / 100) * ($type-> width / 100) * $request->carton_sqm;
+
+            if(!is_nan($count)) {
+                $result = round($count);
+            } else {
+                $result = 0;
+            }
+        } else {
+            $result = 0;
+        }
+
+        return response()->json($result);
+    }
+
+    public function formulaCubicMeter(Request $request)
+    {
+        $type = Type::find($request->type_id);
+        if($type) {
+            $count = ($type->length / 100) * ($type-> width / 100) * $type->thickness * $request->carton_pcs * $request->cubic_meter;
+
+            if(!is_nan($count)) {
+                $result = round($count, 2);
+            } else {
+                $result = 0;
+            }
+        } else {
+            $result = 0;
+        }
+
+        return response()->json($result);
+    }
+
     public function create(Request $request)
     {
         if($request->has('_token') && session()->token() == $request->_token) {
@@ -190,7 +226,6 @@ class CodeController extends Controller {
                 'country_id'          => 'required',
                 'supplier_id'         => 'required',
                 'grade_id'            => 'required',
-                'selling_unit'        => 'required',
                 'cubic_meter'         => 'required',
                 'container_standart'  => 'required',
                 'container_stock'     => 'required',
@@ -205,7 +240,6 @@ class CodeController extends Controller {
                 'country_id.required'          => 'Please select a country.',
                 'supplier_id.required'         => 'Please select a supplier.',
                 'grade_id.required'            => 'Please select a grade.',
-                'selling_unit.required'        => 'Selling unit cannot be empty.',
                 'cubic_meter.required'         => 'Cubic meter cannot be empty.',
                 'container_standart.required'  => 'Please select a standart container.',
                 'container_stock.required'     => 'Container stock cannot be empty.',
@@ -228,7 +262,6 @@ class CodeController extends Controller {
                     'carton_pallet'       => $request->carton_pallet,
                     'carton_pcs'          => $request->carton_pcs,
                     'carton_sqm'          => $request->carton_sqm,
-                    'selling_unit'        => $request->selling_unit,
                     'cubic_meter'         => $request->cubic_meter,
                     'container_standart'  => $request->container_standart,
                     'container_stock'     => $request->container_stock,
@@ -288,7 +321,6 @@ class CodeController extends Controller {
                 'country_id'          => 'required',
                 'supplier_id'         => 'required',
                 'grade_id'            => 'required',
-                'selling_unit'        => 'required',
                 'cubic_meter'         => 'required',
                 'container_standart'  => 'required',
                 'container_stock'     => 'required',
@@ -303,7 +335,6 @@ class CodeController extends Controller {
                 'country_id.required'          => 'Please select a country.',
                 'supplier_id.required'         => 'Please select a supplier.',
                 'grade_id.required'            => 'Please select a grade.',
-                'selling_unit.required'        => 'Selling unit cannot be empty.',
                 'cubic_meter.required'         => 'Cubic meter cannot be empty.',
                 'container_standart.required'  => 'Please select a standart container.',
                 'container_stock.required'     => 'Container stock cannot be empty.',
@@ -326,7 +357,6 @@ class CodeController extends Controller {
                     'carton_pallet'       => $request->carton_pallet,
                     'carton_pcs'          => $request->carton_pcs,
                     'carton_sqm'          => $request->carton_sqm,
-                    'selling_unit'        => $request->selling_unit,
                     'cubic_meter'         => $request->cubic_meter,
                     'container_standart'  => $request->container_standart,
                     'container_stock'     => $request->container_stock,
@@ -403,7 +433,6 @@ class CodeController extends Controller {
             'carton_pallet'       => $data->carton_pallet . '<sub> / carton</sub>',
             'carton_pcs'          => $data->carton_pcs . '<sub> / pcs</sub>',
             'carton_sqm'          => $data->carton_sqm . '<sub> / carton</sub>',
-            'selling_unit'        => $data->selling_unit,
             'cubic_meter'         => $data->cubic_meter,
             'container_standart'  => $data->containerStandart(),
             'container_stock'     => $data->container_stock,

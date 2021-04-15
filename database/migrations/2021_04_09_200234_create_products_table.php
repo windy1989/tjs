@@ -25,7 +25,6 @@ class CreateProductsTable extends Migration
             $table->double('carton_pallet')->nullable();
             $table->double('carton_pcs')->nullable();
             $table->double('carton_sqm')->nullable();
-            $table->double('selling_unit');
             $table->double('cubic_meter');
             $table->char('container_standart', 1);
             $table->double('container_stock');
