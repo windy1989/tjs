@@ -161,9 +161,14 @@ class CogsController extends Controller {
 
     public function getCompleteData(Request $request)
     {
-        $data           = Product::find($request->product_id);
-        $currency_rate  = CurrencyRate::where('currency_id', $request->currency_id)->where('company_id', $data->company_id)->latest()->limit(1)->get();
-        $emkl           = Emkl::where('company_id', $data->company_id)
+        $data          = Product::find($request->product_id);
+        $currency_rate = CurrencyRate::where('currency_id', $request->currency_id)
+            ->where('company_id', $data->company_id)
+            ->latest()
+            ->limit(1)
+            ->get();
+
+        $emkl = Emkl::where('company_id', $data->company_id)
             ->where('country_id', $data->country_id)
             ->where('container', $data->container_standart)
             ->first();
@@ -346,39 +351,57 @@ class CogsController extends Controller {
 
     public function show(Request $request)
     {
-        $data    = Product::find($request->id);
-        $shading = [];
-
-        if($data->productShading) {
-            foreach($data->productShading as $pd) {
-                $shading[] = [
-                    'warehouse' => $pd->warehouse->name,
-                    'code'      => $pd->code,
-                    'qty'       => $pd->qty
-                ];
-            }
-        }
+        $data     = Cogs::find($request->id);
+        $formula  = $data->formula();
+        $currency = $data->currency->code;
+        $symbol   = $data->currency->symbol;
 
         return response()->json([
-            'code'                => $data->code(),
-            'type'                => $data->type->code,
-            'company'             => $data->company->name,
-            'hs_code'             => $data->hsCode->name,
-            'brand'               => $data->brand->name,
-            'country'             => $data->country->name,
-            'supplier'            => $data->supplier->name,
-            'grade'               => $data->grade->name,
-            'carton_pallet'       => $data->carton_pallet . '<sub> / carton</sub>',
-            'carton_pcs'          => $data->carton_pcs . '<sub> / pcs</sub>',
-            'carton_sqm'          => $data->carton_sqm . '<sub> / carton</sub>',
-            'selling_unit'        => $data->selling_unit,
-            'cubic_meter'         => $data->cubic_meter,
-            'container_standart'  => $data->container_standart,
-            'container_stock'     => $data->container_stock,
-            'container_max_stock' => $data->container_max_stock,
-            'description'         => $data->description,
-            'status'              => $data->status(),
-            'shading'             => $shading
+            'product'                => $data->product->code(),
+            'currency'               => $currency,
+            'city'                   => $data->city->name,
+            'import'                 => $data->import->name,
+            'price_profile_custom'   => $symbol . number_format($data->price_profile_custom, 0, ',', '.'),
+            'agent_fee_usd'          => $symbol . number_format($data->agent_fee_usd, 0, ',', '.'),
+            'shipping'               => $data->shipping(),
+            'ls_cost_document'       => $symbol . number_format($data->ls_cost_document, 0, ',', '.'),
+            'number_container'       => $data->number_container,
+            'sni_cost'               => $symbol . number_format($data->sni_cost, 0, ',', '.'),
+            'origin_country'         => $data->country->code,
+            'lengths'                => number_format($formula->lengths, 0, ',', '.') . ' Cm',
+            'width'                  => number_format($formula->width, 0, ',', '.') . ' Cm',
+            'pcs_ctn'                => number_format($formula->pcs_ctn, 0, ',', '.') . ' <sub>/ CARTON</sub>',
+            'thickness'              => number_format($formula->thickenss, 0, ',', '.') . ' mm',
+            'min_total_dos'          => number_format($formula->min_total_dos, 0, ',', '.') . ' mm <sub>/ CONTAINER</sub>',
+            'container'              => $c,
+            'product_price'          => $symbol . number_format($formula->product_price, 0, ',', '.'),
+            'buying_unit'            => $data->type->buyUnit->code,
+            'selling_unit'           => $data->type->sellingUnit->code,
+            'conversion_unit'        => $symbol . number_format($formula->conversion_unit, 0, ',', '.'),
+            'rate_unit'              => $symbol . number_format($formula->rate_unit, 0, ',', '.'),
+            'local_price_idr'        => $symbol . number_format($formula->local_price_idr, 0, ',', '.'),
+            'total_sqm_load'         => number_format($formula->total_sqm_load, 0, ',', '.') . ' <sub>/ CONTAINER</sub>',
+            'agent_fee_usd_sqm'      => number_format($formula->agent_fee_usd_sqm, 3, ',', '.') . ' <sub>/ SQM</sub>',
+            'agent_fee_idr'          => $symbol . number_format($formula->agent_fee_idr, 0, ',', '.'),
+            'freight_cost_usd'       => $symbol . number_format($formula->freight_cost_usd, 0, ',', '.') . ' <sub>/ CONTAINER</sub>',
+            'cbm_container'          => number_format($formula->cbm_container, 0, ',', '.') . ' <sub>/ CONTAINER</sub>',
+            'kg_dos'                 => number_format($formula->kg_dos, 0, ',', '.') . ' Kg',
+            'total_weight_container' => number_format($formula->total_weight_container, 0, ',', '.') . ' <sub>/ CONTAINER</sub>',
+            'tonnage_of_container'   => number_format($formula->tonnage_of_container, 0, ',', '.') . '%',
+            'sqm_dos'                => number_format($formula->sqm_dos, 0, ',', '.') . ' <sub>/ DOS</sub>',
+            'freight_cost'           => $symbol . number_format($formula->freight_cost, 0, ',', '.'),
+            'landed_cost_container'  => $symbol . number_format($formula->landed_cost_container, 0, ',', '.') . ' <sub>/ CONTAINER</sub>',
+            'total_landed_cost'      => $symbol . number_format($formula->total_landed_cost, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'rate_of_usd'            => $symbol . number_format($formula->rate_of_usd, 0, ',', '.'),
+            'ls_cost_sqm'            => $symbol . number_format($formula->ls_cost_sqm, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'import_duty'            => $symbol . number_format($formula->import_duty, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'value_tax'              => $symbol . number_format($formula->value_tax, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'income_tax'             => $symbol . number_format($formula->income_tax, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'total_import_tax'       => $symbol . number_format($formula->total_import_tax, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'safe_guard'             => $symbol . number_format($formula->safe_guard, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'cogs_idr'               => $symbol . number_format($formula->cogs_idr, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'cogs_pta_idr'           => $symbol . number_format($formula->cogs_pta_idr, 0, ',', '.')  . ' <sub>/ SQM</sub>',
+            'cogs_smb_idr'           => $symbol . number_format($formula->cogs_smb_idr, 0, ',', '.') . ' <sub>/ SQM</sub>'
         ]);
     }
 
