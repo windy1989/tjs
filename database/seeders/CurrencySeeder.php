@@ -20,6 +20,7 @@ class CurrencySeeder extends Seeder
             Currency::create([
                 'code'   => $c['code'],
                 'name'   => $c['name'],
+                'symbol' => $c['symbol'],
                 'status' => $c['status']
             ]);
         }

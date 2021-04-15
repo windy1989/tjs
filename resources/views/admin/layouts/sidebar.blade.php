@@ -30,9 +30,11 @@
             </div>
             <div class="card card-sidebar-mobile">
                 <ul class="nav nav-sidebar" data-nav-type="accordion">
-                    <li class="nav-item-header">
-                        <div class="text-uppercase font-size-xs line-height-xs">Menu Navigation</div> 
-                        <i class="icon-menu" title="Main"></i>
+                    <li class="nav-item-header border-top-dashed border-bottom-dashed mb-3">
+                        <div class="text-uppercase mb-0 font-weight-bold text-center">
+                            <span style="font-size:35px;" id="header-clock-realtime">{{ date('H:i:s') }}</span>
+                            <h5>{{ date('D, d M Y') }}</h5>
+                        </div> 
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/dashboard') }}" class="nav-link {{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">

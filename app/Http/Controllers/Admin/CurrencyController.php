@@ -26,6 +26,7 @@ class CurrencyController extends Controller {
             'id',
             'code',
             'name',
+            'symbol',
             'status'
         ];
 
@@ -76,6 +77,7 @@ class CurrencyController extends Controller {
                     $nomor,
                     $val->code,
                     $val->name,
+                    $val->symbol,
                     $val->status(),
                     '
                         <button type="button" class="btn bg-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
@@ -105,11 +107,13 @@ class CurrencyController extends Controller {
         $validation = Validator::make($request->all(), [
             'code'   => 'required|unique:currencies,code',
             'name'   => 'required',
+            'symbol' => 'required',
             'status' => 'required'
         ], [
             'code.required'   => 'Code cannot be empty.',
             'code.unique'     => 'Code already exists.',
             'name.required'   => 'Name cannot be empty.',
+            'symbol.required' => 'Symbol cannot be empty.',
             'status.required' => 'Please select a status.'
         ]);
 
@@ -122,6 +126,7 @@ class CurrencyController extends Controller {
             $query = Currency::create([
                 'code'   => $request->code,
                 'name'   => $request->name,
+                'symbol' => $request->symbol,
                 'status' => $request->status
             ]);
 
@@ -153,6 +158,7 @@ class CurrencyController extends Controller {
         return response()->json([
             'code'   => $data->code,
             'name'   => $data->name,
+            'symbol' => $data->symbol,
             'status' => $data->status
         ]);
     }
@@ -162,11 +168,13 @@ class CurrencyController extends Controller {
         $validation = Validator::make($request->all(), [
             'code'   => ['required', Rule::unique('currencies', 'code')->ignore($id)],
             'name'   => 'required',
+            'symbol' => 'required',
             'status' => 'required'
         ], [
             'code.required'   => 'Code cannot be empty.',
             'code.unique'     => 'Code already exists.',
             'name.required'   => 'Name cannot be empty.',
+            'symbol.required' => 'Symbol cannot be empty.',
             'status.required' => 'Please select a status.'
         ]);
 
@@ -179,6 +187,7 @@ class CurrencyController extends Controller {
             $query = Currency::where('id', $id)->update([
                 'code'   => $request->code,
                 'name'   => $request->name,
+                'symbol' => $request->symbol,
                 'status' => $request->status
             ]);
 

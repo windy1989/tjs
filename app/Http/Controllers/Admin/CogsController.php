@@ -162,17 +162,22 @@ class CogsController extends Controller {
     public function getCompleteData(Request $request)
     {
         $data           = Product::find($request->product_id);
-        $emkl           = Emkl::where('company_id', $data->company_id)->where('country_id', $data->country_id)->first();
-        $currency_rate  = CurrencyRate::where('company_id', $data->company_id)->latest()->limit(1)->get();
+        $currency_rate  = CurrencyRate::where('currency_id', $request->currency_id)->where('company_id', $data->company_id)->latest()->limit(1)->get();
+        $emkl           = Emkl::where('company_id', $data->company_id)
+            ->where('country_id', $data->country_id)
+            ->where('container', $data->container_standart)
+            ->first();
 
         if($emkl) {
             $container = $emkl->container; 
             $c         = $emkl->container();
             $lcc       = $emkl->cost;
+            $cs        = $emkl->container == 1 ? 20 : 40;
         } else {
             $container = 0;
             $c         = 'Not Set';
             $lcc       = 0;
+            $cs        = 0;
         }
 
         $freight = Freight::where('country_id', $data->country_id)
@@ -188,9 +193,11 @@ class CogsController extends Controller {
         }
 
         if($currency_rate->count() > 0) {
-            $ru = $currency_rate[0]->conversion;
+            $symbol = $currency_rate[0]->currency->symbol;
+            $ru     = $currency_rate[0]->conversion;
         } else {
-            $ru = 0;
+            $symbol = null;
+            $ru     = 0;
         }
 
         if($freight) {
@@ -212,11 +219,11 @@ class CogsController extends Controller {
         $wg   = $data->type->weight;
         $cu   = $data->type->conversion;
         $lpi  = $ru * $cu * $pp;
-        $tsl  = ($l / 100) * ($wd / 100) * $cp * $data->container_standart;
+        $tsl  = ($l / 100) * ($wd / 100) * $cp * $cs;
         $afus = @($aou  / $tsl);
         $afi  = @($afus * $cu * $ru);
         $cc   = ($l / 100) * ($wd / 100) * ($t / 1000) * $cp;
-        $twc  = $wg * $data->container_standart;
+        $twc  = $wg * $cs;
         $toc  = $wg * $twc;
         $sd   = ($l / 100) * ($wd / 100) * $cp;
         $fc   = @($fcu * $ru * $toc / $sd);
@@ -236,36 +243,36 @@ class CogsController extends Controller {
             'width'                  => number_format($wd, 0, ',', '.') . ' Cm',
             'pcs_ctn'                => number_format($cp, 0, ',', '.') . ' <sub>/ CARTON</sub>',
             'thickness'              => number_format($t, 0, ',', '.') . ' mm',
-            'min_total_dos'          => number_format($data->container_standart, 0, ',', '.') . ' mm <sub>/ CONTAINER</sub>',
+            'min_total_dos'          => number_format($cs, 0, ',', '.') . ' mm <sub>/ CONTAINER</sub>',
             'container'              => $c,
-            'product_price'          => (!is_nan($pp) ? number_format($pp, 0, ',', '.') : 0),
+            'product_price'          => $symbol . (!is_nan($pp) ? number_format($pp, 0, ',', '.') : 0),
             'buying_unit'            => $data->type->buyUnit->code,
             'selling_unit'           => $data->type->sellingUnit->code,
-            'conversion_unit'        => (!is_nan($cu) ? number_format($cu, 0, ',', '.') : 0),
-            'rate_unit'              => (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
-            'local_price_idr'        => (!is_nan($lpi) ? number_format($lpi, 0, ',', '.') : 0),
+            'conversion_unit'        => $symbol . (!is_nan($cu) ? number_format($cu, 0, ',', '.') : 0),
+            'rate_unit'              => $symbol . (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
+            'local_price_idr'        => $symbol . (!is_nan($lpi) ? number_format($lpi, 0, ',', '.') : 0),
             'total_sqm_load'         => (!is_nan($tsl) ? number_format(round($tsl), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
             'agent_fee_usd_sqm'      => (!is_nan($afus) ? number_format($afus, 3, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'agent_fee_idr'          => (!is_nan($afi) ? number_format($afi, 0, ',', '.') : 0),
-            'freight_cost_usd'       => (!is_nan($fcu) ? number_format($fcu, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'agent_fee_idr'          => $symbol . (!is_nan($afi) ? number_format($afi, 0, ',', '.') : 0),
+            'freight_cost_usd'       => $symbol . (!is_nan($fcu) ? number_format($fcu, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
             'cbm_container'          => (!is_nan($cc) ? number_format(round($cc), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
             'kg_dos'                 => number_format($wg, 0, ',', '.') . ' Kg',
             'total_weight_container' => (!is_nan($twc) ? number_format(round($twc), 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
             'tonnage_of_container'   => (!is_nan($toc) ? number_format(round($toc), 0, ',', '.') : 0) . '%',
             'sqm_dos'                => (!is_nan($sd) ? number_format(round($sd), 0, ',', '.') : 0) . ' <sub>/ DOS</sub>',
-            'freight_cost'           => (!is_nan($fc) ? number_format(round($fc), 0, ',', '.') : 0),
-            'landed_cost_container'  => (!is_nan($lcc) ? number_format($lcc, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
-            'total_landed_cost'      => (!is_nan($tlc) ? number_format(round($tlc), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'rate_of_usd'            => (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
-            'ls_cost_sqm'            => (!is_nan($lcs) ? number_format(round($lcs), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'import_duty'            => (!is_nan($id) ? number_format(round($id), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'value_tax'              => (!is_nan($vt) ? number_format(round($vt), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'income_tax'             => (!is_nan($it) ? number_format(round($it), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'total_import_tax'       => (!is_nan($tit) ? number_format(round($tit), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'safe_guard'             => (!is_nan($sg) ? number_format($sg, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_idr'               => (!is_nan($ci) ? number_format($ci, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_pta_idr'           => (!is_nan($cpi) ? number_format($cpi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_smb_idr'           => (!is_nan($csi) ? number_format($csi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>'
+            'freight_cost'           => $symbol . (!is_nan($fc) ? number_format(round($fc), 0, ',', '.') : 0),
+            'landed_cost_container'  => $symbol . (!is_nan($lcc) ? number_format($lcc, 0, ',', '.') : 0) . ' <sub>/ CONTAINER</sub>',
+            'total_landed_cost'      => $symbol . (!is_nan($tlc) ? number_format(round($tlc), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'rate_of_usd'            => $symbol . (!is_nan($ru) ? number_format($ru, 0, ',', '.') : 0),
+            'ls_cost_sqm'            => $symbol . (!is_nan($lcs) ? number_format(round($lcs), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'import_duty'            => $symbol . (!is_nan($id) ? number_format(round($id), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'value_tax'              => $symbol . (!is_nan($vt) ? number_format(round($vt), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'income_tax'             => $symbol . (!is_nan($it) ? number_format(round($it), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'total_import_tax'       => $symbol . (!is_nan($tit) ? number_format(round($tit), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'safe_guard'             => $symbol . (!is_nan($sg) ? number_format($sg, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_idr'               => $symbol . (!is_nan($ci) ? number_format($ci, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_pta_idr'           => $symbol . (!is_nan($cpi) ? number_format($cpi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_smb_idr'           => $symbol . (!is_nan($csi) ? number_format($csi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>'
         ]);
     }
 
@@ -284,7 +291,7 @@ class CogsController extends Controller {
                 'number_container'     => 'required',
                 'sni_cost'             => 'required'
             ], [
-                'type_id.required'              => 'Please select a product.',
+                'product_id.required'           => 'Please select a product.',
                 'currency_id.required'          => 'Please select a unit currency.',
                 'city_id.required'              => 'Please select a destination port.',
                 'import_id.required'            => 'Please select a import.',

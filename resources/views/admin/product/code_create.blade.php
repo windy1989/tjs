@@ -228,7 +228,11 @@
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Standart Container :<span class="text-danger">*</span></label>
-                                 <input type="number" name="container_standart" id="container_standart" class="form-control" value="{{ old('container_standart') }}" placeholder="Enter standart container">
+                                 <select name="container_standart" id="container_standart" class="custom-select">
+                                    <option value="">-- Choose --</option>
+                                    <option value="1">20 Feet</option>
+                                    <option value="2">40 Feet</option>
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-6">

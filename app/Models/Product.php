@@ -61,6 +61,23 @@ class Product extends Model {
         return $status;
     }
 
+    public function containerStandart() 
+    {
+        switch($this->container_standart) {
+            case '1':
+                $container_standart = '20 Feet';
+                break;
+            case '2':
+                $container_standart = '40 Feet';
+                break;
+            default:
+                $container_standart = 'Invalid';
+                break;
+        }
+
+        return $container_standart;
+    }
+
     public function type()
     {
         return $this->belongsTo('App\Models\Type');

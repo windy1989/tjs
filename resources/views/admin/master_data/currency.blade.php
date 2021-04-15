@@ -48,6 +48,7 @@
                         <th>No</th>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>Symbol</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -79,6 +80,10 @@
                <div class="form-group">
                   <label>Name :<span class="text-danger">*</span></label>
                   <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
+               </div>
+               <div class="form-group">
+                  <label>Symbol :<span class="text-danger">*</span></label>
+                  <input type="text" name="symbol" id="symbol" class="form-control" placeholder="Enter symbol">
                </div>
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
@@ -175,6 +180,7 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
             { name: 'name', className: 'text-center align-middle' },
+            { name: 'symbol', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
@@ -247,6 +253,7 @@
             loadingClose('.modal-content');
             $('#code').val(response.code);
             $('#name').val(response.name);
+            $('#symbol').val(response.symbol);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },

@@ -5,7 +5,7 @@
 				<img src="{{ asset('website/logo-white.png') }}" alt="Logo">
 			</a>
 		</div>
-		<div class="d-md-none">
+		<div class="d-md-none mt-2">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
 				<i class="icon-tree5"></i>
 			</button>
@@ -22,7 +22,7 @@
 				</li>
 			</ul>
 			<div class="ml-md-3 mr-md-auto" style="font-size: 13px;">
-				{{ date('l, d F Y') }} <span id="header-clock-realtime"></span>
+
 			</div>
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown dropdown-user">

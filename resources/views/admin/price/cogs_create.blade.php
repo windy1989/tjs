@@ -138,7 +138,7 @@
                            <h6 class="card-title font-weight-bold text-center">Unit Currency</h6>
                         </div>
                         <div class="card-body">
-                           <select name="currency_id" id="currency_id" class="custom-select" onchange="getCompleteData()">
+                           <select name="currency_id" id="currency_id" class="custom-select form-control-uniform" onchange="getCompleteData()">
                               <option value="">-- Choose --</option>
                               @foreach($currency as $c)
                                  <option value="{{ $c->id }}" {{ old('currency_id') == $c->id ? 'selected' : '' }}>{{ $c->code }}</option>
@@ -153,7 +153,7 @@
                            <h6 class="card-title font-weight-bold text-center">Price Profile Custom</h6>
                         </div>
                         <div class="card-body">
-                           <input type="number" name="price_profile_custom" id="price_profile_custom" class="form-control" value="{{ old('price_profile_custom') }}" onkeyup="getCompleteData()" placeholder="Enter number">
+                           <input type="number" name="price_profile_custom" id="price_profile_custom" class="form-control @error('price_profile_custom') border-danger @enderror" title="@error('price_profile_custom') {{ $message }} @enderror" value="{{ old('price_profile_custom') }}" onkeyup="getCompleteData()" placeholder="Enter number">
                         </div>
                      </div>
                   </div>
@@ -234,7 +234,7 @@
                         </div>
                         <div class="card-body">
                            <div class="input-group">
-                              <input type="number" name="agent_fee_usd" id="agent_fee_usd" class="form-control" value="{{ old('agent_fee_usd') }}" placeholder="Enter number">
+                              <input type="number" name="agent_fee_usd" id="agent_fee_usd" class="form-control @error('agent_fee_usd') border-danger @enderror" title="@error('agent_fee_usd') {{ $message }} @enderror" value="{{ old('agent_fee_usd') }}" placeholder="Enter number">
                               <div class="input-group-prepend">
                                  <span class="input-group-text">container</span>
                               </div>
@@ -403,7 +403,7 @@
                         </div>
                         <div class="card-body">
                            <div class="input-group">
-                              <input type="number" name="ls_cost_document" id="ls_cost_document" class="form-control" value="{{ old('ls_cost_document') }}" onkeyup="getCompleteData()" placeholder="Enter number">
+                              <input type="number" name="ls_cost_document" id="ls_cost_document" class="form-control @error('ls_cost_document') border-danger @enderror" title="@error('ls_cost_document') {{ $message }} @enderror" value="{{ old('ls_cost_document') }}" onkeyup="getCompleteData()" placeholder="Enter number">
                               <div class="input-group-prepend">
                                  <span class="input-group-text">document</span>
                               </div>
@@ -418,7 +418,7 @@
                         </div>
                         <div class="card-body">
                            <div class="input-group">
-                              <input type="number" name="number_container" id="number_container" class="form-control" value="{{ old('number_container') }}" onkeyup="getCompleteData()" placeholder="Enter number">
+                              <input type="number" name="number_container" id="number_container" class="form-control @error('number_container') border-danger @enderror" title="@error('number_container') {{ $message }} @enderror" value="{{ old('number_container') }}" onkeyup="getCompleteData()" placeholder="Enter number">
                               <div class="input-group-prepend">
                                  <span class="input-group-text">document</span>
                               </div>
@@ -503,7 +503,7 @@
                         </div>
                         <div class="card-body">
                            <div class="input-group">
-                              <input type="number" name="sni_cost" id="sni_cost" class="form-control" value="{{ old('sni_cost') }}" onkeyup="getCompleteData()" placeholder="Enter number">
+                              <input type="number" name="sni_cost" id="sni_cost" class="form-control @error('sni_cost') border-danger @enderror" title="@error('sni_cost') {{ $message }} @enderror" value="{{ old('sni_cost') }}" onkeyup="getCompleteData()" placeholder="Enter number">
                               <div class="input-group-prepend">
                                  <span class="input-group-text">SQM</span>
                               </div>
