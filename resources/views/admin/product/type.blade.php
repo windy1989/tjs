@@ -103,10 +103,6 @@
                               <td class="align-middle" id="detail_faces"></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Company</th>
-                              <td class="align-middle" id="detail_company"></td>
-                           </tr>
-                           <tr>
                               <th width="20%" class="align-middle">Division</th>
                               <td class="align-middle" id="detail_division"></td>
                            </tr>
@@ -302,7 +298,6 @@
          success: function(response) {
             loadingClose('.modal-content');
             $('#detail_category').html(': ' + response.category);
-            $('#detail_company').html(': ' + response.company);
             $('#detail_division').html(': ' + response.division);
             $('#detail_surface').html(': ' + response.surface);
             $('#detail_color').html(': ' + response.color);

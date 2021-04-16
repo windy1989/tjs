@@ -195,7 +195,7 @@
                               <div class="form-group">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
-                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" placeholder="0" disabled>
+                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" disabled>
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Cubic Meters</span>
                                     </div>

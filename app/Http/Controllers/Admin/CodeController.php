@@ -187,12 +187,16 @@ class CodeController extends Controller {
             $cubic_meter = ($type->length / 100) * ($type-> width / 100) * $type->thickness * $request->carton_pcs;
         } else {
             $carton_sqm  = 0;
-            $cubic_meter = 0;
+            $cubic_meter = null;
+        }
+
+        if(strpos($type->category->name, 'tile') !== false) {
+            $cubic_meter = null;
         }
 
         return response()->json([
             'carton_sqm'  => round($carton_sqm, 2),
-            'cubic_meter' => round($cubic_meter, 2)
+            'cubic_meter' => $cubic_meter ? round($cubic_meter, 2) : $cubic_meter
         ]);
     }
 
