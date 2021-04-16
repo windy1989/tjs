@@ -90,7 +90,7 @@
                      <div class="input-group-prepend">
                         <span class="input-group-text">IDR</span>
                      </div>
-                     <input type="text" name="conversion" id="conversion" class="form-control" placeholder="Enter conversion">
+                     <input type="number" name="conversion" id="conversion" class="form-control" placeholder="Enter conversion">
                   </div>
                </div>
             </form>
