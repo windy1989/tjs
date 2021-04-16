@@ -81,7 +81,7 @@
                </div>
                <div class="form-group">
                   <label>Price :<span class="text-danger">*</span></label>
-                  <input type="text" name="price" id="price" class="form-control number" placeholder="Enter price">
+                  <input type="text" name="price" id="price" class="form-control" placeholder="Enter price">
                </div>
             </form>
          </div>

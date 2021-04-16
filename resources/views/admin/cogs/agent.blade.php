@@ -101,15 +101,15 @@
                </div>
                <div class="form-group">
                   <label>Min Price :<span class="text-danger">*</span></label>
-                  <input type="text" name="min_price" id="min_price" class="form-control number" placeholder="Enter min price">
+                  <input type="text" name="min_price" id="min_price" class="form-control" placeholder="Enter min price">
                </div>
                <div class="form-group">
                   <label>Max Price :<span class="text-danger">*</span></label>
-                  <input type="text" name="max_price" id="max_price" class="form-control number" placeholder="Enter max price">
+                  <input type="text" name="max_price" id="max_price" class="form-control" placeholder="Enter max price">
                </div>
                <div class="form-group">
                   <label>Fee :<span class="text-danger">*</span></label>
-                  <input type="text" name="fee" id="fee" class="form-control number" placeholder="Enter fee">
+                  <input type="text" name="fee" id="fee" class="form-control" placeholder="Enter fee">
                </div>
             </form>
          </div>

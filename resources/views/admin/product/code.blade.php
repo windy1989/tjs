@@ -142,14 +142,6 @@
                               <td class="align-middle" id="detail_carton_pallet"></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Carton</th>
-                              <td class="align-middle" id="detail_carton_sqm"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Cubic Meters</th>
-                              <td class="align-middle" id="detail_cubic_meter"></td>
-                           </tr>
-                           <tr>
                               <th width="20%" class="align-middle">Container</th>
                               <td class="align-middle" id="detail_container_stock"></td>
                            </tr>
@@ -284,8 +276,6 @@
             $('#detail_grade').html(': ' + response.grade);
             $('#detail_carton_pallet').html(': ' + response.carton_pallet);
             $('#detail_carton_pcs').html(': ' + response.carton_pcs);
-            $('#detail_carton_sqm').html(': ' + response.carton_sqm);
-            $('#detail_cubic_meter').html(': ' + response.cubic_meter);
             $('#detail_container_standart').html(': ' + response.container_standart);
             $('#detail_container_stock').html(': ' + response.container_stock);
             $('#detail_container_max_stock').html(': ' + response.container_max_stock);

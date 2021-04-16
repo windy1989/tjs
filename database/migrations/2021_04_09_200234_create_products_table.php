@@ -24,8 +24,6 @@ class CreateProductsTable extends Migration
             $table->bigInteger('grade_id');
             $table->double('carton_pallet')->nullable();
             $table->double('carton_pcs')->nullable();
-            $table->double('carton_sqm')->nullable();
-            $table->double('cubic_meter');
             $table->char('container_standart', 1);
             $table->double('container_stock');
             $table->double('container_max_stock');

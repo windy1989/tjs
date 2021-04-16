@@ -118,7 +118,7 @@
                      <div class="input-group-prepend">
                         <span class="input-group-text">Rp</span>
                      </div>
-                     <input type="text" name="cost" id="cost" class="form-control number" placeholder="Enter cost">
+                     <input type="text" name="cost" id="cost" class="form-control" placeholder="Enter cost">
                   </div>
                </div>
             </form>

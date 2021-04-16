@@ -23,8 +23,6 @@ class Product extends Model {
         'grade_id',
         'carton_pallet',
         'carton_pcs',
-        'carton_sqm',
-        'cubic_meter',
         'container_standart',
         'container_stock',
         'container_max_stock',

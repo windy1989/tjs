@@ -29,8 +29,6 @@ class ProductSeeder extends Seeder
                 'grade_id'            => $p['grade_id'],
                 'carton_pallet'       => $p['carton_pallet'],
                 'carton_pcs'          => $p['carton_pcs'],
-                'carton_sqm'          => $p['carton_sqm'],
-                'cubic_meter'         => $p['cubic_meter'],
                 'container_standart'  => $p['container_standart'],
                 'container_stock'     => $p['container_stock'],
                 'container_max_stock' => $p['container_max_stock'],

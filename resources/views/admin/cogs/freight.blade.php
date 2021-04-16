@@ -103,7 +103,7 @@
                </div>
                <div class="form-group">
                   <label>Cost :<span class="text-danger">*</span></label>
-                  <input type="text" name="cost" id="cost" class="form-control number" placeholder="Enter cost">
+                  <input type="text" name="cost" id="cost" class="form-control" placeholder="Enter cost">
                </div>
             </form>
          </div>

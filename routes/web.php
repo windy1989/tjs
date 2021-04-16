@@ -179,8 +179,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::get('/', 'CodeController@index');
             Route::post('datatable', 'CodeController@datatable');
             Route::post('generate_code', 'CodeController@generateCode');
-            Route::post('formula_sqm_carton', 'CodeController@formulaSqmCarton');
-            Route::post('formula_cubic_meter', 'CodeController@formulaCubicMeter');
+            Route::post('formula', 'CodeController@formula');
             Route::match(['get', 'post'], 'create', 'CodeController@create');
             Route::match(['get', 'post'], 'update/{id}', 'CodeController@update');
             Route::post('show', 'CodeController@show');

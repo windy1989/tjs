@@ -80,73 +80,73 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Rental Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="rental_cost" id="rental_cost" class="form-control number" placeholder="Enter rental cost">
+                        <input type="text" name="rental_cost" id="rental_cost" class="form-control" placeholder="Enter rental cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Travel Sales Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="travel_sales_cost" id="travel_sales_cost" class="form-control number" placeholder="Enter travel sales cost">
+                        <input type="text" name="travel_sales_cost" id="travel_sales_cost" class="form-control" placeholder="Enter travel sales cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Marketing Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="marketing_cost" id="marketing_cost" class="form-control number" placeholder="Enter marketing cost">
+                        <input type="text" name="marketing_cost" id="marketing_cost" class="form-control" placeholder="Enter marketing cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>On Site Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="on_site_cost" id="on_site_cost" class="form-control number" placeholder="Enter on site cost">
+                        <input type="text" name="on_site_cost" id="on_site_cost" class="form-control" placeholder="Enter on site cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Storage Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="storage_cost" id="storage_cost" class="form-control number" placeholder="Enter storage cost">
+                        <input type="text" name="storage_cost" id="storage_cost" class="form-control" placeholder="Enter storage cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Fixed Cost :<span class="text-danger">*</span></label>
-                        <input type="text" name="fixed_cost" id="fixed_cost" class="form-control number" placeholder="Enter fixed cost">
+                        <input type="text" name="fixed_cost" id="fixed_cost" class="form-control" placeholder="Enter fixed cost">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Interest In Payment :<span class="text-danger">*</span></label>
-                        <input type="text" name="interest_in_payment" id="interest_in_payment" class="form-control number" placeholder="Enter interest in payment">
+                        <input type="text" name="interest_in_payment" id="interest_in_payment" class="form-control" placeholder="Enter interest in payment">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Nett Profit :<span class="text-danger">*</span></label>
-                        <input type="text" name="nett_profit" id="nett_profit" class="form-control number" placeholder="Enter nett profit">
+                        <input type="text" name="nett_profit" id="nett_profit" class="form-control" placeholder="Enter nett profit">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Saving :<span class="text-danger">*</span></label>
-                        <input type="text" name="saving" id="saving" class="form-control number" placeholder="Enter saving">
+                        <input type="text" name="saving" id="saving" class="form-control" placeholder="Enter saving">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Sales Commission :<span class="text-danger">*</span></label>
-                        <input type="text" name="sales_commission" id="sales_commission" class="form-control number" placeholder="Enter sales commission">
+                        <input type="text" name="sales_commission" id="sales_commission" class="form-control" placeholder="Enter sales commission">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Middlemant Commission :<span class="text-danger">*</span></label>
-                        <input type="text" name="middlemant_commission" id="middlemant_commission" class="form-control number" placeholder="Enter middlemant commission">
+                        <input type="text" name="middlemant_commission" id="middlemant_commission" class="form-control" placeholder="Enter middlemant commission">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Project Commission :<span class="text-danger">*</span></label>
-                        <input type="text" name="project_commission" id="project_commission" class="form-control number" placeholder="Enter project commission">
+                        <input type="text" name="project_commission" id="project_commission" class="form-control" placeholder="Enter project commission">
                      </div>
                   </div>
                </div>

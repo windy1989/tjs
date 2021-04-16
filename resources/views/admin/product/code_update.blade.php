@@ -158,7 +158,7 @@
                                  <label>Carton :</label>
                                  <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formulaCubicMeter()" value="{{ $product->carton_pcs }}" placeholder="Enter number">
+                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formula()" value="{{ $product->carton_pcs }}" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Pcs</span>
                                     </div>
@@ -180,14 +180,10 @@
                            <div class="col-md-4">
                               <div class="form-group">
                                  <label>Carton :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_sqm" id="carton_sqm" class="form-control" value="{{ $product->carton_sqm }}" onkeyup="formulaSqmCarton()" placeholder="Enter number">
+                                    <input type="number" name="carton_sqm" id="carton_sqm" class="form-control" placeholder="0" disabled>
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">SQM</span>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text" id="result_formula_carton_sqm">0</span>
                                     </div>
                                  </div>
                               </div>
@@ -196,12 +192,9 @@
                               <div class="form-group">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
-                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" onkeyup="formulaCubicMeter()" value="{{ $product->cubic_meter }}" placeholder="Enter number">
+                                    <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" placeholder="0" disabled>
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Cubic Meters</span>
-                                    </div>
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text" id="result_formula_cubic_meter">0</span>
                                     </div>
                                  </div>
                               </div>
@@ -378,39 +371,21 @@
       select2ServerSide('#type_id', '{{ url("admin/select2/type") }}');
    });
 
-   function formulaSqmCarton() {
+   function formula() {
       $.ajax({
-         url: '{{ url("admin/product/code/formula_sqm_carton") }}',
+         url: '{{ url("admin/product/code/formula") }}',
          type: 'POST',
          dataType: 'JSON',
          data: {
             type_id: $('#type_id').val(),
-            carton_sqm: $('#carton_sqm').val()
+            carton_pcs: $('#carton_pcs').val()
          },
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
-            $('#result_formula_carton_sqm').html(response);
-         }
-      });
-   }
-
-   function formulaCubicMeter() {
-      $.ajax({
-         url: '{{ url("admin/product/code/formula_cubic_meter") }}',
-         type: 'POST',
-         dataType: 'JSON',
-         data: {
-            type_id: $('#type_id').val(),
-            carton_pcs: $('#carton_pcs').val(),
-            cubic_meter	: $('#cubic_meter').val()
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         },
-         success: function(response) {
-            $('#result_formula_cubic_meter').html(response);
+            $('#carton_sqm').val(response.carton_sqm);
+            $('#cubic_meter').val(response.cubic_meter);
          }
       });
    }
@@ -431,7 +406,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
-            formulaSqmCarton();
+            formula();
             $('#code').val(response);
          },
          error: function() {

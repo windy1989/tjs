@@ -112,32 +112,32 @@ class Cogs extends Model {
             'thickness'              => $t,
             'min_total_dos'          => $cs,
             'container'              => $c,
-            'product_price'          => !is_nan($pp) ? $pp : 0,
-            'conversion_unit'        => !is_nan($cu) ? $cu : 0,
-            'rate_unit'              => !is_nan($ru) ? $ru : 0,
-            'local_price_idr'        => !is_nan($lpi) ? $lpi : 0,
-            'total_sqm_load'         => !is_nan($tsl) ? round($tsl) : 0,
-            'agent_fee_usd_sqm'      => !is_nan($afus) ? $afus : 0,
-            'agent_fee_idr'          => !is_nan($afi) ? $afi : 0,
-            'freight_cost_usd'       => !is_nan($fcu) ? $fcu : 0,
-            'cbm_container'          => !is_nan($cc) ? round($cc) : 0,
+            'product_price'          => !is_nan($pp) && !is_infinite($pp) ? round($pp) : 0,
+            'conversion_unit'        => !is_nan($cu) && !is_infinite($cu) ? round($cu) : 0,
+            'rate_unit'              => !is_nan($ru) && !is_infinite($ru) ? round($ru) : 0,
+            'local_price_idr'        => !is_nan($lpi) ? round($lpi) : 0,
+            'total_sqm_load'         => !is_nan($tsl) && !is_infinite($tsl) ? round($tsl) : 0,
+            'agent_fee_usd_sqm'      => !is_nan($afus) && !is_infinite($afus) ? round($afus) : 0,
+            'agent_fee_idr'          => !is_nan($afi) && !is_infinite($afi) ? round($afi) : 0,
+            'freight_cost_usd'       => !is_nan($fcu) && !is_infinite($fcu) ? round($fcu) : 0,
+            'cbm_container'          => !is_nan($cc) && !is_infinite($c) ? round($cc) : 0,
             'kg_dos'                 => $wg,
-            'total_weight_container' => !is_nan($twc) ? round($twc) : 0,
-            'tonnage_of_container'   => !is_nan($toc) ? round($toc) : 0,
-            'sqm_dos'                => !is_nan($sd) ? round($sd) : 0,
-            'freight_cost'           => !is_nan($fc) ? round($fc) : 0,
-            'landed_cost_container'  => !is_nan($lcc) ? $lcc : 0,
-            'total_landed_cost'      => !is_nan($tlc) ? round($tlc) : 0,
-            'rate_of_usd'            => !is_nan($ru) ? $ru : 0,
-            'ls_cost_sqm'            => !is_nan($lcs) ? round($lcs) : 0,
-            'import_duty'            => !is_nan($id) ? round($id) : 0,
-            'value_tax'              => !is_nan($vt) ? round($vt) : 0,
-            'income_tax'             => !is_nan($it) ? round($it) : 0,
-            'total_import_tax'       => !is_nan($tit) ? round($tit) : 0,
-            'safe_guard'             => !is_nan($sg) ? $sg : 0,
-            'cogs_idr'               => !is_nan($ci) ? $ci : 0,
-            'cogs_pta_idr'           => !is_nan($cpi) ? $cpi : 0,
-            'cogs_smb_idr'           => !is_nan($csi) ? $csi : 0
+            'total_weight_container' => !is_nan($twc) && !is_infinite($twc) ? round($twc) : 0,
+            'tonnage_of_container'   => !is_nan($toc) && !is_infinite($toc) ? round($toc) : 0,
+            'sqm_dos'                => !is_nan($sd) && !is_infinite($sd) ? round($sd) : 0,
+            'freight_cost'           => !is_nan($fc) && !is_infinite($fc) ? round($fc) : 0,
+            'landed_cost_container'  => !is_nan($lcc) && !is_infinite($lcc) ? round($lcc) : 0,
+            'total_landed_cost'      => !is_nan($tlc) && !is_infinite($tlc) ? round($tlc) : 0,
+            'rate_of_usd'            => !is_nan($ru) && !is_infinite($ru) ? round($ru) : 0,
+            'ls_cost_sqm'            => !is_nan($lcs) && !is_infinite($lcs) ? round($lcs) : 0,
+            'import_duty'            => !is_nan($id) && !is_infinite($id) ? round($id) : 0,
+            'value_tax'              => !is_nan($vt) && !is_infinite($vt) ? round($vt) : 0,
+            'income_tax'             => !is_nan($it) && !is_infinite($it) ? round($it) : 0,
+            'total_import_tax'       => !is_nan($tit) && !is_infinite($tit) ? round($tit) : 0,
+            'safe_guard'             => !is_nan($sg) && !is_infinite($sg) ? round($sg) : 0,
+            'cogs_idr'               => !is_nan($ci) && !is_infinite($ci) ? round($ci) : 0,
+            'cogs_pta_idr'           => !is_nan($cpi) && !is_infinite($cpi) ? round($cpi) : 0,
+            'cogs_smb_idr'           => !is_nan($csi) && !is_infinite($csi) ? round($csi) : 0
         ];
     }
 
@@ -171,6 +171,11 @@ class Cogs extends Model {
     public function city()
     {
         return $this->belongsTo('App\Models\City');
+    }
+
+    public function import()
+    {
+        return $this->belongsTo('App\Models\Import');
     }
 
 }
