@@ -109,7 +109,12 @@
                </div>
                <div class="form-group">
                   <label>Fee :<span class="text-danger">*</span></label>
-                  <input type="number" name="fee" id="fee" class="form-control" placeholder="Enter fee">
+                  <div class="input-group">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                     </div>
+                     <input type="number" name="fee" id="fee" class="form-control" placeholder="Enter fee">
+                  </div>
                </div>
             </form>
          </div>
