@@ -143,7 +143,7 @@
                                 <a href="{{ url('admin/price/cogs') }}" class="nav-link {{ Request::segment(2) == 'price' && Request::segment(3) == 'cogs' ? 'active' : '' }}">Cogs</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/price/hpp') }}" class="nav-link {{ Request::segment(2) == 'price' && Request::segment(3) == 'hpp' ? 'active' : '' }}">Hpp</a>
+                                <a href="{{ url('admin/price/pricing_policy') }}" class="nav-link {{ Request::segment(2) == 'price' && Request::segment(3) == 'pricing_policy' ? 'active' : '' }}">Pricing Policy</a>
                             </li>
                         </ul>
                     </li>

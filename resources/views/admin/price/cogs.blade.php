@@ -385,10 +385,10 @@
                <div class="col-md-3">
                   <div class="card" style="min-height:121px;">
                      <div class="card-header">
-                        <h6 class="card-title font-weight-bold text-center">LS Cost</h6>
+                        <h6 class="card-title font-weight-bold text-center">LS Cost Document</h6>
                      </div>
                      <div class="card-body">
-                        <div class="text-center" id="detail_total_landed_cost"></div>
+                        <div class="text-center" id="detail_ls_cost_document"></div>
                      </div>
                   </div>
                </div>
@@ -415,7 +415,7 @@
                <div class="col-md-3">
                   <div class="card" style="min-height:121px;">
                      <div class="card-header">
-                        <h6 class="card-title font-weight-bold text-center">LS Cost</h6>
+                        <h6 class="card-title font-weight-bold text-center">LS Cost SQM</h6>
                      </div>
                      <div class="card-body">
                         <div class="text-center" id="detail_ls_cost_sqm"></div>
@@ -585,6 +585,7 @@
             loadingOpen('.modal-content');
          },
          success: function(response) {
+            console.log(response);
             loadingClose('.modal-content');
             $('#detail_product').html(response.product);
             $('#detail_currency').html(response.currency);

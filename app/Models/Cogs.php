@@ -120,7 +120,7 @@ class Cogs extends Model {
             'agent_fee_usd_sqm'      => !is_nan($afus) && !is_infinite($afus) ? round($afus) : 0,
             'agent_fee_idr'          => !is_nan($afi) && !is_infinite($afi) ? round($afi) : 0,
             'freight_cost_usd'       => !is_nan($fcu) && !is_infinite($fcu) ? round($fcu) : 0,
-            'cbm_container'          => !is_nan($cc) && !is_infinite($c) ? round($cc) : 0,
+            'cbm_container'          => !is_nan($cc) && !is_infinite($cc) ? round($cc) : 0,
             'kg_dos'                 => $wg,
             'total_weight_container' => !is_nan($twc) && !is_infinite($twc) ? round($twc) : 0,
             'tonnage_of_container'   => !is_nan($toc) && !is_infinite($toc) ? round($toc) : 0,
