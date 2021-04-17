@@ -71,6 +71,10 @@ function loadingOpen(selector) {
    });
 }
 
+function loadingClose(selector) {
+   $(selector).waitMe('hide');
+}
+
 function notif(type, background, message) {
    new Noty({
       theme: ' alert ' + background + ' text-white alert-styled-left p-0',
@@ -78,10 +82,6 @@ function notif(type, background, message) {
       type: type,
       timeout: 2500
    }).show();
-}
-
-function loadingClose(selector) {
-   $(selector).waitMe('hide');
 }
 
 function select2ServerSide(selector, endpoint) {

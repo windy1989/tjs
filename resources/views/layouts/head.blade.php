@@ -26,6 +26,10 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
+   <link href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
+   <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
+   <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
+   <script src="{{ asset('template/front-office/custom.js') }}"></script>
 	<title>{{ $title }}</title>
 </head>

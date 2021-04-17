@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
+Route::prefix('product')->group(function() {
+    Route::get('/', 'ProductController@index');
+});
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::get('dashboard', 'DashboardController@index');

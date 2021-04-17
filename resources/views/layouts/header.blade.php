@@ -19,16 +19,16 @@
 									</ul>
 								</li> --}}
 								<li class="top-links-item">
-									<a href="#">Wishlist</a>
+									<a href="{{ url('wishlist') }}">Wishlist</a>
 								</li>
 								<li class="top-links-item d-sm-none d-md-none">
-									<a href="#">Cart</a>
+									<a href="{{ url('cart') }}">Cart</a>
 								</li>
 								<li class="top-links-item">
-									<a href="#">Register</a>
+									<a href="{{ url('account/register') }}">Register</a>
 								</li>
 								<li class="top-links-item">
-									<a href="#">Login</a>
+									<a href="{{ url('account/login') }}">Login</a>
 								</li>
 							</ul>
 						</div>
@@ -171,8 +171,9 @@
 								</li>
 							</ul>
 						</nav>
-						<form class="top-search-form" action="search.html" method="get">
-							<input type="text" name="q" class="form-control" value="" placeholder="Search ..." autocomplete="off">
+						<form class="top-search-form" action="{{ url('product') }}" method="get">
+							@csrf
+							<input type="text" name="search" class="form-control" placeholder="Search ..." autocomplete="off">
 						</form>
 					</div>
 				</div>

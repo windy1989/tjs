@@ -7,7 +7,6 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller {
     
@@ -26,7 +25,7 @@ class HomeController extends Controller {
         
         $category = Category::where('status', 1)
             ->whereExists(function($query) {
-                $query->select(DB::raw(4))
+                $query->selectRaw(4)
                     ->from('products')
                     ->leftJoin('types', 'products.type_id', '=', 'types.id')
                     ->whereColumn('categories.id', 'types.category_id');
