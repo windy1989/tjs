@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('country_id');
             $table->bigInteger('supplier_id');
             $table->bigInteger('grade_id');
+            $table->string('ventura_code')->nullable();
             $table->double('carton_pallet')->nullable();
             $table->double('carton_pcs')->nullable();
             $table->char('container_standart', 1);

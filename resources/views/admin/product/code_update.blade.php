@@ -68,11 +68,19 @@
                <div class="tab-content">
                   <div class="tab-pane fade show active" id="highlighted-justified-tab1">
                      <p class="mt-4">
-                        <div class="form-group">
-                           <label>Code :</label>
-                           <input type="text" name="code" id="code" class="form-control" value="{{ $product->code() }}" placeholder="Auto Generate" readonly>
-                        </div>
                         <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Code TJS :</label>
+                                 <input type="text" name="code" id="code" class="form-control" value="{{ $product->code() }}" placeholder="Auto Generate" readonly>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Code Ventura :</label>
+                                 <input type="text" name="ventura_code" id="ventura_code" class="form-control" value="{{ $product->ventura_code }}" placeholder="Enter code ventura">
+                              </div>
+                           </div>
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Type :<span class="text-danger">*</span></label>

@@ -105,14 +105,14 @@ class BannerController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'required|image|mimes:jpg,jpeg,png|max:500|dimensions:width=1920,height=500',
+            'image'  => 'required|image|mimes:jpg,jpeg,png|max:500|dimensions:width=1920,height=800',
             'status' => 'required'
         ], [
             'image.required'   => 'Image cannot be empty.',
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 500KB.',
-            'image.dimensions' => 'Image size must be 1920x500.',
+            'image.dimensions' => 'Image size must be 1920x800.',
             'status.required'  => 'Please select a status.'
         ]);
 
@@ -161,13 +161,13 @@ class BannerController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'image|mimes:jpg,jpeg,png|max:500|dimensions:width=1920,height=500',
+            'image'  => 'image|mimes:jpg,jpeg,png|max:500|dimensions:width=1920,height=800',
             'status' => 'required'
         ], [
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 500KB.',
-            'image.dimensions' => 'Image size must be 1920x500.',
+            'image.dimensions' => 'Image size must be 1920x800.',
             'status.required'  => 'Please select a status.'
         ]);
 

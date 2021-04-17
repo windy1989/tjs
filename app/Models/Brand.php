@@ -37,4 +37,9 @@ class Brand extends Model {
         return $status;
     }
 
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
+
 }

@@ -27,6 +27,7 @@ class ProductSeeder extends Seeder
                 'country_id'          => $p['country_id'],
                 'supplier_id'         => $p['supplier_id'],
                 'grade_id'            => $p['grade_id'],
+                'ventura_code'        => $p['ventura_code'],
                 'carton_pallet'       => $p['carton_pallet'],
                 'carton_pcs'          => $p['carton_pcs'],
                 'container_standart'  => $p['container_standart'],

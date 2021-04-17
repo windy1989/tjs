@@ -39,15 +39,11 @@ class WarehouseCommand extends Command
      */
     public function handle()
     {
-        $header = [
-            'Authorization' => 'f59c6dfc05dc8f3614e73bab8ba9e7fd8482d3aa05f7d8ebdc66b9fc0bbf40f5a155f1a4f80d20507a27481d58c418671432e712e764e787af9acc1faebf2f05'
-        ];
-
-        $get_page   = json_decode(Http::withHeaders($header)->post('http://203.161.31.109/ventura/warehouse'));
+        $get_page   = json_decode(Http::post('http://203.161.31.109/ventura/warehouse'));
         $total_page = $get_page->result->total_page;
 
         for($i = 1; $i <= $total_page; $i++) {
-            $warehouse = json_decode(Http::withHeaders($header)->post('http://203.161.31.109/ventura/warehouse', [
+            $warehouse = json_decode(Http::post('http://203.161.31.109/ventura/warehouse', [
                 'page' => $i
             ]));
 

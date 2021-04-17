@@ -43,4 +43,9 @@ class Category extends Model {
         return $query;
     }
 
+    public function type()
+    {
+        return $this->hasMany('App\Models\Type');
+    }
+
 }

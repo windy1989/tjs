@@ -90,8 +90,12 @@
                      <table cellpadding="10" cellspacing="0" width="100%">
                         <tbody>
                            <tr>
-                              <th width="20%" class="align-middle">Code</th>
+                              <th width="20%" class="align-middle">Code TJS</th>
                               <td class="align-middle" id="detail_code"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Code Ventura</th>
+                              <td class="align-middle" id="detail_ventura_code"></td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Type</th>
@@ -267,6 +271,7 @@
          success: function(response) {
             loadingClose('.modal-content');
             $('#detail_code').html(': ' + response.code);
+            $('#detail_ventura_code').html(': ' + response.ventura_code);
             $('#detail_type').html(': ' + response.type);
             $('#detail_company').html(': ' + response.company);
             $('#detail_hs_code').html(': ' + response.hs_code);

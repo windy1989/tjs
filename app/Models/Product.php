@@ -21,6 +21,7 @@ class Product extends Model {
         'country_id',
         'supplier_id',
         'grade_id',
+        'ventura_code',
         'carton_pallet',
         'carton_pcs',
         'container_standart',
@@ -75,6 +76,48 @@ class Product extends Model {
         return $container_standart;
     }
 
+    public function price()
+    {
+        $price = $this->currencyPrice;
+        if($price) {
+            return $price->price;
+        } else {
+            return 0;
+        }
+    }
+
+    public function availability()
+    {
+        $data = $this->stock;
+        if($data) {
+            $stock = $this->stock->sum('stock');
+        } else {
+            $stock = 0;
+        }
+
+        if($stock > 18) {
+            $color  = 'badge-success';
+            $status = 'Ready';
+        } else if($stock > 2 && $stock <= 18) {
+            $color  = 'badge-warning';
+            $status = 'Limited';
+        } else {
+            $color  = 'badge-danger';
+            $status = 'Indent';
+        }
+
+        return (object)[
+            'color'  => $color,
+            'status' => $status,
+            'stock'  => $stock
+        ];
+    }
+
+    public function stock()
+    {
+        return $this->hasMany('App\Models\Stock', 'code', 'ventura_code');
+    }
+
     public function type()
     {
         return $this->belongsTo('App\Models\Type');
@@ -118,6 +161,11 @@ class Product extends Model {
     public function currencyPrice()
     {
         return $this->hasOne('App\Models\CurrencyPrice');
+    }
+
+    public function currencyRate()
+    {
+        return $this->hasMany('App\Models\CurrencyRate');
     }
 
 }
