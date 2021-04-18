@@ -78,7 +78,6 @@
                            </div>
                         @endforeach
                      </div>
-                     {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}
                   @else
                      <center>
                         <h2 class="text-uppercase">Data Not Found</h2>
@@ -88,6 +87,7 @@
                         </p>
                      </center>
                   @endif
+                  {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}
                </div>
                <div class="sidebar col-lg-3">
                   <div class="sidebar-widgets-wrap">

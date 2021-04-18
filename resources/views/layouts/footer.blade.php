@@ -12,7 +12,7 @@
 										</p>
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 mb-5">
 									<div class="widget clearfix">
 										<h4 class="text-center">Contact</h4>
 										<div class="posts-sm row col-mb-30" id="post-list-footer">
