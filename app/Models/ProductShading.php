@@ -14,6 +14,7 @@ class ProductShading extends Model {
     protected $fillable   = [
         'product_id',
         'warehouse_code',
+        'stock_code',
         'code',
         'qty'
     ];

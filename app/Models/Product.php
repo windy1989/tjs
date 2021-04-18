@@ -21,7 +21,6 @@ class Product extends Model {
         'country_id',
         'supplier_id',
         'grade_id',
-        'ventura_code',
         'carton_pallet',
         'carton_pcs',
         'container_standart',
@@ -92,11 +91,11 @@ class Product extends Model {
 
     public function availability()
     {
-        $data = $this->stock;
+        $data  = $this->productShading;
+        $stock = 0;
+
         if($data) {
-            $stock = $this->stock->sum('stock');
-        } else {
-            $stock = 0;
+            $stock = $data->sum('qty');
         }
 
         if($stock > 18) {
@@ -105,7 +104,7 @@ class Product extends Model {
         } else if($stock > 2 && $stock <= 18) {
             $color  = 'badge-warning';
             $status = 'Limited';
-        } else if($stock > 0 && $stock < 2) {
+        } else if($stock > 0 && $stock <= 2) {
             $color  = 'badge-secondary';
             $status = 'Indent';
         } else {
@@ -118,11 +117,6 @@ class Product extends Model {
             'status' => $status,
             'stock'  => $stock
         ];
-    }
-
-    public function stock()
-    {
-        return $this->hasMany('App\Models\Stock', 'code', 'ventura_code');
     }
 
     public function type()

@@ -68,19 +68,11 @@
                <div class="tab-content">
                   <div class="tab-pane fade show active" id="highlighted-justified-tab1">
                      <p class="mt-4">
+                        <div class="form-group">
+                           <label>Code :</label>
+                           <input type="text" name="code" id="code" class="form-control" value="{{ old('code') }}" placeholder="Auto Generate" readonly>
+                        </div>
                         <div class="row">
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Code TJS :</label>
-                                 <input type="text" name="code" id="code" class="form-control" value="{{ old('code') }}" placeholder="Auto Generate" readonly>
-                              </div>
-                           </div> 
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Code Ventura :</label>
-                                 <input type="text" name="ventura_code" id="ventura_code" class="form-control" value="{{ old('ventura_code') }}" placeholder="Enter code ventura">
-                              </div>
-                           </div> 
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Type :<span class="text-danger">*</span></label>
@@ -258,8 +250,8 @@
                               <thead class="bg-info">
                                  <tr class="text-center">
                                     <th>Warehouse</th>
+                                    <th>Ventura</th>
                                     <th>Code</th>
-                                    <th>Qty</th>
                                     <th>Delete</th>
                                  </tr>
                               </thead>
@@ -268,16 +260,16 @@
                                     @foreach(old('shading_warehouse_name') as $key => $swn)
                                        <tr>
                                           <td>{{ $swn }}</td>
+                                          <td>{{ old('shading_stock_code')[$key] }}</td>
                                           <td>{{ old('shading_code')[$key] }}</td>
-                                          <td>{{ old('shading_qty')[$key] }}</td>
                                           <td>
                                              <button type="button" class="btn bg-danger btn-sm" id="delete_data_shading">
                                                 <i class="icon-trash-alt"></i>
                                              </button>
                                              <input type="hidden" name="shading_warehouse_code[]" value="{{ old('shading_warehouse_code')[$key] }}">
                                              <input type="hidden" name="shading_warehouse_name[]" value="{{ $swn }}">
+                                             <input type="hidden" name="shading_stock_code[]" value="{{ old('shading_stock_code')[$key] }}">
                                              <input type="hidden" name="shading_code[]" value="{{ old('shading_code')[$key] }}">
-                                             <input type="hidden" name="shading_qty[]" value="{{ old('shading_qty')[$key] }}">
                                           </td>
                                        </tr>
                                     @endforeach
@@ -342,12 +334,12 @@
                </select>
             </div>
             <div class="form-group">
-               <label>Code :<span class="text-danger">*</span></label>
-               <input type="text" name="shading_code" id="shading_code" class="form-control" placeholder="Enter code">
+               <label>Ventura:<span class="text-danger">*</span></label>
+               <input type="text" name="shading_stock_code" id="shading_stock_code" class="form-control" placeholder="Enter code ventura">
             </div>
             <div class="form-group">
-               <label>Qty :</label>
-               <input type="number" name="shading_qty" id="shading_qty" class="form-control" placeholder="Enter qty">
+               <label>Code :<span class="text-danger">*</span></label>
+               <input type="text" name="shading_code" id="shading_code" class="form-control" placeholder="Enter code">
             </div>
          </div>
          <div class="modal-footer">
@@ -430,11 +422,11 @@
    }
 
    function addShading() {
-      let shading_warehouse = $('#shading_warehouse');
-      let shading_code      = $('#shading_code');
-      let shading_qty       = $('#shading_qty');
+      let shading_warehouse  = $('#shading_warehouse');
+      let shading_stock_code = $('#shading_stock_code');
+      let shading_code       = $('#shading_code');
 
-      if(!shading_warehouse.val() || !shading_code.val() || !shading_qty.val()) {
+      if(!shading_warehouse.val() || !shading_stock_code.val() || !shading_code.val()) {
          swalInit({
             title: 'Please fill in all fields.',
             type: 'info'
@@ -444,20 +436,20 @@
 
          $('#datatable_shading').DataTable().row.add([
             arr_shading_warehouse[1],
+            shading_stock_code.val(),
             shading_code.val(),
-            shading_qty.val(),
             `
                <button type="button" class="btn bg-danger btn-sm" id="delete_data_shading"><i class="icon-trash-alt"></i></button>
                <input type="hidden" name="shading_warehouse_code[]" value="` + arr_shading_warehouse[0] + `">
                <input type="hidden" name="shading_warehouse_name[]" value="` + arr_shading_warehouse[1] + `">
+               <input type="hidden" name="shading_stock_code[]" value="` + shading_stock_code.val() + `">
                <input type="hidden" name="shading_code[]" value="` + shading_code.val() + `">
-               <input type="hidden" name="shading_qty[]" value="` + shading_qty.val() + `">
             `
          ]).draw().node();
 
          shading_warehouse.val(null).trigger('change');
+         shading_stock_code.val(null);
          shading_code.val(null);
-         shading_qty.val(null);
          $('#modal_form').modal('hide');
       }
    }

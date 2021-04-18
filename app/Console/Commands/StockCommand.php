@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Stock;
+use App\Models\ProductShading;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -41,24 +42,19 @@ class StockCommand extends Command
     {
         ini_set('memory_limit', '-1');
 
-        $get_page   = json_decode(Http::post('http://203.161.31.109/ventura/item/stock'));
-        $total_page = $get_page->result->total_page;
-
-        for($i = 1; $i <= $total_page; $i++) {
-            $stock = json_decode(Http::post('http://203.161.31.109/ventura/item/stock', [
-                'page'     => $i,
-                'per_page' => 1000
+        foreach(ProductShading::all() as $ps) {
+            $stock = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                'kode_item' => $ps->stock_code,
+                'gudang'    => $ps->warehouse_code,
+                'per_page'  => 1000
             ]));
 
-            foreach($stock->result->data as $s) {
-                Stock::updateOrCreate([
-                    'warehouse_code' => $s->kode_gudang,
-                    'code'           => $s->kode_item,
-                    'type'           => $s->tipe_item
-                ], [
-                    'name'  => $s->nama,
-                    'stock' => $s->stok
-                ]);
+            if($stock->result->total_data > 0) {
+                foreach($stock->result->data as $s) {
+                    $ps->update(['qty' => $s->stok]);
+                }
+            } else {
+                $ps->delete();
             }
         }
     }

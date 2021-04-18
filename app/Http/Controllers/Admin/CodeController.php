@@ -14,6 +14,7 @@ use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Models\ProductShading;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class CodeController extends Controller {
@@ -211,7 +212,6 @@ class CodeController extends Controller {
                 'country_id'          => 'required',
                 'supplier_id'         => 'required',
                 'grade_id'            => 'required',
-                'ventura_code'        => 'required',
                 'container_standart'  => 'required',
                 'container_stock'     => 'required',
                 'container_max_stock' => 'required',
@@ -225,7 +225,6 @@ class CodeController extends Controller {
                 'country_id.required'          => 'Please select a country.',
                 'supplier_id.required'         => 'Please select a supplier.',
                 'grade_id.required'            => 'Please select a grade.',
-                'ventura_code.required'        => 'Code ventura cannot be empty.',
                 'container_standart.required'  => 'Please select a standart container.',
                 'container_stock.required'     => 'Container stock cannot be empty.',
                 'container_max_stock.required' => 'Container max stock cannot be empty.',
@@ -244,7 +243,6 @@ class CodeController extends Controller {
                     'country_id'          => $request->country_id,
                     'supplier_id'         => $request->supplier_id,
                     'grade_id'            => $request->grade_id,
-                    'ventura_code'        => $request->ventura_code,
                     'carton_pallet'       => $request->carton_pallet,
                     'carton_pcs'          => $request->carton_pcs,
                     'container_standart'  => $request->container_standart,
@@ -257,12 +255,26 @@ class CodeController extends Controller {
                 if($query) {
                     if($request->shading_warehouse_code) {
                         foreach($request->shading_warehouse_code as $key => $swc) {
-                            ProductShading::create([
-                                'product_id'     => $query->id,
-                                'warehouse_code' => $swc,
-                                'code'           => $request->shading_code[$key],
-                                'qty'            => $request->shading_qty[$key]
-                            ]);
+                            $total_stock = 0;
+                            $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                                'kode_item' => $request->shading_stock_code[$key],
+                                'gudang'    => $swc,
+                                'per_page'  => 1000
+                            ]));
+
+                            if($stock->result->total_data > 0) {
+                                foreach($stock->result->data as $s) {
+                                    $total_stock += $s->stok;
+                                }
+
+                                ProductShading::create([
+                                    'product_id'     => $query->id,
+                                    'warehouse_code' => $swc,
+                                    'stock_code'     => $request->shading_stock_code[$key],
+                                    'code'           => $request->shading_code[$key],
+                                    'qty'            => $total_stock
+                                ]);
+                            }
                         }
                     }
 
@@ -305,7 +317,6 @@ class CodeController extends Controller {
                 'country_id'          => 'required',
                 'supplier_id'         => 'required',
                 'grade_id'            => 'required',
-                'ventura_code'        => 'required',
                 'container_standart'  => 'required',
                 'container_stock'     => 'required',
                 'container_max_stock' => 'required',
@@ -319,7 +330,6 @@ class CodeController extends Controller {
                 'country_id.required'          => 'Please select a country.',
                 'supplier_id.required'         => 'Please select a supplier.',
                 'grade_id.required'            => 'Please select a grade.',
-                'ventura_code.required'        => 'Code ventura cannot be empty.',
                 'container_standart.required'  => 'Please select a standart container.',
                 'container_stock.required'     => 'Container stock cannot be empty.',
                 'container_max_stock.required' => 'Container max stock cannot be empty.',
@@ -338,7 +348,6 @@ class CodeController extends Controller {
                     'country_id'          => $request->country_id,
                     'supplier_id'         => $request->supplier_id,
                     'grade_id'            => $request->grade_id,
-                    'ventura_code'        => $request->ventura_code,
                     'carton_pallet'       => $request->carton_pallet,
                     'carton_pcs'          => $request->carton_pcs,
                     'container_standart'  => $request->container_standart,
@@ -352,12 +361,26 @@ class CodeController extends Controller {
                     ProductShading::where('product_id', $id)->delete();
                     if($request->shading_warehouse_code) {
                         foreach($request->shading_warehouse_code as $key => $swc) {
-                            ProductShading::create([
-                                'product_id'     => $id,
-                                'warehouse_code' => $swc,
-                                'code'           => $request->shading_code[$key],
-                                'qty'            => $request->shading_qty[$key]
-                            ]);
+                            $total_stock = 0;
+                            $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                                'kode_item' => $request->shading_stock_code[$key],
+                                'gudang'    => $swc,
+                                'per_page'  => 1000
+                            ]));
+
+                            if($stock->result->total_data > 0) {
+                                foreach($stock->result->data as $s) {
+                                    $total_stock += $s->stok;
+                                }
+
+                                ProductShading::create([
+                                    'product_id'     => $id,
+                                    'warehouse_code' => $swc,
+                                    'stock_code'     => $request->shading_stock_code[$key],
+                                    'code'           => $request->shading_code[$key],
+                                    'qty'            => $total_stock
+                                ]);
+                            }
                         }
                     }
 
@@ -397,9 +420,9 @@ class CodeController extends Controller {
         if($data->productShading) {
             foreach($data->productShading as $pd) {
                 $shading[] = [
-                    'warehouse' => $pd->warehouse->name,
-                    'code'      => $pd->code,
-                    'qty'       => $pd->qty
+                    'warehouse'  => $pd->warehouse->name,
+                    'stock_code' => $pd->stock_code,
+                    'code'       => $pd->code
                 ];
             }
         }
@@ -413,7 +436,6 @@ class CodeController extends Controller {
             'country'             => $data->country->name,
             'supplier'            => $data->supplier->name,
             'grade'               => $data->grade->name,
-            'ventura_code'        => $data->ventura_code,
             'carton_pallet'       => $data->carton_pallet . '<sub> / carton</sub>',
             'carton_pcs'          => $data->carton_pcs . '<sub> / pcs</sub>',
             'container_standart'  => $data->containerStandart(),

@@ -110,21 +110,17 @@ class ProductController extends Controller {
                 }
 
                 if($filter['other']['stock']) {
-                    if($filter['other']['stock'] == 'ready') {
-                        $query->whereHas('stock', function($query) {
-                                $query->havingRaw('SUM(stock) > ?', [18]); 
-                            });
-                    } else if($filter['other']['stock'] == 'limited') {
-                        $query->whereHas('stock', function($query) {
-                                $query->havingRaw('SUM(stock) > ?', [2])
-                                    ->havingRaw('SUM(stock) <= ?', [18]);
-                            });
-                    } else if($filter['other']['stock'] == 'indent') {
-                        $query->whereHas('stock', function($query) {
-                                $query->havingRaw('SUM(stock) > ?', [0])
-                                    ->havingRaw('SUM(stock) < ?', [2]);
-                            });
-                    }
+                    $query->whereHas('productShading', function($query) use ($filter) {
+                            if($filter['other']['stock'] == 'ready') {
+                                $query->havingRaw('SUM(qty) > ?', [18]);
+                            } else if($filter['other']['stock'] == 'limited') {
+                                $query->havingRaw('SUM(qty) > ?', [2])
+                                    ->havingRaw('SUM(qty) <= ?', [18]);
+                            } else if($filter['other']['stock'] == 'indent') {
+                                $query->havingRaw('SUM(qty) > ?', [0])
+                                    ->havingRaw('SUM(qty) <= ?', [2]);
+                            }
+                        });
                 }
 
                 if($filter['category']) {
@@ -178,7 +174,7 @@ class ProductController extends Controller {
             'category' => Category::where('parent_id', 0)->where('status', 1)->get(),
             'color'    => Color::where('status', 1)->get(),
             'pattern'  => Pattern::where('status', 1)->get(),
-            'product'  => $product->groupBy('id')->paginate($filter['other']['show'])->appends($request->except('page')),
+            'product'  => $product->groupBy('products.id')->paginate($filter['other']['show'])->appends($request->except('page')),
             'filter'   => $filter,
             'content'  => 'product'
         ];

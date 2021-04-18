@@ -17,6 +17,7 @@ class CreateProductShadingsTable extends Migration
             $table->id();
             $table->bigInteger('product_id');
             $table->string('warehouse_code');
+            $table->string('stock_code');
             $table->string('code');
             $table->integer('qty')->default(0);
             $table->timestamps();

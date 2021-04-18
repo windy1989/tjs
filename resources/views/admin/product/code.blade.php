@@ -90,12 +90,8 @@
                      <table cellpadding="10" cellspacing="0" width="100%">
                         <tbody>
                            <tr>
-                              <th width="20%" class="align-middle">Code TJS</th>
+                              <th width="20%" class="align-middle">Code</th>
                               <td class="align-middle" id="detail_code"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Code Ventura</th>
-                              <td class="align-middle" id="detail_ventura_code"></td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Type</th>
@@ -168,6 +164,7 @@
                            <thead class="bg-info">
                               <tr class="text-center">
                                  <th>Warehouse</th>
+                                 <th>Ventura</th>
                                  <th>Code</th>
                                  <th>Qty</th>
                               </tr>
@@ -271,7 +268,6 @@
          success: function(response) {
             loadingClose('.modal-content');
             $('#detail_code').html(': ' + response.code);
-            $('#detail_ventura_code').html(': ' + response.ventura_code);
             $('#detail_type').html(': ' + response.type);
             $('#detail_company').html(': ' + response.company);
             $('#detail_hs_code').html(': ' + response.hs_code);
@@ -290,6 +286,7 @@
             $.each(response.shading, function(i, val) {
                $('#datatable_shading').DataTable().row.add([
                   val.warehouse,
+                  val.stock_code,
                   val.code,
                   val.qty
                ]).draw().node();
