@@ -61,7 +61,72 @@ class ProductController extends Controller {
             $filter['pattern'] = [];
         }
 
-        $product = Product::where(function($query) use ($filter) {
+        if($request->search) {
+            $filter['other']['search'] = $request->search;
+        } else {
+            $filter['other']['search'] = null;
+        }
+
+        if($request->show) {
+            $filter['other']['show'] = $request->show;
+        } else {
+            $filter['other']['show'] = 12;
+        }
+
+        if($request->stock) {
+            $filter['other']['stock'] = $request->stock;
+        } else {
+            $filter['other']['stock'] = null;
+        }
+
+        if($request->sort) {
+            $filter['other']['sort'] = $request->sort;
+        } else {
+            $filter['other']['sort'] = null;
+        }
+
+        $product = Product::select('products.*', 'currency_prices.price')
+            ->where(function($query) use ($filter) {
+                if($filter['other']['search']) {
+                    $query->whereHas('type', function($query) use ($filter) {
+                            $query->where('code', 'like', '%' . $filter['other']['search'] . '%');
+                        })
+                        ->orWhereHas('company', function($query) use ($filter) {
+                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
+                        })
+                        ->orWhereHas('country', function($query) use ($filter) {
+                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
+                        })
+                        ->orWhereHas('brand', function($query) use ($filter) {
+                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
+                        })
+                        ->orWhereHas('grade', function($query) use ($filter) {
+                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
+                        });
+                }
+
+                if($filter['other']['stock']) {
+                    if($filter['other']['stock'] == 'ready') {
+                        $query->whereHas('stock', function($query) {
+                                $query->havingRaw('SUM(stock) > ?', [18]); 
+                            });
+                    } else if($filter['other']['stock'] == 'limited') {
+                        $query->whereHas('stock', function($query) {
+                                $query->havingRaw('SUM(stock) > ?', [2])
+                                    ->havingRaw('SUM(stock) <= ?', [18]);
+                            });
+                    } else if($filter['other']['stock'] == 'indent') {
+                        $query->whereHas('stock', function($query) {
+                                $query->havingRaw('SUM(stock) > ?', [0])
+                                    ->havingRaw('SUM(stock) < ?', [2]);
+                            });
+                    }
+                }
+
                 if($filter['category']) {
                     $query->whereHas('type', function($query) use ($filter) {
                             $query->whereHas('category', function($query) use ($filter) {
@@ -88,8 +153,20 @@ class ProductController extends Controller {
                         });
                 }
             })
-            ->where('status', 1)
-            ->paginate(12);
+            ->leftJoin('currency_prices', 'products.id', '=', 'currency_prices.product_id')
+            ->where('status', 1);
+
+        if($filter['other']['sort']) {
+            if($filter['other']['sort'] == 'newest') {
+                $product->latest();
+            } else {
+                if($filter['other']['sort'] == 'low_to_high') {
+                    $product->orderBy('price', 'asc');
+                } else {
+                    $product->orderBy('price', 'desc');
+                }
+            }
+        }
 
         $data = [
             'title'    => 'Smart Marble & Bath | Product',
@@ -97,7 +174,7 @@ class ProductController extends Controller {
             'category' => Category::where('parent_id', 0)->where('status', 1)->get(),
             'color'    => Color::where('status', 1)->get(),
             'pattern'  => Pattern::where('status', 1)->get(),
-            'product'  => $product,
+            'product'  => $product->groupBy('id')->paginate($filter['other']['show'])->appends($request->except('page')),
             'filter'   => $filter,
             'content'  => 'product'
         ];

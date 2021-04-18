@@ -48,7 +48,7 @@
                                  </div>
                                  <div class="product-desc p-3 text-center">
                                     <div class="product-title">
-                                       <h4 class="mb-0 font-weight-normal" style="font-size:15px; max-height:20px; overflow:hidden;">
+                                       <h4 class="mb-0 font-weight-normal limit-text-list-product">
                                           <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
                                        </h4>
                                     </div>
@@ -83,7 +83,7 @@
                      </div>
                      <div class="product-desc p-3 text-center">
                         <div class="product-title">
-                           <h4 class="mb-0 font-weight-normal" style="font-size:15px; max-height:20px; overflow:hidden;">
+                           <h4 class="mb-0 font-weight-normal limit-text-list-product">
                               <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
                            </h4>
                         </div>
@@ -119,6 +119,7 @@
                                  $query->where('category_id', $c->id);
                               })
                               ->limit(4)
+                              ->groupBy('id')
                               ->get();
                         @endphp
                         @foreach($product as $p)
@@ -132,7 +133,7 @@
                                  </div>
                                  <div class="product-desc p-3 text-center">
                                     <div class="product-title">
-                                       <h4 class="mb-0 font-weight-normal" style="font-size:15px; max-height:20px; overflow:hidden;">
+                                       <h4 class="mb-0 font-weight-normal limit-text-list-product">
                                           <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
                                        </h4>
                                     </div>

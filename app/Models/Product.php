@@ -78,12 +78,16 @@ class Product extends Model {
 
     public function price()
     {
-        $price = $this->currencyPrice;
-        if($price) {
-            return $price->price;
+        $data = $this->currencyPrice->last();
+        if($data) {
+            if($data->currency->code == 'IDR' || $data->currency->id == 5) {
+                $price = $data->price;
+            }
         } else {
-            return 0;
+            $price = 0;
         }
+
+        return $price;
     }
 
     public function availability()
@@ -101,9 +105,12 @@ class Product extends Model {
         } else if($stock > 2 && $stock <= 18) {
             $color  = 'badge-warning';
             $status = 'Limited';
+        } else if($stock > 0 && $stock < 2) {
+            $color  = 'badge-secondary';
+            $status = 'Indent';
         } else {
             $color  = 'badge-danger';
-            $status = 'Indent';
+            $status = 'Not Available';
         }
 
         return (object)[
@@ -160,7 +167,7 @@ class Product extends Model {
 
     public function currencyPrice()
     {
-        return $this->hasOne('App\Models\CurrencyPrice');
+        return $this->hasMany('App\Models\CurrencyPrice');
     }
 
     public function currencyRate()

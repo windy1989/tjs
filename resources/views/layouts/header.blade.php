@@ -171,8 +171,7 @@
 								</li>
 							</ul>
 						</nav>
-						<form class="top-search-form" action="{{ url('product') }}" method="get">
-							@csrf
+						<form class="top-search-form" action="{{ url('product') }}" method="GET">
 							<input type="text" name="search" class="form-control" placeholder="Search ..." autocomplete="off">
 						</form>
 					</div>

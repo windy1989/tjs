@@ -1,77 +1,101 @@
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
-         <div class="row gutter-40 col-mb-80">
-            <div class="postcontent col-lg-9 order-lg-last">
-               @if($product->count() > 0)
-                  <div id="shop" class="shop row grid-container gutter-20" data-layout="fitRows">
-                     <div class="col-lg-12 mb-0">
-                        <div class="bg-light p-2">
-                           <form class="form-inline mb-0">
-                              <div class="form-group mr-2">
-                                 <a href="#" class="button button-small button-rounded button-reveal button-dark">Default</a>
-                              </div>
-                              <div class="form-group mr-3">
-                                 <a href="#" class="button button-small button-rounded button-reveal button-white button-light">Newest</a>
-                              </div>
-                              <div class="form-group mr-3">
-                                 <select name="price" id="price" class="form-control">
-                                    <option value="">Availability</option>
-                                    <option value="ready">Ready</option>
-                                    <option value="limited">Limited</option>
-                                    <option value="indent">Indent</option>
-                                 </select>
-                              </div>
-                              <div class="form-group">
-                                 <select name="price" id="price" class="form-control">
-                                    <option value="">Price</option>
-                                    <option value="low_to_high">Low To High</option>
-                                    <option value="high_to_low">Low To High</option>
-                                 </select>
-                              </div>
-                           </form>
+         <form method="GET" class="mt-0" action="{{ url('product') }}">
+            <div class="row gutter-40 col-mb-80">
+               <div class="postcontent col-lg-9 order-lg-last">
+                  <div class="row mb-3">
+                     <div class="col-md-4">
+                        <div class="form-group row no-gutters">
+                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Show</label>
+                           <div class="col-9">
+                              <select name="show" id="show" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                                 <option value="">12</option>
+                                 <option value="24" {{ $filter['other']['show'] == 24 ? 'selected' : '' }}>24</option>
+                                 <option value="48" {{ $filter['other']['show'] == 48 ? 'selected' : '' }}>48</option>
+                                 <option value="60" {{ $filter['other']['show'] == 60 ? 'selected' : '' }}>60</option>
+                              </select>
+                           </div>
                         </div>
                      </div>
-                     @foreach($product as $p)
-                        <div class="product col-md-4 mb-4 col-sm-6 col-12">
-                           <div class="grid-inner border">
-                              <div class="product-image">
-                                 <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                                    <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" style="max-height:253px;" alt="{{ $p->code() }}">
-                                 </a>
-                                 <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
-                              </div>
-                              <div class="product-desc p-3 text-center">
-                                 <div class="product-title">
-                                    <h4 class="mb-0 font-weight-normal" style="font-size:15px; max-height:20px; overflow:hidden;">
-                                       <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
-                                    </h4>
+                     <div class="col-md-4">
+                        <div class="form-group row no-gutters">
+                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Stock</label>
+                           <div class="col-9">
+                              <select name="stock" id="stock" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                                 <option value="">All</option>
+                                 <option value="ready" {{ $filter['other']['stock'] == 'ready' ? 'selected' : '' }}>Ready</option>
+                                 <option value="limited" {{ $filter['other']['stock'] == 'limited' ? 'selected' : '' }}>Limited</option>
+                                 <option value="indent" {{ $filter['other']['stock'] == 'indent' ? 'selected' : '' }}>Indent</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group row no-gutters">
+                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Sort</label>
+                           <div class="col-9">
+                              <select name="sort" id="sort" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                                 <option value="">Normal</option>
+                                 <option value="low_to_high" {{ $filter['other']['sort'] == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
+                                 <option value="high_to_low" {{ $filter['other']['sort'] == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
+                                 <option value="newest" {{ $filter['other']['sort'] == 'newest' ? 'selected' : '' }}>Newest</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  @if($product->count() > 0)
+                     <div id="shop" class="shop row grid-container gutter-20" data-layout="fitRows">
+                        @foreach($product as $p)
+                           <div class="product col-md-4 mb-4 col-sm-6 col-12">
+                              <div class="grid-inner border">
+                                 <div class="bg-light">
+                                    <div class="p-2 font-weight-bold text-center">
+                                       {{ $p->type->category->name }}
+                                    </div>
                                  </div>
-                                 <div class="product-price">
-                                    <ins style="font-size:15px;">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                 <div class="product-image">
+                                    <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                                       <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" style="max-height:253px;" alt="{{ $p->code() }}">
+                                    </a>
+                                    <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                  </div>
-                                 <div class="product-rating text-muted">
-                                    {{ $p->brand->name }}
+                                 <div class="product-desc p-3 text-center">
+                                    <div class="product-title">
+                                       <h4 class="mb-0 font-weight-normal limit-text-list-product">
+                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
+                                       </h4>
+                                    </div>
+                                    <div class="product-price">
+                                       <ins style="font-size:15px;">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                    </div>
+                                    <div class="product-rating text-muted">
+                                       {{ $p->brand->name }}
+                                    </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
-                     @endforeach
-                  </div>
-                  {{ $product->withQueryString()->onEachSide(2)->links('pagination') }}
-               @else
-                  <center>
-                     <h2 class="text-uppercase">Data Not Found</h2>
-                     <img src="{{ asset('website/data-empty.png') }}" style="max-width:80%;" class="img-fluid">
-                     <p class="mt-2 text-muted">
-                        Looks like the product you're looking for doesn't exist or maybe you forgot to clear the search bar!
-                     </p>
-                  </center>
-               @endif
-            </div>
-            <div class="sidebar col-lg-3">
-               <div class="sidebar-widgets-wrap">
-                  <form method="GET" action="{{ url('product') }}">
+                        @endforeach
+                     </div>
+                     {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}
+                  @else
+                     <center>
+                        <h2 class="text-uppercase">Data Not Found</h2>
+                        <img src="{{ asset('website/data-empty.png') }}" style="max-width:80%;" class="img-fluid">
+                        <p class="mt-2 text-muted">
+                           Looks like the product you're looking for doesn't exist or maybe you forgot to clear the search bar!
+                        </p>
+                     </center>
+                  @endif
+               </div>
+               <div class="sidebar col-lg-3">
+                  <div class="sidebar-widgets-wrap">
+                     <div class="clearfix">
+                        <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
+                        <button type="submit" onclick="clickFilter(this)" class="btn btn-dark btn-sm col-12 mt-2"><i class="icon-search"></i></button>
+                     </div>
+                     <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
                         <h4 class="mb-3 text-uppercase" style="font-size:18px;">Category</h4>
                         <ul class="sidebar-filter-product">
@@ -158,10 +182,10 @@
                            @endforeach
                         </ul>
                      </div>
-                  </form>
+                  </div>
                </div>
             </div>
-         </div>
+         </form>
       </div>
    </div>
 </section>

@@ -52,6 +52,12 @@
    color: #30302E;
 }
 
+.limit-text-list-product {
+   font-size: 15px;
+   max-height: 20px;
+   overflow: hidden;
+}
+
 @media (max-width: 991.98px) {
    .menu-container #tab-shop .nav-link {
       padding: 15px;
@@ -62,14 +68,14 @@
    .product > .grid-inner > .product-image > a  > img {
       max-height: 100% !important;
    }
+
+   .limit-text-list-product {
+      max-height: auto;
+}
 }
 
 @media only screen and (max-width: 991px) {
    .header-row > #logo > a > img {
       max-height: 55px !important;
-   }
-
-   .sidebar-filter-product {
-      max-height: 100% !important;
    }
 }

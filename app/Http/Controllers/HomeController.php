@@ -20,6 +20,7 @@ class HomeController extends Controller {
             ->has('product', '>', 4)
             ->where('status', 1)
             ->inRandomOrder()
+            ->groupBy('id')
             ->limit(4)
             ->get();
         
@@ -31,6 +32,7 @@ class HomeController extends Controller {
                     ->whereColumn('categories.id', 'types.category_id');
             })
             ->inRandomOrder()
+            ->groupBy('id')
             ->limit(3)
             ->get();
 
@@ -39,7 +41,7 @@ class HomeController extends Controller {
             'banner'      => Banner::where('status', 1)->get(),
             'brand'       => $brand,
             'category'    => $category,
-            'product_new' => Product::where('status', 1)->latest()->limit(8)->get(),
+            'product_new' => Product::where('status', 1)->latest()->groupBy('id')->limit(8)->get(),
             'content'     => 'home'
         ];
 
