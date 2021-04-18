@@ -142,14 +142,18 @@ class ProductController extends Controller {
                 }
 
                 if($filter['color']) {
-                    $query->whereHas('color', function($query) use ($filter) {
-                            $query->whereIn('code', $filter['color']);
+                    $query->whereHas('type', function($query) use ($filter) {
+                            $query->whereHas('color', function($query) use ($filter) {
+                                    $query->whereIn('code', $filter['color']);
+                                }); 
                         });
                 }
 
                 if($filter['pattern']) {
-                    $query->whereHas('pattern', function($query) use ($filter) {
-                            $query->whereIn('code', $filter['pattern']);
+                    $query->whereHas('type', function($query) use ($filter) {
+                            $query->whereHas('pattern', function($query) use ($filter) {
+                                    $query->whereIn('code', $filter['pattern']);
+                                });
                         });
                 }
             })

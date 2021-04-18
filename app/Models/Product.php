@@ -160,16 +160,6 @@ class Product extends Model {
         return $this->belongsTo('App\Models\Grade');
     }
 
-    public function color()
-    {
-        return $this->belongsTo('App\Models\Color');
-    }
-
-    public function pattern()
-    {
-        return $this->belongsTo('App\Models\Pattern');
-    }
-
     public function productShading()
     {
         return $this->hasMany('App\Models\ProductShading');
