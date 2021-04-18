@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('warehouse:sync');
-        $schedule->command('stock:sync');
+        $schedule->command('warehouse:sync')->everyFifteenMinutes()->runInBackground();
+        $schedule->command('stock:sync')->everyFifteenMinutes()->runInBackground();
     }
 
     /**
