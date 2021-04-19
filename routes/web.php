@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::prefix('product')->group(function() {
     Route::get('/', 'ProductController@index');
+    Route::get('detail/{id}', 'ProductController@detail');
+});
+
+Route::prefix('account')->group(function() {
+    Route::match(['get', 'post'], 'login', 'AccountController@login');
+    Route::match(['get', 'post'], 'register', 'AccountController@register');
 });
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

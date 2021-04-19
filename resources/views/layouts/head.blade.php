@@ -31,5 +31,6 @@
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
-	<title>{{ $title }}</title>
+   <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
+	<title>Smart Marble & Bath | {{ $title }}</title>
 </head>

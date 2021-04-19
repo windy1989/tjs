@@ -37,7 +37,7 @@ class HomeController extends Controller {
             ->get();
 
         $data = [
-            'title'       => 'Smart Marble & Bath | SMB',
+            'title'       => 'SMB',
             'banner'      => Banner::where('status', 1)->get(),
             'brand'       => $brand,
             'category'    => $category,

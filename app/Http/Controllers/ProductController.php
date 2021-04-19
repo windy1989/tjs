@@ -85,8 +85,7 @@ class ProductController extends Controller {
             $filter['other']['sort'] = null;
         }
 
-        $product = Product::select('products.*', 'currency_prices.price')
-            ->where(function($query) use ($filter) {
+        $product = Product::where(function($query) use ($filter) {
                 if($filter['other']['search']) {
                     $query->whereHas('type', function($query) use ($filter) {
                             $query->where('code', 'like', '%' . $filter['other']['search'] . '%');
@@ -153,23 +152,20 @@ class ProductController extends Controller {
                         });
                 }
             })
-            ->leftJoin('currency_prices', 'products.id', '=', 'currency_prices.product_id')
             ->where('status', 1);
 
         if($filter['other']['sort']) {
             if($filter['other']['sort'] == 'newest') {
                 $product->latest();
             } else {
-                if($filter['other']['sort'] == 'low_to_high') {
-                    $product->orderBy('price', 'asc');
-                } else {
-                    $product->orderBy('price', 'desc');
-                }
+                $product->select('products.*', 'pricing_policies.price_list')
+                    ->leftJoin('pricing_policies', 'products.id', '=', 'pricing_policies.product_id')  
+                    ->orderBy('price_list', $filter['other']['sort'] == 'low_to_high' ? 'asc' : 'desc');
             }
         }
 
         $data = [
-            'title'    => 'Smart Marble & Bath | Product',
+            'title'    => 'Product',
             'brand'    => Brand::where('status', 1)->get(),
             'category' => Category::where('parent_id', 0)->where('status', 1)->get(),
             'color'    => Color::where('status', 1)->get(),
@@ -177,6 +173,34 @@ class ProductController extends Controller {
             'product'  => $product->groupBy('products.id')->paginate($filter['other']['show'])->appends($request->except('page')),
             'filter'   => $filter,
             'content'  => 'product'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $product_id = base64_decode($id);
+        $product    = Product::find($product_id);
+        
+        if(!$product) {
+            return redirect('product');
+        }
+
+        $related_product = Product::where('type_id', $product->type_id)
+            ->orWhere('brand_id', $product->brand_id)
+            ->orWhereHas('type', function($query) use ($product) {
+                    $query->where('category_id', $product->type->category_id);
+                })
+            ->limit(8)
+            ->inRandomOrder()
+            ->get();
+        
+        $data = [
+            'title'           => $product->code(),
+            'product'         => $product,
+            'related_product' => $related_product,
+            'content'         => 'product_detail'
         ];
 
         return view('layouts.index', ['data' => $data]);

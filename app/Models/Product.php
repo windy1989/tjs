@@ -77,11 +77,9 @@ class Product extends Model {
 
     public function price()
     {
-        $data = $this->currencyPrice->last();
+        $data = $this->pricingPolicy;
         if($data) {
-            if($data->currency->code == 'IDR' || $data->currency->id == 5) {
-                $price = $data->price;
-            }
+            $price = $data->price_list;
         } else {
             $price = 0;
         }
@@ -167,6 +165,11 @@ class Product extends Model {
     public function currencyRate()
     {
         return $this->hasMany('App\Models\CurrencyRate');
+    }
+
+    public function pricingPolicy()
+    {
+        return $this->hasOne('App\Models\PricingPolicy');
     }
 
 }
