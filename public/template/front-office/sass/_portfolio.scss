@@ -291,14 +291,14 @@ $masonry-prefix: masonry;
 			font-size: 90%;
 		}
 	}
-	.#{$portfolio-prefix}.no-gutters & {
+	.#{$portfolio-prefix}.g-0 & {
 		padding-left: $container-padding-x;
 		padding-right: $container-padding-x;
 	}
 
-	.desc-sm.no-gutters & {
-		padding-left: $container-padding-x - 5px;
-		padding-right: $container-padding-x - 5px;
+	.desc-sm.g-0 & {
+		padding-left: $container-padding-x - 5;
+		padding-right: $container-padding-x - 5;
 	}
 
 	.#{$portfolio-prefix}-reveal & {

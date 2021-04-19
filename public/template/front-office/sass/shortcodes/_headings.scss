@@ -126,8 +126,8 @@ $before_heading-prefix: before-heading;
 	&.center::after,
 	&.text-center::after { margin: 30px auto 0; }
 
-	.text-right &,
-	&.text-right,
+	.text-end &,
+	&.text-end,
 	&.title-right { direction: rtl; }
 
 	&.border-0::after,

@@ -134,7 +134,11 @@ window.SEMICOLON_onePageCurrentSection = function(){
 
 window.SEMICOLON_onePageSettings = function( hash, element ) {
 
-	if( hash === 'undefined' && element.length < 1 ) {
+	if( typeof hash === 'undefined' || element.length < 1 ) {
+		return true;
+	}
+
+	if( $( hash ).length < 1 ) {
 		return true;
 	}
 

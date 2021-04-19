@@ -264,9 +264,7 @@ span.middot {
   -moz-filter: brightness(80%) grayscale(1) contrast(90%);
   -o-filter: brightness(80%) grayscale(1) contrast(90%);
   -ms-filter: brightness(80%) grayscale(1) contrast(90%);
-  transition: 1s -webkit-filter ease;
   transition: 1s filter ease;
-  transition: 1s filter ease, 1s -webkit-filter ease;
   -webkit-transition: 1s -webkit-filter ease;
   -moz-transition: 1s -moz-filter ease;
   -ms-transition: 1s -ms-filter ease;
@@ -282,6 +280,9 @@ span.middot {
 
 .bganimate {
   -webkit-animation: BgAnimated 30s infinite linear 30s infinite linear;
+  -moz-animation: BgAnimated 30s infinite linear 30s infinite linear;
+  -ms-animation: BgAnimated 30s infinite linear 30s infinite linear;
+  -o-animation: BgAnimated 30s infinite linear 30s infinite linear;
   animation: BgAnimated 30s infinite linear 30s infinite linear;
 }
 
@@ -306,6 +307,7 @@ span.middot {
   width: 100% !important;
   min-height: 30px;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -313,17 +315,11 @@ span.middot {
   z-index: 3;
   position: relative;
   display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
   width: 100%;
   min-height: 100%;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
+  justify-content: center;
+  flex-flow: column;
 }
 .vertical-middle-overlay {
   position: absolute;
@@ -517,9 +513,10 @@ a.h-text-dark:hover {
 
 .bg-clip {
   border: 1rem solid transparent;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
   background-clip: padding-box;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .bg-clip-sm {
@@ -535,91 +532,92 @@ a.h-text-dark:hover {
 -----------------------------------------------------------------*/
 .gradient-light-grey,
 .h-gradient-light-grey:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#2c3e50), to(#bdc3c7)) !important;
+  background-image: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7) !important;
   background-image: linear-gradient(to right, #2c3e50, #bdc3c7) !important;
 }
 .gradient-green-dark,
 .h-gradient-green-dark:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#99f2c8), to(#1f4037)) !important;
+  background-image: -webkit-linear-gradient(to right, #99f2c8, #1f4037) !important;
   background-image: linear-gradient(to right, #99f2c8, #1f4037) !important;
 }
 .gradient-grey-brown,
 .h-gradient-grey-brown:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#C06C84), color-stop(#6C5B7B), to(#355C7D)) !important;
+  background-image: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D) !important;
   background-image: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D) !important;
 }
 .gradient-light-pink,
 .h-gradient-light-pink:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#ffdde1), to(#ee9ca7)) !important;
+  background-image: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7) !important;
   background-image: linear-gradient(to right, #ffdde1, #ee9ca7) !important;
 }
 .gradient-blue-purple,
 .h-gradient-blue-purple:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#4A00E0), to(#8E2DE2)) !important;
+  background-image: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2) !important;
   background-image: linear-gradient(to right, #4A00E0, #8E2DE2) !important;
 }
 .gradient-multiples,
 .h-gradient-multiples:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#eea2a2), color-stop(19%, #bbc1bf), color-stop(42%, #57c6e1), color-stop(79%, #b49fda), to(#7ac5d8)) !important;
+  background-image: -webkit-linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%) !important;
   background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%) !important;
 }
 .gradient-blue-green,
 .h-gradient-blue-green:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#2af598), to(#009efd)) !important;
+  background-image: -webkit-linear-gradient(to right, #2af598 0%, #009efd 100%) !important;
   background-image: linear-gradient(to right, #2af598 0%, #009efd 100%) !important;
 }
 .gradient-light,
 .h-gradient-light:hover {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#DDD), to(#FFF)) !important;
+  background-image: -webkit-linear-gradient(to top, #DDD 0%, #FFF 100%) !important;
   background-image: linear-gradient(to top, #DDD 0%, #FFF 100%) !important;
 }
 .gradient-grey-orange,
 .h-gradient-grey-orange:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#3B4371), to(#F3904F)) !important;
+  background-image: -webkit-linear-gradient(to right, #3B4371, #F3904F) !important;
   background-image: linear-gradient(to right, #3B4371, #F3904F) !important;
 }
 .gradient-sunset,
 .h-gradient-sunset:hover {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#a8edea), to(#fed6e3)) !important;
+  background-image: -webkit-linear-gradient(to top, #a8edea 0%, #fed6e3 100%) !important;
   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%) !important;
 }
 .gradient-dark,
 .h-gradient-dark:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#535353), to(#000)) !important;
+  background-image: -webkit-linear-gradient(to right, #535353, #000) !important;
   background-image: linear-gradient(to right, #535353, #000) !important;
 }
 .gradient-lemon,
 .h-gradient-lemon:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#cac531), to(#f3f9a7)) !important;
+  background-image: -webkit-linear-gradient(to right, #cac531, #f3f9a7) !important;
   background-image: linear-gradient(to right, #cac531, #f3f9a7) !important;
 }
 .gradient-earth,
 .h-gradient-earth:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#649173), to(#dbd5a4)) !important;
+  background-image: -webkit-linear-gradient(to right, #649173, #dbd5a4) !important;
   background-image: linear-gradient(to right, #649173, #dbd5a4) !important;
 }
 .gradient-sky,
 .h-gradient-sky:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#2980b9), color-stop(#6dd5fa), to(#F5F5F5)) !important;
+  background-image: -webkit-linear-gradient(to right, #2980b9, #6dd5fa, #F5F5F5) !important;
   background-image: linear-gradient(to right, #2980b9, #6dd5fa, #F5F5F5) !important;
 }
 .gradient-ocean,
 .h-gradient-ocean:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1cb5e0)) !important;
+  background-image: -webkit-linear-gradient(to right, #000046, #1cb5e0) !important;
   background-image: linear-gradient(to right, #000046, #1cb5e0) !important;
 }
 .gradient-horizon,
 .h-gradient-horizon:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#833ab4), color-stop(50%, #fd1d1d), to(#fcb045)) !important;
+  background-image: -webkit-linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) !important;
   background-image: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%) !important;
 }
 .gradient-green-blue,
 .h-gradient-green-blue:hover {
-  background-image: -webkit-gradient(linear, left top, right top, from(#43cea2), to(#185a9d)) !important;
+  background-image: -webkit-linear-gradient(to right, #43cea2, #185a9d) !important;
   background-image: linear-gradient(to right, #43cea2, #185a9d) !important;
 }
 .gradient-purple-blue,
 .h-gradient-purple-blue:hover {
+  background-image: -webkit-linear-gradient(19deg, #21d4fd 0%, #b721ff 100%) !important;
   background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%) !important;
 }
 .gradient-text {
@@ -1326,115 +1324,115 @@ a.h-text-dark:hover {
 }
 
 @media (min-width: 576px) {
-  .min-vh-100 {
+  .min-vh-sm-100 {
     min-height: 100vh !important;
   }
 
-  .vh-100 {
+  .vh-sm-100 {
     height: 100vh !important;
   }
 
-  .max-vh-100 {
+  .max-vh-sm-100 {
     max-height: 100vh !important;
   }
 
-  .h-100 {
+  .h-sm-100 {
     height: 100% !important;
   }
 
-  .min-vh-75 {
+  .min-vh-sm-75 {
     min-height: 75vh !important;
   }
 
-  .vh-75 {
+  .vh-sm-75 {
     height: 75vh !important;
   }
 
-  .max-vh-75 {
+  .max-vh-sm-75 {
     max-height: 75vh !important;
   }
 
-  .h-75 {
+  .h-sm-75 {
     height: 75% !important;
   }
 
-  .min-vh-60 {
+  .min-vh-sm-60 {
     min-height: 60vh !important;
   }
 
-  .vh-60 {
+  .vh-sm-60 {
     height: 60vh !important;
   }
 
-  .max-vh-60 {
+  .max-vh-sm-60 {
     max-height: 60vh !important;
   }
 
-  .h-60 {
+  .h-sm-60 {
     height: 60% !important;
   }
 
-  .min-vh-50 {
+  .min-vh-sm-50 {
     min-height: 50vh !important;
   }
 
-  .vh-50 {
+  .vh-sm-50 {
     height: 50vh !important;
   }
 
-  .max-vh-50 {
+  .max-vh-sm-50 {
     max-height: 50vh !important;
   }
 
-  .h-50 {
+  .h-sm-50 {
     height: 50% !important;
   }
 
-  .min-vh-40 {
+  .min-vh-sm-40 {
     min-height: 40vh !important;
   }
 
-  .vh-40 {
+  .vh-sm-40 {
     height: 40vh !important;
   }
 
-  .max-vh-40 {
+  .max-vh-sm-40 {
     max-height: 40vh !important;
   }
 
-  .h-40 {
+  .h-sm-40 {
     height: 40% !important;
   }
 
-  .min-vh-25 {
+  .min-vh-sm-25 {
     min-height: 25vh !important;
   }
 
-  .vh-25 {
+  .vh-sm-25 {
     height: 25vh !important;
   }
 
-  .max-vh-25 {
+  .max-vh-sm-25 {
     max-height: 25vh !important;
   }
 
-  .h-25 {
+  .h-sm-25 {
     height: 25% !important;
   }
 
-  .min-vh-0 {
+  .min-vh-sm-0 {
     min-height: 0vh !important;
   }
 
-  .vh-0 {
+  .vh-sm-0 {
     height: 0vh !important;
   }
 
-  .max-vh-0 {
+  .max-vh-sm-0 {
     max-height: 0vh !important;
   }
 
-  .h-0 {
+  .h-sm-0 {
     height: 0% !important;
   }
 
@@ -1447,115 +1445,115 @@ a.h-text-dark:hover {
   }
 }
 @media (min-width: 768px) {
-  .min-vh-100 {
+  .min-vh-md-100 {
     min-height: 100vh !important;
   }
 
-  .vh-100 {
+  .vh-md-100 {
     height: 100vh !important;
   }
 
-  .max-vh-100 {
+  .max-vh-md-100 {
     max-height: 100vh !important;
   }
 
-  .h-100 {
+  .h-md-100 {
     height: 100% !important;
   }
 
-  .min-vh-75 {
+  .min-vh-md-75 {
     min-height: 75vh !important;
   }
 
-  .vh-75 {
+  .vh-md-75 {
     height: 75vh !important;
   }
 
-  .max-vh-75 {
+  .max-vh-md-75 {
     max-height: 75vh !important;
   }
 
-  .h-75 {
+  .h-md-75 {
     height: 75% !important;
   }
 
-  .min-vh-60 {
+  .min-vh-md-60 {
     min-height: 60vh !important;
   }
 
-  .vh-60 {
+  .vh-md-60 {
     height: 60vh !important;
   }
 
-  .max-vh-60 {
+  .max-vh-md-60 {
     max-height: 60vh !important;
   }
 
-  .h-60 {
+  .h-md-60 {
     height: 60% !important;
   }
 
-  .min-vh-50 {
+  .min-vh-md-50 {
     min-height: 50vh !important;
   }
 
-  .vh-50 {
+  .vh-md-50 {
     height: 50vh !important;
   }
 
-  .max-vh-50 {
+  .max-vh-md-50 {
     max-height: 50vh !important;
   }
 
-  .h-50 {
+  .h-md-50 {
     height: 50% !important;
   }
 
-  .min-vh-40 {
+  .min-vh-md-40 {
     min-height: 40vh !important;
   }
 
-  .vh-40 {
+  .vh-md-40 {
     height: 40vh !important;
   }
 
-  .max-vh-40 {
+  .max-vh-md-40 {
     max-height: 40vh !important;
   }
 
-  .h-40 {
+  .h-md-40 {
     height: 40% !important;
   }
 
-  .min-vh-25 {
+  .min-vh-md-25 {
     min-height: 25vh !important;
   }
 
-  .vh-25 {
+  .vh-md-25 {
     height: 25vh !important;
   }
 
-  .max-vh-25 {
+  .max-vh-md-25 {
     max-height: 25vh !important;
   }
 
-  .h-25 {
+  .h-md-25 {
     height: 25% !important;
   }
 
-  .min-vh-0 {
+  .min-vh-md-0 {
     min-height: 0vh !important;
   }
 
-  .vh-0 {
+  .vh-md-0 {
     height: 0vh !important;
   }
 
-  .max-vh-0 {
+  .max-vh-md-0 {
     max-height: 0vh !important;
   }
 
-  .h-0 {
+  .h-md-0 {
     height: 0% !important;
   }
 
@@ -1568,115 +1566,115 @@ a.h-text-dark:hover {
   }
 }
 @media (min-width: 992px) {
-  .min-vh-100 {
+  .min-vh-lg-100 {
     min-height: 100vh !important;
   }
 
-  .vh-100 {
+  .vh-lg-100 {
     height: 100vh !important;
   }
 
-  .max-vh-100 {
+  .max-vh-lg-100 {
     max-height: 100vh !important;
   }
 
-  .h-100 {
+  .h-lg-100 {
     height: 100% !important;
   }
 
-  .min-vh-75 {
+  .min-vh-lg-75 {
     min-height: 75vh !important;
   }
 
-  .vh-75 {
+  .vh-lg-75 {
     height: 75vh !important;
   }
 
-  .max-vh-75 {
+  .max-vh-lg-75 {
     max-height: 75vh !important;
   }
 
-  .h-75 {
+  .h-lg-75 {
     height: 75% !important;
   }
 
-  .min-vh-60 {
+  .min-vh-lg-60 {
     min-height: 60vh !important;
   }
 
-  .vh-60 {
+  .vh-lg-60 {
     height: 60vh !important;
   }
 
-  .max-vh-60 {
+  .max-vh-lg-60 {
     max-height: 60vh !important;
   }
 
-  .h-60 {
+  .h-lg-60 {
     height: 60% !important;
   }
 
-  .min-vh-50 {
+  .min-vh-lg-50 {
     min-height: 50vh !important;
   }
 
-  .vh-50 {
+  .vh-lg-50 {
     height: 50vh !important;
   }
 
-  .max-vh-50 {
+  .max-vh-lg-50 {
     max-height: 50vh !important;
   }
 
-  .h-50 {
+  .h-lg-50 {
     height: 50% !important;
   }
 
-  .min-vh-40 {
+  .min-vh-lg-40 {
     min-height: 40vh !important;
   }
 
-  .vh-40 {
+  .vh-lg-40 {
     height: 40vh !important;
   }
 
-  .max-vh-40 {
+  .max-vh-lg-40 {
     max-height: 40vh !important;
   }
 
-  .h-40 {
+  .h-lg-40 {
     height: 40% !important;
   }
 
-  .min-vh-25 {
+  .min-vh-lg-25 {
     min-height: 25vh !important;
   }
 
-  .vh-25 {
+  .vh-lg-25 {
     height: 25vh !important;
   }
 
-  .max-vh-25 {
+  .max-vh-lg-25 {
     max-height: 25vh !important;
   }
 
-  .h-25 {
+  .h-lg-25 {
     height: 25% !important;
   }
 
-  .min-vh-0 {
+  .min-vh-lg-0 {
     min-height: 0vh !important;
   }
 
-  .vh-0 {
+  .vh-lg-0 {
     height: 0vh !important;
   }
 
-  .max-vh-0 {
+  .max-vh-lg-0 {
     max-height: 0vh !important;
   }
 
-  .h-0 {
+  .h-lg-0 {
     height: 0% !important;
   }
 
@@ -1689,115 +1687,115 @@ a.h-text-dark:hover {
   }
 }
 @media (min-width: 1200px) {
-  .min-vh-100 {
+  .min-vh-xl-100 {
     min-height: 100vh !important;
   }
 
-  .vh-100 {
+  .vh-xl-100 {
     height: 100vh !important;
   }
 
-  .max-vh-100 {
+  .max-vh-xl-100 {
     max-height: 100vh !important;
   }
 
-  .h-100 {
+  .h-xl-100 {
     height: 100% !important;
   }
 
-  .min-vh-75 {
+  .min-vh-xl-75 {
     min-height: 75vh !important;
   }
 
-  .vh-75 {
+  .vh-xl-75 {
     height: 75vh !important;
   }
 
-  .max-vh-75 {
+  .max-vh-xl-75 {
     max-height: 75vh !important;
   }
 
-  .h-75 {
+  .h-xl-75 {
     height: 75% !important;
   }
 
-  .min-vh-60 {
+  .min-vh-xl-60 {
     min-height: 60vh !important;
   }
 
-  .vh-60 {
+  .vh-xl-60 {
     height: 60vh !important;
   }
 
-  .max-vh-60 {
+  .max-vh-xl-60 {
     max-height: 60vh !important;
   }
 
-  .h-60 {
+  .h-xl-60 {
     height: 60% !important;
   }
 
-  .min-vh-50 {
+  .min-vh-xl-50 {
     min-height: 50vh !important;
   }
 
-  .vh-50 {
+  .vh-xl-50 {
     height: 50vh !important;
   }
 
-  .max-vh-50 {
+  .max-vh-xl-50 {
     max-height: 50vh !important;
   }
 
-  .h-50 {
+  .h-xl-50 {
     height: 50% !important;
   }
 
-  .min-vh-40 {
+  .min-vh-xl-40 {
     min-height: 40vh !important;
   }
 
-  .vh-40 {
+  .vh-xl-40 {
     height: 40vh !important;
   }
 
-  .max-vh-40 {
+  .max-vh-xl-40 {
     max-height: 40vh !important;
   }
 
-  .h-40 {
+  .h-xl-40 {
     height: 40% !important;
   }
 
-  .min-vh-25 {
+  .min-vh-xl-25 {
     min-height: 25vh !important;
   }
 
-  .vh-25 {
+  .vh-xl-25 {
     height: 25vh !important;
   }
 
-  .max-vh-25 {
+  .max-vh-xl-25 {
     max-height: 25vh !important;
   }
 
-  .h-25 {
+  .h-xl-25 {
     height: 25% !important;
   }
 
-  .min-vh-0 {
+  .min-vh-xl-0 {
     min-height: 0vh !important;
   }
 
-  .vh-0 {
+  .vh-xl-0 {
     height: 0vh !important;
   }
 
-  .max-vh-0 {
+  .max-vh-xl-0 {
     max-height: 0vh !important;
   }
 
-  .h-0 {
+  .h-xl-0 {
     height: 0% !important;
   }
 
@@ -1810,115 +1808,115 @@ a.h-text-dark:hover {
   }
 }
 @media (min-width: 1440px) {
-  .min-vh-100 {
+  .min-vh-xxl-100 {
     min-height: 100vh !important;
   }
 
-  .vh-100 {
+  .vh-xxl-100 {
     height: 100vh !important;
   }
 
-  .max-vh-100 {
+  .max-vh-xxl-100 {
     max-height: 100vh !important;
   }
 
-  .h-100 {
+  .h-xxl-100 {
     height: 100% !important;
   }
 
-  .min-vh-75 {
+  .min-vh-xxl-75 {
     min-height: 75vh !important;
   }
 
-  .vh-75 {
+  .vh-xxl-75 {
     height: 75vh !important;
   }
 
-  .max-vh-75 {
+  .max-vh-xxl-75 {
     max-height: 75vh !important;
   }
 
-  .h-75 {
+  .h-xxl-75 {
     height: 75% !important;
   }
 
-  .min-vh-60 {
+  .min-vh-xxl-60 {
     min-height: 60vh !important;
   }
 
-  .vh-60 {
+  .vh-xxl-60 {
     height: 60vh !important;
   }
 
-  .max-vh-60 {
+  .max-vh-xxl-60 {
     max-height: 60vh !important;
   }
 
-  .h-60 {
+  .h-xxl-60 {
     height: 60% !important;
   }
 
-  .min-vh-50 {
+  .min-vh-xxl-50 {
     min-height: 50vh !important;
   }
 
-  .vh-50 {
+  .vh-xxl-50 {
     height: 50vh !important;
   }
 
-  .max-vh-50 {
+  .max-vh-xxl-50 {
     max-height: 50vh !important;
   }
 
-  .h-50 {
+  .h-xxl-50 {
     height: 50% !important;
   }
 
-  .min-vh-40 {
+  .min-vh-xxl-40 {
     min-height: 40vh !important;
   }
 
-  .vh-40 {
+  .vh-xxl-40 {
     height: 40vh !important;
   }
 
-  .max-vh-40 {
+  .max-vh-xxl-40 {
     max-height: 40vh !important;
   }
 
-  .h-40 {
+  .h-xxl-40 {
     height: 40% !important;
   }
 
-  .min-vh-25 {
+  .min-vh-xxl-25 {
     min-height: 25vh !important;
   }
 
-  .vh-25 {
+  .vh-xxl-25 {
     height: 25vh !important;
   }
 
-  .max-vh-25 {
+  .max-vh-xxl-25 {
     max-height: 25vh !important;
   }
 
-  .h-25 {
+  .h-xxl-25 {
     height: 25% !important;
   }
 
-  .min-vh-0 {
+  .min-vh-xxl-0 {
     min-height: 0vh !important;
   }
 
-  .vh-0 {
+  .vh-xxl-0 {
     height: 0vh !important;
   }
 
-  .max-vh-0 {
+  .max-vh-xxl-0 {
     max-height: 0vh !important;
   }
 
-  .h-0 {
+  .h-xxl-0 {
     height: 0% !important;
   }
 
@@ -1950,7 +1948,6 @@ a.h-text-dark:hover {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -1972,7 +1969,6 @@ a.h-text-dark:hover {
   }
 
   .position-sm-sticky {
-    position: -webkit-sticky !important;
     position: sticky !important;
   }
 }
@@ -1994,7 +1990,6 @@ a.h-text-dark:hover {
   }
 
   .position-md-sticky {
-    position: -webkit-sticky !important;
     position: sticky !important;
   }
 }
@@ -2016,7 +2011,6 @@ a.h-text-dark:hover {
   }
 
   .position-lg-sticky {
-    position: -webkit-sticky !important;
     position: sticky !important;
   }
 }
@@ -2038,7 +2032,6 @@ a.h-text-dark:hover {
   }
 
   .position-xl-sticky {
-    position: -webkit-sticky !important;
     position: sticky !important;
   }
 }
@@ -2060,7 +2053,6 @@ a.h-text-dark:hover {
   }
 
   .position-xxl-sticky {
-    position: -webkit-sticky !important;
     position: sticky !important;
   }
 }
@@ -2071,7 +2063,6 @@ a.h-text-dark:hover {
   opacity: 0;
 }
 .lazy:not(.initial) {
-  -webkit-transition: opacity 1s;
   transition: opacity 1s;
 }
 .lazy.initial, .lazy-loaded, .lazy-error {
@@ -2088,11 +2079,6 @@ img.lazy:not([src]) {
 /* ----------------------------------------------------------------
 	Borders
 -----------------------------------------------------------------*/
-.border-width-0,
-.h-border-width-0:hover {
-  border-width: 0px !important;
-}
-
 .border-width-1,
 .h-border-width-1:hover {
   border-width: 1px !important;
@@ -2231,6 +2217,61 @@ img.lazy:not([src]) {
 }
 
 /* ----------------------------------------------------------------
+	Text Sizes Utility Classes:
+-----------------------------------------------------------------*/
+.text-size-xs {
+  font-size: 0.875rem !important;
+}
+
+.text-size-sm {
+  font-size: 1rem !important;
+}
+
+.text-size-md {
+  font-size: 1.5rem !important;
+}
+
+.text-size-lg {
+  font-size: 2rem !important;
+}
+
+.text-size-xl {
+  font-size: calc(1rem + 2.25vw) !important;
+}
+
+.text-size-xxl {
+  font-size: calc(1rem + 3.5vw) !important;
+}
+
+/* ----------------------------------------------------------------
+	Square Sizes Utility Classes:
+-----------------------------------------------------------------*/
+.square-xs {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.square-sm {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.square-md {
+  width: 4rem !important;
+  height: 4rem !important;
+}
+
+.square-lg {
+  width: 6rem !important;
+  height: 6rem !important;
+}
+
+.square-xl {
+  width: 8rem !important;
+  height: 8rem !important;
+}
+
+/* ----------------------------------------------------------------
 	Max-width Utility Classes:
 -----------------------------------------------------------------*/
 .align-wide-lg {
@@ -2264,7 +2305,7 @@ img.lazy:not([src]) {
     width: 100vw !important;
   }
 }
-.align-full {
+.align-wide-full {
   margin-left: calc(50% - 50vw) !important;
   margin-right: calc(50% - 50vw) !important;
   max-width: 100vw !important;
@@ -2285,31 +2326,24 @@ img.lazy:not([src]) {
 	Shadow
 -----------------------------------------------------------------*/
 .h-shadow-sm:hover {
-  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
 .h-shadow:hover {
-  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .h-shadow-lg:hover {
-  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
 .h-shadow-none:hover {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .shadow-ts {
   -webkit-transition: box-shadow 0.5s ease;
-  -webkit-transition: -webkit-box-shadow 0.5s ease;
-  transition: -webkit-box-shadow 0.5s ease;
   transition: box-shadow 0.5s ease;
-  transition: box-shadow 0.5s ease, -webkit-box-shadow 0.5s ease;
 }
 
 .all-ts {
@@ -2322,105 +2356,91 @@ img.lazy:not([src]) {
 -----------------------------------------------------------------*/
 .translate-y-sm,
 .h-translate-y-sm:hover {
-  -webkit-transform: translateY(-3px) !important;
-          transform: translateY(-3px) !important;
+  transform: translateY(-3px) !important;
 }
 
 .translate-y,
 .h-translate-y:hover {
-  -webkit-transform: translateY(-6px) !important;
-          transform: translateY(-6px) !important;
+  transform: translateY(-6px) !important;
 }
 
 .translate-y-lg,
 .h-translate-y-lg:hover {
-  -webkit-transform: translateY(-10px) !important;
-          transform: translateY(-10px) !important;
+  transform: translateY(-10px) !important;
 }
 
 .translate-x-sm,
 .h-translate-x-sm:hover {
-  -webkit-transform: translateX(-3px) !important;
-          transform: translateX(-3px) !important;
+  transform: translateX(-3px) !important;
 }
 
 .translate-x,
 .h-translate-x:hover {
-  -webkit-transform: translateX(-6px) !important;
-          transform: translateX(-6px) !important;
+  transform: translateX(-6px) !important;
 }
 
 .translate-x-lg,
 .h-translate-x-lg:hover {
-  -webkit-transform: translateX(-10px) !important;
-          transform: translateX(-10px) !important;
+  transform: translateX(-10px) !important;
 }
 
 .translate-x-n-sm,
 .h-translate-x-n-sm:hover {
-  -webkit-transform: translateX(3px) !important;
-          transform: translateX(3px) !important;
+  transform: translateX(3px) !important;
 }
 
 .translate-x-n,
 .h-translate-x-n:hover {
-  -webkit-transform: translateX(6px) !important;
-          transform: translateX(6px) !important;
+  transform: translateX(6px) !important;
 }
 
 .translate-x-n-lg,
 .h-translate-x-n-lg:hover {
-  -webkit-transform: translateX(10px) !important;
-          transform: translateX(10px) !important;
+  transform: translateX(10px) !important;
 }
 
 .scale-sm,
 .h-scale-sm:hover {
-  -webkit-transform: scale(1.025) !important;
-          transform: scale(1.025) !important;
+  transform: scale(1.025) !important;
 }
 
 .scale,
 .h-scale:hover {
-  -webkit-transform: scale(1.05) !important;
-          transform: scale(1.05) !important;
+  transform: scale(1.05) !important;
 }
 
 .scale-lg,
 .h-scale-lg:hover {
-  -webkit-transform: scale(1.1) !important;
-          transform: scale(1.1) !important;
+  transform: scale(1.1) !important;
 }
 
 .scale-n-sm,
 .h-scale-n-sm:hover {
-  -webkit-transform: scale(0.975) !important;
-          transform: scale(0.975) !important;
+  transform: scale(0.975) !important;
 }
 
 .scale-n,
 .h-scale-n:hover {
-  -webkit-transform: scale(0.95) !important;
-          transform: scale(0.95) !important;
+  transform: scale(0.95) !important;
 }
 
 .scale-n-lg,
 .h-scale-n-lg:hover {
-  -webkit-transform: scale(0.9) !important;
-          transform: scale(0.9) !important;
+  transform: scale(0.9) !important;
 }
 
 .transform-ts {
   -webkit-transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transition: -webkit-transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 /* ----------------------------------------------------------------
 	translate
 -----------------------------------------------------------------*/
+.z-0 {
+  z-index: 0 !important;
+}
+
 .z-1 {
   z-index: 1 !important;
 }
@@ -2459,4 +2479,43 @@ img.lazy:not([src]) {
 
 .z-10 {
   z-index: 10 !important;
+}
+
+.z-auto {
+  z-index: auto !important;
+}
+
+/* ----------------------------------------------------------------
+	X/Y Positioning Classes
+-----------------------------------------------------------------*/
+.pos-x-start {
+  left: 0 !important;
+  right: auto !important;
+}
+.pos-x-end {
+  left: auto !important;
+  right: 0 !important;
+}
+.pos-x-center {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+.pos-y-start {
+  top: 0 !important;
+  bottom: auto !important;
+}
+.pos-y-end {
+  top: auto !important;
+  bottom: 0 !important;
+}
+.pos-y-center {
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+}
+.pos-x-center.pos-y-center {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }

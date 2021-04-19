@@ -27,7 +27,8 @@ $RTL-template:							false !default; // if true then CSS will be generated for R
 $enable-dark: 							true !default; // if False then CSS will be Remove all .dark Classes.
 
 //-------------------- Dark --------------------//
-$patterns-template:						true !default; // False to Disable all Patterns related CSS.
+$patterns-template: 					true !default; // False to Disable all Patterns related CSS.
+
 
 //-------------------- Line Height Variables --------------------//
 
@@ -36,6 +37,7 @@ $line-height-content:           		1.8;
 
 
 //-------------------- Utilities --------------------//
+
 
 $margin-base:                   		3rem;
 $margin-small:                  		2rem;
@@ -49,6 +51,8 @@ $positions:								static, relative, absolute, fixed, sticky; // Set False for D
 $vh-elements: 							100, 75, 60, 50, 40, 25, 0; // Set False for Disabled
 $letter-spacing:						5; //ls-* value Until
 $op-classes:							9; //op-* value Until 0 - 1
+$border-width:							6; //border-width-* value Until 0 - 6
+$border-styles:							dotted, dashed, solid, double; // Set False for Disabled
 
 // Font weights
 $font-weight-extralight: 				100;
@@ -68,6 +72,15 @@ $line-size:								1px;
 $line-color:							darken($body-bg, 6.67%);
 $line-dark:								rgba(white,0.1);
 
+$text-sizes: (
+	xs: 0.875rem,
+	sm: 1rem,
+	md: 1.5rem,
+	lg: 2rem,
+	xl: calc(1rem + 2.25vw),
+	xxl: calc(1rem + 3.5vw)
+);
+
 // Gradients
 $gradients-classes:						true !default;
 
@@ -84,6 +97,14 @@ $max-widths: (
 	lg: 80rem,
 	xl: 90rem,
 	xxl: 100rem
+);
+
+$square-sizes: (
+	xs: 1rem,
+	sm: 2rem,
+	md: 4rem,
+	lg: 6rem,
+	xl: 8rem
 );
 
 $translate-sm: 							3px;
@@ -316,7 +337,7 @@ $slider-arrows-size:					52px;
 $slider-arrows-sm-size:					$slider-arrows-size - 20px;
 
 $slider-arrows-bg-color:				rgba($black,0.3);
-$slider-arrows-bg-hover-color:			rgba($black,0.6) !important;
+$slider-arrows-bg-hover-color:			rgba($black,0.6);
 $slider-arrows-border-radius:			3px;
 $slider-arrow-sm-offset:				20px;
 

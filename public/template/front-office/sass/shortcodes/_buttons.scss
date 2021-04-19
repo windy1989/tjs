@@ -441,7 +441,9 @@ body:not(.device-touch) .#{$btn-prefix}-reveal span {
 @mixin buttons-color($colors) {
   @each $name, $hex in $colors {
 	.#{$btn-prefix}-#{$name} {
-		@include gradient-bg($hex);
+		&:not(.button-border) {
+			@include gradient-bg($hex);
+		}
 		&.#{$btn-prefix}-3d:hover,
 		&.#{$btn-prefix}-reveal:hover,
 		&.#{$btn-prefix}-border:hover,

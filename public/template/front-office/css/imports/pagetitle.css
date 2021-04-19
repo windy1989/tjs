@@ -151,7 +151,7 @@
   overflow: hidden;
 }
 #page-title.page-title-video .container {
-  z-index: 3;
+  z-index: 5;
 }
 #page-title.page-title-video .video-wrap {
   position: absolute;

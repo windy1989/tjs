@@ -13,6 +13,10 @@ window.SEMICOLON_progressInit = function( $progressEl ){
 			elBar	= element.parent('li'),
 			elValue	= elBar.attr('data-percent');
 
+		if( element.parent('.kv-upload-progress').length > 0 || element.children('.progress-bar').length > 0 ) {
+			return true;
+		}
+
 		let observer = new IntersectionObserver( function(entries, observer){
 			entries.forEach( function(entry){
 				if (entry.isIntersecting) {

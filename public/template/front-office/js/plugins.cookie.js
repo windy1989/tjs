@@ -9,29 +9,32 @@
 
 window.SEMICOLON_cookieInit = function( $cookieEl ){
 
-	$cookieEl = $cookieEl.filter('.gdpr-settings:not(.customjs)');
+	$cookieEl = $cookieEl.filter(':not(.customjs)');
 
 	if( $cookieEl.length < 1 ){
 		return true;
 	}
 
-	let elSpeed		= $cookieEl.attr('data-speed') || 300,
-		elExpire	= $cookieEl.attr('data-expire') || 30,
-		elDelay		= $cookieEl.attr('data-delay') || 1500,
-		elPersist	= $cookieEl.attr('data-persistent'),
+	let $cookieBar = $('.gdpr-settings'),
+		elSpeed		= $cookieBar.attr('data-speed') || 300,
+		elExpire	= $cookieBar.attr('data-expire') || 30,
+		elDelay		= $cookieBar.attr('data-delay') || 1500,
+		elPersist	= $cookieBar.attr('data-persistent'),
 		elDirection	= 'bottom',
-		elHeight	= $cookieEl.outerHeight() + 100,
-		elWidth		= $cookieEl.outerWidth() + 100,
+		elHeight	= $cookieBar.outerHeight() + 100,
+		elWidth		= $cookieBar.outerWidth() + 100,
 		elProp		= {},
-		elSize;
+		elSize,
+		elSettings	= $('.gdpr-cookie-settings'),
+		elSwitches	= elSettings.find('[data-cookie-name]');
 
 	if( elPersist == 'true' ) {
 		Cookies.set('websiteUsesCookies', '');
 	}
 
-	if( $cookieEl.hasClass('gdpr-settings-sm') && $cookieEl.hasClass('gdpr-settings-right') ) {
+	if( $cookieBar.hasClass('gdpr-settings-sm') && $cookieBar.hasClass('gdpr-settings-right') ) {
 		elDirection = 'right';
-	} else if( $cookieEl.hasClass('gdpr-settings-sm') ) {
+	} else if( $cookieBar.hasClass('gdpr-settings-sm') ) {
 		elDirection = 'left';
 	}
 
@@ -48,21 +51,80 @@ window.SEMICOLON_cookieInit = function( $cookieEl ){
 		elProp[elDirection] = elSize;
 	}
 
-	$cookieEl.css( elProp );
+	$cookieBar.css( elProp );
 
 	if( Cookies.get('websiteUsesCookies') != 'yesConfirmed' ) {
 		elProp[elDirection] = 0;
 		elProp.opacity = 1;
 		setTimeout( function(){
-			$cookieEl.css( elProp );
+			$cookieBar.css( elProp );
 		}, Number( elDelay ) );
 	}
 
 	$('.gdpr-accept').off( 'click' ).on( 'click', function(){
 		elProp[elDirection] = elSize;
 		elProp.opacity = 0;
-		$cookieEl.css( elProp );
+		$cookieBar.css( elProp );
 		Cookies.set('websiteUsesCookies', 'yesConfirmed', { expires: Number( elExpire ) });
 		return false;
 	});
+
+	elSwitches.each( function(){
+		let elSwitch = $(this),
+			elCookie = elSwitch.attr( 'data-cookie-name' ),
+			getCookie = Cookies.get( elCookie );
+
+		if( typeof getCookie !== 'undefined' && getCookie == '1' ) {
+			elSwitch.prop( 'checked', true );
+		} else {
+			elSwitch.prop( 'checked', false )
+		}
+	});
+
+	$('.gdpr-save-cookies').off( 'click' ).on( 'click', function(){
+		elSwitches.each( function(){
+			let elSwitch = $(this),
+				elCookie = elSwitch.attr( 'data-cookie-name' );
+
+			if( elSwitch.prop( 'checked' ) ) {
+				Cookies.set( elCookie, '1', { expires: Number( elExpire ) });
+			} else {
+				Cookies.remove( elCookie, '' );
+			}
+		});
+
+		if( elSettings.parents( '.mfp-content' ).length > 0 ) {
+			$.magnificPopup.close();
+		}
+
+		setTimeout( function(){
+			window.location.reload();
+		}, 500);
+
+		return false;
+	});
+
+	$('.gdpr-container').each( function(){
+		let element = $(this),
+			elCookie = element.attr('data-cookie-name'),
+			elContent = element.attr('data-cookie-content'),
+			elContentAjax = element.attr('data-cookie-content-ajax'),
+			getCookie = Cookies.get( elCookie );
+
+		if( typeof getCookie !== 'undefined' && getCookie == '1' ) {
+			element.addClass('gdpr-content-active');
+			if( elContentAjax ) {
+				element.load( elContentAjax );
+			} else {
+				if( elContent ) {
+					element.append( elContent );
+				}
+			}
+			SEMICOLON.initialize.resizeVideos({ parent: element });
+		} else {
+			element.addClass('gdpr-content-blocked');
+		}
+	});
+
 };
+

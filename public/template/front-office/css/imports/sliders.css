@@ -292,6 +292,7 @@ body:not(.stretched) .slider-parallax .slider-inner {
   overflow: hidden;
   width: 100%;
   position: relative;
+  direction: ltr;
 }
 .video-wrap video {
   position: relative;

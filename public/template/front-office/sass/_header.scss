@@ -1832,7 +1832,7 @@ only screen and (                min-resolution: 2dppx) {
 		transition: right .3s ease;
 		@include media-breakpoint-down(md) {
 			right: -260px !important;
-			height: calc(100vh);
+			height: 100%;
 			z-index: 499;
 		}
 		@include media-breakpoint-up(lg) {

@@ -271,5 +271,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::match(['get', 'post'], 'create', 'CogsController@create');
             Route::post('show', 'CogsController@show');
         });
+
+        Route::prefix('pricing_policy')->group(function() {
+            Route::get('/', 'PricingPolicyController@index');
+            Route::post('datatable', 'PricingPolicyController@datatable');
+            Route::post('row_detail', 'PricingPolicyController@rowDetail');
+            Route::post('create', 'PricingPolicyController@create');
+            Route::post('show', 'PricingPolicyController@show');
+            Route::post('update/{id}', 'PricingPolicyController@update');
+            Route::post('destroy', 'PricingPolicyController@destroy');
+        });
     });
 });

@@ -112,8 +112,9 @@ var SEMICOLON = SEMICOLON || {};
 		},
 
 		execPlugin: function( element, settings ) {
-			window.scwEvents	= window.scwEvents || {};
-			let pluginActive	= false,
+			window.scwEvents = window.scwEvents || {};
+			
+			let pluginActive = false,
 				pluginLinkingInterval;
 
 			if( settings.trigger && !scwEvents[settings.trigger] ) {

@@ -65,11 +65,11 @@ $accordion-prefix: accordion;
 }
 
 .#{$toggle-prefix} {
-	&:not(.#{$toggle-prefix}-active) .#{$toggle-prefix}-open,
-	&-active .#{$toggle-prefix}-closed { display: none; }
+	&:not(.#{$toggle-prefix}-active) > .#{$toggle-prefix}-header .#{$toggle-prefix}-open,
+	&-active > .#{$toggle-prefix}-header .#{$toggle-prefix}-closed { display: none; }
 }
 
-.#{$toggle-prefix}-active .#{$toggle-prefix}-open { display: inline-block; }
+.#{$toggle-prefix}-active > .#{$toggle-prefix}-header .#{$toggle-prefix}-open { display: inline-block; }
 
 .#{$toggle-prefix},
 .#{$accordion-prefix}{

@@ -126,7 +126,7 @@ h3.titular-title {
 .center .heading-block::after, .text-center .heading-block::after, .heading-block.center::after, .heading-block.text-center::after {
   margin: 30px auto 0;
 }
-.text-right .heading-block, .heading-block.text-right, .heading-block.title-right {
+.text-end .heading-block, .heading-block.text-end, .heading-block.title-right {
   direction: rtl;
 }
 .heading-block.border-0::after, .heading-block.border-bottom-0::after {
