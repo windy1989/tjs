@@ -46,18 +46,18 @@
                               <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary">Forgot Password?</a>
                               <button type="submit" class="button button-3d button-black float-right m-0">Login</button>
                            </div>
-                           <div class="line line-sm"></div>
-                           <form method="POST" action="{{ url('account/login_social_media') }}">
-                              @csrf
-                              <div class="center col-12">
-                                 <button type="submit" class="button button-rounded si-facebook si-colored col-12" value="facebook">
-                                    <i class="icon-facebook"></i> Login With Facebook
-                                 </button>
-                                 <button type="submit" class="button button-rounded si-google si-colored col-12" value="google" style="background:#ec3923 !important;">
-                                    <i class="icon-google"></i> Login With Google
-                                 </button>
-                              </div>
-                           </form>
+                        </div>
+                     </form>
+                     <div class="line line-sm"></div>
+                     <form method="POST" action="{{ url('account/login_social_media') }}">
+                        @csrf
+                        <div class="center">
+                           <button type="submit" name="submit" class="button button-rounded si-facebook si-colored col-12" value="facebook">
+                              <i class="icon-facebook"></i> Login With Facebook
+                           </button>
+                           <button type="submit" name="submit" class="button button-rounded si-google si-colored col-12" value="google" style="background:#ec3923 !important;">
+                              <i class="icon-google"></i> Login With Google
+                           </button>
                         </div>
                      </form>
                   </div>

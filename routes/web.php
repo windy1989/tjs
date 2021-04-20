@@ -14,7 +14,18 @@ Route::prefix('account')->group(function() {
     Route::get('verification', 'AccountController@verification');
     Route::post('forgot_password', 'AccountController@forgotPassword');
     Route::match(['get', 'post'], 'reset_password', 'AccountController@resetPassword');
+    Route::post('login_social_media', 'AccountController@loginSocialMedia');
+    Route::get('login_social_media_callback/{param}', 'AccountController@loginSocialMediaCallback');
+    Route::get('logout', 'AccountController@logout');
 });
+
+Route::prefix('information')->group(function() {
+    Route::get('privacy_policy', 'InformationController@privacyPolicy');
+    Route::get('terms_and_conditions', 'InformationController@termsAndConditions');
+    Route::get('about_us', 'InformationController@aboutUs');
+    Route::get('contact', 'InformationController@contact');
+    Route::get('how_to_buy', 'InformationController@howToBuy');
+}); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::get('dashboard', 'DashboardController@index');

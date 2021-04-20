@@ -17,11 +17,14 @@
    <meta property="og:url" content="{{ url('/') }}">
    <meta property="og:image" content="{{ asset('website/logo-black.png') }}">
    <meta name="robots" content="all">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
    <link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/dark.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/swiper.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/ecommerce/css/fonts.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">

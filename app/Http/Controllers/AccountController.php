@@ -9,6 +9,7 @@ use App\Jobs\EmailProcess;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller {
@@ -204,7 +205,7 @@ class AccountController extends Controller {
                 if($validation->fails()) {
                     return redirect()->back()->withErrors($validation);
                 } else {
-                    $query = Customer::find($customer->id)->update([
+                    $query = Customer::find($customer->tokenable_id)->update([
                         'password' => bcrypt($request->password)
                     ]);
 
@@ -220,6 +221,64 @@ class AccountController extends Controller {
             }
         }
 
+        return redirect('/');
+    }
+
+    public function loginSocialMedia(Request $request)
+    {
+        return Socialite::driver($request->submit)->redirect();
+    }
+
+    public function loginSocialMediaCallback(Request $request, $param)
+    {
+        if($param) {
+            if($param == 'google' || $param == 'facebook') {
+                $data         = Socialite::driver($param)->user();
+                $account      = Customer::where('email', $data->getEmail())->first();
+                $verification = date('Y-m-d H:i:s');
+
+                if($account) {
+                    if(!$account->verification) {
+                        Customer::find($account->id)->update(['verification' => $verification]);
+                        $account->verification = $verification;
+                    }
+
+                    session([
+                        'fo_id'           => $account->id,
+                        'fo_photo'        => $account->photo,
+                        'fo_name'         => $account->name,
+                        'fo_email'        => $account->email,
+                        'fo_verification' => $account->verification
+                    ]);
+                } else {
+                    $account = Customer::create([
+                        'photo'        => $data->getAvatar(),
+                        'name'         => $data->getName(),
+                        'email'        => $data->getEmail(),
+                        'verification' => date('Y-m-d H:i:s')
+                    ]);
+
+                    session([
+                        'fo_id'           => $account->id,
+                        'fo_photo'        => $account->photo,
+                        'fo_name'         => $account->name,
+                        'fo_email'        => $account->email,
+                        'fo_verification' => $verification
+                    ]);
+                }
+
+                return redirect('/');
+            } else {
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function logout()
+    {
+        session()->flush();
         return redirect('/');
     }
 
