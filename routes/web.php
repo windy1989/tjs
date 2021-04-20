@@ -11,6 +11,9 @@ Route::prefix('product')->group(function() {
 Route::prefix('account')->group(function() {
     Route::match(['get', 'post'], 'login', 'AccountController@login');
     Route::match(['get', 'post'], 'register', 'AccountController@register');
+    Route::get('verification', 'AccountController@verification');
+    Route::post('forgot_password', 'AccountController@forgotPassword');
+    Route::match(['get', 'post'], 'reset_password', 'AccountController@resetPassword');
 });
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

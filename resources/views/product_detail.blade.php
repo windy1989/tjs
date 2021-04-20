@@ -29,35 +29,7 @@
                            Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
                         <div class="d-flex align-items-center justify-content-end">
-                           @if($product->availability()->status == 'Ready')
-                              <div class="style-msg successmsg">
-                                 <div class="sb-msg">
-                                    <i class="icon-ok-circle"></i>
-                                    <strong>Ready Stock!</strong> Buy now
-                                 </div>
-                              </div>
-                           @elseif($product->availability()->status == 'Limited')
-                              <div class="style-msg alertmsg">
-                                 <div class="sb-msg">
-                                    <i class="icon-warning-sign"></i>
-                                    <strong>Stock Limited!</strong> Buy now before it runs out
-                                 </div>
-                              </div>
-                           @elseif($product->availability()->status == 'Indent')
-                              <div class="style-msg infomsg">
-                                 <div class="sb-msg">
-                                    <i class="icon-ban-circle"></i>
-                                    <strong>Stock Indent!</strong> You can enter the favorites first
-                                 </div>
-                              </div>
-                           @else
-                              <div class="style-msg errormsg">
-                                 <div class="sb-msg">
-                                    <i class="icon-remove-sign"></i>
-                                    <strong>Stock Empty!</strong> Sorry our stock is empty
-                                 </div>
-                              </div>
-                           @endif
+                           Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }}</strong>
                         </div>
                      </div>
                      <div class="line"></div>
@@ -82,6 +54,37 @@
                      </form>
                      <div class="line"></div>
                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                           @if($product->availability()->status == 'Ready')
+                              <div class="style-msg successmsg w-100 text-center">
+                                 <div class="sb-msg">
+                                    <i class="icon-ok-circle"></i>
+                                    <strong>Ready Stock!</strong> Buy now
+                                 </div>
+                              </div>
+                           @elseif($product->availability()->status == 'Limited')
+                              <div class="style-msg alertmsg w-100 text-center">
+                                 <div class="sb-msg">
+                                    <i class="icon-warning-sign"></i>
+                                    <strong>Stock Limited!</strong> Buy now before it runs out
+                                 </div>
+                              </div>
+                           @elseif($product->availability()->status == 'Indent')
+                              <div class="style-msg infomsg w-100 text-center">
+                                 <div class="sb-msg">
+                                    <i class="icon-ban-circle"></i>
+                                    <strong>Stock Indent!</strong> You can enter the favorites first
+                                 </div>
+                              </div>
+                           @else
+                              <div class="style-msg errormsg w-100 text-center">
+                                 <div class="sb-msg">
+                                    <i class="icon-remove-sign"></i>
+                                    <strong>Stock Empty!</strong> Sorry our stock is empty
+                                 </div>
+                              </div>
+                           @endif
+                        </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                            <span class="text-muted">Category:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->category->name }}</span>
@@ -188,7 +191,7 @@
             <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3" data-items-xl="4">
                @foreach($related_product as $rp)
                   <div class="oc-item">
-                     <div class="product">
+                     <div class="product border">
                         <div class="product-image">
                           <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
                               <img src="{{ Storage::exists($rp->type->image) ? asset(Storage::url($rp->type->image)) : asset('website/empty.jpg') }}" style="max-height:253px;" alt="{{ $rp->code() }}">
