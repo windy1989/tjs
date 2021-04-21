@@ -152,6 +152,9 @@ class ProductController extends Controller {
                         });
                 }
             })
+            ->whereHas('productShading', function($query) {
+                    $query->havingRaw('SUM(qty) > ?', [0]);
+                })
             ->where('status', 1);
 
         if($filter['other']['sort']) {

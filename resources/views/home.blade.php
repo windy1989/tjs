@@ -23,7 +23,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h2 class="text-uppercase">Product Brand</h2>
+            <h3 class="text-uppercase">Product Brand</h3>
          </div>
          <div class="tabs clearfix" id="tab-3">
             <ul class="tab-nav clearfix">
@@ -49,13 +49,16 @@
                                  <div class="product-desc p-3 text-center">
                                     <div class="product-title">
                                        <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
+                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" style="font-weight:500;">{{ $p->code() }}</a>
                                        </h4>
                                     </div>
-                                    <div class="product-price">
-                                       <ins style="font-size:15px;">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                    <div class="product-price text-info font-weight-bold">
+                                       <span>{{ $p->type->length }}x{{ $p->type->width }}</span>
                                     </div>
-                                    <div class="product-rating text-muted">
+                                    <div class="product-price font-weight-bold">
+                                       <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                    </div>
+                                    <div class="product-rating font-weight-bold" style="color:orange;">
                                        {{ $p->type->category->name }}
                                     </div>
                                  </div>
@@ -69,7 +72,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h2 class="text-uppercase">Product New</h2>
+            <h3 class="text-uppercase">Product New</h3>
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_new as $p)
@@ -84,13 +87,16 @@
                      <div class="product-desc p-3 text-center">
                         <div class="product-title">
                            <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
+                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" style="font-weight:500;">{{ $p->code() }}</a>
                            </h4>
                         </div>
-                        <div class="product-price">
-                           <ins style="font-size:15px;">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                        <div class="product-price text-info font-weight-bold">
+                           <span>{{ $p->type->length }}x{{ $p->type->width }}</span>
                         </div>
-                        <div class="product-rating text-muted">
+                        <div class="product-price font-weight-bold">
+                           <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                        </div>
+                        <div class="product-rating font-weight-bold" style="color:orange;">
                            {{ $p->brand->name }}
                         </div>
                      </div>
@@ -100,7 +106,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h2 class="text-uppercase">Product Category</h2>
+            <h3 class="text-uppercase">Product Category</h3>
          </div>
          <div class="tabs clearfix" id="tab-3">
             <ul class="tab-nav clearfix">
@@ -134,13 +140,16 @@
                                  <div class="product-desc p-3 text-center">
                                     <div class="product-title">
                                        <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">{{ $p->code() }}</a>
+                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" style="font-weight:500;">{{ $p->code() }}</a>
                                        </h4>
                                     </div>
-                                    <div class="product-price">
-                                       <ins style="font-size:15px;">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                    <div class="product-price text-info font-weight-bold">
+                                       <span>{{ $p->type->length }}x{{ $p->type->width }}</span>
                                     </div>
-                                    <div class="product-rating text-muted">
+                                    <div class="product-price font-weight-bold">
+                                       <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
+                                    </div>
+                                    <div class="product-rating font-weight-bold" style="color:orange;">
                                        {{ $p->brand->name }}
                                     </div>
                                  </div>

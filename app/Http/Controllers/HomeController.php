@@ -12,12 +12,13 @@ class HomeController extends Controller {
     
     public function index()
     {
-        $brand = Brand::with('product')
-            ->withCount('product')
-            ->whereHas('product', function($query) {
-                $query->where('status', 1);
+        $brand = Brand::whereHas('product', function($query) {
+                $query->where('status', 1)
+                    ->whereHas('productShading', function($query) {
+                            $query->havingRaw('SUM(qty) > ?', [2]);
+                        })
+                    ->havingRaw('COUNT(*) > ?', [4]);
             })
-            ->has('product', '>', 4)
             ->where('status', 1)
             ->inRandomOrder()
             ->groupBy('id')
@@ -25,15 +26,27 @@ class HomeController extends Controller {
             ->get();
         
         $category = Category::where('status', 1)
-            ->whereExists(function($query) {
-                $query->selectRaw(4)
-                    ->from('products')
-                    ->leftJoin('types', 'products.type_id', '=', 'types.id')
-                    ->whereColumn('categories.id', 'types.category_id');
+            ->whereHas('type', function($query) {
+                $query->where('status', 1)
+                    ->havingRaw('COUNT(*) > ?', [4])
+                    ->whereHas('product', function($query) {
+                            $query->havingRaw('COUNT(*) > ?', [4])
+                                ->where('status', 1)
+                                ->whereHas('productShading', function($query) {
+                                        $query->havingRaw('SUM(qty) > ?', [18]);
+                                    });
+                        });
             })
             ->inRandomOrder()
             ->groupBy('id')
             ->limit(3)
+            ->get();
+
+        $product_new = Product::whereHas('productShading', function($query) {
+                $query->havingRaw('SUM(qty) > ?', [18]);
+            })
+            ->latest()
+            ->limit(8)
             ->get();
 
         $data = [
@@ -41,7 +54,7 @@ class HomeController extends Controller {
             'banner'      => Banner::where('status', 1)->get(),
             'brand'       => $brand,
             'category'    => $category,
-            'product_new' => Product::where('status', 1)->latest()->groupBy('id')->limit(8)->get(),
+            'product_new' => $product_new,
             'content'     => 'home'
         ];
 

@@ -122,4 +122,9 @@ class Type extends Model {
         return $this->belongsTo('App\Models\Unit', 'selling_unit_id', 'id');
     }
 
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
+
 }

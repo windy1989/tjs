@@ -201,13 +201,16 @@
                         <div class="product-desc p-3 text-center">
                            <div class="product-title">
                               <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                 <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">{{ $rp->code() }}</a>
+                                 <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" style="font-weight:500;">{{ $rp->code() }}</a>
                               </h4>
                            </div>
-                           <div class="product-price">
-                              <ins style="font-size:15px;">Rp {{ number_format($rp->price(), 0, ',', '.') }}</ins>
+                           <div class="product-price text-info font-weight-bold">
+                              <span>{{ $rp->type->length }}x{{ $rp->type->width }}</span>
                            </div>
-                           <div class="product-rating text-muted">
+                           <div class="product-price font-weight-bold">
+                              <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($rp->price(), 0, ',', '.') }}</ins>
+                           </div>
+                           <div class="product-rating font-weight-bold" style="color:orange;">
                               {{ $rp->brand->name }}
                            </div>
                         </div>
