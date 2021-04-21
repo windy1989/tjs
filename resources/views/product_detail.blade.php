@@ -50,7 +50,7 @@
                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                            <input type="text" value="Add To Wishlist" class="form-control-plaintext" disabled>
                         </div>
-                        <button type="submit" class="button button-teal m-0"><i class="icon-heart"></i></button>
+                        <button type="submit" class="button button-teal m-0"><i class="icon-heart21"></i></button>
                      </form>
                      <div class="line"></div>
                      <ul class="list-group list-group-flush">

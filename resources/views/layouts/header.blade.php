@@ -12,7 +12,7 @@
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="{{ url('information/how_to_buy') }}">How To Buy</a>
+									<a href="{{ url('information/about_us') }}">About Us</a>
 								</li>
 								<li class="top-links-item">
 									<a href="{{ url('information/privacy_policy') }}">Privacy Policy</a>
@@ -40,10 +40,32 @@
 						</div>
 						<div class="header-misc">
 							<div id="top-account">
-								<a href="{{ url('account/login') }}">
-									<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
-									<span class="d-none d-sm-inline-block font-primary font-weight-medium">Login / Register</span>
-								</a>
+								@if(session('fo_id'))
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="icon-line2-user mr-1 position-relative"></i>
+											<span class="d-none d-sm-inline-block font-primary font-weight-medium">My Account</span>
+										</a>
+										<div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/order_history') }}">History Order</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/profile') }}">Profile</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/cart') }}">Cart</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/wishlist') }}">Wishlist</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/indent') }}">Indent</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/logout') }}">Logout</a>
+										</div>
+									</div>
+								@else
+									<a href="{{ url('account/login') }}">
+										<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
+										<span class="d-none d-sm-inline-block font-primary font-weight-medium">Login / Register</span>
+									</a>
+								@endif
 							</div>
 							<div id="top-search" class="header-misc-icon">
 								<a href="#" id="top-search-trigger">
@@ -51,34 +73,17 @@
 									<i class="icon-line-cross"></i>
 								</a>
 							</div>
-							<div id="top-cart" class="header-misc-icon d-none d-sm-block">
-								<a href="#" id="top-cart-trigger">
-									<i class="icon-line-bag"></i>
-									<span class="top-cart-number">5</span>
+							<div id="top-cart" class="header-misc-icon">
+								<a href="{{ url('account/wishlist') }}" id="top-cart-trigger">
+									<i class="icon-heart21"></i>
+									<span class="top-cart-number">0</span>
 								</a>
-								<div class="top-cart-content">
-									<div class="top-cart-title">
-										<h4>Cart</h4>
-									</div>
-									<div class="top-cart-items">
-										<div class="top-cart-item">
-											<div class="top-cart-item-image">
-												<a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
-											</div>
-											<div class="top-cart-item-desc">
-												<div class="top-cart-item-desc-title">
-													<a href="#">Blue Round-Neck Tshirt with a Button</a>
-													<span class="top-cart-item-price d-block">$19.99</span>
-												</div>
-												<div class="top-cart-item-quantity">x 2</div>
-											</div>
-										</div>
-									</div>
-									<div class="top-cart-action">
-										<span class="top-checkout-price">$114.95</span>
-										<a href="#" class="button button-3d button-small m-0">View Cart</a>
-									</div>
-								</div>
+							</div>
+							<div id="top-cart" class="header-misc-icon">
+								<a href="{{ url('account/cart') }}" id="top-cart-trigger">
+									<i class="icon-line-bag"></i>
+									<span class="top-cart-number">0</span>
+								</a>
 							</div>
 						</div>
 						<div id="primary-menu-trigger">

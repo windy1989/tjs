@@ -24,7 +24,6 @@ Route::prefix('information')->group(function() {
     Route::get('terms_and_conditions', 'InformationController@termsAndConditions');
     Route::get('about_us', 'InformationController@aboutUs');
     Route::get('contact', 'InformationController@contact');
-    Route::get('how_to_buy', 'InformationController@howToBuy');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

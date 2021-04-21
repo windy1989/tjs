@@ -33,13 +33,13 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => url('account/login_social_media_callback/google'),
+        'redirect' => env('APP_URL') . '/account/login_social_media_callback/google',
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => url('account/login_social_media_callback/facebook'),
+        'redirect' => env('APP_URL') . '/account/login_social_media_callback/facebook',
     ],
 
 ];
