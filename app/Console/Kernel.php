@@ -13,8 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\WarehouseCommand::class,
-        Commands\StockCommand::class
+        //
     ];
 
     /**
@@ -25,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('warehouse:sync')->everyFifteenMinutes()->runInBackground();
-        $schedule->command('stock:sync')->everyFifteenMinutes()->runInBackground();
+        $schedule->command('warehouse:sync')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('stock:sync')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('queue:work')->everyMinute()->withoutOverlapping()->runInBackground();
     }
 
     /**
