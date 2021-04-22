@@ -160,6 +160,19 @@
                         </ul>
                      </div>
                      <div class="mb-5 clearfix">
+                        <h4 class="mb-3 text-uppercase" style="font-size:18px;">Size</h4>
+                        <ul class="sidebar-filter-product">
+                           @foreach($size as $s)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="size[]" id="{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" onchange="clickFilter(this)" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                 </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
+                     <div class="mb-5 clearfix">
                         <h4 class="mb-3 text-uppercase" style="font-size:18px;">Color</h4>
                         <ul class="sidebar-filter-product">
                            @foreach($color as $c)

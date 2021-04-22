@@ -6,6 +6,10 @@ Route::get('/', 'HomeController@index');
 Route::prefix('product')->group(function() {
     Route::get('/', 'ProductController@index');
     Route::get('detail/{id}', 'ProductController@detail');
+    Route::post('check_stock', 'ProductController@checkStock');
+    Route::post('add_to_cart', 'ProductController@addToCart');
+    Route::post('add_to_wishlist', 'ProductController@addToWishlist');
+    Route::post('move_wishlist_to_cart', 'ProductController@moveWishlistToCart');
 });
 
 Route::prefix('account')->group(function() {
@@ -17,6 +21,7 @@ Route::prefix('account')->group(function() {
     Route::post('login_social_media', 'AccountController@loginSocialMedia');
     Route::get('login_social_media_callback/{param}', 'AccountController@loginSocialMediaCallback');
     Route::get('logout', 'AccountController@logout');
+    Route::match(['get', 'post'], 'cart', 'AccountController@cart');
 });
 
 Route::prefix('information')->group(function() {

@@ -1,3 +1,7 @@
+.cursor-none {
+   cursor: default;
+}
+
 .header-row > #logo > a > img {
    max-height: 70px;
 }

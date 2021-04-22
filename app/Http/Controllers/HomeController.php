@@ -12,17 +12,13 @@ class HomeController extends Controller {
     
     public function index()
     {
-        $brand = Brand::whereHas('product', function($query) {
-                $query->where('status', 1)
-                    ->whereHas('productShading', function($query) {
-                            $query->havingRaw('SUM(qty) > ?', [2]);
-                        })
-                    ->havingRaw('COUNT(*) > ?', [4]);
+        $product_cheapest = Product::select('products.*', 'pricing_policies.price_list')
+            ->whereHas('productShading', function($query) {
+                $query->havingRaw('SUM(qty) > ?', [18]);
             })
-            ->where('status', 1)
-            ->inRandomOrder()
-            ->groupBy('id')
-            ->limit(4)
+            ->leftJoin('pricing_policies', 'products.id', '=', 'pricing_policies.product_id')
+            ->orderBy('pricing_policies.price_list', 'asc')
+            ->limit(8)
             ->get();
         
         $category = Category::where('status', 1)
@@ -37,6 +33,7 @@ class HomeController extends Controller {
                                     });
                         });
             })
+            ->where('parent_id', '!=', 0)
             ->inRandomOrder()
             ->groupBy('id')
             ->limit(3)
@@ -49,13 +46,21 @@ class HomeController extends Controller {
             ->limit(8)
             ->get();
 
+        $product_limited = Product::whereHas('productShading', function($query) {
+                $query->havingRaw('SUM(qty) > ?', [2])
+                    ->havingRaw('SUM(qty) <= ?', [18]);
+            })
+            ->latest()
+            ->limit(8)
+            ->get();
+
         $data = [
-            'title'       => 'SMB',
-            'banner'      => Banner::where('status', 1)->get(),
-            'brand'       => $brand,
-            'category'    => $category,
-            'product_new' => $product_new,
-            'content'     => 'home'
+            'title'            => 'SMB',
+            'banner'           => Banner::where('status', 1)->get(),
+            'product_cheapest' => $product_cheapest,
+            'product_limited'  => $product_limited,
+            'product_new'      => $product_new,
+            'content'          => 'home'
         ];
 
         return view('layouts.index', ['data' => $data]);

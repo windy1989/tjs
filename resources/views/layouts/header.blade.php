@@ -1,6 +1,57 @@
 <body class="stretched">
+	<div class="body-overlay"></div>
+	<div id="side-panel" class="dark">
+		<div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="icon-line-cross"></i></a></div>
+		<div class="side-panel-wrap">
+			<div class="widget clearfix">
+				<h4 class="mb-3">My Account</h4>
+				<nav class="nav-tree">
+					{{-- <div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/order_history') }}">History Order</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/profile') }}">Profile</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/cart') }}">Cart</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/wishlist') }}">Wishlist</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/indent') }}">Indent</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/logout') }}">Logout</a>
+					</div> --}}
+					<ul>
+						<li>
+							<a href="{{ url('account/order_history') }}">History Order</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="widget quick-contact-widget form-widget clearfix">
+
+				<h4>Quick Contact</h4>
+				<div class="form-result"></div>
+				<form id="quick-contact-form" name="quick-contact-form" action="include/form.php" method="post" class="quick-contact-form mb-0">
+					<div class="form-process">
+						<div class="css3-spinner">
+							<div class="css3-spinner-scaler"></div>
+						</div>
+					</div>
+					<input type="text" class="required sm-form-control input-block-level" id="quick-contact-form-name" name="quick-contact-form-name" value="" placeholder="Full Name" />
+					<input type="text" class="required sm-form-control email input-block-level" id="quick-contact-form-email" name="quick-contact-form-email" value="" placeholder="Email Address" />
+					<textarea class="required sm-form-control input-block-level short-textarea" id="quick-contact-form-message" name="quick-contact-form-message" rows="4" cols="30" placeholder="Message"></textarea>
+					<input type="text" class="d-none" id="quick-contact-form-botcheck" name="quick-contact-form-botcheck" value="" />
+					<input type="hidden" name="prefix" value="quick-contact-form-">
+					<button type="submit" id="quick-contact-form-submit" name="quick-contact-form-submit" class="button button-small button-3d m-0" value="submit">Send Email</button>
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
 	<div id="wrapper" class="clearfix">
-		<div id="top-bar" class="bg-light">
+		<div id="top-bar">
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
@@ -26,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-		<header id="header" class="full-header header-size-md sticky-top">
+		<header id="header" class="full-header header-size-md">
 			<div id="header-wrap">
 				<div class="container">
 					<div class="header-row justify-content-lg-between">
@@ -41,25 +92,10 @@
 						<div class="header-misc">
 							<div id="top-account">
 								@if(session('fo_id'))
-									<div class="dropdown">
-										<a href="javascript:void(0);" class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="icon-line2-user mr-1 position-relative"></i>
-											<span class="d-none d-sm-inline-block font-primary font-weight-medium">My Account</span>
-										</a>
-										<div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/order_history') }}">History Order</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/profile') }}">Profile</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/cart') }}">Cart</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/wishlist') }}">Wishlist</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/indent') }}">Indent</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/logout') }}">Logout</a>
-										</div>
-									</div>
+									<a href="javascript:void(0);" class="side-panel-trigger">
+										<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
+										<span class="d-none d-sm-inline-block font-primary font-weight-medium">My Account</span>
+									</a>
 								@else
 									<a href="{{ url('account/login') }}">
 										<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>

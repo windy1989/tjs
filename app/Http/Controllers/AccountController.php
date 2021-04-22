@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use stdClass;
+use App\Models\Cart;
 use App\Models\Token;
 use App\Models\Customer;
 use App\Jobs\EmailProcess;
@@ -280,6 +281,21 @@ class AccountController extends Controller {
     {
         session()->flush();
         return redirect('/');
+    }
+
+    public function cart(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect('/');
+        }
+
+        $data = [
+            'title'   => 'Cart',
+            'cart'    => Cart::where('customer_id', session('fo_id'))->paginate(10),
+            'content' => 'account.cart'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
     }
 
 }

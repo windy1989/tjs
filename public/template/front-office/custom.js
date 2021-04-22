@@ -1,3 +1,15 @@
+$(function() {
+   $('.side-panel-trigger').off('click').on('click', function() {
+      $body.toggleClass('side-panel-open');
+      
+      if($body.hasClass('device-touch') && $body.hasClass('side-push-panel')) {
+         $body.toggleClass('ohidden');
+      }
+
+      return false;
+   });
+});
+
 function loadingOpen(selector) {
    $(selector).waitMe({
       effect: 'facebook',

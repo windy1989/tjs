@@ -38,9 +38,10 @@
                         <div class="quantity clearfix">
                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                            <input type="button" value="-" class="minus">
-                           <input type="number" step="1" min="1" max="{{ $product->availability()->stock }}" name="qty" value="1" title="Quantity" class="qty">
+                           <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
                            <input type="button" value="+" class="plus">
                         </div>
+                        <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">More Detail</a>
                         <button type="submit" class="button button-green m-0">Add to cart</button>
                      </form>
                      <div class="line"></div>
@@ -50,7 +51,13 @@
                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                            <input type="text" value="Add To Wishlist" class="form-control-plaintext" disabled>
                         </div>
-                        <button type="submit" class="button button-teal m-0"><i class="icon-heart21"></i></button>
+                        @if(count($product->wishlist) > 0)
+                           @if(count($product->wishlist->where('customer_id', session('fo_id'))) > 0)
+                              <a href="javascript:void(0);" class="button button-red m-0 cursor-none"><i class="icon-heart21"></i></a>
+                           @endif
+                        @else
+                           <button type="submit" class="button button-teal m-0"><i class="icon-heart21"></i></button>
+                        @endif
                      </form>
                      <div class="line"></div>
                      <ul class="list-group list-group-flush">
@@ -222,3 +229,99 @@
       </div>
    </div>
 </section>
+
+<div class="modal fade" id="detail_stock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">DETAIL STOCK</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped">
+                  <thead class="alert-info">
+                     <tr class="text-center">
+                        <th>Shading</th>
+                        <th>Initial Stock</th>
+                        <th>Last Stock</th>
+                     </tr>
+                  </thead>
+                  <tbody id="data_shading"></tbody>
+                  <tfoot>
+                     <tr>
+                        <th colspan="2" class="text-right">Total Request</th>
+                        <th id="total_request_stock">0</th>
+                     </tr>
+                     <tr>
+                        <th colspan="2" class="text-right">Total Stock</th>
+                        <th id="total_stock">0</th>
+                     </tr>
+                     <tr>
+                        <th colspan="2" class="text-right">Total Ready</th>
+                        <th id="total_ready_stock">0</th>
+                     </tr>
+                     <tr>
+                        <th colspan="2" class="text-right">Total Indent</th>
+                        <th id="total_indent_stock">0</th>
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script>
+   $(function() {
+      checkStock();
+   });
+
+   function checkStock() {
+      $.ajax({
+         url: '{{ url("product/check_stock") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: {
+            product_id: '{{ $product->id }}',
+            qty: $('#qty').val()
+         },
+         beforeSend: function() {
+            $('#data_shading').html('');
+            $('#total_stock').html(0);
+            $('#total_ready_stock').html(0);
+            $('#total_indent_stock').html(0);
+            $('#total_request_stock').html(0);
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         success: function(response) {
+            $('#total_stock').html(response.total_stock);
+            $('#total_ready_stock').html(response.total_ready);
+            $('#total_indent_stock').html(response.total_indent);
+            $('#total_request_stock').html(response.total_request);
+            
+            if(response.data_shading.length > 0) {
+               $.each(response.data_shading, function(i, val) {
+                  $('#data_shading').append(`
+                     <tr class="text-center">
+                        <td>` + val.shading + `</td>
+                        <td>` + val.initial_stock + `</td>
+                        <td>` + val.last_stock + `</td>
+                     </tr>
+                  `);
+               });
+            } else {
+               $('#data_shading').html('<tr><td colspan="3" class="text-center">Data empty</td></tr>');
+            }
+         }
+      });
+   }
+</script>

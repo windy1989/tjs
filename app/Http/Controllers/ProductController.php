@@ -2,17 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Type;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Pattern;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use App\Models\ProductShading;
 
 class ProductController extends Controller {
     
     public function index(Request $request)
     {
+        $size = Type::select('length', 'width')
+            ->where([
+                ['length', '!=', null],
+                ['length', '>', 0]
+            ])
+            ->where([
+                ['width', '!=', null],
+                ['width', '>', 0]
+            ])
+            ->where('status', 1)
+            ->groupBy('length', 'width')
+            ->get();
+
         if($request->category) {
             if(is_array($request->category)) {
                 foreach($request->category as $c) {
@@ -35,6 +52,21 @@ class ProductController extends Controller {
             }
         } else {
             $filter['brand'] = [];
+        }
+
+        if($request->size) {
+            if(is_array($request->size)) {
+                foreach($request->size as $s) {
+                    $explode                    = explode('x', $s);
+                    $filter['size'][]           = $s;
+                    $filter['size']['length'][] = $explode[0];
+                    $filter['size']['width'][]  = $explode[1];
+                }
+            } else {
+                $filter['size'][] = $request->size;
+            }
+        } else {
+            $filter['size'] = [];
         }
 
         if($request->color) {
@@ -130,6 +162,13 @@ class ProductController extends Controller {
                         });
                 }
 
+                if($filter['size']) {
+                    $query->whereHas('type', function($query) use ($filter) {
+                            $query->whereIn('length', $filter['size']['length']);
+                            $query->whereIn('width', $filter['size']['width']);
+                        });
+                }
+
                 if($filter['brand']) {
                     $query->whereHas('brand', function($query) use ($filter) {
                             $query->whereIn('code', $filter['brand']);
@@ -152,10 +191,10 @@ class ProductController extends Controller {
                         });
                 }
             })
+            ->where('status', 1)
             ->whereHas('productShading', function($query) {
                     $query->havingRaw('SUM(qty) > ?', [0]);
-                })
-            ->where('status', 1);
+                });
 
         if($filter['other']['sort']) {
             if($filter['other']['sort'] == 'newest') {
@@ -173,6 +212,7 @@ class ProductController extends Controller {
             'category' => Category::where('parent_id', 0)->where('status', 1)->get(),
             'color'    => Color::where('status', 1)->get(),
             'pattern'  => Pattern::where('status', 1)->get(),
+            'size'     => $size,
             'product'  => $product->groupBy('products.id')->paginate($filter['other']['show'])->appends($request->except('page')),
             'filter'   => $filter,
             'content'  => 'product'
@@ -190,10 +230,17 @@ class ProductController extends Controller {
             return redirect('product');
         }
 
-        $related_product = Product::where('type_id', $product->type_id)
-            ->orWhere('brand_id', $product->brand_id)
-            ->orWhereHas('type', function($query) use ($product) {
-                    $query->where('category_id', $product->type->category_id);
+        $related_product = Product::where(function($query) use ($product) {
+                    $query->where('type_id', $product->type_id)
+                        ->whereHas('productShading', function($query) {
+                                $query->havingRaw('SUM(qty) > ?', [0]);
+                            });
+                })
+            ->where(function($query) use ($product) {
+                    $query->where('brand_id', $product->brand_id)
+                        ->orWhereHas('type', function($query) use ($product) {
+                                $query->where('category_id', $product->type->category_id);
+                            });
                 })
             ->limit(8)
             ->inRandomOrder()
@@ -207,6 +254,104 @@ class ProductController extends Controller {
         ];
 
         return view('layouts.index', ['data' => $data]);
+    }
+
+    public function checkStock(Request $request)
+    {
+        $data_shading  = ProductShading::where('product_id', $request->product_id)->orderBy('qty', 'asc')->get();
+        $total_stock   = ProductShading::where('product_id', $request->product_id)->sum('qty');
+        $total_indent  = 0;
+        $total_request = abs($request->qty);
+        $total_ready   = $total_request;
+        $shading       = [];
+
+        if($total_request > $total_stock) {
+            $total_indent = $total_request - $total_stock;
+        }
+
+        foreach($data_shading as $ds) {
+            $minus     = $ds->qty - $total_request;
+            $shading[] = [
+                'shading'       => $ds->code,
+                'initial_stock' => $ds->qty,
+                'last_stock'    => $minus > 0 ? $minus : 0
+            ];
+
+            if($total_request > 0) {
+                $ds->qty - $total_request;
+            }
+        }
+
+        return response()->json([
+            'total_stock'   => $total_stock,
+            'total_ready'   => abs($total_ready - $total_indent),
+            'total_indent'  => $total_indent,
+            'total_request' => $total_request,
+            'data_shading'  => $shading
+        ]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect()->back();
+        }
+
+        $cart = Cart::where('customer_id', session('fo_id'))
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if($cart) {
+            Cart::where('customer_id', session('fo_id'))
+                ->where('product_id', $request->product_id)
+                ->update(['qty' => $cart->qty + $request->qty]);
+        } else {
+            Cart::create([
+                'customer_id' => session('fo_id'),
+                'product_id'  => $request->product_id,
+                'qty'         => $request->qty
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function addToWishlist(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect()->back();
+        }
+
+        $wishlist = Wishlist::where('customer_id', session('fo_id'))
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if(!$wishlist) {
+            Wishlist::create([
+                'customer_id' => session('fo_id'),
+                'product_id'  => $request->product_id
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function moveWishlistToCart(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect()->back();
+        }
+
+        if($request->product_id) {
+            foreach($request->product_id as $pi) {
+                Wishlist::create([
+                    'customer_id' => session('fo_id'),
+                    'product_id'  => $pi
+                ]);
+            }
+        }
+
+        return redirect()->back();
     }
 
 }

@@ -247,7 +247,7 @@
             $.each(response, function(i, val) {
                content += `
                   <div class="col-md-4">
-                     <div class="card">
+                     <div class="card alpha-teal border-teal">
                         <div class="card-header">
                            <h6 class="card-title text-center">` + i + `</h6>
                         </div>
