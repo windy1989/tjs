@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use QrCode;
+use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Customer;
+use App\Models\OrderDetail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ProductShading;
 
 class CheckoutController extends Controller {
     
@@ -17,7 +23,81 @@ class CheckoutController extends Controller {
         }
 
         if($request->has('_token') && session()->token() == $request->_token) {
-             
+            $order = Order::create([
+                'customer_id' => session('fo_id'),
+                'qr_code'     => $qr_code,
+                'code'        => Order::generateCode('RTL'),
+                'type'        => 1
+            ]);
+
+            $total = 0;
+            foreach($customer->cart as $c) {
+                $formula        = $c->product->cogs;
+                $pricing        = $c->product->pricingPolicy;
+                $showroom_cost  = $pricing ? $pricing->showroom_cost : 0;
+                $marketing_cost = $pricing ? $pricing->marketing_cost : 0;
+                $bottom_price   = $pricing ? $pricing->bottom_price : 0;
+                $fixed_cost     = $pricing ? $pricing->fixed_cost : 0;
+                $cogs_idr       = $formula ? $formula->cogs_idr : 0;
+                $cogs_pta_idr   = $formula ? $formula->cogs_pta_idr : 0;
+                $cogs_smb_idr   = $formula ? $formula->cogs_smb_idr : 0;
+                $subtotal       = $c->product->price() * $c->qty;
+                $total         += $subtotal;
+
+                $request = abs($c->qty);
+                $indent  = 0;
+                $stock   = $c->product->productShading->sum('qty');
+
+                if($request > $stock) {
+                    $indent = $request - $stock;
+                }
+
+                $ready   = abs($request - $indent);
+                $shading = ProductShading::where('product_id', $c->product->id)->orderBy('qty', 'asc')->get();
+
+                foreach($shading as $s) {
+                    $minus = $s->qty - $ready;
+                    ProductShading::find($s->id)->update(['qty' => $minus > 0 ? $minus : 0]);
+
+                    if($ready > 0) {
+                        $s->qty - $ready;
+                    }
+                }
+                
+                OrderDetail::create([
+                    'order_id'         => $order->id,
+                    'product_id'       => $c->product_id,
+                    'showroom_cost'    => $showroom_cost,
+                    'marketing_cost'   => $marketing_cost,
+                    'bottom_price'     => $bottom_price,
+                    'fixed_cost'       => $fixed_cost,
+                    'price_list'       => $c->product->price(),
+                    'cogs_perwira'     => $cogs_pta_idr,
+                    'cogs_smartmarble' => $cogs_smb_idr,
+                    'profit'           => $subtotal - $cogs_idr,
+                    'qty'              => $request,
+                    'ready'            => $ready,
+                    'indent'           => $indent,
+                    'total'            => $subtotal
+                ]);
+            }
+
+            $qr_code = 'public/checkout/' . Str::random(40) . '.png';
+            QrCode::size(500)->format('png')->generate($order->code, 'app/' . $qr_code);
+
+            // $payload = [
+            //     'name'    => session('fo_name'),
+            //     'email'   => session('fo_email'),
+            //     'link'    => url('account/verification?token=' . base64_encode($token->token)),
+            //     'view'    => 'order_cash',
+            //     'subject' => 'SMB | Verification Account'
+            // ];
+
+            // dispatch(new EmailProcess($payload));
+
+            Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total, 'grandtotal' => $total]);
+            Cart::where('customer_id', session('fo_id'))->delete();
+            return redirect('checkout/cash/cash_success?code=' . base64_encode($order->code));
         } else {
             $data = [
                 'title'    => 'Checkout',
@@ -27,6 +107,26 @@ class CheckoutController extends Controller {
 
             return view('layouts.index', ['data' => $data]);
         }
+    }
+
+    public function cashSuccess(Request $request)
+    {
+        $code  = base64_decode($request->code);
+        $order = Order::where('code', $code)->first();
+
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        } else if(!$order) {
+            return redirect('/');
+        }
+
+        $data = [
+            'title'   => 'Order Successfully Created',
+            'order'   => $order,
+            'content' => 'checkout.cash_success'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
     }
 
 }

@@ -15,8 +15,8 @@
                      <th class="cart-product-name">Product</th>
                      <th class="cart-product-price">Unit Price</th>
                      <th class="cart-product-quantity">Qty</th>
-                     <th class="cart-product-quantity">Item Ready</th>
-                     <th class="cart-product-quantity">Item Indent</th>
+                     <th class="cart-product-quantity">Ready Stock</th>
+                     <th class="cart-product-quantity">Indent Stock</th>
                      <th class="cart-product-subtotal">Total</th>
                   </tr>
                </thead>

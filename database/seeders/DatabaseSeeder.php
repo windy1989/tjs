@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FreightSeeder::class);
         $this->call(EmklSeeder::class);
         $this->call(MarketingStructureSeeder::class);
+        $this->call(CustomerSeeder::class);
     }
 }

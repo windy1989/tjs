@@ -15,18 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->id('customer_id');
-            $table->id('code');
-            $table->id('discount');
-            $table->id('subtotal');
-            $table->id('grandtotal');
-            $table->id('payment');
-            $table->id('change');
-            $table->id('bottom_price');
-            $table->id('showroom_cost');
-            $table->id('marketing_cost');
-            $table->id('fixed_cost');
-            $table->id('fixed_cost');
+            $table->bigInteger('customer_id');
+            $table->string('qr_code');
+            $table->string('code')->unique();
+            $table->double('discount')->default(0);
+            $table->double('subtotal')->default(0);
+            $table->double('grandtotal')->default(0);
+            $table->double('payment')->default(0);
+            $table->double('change')->default(0);
+            $table->char('type', 1);
             $table->timestamps();
         });
     }

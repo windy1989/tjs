@@ -36,7 +36,8 @@ Route::prefix('information')->group(function() {
 
 Route::prefix('checkout')->group(function() {
     Route::match(['get', 'post'], 'cash', 'CheckoutController@cash');
-    Route::get('transfer_credit', 'CheckoutController@transferCredit');
+    Route::get('cash/cash_success', 'CheckoutController@cashSuccess');
+    Route::get('cashless', 'CheckoutController@transferCredit');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

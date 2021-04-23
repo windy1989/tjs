@@ -172,6 +172,11 @@ class Product extends Model {
         return $this->hasOne('App\Models\PricingPolicy');
     }
 
+    public function cogs()
+    {
+        return $this->hasOne('App\Models\Cogs');
+    }
+
     public function wishlist()
     {
         return $this->hasMany('App\Models\Wishlist');

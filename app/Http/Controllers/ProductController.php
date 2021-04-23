@@ -288,7 +288,6 @@ class ProductController extends Controller {
             'total_ready'   => abs($total_ready - $total_indent),
             'total_indent'  => $total_indent,
             'total_request' => $total_request,
-            'total_price'   => $total_price,
             'data_shading'  => $shading
         ]);
     }
