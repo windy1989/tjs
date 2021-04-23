@@ -1,54 +1,41 @@
+@php 
+	$total_cart     = App\Models\Cart::where('customer_id', session('fo_id'))->count(); 
+	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
+@endphp
 <body class="stretched">
 	<div class="body-overlay"></div>
 	<div id="side-panel" class="dark">
 		<div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="icon-line-cross"></i></a></div>
 		<div class="side-panel-wrap">
 			<div class="widget clearfix">
-				<h4 class="mb-3">My Account</h4>
+				<h4 class="mb-4">My Account</h4>
 				<nav class="nav-tree">
-					{{-- <div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/order_history') }}">History Order</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/profile') }}">Profile</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/cart') }}">Cart</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/wishlist') }}">Wishlist</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/indent') }}">Indent</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" style="font-size:14px;" href="{{ url('account/logout') }}">Logout</a>
-					</div> --}}
 					<ul>
 						<li>
-							<a href="{{ url('account/order_history') }}">History Order</a>
+							<a href="{{ url('account/order_history') }}"><i class="icon-line2-notebook"></i> History Order</a>
+						</li>
+						<li>
+							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Profile</a>
+						</li>
+						<li>
+							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-light">{{ $total_cart }}</sup></a>
+						</li>
+						<li>
+							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-light">{{ $total_wishlist }}</sup></a>
+						</li>
+						<li>
+							<a href="{{ url('account/indent') }}"><i class="icon-clock1"></i> Indent</a>
 						</li>
 					</ul>
 				</nav>
 			</div>
-
-			<div class="widget quick-contact-widget form-widget clearfix">
-
-				<h4>Quick Contact</h4>
-				<div class="form-result"></div>
-				<form id="quick-contact-form" name="quick-contact-form" action="include/form.php" method="post" class="quick-contact-form mb-0">
-					<div class="form-process">
-						<div class="css3-spinner">
-							<div class="css3-spinner-scaler"></div>
-						</div>
-					</div>
-					<input type="text" class="required sm-form-control input-block-level" id="quick-contact-form-name" name="quick-contact-form-name" value="" placeholder="Full Name" />
-					<input type="text" class="required sm-form-control email input-block-level" id="quick-contact-form-email" name="quick-contact-form-email" value="" placeholder="Email Address" />
-					<textarea class="required sm-form-control input-block-level short-textarea" id="quick-contact-form-message" name="quick-contact-form-message" rows="4" cols="30" placeholder="Message"></textarea>
-					<input type="text" class="d-none" id="quick-contact-form-botcheck" name="quick-contact-form-botcheck" value="" />
-					<input type="hidden" name="prefix" value="quick-contact-form-">
-					<button type="submit" id="quick-contact-form-submit" name="quick-contact-form-submit" class="button button-small button-3d m-0" value="submit">Send Email</button>
-				</form>
-
-			</div>
-
+			<div class="form-group"><hr></div>
+			<div class="form-group">
+				<div class="text-center">
+					<a href="{{ url('account/logout') }}" class="button button-red col-12">Logout</a>
+				</div>	
+			</div>	
 		</div>
-
 	</div>
 	<div id="wrapper" class="clearfix">
 		<div id="top-bar">
@@ -60,19 +47,11 @@
 						</p>
 					</div>
 					<div class="col-12 col-md-auto">
-						<div class="top-links on-click">
-							<ul class="top-links-container">
-								<li class="top-links-item">
-									<a href="{{ url('information/about_us') }}">About Us</a>
-								</li>
-								<li class="top-links-item">
-									<a href="{{ url('information/privacy_policy') }}">Privacy Policy</a>
-								</li>
-								<li class="top-links-item">
-									<a href="{{ url('information/terms_and_conditions') }}">Terms & Conditions</a>
-								</li>
-							</ul>
-						</div>
+						<ul id="top-social">
+							<li><a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="si-facebook"><span class="ts-icon"><i class="icon-facebook"></i></span></a></li>
+							<li><a href="mailto:smartmarandbath@gmail.com" class="si-gplus"><span class="ts-icon"><i class="icon-gmail"></i></span></a></li>
+							<li><a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="si-instagram"><span class="ts-icon"><i class="icon-instagram"></i></span></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -109,16 +88,16 @@
 									<i class="icon-line-cross"></i>
 								</a>
 							</div>
-							<div id="top-cart" class="header-misc-icon">
-								<a href="{{ url('account/wishlist') }}" id="top-cart-trigger">
+							<div id="top-search" class="header-misc-icon d-none d-sm-block">
+								<a href="{{ url('account/wishlist') }}" id="top-search-trigger">
 									<i class="icon-heart21"></i>
-									<span class="top-cart-number">0</span>
+									<span class="top-cart-number">{{ $total_wishlist }}</span>
 								</a>
 							</div>
-							<div id="top-cart" class="header-misc-icon">
-								<a href="{{ url('account/cart') }}" id="top-cart-trigger">
+							<div id="top-search" class="header-misc-icon d-none d-sm-block">
+								<a href="{{ url('account/cart') }}" id="top-search-trigger">
 									<i class="icon-line-bag"></i>
-									<span class="top-cart-number">0</span>
+									<span class="top-cart-number">{{ $total_cart }}</span>
 								</a>
 							</div>
 						</div>

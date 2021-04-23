@@ -12,7 +12,18 @@
 										</p>
 									</div>
 								</div>
-								<div class="col-md-3 mb-5">
+								<div class="col-md-4 mb-5">
+									<div class="widget clearfix">
+										<h4 class="text-center mb-4">Help</h4>
+										<div class="text-center">
+											<div class="mb-2"><a href="{{ url('information/how_to_buy') }}" class="text-white">How To Buy</a></div>
+											<div class="mb-2"><a href="{{ url('information/about_us') }}" class="text-white">About Us</a></div>
+											<div class="mb-2"><a href="{{ url('information/privacy_policy') }}" class="text-white">Privacy Policy</a></div>
+											<div class="mb-2"><a href="{{ url('information/terms_and_conditions') }}" class="text-white">Terms & Conditions</a></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
 									<div class="widget clearfix">
 										<h4 class="text-center">Contact</h4>
 										<div class="posts-sm row col-mb-30" id="post-list-footer">
@@ -43,11 +54,6 @@
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-								<div class="col-md-5">
-									<div class="widget clearfix">
-										<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6504839608283!2d106.7995945270812!3d-6.177520366051822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f68a00d33aa7%3A0xadc562e1b8269900!2sJl.%20Tomang%20Raya%20No.28%2C%20RT.5%2FRW.1%2C%20Jatipulo%2C%20Kec.%20Palmerah%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2011440!5e0!3m2!1sid!2sid!4v1618920672871!5m2!1sid!2sid" width="auto" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 									</div>
 								</div>
 							</div>

@@ -258,8 +258,9 @@ class ProductController extends Controller {
 
     public function checkStock(Request $request)
     {
-        $data_shading  = ProductShading::where('product_id', $request->product_id)->orderBy('qty', 'asc')->get();
-        $total_stock   = ProductShading::where('product_id', $request->product_id)->sum('qty');
+        $product_id    = base64_decode($request->product_id);
+        $data_shading  = ProductShading::where('product_id', $product_id)->orderBy('qty', 'asc')->get();
+        $total_stock   = ProductShading::where('product_id', $product_id)->sum('qty');
         $total_indent  = 0;
         $total_request = abs($request->qty);
         $total_ready   = $total_request;
@@ -287,6 +288,7 @@ class ProductController extends Controller {
             'total_ready'   => abs($total_ready - $total_indent),
             'total_indent'  => $total_indent,
             'total_request' => $total_request,
+            'total_price'   => $total_price,
             'data_shading'  => $shading
         ]);
     }
@@ -297,23 +299,71 @@ class ProductController extends Controller {
             return redirect()->back();
         }
 
-        $cart = Cart::where('customer_id', session('fo_id'))
-            ->where('product_id', $request->product_id)
+        $product_id = base64_decode($request->product_id);
+        $cart       = Cart::where('customer_id', session('fo_id'))
+            ->where('product_id', $product_id)
             ->first();
 
         if($cart) {
             Cart::where('customer_id', session('fo_id'))
-                ->where('product_id', $request->product_id)
+                ->where('product_id', $product_id)
                 ->update(['qty' => $cart->qty + $request->qty]);
         } else {
             Cart::create([
                 'customer_id' => session('fo_id'),
-                'product_id'  => $request->product_id,
+                'product_id'  => $product_id,
                 'qty'         => $request->qty
             ]);
         }
 
         return redirect()->back();
+    }
+
+    public function cartQty(Request $request)
+    {
+        if(!session('fo_id')) {
+            return response()->json('Unauthorized');
+        }
+
+        $id            = $request->id;
+        $product_id    = base64_decode($request->product_id);
+        $total_request = abs($request->qty);
+        $cart_customer = Cart::where('customer_id', session('fo_id'))->get();
+        $cart_row      = Cart::find($id);
+        $total_indent  = 0;
+        $total_price   = $cart_row->product->price() * $total_request;
+        $grandtotal    = 0;
+        $total_stock   = $cart_row->product->productShading->sum('qty');
+
+        if($total_request > $total_stock) {
+            $total_indent = $total_request - $total_stock;
+        }
+
+        foreach($cart_customer as $cc) {
+            if($cc->id == $id) {
+                $grandtotal += $cc->product->price() * $total_request;
+            } else {
+                $grandtotal += $cc->product->price() * $cc->qty;
+            }
+        }
+
+        $cart_row->update(['qty' => $total_request]);
+        return response()->json([
+            'total_ready'  => abs($total_request - $total_indent),
+            'total_indent' => $total_indent,
+            'total_price'  => 'Rp ' . number_format($total_price, 0, ',', '.'),
+            'grandtotal'   => 'Rp ' . number_format($grandtotal, 0, ',', '.')
+        ]);
+    }
+
+    public function cartDestroy($id)
+    {
+        if(!session('fo_id')) {
+            return response()->json('Unauthorized');
+        }
+
+        Cart::find(base64_decode($id))->delete();
+        return redirect('account/cart');
     }
 
     public function addToWishlist(Request $request)
@@ -322,35 +372,37 @@ class ProductController extends Controller {
             return redirect()->back();
         }
 
-        $wishlist = Wishlist::where('customer_id', session('fo_id'))
-            ->where('product_id', $request->product_id)
+        $product_id = base64_decode($request->product_id);
+        $wishlist   = Wishlist::where('customer_id', session('fo_id'))
+            ->where('product_id', $product_id)
             ->first();
 
         if(!$wishlist) {
             Wishlist::create([
                 'customer_id' => session('fo_id'),
-                'product_id'  => $request->product_id
+                'product_id'  => $product_id
             ]);
         }
 
         return redirect()->back();
     }
 
-    public function moveWishlistToCart(Request $request)
+    public function moveWishlistToCart($id)
     {
         if(!session('fo_id')) {
             return redirect()->back();
         }
 
-        if($request->product_id) {
-            foreach($request->product_id as $pi) {
-                Wishlist::create([
-                    'customer_id' => session('fo_id'),
-                    'product_id'  => $pi
-                ]);
-            }
-        }
+        $id       = base64_decode($id);
+        $wishlist = Wishlist::find($id);
 
+        Cart::create([
+            'customer_id' => session('fo_id'),
+            'product_id'  => $wishlist->product_id,
+            'qty'         => 1
+        ]);
+
+        $wishlist->delete();
         return redirect()->back();
     }
 

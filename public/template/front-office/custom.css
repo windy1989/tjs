@@ -62,6 +62,15 @@
    overflow: hidden;
 }
 
+#side-panel > .side-panel-wrap > .widget > nav > ul > li > a {
+   font-size: 12px !important;
+   font-weight: 500;
+}
+
+#side-panel > .side-panel-wrap > .widget > nav > ul > li > a:hover {
+   color: #edb31a !important;
+}
+
 @media (max-width: 991.98px) {
    .menu-container #tab-shop .nav-link {
       padding: 15px;
@@ -69,10 +78,6 @@
 }
 
 @media only screen and (max-width: 575px) {
-   .product > .product-image > a  > img {
-      max-height: 100% !important;
-   }
-
    .limit-text-list-product {
       max-height: auto;
 }

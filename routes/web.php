@@ -8,8 +8,10 @@ Route::prefix('product')->group(function() {
     Route::get('detail/{id}', 'ProductController@detail');
     Route::post('check_stock', 'ProductController@checkStock');
     Route::post('add_to_cart', 'ProductController@addToCart');
+    Route::post('cart_qty', 'ProductController@cartQty');
+    Route::get('cart_destroy/{id}', 'ProductController@cartDestroy');
     Route::post('add_to_wishlist', 'ProductController@addToWishlist');
-    Route::post('move_wishlist_to_cart', 'ProductController@moveWishlistToCart');
+    Route::get('move_wishlist_to_cart/{id}', 'ProductController@moveWishlistToCart');
 });
 
 Route::prefix('account')->group(function() {
@@ -21,7 +23,8 @@ Route::prefix('account')->group(function() {
     Route::post('login_social_media', 'AccountController@loginSocialMedia');
     Route::get('login_social_media_callback/{param}', 'AccountController@loginSocialMediaCallback');
     Route::get('logout', 'AccountController@logout');
-    Route::match(['get', 'post'], 'cart', 'AccountController@cart');
+    Route::get('cart', 'AccountController@cart');
+    Route::get('wishlist', 'AccountController@wishlist');
 });
 
 Route::prefix('information')->group(function() {
@@ -29,6 +32,11 @@ Route::prefix('information')->group(function() {
     Route::get('terms_and_conditions', 'InformationController@termsAndConditions');
     Route::get('about_us', 'InformationController@aboutUs');
     Route::get('contact', 'InformationController@contact');
+}); 
+
+Route::prefix('checkout')->group(function() {
+    Route::match(['get', 'post'], 'cash', 'CheckoutController@cash');
+    Route::get('transfer_credit', 'CheckoutController@transferCredit');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

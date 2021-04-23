@@ -57,7 +57,7 @@
                                  </div>
                                  <div class="product-image">
                                     <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                                       <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" style="max-height:253px;" alt="{{ $p->code() }}">
+                                       <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}">
                                     </a>
                                     <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                  </div>

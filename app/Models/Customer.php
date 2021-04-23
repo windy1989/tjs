@@ -20,6 +20,11 @@ class Customer extends Model {
         'verification'
     ];
 
+    public function cart()
+    {
+        return $this->hasMany('App\Models\Cart');
+    }
+
     public function wishlist()
     {
         return $this->hasMany('App\Models\Wishlist');

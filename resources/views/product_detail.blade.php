@@ -36,7 +36,7 @@
                      <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0 d-flex justify-content-between align-items-center" method="POST">
                         @csrf
                         <div class="quantity clearfix">
-                           <input type="hidden" name="product_id" value="{{ $product->id }}">
+                           <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
                            <input type="button" value="-" class="minus">
                            <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
                            <input type="button" value="+" class="plus">
@@ -48,7 +48,7 @@
                      <form method="POST" action="{{ url('product/add_to_wishlist') }}" class="cart mb-0 d-flex justify-content-between align-items-center">
                         @csrf
                         <div class="quantity clearfix">
-                           <input type="hidden" name="product_id" value="{{ $product->id }}">
+                           <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
                            <input type="text" value="Add To Wishlist" class="form-control-plaintext" disabled>
                         </div>
                         @if(count($product->wishlist) > 0)
@@ -201,7 +201,7 @@
                      <div class="product border">
                         <div class="product-image">
                           <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
-                              <img src="{{ Storage::exists($rp->type->image) ? asset(Storage::url($rp->type->image)) : asset('website/empty.jpg') }}" style="max-height:253px;" alt="{{ $rp->code() }}">
+                              <img src="{{ Storage::exists($rp->type->image) ? asset(Storage::url($rp->type->image)) : asset('website/empty.jpg') }}" alt="{{ $rp->code() }}">
                            </a>
                            <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
                         </div>
@@ -289,7 +289,7 @@
          type: 'POST',
          dataType: 'JSON',
          data: {
-            product_id: '{{ $product->id }}',
+            product_id: '{{ base64_encode($product->id) }}',
             qty: $('#qty').val()
          },
          beforeSend: function() {

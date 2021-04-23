@@ -6,6 +6,7 @@ use stdClass;
 use App\Models\Cart;
 use App\Models\Token;
 use App\Models\Customer;
+use App\Models\Wishlist;
 use App\Jobs\EmailProcess;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -289,10 +290,33 @@ class AccountController extends Controller {
             return redirect('/');
         }
 
+        $total_cart = 0;
+        $cart       = Cart::where('customer_id', session('fo_id'));
+
+        foreach($cart->get() as $c) {
+            $total_cart += $c->product->price() * $c->qty;
+        }
+
         $data = [
-            'title'   => 'Cart',
-            'cart'    => Cart::where('customer_id', session('fo_id'))->paginate(10),
-            'content' => 'account.cart'
+            'title'      => 'Cart',
+            'cart'       => $cart->paginate(10),
+            'total_cart' => $total_cart,
+            'content'    => 'account.cart'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function wishlist(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect('/');
+        }
+
+        $data = [
+            'title'    => 'Wishlist',
+            'wishlist' => Wishlist::where('customer_id', session('fo_id'))->paginate(10),
+            'content'  => 'account.wishlist'
         ];
 
         return view('layouts.index', ['data' => $data]);
