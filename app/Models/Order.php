@@ -13,7 +13,6 @@ class Order extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'customer_id',
-        'qr_code',
         'code',
         'discount',
         'subtotal',
@@ -55,6 +54,16 @@ class Order extends Model {
         }
 
         return $type;
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function orderDetail()
+    {
+        return $this->hasMany('App\Models\OrderDetail');
     }
 
 }

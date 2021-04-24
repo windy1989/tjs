@@ -16,7 +16,6 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('customer_id');
-            $table->string('qr_code');
             $table->string('code')->unique();
             $table->double('discount')->default(0);
             $table->double('subtotal')->default(0);

@@ -6,6 +6,7 @@ use QrCode;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Jobs\EmailProcess;
 use App\Models\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -25,7 +26,6 @@ class CheckoutController extends Controller {
         if($request->has('_token') && session()->token() == $request->_token) {
             $order = Order::create([
                 'customer_id' => session('fo_id'),
-                'qr_code'     => $qr_code,
                 'code'        => Order::generateCode('RTL'),
                 'type'        => 1
             ]);
@@ -82,21 +82,20 @@ class CheckoutController extends Controller {
                 ]);
             }
 
-            $qr_code = 'public/checkout/' . Str::random(40) . '.png';
-            QrCode::size(500)->format('png')->generate($order->code, 'app/' . $qr_code);
-
-            // $payload = [
-            //     'name'    => session('fo_name'),
-            //     'email'   => session('fo_email'),
-            //     'link'    => url('account/verification?token=' . base64_encode($token->token)),
-            //     'view'    => 'order_cash',
-            //     'subject' => 'SMB | Verification Account'
-            // ];
-
-            // dispatch(new EmailProcess($payload));
-
-            Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total, 'grandtotal' => $total]);
+            Order::find($order->id)->update(['subtotal' => $total, 'grandtotal' => $total]);
             Cart::where('customer_id', session('fo_id'))->delete();
+
+            $payload  = [
+                'email'   => $customer->email,
+                'name'    => $customer->name,
+                'order'   => Order::find($order->id),
+                'link'    => url('account/history_order/detail/' . base64_encode($order->id)),
+                'view'    => 'order_cash',
+                'subject' => 'SMB | Invoice #' . $order->code
+            ];
+
+            dispatch(new EmailProcess($payload));
+
             return redirect('checkout/cash/cash_success?code=' . base64_encode($order->code));
         } else {
             $data = [

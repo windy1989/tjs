@@ -28,4 +28,9 @@ class OrderDetail extends Model {
         'total'
     ];
 
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
+    }
+
 }
