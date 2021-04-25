@@ -12,7 +12,7 @@
 				<nav class="nav-tree">
 					<ul>
 						<li>
-							<a href="{{ url('account/order_history') }}"><i class="icon-line2-notebook"></i> History Order</a>
+							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
 						</li>
 						<li>
 							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Profile</a>

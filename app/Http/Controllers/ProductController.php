@@ -295,7 +295,7 @@ class ProductController extends Controller {
     public function addToCart(Request $request)
     {
         if(!session('fo_id')) {
-            return redirect()->back();
+            return redirect('account/login');
         }
 
         $product_id = base64_decode($request->product_id);
@@ -358,7 +358,7 @@ class ProductController extends Controller {
     public function cartDestroy($id)
     {
         if(!session('fo_id')) {
-            return response()->json('Unauthorized');
+            return redirect('account/login');
         }
 
         Cart::find(base64_decode($id))->delete();
@@ -368,7 +368,7 @@ class ProductController extends Controller {
     public function addToWishlist(Request $request)
     {
         if(!session('fo_id')) {
-            return redirect()->back();
+            return redirect('account/login');
         }
 
         $product_id = base64_decode($request->product_id);
@@ -386,7 +386,7 @@ class ProductController extends Controller {
         return redirect()->back();
     }
 
-    public function moveWishlistToCart($id)
+    public function wishlistToCart($id)
     {
         if(!session('fo_id')) {
             return redirect()->back();
@@ -403,6 +403,16 @@ class ProductController extends Controller {
 
         $wishlist->delete();
         return redirect()->back();
+    }
+
+    public function wishlistDestroy($id)
+    {
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        }
+
+        Wishlist::find(base64_decode($id))->delete();
+        return redirect('account/wishlist');
     }
 
 }

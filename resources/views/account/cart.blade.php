@@ -47,7 +47,7 @@
                         <td class="cart-product-quantity">
                            <span class="amount">
                               <span class="d-inline">Ready</span> 
-                              <strong class="badge badge-success"  id="total_ready_{{ $c->id }}"> 
+                              <strong class="badge badge-success" id="total_ready_{{ $c->id }}"> 
                                  @php
                                     $total_stock   = $c->product->productShading->sum('qty');
                                     $total_request = abs($c->qty);

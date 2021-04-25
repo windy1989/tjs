@@ -5,6 +5,7 @@ namespace App\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -35,9 +36,15 @@ class EmailProcess implements ShouldQueue
     {
         $data = $this->payload;
         Mail::send('emails.' . $data['view'], $data, function($mail) use ($data) {
-            $mail->to($data['email'], $data['name'])
-                ->subject($data['subject'])
-                ->from(config('mail.mailers.smtp.username'), 'Smart Marble And Bath');
+            if(array_key_exists('attachment', $data)) {
+                if($data['attachment']) {
+                    $mail->attach(storage_path('app/' . $data['order']->qr_code));
+                }
+            }
+
+            $mail->to($data['email'], $data['name']);
+            $mail->subject($data['subject']);
+            $mail->from(config('mail.mailers.smtp.username'), 'Smart Marble And Bath');
         });
     }
 }

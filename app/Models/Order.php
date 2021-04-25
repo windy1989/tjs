@@ -13,14 +13,22 @@ class Order extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'customer_id',
+        'qr_code',
+        'number',
         'code',
         'discount',
         'subtotal',
         'grandtotal',
         'payment',
         'change',
-        'type'
+        'type',
+        'status'
     ];
+
+    public static function generateNumber($param)
+    {
+        return 'SMB' . $param . date('ymdHis');
+    }
 
     public static function generateCode($param)
     {
@@ -54,6 +62,23 @@ class Order extends Model {
         }
 
         return $type;
+    }
+
+    public function status() 
+    {
+        switch($this->status) {
+            case '1':
+                $status = 'Unpaid';
+                break;
+            case '2':
+                $status = 'Paid';
+                break;
+            default:
+                $status = 'Invalid';
+                break;
+        }
+
+        return $status;
     }
 
     public function customer()

@@ -29,11 +29,14 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
-   <link href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
    <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+   <script src="{{ asset('template/plugins/countdown/source/syotimer.lang.js') }}"></script>
+   <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
 	<title>Smart Marble & Bath | {{ $title }}</title>

@@ -11,6 +11,7 @@ use App\Models\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ProductShading;
+use Illuminate\Support\Facades\Storage;
 
 class CheckoutController extends Controller {
     
@@ -26,8 +27,10 @@ class CheckoutController extends Controller {
         if($request->has('_token') && session()->token() == $request->_token) {
             $order = Order::create([
                 'customer_id' => session('fo_id'),
+                'number'      => Order::generateNumber('RTL'),
                 'code'        => Order::generateCode('RTL'),
-                'type'        => 1
+                'type'        => 1,
+                'status'      => 1
             ]);
 
             $total = 0;
@@ -82,21 +85,25 @@ class CheckoutController extends Controller {
                 ]);
             }
 
-            Order::find($order->id)->update(['subtotal' => $total, 'grandtotal' => $total]);
+            $generate = QrCode::format('png')->merge('/public/website/icon.png')->size(200)->generate($order->number);
+            $qr_code  = 'public/order/SMB-QrCode-' . str_replace('/', '', $order->number) . '.png';
+            Storage::put($qr_code, $generate);
+
+            Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total, 'grandtotal' => $total]);
             Cart::where('customer_id', session('fo_id'))->delete();
 
             $payload  = [
-                'email'   => $customer->email,
-                'name'    => $customer->name,
-                'order'   => Order::find($order->id),
-                'link'    => url('account/history_order/detail/' . base64_encode($order->id)),
-                'view'    => 'order_cash',
-                'subject' => 'SMB | Invoice #' . $order->code
+                'email'      => $customer->email,
+                'name'       => $customer->name,
+                'order'      => Order::find($order->id),
+                'attachment' => true,
+                'link'       => url('account/history_order/detail/' . base64_encode($order->id)),
+                'view'       => 'order_cash',
+                'subject'    => 'SMB | Order ' . $order->number
             ];
 
             dispatch(new EmailProcess($payload));
-
-            return redirect('checkout/cash/cash_success?code=' . base64_encode($order->code));
+            return redirect('checkout/cash/cash_success?number=' . base64_encode($order->number));
         } else {
             $data = [
                 'title'    => 'Checkout',
@@ -110,8 +117,8 @@ class CheckoutController extends Controller {
 
     public function cashSuccess(Request $request)
     {
-        $code  = base64_decode($request->code);
-        $order = Order::where('code', $code)->first();
+        $number = base64_decode($request->number);
+        $order  = Order::where('number', $number)->first();
 
         if(!session('fo_id')) {
             return redirect('account/login');

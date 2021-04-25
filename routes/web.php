@@ -11,7 +11,8 @@ Route::prefix('product')->group(function() {
     Route::post('cart_qty', 'ProductController@cartQty');
     Route::get('cart_destroy/{id}', 'ProductController@cartDestroy');
     Route::post('add_to_wishlist', 'ProductController@addToWishlist');
-    Route::get('move_wishlist_to_cart/{id}', 'ProductController@moveWishlistToCart');
+    Route::get('wishlist_to_cart/{id}', 'ProductController@wishlistToCart');
+    Route::get('wishlist_destroy/{id}', 'ProductController@wishlistDestroy');
 });
 
 Route::prefix('account')->group(function() {
@@ -25,6 +26,8 @@ Route::prefix('account')->group(function() {
     Route::get('logout', 'AccountController@logout');
     Route::get('cart', 'AccountController@cart');
     Route::get('wishlist', 'AccountController@wishlist');
+    Route::get('history_order', 'AccountController@historyOrder');
+    Route::get('history_order/detail/{id}', 'AccountController@historyOrderDetail');
 });
 
 Route::prefix('information')->group(function() {

@@ -6,7 +6,6 @@
 <section id="content">
    <div class="content-wrap">
       <div class="container">
-         @php $total_wishlist = 0; @endphp
          @if($wishlist->count() > 0)
             <table class="table cart mb-5">
                <thead>
@@ -40,7 +39,7 @@
                            <span class="amount">{{ $w->product->productShading->sum('qty') }}</span>
                         </td>
                         <td class="cart-product-subtotal">
-                           <a href="{{ url('product/move_wishlist_to_cart/' . base64_encode($w->id)) }}" class="remove text-success" title="Move this item">Move Now Your Cart</span></a>
+                           <a href="{{ url('product/wishlist_to_cart/' . base64_encode($w->id)) }}" class="remove text-success" title="Move this item">Move Now Your Cart</span></a>
                         </td>
                      </tr>
                   @endforeach

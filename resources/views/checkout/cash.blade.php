@@ -51,7 +51,7 @@
 													<td class="cart-product-quantity">
 														<span class="amount">
 															<span class="d-inline">Ready</span> 
-															<strong class="badge badge-success" id="total_ready_{{ $c->id }}"> 
+															<strong class="badge badge-success"> 
 																@php
 																	$total_stock   = $c->product->productShading->sum('qty');
 																	$total_request = abs($c->qty);
@@ -69,7 +69,7 @@
 													<td class="cart-product-quantity">
 														<span class="amount">
 															<span class="d-inline">Indent</span> 
-															<strong class="badge badge-info"  id="total_indent_{{ $c->id }}"> 
+															<strong class="badge badge-info"> 
 																@php
 																	$total_stock   = $c->product->productShading->sum('qty');
 																	$total_request = abs($c->qty);
@@ -84,7 +84,7 @@
 														</span>
 													</td>
 													<td class="cart-product-subtotal">
-														<span class="amount" id="total_price_{{ $c->id }}">
+														<span class="amount">
 															Rp {{ number_format($c->product->price() * $c->qty, 0, ',', '.') }}
 														</span>
 													</td>
@@ -96,7 +96,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-5">
 						<div class="card">
 							<div class="card-body">
 								<h4>Summary</h4>

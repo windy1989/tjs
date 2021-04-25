@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use stdClass;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Token;
 use App\Models\Customer;
 use App\Models\Wishlist;
@@ -287,7 +287,7 @@ class AccountController extends Controller {
     public function cart(Request $request)
     {
         if(!session('fo_id')) {
-            return redirect('/');
+            return redirect('account/login');
         }
 
         $total_cart = 0;
@@ -310,13 +310,85 @@ class AccountController extends Controller {
     public function wishlist(Request $request)
     {
         if(!session('fo_id')) {
-            return redirect('/');
+            return redirect('account/login');
         }
 
         $data = [
             'title'    => 'Wishlist',
             'wishlist' => Wishlist::where('customer_id', session('fo_id'))->paginate(10),
             'content'  => 'account.wishlist'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function historyOrder(Request $request) 
+    {
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        }
+
+        $order = Order::where('customer_id', session('fo_id'))
+            ->where(function($query) use ($request) {
+                    if($request->search) {
+                        $query->where('number', 'like', "%$request->search%");
+                    }
+
+                    if($request->type) {
+                        $query->where('type', $request->type);
+                    }
+                });
+
+        if($request->status) {
+            $order->where('status', $request->status);
+        } else {
+            $order->whereNotNull('status');
+        }
+
+        $data = [
+            'title'   => 'History Order',
+            'order'   => $order->latest()->paginate(5)->appends($request->except('page')),
+            'status'  => $request->status,
+            'type'    => $request->type,
+            'search'  => $request->search,
+            'content' => 'account.history_order'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function historyOrderDetail(Request $request, $id)
+    {
+        $order_id = base64_decode($id);
+        $order    = Order::find($order_id);
+
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        } else if(!$order) {
+            return redirect('account/history_order');
+        }
+
+        if($order->status == 1) {
+            $countdown_time   = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($order->created_at)));
+            $countdown_title  = 'Deadline For Your Order';
+            $countdown_status = 'Waiting For Payment';
+        } else if($order->status == 6) {
+            $countdown_time   = '0000-00-00 00:00:00';
+            $countdown_title  = 'Order Has Been Canceled';
+            $countdown_status = 'Cancelled';
+        } else {
+            $countdown_time   = '0000-00-00 00:00:00';
+            $countdown_title  = 'Order Has Been Paid In Full';
+            $countdown_status = 'Successfully Paid';
+        }
+
+        $data = [
+            'title'            => 'History Order Detail',
+            'order'            => $order,
+            'countdown_time'   => $countdown_time,
+            'countdown_title'  => $countdown_title,
+            'countdown_status' => $countdown_status,
+            'content'          => 'account.history_order_detail'
         ];
 
         return view('layouts.index', ['data' => $data]);

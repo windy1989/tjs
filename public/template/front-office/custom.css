@@ -2,6 +2,22 @@
    cursor: default;
 }
 
+.a-link-order {
+   margin-left: 40px;
+}
+
+.active-link-custom {
+   color: white !important;
+   font-weight: bold !important;
+   background: linear-gradient(#50b7bd, #ec3822, #efbd45) !important;
+}
+
+.focus-custom:focus {
+   border: 1px solid #282828 !important;
+   outline: none;
+   box-shadow: none;
+}
+
 .header-row > #logo > a > img {
    max-height: 70px;
 }
@@ -74,6 +90,15 @@
 @media (max-width: 991.98px) {
    .menu-container #tab-shop .nav-link {
       padding: 15px;
+   }
+
+   .a-link-order {
+      margin-left: 0 !important;
+      margin-top: 5px;
+   }
+
+   .active-link-custom {
+      padding: 10px !important;
    }
 }
 

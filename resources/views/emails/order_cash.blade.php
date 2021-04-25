@@ -450,7 +450,7 @@
                         <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td>
-                              <h3>{{ $order->code }}</h3>
+                              <h3>{{ $order->number }}</h3>
                             </td>
                             <td>
                               <h3 class="align-right">{{ date('d-m-Y', strtotime($order->created_at)) }}</h3>
@@ -494,7 +494,6 @@
                           <a href="mailto:smartmarandbath@gmail.com">support team</a> 
                           for help.
                         </p>
-                        <p>Cheers, <br>The SMB Team</p>
                         <table class="body-sub" role="presentation">
                           <tr>
                             <td>
