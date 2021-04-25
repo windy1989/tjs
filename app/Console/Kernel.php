@@ -25,13 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        Artisan::call('warehouse:sync');
-        Artisan::call('stock:sync');
-        Artisan::call('queue:work --stop-when-empty');
-        
-        // $schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        // $schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        // $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping()->runInBackground();
     }
 
     /**
