@@ -422,7 +422,8 @@ class CodeController extends Controller {
                 $shading[] = [
                     'warehouse'  => $pd->warehouse->name,
                     'stock_code' => $pd->stock_code,
-                    'code'       => $pd->code
+                    'code'       => $pd->code,
+                    'qty'        => $pd->qty
                 ];
             }
         }
