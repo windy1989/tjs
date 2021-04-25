@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,9 +25,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping()->runInBackground();
+        Artisan::call('warehouse:sync');
+        Artisan::call('stock:sync');
+        Artisan::call('queue:work --stop-when-empty');
+        
+        // $schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        // $schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        // $schedule->command('queue:work --stop-when-empty')->everyMinute()->withoutOverlapping()->runInBackground();
     }
 
     /**
