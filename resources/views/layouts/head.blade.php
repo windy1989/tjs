@@ -17,6 +17,7 @@
    <meta property="og:url" content="{{ url('/') }}">
    <meta property="og:image" content="{{ asset('website/logo-black.png') }}">
    <meta name="robots" content="all">
+   <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
    <link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/bootstrap.css') }}">
