@@ -323,4 +323,9 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::post('destroy', 'PricingPolicyController@destroy');
         });
     });
+
+    Route::prefix('customer')->group(function() {
+        Route::get('/', 'CustomerController@index');
+        Route::post('datatable', 'CustomerController@datatable');
+    });
 });
