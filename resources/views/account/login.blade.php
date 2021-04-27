@@ -1,3 +1,8 @@
+<section id="page-title">
+   <div class="container">
+      <h1>Login Customer</h1>
+   </div>
+</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
@@ -32,7 +37,6 @@
                   <div class="card-body" style="padding:40px;">
                      <form id="login-form" name="login-form" class="mb-0" action="{{ url('account/login') }}" method="POST">
                         @csrf
-                        <h3 class="mb-5">Login Customer</h3>
                         <div class="row">
                            <div class="col-12 form-group">
                               <label>Email:</label>

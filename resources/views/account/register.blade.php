@@ -1,3 +1,8 @@
+<section id="page-title">
+   <div class="container">
+      <h1>Register Customer</h1>
+   </div>
+</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
@@ -10,7 +15,6 @@
                   <div class="card-body" style="padding:40px;">
                      <form id="login-form" name="login-form" class="mb-0" action="{{ url('account/register') }}" method="POST">
                         @csrf
-                        <h3 class="mb-5">Registrasi Customer</h3>
                         <div class="form-group row">
                            <label class="col-sm-3 text-capitalize col-form-label">Full Name</label>
                            <div class="col-sm-9">

@@ -1,3 +1,8 @@
+<section id="page-title">
+   <div class="container">
+      <h1>Product</h1>
+   </div>
+</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">

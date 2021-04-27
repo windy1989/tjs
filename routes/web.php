@@ -41,7 +41,11 @@ Route::prefix('information')->group(function() {
 Route::prefix('checkout')->group(function() {
     Route::match(['get', 'post'], 'cash', 'CheckoutController@cash');
     Route::get('cash/cash_success', 'CheckoutController@cashSuccess');
-    Route::get('cashless', 'CheckoutController@transferCredit');
+    Route::match(['get', 'post'], 'cashless', 'CheckoutController@cashless');
+}); 
+
+Route::prefix('webhook')->group(function() {
+    Route::post('xendit', 'WebhookController@xendit');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {

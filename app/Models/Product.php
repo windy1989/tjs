@@ -36,9 +36,8 @@ class Product extends Model {
         $brand_code   = $this->brand->code;
         $country_code = $this->country->code;
         $type_code    = $this->type->code;
-        $grade_code   = $this->grade->code;
 
-        return $company_code . $brand_code . $country_code . $type_code . $grade_code;
+        return $company_code . $brand_code . $country_code . $type_code;
     }
 
     public function status() 

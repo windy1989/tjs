@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use QrCode;
+use Xendit\Invoice;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Customer;
@@ -133,6 +134,37 @@ class CheckoutController extends Controller {
         ];
 
         return view('layouts.index', ['data' => $data]);
+    }
+
+    public function cashless(Request $request)
+    {
+        $customer = Customer::find(session('fo_id'));
+        if(!session('fo_id') || !$customer) {
+            return redirect('account/login');
+        } else if($customer->cart->count() < 1) {
+            return redirect('product');
+        }
+        
+        if($request->has('_token') && session()->token() == $request->_token) {
+            $params = [
+                'external_id' => 'demo_147580196270',
+                'payer_email' => 'sample_email@xendit.co',
+                'description' => 'Trip to Bali',
+                'amount'      => 32000
+            ];
+
+            $createInvoice = Invoice::create($params);
+            return redirect($createInvoice['invoice_url']);
+        } else {
+            $data = [
+                'title'    => 'Checkout',
+                'customer' => $customer,
+                'content'  => 'checkout.cashless'
+            ];
+    
+            return view('layouts.index', ['data' => $data]);
+        }
+        
     }
 
 }
