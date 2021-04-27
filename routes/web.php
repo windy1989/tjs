@@ -45,7 +45,7 @@ Route::prefix('checkout')->group(function() {
 }); 
 
 Route::prefix('webhook')->group(function() {
-    Route::post('xendit', 'WebhookController@xendit');
+    Route::post('xendit', 'WebHookController@xendit');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
