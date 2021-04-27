@@ -88,7 +88,6 @@
 			</div>
 		</footer>
 	</div>
-	<div id="gotoTop" class="icon-angle-up"></div>
 	<script src="{{ asset('template/front-office/js/plugins.min.js') }}"></script>
 	<script src="{{ asset('template/front-office/js/functions.js') }}"></script>
 </body>

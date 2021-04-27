@@ -40,6 +40,17 @@
    <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
-   <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=be1f55d9-a325-4c8d-937c-1710fed2a87e"></script>
-	<title>Smart Marble & Bath | {{ $title }}</title>
+   <title>Smart Marble & Bath | {{ $title }}</title>
+   <div id="tawk_60881c7062662a09efc29df5"></div>
+   <script>
+      var Tawk_API = Tawk_API || {}, Tawk_LoadStart=new Date();
+      (function() {
+         var s1     = document.createElement('script'),s0=document.getElementsByTagName('script')[0];
+         s1.async   = true;
+         s1.src     = 'https://embed.tawk.to/60881c7062662a09efc29df5/1f49s1kk2';
+         s1.charset = 'UTF-8';
+         s1.setAttribute('crossorigin', '*');
+         s0.parentNode.insertBefore(s1, s0);
+      })();
+   </script>
 </head>
