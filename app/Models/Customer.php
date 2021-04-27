@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Customer extends Model {
@@ -19,6 +20,19 @@ class Customer extends Model {
         'password',
         'verification'
     ];
+
+    public function photo()
+    {
+        if(Storage::exists($this->photo)) {
+            $photo = asset(Storage::url($this->photo));
+        } else if($this->photo) {
+            $photo = $this->photo;
+        } else {
+            $photo = asset('website/user.png');
+        }
+
+        return $photo;
+    }
 
     public function cart()
     {

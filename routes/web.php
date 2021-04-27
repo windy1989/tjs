@@ -28,6 +28,7 @@ Route::prefix('account')->group(function() {
     Route::get('wishlist', 'AccountController@wishlist');
     Route::get('history_order', 'AccountController@historyOrder');
     Route::get('history_order/detail/{id}', 'AccountController@historyOrderDetail');
+    Route::match(['get', 'post'], 'profile', 'AccountController@profile');
 });
 
 Route::prefix('information')->group(function() {

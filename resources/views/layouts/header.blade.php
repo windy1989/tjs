@@ -23,9 +23,6 @@
 						<li>
 							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-light">{{ $total_wishlist }}</sup></a>
 						</li>
-						<li>
-							<a href="{{ url('account/indent') }}"><i class="icon-clock1"></i> Indent</a>
-						</li>
 					</ul>
 				</nav>
 			</div>
@@ -43,13 +40,13 @@
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<strong>Call:</strong> (+62) 811332642 | <strong>Email:</strong> smartmarandbath@gmail.com
+							<strong>Call:</strong> (+62) 811332642 | <strong>Email:</strong> smartmarbleandbath@gmail.com
 						</p>
 					</div>
 					<div class="col-12 col-md-auto">
 						<ul id="top-social">
 							<li><a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="si-facebook"><span class="ts-icon"><i class="icon-facebook"></i></span></a></li>
-							<li><a href="mailto:smartmarandbath@gmail.com" class="si-gplus"><span class="ts-icon"><i class="icon-gmail"></i></span></a></li>
+							<li><a href="mailto:smartmarbleandbath@gmail.com" class="si-gplus"><span class="ts-icon"><i class="icon-gmail"></i></span></a></li>
 							<li><a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="si-instagram"><span class="ts-icon"><i class="icon-instagram"></i></span></a></li>
 						</ul>
 					</div>

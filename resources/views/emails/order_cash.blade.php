@@ -491,7 +491,7 @@
                         </table>
                         <p>
                           If you have any questions about this invoice, simply reply to this email or reach out to our 
-                          <a href="mailto:smartmarandbath@gmail.com">support team</a> 
+                          <a href="mailto:smartmarbleandbath@gmail.com">support team</a> 
                           for help.
                         </p>
                         <table class="body-sub" role="presentation">

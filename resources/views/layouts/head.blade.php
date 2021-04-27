@@ -40,5 +40,6 @@
    <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
+   <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=be1f55d9-a325-4c8d-937c-1710fed2a87e"></script>
 	<title>Smart Marble & Bath | {{ $title }}</title>
 </head>

@@ -10,7 +10,9 @@ use App\Models\Wishlist;
 use App\Jobs\EmailProcess;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Validator;
 
@@ -392,6 +394,66 @@ class AccountController extends Controller {
         ];
 
         return view('layouts.index', ['data' => $data]);
+    }
+
+    public function profile(Request $request)
+    {
+        $profile = Customer::find(session('fo_id'));
+        if($request->has('_token') && session()->token() == $request->_token) {
+            $validation = Validator::make($request->all(), [
+                'photo'    => 'mimes:jpg,jpeg,png|max:500',
+                'name'     => 'required',
+                'email'    => ['required', 'email', Rule::unique('customers', 'email')->ignore($profile->id)],
+                'phone'    => 'required|min:9|numeric'
+            ], [
+                'photo.mimes'       => 'Type photo must be jpg, jpeg or png',
+                'photo.max'         => 'Photo max 500KB',
+                'name.required'     => 'Name cannot be empty',
+                'email.required'    => 'Email cannot be empty',
+                'email.email'       => 'Email not valid',
+                'email.unique'      => 'Email exists',
+                'phone.required'    => 'Phone cannot be empty',
+                'phone.min'         => 'Phone must be at least 9 characters long',
+                'phone.numeric'     => 'Phone must be number'
+            ]);
+
+            if($validation->fails()) {
+                return redirect()->back()->withErrors($validation)->withInput();
+            } else {
+                if($request->has('photo')) {
+                    if(Storage::exists($profile->photo)) {
+                        Storage::delete($profile->photo);
+                    }
+
+                    $photo = $request->file('photo')->store('public/customer');
+                } else {
+                    $photo = $profile->image;
+                }
+
+                $profile->update([
+                    'photo'    => $photo,
+                    'name'     => $request->name,
+                    'email'    => $request->email,
+                    'phone'    => $request->phone
+                ]);
+
+                session([
+                    'fo_photo'        => $photo,
+                    'fo_name'         => $request->name,
+                    'fo_email'        => $request->email
+                ]);
+
+                return redirect()->back()->with(['success' => 'Profile successfully updated']);
+            }
+        } else {
+            $data = [
+                'title'   => 'Profile',
+                'profile' => $profile,
+                'content' => 'account.profile'
+            ];
+
+            return view('layouts.index', ['data' => $data]);
+        }
     }
 
 }
