@@ -32,7 +32,13 @@
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Code</h5>
-				<div class="header-elements">
+				<div class="header-elements form-inline">
+               <select name="filter_brand_id" id="filter_brand_id" class="form-control mr-3" onchange="loadDataTable()">
+						<option value="">All</option>
+                  @foreach($brand as $b)
+                     <option value="{{ $b->id }}">{{ $b->name }}</option>
+                  @endforeach
+					</select>
 					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
 						<option value="">All</option>
 						<option value="1">Active</option>
@@ -214,7 +220,7 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-               quality: $('#filter_quality').val(),
+               brand_id: $('#filter_brand_id').val(),
                status: $('#filter_status').val()
             },
             beforeSend: function() {

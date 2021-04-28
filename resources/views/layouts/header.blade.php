@@ -5,7 +5,9 @@
 <body class="stretched">
 	<div class="body-overlay"></div>
 	<div id="side-panel" class="dark">
-		<div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="icon-line-cross"></i></a></div>
+		<div id="side-panel-trigger-close" class="side-panel-trigger">
+			<a href="#"><i class="icon-line-cross"></i></a>
+		</div>
 		<div class="side-panel-wrap">
 			<div class="widget clearfix">
 				<h4 class="mb-4">My Account</h4>

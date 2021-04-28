@@ -23,6 +23,7 @@ class CodeController extends Controller {
     {
         $data = [
             'title'   => 'Product Code',
+            'brand'   => Brand::where('status', 1)->get(),
             'content' => 'admin.product.code'
         ];
 
@@ -73,6 +74,10 @@ class CodeController extends Controller {
                     });
                 }         
 
+                if($request->brand_id) {
+                    $query->where('brand_id', $request->brand_id);
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -105,7 +110,11 @@ class CodeController extends Controller {
                                     ->orWhere('code', 'like', "%$search%");
                             });
                     });
-                }         
+                }      
+                
+                if($request->brand_id) {
+                    $query->where('brand_id', $request->brand_id);
+                }
 
                 if($request->status) {
                     $query->where('status', $request->status);

@@ -9,7 +9,7 @@
 							<h4 class="mt-2">Order Successfully Created</h4>
 							<p>Scan this barcode at cashier</p>
 							<center>
-								<img src="{{ asset(Storage::url($order->qr_code)) }}" alt="{{ $order->qr_code }}">
+								<img src="{{ asset(Storage::url($order->qr_code)) }}" alt="{{ $order->qr_code }}" class="img-fluid">
 							</center>
 							<h5 class="mt-4 text-uppercase">Thank you for your order.</h5>
 							<a href="{{ url('account/history_order/detail/' . base64_encode($order->id)) }}" class="button button-green button-3d">Detail Order</a>

@@ -15,7 +15,7 @@
                            <div class="flexslider">
                               <div class="slider-wrap" data-lightbox="gallery">
                                  <div class="slide" data-thumb="{{ Storage::exists($product->type->image) ? asset(Storage::url($product->type->image)) : asset('website/empty.jpg') }}">
-                                    <a href="{{ Storage::exists($product->type->image) ? asset(Storage::url($product->type->image)) : asset('website/empty.jpg') }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ Storage::exists($product->type->image) ? asset(Storage::url($product->type->image)) : asset('website/empty.jpg') }}" alt="{{ $product->code() }}"></a>
+                                    <a href="{{ Storage::exists($product->type->image) ? asset(Storage::url($product->type->image)) : asset('website/empty.jpg') }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ Storage::exists($product->type->image) ? asset(Storage::url($product->type->image)) : asset('website/empty.jpg') }}" alt="{{ $product->code() }}" class="img-fluid"></a>
                                  </div>
                               </div>
                            </div>
@@ -201,7 +201,7 @@
                      <div class="product border">
                         <div class="product-image">
                           <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
-                              <img src="{{ Storage::exists($rp->type->image) ? asset(Storage::url($rp->type->image)) : asset('website/empty.jpg') }}" alt="{{ $rp->code() }}">
+                              <img src="{{ Storage::exists($rp->type->image) ? asset(Storage::url($rp->type->image)) : asset('website/empty.jpg') }}" alt="{{ $rp->code() }}" class="img-fluid">
                            </a>
                            <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
                         </div>

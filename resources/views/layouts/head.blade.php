@@ -38,6 +38,7 @@
    <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
    <script src="{{ asset('template/plugins/countdown/source/syotimer.lang.js') }}"></script>
    <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
+   <script src="{{ asset('template/plugins/side-panel/dist/jquery.slidereveal.min.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
    <title>Smart Marble & Bath | {{ $title }}</title>

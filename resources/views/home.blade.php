@@ -2,7 +2,7 @@
    <div class="slider-inner">
       <div class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="false" data-loop="true" data-animate-in="rollIn" data-speed="450" data-animate-out="rollOut" data-autoplay="5000">
          @foreach($banner as $key => $b)
-            <img src="{{ asset(Storage::url($b->image)) }}" alt="Slider {{ $key + 1 }}">
+            <img src="{{ asset(Storage::url($b->image)) }}" alt="Slider {{ $key + 1 }}" class="img-fluid">
          @endforeach
       </div>
    </div>
@@ -13,23 +13,23 @@
          <div class="row align-items-stretch gutter-20 min-vh-60">
             <div class="col-md-4 min-vh-50">
                <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-smartmarble.jpg') }}" style="max-height:584px;">
+                  <img src="{{ asset('website/home-top-smartmarble.jpg') }}" style="max-height:584px;" class="img-fluid">
                </a>
             </div>
             <div class="col-md-4 min-vh-50">
                <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-kohler.jpg') }}" style="max-height:584px; background-position: center top;">
+                  <img src="{{ asset('website/home-top-kohler.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
                </a>
             </div>
             <div class="col-md-4 min-vh-50">
                <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-bravat.jpg') }}" style="max-height:584px; background-position: center top;">
+                  <img src="{{ asset('website/home-top-bravat.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
                </a>
             </div>
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h3 class="text-uppercase">Product Cheapest</h3>
+            <h3 class="text-uppercase">Special Price</h3>
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_cheapest as $p)
@@ -37,7 +37,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}">
+                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -71,7 +71,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}">
+                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -105,7 +105,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}">
+                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>

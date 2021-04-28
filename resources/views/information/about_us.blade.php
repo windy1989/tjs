@@ -33,7 +33,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-1.png') }}" alt="Certificate 1">
+                     <img src="{{ asset('website/certificate-1.png') }}" alt="Certificate 1" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -46,7 +46,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-2.png') }}" alt="Certificate 2">
+                     <img src="{{ asset('website/certificate-2.png') }}" alt="Certificate 2" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -59,7 +59,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-3.png') }}" alt="Certificate 3">
+                     <img src="{{ asset('website/certificate-3.png') }}" alt="Certificate 3" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -72,7 +72,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-4.png') }}" alt="Certificate 4">
+                     <img src="{{ asset('website/certificate-4.png') }}" alt="Certificate 4" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -85,7 +85,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-5.png') }}" alt="Certificate 5">
+                     <img src="{{ asset('website/certificate-5.png') }}" alt="Certificate 5" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -98,7 +98,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/certificate-6.png') }}" alt="Certificate 6">
+                     <img src="{{ asset('website/certificate-6.png') }}" alt="Certificate 6" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -117,7 +117,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-1.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-1.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -133,7 +133,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-2.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-2.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -149,7 +149,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-3.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-3.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -165,7 +165,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-4.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-4.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -181,7 +181,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-5.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-5.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -197,7 +197,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-6.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-6.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -213,7 +213,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-7.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-7.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -229,7 +229,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-8.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-8.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -245,7 +245,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-9.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-9.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -261,7 +261,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-10.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-10.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -277,7 +277,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-11.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-11.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -293,7 +293,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-12.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-12.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -309,7 +309,7 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-13.jpg') }}" style="max-height:127px;">
+                     <img src="{{ asset('website/project-13.jpg') }}" style="max-height:127px;" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
@@ -330,62 +330,62 @@
          <ul class="clients-grid grid-2 grid-sm-3 grid-md-6 mb-0">
             <li class="grid-item">
                <a href="{{ asset('website/client-1.png') }}">
-                  <img src="{{ asset('website/client-1.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-1.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-2.png') }}">
-                  <img src="{{ asset('website/client-2.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-2.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-3.png') }}">
-                  <img src="{{ asset('website/client-3.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-3.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-4.png') }}">
-                  <img src="{{ asset('website/client-4.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-4.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-5.png') }}">
-                  <img src="{{ asset('website/client-5.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-5.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-6.png') }}">
-                  <img src="{{ asset('website/client-6.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-6.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-7.png') }}">
-                  <img src="{{ asset('website/client-7.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-7.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-8.png') }}">
-                  <img src="{{ asset('website/client-8.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-8.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-9.png') }}">
-                  <img src="{{ asset('website/client-9.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-9.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-10.png') }}">
-                  <img src="{{ asset('website/client-10.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-10.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-11.png') }}">
-                  <img src="{{ asset('website/client-11.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-11.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
             <li class="grid-item">
                <a href="{{ asset('website/client-12.png') }}">
-                  <img src="{{ asset('website/client-12.png') }}" style="max-height:49px;">
+                  <img src="{{ asset('website/client-12.png') }}" style="max-height:49px;" class="img-fluid">
                </a>
             </li>
          </ul>
