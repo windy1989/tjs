@@ -34,13 +34,13 @@
 				<h5 class="card-title">List Data Code</h5>
 				<div class="header-elements form-inline">
                <select name="filter_brand_id" id="filter_brand_id" class="form-control mr-3" onchange="loadDataTable()">
-						<option value="">All</option>
+						<option value="">All Brand</option>
                   @foreach($brand as $b)
                      <option value="{{ $b->id }}">{{ $b->name }}</option>
                   @endforeach
 					</select>
 					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
-						<option value="">All</option>
+						<option value="">All Status</option>
 						<option value="1">Active</option>
 						<option value="2">Not Active</option>
 					</select>
@@ -70,7 +70,7 @@
    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail Product Type</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detail Product Code</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>

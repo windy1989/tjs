@@ -126,9 +126,6 @@
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data: {
-               status: $('#filter_status').val()
-            },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },

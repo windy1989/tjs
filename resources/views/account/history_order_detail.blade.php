@@ -17,13 +17,17 @@
                      No. {{ $order->number }}
                   </span>
                </div>
-               <div class="mb-5">
-                  <div class="row justify-content-center">
-                     <div class="col-md-6">
-                        <div id="simple_timer"></div>
+               @if($order->status == 1)
+                  <div class="mb-5">
+                     <div class="row justify-content-center">
+                        <div class="col-md-6">
+                           <div id="simple_timer"></div>
+                        </div>
                      </div>
                   </div>
-               </div>
+               @else
+                  <div class="mt-5 mb-5"></div>
+               @endif
                <table class="table cart table-bordered">
                   <thead>
                      <tr>
@@ -170,20 +174,17 @@
 <script>
    $(function() {
       $('#simple_timer').syotimer({
-         year: '{{ date("Y", strtotime($countdown_time)) }}',
-         month: '{{ date("m", strtotime($countdown_time)) }}',
-         day: '{{ date("d", strtotime($countdown_time)) }}',
-         hour: '{{ date("H", strtotime($countdown_time)) }}',
-         minute: '{{ date("i", strtotime($countdown_time)) }}',
-         headTitle: '<h3 class="mb-2 mt-0">{{ $countdown_title }}</h3>',
+         year: '{{ date("Y", strtotime("+1 day", strtotime($order->created_at))) }}',
+         month: '{{ date("m", strtotime("+1 day", strtotime($order->created_at))) }}',
+         day: '{{ date("d", strtotime("+1 day", strtotime($order->created_at))) }}',
+         hour: '{{ date("H", strtotime("+1 day", strtotime($order->created_at))) }}',
+         minute: '{{ date("i", strtotime("+1 day", strtotime($order->created_at))) }}',
+         headTitle: '<h3 class="mb-2 mt-0">Deadline For Your Order</h3>',
          dayVisible: false,
          periodUnit: 'd',
          periodic: true,
          periodInterval: 10,
-         timeZone: 'local',
-         afterDeadline: function(timerBlock) {
-            timerBlock.bodyBlock.html('<p style="font-size: 1.2em;">{{ $countdown_status }}</p>');
-         }
+         timeZone: 'local'
       });
    });
 </script>

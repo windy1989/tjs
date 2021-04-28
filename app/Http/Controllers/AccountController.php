@@ -370,27 +370,10 @@ class AccountController extends Controller {
             return redirect('account/history_order');
         }
 
-        if($order->status == 1) {
-            $countdown_time   = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($order->created_at)));
-            $countdown_title  = 'Deadline For Your Order';
-            $countdown_status = 'Waiting For Payment';
-        } else if($order->status == 6) {
-            $countdown_time   = '0000-00-00 00:00:00';
-            $countdown_title  = 'Order Has Been Canceled';
-            $countdown_status = 'Cancelled';
-        } else {
-            $countdown_time   = '0000-00-00 00:00:00';
-            $countdown_title  = 'Order Has Been Paid In Full';
-            $countdown_status = 'Successfully Paid';
-        }
-
         $data = [
-            'title'            => 'History Order Detail',
-            'order'            => $order,
-            'countdown_time'   => $countdown_time,
-            'countdown_title'  => $countdown_title,
-            'countdown_status' => $countdown_status,
-            'content'          => 'account.history_order_detail'
+            'title'   => 'History Order Detail',
+            'order'   => $order,
+            'content' => 'account.history_order_detail'
         ];
 
         return view('layouts.index', ['data' => $data]);

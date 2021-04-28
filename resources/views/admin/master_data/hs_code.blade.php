@@ -34,7 +34,7 @@
 				<h5 class="card-title">List Data Hs Code</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
-						<option value="">All</option>
+						<option value="">All Status</option>
 						<option value="1">Active</option>
 						<option value="2">Not Active</option>
 					</select>
