@@ -330,4 +330,17 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::get('/', 'CustomerController@index');
         Route::post('datatable', 'CustomerController@datatable');
     });
+
+    Route::prefix('setting')->group(function() {
+        Route::prefix('user')->group(function() {
+            Route::get('/', 'UserController@index');
+            Route::post('datatable', 'UserController@datatable');
+            Route::post('row_detail', 'UserController@rowDetail');
+            Route::post('create', 'UserController@create');
+            Route::post('show', 'UserController@show');
+            Route::post('update/{id}', 'UserController@update');
+            Route::post('destroy', 'UserController@destroy');
+            Route::post('reset_password', 'UserController@resetPassword');
+        });
+    });
 });

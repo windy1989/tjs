@@ -17,6 +17,17 @@
 	<script src="{{ asset('template/back-office/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
+
+	<style>
+		body {
+			background: url('{{ asset("website/bg-login-bo.jpg") }}') no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	</style>
+
 </head>
 <body>
 	<div class="page-content" style="background-image: url('{{ asset("webiste/bg-login-bo.jpg") }}') !important;">
@@ -24,13 +35,13 @@
 			<div class="content d-flex justify-content-center align-items-center">
 				<form class="login-form" action="{{ url('login') }}" method="POST">
 					@csrf
-					<div class="card mb-0">
+					<div class="card shadow-lg bg-white rounded mb-0">
 						<div class="card-body">
 							<div class="text-center mb-3">
 								<img src="{{ asset('website/icon.png') }}" style="max-width:70px;" alt="Logo">
 								<div class="mb-3 mt-3">
-									<h5 class="mb-0">Login to your account</h5>
-									<span class="d-block text-muted">Enter your credentials below</span>
+									<h5 class="mb-0">SMB Back Ofiice</h5>
+									<span class="d-block text-muted">Login to your account</span>
 								</div>
 							</div>
 							<div class="form-group form-group-feedback form-group-feedback-left">

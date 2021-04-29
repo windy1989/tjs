@@ -217,12 +217,6 @@
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Setting">
                             <li class="nav-item">
-                                <a href="{{ url('admin/setting/menu') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'menu' ? 'active' : '' }}">Menu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/setting/role') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'role' ? 'active' : '' }}">Role</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('admin/setting/user') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
                             </li>
                         </ul>
