@@ -19,7 +19,7 @@
 }
 
 .header-row > #logo > a > img {
-   max-height: 70px;
+   max-height: 50px;
 }
 
 .menu-container #tab-shop {
@@ -110,6 +110,6 @@
 
 @media only screen and (max-width: 991px) {
    .header-row > #logo > a > img {
-      max-height: 55px !important;
+      max-height: 40px !important;
    }
 }

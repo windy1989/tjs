@@ -115,62 +115,28 @@
                      </div>
                      <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
-                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Category</h4>
-                        <ul class="sidebar-filter-product">
-                           @foreach($category as $c)
-                              @php
-                                 $sub_1 = App\Models\Category::where('parent_id', $c->id)
-                                    ->where('status', 1)
-                                    ->oldest('name')
-                                    ->get();
-                              @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php
-                                       $sub_2 = App\Models\Category::where('parent_id', $s1->id)
-                                          ->where('status', 1)
-                                          ->oldest('name')
-                                          ->get();
-                                    @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          <li>
-                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s2->slug }}" value="{{ $s2->slug }}" onchange="clickFilter(this)" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                                <label class="form-check-label font-weight-normal" for="{{ $s2->slug }}">{{ $s2->name }}</label>
-                                             </div>
-                                          </li>
-                                       @endforeach
-                                    @else
-                                       <li>
-                                          <div class="form-check">
-                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s1->slug }}" value="{{ $s1->slug }}" onchange="clickFilter(this)" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal" for="{{ $s1->slug }}">{{ $s1->name }}</label>
-                                          </div>
-                                       </li>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <li>
-                                    <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="category[]" id="{{ $c->slug }}" value="{{ $c->slug }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal" for="{{ $c->slug }}">{{ $c->name }}</label>
-                                    </div>
-                                 </li>
-                              @endif
-                           @endforeach
-                        </ul>
-                     </div>
-                     <div class="mb-5 clearfix">
                         <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
                         <ul class="sidebar-filter-product">
                            @foreach($brand as $b)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
-                                 </div>
-                              </li>
+                              @if($filter['brand'])
+                                 @foreach($filter['brand'] as $fb)
+                                    @php $get_brand = App\Models\Brand::where('code', $fb)->first(); @endphp
+                                    <li>
+                                       <div class="form-check">
+                                          <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $fb }}" value="{{ $fb }}" onchange="clickFilter(this)" checked>
+                                          <label class="form-check-label font-weight-normal" for="{{ $fb }}">{{ $get_brand->name }}</label>
+                                       </div>
+                                    </li>
+                                 @endforeach
+                              @endif
+                              @if(!in_array($b->code, $filter['brand']))
+                                 <li>
+                                    <div class="form-check">
+                                       <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)">
+                                       <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
+                                    </div>
+                                 </li>
+                              @endif
                            @endforeach
                         </ul>
                      </div>
@@ -232,9 +198,9 @@
                      <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
                   </div>
                   <div class="form-group"><hr></div>
-                  <div class="mb-5 clearfix" data-readmore="true" data-readmore-maskcolor="rgba(0, 0, 0, .1)" data-readmore-masksize="0%" data-readmore-trigger-open="<div style='font-size:14px !important;' class='text-white'>Read More <i class='icon-angle-down'></i></div>" data-readmore-trigger-close="<div style='font-size:14px !important;' class='text-white'>Hide <i class='icon-angle-up'></i></div>">
+                  <div class="mb-5 clearfix">
                      <h4 class="mb-3 text-uppercase" style="font-size:15px;">Category</h4>
-                     <ul>
+                     <ul class="sidebar-filter-product">
                         @foreach($category as $c)
                            @php
                               $sub_1 = App\Models\Category::where('parent_id', $c->id)
@@ -282,9 +248,9 @@
                         </li>
                      </ul>
                   </div>
-                  <div class="mb-5 clearfix" data-readmore="true" data-readmore-maskcolor="rgba(0, 0, 0, .1)" data-readmore-masksize="0%" data-readmore-trigger-open="<div style='font-size:14px !important;' class='text-white'>Read More <i class='icon-angle-down'></i></div>" data-readmore-trigger-close="<div style='font-size:14px !important;' class='text-white'>Hide <i class='icon-angle-up'></i></div>">
+                  <div class="mb-5 clearfix">
                      <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
-                     <ul>
+                     <ul class="sidebar-filter-product">
                         @foreach($brand as $b)
                            <li>
                               <div class="form-check">
@@ -298,9 +264,9 @@
                         </li>
                      </ul>
                   </div>
-                  <div class="mb-5 clearfix" data-readmore="true" data-readmore-maskcolor="rgba(0, 0, 0, .1)" data-readmore-masksize="0%" data-readmore-trigger-open="<div style='font-size:14px !important;' class='text-white'>Read More <i class='icon-angle-down'></i></div>" data-readmore-trigger-close="<div style='font-size:14px !important;' class='text-white'>Hide <i class='icon-angle-up'></i></div>">
+                  <div class="mb-5 clearfix">
                      <h4 class="mb-3 text-uppercase" style="font-size:15px;">Size</h4>
-                     <ul>
+                     <ul class="sidebar-filter-product">
                         @foreach($size as $s)
                            <li>
                               <div class="form-check">
@@ -314,9 +280,9 @@
                         </li>
                      </ul>
                   </div>
-                  <div class="mb-5 clearfix" data-readmore="true" data-readmore-maskcolor="rgba(0, 0, 0, .1)" data-readmore-masksize="0%" data-readmore-trigger-open="<div style='font-size:14px !important;' class='text-white'>Read More <i class='icon-angle-down'></i></div>" data-readmore-trigger-close="<div style='font-size:14px !important;' class='text-white'>Hide <i class='icon-angle-up'></i></div>">
+                  <div class="mb-5 clearfix">
                      <h4 class="mb-3 text-uppercase" style="font-size:15px;">Color</h4>
-                     <ul>
+                     <ul class="sidebar-filter-product">
                         @foreach($color as $c)
                            <li>
                               <div class="form-check">
@@ -330,9 +296,9 @@
                         </li>
                      </ul>
                   </div>
-                  <div class="mb-5 clearfix" data-readmore="true" data-readmore-maskcolor="rgba(0, 0, 0, .1)" data-readmore-masksize="0%" data-readmore-trigger-open="<div style='font-size:14px !important;' class='text-white'>Read More <i class='icon-angle-down'></i></div>" data-readmore-trigger-close="<div style='font-size:14px !important;' class='text-white'>Hide <i class='icon-angle-up'></i></div>">
+                  <div class="mb-5 clearfix">
                      <h4 class="mb-3 text-uppercase" style="font-size:15px;">Pattern</h4>
-                     <ul>
+                     <ul class="sidebar-filter-product">
                         @foreach($pattern as $p)
                            <li>
                               <div class="form-check">

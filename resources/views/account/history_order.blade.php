@@ -74,7 +74,7 @@
                   <div class="card-body">
                      <div class="card-title">
                         <span style="font-size:17px; font-weight:500;">
-                           {{ $o->number }}&nbsp;&nbsp;
+                           No. {{ $o->number }}&nbsp;&nbsp;
                            @if($o->type == 1) 
                               <sub class="badge badge-primary">{{ $o->type() }}</sub>
                            @else

@@ -11,8 +11,8 @@
                <div class="col-lg-6">
                   <h3>Our Company</h3>
                   <p>
-                     Smart Marble & Bath (SMB) was founded in 2018, in Jakarta, the business central in Indonesia. SMB offers top quality line of tile, bathroom fitting, and sanitary products. Our showroom located in the Jagat Building Jl. Tomang Raya No. 28-30 West Jakarta 11430.<br><br>
-                     Smart Marble & Bath (SMB) is a branch of Karya Modern Group is located in Surabaya and has been already in tile and bathroom ﬁtting business for more than 42 years. Karya Modern Group was founded in 1976 in Surabaya and was a material store when it was ﬁrst started. Karya Modern Group located in Surabaya, East Java Province. It was built since 1976 as a material store located at Jl. Baliwerti No. 119-121 Kav 10, Surabaya.
+                     Smart Marble & Bath (SMB) was founded in 2018, in Jakarta, the business central in Indonesia. SMB offers top quality line of tile, bathroom fitting, and sanitary products. Our showroom located in the Jagat Building Jl. Tomang Raya No. 28-30 West Jakarta 11430<br><br>
+                     Smart Marble & Bath (SMB) is a branch of Karya Modern Group located in Surabaya, east of java island and has been in tiles and bathroom sanitary ware business for more than 42 years. Karya Modern Group was founded in 1976 in Surabaya, Initially was a building material store, now we are focussing on Tiles and Sanitary ware needs. Our head office is located at Jl. Baliwerti No. 119-121 Kav 10, Surabaya.
                   </p>
                </div>
                <div class="col-lg-6">

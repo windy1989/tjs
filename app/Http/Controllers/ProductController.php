@@ -242,6 +242,7 @@ class ProductController extends Controller {
                                 $query->where('category_id', $product->type->category_id);
                             });
                 })
+            ->where('id', '!=', $product->id)
             ->limit(8)
             ->inRandomOrder()
             ->get();
