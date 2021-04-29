@@ -49,6 +49,8 @@ Route::prefix('webhook')->group(function() {
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
+    Route::match(['get', 'post'], 'login', 'AuthController@login');
+    
     Route::get('dashboard', 'DashboardController@index');
 
     Route::prefix('select2')->group(function() {
