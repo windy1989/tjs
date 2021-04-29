@@ -131,6 +131,7 @@ class CodeController extends Controller {
                     $val->type->code,
                     $val->code(),
                     $val->brand->name,
+                    $val->availability()->stock,
                     $val->country->name,
                     $val->status(),
                     '
@@ -452,6 +453,7 @@ class CodeController extends Controller {
             'container_stock'     => $data->container_stock,
             'container_max_stock' => $data->container_max_stock,
             'description'         => $data->description,
+            'stock'               => $data->availability()->stock,
             'status'              => $data->status(),
             'shading'             => $shading
         ]);

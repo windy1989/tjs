@@ -55,6 +55,7 @@
                         <th>Type</th>
                         <th>Code</th>
                         <th>Brand</th>
+                        <th>Stock</th>
                         <th>Country</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -126,6 +127,10 @@
                            <tr>
                               <th width="20%" class="align-middle">Grade</th>
                               <td class="align-middle" id="detail_grade"></td>
+                           </tr>
+                           <tr>
+                              <th width="20%" class="align-middle">Stock</th>
+                              <td class="align-middle" id="detail_stock"></td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Status</th>
@@ -242,6 +247,7 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'type_id', className: 'text-center align-middle' },
             { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
+            { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'brand_id', className: 'text-center align-middle' },
             { name: 'country_id', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
@@ -287,6 +293,7 @@
             $('#detail_container_stock').html(': ' + response.container_stock);
             $('#detail_container_max_stock').html(': ' + response.container_max_stock);
             $('#detail_description').html(response.description);
+            $('#detail_stock').html(': ' + response.stock);
             $('#detail_status').html(': ' + response.status);
 
             $.each(response.shading, function(i, val) {
