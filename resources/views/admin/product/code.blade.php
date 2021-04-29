@@ -247,8 +247,8 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'type_id', className: 'text-center align-middle' },
             { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'brand_id', className: 'text-center align-middle' },
+            { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'country_id', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
