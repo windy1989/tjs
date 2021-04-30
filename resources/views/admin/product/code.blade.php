@@ -68,7 +68,7 @@
 	</div>
 
 <div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
-   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+   <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Form Product Code</h5>
@@ -100,18 +100,13 @@
                      <p class="mt-4">
                         <div class="form-group">
                            <label>Code :</label>
-                           <input type="text" name="code" id="code" class="form-control" value="{{ old('code') }}" placeholder="Auto Generate" readonly>
+                           <input type="text" name="code" id="code" class="form-control" placeholder="Auto Generate" readonly>
                         </div>
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Type :<span class="text-danger">*</span></label>
-                                 <select name="type_id" id="type_id" onchange="generateCode()">
-                                    @if(old('type_id'))
-                                       @php $type = App\Models\Type::find(old('type_id')); @endphp
-                                       <option value="{{ $type->id }}" selected>{{ $type->code }}</option>
-                                    @endif
-                                 </select>
+                                 <select name="type_id" id="type_id" onchange="generateCode()"></select>
                               </div>
                            </div>
                            <div class="col-md-6">
@@ -120,7 +115,7 @@
                                  <select name="hs_code_id" id="hs_code_id" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($hs_code as $hs)
-                                       <option value="{{ $hs->id }}" {{ old('hs_code_id') == $hs->id ? 'selected' : '' }}>({{ $hs->code }}) {{ $hs->name }}</option>
+                                       <option value="{{ $hs->id }}">({{ $hs->code }}) {{ $hs->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -131,7 +126,7 @@
                                  <select name="company_id" id="company_id" class="select2" onchange="generateCode()">
                                     <option value="">-- Choose --</option>
                                     @foreach($company as $c)
-                                       <option value="{{ $c->id }}" {{ old('company_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
+                                       <option value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -142,7 +137,7 @@
                                  <select name="brand_id" id="brand_id" class="select2" onchange="generateCode()">
                                     <option value="">-- Choose --</option>
                                     @foreach($brand as $b)
-                                       <option value="{{ $b->id }}" {{ old('brand_id') == $b->id ? 'selected' : '' }}>{{ $b->name }}</option>
+                                       <option value="{{ $b->id }}">{{ $b->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -153,7 +148,7 @@
                                  <select name="country_id" id="country_id" class="select2" onchange="generateCode()">
                                     <option value="">-- Choose --</option>
                                     @foreach($country as $c)
-                                       <option value="{{ $c->id }}" {{ old('country_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
+                                       <option value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -164,7 +159,7 @@
                                  <select name="supplier_id" id="supplier_id" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($supplier as $s)
-                                       <option value="{{ $s->id }}" {{ old('supplier_id') == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
+                                       <option value="{{ $s->id }}">{{ $s->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -175,7 +170,7 @@
                                  <select name="grade_id" id="grade_id" class="select2" onchange="generateCode()">
                                     <option value="">-- Choose --</option>
                                     @foreach($grade as $g)
-                                       <option value="{{ $g->id }}" {{ old('grade_id') == $g->id ? 'selected' : '' }}>{{ $g->name }}</option>
+                                       <option value="{{ $g->id }}">{{ $g->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -191,7 +186,7 @@
                                  <label>Carton :</label>
                                  <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" value="{{ old('carton_pcs') }}" onkeyup="formula()" placeholder="Enter number">
+                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formula()" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Pcs</span>
                                     </div>
@@ -203,7 +198,7 @@
                                  <label>Pallet :</label>
                                  <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
                                  <div class="input-group">
-                                    <input type="number" name="carton_pallet" id="carton_pallet" class="form-control" value="{{ old('carton_pallet') }}" placeholder="Enter number">
+                                    <input type="number" name="carton_pallet" id="carton_pallet" class="form-control" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Carton</span>
                                     </div>
@@ -236,7 +231,7 @@
                               <div class="form-group">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
-                                    <input type="number" name="container_stock" id="container_stock" class="form-control" value="{{ old('container_stock') }}" placeholder="Enter number">
+                                    <input type="number" name="container_stock" id="container_stock" class="form-control" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Container</span>
                                     </div>
@@ -257,7 +252,7 @@
                               <div class="form-group">
                                  <label>Max Stock Unit :<span class="text-danger">*</span></label>
                                  <div class="input-group">
-                                    <input type="number" name="container_max_stock" id="container_max_stock" class="form-control" value="{{ old('container_max_stock') }}" placeholder="Enter number">
+                                    <input type="number" name="container_max_stock" id="container_max_stock" class="form-control" placeholder="Enter number">
                                     <div class="input-group-prepend">
                                        <span class="input-group-text">Container</span>
                                     </div>
@@ -317,7 +312,7 @@
                   </div>
                   <div class="tab-pane fade" id="highlighted-justified-tab4">
                      <p class="mt-4">
-                        <textarea name="description" id="description" class="description summernote"></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="8" placeholder="Enter description"></textarea>
                      </p>
                   </div>
                </div>
@@ -325,13 +320,13 @@
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" {{ old('status') == 2 ? 'checked' : '' }} data-fouc>
+                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" data-fouc>
                         Not Active
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" {{ old('status') != 2 ? 'checked' : '' }} data-fouc>
+                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" data-fouc checked>
                         Active
                      </label>
                   </div>
@@ -477,7 +472,6 @@
       $('#supplier_id').val(null).change();
       $('#grade_id').val(null).change();
       $('#datatable_shading').DataTable().clear().draw();
-      $('.summernote').summernote('reset');
    }
 
    function success() {
@@ -536,10 +530,7 @@
          url: '{{ url("admin/product/code/create") }}',
          type: 'POST',
          dataType: 'JSON',
-         data: new FormData($('#form_data')[0]),
-         contentType: false,
-         processData: false,
-         cache: true,
+         data: $('#form_data').serialize(),
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
@@ -610,7 +601,7 @@
             $('#container_standart').val(response.container_standart);
             $('#container_stock').val(response.container_stock);
             $('#container_max_stock').val(response.container_max_stock);
-            $('#description').summernote('code', response.description);
+            $('#description').val(response.description);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
 
             $.each(response.shading, function(i, val) {
@@ -641,10 +632,7 @@
          url: '{{ url("admin/product/code/update") }}' + '/' + id,
          type: 'POST',
          dataType: 'JSON',
-         data: new FormData($('#form_data')[0]),
-         contentType: false,
-         processData: false,
-         cache: true,
+         data: $('#form_data').serialize(),
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },

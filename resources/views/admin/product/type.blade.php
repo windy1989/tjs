@@ -12,9 +12,9 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<a href="{{ url('admin/product/type/create') }}" class="btn bg-primary btn-labeled btn-labeled-left">
+					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
 						<b><i class="icon-plus3"></i></b> Add Data
-					</a>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -65,158 +65,316 @@
    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail Product Type</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form Product Type</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
-            <ul class="nav nav-tabs nav-tabs-highlight nav-justified">
-               <li class="nav-item">
-                  <a href="#highlighted-justified-tab1" class="nav-link active" data-toggle="tab">Data</a>
-               </li>
-               <li class="nav-item">
-                  <a href="#highlighted-justified-tab2" class="nav-link" data-toggle="tab">Specification</a>
-               </li>
-               <li class="nav-item">
-                  <a href="#highlighted-justified-tab3" class="nav-link" data-toggle="tab">Stock</a>
-               </li>
-               <li class="nav-item">
-                  <a href="#highlighted-justified-tab4" class="nav-link" data-toggle="tab">Image</a>
-               </li>
-            </ul>
-            <div class="tab-content">
-               <div class="tab-pane fade show active" id="highlighted-justified-tab1">
-                  <p class="mt-4">
-                     <table cellpadding="10" cellspacing="0" width="100%">
-                        <tbody>
-                           <tr>
-                              <th width="20%" class="align-middle">Category</th>
-                              <td class="align-middle" id="detail_category"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Code</th>
-                              <td class="align-middle" id="detail_code"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Faces</th>
-                              <td class="align-middle" id="detail_faces"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Division</th>
-                              <td class="align-middle" id="detail_division"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Surface</th>
-                              <td class="align-middle" id="detail_surface"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Color</th>
-                              <td class="align-middle" id="detail_color"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Pattern</th>
-                              <td class="align-middle" id="detail_pattern"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Status</th>
-                              <td class="align-middle" id="detail_status"></td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </p>
+            <form id="form_data">
+               <div class="alert alert-danger" id="validation_alert" style="display:none;">
+                  <ul id="validation_content"></ul>
                </div>
-               <div class="tab-pane fade" id="highlighted-justified-tab2">
-                  <p class="mt-4">
-                     <table cellpadding="10" cellspacing="0" width="100%">
-                        <tbody>
-                           <tr>
-                              <th width="20%" class="align-middle">Material</th>
-                              <td class="align-middle" id="detail_material"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Loading Limit</th>
-                              <td class="align-middle" id="detail_specification"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Length</th>
-                              <td class="align-middle" id="detail_length"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Width</th>
-                              <td class="align-middle" id="detail_width"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Height</th>
-                              <td class="align-middle" id="detail_height"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Weight</th>
-                              <td class="align-middle" id="detail_weight"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Thickness</th>
-                              <td class="align-middle" id="detail_thickness"></td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </p>
-               </div>
-               <div class="tab-pane fade" id="highlighted-justified-tab3">
-                  <p class="mt-4">
-                     <table cellpadding="10" cellspacing="0" width="100%">
-                        <tbody>
-                           <tr>
-                              <th width="20%" class="align-middle">Buy Unit</th>
-                              <td class="align-middle" id="detail_buy_unit"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Stock Unit</th>
-                              <td class="align-middle" id="detail_stock_unit"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Selling Unit</th>
-                              <td class="align-middle" id="detail_selling_unit"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Need To Stock</th>
-                              <td class="align-middle" id="detail_stockable"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Small Stock</th>
-                              <td class="align-middle" id="detail_small_stock"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Min Stock</th>
-                              <td class="align-middle" id="detail_min_stock"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Max Stock</th>
-                              <td class="align-middle" id="detail_max_stock"></td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Conversion</th>
-                              <td class="align-middle" id="detail_conversion"></td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </p>
-               </div>
-               <div class="tab-pane fade" id="highlighted-justified-tab4">
-                  <p class="mt-4">
-                     <div class="form-group">
-                        <div class="text-center">
-                           <a href="" id="detail_image" data-lightbox="Image" data-title="Preview Image">
-                              <img src="" class="img-fluid img-thumbnail w-100" style="max-width:350px;">
-                           </a>
+               <ul class="nav nav-tabs nav-tabs-highlight nav-justified">
+                  <li class="nav-item">
+                     <a href="#highlighted-justified-tab1" class="nav-link active" data-toggle="tab">Data</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="#highlighted-justified-tab2" class="nav-link" data-toggle="tab">Specification</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="#highlighted-justified-tab3" class="nav-link" data-toggle="tab">Stock</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="#highlighted-justified-tab4" class="nav-link" data-toggle="tab">Image</a>
+                  </li>
+               </ul>
+               <div class="tab-content">
+                  <div class="tab-pane fade show active" id="highlighted-justified-tab1">
+                     <p class="mt-4">
+                        <div class="form-group">
+                           <label>Category :<span class="text-danger">*</span></label>
+                           <select name="category_id" id="category_id" class="select2" onchange="selectionField()">
+                              <option value="">-- Choose --</option>
+                              @foreach($category as $c)
+                                 @php $sub_1 = App\Models\Category::where('parent_id', $c->id)->where('status', 1)->oldest('name')->get(); @endphp
+                                 @if($sub_1->count() > 0)
+                                    @foreach($sub_1 as $s1)
+                                       @php $sub_2 = App\Models\Category::where('parent_id', $s1->id)->where('status', 1)->oldest('name')->get(); @endphp
+                                       @if($sub_2->count() > 0)
+                                          @foreach($sub_2 as $s2)
+                                             <option value="{{ $s2->id }}">{{ $c->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }}</option>
+                                          @endforeach
+                                       @else
+                                          <option value="{{ $s1->id }}">{{ $c->name }} &rarr; {{ $s1->name }}</option>
+                                       @endif
+                                    @endforeach
+                                 @else
+                                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                 @endif
+                              @endforeach
+                           </select>
                         </div>
-                     </div>
-                  </p>
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Code :<span class="text-danger">*</span></label>
+                                 <input type="text" name="code" id="code" class="form-control" placeholder="Enter code">
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Faces :</label>
+                                 <input type="text" name="faces" id="faces" class="form-control" placeholder="Enter faces">
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Division :<span class="text-danger">*</span></label>
+                                 <select name="division_id" id="division_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($division as $d)
+                                       <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Surface :</label>
+                                 <select name="surface_id" id="surface_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($surface as $s)
+                                       <option value="{{ $s->id }}">{{ $s->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Color :<span class="text-danger">*</span></label>
+                                 <select name="color_id" id="color_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($color as $c)
+                                       <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Pattern :<span class="text-danger">*</span></label>
+                                 <select name="pattern_id" id="pattern_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($pattern as $p)
+                                       <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                     </p>
+                  </div>
+                  <div class="tab-pane fade" id="highlighted-justified-tab2">
+                     <p class="mt-4">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Material :<span class="text-danger">*</span></label>
+                                 <select name="material" id="material" class="custom-select">
+                                    <option value="">-- Choose --</option>
+                                    <option value="1">High</option>
+                                    <option value="2">Medium</option>
+                                    <option value="3">Low</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Loading Limit :<span class="text-danger">*</span></label>
+                                 <select name="specification_id" id="specification_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($specification as $s)
+                                       <option value="{{ $s->id }}">{{ $s->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Length :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="length" id="length" class="form-control" placeholder="Enter length">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Width :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="width" id="width" class="form-control" placeholder="Enter width">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Height :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="height" id="height" class="form-control" placeholder="Enter height">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Cm</span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Weight :<span class="text-danger">*</span></label>
+                                 <div class="input-group">
+                                    <input type="number" name="weight" id="weight" class="form-control" placeholder="Enter weight">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">Kg</span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Thickness :</label>
+                                 <div class="input-group">
+                                    <input type="number" name="thickness" id="thickness" class="form-control" placeholder="Enter thickness">
+                                    <div class="input-group-prepend">
+                                       <span class="input-group-text">mm</span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </p>
+                  </div>
+                  <div class="tab-pane fade" id="highlighted-justified-tab3">
+                     <p class="mt-4">
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Buying Unit :<span class="text-danger">*</span></label>
+                                 <select name="buy_unit_id" id="buy_unit_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($unit as $u)
+                                       <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Stock Unit :<span class="text-danger">*</span></label>
+                                 <select name="stock_unit_id" id="stock_unit_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($unit as $u)
+                                       <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Selling Unit :<span class="text-danger">*</span></label>
+                                 <select name="selling_unit_id" id="selling_unit_id" class="select2">
+                                    <option value="">-- Choose --</option>
+                                    @foreach($unit as $u)
+                                       <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Need To Stock :<span class="text-danger">*</span></label>
+                                 <select name="stockable" id="stockable" class="custom-select">
+                                    <option value="">-- Choose --</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Small Stock :<span class="text-danger">*</span></label>
+                                 <input type="number" name="small_stock" id="small_stock" class="form-control" placeholder="Enter small stock">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Min Stock :<span class="text-danger">*</span></label>
+                                 <input type="number" name="min_stock" id="min_stock" class="form-control" placeholder="Enter min stock">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Max Stock :<span class="text-danger">*</span></label>
+                                 <input type="number" name="max_stock" id="max_stock" class="form-control" placeholder="Enter max stock">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Conversion :<span class="text-danger">*</span></label>
+                                 <input type="number" name="conversion" id="conversion" class="form-control" placeholder="Enter conversion">
+                              </div>
+                           </div>
+                        </div>
+                     </p>
+                  </div>
+                  <div class="tab-pane fade" id="highlighted-justified-tab4">
+                     <p class="mt-4">
+                        <div class="form-group">
+                           <div class="input-group">
+                           <div class="custom-file">
+                              <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                           </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="text-center">
+                              <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                                 <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                              </a>
+                              <p class="text-danger font-italic mt-3">
+                                 Maximum file size is <b>100KB</b> & the only files supported are <b>jpeg, jpg, png</b>
+                              </p>
+                           </div>
+                        </div>
+                     </p>
+                  </div>
                </div>
-            </div>
+               <div class="form-group"><hr></div>
+               <div class="form-group text-center mt-4">
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" data-fouc>
+                        Not Active
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" data-fouc checked>
+                        Active
+                     </label>
+                  </div>
+               </div>
+            </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
+            <button type="button" class="btn bg-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="icon-cross3"></i> Cancel</button>
+            <button type="button" class="btn bg-warning" id="btn_update" onclick="update()" style="display:none;"><i class="icon-pencil7"></i> Save</button>
+            <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Add</button>
          </div>
       </div>
    </div>
@@ -225,9 +383,63 @@
 <script>
    $(function() {
       loadDataTable();
+      selectionField();
    });
 
-  function success() {
+   function selectionField() {
+      var category = $('#category_id option:selected').text();
+      if(category.toLowerCase().indexOf('sanitary') >= 0) {
+         $('#thickness').val(null);
+         $('#thickness').attr('disabled', true);
+         $('#height').attr('disabled', false);
+      } else if(category.toLowerCase().indexOf('tile') >= 0) {
+         $('#height').val(null);
+         $('#height').attr('disabled', true);
+         $('#thickness').attr('disabled', false);
+      }
+   }
+
+   function cancel() {
+      reset();
+      $('#modal_form').modal('hide');
+      $('#btn_create').show();
+      $('#btn_update').hide();
+      $('#btn_cancel').hide();
+   }
+
+   function toShow() {
+      $('#modal_form').modal('show');
+      $('#validation_alert').hide();
+      $('#validation_content').html('');
+      $('#btn_create').hide();
+      $('#btn_update').show();
+      $('#btn_cancel').show();
+   }
+
+   function reset() {
+      $('#validation_alert').hide();
+      $('#validation_content').html('');
+      $('#form_data').trigger('reset');
+      $('#preview_image').attr('href', '{{ asset("website/empty.jpg") }}');
+      $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
+      $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active');
+      $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
+      $('.tab-pane').removeClass('active');
+      $('.tab-pane#highlighted-justified-tab1').addClass('show active');
+      $('#category_id').val(null).change();
+      $('#division_id').val(null).change();
+      $('#surface_id').val(null).change();
+      $('#color_id').val(null).change();
+      $('#pattern_id').val(null).change();
+      $('#specification_id').val(null).change();
+      $('#buy_unit_id').val(null).change();
+      $('#stock_unit_id').val(null).change();
+      $('#selling_unit_id').val(null).change();
+   }
+
+   function success() {
+      reset();
+      $('#modal_form').modal('hide');
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
    }
 
@@ -275,13 +487,58 @@
       }); 
    }
 
+   function create() {
+      $.ajax({
+         url: '{{ url("admin/product/type/create") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: new FormData($('#form_data')[0]),
+         contentType: false,
+         processData: false,
+         cache: true,
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            $('#validation_alert').hide();
+            $('#validation_content').html('');
+            loadingOpen('.modal-content');
+         },
+         success: function(response) {
+            loadingClose('.modal-content');
+            if(response.status == 200) {
+               success();
+               notif('success', 'bg-success', response.message);
+            } else if(response.status == 422) {
+               $('#validation_alert').show();
+               $('.modal-body').scrollTop(0);
+               notif('warning', 'bg-warning', 'Validation');
+               
+               $.each(response.error, function(i, val) {
+                  $.each(val, function(i, val) {
+                     $('#validation_content').append(`
+                        <li>` + val + `</li>
+                     `);
+                  });
+               });
+            } else {
+               notif('error', 'bg-danger', response.message);
+            }
+         },
+         error: function() {
+            $('.modal-body').scrollTop(0);
+            loadingClose('.modal-content');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
+   }
+
    function show(id) {
-      $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active')
-      $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
-      $('.tab-pane').removeClass('active')
-      $('.tab-pane#highlighted-justified-tab1').addClass('show active')
-      $('#modal_form').modal('show');
-      
+      toShow();
       $.ajax({
          url: '{{ url("admin/product/type/show") }}',
          type: 'POST',
@@ -297,33 +554,85 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
-            $('#detail_category').html(': ' + response.category);
-            $('#detail_division').html(': ' + response.division);
-            $('#detail_surface').html(': ' + response.surface);
-            $('#detail_color').html(': ' + response.color);
-            $('#detail_pattern').html(': ' + response.pattern);
-            $('#detail_specification').html(': ' + response.specification);
-            $('#detail_buy_unit').html(': ' + response.buy_unit);
-            $('#detail_stock_unit').html(': ' + response.stock_unit);
-            $('#detail_selling_unit').html(': ' + response.selling_unit);
-            $('#detail_image').attr('href', response.image);
-            $('#detail_image img').attr('src', response.image);
-            $('#detail_code').html(': ' + response.code);
-            $('#detail_material').html(': ' + response.material);
-            $('#detail_faces').html(': ' + response.faces);
-            $('#detail_length').html(': ' + response.lengths);
-            $('#detail_width').html(': ' + response.width);
-            $('#detail_height').html(': ' + response.height);
-            $('#detail_weight').html(': ' + response.weight);
-            $('#detail_thickness').html(': ' + response.thickness);
-            $('#detail_conversion').html(': ' + response.conversion);
-            $('#detail_stockable').html(': ' + response.stockable);
-            $('#detail_small_stock').html(': ' + response.small_stock);
-            $('#detail_min_stock').html(': ' + response.min_stock);
-            $('#detail_max_stock').html(': ' + response.max_stock);
-            $('#detail_status').html(': ' + response.status);
+            $('#category_id').val(response.category_id).change();
+            $('#division_id').val(response.division_id).change();
+            $('#surface_id').val(response.surface_id).change();
+            $('#color_id').val(response.color_id).change();
+            $('#pattern_id').val(response.pattern_id).change();
+            $('#specification_id').val(response.specification_id).change();
+            $('#buy_unit_id').val(response.buy_unit_id).change();
+            $('#stock_unit_id').val(response.stock_unit_id).change();
+            $('#selling_unit_id').val(response.selling_unit_id).change();
+            $('#code').val(response.code);
+            $('#faces').val(response.faces);
+            $('#material').val(response.material);
+            $('#length').val(response.lengths);
+            $('#width').val(response.width);
+            $('#height').val(response.height);
+            $('#weight').val(response.weight);
+            $('#thickness').val(response.thickness);
+            $('#small_stock').val(response.small_stock);
+            $('#min_stock').val(response.min_stock);
+            $('#max_stock').val(response.max_stock);
+            $('#conversion').val(response.conversion);
+            $('#stockable').val(response.stockable);
+            $('#preview_image').attr('href', response.image);
+            $('#preview_image img').attr('src', response.image);
+            $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
+            $('#btn_update').attr('onclick', 'update(' + id + ')');
          },
          error: function() {
+            cancel();
+            loadingClose('.modal-content');
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
+   }
+
+   function update(id) {
+      $.ajax({
+         url: '{{ url("admin/product/type/update") }}' + '/' + id,
+         type: 'POST',
+         dataType: 'JSON',
+         data: new FormData($('#form_data')[0]),
+         contentType: false,
+         processData: false,
+         cache: true,
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            $('#validation_alert').hide();
+            $('#validation_content').html('');
+            loadingOpen('.modal-content');
+         },
+         success: function(response) {
+            loadingClose('.modal-content');
+            if(response.status == 200) {
+               success();
+               notif('success', 'bg-success', response.message);
+            } else if(response.status == 422) {
+               $('#validation_alert').show();
+               $('.modal-body').scrollTop(0);
+               notif('warning', 'bg-warning', 'Validation');
+               
+               $.each(response.error, function(i, val) {
+                  $.each(val, function(i, val) {
+                     $('#validation_content').append(`
+                        <li>` + val + `</li>
+                     `);
+                  });
+               });
+            } else {
+               notif('error', 'bg-danger', response.message);
+            }
+         },
+         error: function() {
+            $('.modal-body').scrollTop(0);
             loadingClose('.modal-content');
             swalInit({
                title: 'Server Error',

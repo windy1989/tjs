@@ -215,10 +215,11 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('type')->group(function() {
                 Route::get('/', 'TypeController@index');
                 Route::post('datatable', 'TypeController@datatable');
-                Route::match(['get', 'post'], 'create', 'TypeController@create');
-                Route::match(['get', 'post'], 'update/{id}', 'TypeController@update');
+                Route::post('create', 'TypeController@create');
                 Route::post('show', 'TypeController@show');
+                Route::post('update/{id}', 'TypeController@update');
                 Route::post('destroy', 'TypeController@destroy');
+                Route::get('detail/{id}', 'TypeController@detail');
             });
 
             Route::prefix('code')->group(function() {

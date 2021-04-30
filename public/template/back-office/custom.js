@@ -13,7 +13,6 @@ $(function() {
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
    $('.select2').select2();
-   $('.summernote').summernote();
 
    setInterval(function() {
       var d    = new Date();

@@ -26,8 +26,6 @@
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/jgrowl.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/noty.min.js') }}"></script>
-	<script src="{{ asset('template/back-office/global_assets/js/plugins/editors/summernote/summernote.min.js') }}"></script>
-	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/number-format/jquery.number.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/lightbox/dist/js/lightbox.min.js') }}"></script>
