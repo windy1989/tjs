@@ -128,7 +128,7 @@ class SpecificationController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Specification())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master specification data');
 
@@ -185,7 +185,7 @@ class SpecificationController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Specification())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the specification master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class SpecificationController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Specification())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the specification master data');
 
             $response = [

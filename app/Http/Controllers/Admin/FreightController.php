@@ -140,7 +140,7 @@ class FreightController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Freight())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs freight data');
 
@@ -204,7 +204,7 @@ class FreightController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Freight())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs freight data');
 
                 $response = [
@@ -228,7 +228,7 @@ class FreightController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Freight())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs freight data');
 
             $response = [

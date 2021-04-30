@@ -128,7 +128,7 @@ class GradeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Grade())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master grade data');
 
@@ -185,7 +185,7 @@ class GradeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Grade())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the grade master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class GradeController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Grade())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the grade master data');
 
             $response = [

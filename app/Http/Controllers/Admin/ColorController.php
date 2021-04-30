@@ -128,7 +128,7 @@ class ColorController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Color())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master color data');
 
@@ -185,7 +185,7 @@ class ColorController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Color())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the color master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class ColorController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Color())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the color master data');
 
             $response = [

@@ -327,7 +327,7 @@ class CogsController extends Controller {
                 if($query) {
                     activity()
                         ->performedOn(new Cogs())
-                        ->causedBy(session('id'))
+                        ->causedBy(session('bo_id'))
                         ->withProperties($query)
                         ->log('Add price cogs data');
 

@@ -174,7 +174,7 @@ class SupplierController extends Controller {
 
                 activity()
                     ->performedOn(new Supplier())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master supplier data');
 
@@ -276,7 +276,7 @@ class SupplierController extends Controller {
 
                 activity()
                     ->performedOn(new Supplier())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the supplier master data');
 
                 $response = [
@@ -300,7 +300,7 @@ class SupplierController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Supplier())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the supplier master data');
 
             $response = [

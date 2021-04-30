@@ -132,7 +132,7 @@ class CurrencyRateController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new CurrencyRate())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs rate data');
 
@@ -188,7 +188,7 @@ class CurrencyRateController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new CurrencyRate())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs rate data');
 
                 $response = [
@@ -212,7 +212,7 @@ class CurrencyRateController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new CurrencyRate())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs rate data');
 
             $response = [

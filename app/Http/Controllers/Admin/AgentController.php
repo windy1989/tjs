@@ -140,7 +140,7 @@ class AgentController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Agent())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs agent data');
 
@@ -204,7 +204,7 @@ class AgentController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Agent())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs agent data');
 
                 $response = [
@@ -228,7 +228,7 @@ class AgentController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Agent())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs agent data');
 
             $response = [

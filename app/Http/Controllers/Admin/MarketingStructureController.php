@@ -176,7 +176,7 @@ class MarketingStructureController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new MarketingStructure())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs marketing structure data');
 
@@ -273,7 +273,7 @@ class MarketingStructureController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new MarketingStructure())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs marketing structure data');
 
                 $response = [
@@ -297,7 +297,7 @@ class MarketingStructureController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new MarketingStructure())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs marketing structure data');
 
             $response = [

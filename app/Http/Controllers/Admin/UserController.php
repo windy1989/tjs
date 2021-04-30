@@ -185,7 +185,7 @@ class UserController extends Controller {
 
                 activity()
                     ->performedOn(new User())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add setting user data');
 
@@ -300,7 +300,7 @@ class UserController extends Controller {
 
                 activity()
                     ->performedOn(new User())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the user setting data');
 
                 $response = [
@@ -324,7 +324,7 @@ class UserController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new User())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the user setting data');
 
             $response = [
@@ -347,7 +347,7 @@ class UserController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new User())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Reset password user setting data');
 
             $response = [

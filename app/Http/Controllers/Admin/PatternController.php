@@ -128,7 +128,7 @@ class PatternController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Pattern())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master pattern data');
 
@@ -185,7 +185,7 @@ class PatternController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Pattern())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the pattern master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class PatternController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Pattern())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the pattern master data');
 
             $response = [

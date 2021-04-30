@@ -239,7 +239,7 @@ class PricingPolicyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new PricingPolicy())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add price pricing policy data');
 
@@ -364,7 +364,7 @@ class PricingPolicyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new PricingPolicy())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the price pricing policy data');
 
                 $response = [
@@ -388,7 +388,7 @@ class PricingPolicyController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new PricingPolicy())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the price pricing policy data');
 
             $response = [

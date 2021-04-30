@@ -107,7 +107,7 @@ class CityController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new City())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master city data');
 
@@ -155,7 +155,7 @@ class CityController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new City())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the city master data');
 
                 $response = [
@@ -179,7 +179,7 @@ class CityController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new City())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the city master data');
 
             $response = [

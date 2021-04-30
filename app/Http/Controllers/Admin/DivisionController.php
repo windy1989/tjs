@@ -128,7 +128,7 @@ class DivisionController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Division())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master division data');
 
@@ -185,7 +185,7 @@ class DivisionController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Division())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the division master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class DivisionController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Division())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the division master data');
 
             $response = [

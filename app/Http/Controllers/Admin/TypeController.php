@@ -226,7 +226,7 @@ class TypeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Type())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add product type data');
 
@@ -375,7 +375,7 @@ class TypeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Type())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the product type data');
 
                 $response = [
@@ -399,7 +399,7 @@ class TypeController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Type())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the product type data');
 
             $response = [

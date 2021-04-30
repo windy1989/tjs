@@ -128,7 +128,7 @@ class CompanyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Company())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master company data');
 
@@ -185,7 +185,7 @@ class CompanyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Company())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the company master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class CompanyController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Company())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the company master data');
 
             $response = [

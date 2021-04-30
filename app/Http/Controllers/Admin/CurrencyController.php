@@ -133,7 +133,7 @@ class CurrencyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Currency())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master currency data');
 
@@ -194,7 +194,7 @@ class CurrencyController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Currency())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the currency master data');
 
                 $response = [
@@ -218,7 +218,7 @@ class CurrencyController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Currency())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the currency master data');
 
             $response = [

@@ -136,7 +136,7 @@ class CountryController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Country())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master country data');
 
@@ -198,7 +198,7 @@ class CountryController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Country())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the country master data');
 
                 $response = [
@@ -222,7 +222,7 @@ class CountryController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Country())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the country master data');
 
             $response = [

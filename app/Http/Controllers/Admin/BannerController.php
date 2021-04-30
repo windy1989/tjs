@@ -130,7 +130,7 @@ class BannerController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Banner())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master banner data');
 
@@ -197,7 +197,7 @@ class BannerController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Banner())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the banner master data');
 
                 $response = [
@@ -221,7 +221,7 @@ class BannerController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Banner())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the banner master data');
 
             $response = [

@@ -132,7 +132,7 @@ class EmklRateController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new EmklRate())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs emkl rate data');
 
@@ -188,7 +188,7 @@ class EmklRateController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new EmklRate())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs emkl rate data');
 
                 $response = [
@@ -212,7 +212,7 @@ class EmklRateController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new EmklRate())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs emkl rate data');
 
             $response = [

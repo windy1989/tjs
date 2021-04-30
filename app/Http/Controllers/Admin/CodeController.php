@@ -298,7 +298,7 @@ class CodeController extends Controller {
 
                 activity()
                     ->performedOn(new Product())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add product code data');
 
@@ -436,7 +436,7 @@ class CodeController extends Controller {
 
                 activity()
                     ->performedOn(new Product())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the product code data');
 
                 $response = [
@@ -460,7 +460,7 @@ class CodeController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Product())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the product type data');
 
             $response = [

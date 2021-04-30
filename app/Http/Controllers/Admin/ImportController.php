@@ -115,7 +115,7 @@ class ImportController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Import())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add cogs import data');
 
@@ -168,7 +168,7 @@ class ImportController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Import())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the cogs import data');
 
                 $response = [
@@ -192,7 +192,7 @@ class ImportController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Import())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the cogs import data');
 
             $response = [

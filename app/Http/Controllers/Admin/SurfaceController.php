@@ -128,7 +128,7 @@ class SurfaceController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Surface())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master surface data');
 
@@ -185,7 +185,7 @@ class SurfaceController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Surface())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the surface master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class SurfaceController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Surface())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the surface master data');
 
             $response = [

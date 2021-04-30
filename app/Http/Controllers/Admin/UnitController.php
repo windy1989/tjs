@@ -128,7 +128,7 @@ class UnitController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Unit())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master unit data');
 
@@ -185,7 +185,7 @@ class UnitController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Unit())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the unit master data');
 
                 $response = [
@@ -209,7 +209,7 @@ class UnitController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Unit())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the unit master data');
 
             $response = [

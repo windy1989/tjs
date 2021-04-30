@@ -127,7 +127,7 @@ class CategoryController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Category())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master category data');
 
@@ -184,7 +184,7 @@ class CategoryController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new Category())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the category master data');
 
                 $response = [
@@ -208,7 +208,7 @@ class CategoryController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new Category())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the category master data');
 
             $response = [

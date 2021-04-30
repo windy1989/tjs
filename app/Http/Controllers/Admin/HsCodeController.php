@@ -133,7 +133,7 @@ class HsCodeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new HsCode())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->withProperties($query)
                     ->log('Add master hs code data');
 
@@ -192,7 +192,7 @@ class HsCodeController extends Controller {
             if($query) {
                 activity()
                     ->performedOn(new HsCode())
-                    ->causedBy(session('id'))
+                    ->causedBy(session('bo_id'))
                     ->log('Change the hs code master data');
 
                 $response = [
@@ -216,7 +216,7 @@ class HsCodeController extends Controller {
         if($query) {
             activity()
                 ->performedOn(new HsCode())
-                ->causedBy(session('id'))
+                ->causedBy(session('bo_id'))
                 ->log('Delete the hs code master data');
 
             $response = [
