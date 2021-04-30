@@ -115,28 +115,75 @@
                      </div>
                      <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
-                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
+                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Category</h4>
                         <ul class="sidebar-filter-product">
-                           @foreach($brand as $b)
-                              @if($filter['brand'])
-                                 @foreach($filter['brand'] as $fb)
-                                    @php $get_brand = App\Models\Brand::where('code', $fb)->first(); @endphp
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $fb }}" value="{{ $fb }}" onchange="clickFilter(this)" checked>
-                                          <label class="form-check-label font-weight-normal" for="{{ $fb }}">{{ $get_brand->name }}</label>
-                                       </div>
-                                    </li>
+                           @foreach($category as $c)
+                              @php
+                                 $sub_1 = App\Models\Category::where('parent_id', $c->id)
+                                    ->where('status', 1)
+                                    ->oldest('name')
+                                    ->get();
+                              @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php
+                                       $sub_2 = App\Models\Category::where('parent_id', $s1->id)
+                                          ->where('status', 1)
+                                          ->oldest('name')
+                                          ->get();
+                                    @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          <li>
+                                             <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s2->slug }}" value="{{ $s2->slug }}" onchange="clickFilter(this)" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
+                                                <label class="form-check-label font-weight-normal" for="{{ $s2->slug }}">{{ $s2->name }}</label>
+                                             </div>
+                                          </li>
+                                       @endforeach
+                                    @else
+                                       <li>
+                                          <div class="form-check">
+                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s1->slug }}" value="{{ $s1->slug }}" onchange="clickFilter(this)" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal" for="{{ $s1->slug }}">{{ $s1->name }}</label>
+                                          </div>
+                                       </li>
+                                    @endif
                                  @endforeach
-                              @endif
-                              @if(!in_array($b->code, $filter['brand']))
+                              @else
                                  <li>
                                     <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)">
-                                       <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
+                                       <input type="checkbox" class="form-check-input" name="category[]" id="{{ $c->slug }}" value="{{ $c->slug }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
+                                       <label class="form-check-label font-weight-normal" for="{{ $c->slug }}">{{ $c->name }}</label>
                                     </div>
                                  </li>
                               @endif
+                           @endforeach
+                        </ul>
+                     </div>
+                     <div class="mb-5 clearfix">
+                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
+                        <ul class="sidebar-filter-product">
+                           @foreach($brand as $b)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
+                                 </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
+                     <div class="mb-5 clearfix">
+                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
+                        <ul class="sidebar-filter-product">
+                           @foreach($brand as $b)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
+                                 </div>
+                              </li>
                            @endforeach
                         </ul>
                      </div>
@@ -221,7 +268,7 @@
                                        <li>
                                           <div class="form-check">
                                              <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s2->slug }}" value="{{ $s2->slug }}" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $s2->slug }}">{{ $s2->name }}</label>
+                                             <label class="form-check-label font-weight-normal" style="font-size:10px !important; color:white !important;" for="panel-{{ $s2->slug }}">{{ $s2->name }}</label>
                                           </div>
                                        </li>
                                     @endforeach
@@ -229,7 +276,7 @@
                                     <li>
                                        <div class="form-check">
                                           <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s1->slug }}" value="{{ $s1->slug }}" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $s1->slug }}">{{ $s1->name }}</label>
+                                          <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $s1->slug }}">{{ $s1->name }}</label>
                                        </div>
                                     </li>
                                  @endif
@@ -238,14 +285,11 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $c->slug }}" value="{{ $c->slug }}" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $c->slug }}">{{ $c->name }}</label>
+                                    <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->slug }}">{{ $c->name }}</label>
                                  </div>
                               </li>
                            @endif
                         @endforeach
-                        <li>
-                           <a href="#" class="read-more-trigger"></a>
-                        </li>
                      </ul>
                   </div>
                   <div class="mb-5 clearfix">
@@ -255,13 +299,10 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
                               </div>
                            </li>
                         @endforeach
-                        <li>
-                           <a href="#" class="read-more-trigger"></a>
-                        </li>
                      </ul>
                   </div>
                   <div class="mb-5 clearfix">
@@ -271,13 +312,10 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
                               </div>
                            </li>
                         @endforeach
-                        <li>
-                           <a href="#" class="read-more-trigger"></a>
-                        </li>
                      </ul>
                   </div>
                   <div class="mb-5 clearfix">
@@ -287,13 +325,10 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
                               </div>
                            </li>
                         @endforeach
-                        <li>
-                           <a href="#" class="read-more-trigger"></a>
-                        </li>
                      </ul>
                   </div>
                   <div class="mb-5 clearfix">
@@ -303,13 +338,10 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal" style="font-size:10px !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
                               </div>
                            </li>
                         @endforeach
-                        <li>
-                           <a href="#" class="read-more-trigger"></a>
-                        </li>
                      </ul>
                   </div>
                   <div class="clearfix">

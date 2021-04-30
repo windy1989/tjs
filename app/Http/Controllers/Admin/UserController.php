@@ -28,6 +28,7 @@ class UserController extends Controller {
     public function datatable(Request $request) 
     {
         $column = [
+            'detail',
             'id',
             'photo',
             'name',
@@ -84,6 +85,7 @@ class UserController extends Controller {
                 }
 
                 $response['data'][] = [
+                    '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $photo,
                     $val->name,
@@ -112,6 +114,20 @@ class UserController extends Controller {
         }
 
         return response()->json($response);
+    }
+
+    public function rowDetail(Request $request)
+    {
+        $data = User::find($request->id);
+        $role = [];
+
+        foreach($data->userRole as $ur) {
+            $role[] = $ur->role();
+        }
+        return response()->json([
+            'email' => $data->email,
+            'role'  => $role
+        ]);
     }
 
     public function create(Request $request)

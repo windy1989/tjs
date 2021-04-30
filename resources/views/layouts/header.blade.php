@@ -42,7 +42,7 @@
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<strong>Call:</strong> (+62) 811332642 | <strong>Email:</strong> smartmarbleandbath@gmail.com
+							<strong>Call / Whatsapp:</strong> <a href="https://wa.me/6282131972353" target="_blank">(+62) 82131972353</a> | <strong>Email:</strong> <a href="mailto:smartmarbleandbath@gmail.com">smartmarbleandbath@gmail.com</a>
 						</p>
 					</div>
 					<div class="col-12 col-md-auto">

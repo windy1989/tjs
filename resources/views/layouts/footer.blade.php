@@ -35,8 +35,8 @@
 														</h4>
 													</div>
 													<div class="entry-meta text-center">
-														<span class="text-center">Tomang Raya No. 28-30</span><br>
-														<span class="text-center">(+62) 811257180</span>
+														<span class="text-center">Gedung Jagat, Main Lobby, Tomang Raya No. 28-30</span><br>
+														<span class="text-center">(+62) 82131972353</span>
 													</div>
 												</div>
 											</div>
@@ -48,8 +48,8 @@
 														</h4>
 													</div>
 													<div class="entry-meta text-center">
-														<span class="text-center">Baliwerti 119-121 Kav. 10</span><br>
-														<span class="text-center">(+62) 811332642</span>
+														<span class="text-center">Modern Ceramics, Baliwerti 119-121 Kav. 10</span><br>
+														<span class="text-center">(+62) 82131972353</span>
 													</div>
 												</div>
 											</div>

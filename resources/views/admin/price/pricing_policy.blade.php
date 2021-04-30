@@ -227,7 +227,7 @@
          }
       });
 
-   select2ServerSide('#product_id', '{{ url("admin/select2/product") }}');
+      select2ServerSide('#product_id', '{{ url("admin/select2/product") }}');
    });
 
    function rowDetail(data) {

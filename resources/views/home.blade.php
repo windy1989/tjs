@@ -29,7 +29,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h3 class="text-uppercase">Special Price</h3>
+            <h3 class="text-uppercase">Best Offer</h3>
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_cheapest as $p)

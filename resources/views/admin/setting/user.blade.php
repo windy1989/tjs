@@ -45,6 +45,7 @@
                <table id="datatable_serverside" class="table table-bordered table-striped w-100">
                   <thead class="bg-dark">
                      <tr class="text-center">
+                        <th>#</th>
                         <th>No</th>
                         <th>Photo</th>
                         <th>Name</th>
@@ -61,7 +62,7 @@
 	</div>
 
 <div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
-   <div class="modal-dialog modal-dialog-scrollable">
+   <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Form User</h5>
@@ -75,21 +76,27 @@
                   <ul id="validation_content"></ul>
                </div>
                <div class="form-group">
-                  <label>Photo :</label>
-                  <input type="file" id="photo" name="photo" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
                   <center class="mt-3">
                      <a href="{{ asset("website/user.png") }}" id="preview_photo" data-lightbox="User" data-title="Preview Photo">
                         <img src="{{ asset("website/user.png") }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;" alt="User Photo">
                      </a>
                   </center>
+                  <label>Photo :</label>
+                  <input type="file" id="photo" name="photo" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
                </div>
-               <div class="form-group">
-                  <label>Name :<span class="text-danger">*</span></label>
-                  <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
-               </div>
-               <div class="form-group">
-                  <label>Email :<span class="text-danger">*</span></label>
-                  <input type="text" name="email" id="email" class="form-control" placeholder="Enter email">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Name :<span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Email :<span class="text-danger">*</span></label>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter email">
+                     </div>
+                  </div>
                </div>
                <div class="form-group">
                   <label>Branch :<span class="text-danger">*</span></label>
@@ -150,8 +157,75 @@
 
 <script>
    $(function() {
-      loadDataTable();
+      var table = loadDataTable();
+
+      $('#datatable_serverside tbody').on('click', 'td.details-control', function() {
+         var tr    = $(this).closest('tr');
+         var badge = tr.find('span.badge');
+         var icon  = tr.find('i');
+         var row   = table.row(tr);
+
+         if(row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+            badge.first().removeClass('badge-danger');
+            badge.first().addClass('badge-success');
+            icon.first().removeClass('icon-minus3');
+            icon.first().addClass('icon-plus3');
+         } else {
+            row.child(rowDetail(row.data())).show();
+            tr.addClass('shown');
+            badge.first().removeClass('badge-success');
+            badge.first().addClass('badge-danger');
+            icon.first().removeClass('icon-plus3');
+            icon.first().addClass('icon-minus3');
+         }
+      });
    });
+
+   function rowDetail(data) {
+      var content = '';
+
+      $.ajax({
+         url: '{{ url("admin/setting/user/row_detail") }}',
+         type: 'POST',
+         async: false,
+         data: {
+            id: $(data[0]).data('id')
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         success: function(response) {
+            content += `
+               <div class="form-group row">
+                  <label class="col-form-label col-lg-2">Email</label>
+                  <div class="col-lg-10">: ` + response.email + `</div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-form-label col-lg-2">Role</label>
+                  <div class="col-lg-10">:
+            `;
+
+            $.each(response.role, function(i, val) {
+               content += `
+                  <span class="badge badge-info">` + val + `</span>
+               `;
+            });
+
+            content += '</div></div>';
+         },
+         error: function() {
+            swalInit({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
+
+      return content;
+   }
 
    function cancel() {
       reset();
@@ -188,12 +262,12 @@
    }
 
    function loadDataTable() {
-      $('#datatable_serverside').DataTable({
+      return $('#datatable_serverside').DataTable({
          serverSide: true,
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[0, 'asc']],
+         order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/setting/user/datatable") }}',
             type: 'POST',
@@ -216,6 +290,7 @@
             }
          },
          columns: [
+            { name: 'detail', orderable: false, searchable: false, className: 'text-center align-middle details-control' },
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'photo', searchable: false, className: 'text-center align-middle' },
             { name: 'name', className: 'text-center align-middle' },

@@ -128,13 +128,13 @@
       $('#btn_cancel').show();
    }
 
-  function reset() {
+   function reset() {
       $('#form_data').trigger('reset');
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
 
-  function success() {
+   function success() {
       reset();
       $('#modal_form').modal('hide');
       $('#datatable_serverside').DataTable().ajax.reload(null, false);

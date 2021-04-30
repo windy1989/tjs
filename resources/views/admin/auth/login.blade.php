@@ -30,20 +30,27 @@
 
 </head>
 <body>
-	<div class="page-content" style="background-image: url('{{ asset("webiste/bg-login-bo.jpg") }}') !important;">
-		<div class="content-wrapper" style="background-image: url('{{ asset("webiste/bg-login-bo.jpg") }}') !important;">
+	<div class="page-content">
+		<div class="content-wrapper">
 			<div class="content d-flex justify-content-center align-items-center">
-				<form class="login-form" action="{{ url('login') }}" method="POST">
+				<form class="login-form" action="{{ url('admin/login') }}" method="POST">
 					@csrf
 					<div class="card shadow-lg bg-white rounded mb-0">
 						<div class="card-body">
 							<div class="text-center mb-3">
 								<img src="{{ asset('website/icon.png') }}" style="max-width:70px;" alt="Logo">
 								<div class="mb-3 mt-3">
-									<h5 class="mb-0">SMB Back Ofiice</h5>
+									<h5 class="mb-0">SMB Back Office</h5>
 									<span class="d-block text-muted">Login to your account</span>
 								</div>
 							</div>
+							@if(session('success'))
+								<div class="alert alert-success font-weight-bold text-center">{{ session('success') }}</div>
+							@elseif(session('info'))
+								<div class="alert alert-info font-weight-bold text-center">{{ session('info') }}</div>
+							@elseif(session('failed'))
+								<div class="alert alert-danger font-weight-bold text-center">{{ session('failed') }}</div>
+							@endif
 							<div class="form-group form-group-feedback form-group-feedback-left">
 								<input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
 								<div class="form-control-feedback">
@@ -51,7 +58,7 @@
 								</div>
 							</div>
 							<div class="form-group form-group-feedback form-group-feedback-left">
-								<input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+								<input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
 								<div class="form-control-feedback">
 									<i class="icon-lock2 text-muted"></i>
 								</div>

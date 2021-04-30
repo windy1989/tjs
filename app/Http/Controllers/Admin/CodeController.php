@@ -22,9 +22,15 @@ class CodeController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Product Code',
-            'brand'   => Brand::where('status', 1)->get(),
-            'content' => 'admin.product.code'
+            'title'     => 'Product Code',
+            'company'   => Company::where('status', 1)->get(),
+            'hs_code'   => HsCode::where('status', 1)->get(),
+            'brand'     => Brand::where('status', 1)->get(),
+            'country'   => Country::where('status', 1)->get(),
+            'supplier'  => Supplier::where('status', 1)->get(),
+            'grade'     => Grade::where('status', 1)->get(),
+            'warehouse' => Warehouse::where('status', 1)->get(),
+            'content'   => 'admin.product.code'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -135,8 +141,8 @@ class CodeController extends Controller {
                     $val->country->name,
                     $val->status(),
                     '
-                        <button type="button" class="btn bg-info btn-sm" title="Info" onclick="show(' . $val->id . ')"><i class="icon-info22"></i></button>
-                        <a href="' . url('admin/product/code/update/' . $val->id) . '" class="btn bg-warning btn-sm" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/product/code/detail/' . $val->id) . '" class="btn bg-info btn-sm" title="Detail"><i class="icon-info22"></i></a>
+                        <button type="button" class="btn bg-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
@@ -195,13 +201,13 @@ class CodeController extends Controller {
         $type = Type::find($request->type_id);
         if($type) {
             $carton_sqm  = ($type->length / 100) * ($type-> width / 100) * $request->carton_pcs;
-            $cubic_meter = ($type->length / 100) * ($type-> width / 100) * $type->thickness * $request->carton_pcs;
+            if(strpos($type->category->name, 'tile') !== false) {
+                $cubic_meter = null;
+            } else {
+                $cubic_meter = ($type->length / 100) * ($type-> width / 100) * $type->thickness * $request->carton_pcs;
+            }
         } else {
             $carton_sqm  = 0;
-            $cubic_meter = null;
-        }
-
-        if(strpos($type->category->name, 'tile') !== false) {
             $cubic_meter = null;
         }
 
@@ -213,213 +219,102 @@ class CodeController extends Controller {
 
     public function create(Request $request)
     {
-        if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'type_id'             => 'required',
-                'company_id'          => 'required',
-                'hs_code_id'          => 'required',
-                'brand_id'            => 'required',
-                'country_id'          => 'required',
-                'supplier_id'         => 'required',
-                'grade_id'            => 'required',
-                'container_standart'  => 'required',
-                'container_stock'     => 'required',
-                'container_max_stock' => 'required',
-                'description'         => 'required',
-                'status'              => 'required'
-            ], [
-                'type_id.required'             => 'Please select a type.',
-                'company_id.required'          => 'Please select a company.',
-                'hs_code_id.required'          => 'Please select a hs code.',
-                'brand_id.required'            => 'Please select a brand.',
-                'country_id.required'          => 'Please select a country.',
-                'supplier_id.required'         => 'Please select a supplier.',
-                'grade_id.required'            => 'Please select a grade.',
-                'container_standart.required'  => 'Please select a standart container.',
-                'container_stock.required'     => 'Container stock cannot be empty.',
-                'container_max_stock.required' => 'Container max stock cannot be empty.',
-                'description.required'         => 'Description cannot be empty.',
-                'status.required'              => 'Please select a status.'
+        $validation = Validator::make($request->all(), [
+            'type_id'             => 'required',
+            'company_id'          => 'required',
+            'hs_code_id'          => 'required',
+            'brand_id'            => 'required',
+            'country_id'          => 'required',
+            'supplier_id'         => 'required',
+            'grade_id'            => 'required',
+            'container_standart'  => 'required',
+            'container_stock'     => 'required',
+            'container_max_stock' => 'required',
+            'description'         => 'required',
+            'status'              => 'required'
+        ], [
+            'type_id.required'             => 'Please select a type.',
+            'company_id.required'          => 'Please select a company.',
+            'hs_code_id.required'          => 'Please select a hs code.',
+            'brand_id.required'            => 'Please select a brand.',
+            'country_id.required'          => 'Please select a country.',
+            'supplier_id.required'         => 'Please select a supplier.',
+            'grade_id.required'            => 'Please select a grade.',
+            'container_standart.required'  => 'Please select a standart container.',
+            'container_stock.required'     => 'Container stock cannot be empty.',
+            'container_max_stock.required' => 'Container max stock cannot be empty.',
+            'description.required'         => 'Description cannot be empty.',
+            'status.required'              => 'Please select a status.'
+        ]);
+
+        if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query = Product::create([
+                'type_id'             => $request->type_id,
+                'company_id'          => $request->company_id,
+                'hs_code_id'          => $request->hs_code_id,
+                'brand_id'            => $request->brand_id,
+                'country_id'          => $request->country_id,
+                'supplier_id'         => $request->supplier_id,
+                'grade_id'            => $request->grade_id,
+                'carton_pallet'       => $request->carton_pallet,
+                'carton_pcs'          => $request->carton_pcs,
+                'container_standart'  => $request->container_standart,
+                'container_stock'     => $request->container_stock,
+                'container_max_stock' => $request->container_max_stock,
+                'description'         => $request->description,
+                'status'              => $request->status
             ]);
 
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
-            } else {
-                $query = Product::create([
-                    'type_id'             => $request->type_id,
-                    'company_id'          => $request->company_id,
-                    'hs_code_id'          => $request->hs_code_id,
-                    'brand_id'            => $request->brand_id,
-                    'country_id'          => $request->country_id,
-                    'supplier_id'         => $request->supplier_id,
-                    'grade_id'            => $request->grade_id,
-                    'carton_pallet'       => $request->carton_pallet,
-                    'carton_pcs'          => $request->carton_pcs,
-                    'container_standart'  => $request->container_standart,
-                    'container_stock'     => $request->container_stock,
-                    'container_max_stock' => $request->container_max_stock,
-                    'description'         => $request->description,
-                    'status'              => $request->status
-                ]);
+            if($query) {
+                if($request->shading_warehouse_code) {
+                    foreach($request->shading_warehouse_code as $key => $swc) {
+                        $total_stock = 0;
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                            'kode_item' => $request->shading_stock_code[$key],
+                            'gudang'    => $swc,
+                            'per_page'  => 1000
+                        ]));
 
-                if($query) {
-                    if($request->shading_warehouse_code) {
-                        foreach($request->shading_warehouse_code as $key => $swc) {
-                            $total_stock = 0;
-                            $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
-                                'kode_item' => $request->shading_stock_code[$key],
-                                'gudang'    => $swc,
-                                'per_page'  => 1000
-                            ]));
-
-                            if($stock->result->total_data > 0) {
-                                foreach($stock->result->data as $s) {
-                                    $total_stock += $s->stok;
-                                }
-
-                                ProductShading::create([
-                                    'product_id'     => $query->id,
-                                    'warehouse_code' => $swc,
-                                    'stock_code'     => $request->shading_stock_code[$key],
-                                    'code'           => $request->shading_code[$key],
-                                    'qty'            => $total_stock
-                                ]);
+                        if($stock->result->total_data > 0) {
+                            foreach($stock->result->data as $s) {
+                                $total_stock += $s->stok;
                             }
+
+                            ProductShading::create([
+                                'product_id'     => $query->id,
+                                'warehouse_code' => $swc,
+                                'stock_code'     => $request->shading_stock_code[$key],
+                                'code'           => $request->shading_code[$key],
+                                'qty'            => $total_stock
+                            ]);
                         }
                     }
-
-                    activity()
-                        ->performedOn(new Product())
-                        ->causedBy(session('id'))
-                        ->withProperties($query)
-                        ->log('Add product code data');
-
-                    return redirect()->back()->with(['success' => 'Data added successfully.']);
-                } else {
-                    return redirect()->back()->withInput()->with(['failed' => 'Data failed to added.']);
                 }
-            }
-        } else {
-            $data = [
-                'title'     => 'Create New Product Code',
-                'company'   => Company::where('status', 1)->get(),
-                'hs_code'   => HsCode::where('status', 1)->get(),
-                'brand'     => Brand::where('status', 1)->get(),
-                'country'   => Country::where('status', 1)->get(),
-                'supplier'  => Supplier::where('status', 1)->get(),
-                'grade'     => Grade::where('status', 1)->get(),
-                'warehouse' => Warehouse::where('status', 1)->get(),
-                'content'   => 'admin.product.code_create'
-            ];
 
-            return view('admin.layouts.index', ['data' => $data]);
-        }
-    }
+                activity()
+                    ->performedOn(new Product())
+                    ->causedBy(session('id'))
+                    ->withProperties($query)
+                    ->log('Add product code data');
 
-    public function update(Request $request, $id)
-    {
-        if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'type_id'             => 'required',
-                'company_id'          => 'required',
-                'hs_code_id'          => 'required',
-                'brand_id'            => 'required',
-                'country_id'          => 'required',
-                'supplier_id'         => 'required',
-                'grade_id'            => 'required',
-                'container_standart'  => 'required',
-                'container_stock'     => 'required',
-                'container_max_stock' => 'required',
-                'description'         => 'required',
-                'status'              => 'required'
-            ], [
-                'type_id.required'             => 'Please select a type.',
-                'company_id.required'          => 'Please select a company.',
-                'hs_code_id.required'          => 'Please select a hs code.',
-                'brand_id.required'            => 'Please select a brand.',
-                'country_id.required'          => 'Please select a country.',
-                'supplier_id.required'         => 'Please select a supplier.',
-                'grade_id.required'            => 'Please select a grade.',
-                'container_standart.required'  => 'Please select a standart container.',
-                'container_stock.required'     => 'Container stock cannot be empty.',
-                'container_max_stock.required' => 'Container max stock cannot be empty.',
-                'description.required'         => 'Description cannot be empty.',
-                'status.required'              => 'Please select a status.'
-            ]);
-
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data added successfully.'
+                ];
             } else {
-                $query = Product::where('id', $id)->update([
-                    'type_id'             => $request->type_id,
-                    'company_id'          => $request->company_id,
-                    'hs_code_id'          => $request->hs_code_id,
-                    'brand_id'            => $request->brand_id,
-                    'country_id'          => $request->country_id,
-                    'supplier_id'         => $request->supplier_id,
-                    'grade_id'            => $request->grade_id,
-                    'carton_pallet'       => $request->carton_pallet,
-                    'carton_pcs'          => $request->carton_pcs,
-                    'container_standart'  => $request->container_standart,
-                    'container_stock'     => $request->container_stock,
-                    'container_max_stock' => $request->container_max_stock,
-                    'description'         => $request->description,
-                    'status'              => $request->status
-                ]);
-
-                if($query) {
-                    ProductShading::where('product_id', $id)->delete();
-                    if($request->shading_warehouse_code) {
-                        foreach($request->shading_warehouse_code as $key => $swc) {
-                            $total_stock = 0;
-                            $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
-                                'kode_item' => $request->shading_stock_code[$key],
-                                'gudang'    => $swc,
-                                'per_page'  => 1000
-                            ]));
-
-                            if($stock->result->total_data > 0) {
-                                foreach($stock->result->data as $s) {
-                                    $total_stock += $s->stok;
-                                }
-
-                                ProductShading::create([
-                                    'product_id'     => $id,
-                                    'warehouse_code' => $swc,
-                                    'stock_code'     => $request->shading_stock_code[$key],
-                                    'code'           => $request->shading_code[$key],
-                                    'qty'            => $total_stock
-                                ]);
-                            }
-                        }
-                    }
-
-                    activity()
-                        ->performedOn(new Product())
-                        ->causedBy(session('id'))
-                        ->log('Change the product code data');
-
-                    return redirect()->back()->with(['success' => 'Data added successfully.']);
-                } else {
-                    return redirect()->back()->withInput()->with(['failed' => 'Data failed to added.']);
-                }
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to add.'
+                ];
             }
-        } else {
-            $data = [
-                'title'     => 'Update Product Code',
-                'company'   => Company::where('status', 1)->get(),
-                'hs_code'   => HsCode::where('status', 1)->get(),
-                'brand'     => Brand::where('status', 1)->get(),
-                'country'   => Country::where('status', 1)->get(),
-                'supplier'  => Supplier::where('status', 1)->get(),
-                'grade'     => Grade::where('status', 1)->get(),
-                'warehouse' => Warehouse::where('status', 1)->get(),
-                'product'   => Product::find($id),
-                'content'   => 'admin.product.code_update'
-            ];
-
-            return view('admin.layouts.index', ['data' => $data]);
         }
+
+        return response()->json($response);
     }
 
     public function show(Request $request)
@@ -430,33 +325,133 @@ class CodeController extends Controller {
         if($data->productShading) {
             foreach($data->productShading as $pd) {
                 $shading[] = [
-                    'warehouse'  => $pd->warehouse->name,
-                    'stock_code' => $pd->stock_code,
-                    'code'       => $pd->code,
-                    'qty'        => $pd->qty
+                    'warehouse_code' => $pd->warehouse_code,
+                    'stock_code'     => $pd->stock_code,
+                    'code'           => $pd->code,
+                    'qty'            => $pd->qty
                 ];
             }
         }
 
         return response()->json([
             'code'                => $data->code(),
-            'type'                => $data->type->code,
-            'company'             => $data->company->name,
-            'hs_code'             => $data->hsCode->name,
-            'brand'               => $data->brand->name,
-            'country'             => $data->country->name,
-            'supplier'            => $data->supplier->name,
-            'grade'               => $data->grade->name,
-            'carton_pallet'       => $data->carton_pallet . '<sub> / carton</sub>',
-            'carton_pcs'          => $data->carton_pcs . '<sub> / pcs</sub>',
-            'container_standart'  => $data->containerStandart(),
+            'type_id'             => $data->type_id,
+            'type_code'           => $data->type->code,
+            'company_id'          => $data->company_id,
+            'hs_code_id'          => $data->hs_code_id,
+            'brand_id'            => $data->brand_id,
+            'country_id'          => $data->country_id,
+            'supplier_id'         => $data->supplier_id,
+            'grade_id'            => $data->grade_id,
+            'carton_pallet'       => $data->carton_pallet,
+            'carton_pcs'          => $data->carton_pcs,
+            'container_standart'  => $data->container_standart,
             'container_stock'     => $data->container_stock,
             'container_max_stock' => $data->container_max_stock,
             'description'         => $data->description,
-            'stock'               => $data->availability()->stock,
-            'status'              => $data->status(),
+            'status'              => $data->status,
             'shading'             => $shading
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(), [
+            'type_id'             => 'required',
+            'company_id'          => 'required',
+            'hs_code_id'          => 'required',
+            'brand_id'            => 'required',
+            'country_id'          => 'required',
+            'supplier_id'         => 'required',
+            'grade_id'            => 'required',
+            'container_standart'  => 'required',
+            'container_stock'     => 'required',
+            'container_max_stock' => 'required',
+            'description'         => 'required',
+            'status'              => 'required'
+        ], [
+            'type_id.required'             => 'Please select a type.',
+            'company_id.required'          => 'Please select a company.',
+            'hs_code_id.required'          => 'Please select a hs code.',
+            'brand_id.required'            => 'Please select a brand.',
+            'country_id.required'          => 'Please select a country.',
+            'supplier_id.required'         => 'Please select a supplier.',
+            'grade_id.required'            => 'Please select a grade.',
+            'container_standart.required'  => 'Please select a standart container.',
+            'container_stock.required'     => 'Container stock cannot be empty.',
+            'container_max_stock.required' => 'Container max stock cannot be empty.',
+            'description.required'         => 'Description cannot be empty.',
+            'status.required'              => 'Please select a status.'
+        ]);
+
+        if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query = Product::where('id', $id)->update([
+                'type_id'             => $request->type_id,
+                'company_id'          => $request->company_id,
+                'hs_code_id'          => $request->hs_code_id,
+                'brand_id'            => $request->brand_id,
+                'country_id'          => $request->country_id,
+                'supplier_id'         => $request->supplier_id,
+                'grade_id'            => $request->grade_id,
+                'carton_pallet'       => $request->carton_pallet,
+                'carton_pcs'          => $request->carton_pcs,
+                'container_standart'  => $request->container_standart,
+                'container_stock'     => $request->container_stock,
+                'container_max_stock' => $request->container_max_stock,
+                'description'         => $request->description,
+                'status'              => $request->status
+            ]);
+
+            if($query) {
+                ProductShading::where('product_id', $id)->delete();
+                if($request->shading_warehouse_code) {
+                    foreach($request->shading_warehouse_code as $key => $swc) {
+                        $total_stock = 0;
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                            'kode_item' => $request->shading_stock_code[$key],
+                            'gudang'    => $swc,
+                            'per_page'  => 1000
+                        ]));
+
+                        if($stock->result->total_data > 0) {
+                            foreach($stock->result->data as $s) {
+                                $total_stock += $s->stok;
+                            }
+
+                            ProductShading::create([
+                                'product_id'     => $id,
+                                'warehouse_code' => $swc,
+                                'stock_code'     => $request->shading_stock_code[$key],
+                                'code'           => $request->shading_code[$key],
+                                'qty'            => $total_stock
+                            ]);
+                        }
+                    }
+                }
+
+                activity()
+                    ->performedOn(new Product())
+                    ->causedBy(session('id'))
+                    ->log('Change the product code data');
+
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data updated successfully.'
+                ];
+            } else {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to add.'
+                ];
+            }
+        }
+
+        return response()->json($response);
     }
 
     public function destroy(Request $request) 
@@ -480,6 +475,17 @@ class CodeController extends Controller {
         }
 
         return response()->json($response);
+    }
+
+    public function detail($id) 
+    {
+        $data = [
+            'title'   => 'Detail Product Code',
+            'product' => Product::find($id),
+            'content' => 'admin.product.code_detail'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
     }
 
 }
