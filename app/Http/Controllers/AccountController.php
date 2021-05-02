@@ -122,6 +122,7 @@ class AccountController extends Controller {
 
     public function verification(Request $request)
     {
+        session()->flush();
         if(session('fo_id')) {
             return redirect('/');
         }

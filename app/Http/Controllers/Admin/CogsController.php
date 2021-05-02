@@ -300,6 +300,7 @@ class CogsController extends Controller {
                 'currency_id.required'          => 'Please select a unit currency.',
                 'city_id.required'              => 'Please select a destination port.',
                 'import_id.required'            => 'Please select a import.',
+                'shipping.required'             => 'Please select a shipping.',
                 'price_profile_custom.required' => 'Price profile custom cannot be empty.',
                 'agent_fee_usd.required'        => 'Agent fee cannot be empty.',
                 'ls_cost_document.required'     => 'ls cost document cannot be empty.',

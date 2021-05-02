@@ -13,6 +13,7 @@ $(function() {
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
    $('.select2').select2();
+    $('.form-check-input-switch').bootstrapSwitch()
 
    setInterval(function() {
       var d    = new Date();

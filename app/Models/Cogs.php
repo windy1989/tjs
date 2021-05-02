@@ -56,8 +56,8 @@ class Cogs extends Model {
             ->where('city_id', $this->city_id)
             ->first();
 
-        if($this->product->currencyPrice) {
-            $pp = $this->product->currencyPrice->price;
+        if($this->product->currencyPrice->count() > 0) {
+            $pp = $this->product->currencyPrice->last()->price;
         } else {
             $pp = 0;
         }

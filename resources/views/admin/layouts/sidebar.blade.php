@@ -153,19 +153,11 @@
                             <span>Customer</span>
                         </a>
                     </li>
-                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'order' ? 'nav-item-expanded nav-item-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="icon-basket"></i> 
+                    <li class="nav-item">
+                        <a href="{{ url('admin/order') }}" class="nav-link {{ Request::segment(2) == 'order' ? 'active' : '' }}">
+                            <i class="icon-basket"></i>
                             <span>Order</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Sale">
-                            <li class="nav-item">
-                                <a href="{{ url('admin/order/cash') }}" class="nav-link {{ Request::segment(2) == 'order' && Request::segment(3) == 'cash' ? 'active' : '' }}">Cash</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/order/cashless') }}" class="nav-link {{ Request::segment(2) == 'order' && Request::segment(3) == 'cashless' ? 'active' : '' }}">Cashless</a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/purchase') }}" class="nav-link {{ Request::segment(2) == 'purchase' ? 'active' : '' }}">

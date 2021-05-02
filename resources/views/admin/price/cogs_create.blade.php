@@ -63,7 +63,7 @@
                <div class="form-group"><hr></div>
                <div class="row justify-content-center">
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Origin Country</h6>
                         </div>
@@ -73,7 +73,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Length</h6>
                         </div>
@@ -83,7 +83,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Width</h6>
                         </div>
@@ -93,7 +93,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Pcs</h6>
                         </div>
@@ -103,7 +103,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Thickness</h6>
                         </div>
@@ -113,7 +113,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Min Total (Dos)</h6>
                         </div>
@@ -123,7 +123,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Container</h6>
                         </div>
@@ -133,7 +133,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Unit Currency</h6>
                         </div>
@@ -148,7 +148,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Price Profile Custom</h6>
                         </div>
@@ -158,7 +158,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Product Price</h6>
                         </div>
@@ -168,7 +168,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Buying Unit</h6>
                         </div>
@@ -178,7 +178,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Selling Unit</h6>
                         </div>
@@ -188,7 +188,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Conversion Unit</h6>
                         </div>
@@ -198,7 +198,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Rate Unit</h6>
                         </div>
@@ -208,7 +208,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Local Price IDR</h6>
                         </div>
@@ -218,7 +218,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Total SQM Load</h6>
                         </div>
@@ -228,7 +228,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Agent Fee In USD (Container)</h6>
                         </div>
@@ -243,7 +243,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Agent Fee In USD (SQM)</h6>
                         </div>
@@ -253,7 +253,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Agent Fee In IDR</h6>
                         </div>
@@ -263,7 +263,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Destination Port</h6>
                         </div>
@@ -278,7 +278,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Shipping</h6>
                         </div>
@@ -292,7 +292,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Freight Cost in USD</h6>
                         </div>
@@ -302,7 +302,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">CBM</h6>
                         </div>
@@ -312,7 +312,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Kg</h6>
                         </div>
@@ -322,7 +322,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Total Weight (Kg)</h6>
                         </div>
@@ -332,7 +332,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Tonnage Of Container</h6>
                         </div>
@@ -342,7 +342,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">SQM</h6>
                         </div>
@@ -352,7 +352,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Freight Cost</h6>
                         </div>
@@ -362,7 +362,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Import</h6>
                         </div>
@@ -377,7 +377,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Landed Cost</h6>
                         </div>
@@ -387,7 +387,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Total Landed Cost</h6>
                         </div>
@@ -397,7 +397,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">LS Cost</h6>
                         </div>
@@ -412,7 +412,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Number Of Container</h6>
                         </div>
@@ -427,7 +427,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Rate Of In USD</h6>
                         </div>
@@ -437,7 +437,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">LS Cost</h6>
                         </div>
@@ -447,7 +447,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Import Duty</h6>
                         </div>
@@ -457,7 +457,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Value Tax</h6>
                         </div>
@@ -467,7 +467,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Income Tax</h6>
                         </div>
@@ -477,7 +477,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Total Import Tax</h6>
                         </div>
@@ -487,7 +487,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Safe Guard</h6>
                         </div>
@@ -497,7 +497,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-danger" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">SNI Cost</h6>
                         </div>
@@ -512,7 +512,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Cogs In IDR</h6>
                         </div>
@@ -522,7 +522,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Cogs PTA In IDR</h6>
                         </div>
@@ -532,7 +532,7 @@
                      </div>
                   </div>
                   <div class="col-md-3">
-                     <div class="card alpha-teal border-teal" style="min-height:121px;">
+                     <div class="card border-top-2 border-top-success" style="min-height:121px;">
                         <div class="card-header">
                            <h6 class="card-title font-weight-bold text-center">Cogs SMB In IDR</h6>
                         </div>

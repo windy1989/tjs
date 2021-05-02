@@ -9,7 +9,7 @@
          <div class="card">
             <div class="card-body">
                <div class="card-title">
-                  <a href="{{ url()->previous() }}" class="text-dark text-uppercase">
+                  <a href="{{ url('account/history_order') }}" class="text-dark text-uppercase">
                      <i class="icon-chevron-left"></i>
                      &nbsp;Back
                   </a>

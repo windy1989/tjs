@@ -489,7 +489,7 @@
    function resetPassword(id) {
       var notyConfirm = new Noty({
          theme: 'limitless',
-         text: '<h6 class="font-weight-bold mb-3">Are sure you want to reset password?</h6><labelpassword will be reset to "smartmarble"</labelpassword>.</label>',
+         text: '<h6 class="font-weight-bold mb-3">Are sure you want to reset password?</h6><label>password will be reset to <b>"smartmarble"</b>.</label>',
          timeout: false,
          modal: true,
          layout: 'center',

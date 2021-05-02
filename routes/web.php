@@ -51,8 +51,14 @@ Route::prefix('webhook')->group(function() {
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::match(['get', 'post'], 'login', 'AuthController@login');
     Route::get('verification', 'AuthController@verification');
+    Route::post('forgot_password', 'AuthController@forgotPassword');
+    Route::match(['get', 'post'], 'reset_password', 'AuthController@resetPassword');
     
     Route::middleware('admin.login')->group(function() {
+        Route::match(['get', 'post'], 'profile', 'AuthController@profile');
+        Route::match(['get', 'post'], 'my_activity', 'AuthController@myActivity');
+        Route::get('logout', 'AuthController@logout');
+
         Route::get('dashboard', 'DashboardController@index');
 
         Route::prefix('select2')->group(function() {
@@ -333,6 +339,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('customer')->group(function() {
             Route::get('/', 'CustomerController@index');
             Route::post('datatable', 'CustomerController@datatable');
+        });
+
+        Route::prefix('order')->group(function() {
+            Route::get('/', 'OrderController@index');
+            Route::post('datatable', 'OrderController@datatable');
+            Route::match(['get', 'post'], 'detail/{id}', 'OrderController@detail');
         });
 
         Route::prefix('setting')->group(function() {
