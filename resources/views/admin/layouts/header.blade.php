@@ -1,4 +1,4 @@
-<body  onload="loadingOpen('body')">
+<body>
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{ url('admin/dashboard') }}" class="d-inline-block">
