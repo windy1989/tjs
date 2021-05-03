@@ -9,6 +9,10 @@ lightbox.option({
    wrapAround: true
 });
 
+$(window).load(function() {
+   loadingClose('body');
+});
+
 $(function() {
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
