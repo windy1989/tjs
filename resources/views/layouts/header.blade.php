@@ -2,7 +2,7 @@
 	$total_cart     = App\Models\Cart::where('customer_id', session('fo_id'))->count(); 
 	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
 @endphp
-<body class="stretched">
+<body class="stretched" onload="loadingOpen('body')">
 	<div class="body-overlay"></div>
 	<div id="side-panel" class="dark">
 		<div id="side-panel-trigger-close" class="side-panel-trigger">
