@@ -40,7 +40,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Verification</th>
-                        <th>Registrasi</th>
+                        <th>Register</th>
                      </tr>
                   </thead>
                </table>

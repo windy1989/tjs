@@ -150,7 +150,7 @@ class OrderController extends Controller {
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('order/detail/' . $val->id) . '" class="btn bg-info btn-sm" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/order/detail/' . $val->id) . '" class="btn bg-info btn-sm" title="Detail"><i class="icon-info22"></i></a>
                     '
                 ];
 
