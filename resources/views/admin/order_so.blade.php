@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Order Detail</span>
+					<span class="font-weight-semibold">Order SO</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="{{ url('admin/order') }}" class="breadcrumb-item">Order</a>
-					<span class="breadcrumb-item active">Detail</span>
+					<span class="breadcrumb-item active">SO</span>
 				</div>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 				</div>
 				<div class="d-md-flex flex-md-wrap">
 					<div class="mb-4 mb-md-2">
-						<span class="text-muted">Sales Order To:</span>
+						<span class="text-muted">SO To:</span>
 						<ul class="list list-unstyled mb-0">
 							<li><h5 class="my-2">{{ $order->customer->name }}</h5></li>
 							<li><span class="font-weight-semibold">Province</span></li>
@@ -70,15 +70,24 @@
 								<li><h5 class="my-2">Total Due:</h5></li>
 								<li>Number:</li>
 								<li>Type:</li>
-								<li>Order Date:</li>
 								<li>Status:</li>
+								<li>Full Delivery:</li>
 							</ul>
 							<ul class="list list-unstyled text-right mb-0 ml-auto">
 								<li><h5 class="font-weight-semibold my-2">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h5></li>
 								<li>{{ $order->number }}</li>
 								<li>{{ $order->type() }}</li>
-								<li>{{ date('d F Y, H:i', strtotime($order->created_at)) }}</li>
 								<li>{{ $order->status() }}</li>
+								<li>
+									<div class="input-group">
+										<span class="input-group-prepend">
+											<span class="input-group-text" style="border-radius:0;">
+												<input type="checkbox" name="full_delivery_check" id="full_delivery_check" onclick="changeAllPartial()">
+											</span>
+										</span>
+										<input type="date" name="full_delivery_date" id="full_delivery_date" onchange="changeAllPartial()" style="border-radius:0; border: 1px solid lightgray;">
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -90,11 +99,9 @@
 						<tr class="text-center">
 							<th>Image</th>
 							<th>Product</th>
-							<th>Qty</th>
-							<th>Ready</th>
-							<th>Indent</th>
 							<th>Price</th>
 							<th>Total</th>
+							<th>Partial Delivery</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -109,14 +116,16 @@
 								</td>
 								<td class="align-middle">
 									<h6 class="mb-0">{{ $od->product->code() }}</h6>
-									<span class="text-muted">{{ $od->product->type->category->name }}</span>
+									<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
+									<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
+									<div class="text-muted">Indent <b>{{ $od->indent }}</b> Item</div>
 								</td>
-								<td class="align-middle">x{{ $od->qty }}</td>
-								<td class="align-middle">x{{ $od->ready }}</td>
-								<td class="align-middle">x{{ $od->indent }}</td>
 								<td class="align-middle">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
 								<td class="align-middle">
 									<span class="font-weight-semibold">Rp {{ number_format($od->total, 0, ',', '.') }}</span>
+								</td>
+								<td class="align-middle" width="10%">
+									<input type="date" name="partial_delivery[]" id="partial_delivery" class="form-control">
 								</td>
 							</tr>
 						@endforeach
@@ -162,3 +171,17 @@
 			</div>
 		</div>
 	</div>
+
+<script>
+	function changeAllPartial() {
+		var check            = $('#full_delivery_check');
+		var date             = $('#full_delivery_date');
+		var partial_delivery = $('input[name="partial_delivery[]"]');
+
+		if(check.is(':checked') && date.val()) {
+			partial_delivery.val(date.val());
+		} else {
+			date.val(null);
+		}
+	}
+</script>

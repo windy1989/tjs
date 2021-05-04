@@ -150,7 +150,7 @@ class OrderController extends Controller {
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('admin/order/detail/' . $val->id) . '" class="btn bg-info btn-sm" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/order/so/' . $val->id) . '" class="btn bg-brown btn-sm">SO</a>
                     '
                 ];
 
@@ -171,13 +171,13 @@ class OrderController extends Controller {
         return response()->json($response);
     }
 
-    public function detail(Request $request, $id) 
+    public function so(Request $request, $id) 
     {
         $query = Order::find($id);
         $data  = [
-            'title'   => 'Order Detail',
+            'title'   => 'Order SO',
             'order'   => $query,
-            'content' => 'admin.order_detail'
+            'content' => 'admin.order_so'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
