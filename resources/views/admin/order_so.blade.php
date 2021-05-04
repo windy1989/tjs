@@ -135,7 +135,7 @@
 			<div class="card-body">
 				<div class="d-md-flex flex-md-wrap">
 					<div class="pt-2 mb-3">
-						<img src="{{ asset(Storage::url($order->qr_code)) }}" style="max-width:50px;">
+						<img src="{{ asset(Storage::url($order->qr_code)) }}">
 					</div>
 					<div class="pt-2 mb-3 wmin-md-400 ml-auto">
 						<div class="table-responsive">
