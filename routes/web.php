@@ -345,6 +345,8 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::get('/', 'OrderController@index');
             Route::post('datatable', 'OrderController@datatable');
             Route::match(['get', 'post'], 'so/{id}', 'OrderController@so');
+            Route::match(['get', 'post'], 'invoice/{id}', 'OrderController@so');
+            Route::match(['get', 'post'], 'po/{id}', 'OrderController@so');
         });
 
         Route::prefix('setting')->group(function() {

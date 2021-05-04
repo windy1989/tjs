@@ -135,37 +135,30 @@
 			<div class="card-body">
 				<div class="d-md-flex flex-md-wrap">
 					<div class="pt-2 mb-3">
-						<img src="{{ asset(Storage::url($order->qr_code)) }}">
+						<img src="{{ asset(Storage::url($order->qr_code)) }}" style="max-width:50px;">
 					</div>
 					<div class="pt-2 mb-3 wmin-md-400 ml-auto">
-						<h6 class="mb-3">Total due</h6>
 						<div class="table-responsive">
 							<table class="table">
 								<tbody>
 									<tr>
-										<th>Discount:</th>
-										<td class="text-right">Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
-									</tr>
-									<tr>
-										<th>Subtotal:</th>
-										<td class="text-right">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</td>
-									</tr>
-									<tr>
-										<th>Total:</th>
+										<th><h4>TOTAL :</h4></th>
 										<td class="text-right text-primary">
-											<h5 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h5>
+											<h4 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h4>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-						<div class="form-group"><hr></div>
-						<div class="text-right mt-3">
-							<button type="button" class="btn btn-primary btn-labeled btn-labeled-left">
-								<b><i class="icon-paperplane"></i></b> 
-								Create Invoice
-							</button>
-						</div>
+					</div>
+				</div>
+				<div class="form-group"><hr></div>
+				<div class="form-group">
+					<div class="text-right mt-3">
+						<button type="button" class="btn btn-primary btn-labeled btn-labeled-left">
+							<b><i class="icon-paperplane"></i></b> 
+							Create Invoice
+						</button>
 					</div>
 				</div>
 			</div>

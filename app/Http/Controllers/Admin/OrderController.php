@@ -174,6 +174,10 @@ class OrderController extends Controller {
     public function so(Request $request, $id) 
     {
         $query = Order::find($id);
+        if($query->type == 2) {
+            return redirect()->back();
+        }
+
         $data  = [
             'title'   => 'Order SO',
             'order'   => $query,
