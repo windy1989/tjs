@@ -43,5 +43,8 @@ $patterns = array(
   array('id' => '31','code' => 'SD','name' => 'Sedimen','status' => '1','created_at' => '2021-05-03 10:45:13','updated_at' => '2021-05-03 10:45:13','deleted_at' => NULL),
   array('id' => '32','code' => 'RD','name' => 'Random','status' => '1','created_at' => '2021-05-03 10:45:13','updated_at' => '2021-05-03 10:45:13','deleted_at' => NULL),
   array('id' => '33','code' => 'OC','name' => 'Ocean','status' => '1','created_at' => '2021-05-03 10:45:13','updated_at' => '2021-05-03 10:45:13','deleted_at' => NULL),
-  array('id' => '34','code' => 'TR','name' => 'Terrazo','status' => '1','created_at' => '2021-05-03 10:45:13','updated_at' => '2021-05-03 10:45:13','deleted_at' => NULL)
+  array('id' => '34','code' => 'TR','name' => 'Terrazo','status' => '1','created_at' => '2021-05-03 10:45:13','updated_at' => '2021-05-03 10:45:13','deleted_at' => NULL),
+  array('id' => '35','code' => 'FIB','name' => 'Fiber','status' => '1','created_at' => '2021-05-05 11:02:43','updated_at' => '2021-05-05 11:02:43','deleted_at' => NULL),
+  array('id' => '36','code' => 'RIN','name' => 'Ring','status' => '1','created_at' => '2021-05-05 11:17:54','updated_at' => '2021-05-05 11:17:54','deleted_at' => NULL),
+  array('id' => '37','code' => 'SAN','name' => 'Sand','status' => '1','created_at' => '2021-05-05 14:09:54','updated_at' => '2021-05-05 14:09:54','deleted_at' => NULL)
 );
