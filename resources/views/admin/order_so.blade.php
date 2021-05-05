@@ -100,6 +100,8 @@
 							<th>Image</th>
 							<th>Product</th>
 							<th>Price</th>
+							<th>Target Price</th>
+							<th>Max Discount</th>
 							<th>Total</th>
 							<th>Partial Delivery</th>
 						</tr>
@@ -120,7 +122,17 @@
 									<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
 									<div class="text-muted">Indent <b>{{ $od->indent }}</b> Item</div>
 								</td>
-								<td class="align-middle">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
+								<td class="align-middle">
+									<center>
+										Rp {{ number_format($od->price_list, 0, ',', '.') }}
+									</center>
+								</td>
+								<td class="align-middle">
+									<input type="number" class="form-control" placeholder="Enter target price">
+								</td>
+								<td class="align-middle">
+									<span class="font-weight-semibold">Rp {{ number_format($od->product->pricingPolicy->discount_retail_sales, 0, ',', '.') }}</span>
+								</td>
 								<td class="align-middle">
 									<span class="font-weight-semibold">Rp {{ number_format($od->total, 0, ',', '.') }}</span>
 								</td>

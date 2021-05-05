@@ -165,6 +165,12 @@
                             <span>Purchase</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/project') }}" class="nav-link {{ Request::segment(2) == 'project' ? 'active' : '' }}">
+                            <i class="icon-add"></i>
+                            <span>Project</span>
+                        </a>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'accounting' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-book2"></i> 

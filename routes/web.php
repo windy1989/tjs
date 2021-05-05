@@ -349,6 +349,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::match(['get', 'post'], 'po/{id}', 'OrderController@so');
         });
 
+        Route::prefix('project')->group(function() {
+            Route::get('/', 'ProjectController@index');
+        });
+
         Route::prefix('setting')->group(function() {
             Route::prefix('user')->group(function() {
                 Route::get('/', 'UserController@index');
