@@ -167,7 +167,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/project') }}" class="nav-link {{ Request::segment(2) == 'project' ? 'active' : '' }}">
-                            <i class="icon-add"></i>
+                            <i class="icon-briefcase"></i>
                             <span>Project</span>
                         </a>
                     </li>
