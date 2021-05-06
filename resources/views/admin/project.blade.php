@@ -5,6 +5,10 @@
       flex-wrap: nowrap;
    }
 
+   .bg-disabled {
+      background: lightgray;
+   }
+
    .tabable .nav-tabs .nav-link {
       white-space: nowrap;
       background: #e0f2f1 !important;
@@ -61,90 +65,105 @@
                   <ul class="nav nav-tabs nav-tabs-solid nav-tabs-responsive">
                      <li class="nav-item">
                         <a href="#vertical-left-step-1" class="nav-link text-center active" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Project Information</div> 
                            <div>(10%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-2" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Spec Project + Target Price</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-3" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Consultant Meeting</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-4" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Pre Quotation</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-5" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Form Sample</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-6" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Negotiation</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-7" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>PO Project</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-8" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Input Data Vendor + Purchasing Order</div> 
                            <div>(3%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-9" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>PI</div> 
                            <div>(2%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-10" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Production</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-11" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Pay Full Purchase</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-12" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Shipment</div> 
                            <div>(5%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-13" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Delivery To Project</div> 
                            <div>(10%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-14" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Proses Payment</div> 
                            <div>(10%)</div>
                         </a>
                      </li>
                      <li class="nav-item">
                         <a href="#vertical-left-step-15" class="nav-link text-center" data-toggle="tab">
+                           <div style="font-size:20px;"><i class="icon-spinner4"></i></div>
                            <div>Done</div> 
                            <div>(10%)</div>
                         </a>

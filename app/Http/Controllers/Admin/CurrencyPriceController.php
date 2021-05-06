@@ -44,24 +44,20 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                    $query->where('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('company', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('country', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('brand', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('grade', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                });
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('company', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('grade', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
@@ -79,24 +75,20 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                    $query->where('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('company', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('country', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('brand', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                })
-                                ->orWhereHas('grade', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('code', 'like', "%$search%");
-                                });
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('company', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    })
+                                    ->orWhereHas('grade', function($query) use ($search) {
+                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                    });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
