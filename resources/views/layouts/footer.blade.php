@@ -36,7 +36,7 @@
 													</div>
 													<div class="entry-meta text-center">
 														<span class="text-center">Gedung Jagat, Main Lobby, Tomang Raya No. 28-30</span><br>
-														<span class="text-center">(+62) 82131972353</span>
+														<span class="text-center">(031) 5477501</span>
 													</div>
 												</div>
 											</div>
@@ -49,7 +49,7 @@
 													</div>
 													<div class="entry-meta text-center">
 														<span class="text-center">Modern Ceramics, Baliwerti 119-121 Kav. 10</span><br>
-														<span class="text-center">(+62) 82131972353</span>
+														<span class="text-center">(031) 5477501</span>
 													</div>
 												</div>
 											</div>

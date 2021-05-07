@@ -351,6 +351,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
         Route::prefix('project')->group(function() {
             Route::get('/', 'ProjectController@index');
+            Route::post('datatable', 'ProjectController@datatable');
+            Route::post('create', 'ProjectController@create');
+            Route::match(['get', 'post'], 'manage/{id}', 'ProjectController@manage');
+            Route::get('detail/{id}', 'ProjectController@detail');
         });
 
         Route::prefix('setting')->group(function() {

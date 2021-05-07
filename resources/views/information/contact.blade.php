@@ -21,7 +21,7 @@
                         Modern Ceramics, Jl. Baliwerti No.119-121, Alun-alun Contong, Kec. Bubutan, Kota SBY, Jawa Timur 60161
                      </address>
                      <abbr title="Fax"><strong>Open:</strong></abbr> Senin - Jumat (09.00 - 17.00)<br>
-                     <abbr title="Phone Number"><strong>Phone:</strong></abbr> 082131972353<br>
+                     <abbr title="Phone Number"><strong>Phone:</strong></abbr> (031) 5477501<br>
                      <abbr title="Email Address"><strong>Email:</strong></abbr> smartmarbleandbath@gmail.com
                   </div>
                </div>
