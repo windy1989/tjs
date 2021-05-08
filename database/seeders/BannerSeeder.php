@@ -14,7 +14,7 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/banners.php');
+        require public_path('website/backup.php');
 
         foreach($banners as $b) {
             Banner::create([

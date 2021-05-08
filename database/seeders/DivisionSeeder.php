@@ -14,7 +14,7 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/divisions.php');
+        require public_path('website/backup.php');
 
         foreach($divisions as $d) {
             Division::create([

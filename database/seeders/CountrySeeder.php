@@ -14,7 +14,7 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/countries.php');
+        require public_path('website/backup.php');
 
         foreach($countries as $c) {
             Country::create([

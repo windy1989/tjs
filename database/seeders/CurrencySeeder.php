@@ -14,7 +14,7 @@ class CurrencySeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/currencies.php');
+        require public_path('website/backup.php');
 
         foreach($currencies as $c) {
             Currency::create([

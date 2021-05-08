@@ -14,7 +14,7 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/types.php');
+        require public_path('website/backup.php');
 
         foreach($types as $t) {
             Type::create([

@@ -14,7 +14,7 @@ class ImportSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/imports.php');
+        require public_path('website/backup.php');
 
         foreach($imports as $i) {
             Import::create([

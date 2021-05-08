@@ -13,7 +13,7 @@ class EmklRateSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/emkl_rates.php');
+        require public_path('website/backup.php');
 
         foreach($emkl_rates as $er) {
             EmklRate::insert([

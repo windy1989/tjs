@@ -14,7 +14,7 @@ class GradeSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/grades.php');
+        require public_path('website/backup.php');
 
         foreach($grades as $g) {
             Grade::create([

@@ -14,7 +14,7 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/companies.php');
+        require public_path('website/backup.php');
 
         foreach($companies as $c) {
             Company::create([

@@ -14,7 +14,7 @@ class AgentSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/agents.php');
+        require public_path('website/backup.php');
 
         foreach($agents as $a) {
             Agent::create([

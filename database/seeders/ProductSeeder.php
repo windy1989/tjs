@@ -16,9 +16,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/products.php');
-        require public_path('backup/product_shadings.php');
-        require public_path('backup/pricing_policies.php');
+        require public_path('website/backup.php');
 
         foreach($products as $p) {
             Product::create([

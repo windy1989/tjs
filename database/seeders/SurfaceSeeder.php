@@ -14,7 +14,7 @@ class SurfaceSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/surfaces.php');
+        require public_path('website/backup.php');
 
         foreach($surfaces as $s) {
             Surface::create([

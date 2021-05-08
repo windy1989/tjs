@@ -15,8 +15,7 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/suppliers.php');
-        require public_path('backup/supplier_currencies.php');
+        require public_path('website/backup.php');
 
         foreach($suppliers as $s) {
             Supplier::create([

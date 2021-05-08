@@ -14,7 +14,7 @@ class MarketingStructureSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/marketing_structures.php');
+        require public_path('website/backup.php');
 
         foreach($marketing_structures as $ms) {
             MarketingStructure::create([

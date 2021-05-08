@@ -14,7 +14,7 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/cities.php');
+        require public_path('website/backup.php');
 
         foreach($cities as $c) {
             City::create([

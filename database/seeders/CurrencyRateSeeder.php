@@ -14,7 +14,7 @@ class CurrencyRateSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/currency_rates.php');
+        require public_path('website/backup.php');
 
         foreach($currency_rates as $cr) {
             CurrencyRate::insert([

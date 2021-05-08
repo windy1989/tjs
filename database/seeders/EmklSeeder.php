@@ -14,7 +14,7 @@ class EmklSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/emkls.php');
+        require public_path('website/backup.php');
 
         foreach($emkls as $e) {
             Emkl::create([

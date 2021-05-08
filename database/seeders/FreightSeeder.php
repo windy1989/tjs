@@ -14,7 +14,7 @@ class FreightSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('backup/freights.php');
+        require public_path('website/backup.php');
 
         foreach($freights as $f) {
             Freight::create([
