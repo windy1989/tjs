@@ -12,7 +12,7 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="reset()" data-toggle="modal" data-target="#modal_form">
 						<b><i class="icon-plus3"></i></b> Add Data
 					</button>
 				</div>
@@ -48,10 +48,10 @@
 	</div>
 
 <div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
-   <div class="modal-dialog modal-dialog-scrollable">
+   <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Form Color</h5>
+         <div class="modal-header bg-light">
+            <h5 class="modal-title" id="exampleModalLabel">Form Project</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -62,33 +62,110 @@
                   <ul id="validation_content"></ul>
                </div>
                <div class="form-group">
-                  <label>Code :<span class="text-danger">*</span></label>
-                  <input type="text" name="code" id="code" class="form-control" placeholder="Enter code">
+                  <label>Project Name :<sup class="text-danger">*</sup></label>
+                  <textarea name="name" id="name" class="form-control" placeholder="Enter project name"></textarea>
                </div>
-               <div class="form-group">
-                  <label>Name :<span class="text-danger">*</span></label>
-                  <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
-               </div>
-               <div class="form-group text-center mt-4">
-                  <div class="form-check form-check-inline">
-                     <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" data-fouc>
-                        Not Active
-                     </label>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Constructor Name :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="constructor" id="constructor" class="form-control" placeholder="Enter constructor name">
+                     </div>
                   </div>
-                  <div class="form-check form-check-inline">
-                     <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" checked data-fouc>
-                        Active
-                     </label>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Phone :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter phone">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Email :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter email">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Country :<sup class="text-danger">*</sup></label>
+                        <select name="country_id" id="country_id" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($country as $c)
+                              <option value="{{ $c->id }}">{{ $c->name }}</option>
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>City :<sup class="text-danger">*</sup></label>
+                        <select name="city_id" id="city_id" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($city as $c)
+                              <option value="{{ $c->id }}">{{ $c->name }}</option>
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Timeline :<sup class="text-danger">*</sup></label>
+                        <input type="date" name="timeline" id="timeline" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Project Manager :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="manager" id="manager" class="form-control" placeholder="Enter project manager">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Consultant Name :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="consultant" id="consultant" class="form-control" placeholder="Enter consultant name">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Owner :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="owner" id="owner" class="form-control" placeholder="Enter owner">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Payment Method :<sup class="text-danger">*</sup></label>
+                        <select name="payment_method" id="payment_method" class="form-control">
+                           <option value="">-- Choose --</option>
+                           <option value="1">Giro</option>
+                           <option value="2">SKBDN</option>
+                           <option value="3">DP</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Supply Method :<sup class="text-danger">*</sup></label>
+                        <select name="supply_method" id="supply_method" class="form-control">
+                           <option value="">-- Choose --</option>
+                           <option value="1">Full</option>
+                           <option value="2">Partial</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>PPN :<sup class="text-danger">*</sup></label>
+                        <select name="ppn" id="ppn" class="form-control">
+                           <option value="">-- Choose --</option>
+                           <option value="1">Yes</option>
+                           <option value="0">No</option>
+                        </select>
+                     </div>
                   </div>
                </div>
             </form>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
-            <button type="button" class="btn bg-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="icon-cross3"></i> Cancel</button>
-            <button type="button" class="btn bg-warning" id="btn_update" onclick="update()" style="display:none;"><i class="icon-pencil7"></i> Save</button>
             <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Add</button>
          </div>
       </div>
@@ -99,23 +176,6 @@
    $(function() {
       loadDataTable();
    });
-
-   function cancel() {
-      reset();
-      $('#modal_form').modal('hide');
-      $('#btn_create').show();
-      $('#btn_update').hide();
-      $('#btn_cancel').hide();
-   }
-
-   function toShow() {
-      $('#modal_form').modal('show');
-      $('#validation_alert').hide();
-      $('#validation_content').html('');
-      $('#btn_create').hide();
-      $('#btn_update').show();
-      $('#btn_cancel').show();
-   }
 
    function reset() {
       $('#form_data').trigger('reset');
@@ -172,7 +232,7 @@
 
    function create() {
       $.ajax({
-         url: '{{ url("admin/master_data/color/create") }}',
+         url: '{{ url("admin/project/create") }}',
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),

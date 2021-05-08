@@ -33,19 +33,28 @@ class Select2Controller extends Controller {
         $search   = $request->search;
         $data     = Product::where(function($query) use ($search) {
                 $query->whereHas('type', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search]);
+                        $query->whereRaw('INSTR(?, code)', [$search])
+                            ->orWhere('code', 'like', "%$search%");
                     })
                     ->orWhereHas('company', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search]);
+                        $query->whereRaw('INSTR(?, code)', [$search])
+                            ->orWhere('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     })
                     ->orWhereHas('brand', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search]);
+                        $query->whereRaw('INSTR(?, code)', [$search])
+                            ->orWhere('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     })
                     ->orWhereHas('country', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search]);
+                        $query->whereRaw('INSTR(?, code)', [$search])
+                            ->orWhere('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     })
                     ->orWhereHas('grade', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search]);
+                        $query->whereRaw('INSTR(?, code)', [$search])
+                            ->orWhere('code', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
                     });
             })
             ->get();

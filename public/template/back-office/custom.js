@@ -10,6 +10,7 @@ lightbox.option({
 });
 
 $(function() {
+   $('html').tooltip({selector: '[data-popup="tooltip"]'});
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
    $('.select2').select2();
@@ -91,6 +92,7 @@ function select2ServerSide(selector, endpoint) {
       minimumInputLength: 3,
       allowClear: true,
       cache: true,
+      dropdownParent: $('body').parent(),
       ajax: {
          url: endpoint,
          type: 'POST',

@@ -53,7 +53,7 @@
 <div class="modal fade" id="modal_form" data-backdrop="static" role="dialog">
    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
-         <div class="modal-header">
+         <div class="modal-header bg-light">
             <h5 class="modal-title" id="exampleModalLabel">Form Import</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>

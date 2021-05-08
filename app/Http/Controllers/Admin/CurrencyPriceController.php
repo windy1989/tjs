@@ -44,19 +44,28 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%");
                                     })
                                     ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -75,19 +84,28 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%");
                                     })
                                     ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -109,8 +127,8 @@ class CurrencyPriceController extends Controller {
                     $val->currency->code,
                     number_format($val->price),
                     '
-                        <button type="button" class="btn bg-warning btn-sm" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
-                        <button type="button" class="btn bg-danger btn-sm" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
+                        <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
+                        <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
 

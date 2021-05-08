@@ -49,19 +49,28 @@ class CogsController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%");
                                     })
                                     ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -88,19 +97,28 @@ class CogsController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%");
                                     })
                                     ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     })
                                     ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search]);
+                                        $query->whereRaw('INSTR(?, code)', [$search])
+                                            ->orWhere('code', 'like', "%$search%")
+                                            ->orWhere('name', 'like', "%$search%");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -130,7 +148,7 @@ class CogsController extends Controller {
                     $val->city->name,
                     $val->shipping(),
                     '
-                        <button type="button" class="btn bg-info btn-sm" title="Info" onclick="show(' . $val->id . ')"><i class="icon-info22"></i></button>
+                        <button type="button" class="btn bg-info btn-sm" data-popup="tooltip" title="Info" onclick="show(' . $val->id . ')"><i class="icon-info22"></i></button>
                     '
                 ];
 

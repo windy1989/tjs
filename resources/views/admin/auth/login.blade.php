@@ -94,7 +94,7 @@
    <div class="modal-dialog">
       <div class="modal-body">
          <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-light">
                <h4 class="modal-title" id="myModalLabel">Forgot Password</h4>
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
