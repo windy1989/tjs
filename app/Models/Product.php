@@ -32,7 +32,7 @@ class Product extends Model {
 
     public function code()
     {
-        $company_code = $this->company->code;
+        $company_code = $this->type->division->code;
         $brand_code   = $this->brand->code;
         $country_code = $this->country->code;
         $type_code    = $this->type->code;

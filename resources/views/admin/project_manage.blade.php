@@ -214,7 +214,7 @@
                               </div>
                            @endif
                         @endif
-                        @if($project->projectProduct->count() > 0)
+                        @if($project->projectConsultantMeeting->count() > 0)
                            <div class="table-responsive">
                               <table class="table table-bordered table-striped">
                                  <thead class="table-secondary">
