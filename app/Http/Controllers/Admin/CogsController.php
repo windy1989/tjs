@@ -50,12 +50,12 @@ class CogsController extends Controller {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
                                         $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
                                             ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                            ->orWhereHas('division', function($query) use ($search) {
+                                                $query->whereRaw('INSTR(?, code)', [$search])
+                                                    ->orWhere('code', 'like', "%$search%")
+                                                    ->orWhere('name', 'like', "%$search%");
+                                            });
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
                                         $query->whereRaw('INSTR(?, code)', [$search])
@@ -98,12 +98,12 @@ class CogsController extends Controller {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
                                         $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('company', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
                                             ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                            ->orWhereHas('division', function($query) use ($search) {
+                                                $query->whereRaw('INSTR(?, code)', [$search])
+                                                    ->orWhere('code', 'like', "%$search%")
+                                                    ->orWhere('name', 'like', "%$search%");
+                                            });
                                     })
                                     ->orWhereHas('brand', function($query) use ($search) {
                                         $query->whereRaw('INSTR(?, code)', [$search])
