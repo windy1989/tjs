@@ -181,7 +181,8 @@
 		&:not([class*=bg-]) {
 			&:hover,
 			&:focus,
-			&:active {
+			&:active,
+			&.ui-selectmenu-button-open {
 				color: $btn-light-hover-color;
 				background-color: $btn-light-hover-bg;
 				border-color: $btn-light-hover-border-color;
@@ -193,6 +194,14 @@
 			cursor: $cursor-disabled;
 			opacity: $btn-disabled-opacity;
 			box-shadow: none;
+		}
+
+		// Inside input groups
+		.input-group-prepend > & {
+			@include border-right-radius(0);
+		}
+		.input-group-append > & {
+			@include border-left-radius(0);
 		}
 
 		// Colored button
@@ -211,6 +220,7 @@
 		&.ui-button-link {
 			background-color: transparent;
 			border-color: transparent;
+			color: $link-color;
 
 			// Change link color on hover and focus
 			@include hover-focus {
@@ -222,6 +232,7 @@
 			&:focus,
 			&:active {
 				box-shadow: none;
+				background-color: transparent;
 			}
 		}
 
@@ -274,15 +285,15 @@
 
 	// Base
 	.ui-controlgroup {
-		display: inline-block;
-		vertical-align: middle;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		position: relative;
 
 		// Child buttons
 		.ui-button {
-			border-radius: 0;
 			margin-left: -($btn-border-width);
-			float: left;
+			@include border-radius(0);
 		}
 
 		// Remove left margin for first childs
@@ -298,7 +309,8 @@
 		}
 
 		// Add border radius for the last button
-		.ui-button:last-of-type {
+		.ui-button:last-child,
+		.ui-controlgroup-item:last-of-type {
 			@include border-right-radius($btn-border-radius);
 		}
 	}
@@ -395,9 +407,10 @@
 
 				&.ui-datepicker-month,
 				&.ui-datepicker-year {
-					font-size: $font-size-base;
-					font-weight: $font-weight-normal;
-					color: $body-color;
+					color: $input-color;
+					background-color: $input-bg;
+					font-size: $input-font-size;
+					font-weight: $input-font-weight;
 				}
 			}
 		}
@@ -782,7 +795,6 @@
 			position: relative;
 			display: flex;
 			align-items: flex-start;
-			cursor: pointer;
 			padding: $dropdown-item-padding-y $dropdown-item-padding-x;
 			outline: 0;
 			color: $dropdown-link-color;
@@ -966,29 +978,28 @@
 		outline: 0;
 
 		// Button
-		&:not(.ui-controlgroup-item) {
+		:not(.ui-controlgroup) > & {
 			display: inline-block;
 			position: relative;
 			background-color: $input-bg;
 			border: $input-border-width solid $input-border-color;
-			cursor: pointer;
 			@include border-radius($input-border-radius);
+
+			// Darken on hover and focus
+			@include hover-focus {
+				box-shadow: $hover-shadow-lighter;
+			}
+
+			// Reset button styles
+			&:not([class*=bg-]) {
+				@include hover-focus {
+					background-color: $input-bg;
+				}
+			}
 		}
 		&:not(.ui-button-icon-only) {
 			padding: $input-padding-y $input-padding-x;
 			padding-right: (($input-padding-x * 2) + $icon-font-size);
-		}
-
-		// Darken on hover and focus
-		@include hover-focus {
-			box-shadow: $hover-shadow-lighter;
-		}
-
-		// Reset button styles
-		&:not([class*=bg-]) {
-			@include hover-focus {
-				background-color: $input-bg;
-			}
 		}
 
 		// Down arrow
@@ -999,12 +1010,19 @@
 	        position: absolute;
 	        top: 50%;
 	        right: $input-padding-x;
-	        text-align: right;
-	        margin-top: -($icon-font-size / 2);
+	        text-align: center;
 	        font-size: $icon-font-size;
 	        line-height: 1;
 	        color: inherit;
+			transform: translate(0%, -50%);
+	        text-indent: 0;
 	        @include ll-font-smoothing();
+		}
+
+		// In case of icon button
+		&.ui-button-icon-only:after {
+	        right: 50%;
+	        transform: translate(50%, -50%);
 		}
 
 		// Button text
@@ -1012,11 +1030,6 @@
 			display: block;
 			text-transform: none;
 			@include text-truncate();
-		}
-
-		// Opened state
-		&.ui-selectmenu-button-open {
-			box-shadow: $hover-shadow-lighter;
 		}
 	}
 
@@ -1463,6 +1476,7 @@
 			display: flex;
 		    justify-content: center;
 		    align-items: flex-start;
+		    height: 100%;
 			color: $nav-tabs-link-color;
 			padding: $nav-link-padding-y $nav-link-padding-x;
 			border: $nav-tabs-border-width solid transparent;

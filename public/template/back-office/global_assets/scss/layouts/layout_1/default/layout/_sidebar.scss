@@ -14,7 +14,6 @@
 .sidebar {
 	flex: 0 0 auto;
 	width: $sidebar-base-width;
-	z-index: $sidebar-zindex;
 
 	// Exclude content sidebar
 	&:not(.sidebar-component) {
@@ -22,6 +21,7 @@
 		top: 0;
 		bottom: 0;
 		box-sizing: content-box;
+		z-index: $sidebar-zindex;
 		@include transition(all ease-in-out $component-transition-timer);
 	}
 

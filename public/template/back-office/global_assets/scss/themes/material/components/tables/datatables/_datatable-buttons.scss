@@ -189,4 +189,27 @@
             column-count: 4;
         }
     }
+
+    // Confirmation message
+    .dt-button-info {
+        position: fixed;
+        top: $notification-gutter-y;
+        right: $notification-gutter-x;
+        width: $notification-width;
+        background-color: $notification-info-bg;
+        color: $notification-info-color;
+        border: $alert-border-width solid $notification-info-border-color;
+        padding: $alert-padding-y $alert-padding-x;
+        z-index: $zindex-tooltip;
+        @include border-radius($alert-border-radius);
+        @include box-shadow($notification-box-shadow);
+
+        // Title
+        h2 {
+            font-size: $h6-font-size;
+            margin-bottom: map-get($spacers, 1);
+            line-height: $headings-line-height;
+            letter-spacing: $headings-letter-spacing;
+        }
+    }
 }

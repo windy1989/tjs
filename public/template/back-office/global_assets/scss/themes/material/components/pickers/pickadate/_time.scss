@@ -55,10 +55,11 @@
         width: 100%;
         margin: 0;
         padding: $btn-padding-y $btn-padding-x;
-        background-color: $gray-100;
+        background-color: $btn-light-bg;
+        color: $btn-light-color;
         outline: 0;
         border: 0;
-        border-top: $border-width solid $dropdown-divider-bg;
+        border-top: $border-width solid $border-color;
         text-align: center;
         cursor: pointer;
         margin-bottom: -($dropdown-padding-y);
@@ -67,7 +68,8 @@
 
         // Hocer state
         @include hover-focus {
-            background-color: $gray-200;
+            background-color: $btn-light-hover-bg;
+            color: $btn-light-hover-color;
         }
     }
 

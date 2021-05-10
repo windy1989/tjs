@@ -199,8 +199,8 @@
         left: 85%;
         height: 1.875rem;
         text-align: center;
-        color: $gray-600;
-        box-shadow: 0 0 0 1px $gray-400 inset;
+        color: $body-color;
+        box-shadow: 0 0 0 1px $border-color inset;
     }
 
     // Input
@@ -280,17 +280,19 @@
         cursor: pointer;
         padding: 0.375rem;
         display: inline-block;
-        border: $border-width solid $border-color;
-        background-color: transparent;
-        color: $gray-600;
+        border: $btn-border-width solid $btn-light-border-color;
+        background-color: $btn-light-bg;
+        color: $btn-light-color;
         vertical-align: middle;
-        @include border-radius($border-radius);
+        @include border-radius($btn-border-radius);
         @include transition(all ease-in-out $component-transition-timer);
 
         // Custom color replacer
         &[class*=bg-] {
             @include plain-hover-focus {
-                border-color: transparent;
+                background-color: $btn-light-hover-bg;
+                color: $btn-light-hover-color;
+                border-color: $btn-light-hover-border-color;
             }
         }
     }
@@ -302,8 +304,8 @@
             opacity: 0.8;
 
             @include hover-focus {
-                background-color: transparent;
-                color: $gray-600;
+                background-color: $btn-light-bg;
+                color: $btn-light-color;
             }
         }
     }

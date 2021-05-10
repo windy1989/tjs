@@ -322,3 +322,8 @@ $ll-theme-colors: (
 .bg-light-alpha {
     @include ll-background-variant(rgba($white, 0.1));
 }
+
+// Class with body background color
+.bg-body {
+    background-color: $body-bg;
+}

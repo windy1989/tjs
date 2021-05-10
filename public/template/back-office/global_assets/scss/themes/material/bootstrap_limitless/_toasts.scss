@@ -9,4 +9,9 @@
 // Header
 .toast-header {
     background-clip: border-box;
+
+    // Close button
+    .close {
+    	color: inherit;
+    }
 }

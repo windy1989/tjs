@@ -274,6 +274,11 @@
                 &::-webkit-search-cancel-button {
                     -webkit-appearance: none;
                 }
+
+                // Placeholder color
+                &::placeholder {
+                    color: $input-placeholder-light-color;
+                }
             }
 
             // Remove left spacing if no pills
@@ -490,6 +495,7 @@
         .select2-search__field {
             padding: $input-padding-y $input-padding-x;
             padding-left: ($input-padding-x + $dropdown-item-padding-x + $font-size-base);
+            color: $input-color;
             border: $input-border-width solid transparent;
             border-width: $input-border-width 0;
             border-bottom-color: $input-border-color;

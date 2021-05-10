@@ -21,16 +21,42 @@
         path,
         line {
             fill: none;
-            stroke: $gray-600;
-        }
-        path.domain {
-            shape-rendering: crispEdges;
+            
         }
 
         // Disable text selection
         text {
             user-select: none;
         }
+    }
+
+
+    //
+    // Axis
+    //
+
+    // Base
+    .c3-axis,
+    .c3-axis-y,
+    .c3-axis-x {
+        line,
+        path {
+            stroke: $chart-axis-line-color;
+        }
+
+        .tick {
+            fill: $chart-axis-text-color;
+        }
+    }
+
+    // Titles
+    .c3-axis-y-label,
+    .c3-axis-y2-label,
+    .c3-axis-x-label,
+    .c3-axis-x2-label,
+    .c3-ygrid-line text,
+    .c3-xgrid-line text {
+        fill: rgba($chart-text-color, 0.75);
     }
 
 
@@ -43,30 +69,15 @@
     .c3-xgrid-focus,
     .c3-ygrid,
     .c3-event-rect,
-    .c3-bars path {
+    .c3-bars path,
+    .c3 path.domain {
         shape-rendering: crispEdges;
-    }
-
-    // Arcs
-    .c3-chart-arc {
-        path {
-            stroke: $white;
-        }
-
-        text {
-            fill: $white;
-            font-size: $font-size-base;
-        }
     }
 
     // Grid
     .c3-grid {
         line {
-            stroke: $gray-500;
-        }
-
-        text {
-            fill: $gray-500;
+            stroke: $chart-grid-color-primary;
         }
     }
     .c3-xgrid,
@@ -79,8 +90,7 @@
         font-weight: $font-weight-semibold;
 
         &.c3-empty {
-            fill: $gray-700;
-            font-size: 2em;
+            fill: rgba($chart-text-color, 0.5);
         }
     }
 
@@ -95,16 +105,6 @@
         opacity: 0.4;
     }
 
-    // Point
-    .c3-circle._expanded_ {
-        stroke-width: 1.5px;
-        stroke: $white;
-    }
-    .c3-selected-circle {
-        fill: $white;
-        stroke-width: 2px;
-    }
-
     // Bar
     .c3-bar {
         stroke-width: 0;
@@ -115,12 +115,33 @@
     }
 
     // Arc
+    .c3-chart-arc {
+
+        // Slices
+        path {
+            stroke: $card-bg;
+            stroke-width: 2px;
+        }
+
+        // text
+        text {
+            fill: $white;
+            font-size: $font-size-base;
+        }
+
+        // Gauge
+        .c3-gauge-value {
+            fill: $body-color;
+            font-size: $h1-font-size;
+        }
+    }
     .c3-chart-arcs-title {
         font-size: $h6-font-size;
+        fill: $body-color;
     }
     .c3-chart-arcs {
         .c3-chart-arcs-background {
-            fill: $gray-300;
+            fill: darken($card-bg, 2.5%);
             stroke: none;
         }
 
@@ -131,12 +152,8 @@
 
         .c3-chart-arcs-gauge-max,
         .c3-chart-arcs-gauge-min {
-            fill: $gray-200;
+            fill: $body-color;
         }
-    }
-    .c3-chart-arc .c3-gauge-value {
-        fill: $body-color;
-        font-size: $h1-font-size;
     }
 
     // Focus
@@ -157,8 +174,8 @@
 
     // Region
     .c3-region {
-        fill: $color-slate-600;
-        fill-opacity: .1;
+        fill: $c3-region-bg;
+        fill-opacity: $c3-region-opacity;
     }
 
     // Brush
@@ -169,35 +186,32 @@
     // Legend
     .c3-legend-item {
         font-size: $font-size-sm;
-    }
-    .c3-legend-background {
-        fill: $white;
-        stroke: lightgray;
-        stroke-width: 1;
-        opacity: 0.75;
+
+        text {
+            fill: $chart-text-color;
+        }
     }
 
     // Tooltip
     .c3-tooltip {
         border-collapse: collapse;
         border-spacing: 0;
-        background-color: $white;
+        background-color: $tooltip-bg;
+        color: $tooltip-color;
         empty-cells: show;
-        opacity: 0.95;
+        opacity: $tooltip-opacity;
+        @include border-radius($tooltip-border-radius);
 
         th {
-            background-color: $gray-900;
             padding: $table-cell-padding-xs;
-            text-align: center;
-            color: $white;
-            border: $table-border-width solid $gray-900;
             font-weight: $font-weight-semibold;
+            @include border-top-radius($tooltip-border-radius);
         }
 
         td {
             padding: $table-cell-padding-xs;
-            background-color: $white;
-            border: $table-border-width solid $border-color;
+            border-top: $border-width solid $c3-tooltip-border-color;
+
 
             > span {
                 display: inline-block;

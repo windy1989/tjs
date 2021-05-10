@@ -71,12 +71,12 @@
 		&.stack-custom-right {
 			top: auto;
 			left: auto;
-			bottom: 15rem;
-			right: 15rem;
+			bottom: 25%;
+			right: 25%;
 		}
 		&.stack-custom-left {
-			top: 15rem;
-			left: 15rem;
+			top: 25%;
+			left: 25%;
 			right: auto;
 			bottom: auto;
 		}
@@ -408,79 +408,6 @@
 		.ui-pnotify-history-pulldown {
 		    display: block;
 		    margin: 0 auto;
-		}
-	}
-
-
-	//
-	// Mobile view setup
-	//
-
-	@include media-breakpoint-down(sm) {
-
-		// On mobile
-		.ui-pnotify-mobile-able {
-
-			// Notification
-		    &.ui-pnotify {
-		        position: fixed;
-		        top: 0;
-		        right: 0;
-		        left: 0;
-		        width: auto !important;
-		        font-smoothing: antialiased;
-
-		        // Shadow
-			    .ui-pnotify-shadow {
-			        border-bottom-width: ($alert-border-width * 5);
-			        @include box-shadow(none);
-			    }
-
-
-			    //
-			    // Alternate stack initial positioning
-			    //
-
-			    &.stack-top-left,
-			    &.stack-bottom-left {
-			        left: 0;
-			        right: 0;
-			    }
-			    &.stack-bottom-right,
-			    &.stack-bottom-left {
-			        left: 0;
-			        right: 0;
-			        bottom: 0;
-			        top: auto;
-
-			        // Shadow
-				    .ui-pnotify-shadow,
-				    .ui-pnotify-shadow {
-				        border-top-width: ($alert-border-width * 5);
-				        border-bottom-width: $alert-border-width;
-				    }
-			    }
-
-
-			    //
-			    // Utility classes
-			    //
-
-			    // Fade out
-				&.ui-pnotify-nonblock-fade {
-				    opacity: 0.2;
-				}
-
-				// Hide
-				&.ui-pnotify-nonblock-hide {
-				    display: none !important;
-				}
-			}
-
-		    // Container
-		    .ui-pnotify-container {
-		        @include border-radius(0);
-		    }
 		}
 	}
 }

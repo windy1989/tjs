@@ -28,12 +28,12 @@
 
 		// Top dot
 		&:before {
-			top: 0;
+			top: -($timeline-line-width * 2);
 		}
 
 		// Bottom dot
 		&:after {
-			bottom: 0;
+			bottom: -($timeline-line-width * 2);
 		}
 	}
 
@@ -217,7 +217,7 @@
 		.timeline-left {
 
 			// Vertical line
-			.timeline-container:after,
+			.timeline-container:before,
 			&:before,
 			&:after,
 			.timeline-date:before,
@@ -236,17 +236,21 @@
 		.timeline-right {
 
 			// Vertical line
-			.timeline-container:after,
+			.timeline-container:before,
 			&:before,
 			&:after,
 			.timeline-date:before,
 			.timeline-date:after {
 				left: auto;
 				right: ($timeline-icon-size / 2);
-				margin-left: 0;
-				margin-right: -($timeline-line-width);
 			}
-			.timeline-container:after {
+
+			// Adjust dots position
+			&:before,
+			&:after,
+			.timeline-date:before,
+			.timeline-date:after {
+				margin-left: 0;
 				margin-right: -($timeline-line-width / 2);
 			}
 

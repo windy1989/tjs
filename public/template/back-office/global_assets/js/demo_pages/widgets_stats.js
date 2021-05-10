@@ -137,10 +137,11 @@ var StatisticWidgets = function() {
                 // ------------------------------
 
                 // Call function on window resize
-                $(window).on('resize', messagesAreaResize);
+                window.addEventListener('resize', messagesAreaResize);
 
                 // Call function on sidebar width change
-                $(document).on('click', '.sidebar-control', messagesAreaResize);
+                var sidebarToggle = document.querySelector('.sidebar-control');
+                sidebarToggle && sidebarToggle.addEventListener('click', messagesAreaResize);
 
                 // Resize function
                 // 
@@ -354,10 +355,11 @@ var StatisticWidgets = function() {
             // ------------------------------
 
             // Call function on window resize
-            $(window).on('resize', barsResize);
+            window.addEventListener('resize', barsResize);
 
             // Call function on sidebar width change
-            $(document).on('click', '.sidebar-control', barsResize);
+            var sidebarToggle = document.querySelector('.sidebar-control');
+            sidebarToggle && sidebarToggle.addEventListener('click', barsResize);
 
             // Resize function
             // 
@@ -919,10 +921,11 @@ var StatisticWidgets = function() {
             // ------------------------------
 
             // Call function on window resize
-            $(window).on('resize', resizeSparklines);
+            window.addEventListener('resize', resizeSparklines);
 
             // Call function on sidebar width change
-            $(document).on('click', '.sidebar-control', resizeSparklines);
+            var sidebarToggle = document.querySelector('.sidebar-control');
+            sidebarToggle && sidebarToggle.addEventListener('click', resizeSparklines);
 
             // Resize function
             // 
@@ -964,7 +967,7 @@ var StatisticWidgets = function() {
     };
 
     // Animated progress with icon
-    var _progressIcon = function(element, radius, border, backgroundColor, foregroundColor, end, iconClass) {
+    var _progressIcon = function(element, radius, border, foregroundColor, end, iconClass) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -1029,7 +1032,8 @@ var StatisticWidgets = function() {
             svg.append('path')
                 .attr('class', 'd3-progress-background')
                 .attr('d', arc.endAngle(twoPi))
-                .style('fill', backgroundColor);
+                .style('fill', foregroundColor)
+                .style('opacity', 0.1);
 
             // Foreground path
             var foreground = svg.append('path')
@@ -1090,7 +1094,7 @@ var StatisticWidgets = function() {
     };
 
     // Animated progress with percentage count
-    var _progressPercentage = function(element, radius, border, backgroundColor, foregroundColor, end) {
+    var _progressPercentage = function(element, radius, border, foregroundColor, end) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -1155,7 +1159,8 @@ var StatisticWidgets = function() {
             svg.append('path')
                 .attr('class', 'd3-progress-background')
                 .attr('d', arc.endAngle(twoPi))
-                .style('fill', backgroundColor);
+                .style('fill', foregroundColor)
+                .style('opacity', 0.1);
 
             // Foreground path
             var foreground = svg.append('path')
@@ -1228,17 +1233,17 @@ var StatisticWidgets = function() {
             var data = [
                 {
                     "status": "Pending tickets",
-                    "icon": "<i class='badge badge-mark border-blue-300 mr-2'></i>",
+                    "icon": "<i class='icon-history text-blue mr-2'></i>",
                     "value": 938,
                     "color": "#29B6F6"
                 }, {
                     "status": "Resolved tickets",
-                    "icon": "<i class='badge badge-mark border-success-300 mr-2'></i>",
+                    "icon": "<i class='icon-checkmark3 text-success mr-2'></i>",
                     "value": 490,
                     "color": "#66BB6A"
                 }, {
                     "status": "Closed tickets",
-                    "icon": "<i class='badge badge-mark border-danger-300 mr-2'></i>",
+                    "icon": "<i class='icon-cross2 text-danger mr-2'></i>",
                     "value": 789,
                     "color": "#EF5350"
                 }
@@ -1307,10 +1312,8 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
             
@@ -1468,10 +1471,8 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
             
@@ -1601,17 +1602,17 @@ var StatisticWidgets = function() {
             var data = [
                 {
                     "status": "Pending",
-                    "icon": "<i class='badge badge-mark border-blue-300 mr-2'></i>",
+                    "icon": "<i class='icon-history text-blue mr-2'></i>",
                     "value": 720,
                     "color": "#29B6F6"
                 }, {
                     "status": "Resolved",
-                    "icon": "<i class='badge badge-mark border-success-300 mr-2'></i>",
+                    "icon": "<i class='icon-checkmark3 text-success mr-2'></i>",
                     "value": 990,
                     "color": "#66BB6A"
                 }, {
                     "status": "Closed",
-                    "icon": "<i class='badge badge-mark border-danger-300 mr-2'></i>",
+                    "icon": "<i class='icon-cross2 text-danger mr-2'></i>",
                     "value": 720,
                     "color": "#EF5350"
                 }
@@ -1620,7 +1621,7 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
+                radius = (size/2) - (distance * 2),
                 sum = d3.sum(data, function(d) { return d.value; });
 
 
@@ -1685,13 +1686,11 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
-            
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -1759,15 +1758,11 @@ var StatisticWidgets = function() {
             //
 
             svg.append('text')
-                .attr('class', 'text-muted')
+                // .attr('class', 'text-muted')
                 .attr({
-                    'class': 'half-donut-total',
+                    'class': 'half-donut-total d3-text opacity-50',
                     'text-anchor': 'middle',
                     'dy': -33
-                })
-                .style({
-                    'font-size': '12px',
-                    'fill': '#999'
                 })
                 .text('Total');
 
@@ -1779,7 +1774,7 @@ var StatisticWidgets = function() {
             // Text
             svg
                 .append('text')
-                .attr('class', 'half-conut-count')
+                .attr('class', 'half-conut-count d3-text')
                 .attr('text-anchor', 'middle')
                 .attr('dy', -5)
                 .style({
@@ -1845,17 +1840,17 @@ var StatisticWidgets = function() {
             var data = [
                 {
                     "status": "Pending tickets",
-                    "icon": "<i class='badge badge-mark border-blue-300 mr-2'></i>",
+                    "icon": "<i class='icon-history text-blue mr-2'></i>",
                     "value": 567,
                     "color": "#29B6F6"
                 }, {
                     "status": "Resolved tickets",
-                    "icon": "<i class='badge badge-mark border-success-300 mr-2'></i>",
+                    "icon": "<i class='icon-checkmark3 text-success mr-2'></i>",
                     "value": 234,
                     "color": "#66BB6A"
                 }, {
                     "status": "Closed tickets",
-                    "icon": "<i class='badge badge-mark border-danger-300 mr-2'></i>",
+                    "icon": "<i class='icon-cross2 text-danger mr-2'></i>",
                     "value": 642,
                     "color": "#EF5350"
                 }
@@ -1925,10 +1920,8 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
             
@@ -1996,6 +1989,7 @@ var StatisticWidgets = function() {
             // Append text
             svg
                 .append('text')
+                .attr('class', 'd3-text')
                 .attr('text-anchor', 'middle')
                 .attr('dy', 6)
                 .style({
@@ -2091,10 +2085,8 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
             
@@ -2165,6 +2157,7 @@ var StatisticWidgets = function() {
             // Append text
             svg
                 .append('text')
+                .attr('class', 'd3-text')
                 .attr('text-anchor', 'middle')
                 .attr('dy', 6)
                 .style({
@@ -2310,10 +2303,8 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append("g") 
-                    .attr("class", "d3-arc")
+                    .attr("class", "d3-arc d3-slice-border")
                     .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
                         'cursor': 'pointer'
                     });
             
@@ -2385,22 +2376,17 @@ var StatisticWidgets = function() {
 
             // Total
             svg.append('text')
-                .attr('class', 'text-muted')
                 .attr({
-                    'class': 'half-donut-total',
+                    'class': 'half-donut-total d3-text opacity-50',
                     'text-anchor': 'middle',
                     'dy': -13
-                })
-                .style({
-                    'font-size': '12px',
-                    'fill': '#999'
                 })
                 .text('Total');
 
             // Count
             svg
                 .append('text')
-                .attr('class', 'half-donut-count')
+                .attr('class', 'half-donut-count d3-text')
                 .attr('text-anchor', 'middle')
                 .attr('dy', 14)
                 .style({
@@ -2510,7 +2496,7 @@ var StatisticWidgets = function() {
                 })
                 .attr({
                     'd': arc,
-                    'fill': '#eee'
+                    'class': 'd3-state-empty'
                 });
 
             // Foreground
@@ -2527,8 +2513,8 @@ var StatisticWidgets = function() {
                 .append('text')
                 .text(0 + '%')
                 .attr({
-                    'text-anchor': 'middle',
-                    'fill': '#555'
+                    'class': 'd3-text',
+                    'text-anchor': 'middle'
                 })
                 .style({
                     'font-size': 19,
@@ -2543,9 +2529,9 @@ var StatisticWidgets = function() {
             // Group
             var scale = svg.append('g')
                 .attr('transform', 'translate(' + radius + ',' + (radius + 15) + ')')
+                .attr('class', 'd3-text opacity-75')
                 .style({
-                    'font-size': 12,
-                    'fill': '#999'
+                    'font-size': 12
                 });
 
             // Max
@@ -2676,7 +2662,7 @@ var StatisticWidgets = function() {
                 })
                 .attr({
                     'd': arc,
-                    'fill': '#eee'
+                    'class': 'd3-state-empty'
                 });
 
             // Foreground
@@ -2693,8 +2679,8 @@ var StatisticWidgets = function() {
                 .append('text')
                 .text(0 + '%')
                 .attr({
-                    'text-anchor': 'middle',
-                    'fill': '#555'
+                    'class': 'd3-text',
+                    'text-anchor': 'middle'
                 })
                 .style({
                     'font-size': 19,
@@ -2709,9 +2695,9 @@ var StatisticWidgets = function() {
             // Group
             var scale = svg.append('g')
                 .attr('transform', 'translate(' + radius + ',' + (radius + 15) + ')')
+                .attr('class', 'd3-text opacity-75')
                 .style({
-                    'font-size': 12,
-                    'fill': '#999'
+                    'font-size': 12
                 });
 
             // Max
@@ -2878,10 +2864,12 @@ var StatisticWidgets = function() {
             field
                 .append("text")
                 .text("Out of " + goal)
-                .attr("transform", "translate(0,20)")
+                .attr({
+                    'class': 'd3-text opacity-50',
+                    'transform': 'translate(0,20)'
+                })
                 .style({
                     'font-size': 11,
-                    'fill': '#999',
                     'font-weight': 500,
                     'text-transform': 'uppercase',
                     'text-anchor': 'middle'
@@ -2890,7 +2878,7 @@ var StatisticWidgets = function() {
             // Count
             field
                 .append("text")
-                .attr('class', 'arc-goal-completed')
+                .attr('class', 'arc-goal-completed d3-text')
                 .attr("transform", "translate(0,0)")
                 .style({
                     'font-size': 23,
@@ -3068,7 +3056,7 @@ var StatisticWidgets = function() {
             // Append list
             var legend = d3.select(element)
                 .append('ul')
-                .attr('class', 'chart-widget-legend text-muted')
+                .attr('class', 'chart-widget-legend d3-text')
                 .selectAll('li')
                 .data(data)
                 .enter()
@@ -3226,13 +3214,12 @@ var StatisticWidgets = function() {
                 .data(pie(dataset))
                 .enter()
                 .append('path')
+                .attr('class', 'd3-slice-border')
                 .attr('d', arc)
                 .attr('fill', function(d, i) {
                     return color(d.data.name);
                 })
                 .style({
-                    'stroke': '#fff',
-                    'stroke-width': 2,
                     'cursor': 'pointer'
                 });
 
@@ -3275,7 +3262,10 @@ var StatisticWidgets = function() {
 
             var middleCount = svg.append('text')
                 .datum(0)
-                .attr('dy', 6)
+                .attr({
+                    'class': 'd3-text', 
+                    'dy': 6
+                })
                 .style({
                     'font-size': '21px',
                     'font-weight': 500,
@@ -3435,12 +3425,8 @@ var StatisticWidgets = function() {
 
             // Wrap paths in separate group
             var arcs = svg.append('g')
-                .attr('transform', "translate(" + radius + "," + radius + ")")
-                .style({
-                    'stroke': '#fff',
-                    'stroke-width': 2,
-                    'shape-rendering': 'crispEdges'
-                });
+                .attr('class', 'd3-slice-border')
+                .attr('transform', "translate(" + radius + "," + radius + ")");
 
             // Add paths
             arcs.selectAll('path')
@@ -3466,6 +3452,7 @@ var StatisticWidgets = function() {
                 .data(ticks)
                 .enter()
                 .append('text')
+                .attr('class', 'd3-text opacity-50')
                 .attr('transform', function(d) {
                     var ratio = scale(d);
                     var newAngle = minAngle + (ratio * range);
@@ -3473,8 +3460,7 @@ var StatisticWidgets = function() {
                 })
                 .style({
                     'text-anchor': 'middle',
-                    'font-size': 11,
-                    'fill': '#999'
+                    'font-size': 11
                 })
                 .text(function(d) { return d + "%"; });
 
@@ -3543,21 +3529,21 @@ var StatisticWidgets = function() {
             _barChartWidget("#chart_bar_basic", 24, 50, true, "elastic", 1200, 50, "#EF5350", "members");
             _barChartWidget("#chart_bar_color", 24, 50, true, "elastic", 1200, 50, "rgba(255,255,255,0.75)", "members");
 
-            _lineChartWidget('#line_chart_simple', 50, '#2196F3', 'rgba(33,150,243,0.5)', '#2196F3', '#fff');
+            _lineChartWidget('#line_chart_simple', 50, '#2196F3', 'rgba(33,150,243,0.5)', '#2196F3', '#2196F3');
             _lineChartWidget('#line_chart_color', 50, '#fff', 'rgba(255,255,255,0.5)', '#fff', '#29B6F6');
 
             _sparklinesWidget("#sparklines_basic", "area", 30, 50, "basis", 750, 2000, "#66BB6A");
             _sparklinesWidget("#sparklines_color", "area", 30, 50, "basis", 750, 2000, "rgba(255,255,255,0.75)");
 
-            _progressIcon('#progress_icon_one', 42, 2.5, "#eee", "#EF5350", 0.68, "icon-heart6");
-            _progressIcon('#progress_icon_two', 42, 2.5, "#eee", "#5C6BC0", 0.82, "icon-trophy3");
-            _progressIcon('#progress_icon_three', 42, 2.5, "#00897B", "#fff", 0.73, "icon-bag");
-            _progressIcon('#progress_icon_four', 42, 2.5, "#673AB7", "#fff", 0.49, "icon-truck");
+            _progressIcon('#progress_icon_one', 42, 2.5, "#4cb6ac", 0.68, "icon-heart6");
+            _progressIcon('#progress_icon_two', 42, 2.5, "#28b6f6", 0.82, "icon-trophy3");
+            _progressIcon('#progress_icon_three', 42, 2.5, "#fff", 0.73, "icon-bag");
+            _progressIcon('#progress_icon_four', 42, 2.5, "#fff", 0.49, "icon-truck");
 
-            _progressPercentage('#progress_percentage_one', 46, 3, "#eee", "#2196F3", 0.79);
-            _progressPercentage('#progress_percentage_two', 46, 3, "#eee", "#EF5350", 0.62);
-            _progressPercentage('#progress_percentage_three', 46, 3, "#039BE5", "#fff", 0.69);
-            _progressPercentage('#progress_percentage_four', 46, 3, "#E53935", "#fff", 0.43);
+            _progressPercentage('#progress_percentage_one', 46, 3, "#ec3f7a", 0.79);
+            _progressPercentage('#progress_percentage_two', 46, 3, "#66bb6a", 0.62);
+            _progressPercentage('#progress_percentage_three', 46, 3, "#fff", 0.69);
+            _progressPercentage('#progress_percentage_four', 46, 3, "#fff", 0.43);
 
             _animatedPie("#pie_basic", 120);
             _animatedPieWithLegend("#pie_basic_legend", 120);

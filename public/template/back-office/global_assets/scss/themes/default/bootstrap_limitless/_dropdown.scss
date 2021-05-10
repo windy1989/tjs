@@ -292,8 +292,10 @@
         .context-toggle &,
         .navbar-nav > .nav-item:not([class*=mega-menu]) > &,
         .nav-item:not([class*=mega-menu]) .navbar-nav-link ~ & {
-            /*rtl:ignore*/
+            /*rtl:begin:ignore*/
+            left: auto;
             right: 0;
+            /*rtl:end:ignore*/
         }
     }
 

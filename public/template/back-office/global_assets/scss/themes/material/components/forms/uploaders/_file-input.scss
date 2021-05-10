@@ -34,6 +34,11 @@
 		}
 	}
 
+	// Caption
+	.file-caption {
+		top: 0;
+	}
+
 	// Highlight input on focus
 	.file-caption {
 	    &:focus {
@@ -48,6 +53,7 @@
 	    overflow: hidden;
 	    word-break: break-all;
 	    font-family: $font-family-sans-serif;
+	    color: $input-color;
 	    width: 100%;
 	    margin: 0;
 	    padding: 0;
@@ -79,11 +85,6 @@
 	    .file-drop-zone & {
 	    	margin-top: $input-btn-padding-y;
 	    }
-
-	    // Close button
-		.close {
-		    color: $color-danger-800;
-		}
 
 		// List of errors
 		pre {
@@ -124,7 +125,7 @@
 
 	// File preview container
 	.file-preview {
-		border: $border-width solid $border-color;
+		border: ($border-width * 2) dashed $border-color;
 		width: 100%;
 		margin-bottom: $spacer;
 		position: relative;
@@ -138,11 +139,12 @@
 		    position: absolute;
 		    top: 0;
 		    right: 0;
-		    padding: $fileinput-preview-spacer;
+		    padding: $alert-padding-y $alert-padding-x;
 		    line-height: 1;
 			color: $close-color;
 			text-shadow: $close-text-shadow;
 			opacity: 0.75;
+			z-index: 2;
 			@include border-radius($border-radius);
 
 			// Hover state
@@ -348,10 +350,11 @@
 	    button {
 	    	padding: map-get($spacers, 2);
 	    	background-color: transparent;
+	    	color: $body-color;
 	    	border: 0;
 	    	line-height: 1;
 	    	cursor: pointer;
-	    	opacity: 0.6;
+	    	opacity: 0.8;
 	    	outline: 0;
 		    @include transition(opacity ease-in-out $component-transition-timer);
 
@@ -395,10 +398,8 @@
 
 	// Base
 	.file-drop-zone {
-	    border: $border-width dashed $border-color;
 	    height: 100%;
 	    vertical-align: middle;
-	    margin: $fileinput-preview-spacer;
 	    padding: $fileinput-preview-spacer;
 	    @include border-radius($border-radius);
 	}

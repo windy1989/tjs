@@ -23,88 +23,71 @@
         &.breakpoint {
             > tbody {
                 > tr {
-                    &.footable-detail-show > td {
-                        border-bottom: 0;
-                    }
-
-                    // Remove background color from details row
-                    &.footable-row-detail:hover {
-                        background-color: transparent;
-                    }
 
                     // Add pointer
-                    &:hover:not(.footable-row-detail) {
+                    &:hover:not(.footable-detail-row) {
                         cursor: pointer;
                     }
 
-                    // Cell with details
-                    > .footable-cell-detail {
-                        background-color: $gray-100;
-                        border-top: 0;
+                    // Add expand icon
+                    .footable-toggle {
+                        line-height: 1;
+                        margin-top: (($line-height-computed - $icon-font-size) / 2);
+
+                        // Icon base
+                        &:before {
+                            content: $icon-table-row-expand;
+                            display: block;  
+                            font-family: $icon-font-family;
+                            font-size: $icon-font-size;
+                            line-height: 1;
+                            @include ll-font-smoothing();
+                        }
                     }
 
-                    // Add expand icon
-                    .footable-toggle:before {
-                        content: $icon-table-row-expand;
-                        display: inline-block;  
-                        font-family: $icon-font-family;
-                        font-size: $icon-font-size;
-                        vertical-align: middle;
-                        position: relative;
-                        top: (($font-size-base - $icon-font-size) / 2);
-                        line-height: 1;
-                        padding-right: $element-spacer-x;
-                        @include ll-font-smoothing();
+                    // Stick to the left in first column
+                    .footable-first-visible .footable-toggle {
+                        float: left;
+                        margin-right: map-get($spacers, 2);
+                    }
+
+                    // Stick to the right in last column
+                    .footable-last-visible .footable-toggle {
+                        float: right;
+                        margin-left: map-get($spacers, 2);
                     }
 
                     // Add collapse icon
-                    &.footable-detail-show .footable-toggle:before {
+                    &[data-expanded=true] .footable-toggle:before {
                         content: $icon-table-row-collapse;       
                     }
                 }
             }
         }
-    }
 
+        // Row that contains details
+        .footable-detail-row {
 
-    //
-    // Row styling
-    //
-
-    // Inner wrapper
-    .footable-row-detail-inner {
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    // Row details
-    .footable-row-detail-row {
-        display: table-row;
-    }
-
-    // Grouped details
-    .footable-row-detail-group {
-        display: block;
-        font-weight: $font-weight-semibold;
-        margin-top: $spacer;
-        margin-bottom: 0.5rem;
-
-        &:first-child {
-            margin-top: 0.5rem;
+            // Reset .table-hover highlight
+            &:hover {
+                background-color: transparent;
+            }
+            
+            // Reset inner cell styles
+            > td {
+                padding: 0;
+                background-color: transparent;
+            }
         }
     }
 
-    // Name
-    .footable-row-detail-name {
-        display: table-cell;
-        font-weight: $font-weight-semibold;
-        padding-right: ($card-spacer-x * 2);
-    }
+    // Inner list
+    .footable-details {
+        background-color: $ft-inner-list-bg;
 
-    // Value
-    .footable-row-detail-value {
-        display: table-cell;
-        padding: 0.5rem 0;
+        // Force text alignment to the left
+        td {
+            text-align: left!important;
+        }
     }
 }

@@ -77,6 +77,7 @@
         resize: none;
         outline: none;
         overflow: auto;
+        color: $body-color;
 
         // Autogrow on Enter press
         &.trumbowyg-autogrow-on-enter {
@@ -211,6 +212,7 @@
             cursor: pointer;
             background-color: transparent;
             vertical-align: middle;
+            color: $trumbowyg-toolbar-color;
             @include transition(background-color ease-in-out $component-transition-timer, opacity ease-in-out $component-transition-timer);
 
             // Text button
@@ -537,7 +539,7 @@
 
         // Active fullscreen button state
         .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
-            color: $gray-900;
+            color: $trumbowyg-toolbar-color;
             fill: transparent;
         }
     }

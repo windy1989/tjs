@@ -24,7 +24,7 @@
         position: absolute;
         z-index: 1001;
         background-color: theme-color("primary");
-        background-image: repeating-linear-gradient(45deg, transparent, transparent 0.3125rem, rgba($white, 0.75) 0.3125rem, rgba($white, 0.75) 0.625rem);
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 0.3125rem, rgba($card-bg, 0.75) 0.3125rem, rgba($card-bg, 0.75) 0.625rem);
 
         // Vertical lines
         &.top,

@@ -39,10 +39,23 @@
         @include transition(all ease-in-out $component-transition-timer);
     }
 
+    // Remove shadow on focus
+    &:focus ~ .custom-control-label::before {
+        box-shadow: none;
+    }
+
     // Disabled state
     &:disabled {
+
+        // Label
         ~ .custom-control-label {
             cursor: $cursor-disabled;
+        }
+
+        // Control
+        ~ .custom-control-label:before,
+        ~ .custom-control-label:after {
+            opacity: $checkbox-disabled-opacity;
         }
     }
 }

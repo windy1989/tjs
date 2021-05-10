@@ -23,26 +23,22 @@
 
             // Success
             &.focus-success {
-                background-color: $color-success-50;
-                outline-color: $color-success-500;
+                outline-color: theme-color("success");
             }
 
             // Info
             &.focus-info {
-                background-color: $color-primary-50;
-                outline-color: $color-primary-500;
+                outline-color: theme-color("info");
             }
 
             // Warning
             &.focus-warning {
-                background-color: $color-warning-50;
-                outline-color: $color-warning-500;
+                outline-color: theme-color("warning");
             }
 
             // Danger
             &.focus-danger {
-                background-color: $color-danger-50;
-                outline-color: $color-danger-500;
+                outline-color: theme-color("danger");
             }
         }
     }

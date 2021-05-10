@@ -376,7 +376,7 @@
 			&.disabled {
 				@include plain-hover-focus {
 					cursor: $cursor-disabled;
-					background-color: $pagination-disabled-bg;
+					background-color: transparent;
 					color: $pagination-disabled-color;
 				}
 			}

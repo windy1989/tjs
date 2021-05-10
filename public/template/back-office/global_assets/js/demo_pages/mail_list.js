@@ -21,7 +21,7 @@ var MailList = function() {
     var _componentTableInbox = function() {
 
         // Define variables
-        var highlightColorClass = 'alpha-slate';
+        var highlightColorClass = 'table-secondary';
 
         // Highlight row when checkbox is checked
         $('.table-inbox').find('tr > td:first-child').find('input[type=checkbox]').on('change', function() {

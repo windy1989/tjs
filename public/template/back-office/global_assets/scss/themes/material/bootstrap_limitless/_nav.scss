@@ -15,6 +15,16 @@
     position: relative;
     @include transition(all ease-in-out $component-transition-timer);
 
+    // Remove outline
+    &:focus {
+        outline: 0;
+    }
+
+    // Remove ugly dotted border in FF
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
     // Disabled state
     &.disabled {
         cursor: $cursor-disabled;

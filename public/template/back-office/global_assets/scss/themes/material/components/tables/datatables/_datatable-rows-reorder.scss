@@ -14,7 +14,7 @@
     .dt-rowReorder-float {
         position: absolute!important;
         table-layout: static;
-        outline: $table-border-width dashed $color-grey-500;
+        outline: $table-border-width dashed $table-border-color;
         outline-offset: -($table-border-width);
         background-color: $card-bg;
         z-index: $zindex-fixed;
@@ -24,7 +24,7 @@
 
     // The target row
     .dt-rowReorder-moving {
-        outline: $table-border-width solid $color-grey-500;
+        outline: $table-border-width solid $table-border-color;
         outline-offset: -($table-border-width);
     }
 

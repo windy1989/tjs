@@ -31,6 +31,11 @@
         }
     }
 
+    // Remove ugly dotted border in FF
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
     // Disabled state
     &.disabled,
     &:disabled {

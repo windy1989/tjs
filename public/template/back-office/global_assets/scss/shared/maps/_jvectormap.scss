@@ -35,14 +35,16 @@
         font-size: $icon-font-size;
         font-weight: $font-weight-light;
         line-height: 0.625rem;
-        background-color: $color-slate-700;
+        color: $map-btn-zoom-color;
+        background-color: $map-btn-zoom-bg;
         text-align: center;
         @include border-radius($border-radius);
         @include transition(all ease-in-out $component-transition-timer);
 
         //  Hover state
         @include hover {
-            background-color: $color-slate-800;
+            color: $map-btn-zoom-hover-color;
+            background-color: $map-btn-zoom-hover-bg;
         }
     }
     .jvectormap-zoomin {

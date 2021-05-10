@@ -81,6 +81,8 @@
             // Disabled state
             &.disabled {
                 background-color: $input-disabled-bg;
+                color: $input-disabled-color;
+                opacity: 1;
             }
         }
 

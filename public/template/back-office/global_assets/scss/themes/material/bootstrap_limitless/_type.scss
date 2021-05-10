@@ -130,19 +130,20 @@ ul {
     }
 }
 
-// List icons item
-.list-icons-item {
-    display: inline-block;
-    line-height: 1;
-}
-
 // Linked list icons item
 a.list-icons-item {
+    display: inline-block;
+    line-height: 1;
     @include transition(all ease-in-out $component-transition-timer);
 
     // Color
     &:not([class*=text-]) {
         color: inherit;
+    }
+
+    // Icon
+    > i {
+        top: 0;
     }
 
     // Hover/open states

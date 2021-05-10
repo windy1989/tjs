@@ -56,14 +56,14 @@ var MediaLibrary = function() {
             }
         });
 
-        // Toggle success class
+        // Toggle active class
         $('.media-library tbody td input[type=checkbox]').on('change', function () {
             if ($(this).is(':checked')) {
-                $(this).parents('tr').addClass('table-success');
+                $(this).parents('tr').addClass('table-active');
                 $.uniform.update();
             }
             else {
-                $(this).parents('tr').removeClass('table-success');
+                $(this).parents('tr').removeClass('table-active');
                 $.uniform.update();
             }
         });

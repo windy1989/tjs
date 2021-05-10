@@ -165,13 +165,31 @@ $chart-container-height:                  400px !default;
 $chart-min-width:                         37.5rem !default;
 $chart-pie-min-width:                     31.25rem !default;
 
+$chart-text-color:						  $body-color !default;
+$chart-line-color:						  $gray-600 !default;
+$chart-axis-line-color:					  $gray-600 !default;
+$chart-axis-text-color:					  $body-color !default;
+$chart-grid-color-primary:				  $gray-400 !default;
+$chart-grid-color-secondary:			  $gray-900 !default;
+$chart-empty-bg:						  $gray-300 !default;
+
+$c3-region-bg:							  $gray-500 !default;
+$c3-region-opacity:						  1 !default;
+$c3-tooltip-border-color:			  	  rgba($white, 0.1) !default;
+
 // Maps
 $map-container-height:                    500px !default;
 $map-container-sidebar-height:            200px !default;
 
+$map-btn-zoom-bg:						  $gray-900 !default;
+$map-btn-zoom-color:					  $white !default;
+$map-btn-zoom-hover-bg:					  $gray-800 !default;
+$map-btn-zoom-hover-color:				  $map-btn-zoom-color !default;
+
 // Misc
 $select-custom-width:                     220px !default;
 $cursor-disabled:                         default !default;
+$drag-placeholder-bg:					  rgba($white, 0.8) !default;
 
 
 
@@ -291,12 +309,12 @@ $navigation-sub-item-opacity:               0.5 !default;
 
 // Dark sidebar navigation styles
 $navigation-dark-color:                     rgba($sidebar-dark-color, 0.9) !default;
-$navigation-dark-hover-bg:                  rgba($black, 0.15) !default;
+$navigation-dark-hover-bg:                  rgba($white, 0.1) !default;
 $navigation-dark-hover-color:               $sidebar-dark-color !default;
 $navigation-dark-active-bg:                 $color-teal-400 !default;
 $navigation-dark-active-color:              $white !default;
 $navigation-dark-sub-bg:                    rgba($black, 0.15) !default;
-$navigation-dark-sub-active-bg:             rgba($black, 0.15) !default;
+$navigation-dark-sub-active-bg:             rgba($white, 0.1) !default;
 $navigation-dark-sub-active-color:          $white !default;
 $navigation-dark-bordered-border-width:     $border-width !default;
 $navigation-dark-bordered-border-color:     rgba($white, 0.1) !default;
@@ -315,7 +333,6 @@ $navigation-light-sub-active-color:         $body-color !default;
 $navigation-light-bordered-border-width:    $border-width !default;
 $navigation-light-bordered-border-color:    $gray-400 !default;
 $navigation-light-bordered-header-bg:       $gray-100 !default;
-
 
 
 //
@@ -412,6 +429,7 @@ $summernote-border-color:            $border-color !default;
 $summernote-font-path:               "../../../../../../global_assets/css/icons/summernote/" !default;
 $summernote-icon-font-size:          0.875rem !default;
 $summernote-min-height:              rem-calc(150px) !default;
+$summernote-toolbar-bg:				 $card-bg !default;
 
 $summernote-resizer-width:           1.25rem !default;
 $summernote-resizer-height:          $border-width !default;
@@ -431,6 +449,12 @@ $trumbowyg-toolbar-border-width:     $border-width !default;
 $trumbowyg-toolbar-border-color:     $border-color !default;
 $trumbowyg-toolbar-divider-width:    0 !default;
 $trumbowyg-toolbar-height:           ($btn-padding-x * 2) + $icon-font-size + rem-calc($trumbowyg-toolbar-border-width * 2) !default;
+
+
+// CKEditor
+$cke-toolbar-bg:					 $card-bg !default;
+$cke-float-toolbar-bg:				 $cke-toolbar-bg !default;
+$cke-resizer-size:					 ($border-width * 8) !default;
 
 
 // Ace code editor
@@ -599,6 +623,10 @@ $swal2-icon-size:                      5rem !default;
 $swal2-icon-border-width:              0.25rem !default;
 $swal2-icon-spacer:                    1rem !default;
 
+$swal2-toast-icon-size:                1.75rem !default;
+$swal2-toast-icon-border-width:        0.125rem !default;
+$swal2-toast-icon-spacer:              0.5rem !default;
+
 $swal2-step-inactive-color:            $text-muted !default;
 $swal2-step-active-color:              $color-primary-500 !default;
 $swal2-step-complete-color:            $swal2-step-active-color !default;
@@ -618,6 +646,15 @@ $swal2-question-border-color:          $swal2-question-color !default;
 
 $swal2-success-color:                  $color-success-400 !default;
 $swal2-success-border-color:           $swal2-success-color !default;
+
+$swal2-steps-distance: 				   2.5em !default;
+$swal2-steps-line-size: 			   ($border-width * 2) !default;
+$swal2-step-padding-y: 				   $pagination-padding-y !default;
+$swal2-step-padding-x: 				   $pagination-padding-x !default;
+$swal2-step-background: 			   $gray-900 !default;
+$swal2-step-color: 					   $body-color !default;
+$swal2-active-step-background: 		   theme-color("primary") !default;
+$swal2-active-step-color: 			   $white !default;
 
 
 
@@ -655,6 +692,10 @@ $dt-button-collection-3col-width:    28.13rem !default;
 $dt-button-collection-4col-width:    37.5rem !default;
 
 $dt-ext-select-active-row-bg:        $color-success-50 !default;
+
+
+// Footable
+$ft-inner-list-bg:					rgba($black, 0.1) !default;
 
 
 
@@ -721,6 +762,7 @@ $slider-handle-inner-hover-bg:         $slider-handle-hover-bg !default;
 
 $slider-pips-color:                    $gray-700 !default;
 $slider-pips-spacer-y:                 1rem !default;
+$slider-pips-spacer-x:                 1rem !default;
 $slider-pips-marker-width:             0.0625rem !default;
 $slider-pips-marker-height:            0.1875rem !default;
 $slider-pips-font-size:                $font-size-xs !default;

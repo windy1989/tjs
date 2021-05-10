@@ -40,11 +40,11 @@
 		&:before {
 			content: '';
 			display: inline-block;
-			background-color: rgba($white, 0.8);
+			background-color: $drag-placeholder-bg;
 			position: absolute;
 			left: 0;
 			top: 0;
-			border: $border-width dashed rgba($black, 0.2);
+			border: $border-width dashed $border-color;
 			@include size(100%);
 		}
 	}

@@ -11,7 +11,7 @@
 
     // Highlight cloned header
     .DTCR_clonedTable {
-        background-color: rgba($white, 0.8);
+        background-color: $drag-placeholder-bg;
         z-index: 202;
         cursor: move;
 

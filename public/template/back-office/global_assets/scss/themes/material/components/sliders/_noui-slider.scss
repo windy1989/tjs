@@ -53,7 +53,6 @@
         left: 0;
         transform-origin: 0 0;
         /*rtl:end:ignore*/
-        @include size(100%);
     }
 
     // Inherit cursor
@@ -64,6 +63,12 @@
     // Connector
     .noUi-connect {
         background-color: $slider-connect-bg;
+        @include size(100%);
+    }
+
+    // Origin
+    .noUi-origin {
+        @include size(10%);
     }
 
     // Disabled state
@@ -133,7 +138,7 @@
 
         // If has pips
         &.has-pips {
-            margin-right: ($slider-pips-spacer-y + $line-height-computed);
+            margin-right: ($slider-pips-spacer-x + $line-height-computed);
         }
     }
 
@@ -152,6 +157,11 @@
         }
     }
 
+    // Touch area
+    .noUi-touch-area {
+        @include size(100%);
+    }
+
     // Handle
     .noUi-handle {
         background-color: $slider-handle-bg;
@@ -168,11 +178,6 @@
         &,
         &:after {
             @include transition(all ease-in-out $component-transition-timer);
-        }
-
-        // This class is applied to the lower origin when its values is > 50%
-        .noUi-stacking & {
-            z-index: 10;
         }
 
         // Inner circle
@@ -497,7 +502,6 @@
 
     // Default
     .noUi-value {
-        width: 2.5rem;
         position: absolute;
         text-align: center;
         font-size: $slider-pips-font-size;
@@ -535,11 +539,19 @@
 
     // Values
     .noUi-value-horizontal {
-        margin-left: -(1.25rem);
         padding-top: $slider-pips-spacer-y;
+        transform: translateX(-50%);
 
+        // Sub values
         &.noUi-value-sub {
             padding-top: ($slider-pips-spacer-y / 1.5);
+        }
+
+        // Reverse direction
+        .noUi-rtl & {
+            /*rtl:begin:ignore*/
+            transform: translateX(50%);
+            /*rtl:end:ignore*/
         }
     }
 
@@ -570,7 +582,7 @@
 
     // Pips
     .noUi-pips-vertical {
-        padding-left: ($slider-pips-spacer-y / 1.5);
+        padding-left: ($slider-pips-spacer-x / 1.5);
         height: 100%;
         top: 0;
         left: 100%;
@@ -578,12 +590,14 @@
 
     // Values
     .noUi-value-vertical {
-        margin-top: -($line-height-computed / 2);
-        padding-left: ($slider-pips-spacer-y / 2);
+        padding-left: $slider-pips-spacer-x;
+        transform: translateY(-50%);
 
+        // Reverse direction
         .noUi-rtl & {
-            margin-top: 0;
-            margin-bottom: -($line-height-computed / 2);
+            /*rtl:begin:ignore*/
+            transform: translateY(50%);
+            /*rtl:end:ignore*/
         }
     }
 

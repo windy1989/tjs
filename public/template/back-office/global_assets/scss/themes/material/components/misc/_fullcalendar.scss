@@ -19,14 +19,6 @@
 		text-align: left;
 	}
 
-	// Events container
-	.fc-events-container {
-		background-color: $gray-100;
-		border: $border-width solid $border-color;
-		padding: map-get($spacers, 2);
-		@include border-radius($border-radius);
-	}
-
 	// Event
 	.fc-event {
 		padding: $fullcalendar-event-padding-y $fullcalendar-event-padding-x;

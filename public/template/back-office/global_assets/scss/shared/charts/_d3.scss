@@ -9,6 +9,30 @@
 // Check if component is enabled
 @if $enable-d3 {
 
+    // Base
+    // ------------------------------
+
+    // Text color
+    .d3-text {
+        fill: $chart-text-color;
+    }
+
+    // Border color for slices
+    .d3-slice-border {
+        stroke: $card-bg;
+        stroke-width: 1.5px;
+    }
+
+    // Empty state background
+    .d3-state-empty {
+        fill: $chart-empty-bg;
+    }
+
+    // Background color
+    .d3-bg {
+        fill: $card-bg;
+    }
+
 
     // Axis
     // ------------------------------
@@ -16,17 +40,16 @@
     // Base
     .d3-axis {
 
-        // Path
-        path {
-            fill: none;
-            stroke: $gray-600;
+        // Lines
+        path,
+        line {
+            stroke: $chart-axis-line-color;
             shape-rendering: crispEdges;
         }
 
-        // Line
-        line {
-            stroke: $gray-200;
-            shape-rendering: crispEdges;
+        // Axis line
+        path {
+            fill: none;
         }
 
         // Ticks
@@ -34,66 +57,22 @@
             &,
             text {
                 font-size: $font-size-sm;
-                fill: $gray-900;
-            }
-        }
-    }
-
-    // Lighter axis text
-    .d3-axis-solid {
-        path,
-        line {
-            stroke: $gray-500;
-        }
-
-        // Ticks
-        .tick {
-            fill: $gray-600;
-
-            text {
-                fill: $gray-600;
-            }
-        }
-    }
-
-    // Stronger axis text
-    .d3-axis-strong {
-        path,
-        line {
-            stroke: $gray-500;
-        }
-
-        // Ticks
-        .tick {
-            fill: $gray-900;
-
-            text {
-                fill: $gray-900;
+                fill: $chart-axis-text-color;
             }
         }
     }
 
     // Transparent axis
     .d3-axis-transparent {
-
-        // Hide path
         path {
             stroke: none;
         }
+    }
 
-        // Hide line
-        line {
-            stroke: $gray-300;
-        }
-
-        // Change tick colors
-        .tick {
-            fill: $gray-600;
-
-            text {
-                fill: $gray-600;
-            }
-        }
+    // Axis text titles
+    .d3-axis-title {
+        font-size: $font-size-sm;
+        fill: rgba($chart-text-color, 0.75);
     }
 
 
@@ -207,7 +186,7 @@
 
     // Line circles
     .d3-line-circle {
-        fill: none;
+        fill: $card-bg;
         cursor: pointer;
 
         // Thin stroke
@@ -226,6 +205,12 @@
         }
     }
 
+    // Connect lines
+    .d3-line-connect {
+        fill: none;
+        stroke: $chart-line-color;
+    }
+
 
 
     // Grid
@@ -236,25 +221,18 @@
         .tick {
             line {
                 stroke-width: 1px;
-                stroke: $gray-300;
-                shape-rendering: crispEdges;
-            }
-
-            text {
-                fill: $gray-900;
-                stroke: none;
+                stroke: $chart-grid-color-primary;
             }
         }
     }
 
-
     // Dashed grid
     .d3-grid-dashed {
         .tick {
-            stroke-dasharray: 4,2;
-            stroke-width: 1px;
-            stroke: $gray-300;
-            shape-rendering: crispEdges;
+            line {
+                stroke-dasharray: 4,2;
+                stroke: $chart-grid-color-primary;
+            }
         }
 
         path {
@@ -273,6 +251,22 @@
         pointer-events: all;
     }
 
+    // Crosshair pointer
+    .d3-crosshair-pointer {
+        text {
+            fill: $body-color;
+        }
+    }
+
+    // Crosshair line
+    .d3-crosshair-line {
+        fill: none;
+        stroke: $chart-line-color;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+        pointer-events: none;
+    }
+
 
 
     // Bullets
@@ -287,14 +281,14 @@
 
         // Line styles
         line {
-            stroke: $gray-600;
+            stroke: $chart-axis-line-color;
             stroke-width: 1px;
             shape-rendering: crispEdges;
         }
 
         // Text styles
         text {
-            fill: $gray-600;
+            fill: $chart-axis-text-color;
             font-size: $font-size-sm;
         }
     }
@@ -307,13 +301,14 @@
 
     // Title
     .bullet-title {
+        fill: $chart-text-color;
         font-size: $font-size-base;
         font-weight: $font-weight-semibold;
     }
 
     // Subtitle
     .bullet-subtitle {
-        fill: $gray-600;
+        fill: $chart-text-color;
     }
 
 
@@ -420,9 +415,22 @@
     // Legend
     // ------------------------------
 
+    .d3-legend {
+        text {
+            fill: $chart-text-color;
+            font-size: $font-size-sm;
+        }
+
+        line {
+            stroke: $chart-axis-line-color;
+            stroke-width: 1px;
+        }
+    }
+
     .chart-widget-legend {
         margin: 0.625rem 0 0 0;
         padding: 0;
+        fill: $chart-text-color;
         font-size: $font-size-sm;
         text-align: center;
         

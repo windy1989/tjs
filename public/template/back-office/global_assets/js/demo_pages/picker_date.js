@@ -26,14 +26,14 @@ var DateTimePickers = function() {
 
         // Basic initialization
         $('.daterange-basic').daterangepicker({
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light'
         });
 
         // Display week numbers
         $('.daterange-weeknumbers').daterangepicker({
             showWeekNumbers: true,
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light'
         });
 
@@ -46,7 +46,7 @@ var DateTimePickers = function() {
         // Display time picker
         $('.daterange-time').daterangepicker({
             timePicker: true,
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light',
             locale: {
                 format: 'MM/DD/YYYY h:mm a'
@@ -56,7 +56,7 @@ var DateTimePickers = function() {
         // Show calendars on left
         $('.daterange-left').daterangepicker({
             opens: 'left',
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light'
         });
 
@@ -69,7 +69,7 @@ var DateTimePickers = function() {
         $('.daterange-datemenu').daterangepicker({
             showDropdowns: true,
             opens: 'left',
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light'
         });
 
@@ -77,7 +77,7 @@ var DateTimePickers = function() {
         $('.daterange-increments').daterangepicker({
             timePicker: true,
             opens: 'left',
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light',
             timePickerIncrement: 10,
             locale: {
@@ -87,7 +87,7 @@ var DateTimePickers = function() {
 
         // Localization
         $('.daterange-locale').daterangepicker({
-            applyClass: 'bg-slate-600',
+            applyClass: 'btn-primary',
             cancelClass: 'btn-light',
             opens: 'left',
             ranges: {
@@ -132,7 +132,7 @@ var DateTimePickers = function() {
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
                 opens: 'left',
-                applyClass: 'btn-sm bg-slate',
+                applyClass: 'btn-sm btn-primary',
                 cancelClass: 'btn-sm btn-light'
             },
             function(start, end) {
@@ -166,7 +166,7 @@ var DateTimePickers = function() {
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
                 opens: 'left',
-                applyClass: 'btn-sm bg-slate-600',
+                applyClass: 'btn-sm btn-primary',
                 cancelClass: 'btn-sm btn-light'
             },
             function(start, end) {

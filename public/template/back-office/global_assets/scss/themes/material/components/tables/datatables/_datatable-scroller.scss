@@ -30,17 +30,15 @@
             margin-top: -($spacer);
             margin-left: -6.25rem;
             z-index: 1;
-
             border: $table-border-width solid $table-border-color;
             padding: 1.25rem 0;
             text-align: center;
-            background-color: rgba($white, 0.5);
         }
 
         // Scroller areas
         .dataTables_scrollHead,
         .dataTables_scrollFoot {
-            background-color: $white;
+            background-color: $card-bg;
         }
         .dataTables_scrollBody {
             z-index: 2;

@@ -267,15 +267,19 @@
             padding: $btn-padding-y $btn-padding-x;
             font-weight: $font-weight-semibold;
             cursor: pointer;
+            background-color: $btn-light-bg;
+            border: 0;
+            color: $btn-light-color;
             display: inline-block;
+            margin: map-get($spacers, 1);
             @include border-radius($btn-border-radius);
             @include transition(all ease-in-out $component-transition-timer);
 
             // Hover state
             @include hover-focus {
                 outline: 0;
-                color: $datepicker-item-hover-color;
-                background-color: $datepicker-item-hover-bg;
+                color: $btn-light-hover-color;
+                background-color: $btn-light-hover-bg;
             }
 
             // Indicator

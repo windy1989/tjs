@@ -252,6 +252,7 @@ var FileUpload = function() {
             removeIcon: '<i class="icon-cross2 font-size-base mr-2"></i>',
             fileActionSettings: {
                 removeIcon: '<i class="icon-bin"></i>',
+                removeClass: '',
                 uploadIcon: '<i class="icon-upload"></i>',
                 uploadClass: '',
                 zoomIcon: '<i class="icon-zoomin3"></i>',

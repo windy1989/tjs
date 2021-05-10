@@ -43,7 +43,7 @@ var EcommerceOrdersHistory = function() {
                 }
             ],
             order: [[ 0, 'asc' ]],
-            dom: '<"datatable-header datatable-header-accent"fBl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
+            dom: '<"datatable-header"fBl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',

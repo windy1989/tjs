@@ -17,30 +17,15 @@ var LearningCourseDetailed = function() {
     // Setup module components
     //
 
-    // CKEditor
-    var _componentCKEditor = function() {
-        if (typeof CKEDITOR == 'undefined') {
-            console.warn('Warning - ckeditor.js is not loaded.');
+    // Summernote
+    var _componentSummernote = function() {
+        if (!$().summernote) {
+            console.warn('Warning - summernote.min.js is not loaded.');
             return;
         }
 
-        // Initialize
-        CKEDITOR.replace('add-comment', {
-            height: 200,
-            removeButtons: 'Subscript,Superscript',
-            toolbarGroups: [
-                { name: 'styles' },
-                { name: 'editing',     groups: [ 'find', 'selection' ] },
-                { name: 'basicstyles', groups: [ 'basicstyles' ] },
-                { name: 'paragraph',   groups: [ 'list', 'blocks', 'align' ] },
-                { name: 'links' },
-                { name: 'insert' },
-                { name: 'colors' },
-                { name: 'tools' },
-                { name: 'others' },
-                { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] }
-            ]
-        });    
+        // Default initialization
+        $('#add-comment').summernote();
     };
 
     // Schedule
@@ -159,7 +144,7 @@ var LearningCourseDetailed = function() {
 
     return {
         init: function() {
-            _componentCKEditor();
+            _componentSummernote();
             _componentFullCalendar();
         }
     }

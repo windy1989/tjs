@@ -394,7 +394,7 @@ var NotyJgrowl = function() {
         $('#jgrowl-custom-styled').on('click', function () {
             $.jGrowl('Notification with custom style', {
                 header: 'Custom style',
-                theme: 'alert-styled-left alert-styled-custom alpha-teal text-teal-900 border-teal'
+                theme: 'alert-styled-left alert-styled-custom alpha-teal text-teal-800 border-teal'
             });
         });
 

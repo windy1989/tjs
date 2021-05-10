@@ -34,32 +34,32 @@ var InputsCheckboxesRadios = function () {
 
         // Primary
         $('.form-check-input-styled-primary').uniform({
-            wrapperClass: 'border-primary-600 text-primary-800'
+            wrapperClass: 'border-primary text-primary'
         });
 
         // Danger
         $('.form-check-input-styled-danger').uniform({
-            wrapperClass: 'border-danger-600 text-danger-800'
+            wrapperClass: 'border-danger text-danger'
         });
 
         // Success
         $('.form-check-input-styled-success').uniform({
-            wrapperClass: 'border-success-600 text-success-800'
+            wrapperClass: 'border-success text-success'
         });
 
         // Warning
         $('.form-check-input-styled-warning').uniform({
-            wrapperClass: 'border-warning-600 text-warning-800'
+            wrapperClass: 'border-warning text-warning'
         });
 
         // Info
         $('.form-check-input-styled-info').uniform({
-            wrapperClass: 'border-info-600 text-info-800'
+            wrapperClass: 'border-info text-info'
         });
 
         // Custom color
         $('.form-check-input-styled-custom').uniform({
-            wrapperClass: 'border-indigo-600 text-indigo-800'
+            wrapperClass: 'border-indigo-400 text-indigo-400'
         });
     };
 

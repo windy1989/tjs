@@ -64,10 +64,10 @@ var Pagination = function () {
         $('.twbs-prev-next').twbsPagination({
             totalPages: 35,
             visiblePages: 3,
-            prev: '&#8672;',
-            next: '&#8674;',
-            first: '&#8676;',
-            last: '&#8677;',
+            prev: $('html').attr('dir') == 'rtl' ? '&#8674;' : '&#8672;',
+            next: $('html').attr('dir') == 'rtl' ? '&#8672;' : '&#8674;',
+            first: $('html').attr('dir') == 'rtl' ? '&#8677;' : '&#8676;',
+            last: $('html').attr('dir') == 'rtl' ? '&#8676;' : '&#8677;',
             onPageClick: function (event, page) {
                 $('.twbs-content-prev-next').text('Page #' + page + ' content');
             }
@@ -90,8 +90,8 @@ var Pagination = function () {
         $('.twbs-visible-pages').twbsPagination({
             totalPages: 35,
             visiblePages: 2,
-            prev: '&larr;',
-            next: '&rarr;',
+            prev: $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;',
+            next: $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
             first: null,
             last: null,
             onPageClick: function (event, page) {
