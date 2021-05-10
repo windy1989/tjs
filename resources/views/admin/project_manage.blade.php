@@ -558,14 +558,14 @@
                      <ul class="nav nav-sidebar nav-scrollspy">
                         <li class="nav-item">
                            <a href="#step-1" class="nav-link">
-                              <i class="icon-check"></i>
+                              <i class="icon-check text-success"></i>
                               Project Information
                            </a>
                         </li>
                         <li class="nav-item">
                            <a href="#step-2" class="nav-link">
                               @if($project->progress >= 15)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -575,7 +575,7 @@
                         <li class="nav-item">
                            <a href="#step-3" class="nav-link {{ $project->progress >= 15 ? '' : 'disabled' }}">
                               @if($project->progress >= 20)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -585,7 +585,7 @@
                         <li class="nav-item">
                            <a href="#step-4" class="nav-link {{ $project->progress >= 20 ? '' : 'disabled' }}">
                               @if($project->progress >= 25)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -595,7 +595,7 @@
                         <li class="nav-item">
                            <a href="#step-5" class="nav-link {{ $project->progress >= 25 ? '' : 'disabled' }}">
                               @if($project->progress >= 30)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -605,7 +605,7 @@
                         <li class="nav-item">
                            <a href="#step-6" class="nav-link {{ $project->progress >= 30 ? '' : 'disabled' }}">
                               @if($project->progress >= 35)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -615,7 +615,7 @@
                         <li class="nav-item">
                            <a href="#step-7" class="nav-link {{ $project->progress >= 35 ? '' : 'disabled' }}">
                               @if($project->progress >= 40)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -625,7 +625,7 @@
                         <li class="nav-item">
                            <a href="#step-8" class="nav-link {{ $project->progress >= 40 ? '' : 'disabled' }}">
                               @if($project->progress >= 43)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -635,7 +635,7 @@
                         <li class="nav-item">
                            <a href="#step-9" class="nav-link {{ $project->progress >= 43 ? '' : 'disabled' }}">
                               @if($project->progress >= 45)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -645,7 +645,7 @@
                         <li class="nav-item">
                            <a href="#step-10" class="nav-link {{ $project->progress >= 45 ? '' : 'disabled' }}">
                               @if($project->progress >= 50)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -655,7 +655,7 @@
                         <li class="nav-item">
                            <a href="#step-11" class="nav-link {{ $project->progress >= 50 ? '' : 'disabled' }}">
                               @if($project->progress >= 55)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -665,7 +665,7 @@
                         <li class="nav-item">
                            <a href="#step-12" class="nav-link {{ $project->progress >= 55 ? '' : 'disabled' }}">
                               @if($project->progress >= 60)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -675,7 +675,7 @@
                         <li class="nav-item">
                            <a href="#step-13" class="nav-link {{ $project->progress >= 60 ? '' : 'disabled' }}">
                               @if($project->progress >= 70)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -685,7 +685,7 @@
                         <li class="nav-item">
                            <a href="#step-14" class="nav-link {{ $project->progress >= 70 ? '' : 'disabled' }}">
                               @if($project->progress >= 90)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
@@ -695,7 +695,7 @@
                         <li class="nav-item">
                            <a href="#step-15" class="nav-link {{ $project->progress >= 90 ? '' : 'disabled' }}">
                               @if($project->progress >= 100)
-                                 <i class="icon-check"></i>
+                                 <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
