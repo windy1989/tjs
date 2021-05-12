@@ -154,11 +154,7 @@ class EmklRateController extends Controller {
     public function show(Request $request)
     {
         $data = EmklRate::find($request->id);
-        return response()->json([
-            'company_id'  => $data->company_id,
-            'currency_id' => $data->currency_id,
-            'conversion'  => $data->conversion
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

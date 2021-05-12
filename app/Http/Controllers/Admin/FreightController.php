@@ -162,13 +162,7 @@ class FreightController extends Controller {
     public function show(Request $request)
     {
         $data = Freight::find($request->id);
-        return response()->json([
-            'country_id' => $data->country_id,
-            'city_id'    => $data->city_id,
-            'container'  => $data->container,
-            'shipping'   => $data->shipping,
-            'cost'       => $data->cost
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

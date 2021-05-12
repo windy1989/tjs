@@ -17,8 +17,12 @@ class CitySeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($cities as $c) {
-            City::create([
-                'name' => $c['name']
+            City::insert([
+                'id'         => $c['id'],
+                'name'       => $c['name'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

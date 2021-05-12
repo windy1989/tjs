@@ -158,12 +158,7 @@ class CountryController extends Controller {
     public function show(Request $request)
     {
         $data = Country::find($request->id);
-        return response()->json([
-            'code'       => $data->code,
-            'name'       => $data->name,
-            'phone_code' => $data->phone_code,
-            'status'     => $data->status
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

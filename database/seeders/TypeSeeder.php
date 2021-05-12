@@ -17,7 +17,8 @@ class TypeSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($types as $t) {
-            Type::create([
+            Type::insert([
+                'id'               => $t['id'],
                 'category_id'      => $t['category_id'],
                 'division_id'      => $t['division_id'],
                 'surface_id'       => $t['surface_id'],
@@ -41,7 +42,10 @@ class TypeSeeder extends Seeder
                 'min_stock'        => $t['min_stock'],
                 'max_stock'        => $t['max_stock'],
                 'small_stock'      => $t['small_stock'],
-                'status'           => $t['status']
+                'status'           => $t['status'],
+                'created_at'       => $t['created_at'],
+                'updated_at'       => $t['updated_at'],
+                'deleted_at'       => $t['deleted_at']
             ]);
         }
     }

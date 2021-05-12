@@ -183,14 +183,7 @@ class EmklController extends Controller {
     public function show(Request $request)
     {
         $data = Emkl::find($request->id);
-        return response()->json([
-            'company_id' => $data->company_id,
-            'import_id'  => $data->import_id,
-            'country_id' => $data->country_id,
-            'city_id'    => $data->city_id,
-            'container'  => $data->container,
-            'cost'       => $data->cost
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

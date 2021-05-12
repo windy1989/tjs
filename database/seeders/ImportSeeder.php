@@ -17,9 +17,13 @@ class ImportSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($imports as $i) {
-            Import::create([
-                'code' => $i['code'],
-                'name' => $i['name']
+            Import::insert([
+                'id'         => $i['id'],
+                'code'       => $i['code'],
+                'name'       => $i['name'],
+                'created_at' => $i['created_at'],
+                'updated_at' => $i['updated_at'],
+                'deleted_at' => $i['deleted_at']
             ]);
         }
     }

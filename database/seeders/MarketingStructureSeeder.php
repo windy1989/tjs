@@ -17,7 +17,8 @@ class MarketingStructureSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($marketing_structures as $ms) {
-            MarketingStructure::create([
+            MarketingStructure::insert([
+                'id'                    => $ms['id'],
                 'company_id'            => $ms['company_id'],
                 'rental_cost'           => $ms['rental_cost'],
                 'travel_sales_cost'     => $ms['travel_sales_cost'],
@@ -31,7 +32,10 @@ class MarketingStructureSeeder extends Seeder
                 'saving'                => $ms['saving'],
                 'sales_commission'      => $ms['sales_commission'],
                 'middlemant_commission' => $ms['middlemant_commission'],
-                'project_commission'    => $ms['project_commission']
+                'project_commission'    => $ms['project_commission'],
+                'created_at'            => $ms['created_at'],
+                'updated_at'            => $ms['updated_at'],
+                'deleted_at'            => $ms['deleted_at']
             ]);
         }
     }

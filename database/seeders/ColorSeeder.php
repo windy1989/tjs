@@ -17,10 +17,14 @@ class ColorSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($colors as $c) {
-            Color::create([
-                'code'   => $c['code'],
-                'name'   => $c['name'],
-                'status' => $c['status']
+            Color::insert([
+                'id'         => $c['id'],
+                'code'       => $c['code'],
+                'name'       => $c['name'],
+                'status'     => $c['status'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

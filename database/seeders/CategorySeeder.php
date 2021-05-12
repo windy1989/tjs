@@ -17,11 +17,15 @@ class CategorySeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($categories as $c) {
-            Category::create([
-                'name'      => $c['name'],
-                'slug'      => $c['slug'],
-                'parent_id' => $c['parent_id'],
-                'status'    => $c['status']
+            Category::insert([
+                'id'         => $c['id'],
+                'name'       => $c['name'],
+                'slug'       => $c['slug'],
+                'parent_id'  => $c['parent_id'],
+                'status'     => $c['status'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

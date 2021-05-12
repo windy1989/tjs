@@ -137,10 +137,7 @@ class ImportController extends Controller {
     public function show(Request $request)
     {
         $data = Import::find($request->id);
-        return response()->json([
-            'code' => $data->code,
-            'name' => $data->name
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

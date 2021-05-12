@@ -17,11 +17,15 @@ class CountrySeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($countries as $c) {
-            Country::create([
+            Country::insert([
+                'id'         => $c['id'],
                 'code'       => $c['code'],
                 'name'       => $c['name'],
                 'phone_code' => $c['phone_code'],
-                'status'     => $c['status']
+                'status'     => $c['status'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

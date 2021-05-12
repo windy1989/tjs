@@ -154,11 +154,7 @@ class CurrencyRateController extends Controller {
     public function show(Request $request)
     {
         $data = CurrencyRate::find($request->id);
-        return response()->json([
-            'currency_id' => $data->currency_id,
-            'company_id'  => $data->company_id,
-            'conversion'  => $data->conversion
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

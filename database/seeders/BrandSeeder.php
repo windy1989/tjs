@@ -17,11 +17,15 @@ class BrandSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($brands as $b) {
-            Brand::create([
-                'image'  => $b['image'],
-                'code'   => $b['code'],
-                'name'   => $b['name'],
-                'status' => $b['status']
+            Brand::insert([
+                'id'         => $b['id'],
+                'image'      => $b['image'],
+                'code'       => $b['code'],
+                'name'       => $b['name'],
+                'status'     => $b['status'],
+                'created_at' => $b['created_at'],
+                'updated_at' => $b['updated_at'],
+                'deleted_at' => $b['deleted_at']
             ]);
         }
     }

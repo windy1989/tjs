@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Pattern;
+use App\Models\Coa;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class PatternController extends Controller {
-    
+class CoaController extends Controller {
+
     public function index()
     {
         $data = [
-            'title'   => 'Master Pattern',
-            'content' => 'admin.master_data.pattern'
+            'title'   => 'Accounting COA',
+            'parent'  => Coa::where('status', 1)->get(),    
+            'content' => 'admin.accounting.coa'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -26,6 +27,7 @@ class PatternController extends Controller {
             'id',
             'code',
             'name',
+            'parent_id',
             'status'
         ];
 
@@ -35,9 +37,9 @@ class PatternController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Pattern::count();
+        $total_data = Coa::count();
         
-        $query_data = Pattern::where(function($query) use ($search, $request) {
+        $query_data = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
@@ -54,7 +56,7 @@ class PatternController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Pattern::where(function($query) use ($search, $request) {
+        $total_filtered = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
@@ -76,6 +78,7 @@ class PatternController extends Controller {
                     $nomor,
                     $val->code,
                     $val->name,
+                    $val->parent() ? $val->parent()->name : 'Is Parent',
                     $val->status(),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
@@ -103,14 +106,16 @@ class PatternController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'code'   => 'required|unique:patterns,code',
-            'name'   => 'required',
-            'status' => 'required'
+            'code'      => 'required|unique:coas,code',
+            'name'      => 'required',
+            'parent_id' => 'required',
+            'status'    => 'required'
         ], [
-            'code.required'   => 'Code cannot be empty.',
-            'code.unique'     => 'Code already exists.',
-            'name.required'   => 'Name cannot be empty.',
-            'status.required' => 'Please select a status.'
+            'code.required'      => 'Code cannot be empty.',
+            'code.unique'        => 'Code already exists.',
+            'name.required'      => 'Name cannot be empty.',
+            'parent_id.required' => 'Please select a parent.',
+            'status.required'    => 'Please select a status.'
         ]);
 
         if($validation->fails()) {
@@ -119,18 +124,19 @@ class PatternController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
-            $query = Pattern::create([
-                'code'   => $request->code,
-                'name'   => $request->name,
-                'status' => $request->status
+            $query = Coa::create([
+                'code'      => str_replace(',', '.', $request->code),
+                'name'      => $request->name,
+                'parent_id' => $request->parent_id,
+                'status'    => $request->status
             ]);
 
             if($query) {
                 activity()
-                    ->performedOn(new Pattern())
+                    ->performedOn(new Coa())
                     ->causedBy(session('bo_id'))
                     ->withProperties($query)
-                    ->log('Add master pattern data');
+                    ->log('Add accounting coa data');
 
                 $response = [
                     'status'  => 200,
@@ -149,21 +155,23 @@ class PatternController extends Controller {
 
     public function show(Request $request)
     {
-        $data = Pattern::find($request->id);
+        $data = Coa::find($request->id);
         return response()->json($data);
     }
 
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'code'   => ['required', Rule::unique('patterns', 'code')->ignore($id)],
-            'name'   => 'required',
-            'status' => 'required'
+            'code'      => ['required', Rule::unique('brands', 'code')->ignore($id)],
+            'name'      => 'required',
+            'parent_id' => 'required',
+            'status'    => 'required'
         ], [
-            'code.required'   => 'Code cannot be empty.',
-            'code.unique'     => 'Code already exists.',
-            'name.required'   => 'Name cannot be empty.',
-            'status.required' => 'Please select a status.'
+            'code.required'      => 'Code cannot be empty.',
+            'code.unique'        => 'Code already exists.',
+            'name.required'      => 'Name cannot be empty.',
+            'parent_id.required' => 'Please select a parent.',
+            'status.required'    => 'Please select a status.'
         ]);
 
         if($validation->fails()) {
@@ -172,17 +180,18 @@ class PatternController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
-            $query = Pattern::where('id', $id)->update([
-                'code'   => $request->code,
-                'name'   => $request->name,
-                'status' => $request->status
+            $query = Coa::where('id', $id)->update([
+                'code'      => str_replace(',', '.', $request->code),
+                'name'      => $request->name,
+                'parent_id' => $request->parent_id,
+                'status'    => $request->status
             ]);
 
             if($query) {
                 activity()
-                    ->performedOn(new Pattern())
+                    ->performedOn(new Coa())
                     ->causedBy(session('bo_id'))
-                    ->log('Change the pattern master data');
+                    ->log('Change the accounting coa data');
 
                 $response = [
                     'status'  => 200,
@@ -201,12 +210,12 @@ class PatternController extends Controller {
 
     public function destroy(Request $request) 
     {
-        $query = Pattern::where('id', $request->id)->delete();
+        $query = Coa::where('id', $request->id)->delete();
         if($query) {
             activity()
-                ->performedOn(new Pattern())
+                ->performedOn(new Coa())
                 ->causedBy(session('bo_id'))
-                ->log('Delete the pattern master data');
+                ->log('Delete the accounting coa data');
 
             $response = [
                 'status'  => 200,
@@ -221,5 +230,5 @@ class PatternController extends Controller {
 
         return response()->json($response);
     }
-
+    
 }

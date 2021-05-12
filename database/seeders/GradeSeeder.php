@@ -17,10 +17,14 @@ class GradeSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($grades as $g) {
-            Grade::create([
-                'code'   => $g['code'],
-                'name'   => $g['name'],
-                'status' => $g['status']
+            Grade::insert([
+                'id'         => $g['id'],
+                'code'       => $g['code'],
+                'name'       => $g['name'],
+                'status'     => $g['status'],
+                'created_at' => $g['created_at'],
+                'updated_at' => $g['updated_at'],
+                'deleted_at' => $g['deleted_at']
             ]);
         }
     }

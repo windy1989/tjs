@@ -17,11 +17,15 @@ class CurrencySeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($currencies as $c) {
-            Currency::create([
-                'code'   => $c['code'],
-                'name'   => $c['name'],
-                'symbol' => $c['symbol'],
-                'status' => $c['status']
+            Currency::insert([
+                'id'         => $c['id'],
+                'code'       => $c['code'],
+                'name'       => $c['name'],
+                'symbol'     => $c['symbol'],
+                'status'     => $c['status'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

@@ -18,10 +18,14 @@ class UnitSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($units as $u) {
-            Unit::create([
-                'code'   => $u['code'],
-                'name'   => $u['name'],
-                'status' => $u['status']
+            Unit::insert([
+                'id'         => $u['id'],
+                'code'       => $u['code'],
+                'name'       => $u['name'],
+                'status'     => $u['status'],
+                'created_at' => $u['created_at'],
+                'updated_at' => $u['updated_at'],
+                'deleted_at' => $u['deleted_at']
             ]);
         }
     }

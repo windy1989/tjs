@@ -17,10 +17,14 @@ class CompanySeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($companies as $c) {
-            Company::create([
-                'code'   => $c['code'],
-                'name'   => $c['name'],
-                'status' => $c['status']
+            Company::insert([
+                'id'         => $c['id'],
+                'code'       => $c['code'],
+                'name'       => $c['name'],
+                'status'     => $c['status'],
+                'created_at' => $c['created_at'],
+                'updated_at' => $c['updated_at'],
+                'deleted_at' => $c['deleted_at']
             ]);
         }
     }

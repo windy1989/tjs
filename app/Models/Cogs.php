@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cogs extends Model {
 
+    use HasFactory;
+    
     protected $table      = 'cogs';
     protected $primaryKey = 'id';
     protected $fillable   = [

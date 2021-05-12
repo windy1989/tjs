@@ -155,12 +155,7 @@ class CurrencyController extends Controller {
     public function show(Request $request)
     {
         $data = Currency::find($request->id);
-        return response()->json([
-            'code'   => $data->code,
-            'name'   => $data->name,
-            'symbol' => $data->symbol,
-            'status' => $data->status
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

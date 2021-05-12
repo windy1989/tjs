@@ -150,11 +150,7 @@ class ColorController extends Controller {
     public function show(Request $request)
     {
         $data = Color::find($request->id);
-        return response()->json([
-            'code'   => $data->code,
-            'name'   => $data->name,
-            'status' => $data->status
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

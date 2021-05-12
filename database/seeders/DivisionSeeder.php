@@ -17,10 +17,13 @@ class DivisionSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($divisions as $d) {
-            Division::create([
-                'code'   => $d['code'],
-                'name'   => $d['name'],
-                'status' => $d['status']
+            Division::insert([
+                'id'         => $d['id'],
+                'code'       => $d['code'],
+                'name'       => $d['name'],
+                'status'     => $d['status'],
+                'created_at' => $d['created_at'],
+                'updated_at' => $d['updated_at']
             ]);
         }
     }

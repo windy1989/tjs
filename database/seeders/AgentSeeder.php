@@ -17,12 +17,16 @@ class AgentSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($agents as $a) {
-            Agent::create([
+            Agent::insert([
+                'id'          => $a['id'],
                 'country_id'  => $a['country_id'],
                 'category_id' => $a['category_id'],
                 'min_price'   => $a['min_price'],
                 'max_price'   => $a['max_price'],
-                'fee'         => $a['fee']
+                'fee'         => $a['fee'],
+                'created_at'  => $a['created_at'],
+                'updated_at'  => $a['updated_at'],
+                'deleted_at'  => $a['deleted_at']
             ]);
         }
     }

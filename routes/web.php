@@ -358,6 +358,17 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::get('detail/{id}', 'ProjectController@detail');
         });
 
+        Route::prefix('accounting')->group(function() {
+            Route::prefix('coa')->group(function() {
+                Route::get('/', 'CoaController@index');
+                Route::post('datatable', 'CoaController@datatable');
+                Route::post('create', 'CoaController@create');
+                Route::post('show', 'CoaController@show');
+                Route::post('update/{id}', 'CoaController@update');
+                Route::post('destroy', 'CoaController@destroy');
+            });
+        });
+
         Route::prefix('setting')->group(function() {
             Route::prefix('user')->group(function() {
                 Route::get('/', 'UserController@index');

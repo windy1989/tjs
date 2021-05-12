@@ -149,11 +149,7 @@ class CategoryController extends Controller {
     public function show(Request $request)
     {
         $data = Category::find($request->id);
-        return response()->json([
-            'name'      => $data->name,
-            'parent_id' => $data->parent_id,
-            'status'    => $data->status
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

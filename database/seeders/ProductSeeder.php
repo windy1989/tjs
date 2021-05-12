@@ -19,7 +19,8 @@ class ProductSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($products as $p) {
-            Product::create([
+            Product::insert([
+                'id'                  => $p['id'],
                 'type_id'             => $p['type_id'],
                 'company_id'          => $p['company_id'],
                 'hs_code_id'          => $p['hs_code_id'],
@@ -33,22 +34,29 @@ class ProductSeeder extends Seeder
                 'container_stock'     => $p['container_stock'],
                 'container_max_stock' => $p['container_max_stock'],
                 'description'         => $p['description'],
-                'status'              => $p['status']
+                'status'              => $p['status'],
+                'created_at'          => $p['created_at'],
+                'updated_at'          => $p['updated_at'],
+                'deleted_at'          => $p['deleted_at']
             ]);
         }
 
         foreach($product_shadings as $ps) {
-            ProductShading::create([
+            ProductShading::insert([
+                'id'             => $ps['id'],
                 'product_id'     => $ps['product_id'],
                 'warehouse_code' => $ps['warehouse_code'],
                 'stock_code'     => $ps['stock_code'],
                 'code'           => $ps['code'],
-                'qty'            => $ps['qty']
+                'qty'            => $ps['qty'],
+                'created_at'     => $ps['created_at'],
+                'updated_at'     => $ps['updated_at']
             ]);
         }
 
         foreach($pricing_policies as $pp) {
-            PricingPolicy::create([
+            PricingPolicy::insert([
+                'id'                      => $pp['id'],
                 'product_id'              => $pp['product_id'],
                 'showroom_cost'           => $pp['showroom_cost'],
                 'sales_travel_cost'       => $pp['sales_travel_cost'],
@@ -68,7 +76,10 @@ class ProductSeeder extends Seeder
                 'store_price_list'        => $pp['store_price_list'],
                 'discount_retail_sales'   => $pp['discount_retail_sales'],
                 'discount_retail_spv'     => $pp['discount_retail_spv'],
-                'discount_retail_manager' => $pp['discount_retail_manager']
+                'discount_retail_manager' => $pp['discount_retail_manager'],
+                'created_at'              => $pp['created_at'],
+                'updated_at'              => $pp['updated_at'],
+                'deleted_at'              => $pp['deleted_at']
             ]);
         }
     }

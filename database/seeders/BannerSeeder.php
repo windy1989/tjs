@@ -17,9 +17,13 @@ class BannerSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($banners as $b) {
-            Banner::create([
-                'image'  => $b['image'],
-                'status' => $b['status']
+            Banner::insert([
+                'id'         => $b['id'],
+                'image'      => $b['image'],
+                'status'     => $b['status'],
+                'created_at' => $b['created_at'],
+                'updated_at' => $b['updated_at'],
+                'deleted_at' => $b['deleted_at']
             ]);
         }
     }

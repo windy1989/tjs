@@ -162,13 +162,7 @@ class AgentController extends Controller {
     public function show(Request $request)
     {
         $data = Agent::find($request->id);
-        return response()->json([
-            'country_id'  => $data->country_id,
-            'category_id' => $data->category_id,
-            'min_price'   => $data->min_price,
-            'max_price'   => $data->max_price,
-            'fee'         => $data->fee
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

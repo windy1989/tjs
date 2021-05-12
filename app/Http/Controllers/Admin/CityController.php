@@ -129,9 +129,7 @@ class CityController extends Controller {
     public function show(Request $request)
     {
         $data = City::find($request->id);
-        return response()->json([
-            'name' => $data->name
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

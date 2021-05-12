@@ -155,12 +155,7 @@ class HsCodeController extends Controller {
     public function show(Request $request)
     {
         $data = HsCode::find($request->id);
-        return response()->json([
-            'code'   => $data->code,
-            'name'   => $data->name,
-            'alias'  => $data->alias,
-            'status' => $data->status
-        ]);
+        return response()->json($data);
     }
 
     public function update(Request $request, $id)

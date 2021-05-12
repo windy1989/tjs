@@ -17,10 +17,14 @@ class PatternSeeder extends Seeder
         require public_path('website/backup.php');
 
         foreach($patterns as $p) {
-            Pattern::create([
-                'code'   => $p['code'],
-                'name'   => $p['name'],
-                'status' => $p['status']
+            Pattern::insert([
+                'id'         => $p['id'],
+                'code'       => $p['code'],
+                'name'       => $p['name'],
+                'status'     => $p['status'],
+                'created_at' => $p['created_at'],
+                'updated_at' => $p['updated_at'],
+                'deleted_at' => $p['deleted_at']
             ]);
         }
     }
