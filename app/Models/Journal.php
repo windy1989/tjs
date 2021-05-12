@@ -15,8 +15,7 @@ class Journal extends Model {
         'debit',
         'credit',
         'nominal',
-        'description',
-        'type'
+        'description'
     ];
 
 }

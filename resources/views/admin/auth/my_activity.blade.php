@@ -32,13 +32,13 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Finish Date :</label><br>
-                        <input type="date" name="finish_date" id="finish_date" class="form-control" value="{{ $finish_date }}" placeholder="Finish date">
+                        <input type="date" name="finish_date" id="finish_date" class="form-control" value="{{ $finish_date }}">
                      </div>
                   </div>
                   <div class="col-md-12">
                      <div class="form-group text-right mb-0">
-                        <a href="{{ url('admin/my_activity') }}" class="btn btn-danger"><i class="icon-sync"></i> Reset</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-filter4"></i> Search</button>
+                        <a href="{{ url('admin/my_activity') }}" class="btn bg-danger"><i class="icon-sync"></i> Reset</a>
+                        <button type="submit" class="btn bg-success"><i class="icon-filter4"></i> Search</button>
                      </div>
                   </div>
                </div>

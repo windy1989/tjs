@@ -551,7 +551,7 @@
             },
             error: function() {
                loadingClose('#datatable_serverside');
-               swalInit({
+               swalInit.fire({
                   title: 'Server Error',
                   text: 'Please contact developer',
                   type: 'error'
@@ -635,7 +635,7 @@
          },
          error: function() {
             loadingClose('.modal-content');
-            swalInit({
+            swalInit.fire({
                title: 'Server Error',
                text: 'Please contact developer',
                type: 'error'

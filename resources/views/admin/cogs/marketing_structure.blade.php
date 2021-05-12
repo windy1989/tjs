@@ -218,7 +218,7 @@
             });
          },
          error: function() {
-            swalInit({
+            swalInit.fire({
                title: 'Server Error',
                text: 'Please contact developer',
                type: 'error'
@@ -280,7 +280,7 @@
             },
             error: function() {
                loadingClose('#datatable_serverside');
-               swalInit({
+               swalInit.fire({
                   title: 'Server Error',
                   text: 'Please contact developer',
                   type: 'error'
@@ -337,7 +337,7 @@
          error: function() {
             $('.modal-body').scrollTop(0);
             loadingClose('.modal-content');
-            swalInit({
+            swalInit.fire({
                title: 'Server Error',
                text: 'Please contact developer',
                type: 'error'
@@ -381,7 +381,7 @@
          error: function() {
             cancel();
             loadingClose('.modal-content');
-            swalInit({
+            swalInit.fire({
                title: 'Server Error',
                text: 'Please contact developer',
                type: 'error'
@@ -428,7 +428,7 @@
          error: function() {
             $('.modal-body').scrollTop(0);
             loadingClose('.modal-content');
-            swalInit({
+            swalInit.fire({
                title: 'Server Error',
                text: 'Please contact developer',
                type: 'error'
@@ -471,7 +471,7 @@
                      }
                   },
                   error: function() {
-                     swalInit({
+                     swalInit.fire({
                         title: 'Server Error',
                         text: 'Please contact developer',
                         type: 'error'

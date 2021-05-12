@@ -1,7 +1,7 @@
 var swalInit = swal.mixin({
    buttonsStyling: false,
-   confirmButtonClass: 'btn bg-success',
-   cancelButtonClass: 'btn bg-danger'
+   confirmButtonClass: 'btn btn-primary',
+   cancelButtonClass: 'btn btn-light'
 });
 
 lightbox.option({

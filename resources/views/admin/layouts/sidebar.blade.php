@@ -183,15 +183,6 @@
                             <li class="nav-item">
                                 <a href="{{ url('admin/accounting/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'cash_bank' ? 'active' : '' }}">Cash & Bank</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/accounting/payment_invoice') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'payment_invoice' ? 'active' : '' }}">Payment Invoice</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/accounting/payment_delivery') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'payment_delivery' ? 'active' : '' }}">Payment Delivery</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/accounting/budgeting') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'budgeting' ? 'active' : '' }}">Budgeting</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'report' ? 'nav-item-expanded nav-item-open' : '' }}">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJournalsTable extends Migration
+class CreateCashBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateJournalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('journals', function (Blueprint $table) {
+        Schema::create('cash_banks', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
             $table->bigInteger('debit');
             $table->bigInteger('credit');
             $table->double('nominal');
+            $table->date('date');
+            $table->char('type', 1);
             $table->text('description');
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ class CreateJournalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journals');
+        Schema::dropIfExists('cash_banks');
     }
 }

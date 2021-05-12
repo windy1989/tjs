@@ -238,7 +238,8 @@ class AuthController extends Controller {
 
     public function myActivity(Request $request)
     {
-        $activity = ActivityLog::where(function($query) use ($request) {
+        $activity = ActivityLog::where('causer_id', session('bo_id'))
+            ->where(function($query) use ($request) {
                 if($request->start_date && $request->finish_date) {
                     $query->whereDate('created_at', '>=', $request->start_date)
                         ->whereDate('created_at', '<=', $request->finish_date);

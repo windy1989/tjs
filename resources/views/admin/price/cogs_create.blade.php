@@ -674,7 +674,7 @@
          });
       } else {
          reset();
-         swalInit({
+         swalInit.fire({
             title: 'Please select a product',
             type: 'info'
          });

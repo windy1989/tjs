@@ -1,134 +1,37 @@
 <?php
 /**
  * Export to PHP Array plugin for PHPMyAdmin
- * @version 5.1.0
+ * @version 4.9.5
  */
 
 /**
- * Database `tjs`
+ * Database `smartmar_main`
  */
 
-/* `tjs`.`activity_logs` */
+/* `smartmar_main`.`activity_logs` */
 $activity_logs = array(
-  array('id' => '1','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.00","name":"Kas & Bank","parent_id":"0","status":"1","updated_at":"2021-05-12T06:55:14.000000Z","created_at":"2021-05-12T06:55:14.000000Z","id":1}','created_at' => '2021-05-12 13:55:14','updated_at' => '2021-05-12 13:55:14'),
-  array('id' => '2','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.01","name":"Kas Kecil","parent_id":"1","status":"1","updated_at":"2021-05-12T06:55:26.000000Z","created_at":"2021-05-12T06:55:26.000000Z","id":2}','created_at' => '2021-05-12 13:55:26','updated_at' => '2021-05-12 13:55:26'),
-  array('id' => '3','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.01.01","name":"Kas Kecil - SBY","parent_id":"2","status":"1","updated_at":"2021-05-12T06:56:00.000000Z","created_at":"2021-05-12T06:56:00.000000Z","id":3}','created_at' => '2021-05-12 13:56:00','updated_at' => '2021-05-12 13:56:00'),
-  array('id' => '4','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.01.02","name":"Kas Kecil - JKT","parent_id":"2","status":"1","updated_at":"2021-05-12T06:56:51.000000Z","created_at":"2021-05-12T06:56:51.000000Z","id":4}','created_at' => '2021-05-12 13:56:51','updated_at' => '2021-05-12 13:56:51'),
-  array('id' => '5','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.02","name":"Kas Besar","parent_id":"1","status":"1","updated_at":"2021-05-12T06:57:24.000000Z","created_at":"2021-05-12T06:57:24.000000Z","id":5}','created_at' => '2021-05-12 13:57:24','updated_at' => '2021-05-12 13:57:24'),
-  array('id' => '6','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.02.01","name":"Kas Besar - SBY","parent_id":"5","status":"1","updated_at":"2021-05-12T06:58:11.000000Z","created_at":"2021-05-12T06:58:11.000000Z","id":6}','created_at' => '2021-05-12 13:58:11','updated_at' => '2021-05-12 13:58:11'),
-  array('id' => '7','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.02.02","name":"Kas Besar - JkT","parent_id":"5","status":"1","updated_at":"2021-05-12T06:58:26.000000Z","created_at":"2021-05-12T06:58:26.000000Z","id":7}','created_at' => '2021-05-12 13:58:26','updated_at' => '2021-05-12 13:58:26'),
-  array('id' => '8','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03","name":"Bank","parent_id":"1","status":"1","updated_at":"2021-05-12T06:58:54.000000Z","created_at":"2021-05-12T06:58:54.000000Z","id":8}','created_at' => '2021-05-12 13:58:54','updated_at' => '2021-05-12 13:58:54'),
-  array('id' => '9','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.01","name":"Bank - SBY","parent_id":"8","status":"1","updated_at":"2021-05-12T07:02:05.000000Z","created_at":"2021-05-12T07:02:05.000000Z","id":9}','created_at' => '2021-05-12 14:02:05','updated_at' => '2021-05-12 14:02:05'),
-  array('id' => '10','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.01.01","name":"Bank BCA - SBY","parent_id":"9","status":"1","updated_at":"2021-05-12T07:03:54.000000Z","created_at":"2021-05-12T07:03:54.000000Z","id":10}','created_at' => '2021-05-12 14:03:54','updated_at' => '2021-05-12 14:03:54'),
-  array('id' => '11','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.01.02","name":"Bank Mandiri - SBY","parent_id":"9","status":"1","updated_at":"2021-05-12T07:04:20.000000Z","created_at":"2021-05-12T07:04:20.000000Z","id":11}','created_at' => '2021-05-12 14:04:20','updated_at' => '2021-05-12 14:04:20'),
-  array('id' => '12','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.02","name":"Bank - JKT","parent_id":"8","status":"1","updated_at":"2021-05-12T07:04:47.000000Z","created_at":"2021-05-12T07:04:47.000000Z","id":12}','created_at' => '2021-05-12 14:04:47','updated_at' => '2021-05-12 14:04:47'),
-  array('id' => '13','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.02.01","name":"Bank BCA - JKT","parent_id":"0","status":"1","updated_at":"2021-05-12T07:05:17.000000Z","created_at":"2021-05-12T07:05:17.000000Z","id":13}','created_at' => '2021-05-12 14:05:17','updated_at' => '2021-05-12 14:05:17'),
-  array('id' => '14','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:05:42','updated_at' => '2021-05-12 14:05:42'),
-  array('id' => '15','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.02.02","name":"Bank Mandiri - JKT","parent_id":"12","status":"1","updated_at":"2021-05-12T07:06:14.000000Z","created_at":"2021-05-12T07:06:14.000000Z","id":14}','created_at' => '2021-05-12 14:06:14','updated_at' => '2021-05-12 14:06:14'),
-  array('id' => '16','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.03","name":"Bank - SBY (Non Pajak)","parent_id":"8","status":"1","updated_at":"2021-05-12T07:06:43.000000Z","created_at":"2021-05-12T07:06:43.000000Z","id":15}','created_at' => '2021-05-12 14:06:43','updated_at' => '2021-05-12 14:06:43'),
-  array('id' => '17','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:06:52','updated_at' => '2021-05-12 14:06:52'),
-  array('id' => '18','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.03.01","name":"Bank BCA - SBY (Non Tax)","parent_id":"15","status":"1","updated_at":"2021-05-12T07:07:39.000000Z","created_at":"2021-05-12T07:07:39.000000Z","id":16}','created_at' => '2021-05-12 14:07:39','updated_at' => '2021-05-12 14:07:39'),
-  array('id' => '19','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.03.02","name":"Bank Mandiri - SBY (Non Tax)","parent_id":"15","status":"1","updated_at":"2021-05-12T07:08:13.000000Z","created_at":"2021-05-12T07:08:13.000000Z","id":17}','created_at' => '2021-05-12 14:08:13','updated_at' => '2021-05-12 14:08:13'),
-  array('id' => '20','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.04","name":"Bank - JKT (Non Tax)","parent_id":"8","status":"1","updated_at":"2021-05-12T07:08:37.000000Z","created_at":"2021-05-12T07:08:37.000000Z","id":18}','created_at' => '2021-05-12 14:08:37','updated_at' => '2021-05-12 14:08:37'),
-  array('id' => '21','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.04.01","name":"Bank BCA - JKT (Non Tax)","parent_id":"18","status":"1","updated_at":"2021-05-12T07:09:11.000000Z","created_at":"2021-05-12T07:09:11.000000Z","id":19}','created_at' => '2021-05-12 14:09:11','updated_at' => '2021-05-12 14:09:11'),
-  array('id' => '22','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.03.04.02","name":"Bank Mandiri - JKT (Non Tax)","parent_id":"18","status":"1","updated_at":"2021-05-12T07:09:48.000000Z","created_at":"2021-05-12T07:09:48.000000Z","id":20}','created_at' => '2021-05-12 14:09:48','updated_at' => '2021-05-12 14:09:48'),
-  array('id' => '23','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.04","name":"Kas Transfer (Post Silang)","parent_id":"1","status":"1","updated_at":"2021-05-12T07:11:45.000000Z","created_at":"2021-05-12T07:11:45.000000Z","id":21}','created_at' => '2021-05-12 14:11:45','updated_at' => '2021-05-12 14:11:45'),
-  array('id' => '24','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.000.05","name":"Deposito","parent_id":"1","status":"1","updated_at":"2021-05-12T07:12:04.000000Z","created_at":"2021-05-12T07:12:04.000000Z","id":22}','created_at' => '2021-05-12 14:12:04','updated_at' => '2021-05-12 14:12:04'),
-  array('id' => '25','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:20','updated_at' => '2021-05-12 14:12:20'),
-  array('id' => '26','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:25','updated_at' => '2021-05-12 14:12:25'),
-  array('id' => '27','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:32','updated_at' => '2021-05-12 14:12:32'),
-  array('id' => '28','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:38','updated_at' => '2021-05-12 14:12:38'),
-  array('id' => '29','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:43','updated_at' => '2021-05-12 14:12:43'),
-  array('id' => '30','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:48','updated_at' => '2021-05-12 14:12:48'),
-  array('id' => '31','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:12:56','updated_at' => '2021-05-12 14:12:56'),
-  array('id' => '32','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:13:01','updated_at' => '2021-05-12 14:13:01'),
-  array('id' => '33','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:13:06','updated_at' => '2021-05-12 14:13:06'),
-  array('id' => '34','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:13:11','updated_at' => '2021-05-12 14:13:11'),
-  array('id' => '35','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:13:22','updated_at' => '2021-05-12 14:13:22'),
-  array('id' => '36','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:13:40','updated_at' => '2021-05-12 14:13:40'),
-  array('id' => '37','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:14:03','updated_at' => '2021-05-12 14:14:03'),
-  array('id' => '38','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:14:22','updated_at' => '2021-05-12 14:14:22'),
-  array('id' => '39','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:14:33','updated_at' => '2021-05-12 14:14:33'),
-  array('id' => '40','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:14:45','updated_at' => '2021-05-12 14:14:45'),
-  array('id' => '41','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.00","name":"Piutang","parent_id":"0","status":"1","updated_at":"2021-05-12T07:18:05.000000Z","created_at":"2021-05-12T07:18:05.000000Z","id":23}','created_at' => '2021-05-12 14:18:05','updated_at' => '2021-05-12 14:18:05'),
-  array('id' => '42','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.01","name":"Uang muka pembelian","parent_id":"23","status":"1","updated_at":"2021-05-12T07:18:28.000000Z","created_at":"2021-05-12T07:18:28.000000Z","id":24}','created_at' => '2021-05-12 14:18:28','updated_at' => '2021-05-12 14:18:28'),
-  array('id' => '43','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.01.01","name":"Uang muka pembelian - Sby","parent_id":"24","status":"1","updated_at":"2021-05-12T07:18:46.000000Z","created_at":"2021-05-12T07:18:46.000000Z","id":25}','created_at' => '2021-05-12 14:18:46','updated_at' => '2021-05-12 14:18:46'),
-  array('id' => '44','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.01.02","name":"Uang muka pembelian - Jkt","parent_id":"24","status":"1","updated_at":"2021-05-12T07:19:07.000000Z","created_at":"2021-05-12T07:19:07.000000Z","id":26}','created_at' => '2021-05-12 14:19:07','updated_at' => '2021-05-12 14:19:07'),
-  array('id' => '45','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.02","name":"Piutang Usaha","parent_id":"23","status":"1","updated_at":"2021-05-12T07:19:22.000000Z","created_at":"2021-05-12T07:19:22.000000Z","id":27}','created_at' => '2021-05-12 14:19:22','updated_at' => '2021-05-12 14:19:22'),
-  array('id' => '46','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.02.01","name":"Piutang Usaha - Sby","parent_id":"23","status":"1","updated_at":"2021-05-12T07:19:40.000000Z","created_at":"2021-05-12T07:19:40.000000Z","id":28}','created_at' => '2021-05-12 14:19:40','updated_at' => '2021-05-12 14:19:40'),
-  array('id' => '47','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:20:16','updated_at' => '2021-05-12 14:20:16'),
-  array('id' => '48','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.02.02","name":"Piutang Usaha - Jkt","parent_id":"27","status":"1","updated_at":"2021-05-12T07:20:39.000000Z","created_at":"2021-05-12T07:20:39.000000Z","id":29}','created_at' => '2021-05-12 14:20:39','updated_at' => '2021-05-12 14:20:39'),
-  array('id' => '49','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.100.03","name":"Advance Purchase","parent_id":"23","status":"1","updated_at":"2021-05-12T07:21:15.000000Z","created_at":"2021-05-12T07:21:15.000000Z","id":30}','created_at' => '2021-05-12 14:21:15','updated_at' => '2021-05-12 14:21:15'),
-  array('id' => '50','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.00","name":"Persediaan Barang Dagang","parent_id":"0","status":"1","updated_at":"2021-05-12T07:21:29.000000Z","created_at":"2021-05-12T07:21:29.000000Z","id":31}','created_at' => '2021-05-12 14:21:29','updated_at' => '2021-05-12 14:21:29'),
-  array('id' => '51','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.01","name":"Persediaan Barang - Sby","parent_id":"31","status":"1","updated_at":"2021-05-12T07:21:50.000000Z","created_at":"2021-05-12T07:21:50.000000Z","id":32}','created_at' => '2021-05-12 14:21:50','updated_at' => '2021-05-12 14:21:50'),
-  array('id' => '52','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.01.01","name":"Persediaan Barang Retail - Sby","parent_id":"32","status":"1","updated_at":"2021-05-12T07:22:11.000000Z","created_at":"2021-05-12T07:22:11.000000Z","id":33}','created_at' => '2021-05-12 14:22:11','updated_at' => '2021-05-12 14:22:11'),
-  array('id' => '53','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.02.02","name":"Persediaan Barang Non Retail- Jkt","parent_id":"32","status":"1","updated_at":"2021-05-12T07:22:25.000000Z","created_at":"2021-05-12T07:22:25.000000Z","id":34}','created_at' => '2021-05-12 14:22:25','updated_at' => '2021-05-12 14:22:25'),
-  array('id' => '54','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-12 14:23:15','updated_at' => '2021-05-12 14:23:15'),
-  array('id' => '55','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.01.03","name":"Persediaan Barang Proyek - Sby","parent_id":"32","status":"1","updated_at":"2021-05-12T07:23:34.000000Z","created_at":"2021-05-12T07:23:34.000000Z","id":35}','created_at' => '2021-05-12 14:23:34','updated_at' => '2021-05-12 14:23:34'),
-  array('id' => '56','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.02","name":"Persediaan Barang - Jkt","parent_id":"31","status":"1","updated_at":"2021-05-12T07:23:53.000000Z","created_at":"2021-05-12T07:23:53.000000Z","id":36}','created_at' => '2021-05-12 14:23:53','updated_at' => '2021-05-12 14:23:53'),
-  array('id' => '57','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.02.01","name":"Persediaan Barang Retail - Jkt","parent_id":"36","status":"1","updated_at":"2021-05-12T07:24:15.000000Z","created_at":"2021-05-12T07:24:15.000000Z","id":37}','created_at' => '2021-05-12 14:24:15','updated_at' => '2021-05-12 14:24:15'),
-  array('id' => '58','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.02.02","name":"Persediaan Barang Non Retail- Jkt","parent_id":"36","status":"1","updated_at":"2021-05-12T07:24:29.000000Z","created_at":"2021-05-12T07:24:29.000000Z","id":38}','created_at' => '2021-05-12 14:24:29','updated_at' => '2021-05-12 14:24:29'),
-  array('id' => '59','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.200.02.03","name":"Persediaan Barang Proyek - Jkt","parent_id":"36","status":"1","updated_at":"2021-05-12T07:24:43.000000Z","created_at":"2021-05-12T07:24:43.000000Z","id":39}','created_at' => '2021-05-12 14:24:43','updated_at' => '2021-05-12 14:24:43'),
-  array('id' => '60','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.201.00","name":"Barang Terkirim","parent_id":"0","status":"1","updated_at":"2021-05-12T07:25:03.000000Z","created_at":"2021-05-12T07:25:03.000000Z","id":40}','created_at' => '2021-05-12 14:25:03','updated_at' => '2021-05-12 14:25:03'),
-  array('id' => '61','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.300.00","name":"Perlengkapan","parent_id":"0","status":"1","updated_at":"2021-05-12T07:25:14.000000Z","created_at":"2021-05-12T07:25:14.000000Z","id":41}','created_at' => '2021-05-12 14:25:14','updated_at' => '2021-05-12 14:25:14'),
-  array('id' => '62','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.00","name":"Biaya Dibayar Dimuka","parent_id":"0","status":"1","updated_at":"2021-05-12T07:25:26.000000Z","created_at":"2021-05-12T07:25:26.000000Z","id":42}','created_at' => '2021-05-12 14:25:27','updated_at' => '2021-05-12 14:25:27'),
-  array('id' => '63','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.01","name":"Asuransi Dibayar Dimuka","parent_id":"42","status":"1","updated_at":"2021-05-12T07:25:41.000000Z","created_at":"2021-05-12T07:25:41.000000Z","id":43}','created_at' => '2021-05-12 14:25:41','updated_at' => '2021-05-12 14:25:41'),
-  array('id' => '64','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.02","name":"Sewa Dibayar Dimuka","parent_id":"42","status":"1","updated_at":"2021-05-12T07:25:57.000000Z","created_at":"2021-05-12T07:25:57.000000Z","id":44}','created_at' => '2021-05-12 14:25:57','updated_at' => '2021-05-12 14:25:57'),
-  array('id' => '65','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.03","name":"Legal \\/ PBB Dibayar Dimuka","parent_id":"42","status":"1","updated_at":"2021-05-12T07:26:11.000000Z","created_at":"2021-05-12T07:26:11.000000Z","id":45}','created_at' => '2021-05-12 14:26:11','updated_at' => '2021-05-12 14:26:11'),
-  array('id' => '66','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.04","name":"Advertising Dibayar Dimuka","parent_id":"42","status":"1","updated_at":"2021-05-12T07:26:30.000000Z","created_at":"2021-05-12T07:26:30.000000Z","id":46}','created_at' => '2021-05-12 14:26:30','updated_at' => '2021-05-12 14:26:30'),
-  array('id' => '67','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.05","name":"Maintenance Dibayar Dimuka","parent_id":"42","status":"1","updated_at":"2021-05-12T07:26:43.000000Z","created_at":"2021-05-12T07:26:43.000000Z","id":47}','created_at' => '2021-05-12 14:26:43','updated_at' => '2021-05-12 14:26:43'),
-  array('id' => '68','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.400.06","name":"Other Prepaid Expenses","parent_id":"42","status":"1","updated_at":"2021-05-12T07:26:57.000000Z","created_at":"2021-05-12T07:26:57.000000Z","id":48}','created_at' => '2021-05-12 14:26:57','updated_at' => '2021-05-12 14:26:57'),
-  array('id' => '69','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.00","name":"Prepaid Taxes","parent_id":"0","status":"1","updated_at":"2021-05-12T07:28:53.000000Z","created_at":"2021-05-12T07:28:53.000000Z","id":49}','created_at' => '2021-05-12 14:28:53','updated_at' => '2021-05-12 14:28:53'),
-  array('id' => '70','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.01","name":"Tax - PPn Masukan","parent_id":"49","status":"1","updated_at":"2021-05-12T07:29:18.000000Z","created_at":"2021-05-12T07:29:18.000000Z","id":50}','created_at' => '2021-05-12 14:29:18','updated_at' => '2021-05-12 14:29:18'),
-  array('id' => '71','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.02","name":"Tax - PPh 21","parent_id":"49","status":"1","updated_at":"2021-05-12T07:29:37.000000Z","created_at":"2021-05-12T07:29:37.000000Z","id":51}','created_at' => '2021-05-12 14:29:37','updated_at' => '2021-05-12 14:29:37'),
-  array('id' => '72','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.03","name":"Tax - PPh 23","parent_id":"49","status":"1","updated_at":"2021-05-12T07:30:06.000000Z","created_at":"2021-05-12T07:30:06.000000Z","id":52}','created_at' => '2021-05-12 14:30:06','updated_at' => '2021-05-12 14:30:06'),
-  array('id' => '73','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.04","name":"Tax - PPh 25","parent_id":"49","status":"1","updated_at":"2021-05-12T07:30:20.000000Z","created_at":"2021-05-12T07:30:20.000000Z","id":53}','created_at' => '2021-05-12 14:30:20','updated_at' => '2021-05-12 14:30:20'),
-  array('id' => '74','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.500.05","name":"Other Prepaid Tax","parent_id":"49","status":"1","updated_at":"2021-05-12T07:30:34.000000Z","created_at":"2021-05-12T07:30:34.000000Z","id":54}','created_at' => '2021-05-12 14:30:34','updated_at' => '2021-05-12 14:30:34'),
-  array('id' => '75','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.00","name":"Aktiva Tetap","parent_id":"0","status":"1","updated_at":"2021-05-12T07:30:50.000000Z","created_at":"2021-05-12T07:30:50.000000Z","id":55}','created_at' => '2021-05-12 14:30:50','updated_at' => '2021-05-12 14:30:50'),
-  array('id' => '76','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.01","name":"Tanah","parent_id":"55","status":"1","updated_at":"2021-05-12T07:31:08.000000Z","created_at":"2021-05-12T07:31:08.000000Z","id":56}','created_at' => '2021-05-12 14:31:08','updated_at' => '2021-05-12 14:31:08'),
-  array('id' => '77','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.02","name":"Gedung","parent_id":"55","status":"1","updated_at":"2021-05-12T07:31:30.000000Z","created_at":"2021-05-12T07:31:30.000000Z","id":57}','created_at' => '2021-05-12 14:31:30','updated_at' => '2021-05-12 14:31:30'),
-  array('id' => '78','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.03","name":"Kendaraan","parent_id":"55","status":"1","updated_at":"2021-05-12T07:51:35.000000Z","created_at":"2021-05-12T07:51:35.000000Z","id":58}','created_at' => '2021-05-12 14:51:35','updated_at' => '2021-05-12 14:51:35'),
-  array('id' => '79','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.04","name":"Peralatan","parent_id":"55","status":"1","updated_at":"2021-05-12T07:51:52.000000Z","created_at":"2021-05-12T07:51:52.000000Z","id":59}','created_at' => '2021-05-12 14:51:52','updated_at' => '2021-05-12 14:51:52'),
-  array('id' => '80','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.600.05","name":"Inventaris Kantor","parent_id":"55","status":"1","updated_at":"2021-05-12T07:52:05.000000Z","created_at":"2021-05-12T07:52:05.000000Z","id":60}','created_at' => '2021-05-12 14:52:05','updated_at' => '2021-05-12 14:52:05'),
-  array('id' => '81','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.610.00","name":"Akumulasi Depresiasi Fixed Asset","parent_id":"0","status":"1","updated_at":"2021-05-12T07:52:22.000000Z","created_at":"2021-05-12T07:52:22.000000Z","id":61}','created_at' => '2021-05-12 14:52:22','updated_at' => '2021-05-12 14:52:22'),
-  array('id' => '82','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.610.01","name":"Akumulasi Penyusutan Gedung","parent_id":"61","status":"1","updated_at":"2021-05-12T07:52:40.000000Z","created_at":"2021-05-12T07:52:40.000000Z","id":62}','created_at' => '2021-05-12 14:52:40','updated_at' => '2021-05-12 14:52:40'),
-  array('id' => '83','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.610.02","name":"Akumulasi Penyusutan Kendaraan","parent_id":"61","status":"1","updated_at":"2021-05-12T07:53:01.000000Z","created_at":"2021-05-12T07:53:01.000000Z","id":63}','created_at' => '2021-05-12 14:53:01','updated_at' => '2021-05-12 14:53:01'),
-  array('id' => '84','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.610.03","name":"Akumulasi Penyusutan Peralatan","parent_id":"61","status":"1","updated_at":"2021-05-12T07:53:20.000000Z","created_at":"2021-05-12T07:53:20.000000Z","id":64}','created_at' => '2021-05-12 14:53:20','updated_at' => '2021-05-12 14:53:20'),
-  array('id' => '85','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"1.610.04","name":"Akumulasi Penyusutan Inventaris Kantor","parent_id":"61","status":"1","updated_at":"2021-05-12T07:53:33.000000Z","created_at":"2021-05-12T07:53:33.000000Z","id":65}','created_at' => '2021-05-12 14:53:33','updated_at' => '2021-05-12 14:53:33'),
-  array('id' => '86','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.000.00","name":"Hutang","parent_id":"0","status":"1","updated_at":"2021-05-12T07:53:55.000000Z","created_at":"2021-05-12T07:53:55.000000Z","id":66}','created_at' => '2021-05-12 14:53:55','updated_at' => '2021-05-12 14:53:55'),
-  array('id' => '87','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.000.01","name":"Uang Muka Penjualan","parent_id":"66","status":"1","updated_at":"2021-05-12T07:54:14.000000Z","created_at":"2021-05-12T07:54:14.000000Z","id":67}','created_at' => '2021-05-12 14:54:14','updated_at' => '2021-05-12 14:54:14'),
-  array('id' => '88','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.000.01.01","name":"Uang Muka Penjualan - Sby","parent_id":"67","status":"1","updated_at":"2021-05-12T07:54:33.000000Z","created_at":"2021-05-12T07:54:33.000000Z","id":68}','created_at' => '2021-05-12 14:54:33','updated_at' => '2021-05-12 14:54:33'),
-  array('id' => '89','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.000.01.02","name":"Uang Muka Penjualan -Jkt","parent_id":"67","status":"1","updated_at":"2021-05-12T07:54:47.000000Z","created_at":"2021-05-12T07:54:47.000000Z","id":69}','created_at' => '2021-05-12 14:54:47','updated_at' => '2021-05-12 14:54:47'),
-  array('id' => '90','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.00","name":"TAXES","parent_id":"0","status":"1","updated_at":"2021-05-12T07:54:59.000000Z","created_at":"2021-05-12T07:54:59.000000Z","id":70}','created_at' => '2021-05-12 14:54:59','updated_at' => '2021-05-12 14:54:59'),
-  array('id' => '91','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.01","name":"PPn Keluaran","parent_id":"70","status":"1","updated_at":"2021-05-12T07:55:19.000000Z","created_at":"2021-05-12T07:55:19.000000Z","id":71}','created_at' => '2021-05-12 14:55:19','updated_at' => '2021-05-12 14:55:19'),
-  array('id' => '92','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.02","name":"PPh Pasal 21","parent_id":"70","status":"1","updated_at":"2021-05-12T07:55:39.000000Z","created_at":"2021-05-12T07:55:39.000000Z","id":72}','created_at' => '2021-05-12 14:55:39','updated_at' => '2021-05-12 14:55:39'),
-  array('id' => '93','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.03","name":"PPh Pasal 23","parent_id":"70","status":"1","updated_at":"2021-05-12T07:55:52.000000Z","created_at":"2021-05-12T07:55:52.000000Z","id":73}','created_at' => '2021-05-12 14:55:52','updated_at' => '2021-05-12 14:55:52'),
-  array('id' => '94','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.04","name":"PPh Pasal 25","parent_id":"70","status":"1","updated_at":"2021-05-12T07:56:18.000000Z","created_at":"2021-05-12T07:56:18.000000Z","id":74}','created_at' => '2021-05-12 14:56:18','updated_at' => '2021-05-12 14:56:18'),
-  array('id' => '95','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.05","name":"Pajak Bumi & Bangunan","parent_id":"70","status":"1","updated_at":"2021-05-12T07:56:35.000000Z","created_at":"2021-05-12T07:56:35.000000Z","id":75}','created_at' => '2021-05-12 14:56:35','updated_at' => '2021-05-12 14:56:35'),
-  array('id' => '96','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.100.06","name":"Other Taxes Payable","parent_id":"70","status":"1","updated_at":"2021-05-12T07:56:49.000000Z","created_at":"2021-05-12T07:56:49.000000Z","id":76}','created_at' => '2021-05-12 14:56:49','updated_at' => '2021-05-12 14:56:49'),
-  array('id' => '97','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.200.00","name":"Hutang Usaha","parent_id":"0","status":"1","updated_at":"2021-05-12T07:57:11.000000Z","created_at":"2021-05-12T07:57:11.000000Z","id":77}','created_at' => '2021-05-12 14:57:11','updated_at' => '2021-05-12 14:57:11'),
-  array('id' => '98','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.200.01","name":"Hutang Usaha - Sby","parent_id":"77","status":"1","updated_at":"2021-05-12T07:57:28.000000Z","created_at":"2021-05-12T07:57:28.000000Z","id":78}','created_at' => '2021-05-12 14:57:28','updated_at' => '2021-05-12 14:57:28'),
-  array('id' => '99','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.200.02","name":"Hutang Usaha - Jkt","parent_id":"77","status":"1","updated_at":"2021-05-12T07:57:40.000000Z","created_at":"2021-05-12T07:57:40.000000Z","id":79}','created_at' => '2021-05-12 14:57:40','updated_at' => '2021-05-12 14:57:40'),
-  array('id' => '100','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.200.03","name":"Advance Sales","parent_id":"77","status":"1","updated_at":"2021-05-12T07:57:54.000000Z","created_at":"2021-05-12T07:57:54.000000Z","id":80}','created_at' => '2021-05-12 14:57:54','updated_at' => '2021-05-12 14:57:54'),
-  array('id' => '101','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.00","name":"Other Payable","parent_id":"0","status":"1","updated_at":"2021-05-12T07:58:06.000000Z","created_at":"2021-05-12T07:58:06.000000Z","id":81}','created_at' => '2021-05-12 14:58:06','updated_at' => '2021-05-12 14:58:06'),
-  array('id' => '102','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.01","name":"Jamsostek","parent_id":"81","status":"1","updated_at":"2021-05-12T07:58:42.000000Z","created_at":"2021-05-12T07:58:42.000000Z","id":82}','created_at' => '2021-05-12 14:58:42','updated_at' => '2021-05-12 14:58:42'),
-  array('id' => '103','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.02","name":"Asuransi","parent_id":"81","status":"1","updated_at":"2021-05-12T07:58:54.000000Z","created_at":"2021-05-12T07:58:54.000000Z","id":83}','created_at' => '2021-05-12 14:58:54','updated_at' => '2021-05-12 14:58:54'),
-  array('id' => '104','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.03","name":"Sewa","parent_id":"81","status":"1","updated_at":"2021-05-12T07:59:07.000000Z","created_at":"2021-05-12T07:59:07.000000Z","id":84}','created_at' => '2021-05-12 14:59:07','updated_at' => '2021-05-12 14:59:07'),
-  array('id' => '105','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.04","name":"Gaji","parent_id":"81","status":"1","updated_at":"2021-05-12T07:59:22.000000Z","created_at":"2021-05-12T07:59:22.000000Z","id":85}','created_at' => '2021-05-12 14:59:22','updated_at' => '2021-05-12 14:59:22'),
-  array('id' => '106','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.05","name":"THR","parent_id":"81","status":"1","updated_at":"2021-05-12T07:59:35.000000Z","created_at":"2021-05-12T07:59:35.000000Z","id":86}','created_at' => '2021-05-12 14:59:35','updated_at' => '2021-05-12 14:59:35'),
-  array('id' => '107','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.06","name":"Listrik","parent_id":"81","status":"1","updated_at":"2021-05-12T07:59:51.000000Z","created_at":"2021-05-12T07:59:51.000000Z","id":87}','created_at' => '2021-05-12 14:59:51','updated_at' => '2021-05-12 14:59:51'),
-  array('id' => '108','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.07","name":"Telpon","parent_id":"81","status":"1","updated_at":"2021-05-12T08:00:05.000000Z","created_at":"2021-05-12T08:00:05.000000Z","id":88}','created_at' => '2021-05-12 15:00:05','updated_at' => '2021-05-12 15:00:05'),
-  array('id' => '109','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.300.08","name":"Other Accrued Expenses","parent_id":"81","status":"1","updated_at":"2021-05-12T08:00:19.000000Z","created_at":"2021-05-12T08:00:19.000000Z","id":89}','created_at' => '2021-05-12 15:00:19','updated_at' => '2021-05-12 15:00:19'),
-  array('id' => '110','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"2.400.00","name":"Hutang Pembelian Belum Ditagih","parent_id":"0","status":"1","updated_at":"2021-05-12T08:06:35.000000Z","created_at":"2021-05-12T08:06:35.000000Z","id":90}','created_at' => '2021-05-12 15:06:35','updated_at' => '2021-05-12 15:06:35'),
-  array('id' => '111','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"3.000.00","name":"Modal","parent_id":"0","status":"1","updated_at":"2021-05-12T08:08:14.000000Z","created_at":"2021-05-12T08:08:14.000000Z","id":91}','created_at' => '2021-05-12 15:08:14','updated_at' => '2021-05-12 15:08:14'),
-  array('id' => '112','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"3.100.00","name":"OPENING BALANCE EQUITY","parent_id":"0","status":"1","updated_at":"2021-05-12T08:08:28.000000Z","created_at":"2021-05-12T08:08:28.000000Z","id":92}','created_at' => '2021-05-12 15:08:28','updated_at' => '2021-05-12 15:08:28'),
-  array('id' => '113','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"3.200.00","name":"Deviden","parent_id":"0","status":"1","updated_at":"2021-05-12T08:08:39.000000Z","created_at":"2021-05-12T08:08:39.000000Z","id":93}','created_at' => '2021-05-12 15:08:39','updated_at' => '2021-05-12 15:08:39'),
-  array('id' => '114','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"3.300.00","name":"RETAINED EARNING","parent_id":"0","status":"1","updated_at":"2021-05-12T08:08:50.000000Z","created_at":"2021-05-12T08:08:50.000000Z","id":94}','created_at' => '2021-05-12 15:08:50','updated_at' => '2021-05-12 15:08:50'),
-  array('id' => '115','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"4.000.00","name":"Pendapatan","parent_id":"0","status":"1","updated_at":"2021-05-12T08:09:00.000000Z","created_at":"2021-05-12T08:09:00.000000Z","id":95}','created_at' => '2021-05-12 15:09:00','updated_at' => '2021-05-12 15:09:00'),
-  array('id' => '116','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"code":"4.000.01","name":"Penjualan","parent_id":"95","status":"1","updated_at":"2021-05-12T08:09:36.000000Z","created_at":"2021-05-12T08:09:36.000000Z","id":96}','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36')
+  array('id' => '1','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01","name":"Penjualan - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:12:35.000000Z","created_at":"2021-05-12T09:12:35.000000Z","id":97}','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:12:35'),
+  array('id' => '2','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.01","name":"Penjualan Retail - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:18:10.000000Z","created_at":"2021-05-12T09:18:10.000000Z","id":98}','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:18:10'),
+  array('id' => '3','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:19:04','updated_at' => '2021-05-12 16:19:04'),
+  array('id' => '4','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:20:33','updated_at' => '2021-05-12 16:20:33'),
+  array('id' => '5','log_name' => 'default','description' => 'Delete the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:21:41','updated_at' => '2021-05-12 16:21:41'),
+  array('id' => '6','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.02","name":"Penjualan Non Retail - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:31:40.000000Z","created_at":"2021-05-12T09:31:40.000000Z","id":99}','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 16:31:40'),
+  array('id' => '7','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.03","name":"Penjualan Proyek - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:34:13.000000Z","created_at":"2021-05-12T09:34:13.000000Z","id":100}','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 16:34:13'),
+  array('id' => '8','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02","name":"Penjualan - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:03:34.000000Z","created_at":"2021-05-12T10:03:34.000000Z","id":101}','created_at' => '2021-05-12 17:03:34','updated_at' => '2021-05-12 17:03:34'),
+  array('id' => '9','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.01","name":"Penjualan Retail - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:05:37.000000Z","created_at":"2021-05-12T10:05:37.000000Z","id":102}','created_at' => '2021-05-12 17:05:37','updated_at' => '2021-05-12 17:05:37'),
+  array('id' => '10','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.02","name":"Penjualan Non Retail - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:06:39.000000Z","created_at":"2021-05-12T10:06:39.000000Z","id":103}','created_at' => '2021-05-12 17:06:39','updated_at' => '2021-05-12 17:06:39'),
+  array('id' => '11','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.03","name":"Penjualan Proyek - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:07:43.000000Z","created_at":"2021-05-12T10:07:43.000000Z","id":104}','created_at' => '2021-05-12 17:07:43','updated_at' => '2021-05-12 17:07:43'),
+  array('id' => '12','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03","name":"Penjualan - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T10:09:47.000000Z","created_at":"2021-05-12T10:09:47.000000Z","id":105}','created_at' => '2021-05-12 17:09:47','updated_at' => '2021-05-12 17:09:47'),
+  array('id' => '13','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.01","name":"Penjualan Retail - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T10:11:08.000000Z","created_at":"2021-05-12T10:11:08.000000Z","id":106}','created_at' => '2021-05-12 17:11:08','updated_at' => '2021-05-12 17:11:08'),
+  array('id' => '14','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.02","name":"Penjualan Non Retail - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:18:52.000000Z","created_at":"2021-05-12T11:18:52.000000Z","id":107}','created_at' => '2021-05-12 18:18:52','updated_at' => '2021-05-12 18:18:52'),
+  array('id' => '15','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.03","name":"Penjualan Proyek - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:20:30.000000Z","created_at":"2021-05-12T11:20:30.000000Z","id":108}','created_at' => '2021-05-12 18:20:30','updated_at' => '2021-05-12 18:20:30'),
+  array('id' => '16','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04","name":"Penjualan - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:22:06.000000Z","created_at":"2021-05-12T11:22:06.000000Z","id":109}','created_at' => '2021-05-12 18:22:06','updated_at' => '2021-05-12 18:22:06'),
+  array('id' => '17','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.01","name":"Penjualan Retail - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:26:59.000000Z","created_at":"2021-05-12T11:26:59.000000Z","id":110}','created_at' => '2021-05-12 18:26:59','updated_at' => '2021-05-12 18:26:59'),
+  array('id' => '18','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.02","name":"Penjualan Non Retail - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:36:10.000000Z","created_at":"2021-05-12T11:36:10.000000Z","id":111}','created_at' => '2021-05-12 18:36:10','updated_at' => '2021-05-12 18:36:10'),
+  array('id' => '19','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.03","name":"Penjualan Proyek - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:44:12.000000Z","created_at":"2021-05-12T11:44:12.000000Z","id":112}','created_at' => '2021-05-12 18:44:12','updated_at' => '2021-05-12 18:44:12')
 );
 
-/* `tjs`.`agents` */
+/* `smartmar_main`.`agents` */
 $agents = array(
   array('id' => '1','country_id' => '44','category_id' => '63','min_price' => '1','max_price' => '7','fee' => '50','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','category_id' => '63','min_price' => '7','max_price' => '20','fee' => '55','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -139,7 +42,7 @@ $agents = array(
   array('id' => '7','country_id' => '105','category_id' => '68','min_price' => '7','max_price' => '50','fee' => '120','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`banners` */
+/* `smartmar_main`.`banners` */
 $banners = array(
   array('id' => '1','image' => 'public/banner/nAlWzlFGLmUXPVuOrgBamwxXWyTAXMVbzIQyTOeL.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','image' => 'public/banner/DUKTTUj04JJlJHImXrr4QNo1swIOd6xucmBtGGT1.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -148,7 +51,7 @@ $banners = array(
   array('id' => '5','image' => 'public/banner/bTXgt0MG2x0DvaQHILRgEi1lL7CsleJ93B7hCUEY.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `tjs`.`brands` */
+/* `smartmar_main`.`brands` */
 $brands = array(
   array('id' => '1','image' => NULL,'code' => 'AG','name' => 'Arte Gress','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','image' => 'public/brand/25sp2CmVWjZI0xXXXIunhvqnoTGO7tZzhA7isLMJ.png','code' => 'BT','name' => 'Brighton','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -179,11 +82,11 @@ $brands = array(
   array('id' => '27','image' => NULL,'code' => 'TT','name' => 'Tahta','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`carts` */
+/* `smartmar_main`.`carts` */
 $carts = array(
 );
 
-/* `tjs`.`categories` */
+/* `smartmar_main`.`categories` */
 $categories = array(
   array('id' => '1','name' => 'Fitting','slug' => 'fitting','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','name' => 'Other','slug' => 'other','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -295,7 +198,7 @@ $categories = array(
   array('id' => '108','name' => 'Water Treatment Plant','slug' => 'water-treatment-plant','parent_id' => '11','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`cities` */
+/* `smartmar_main`.`cities` */
 $cities = array(
   array('id' => '1','name' => 'KABUPATEN SIMEULUE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','name' => 'KABUPATEN ACEH SINGKIL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -813,7 +716,7 @@ $cities = array(
   array('id' => '514','name' => 'KOTA JAYAPURA','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`coas` */
+/* `smartmar_main`.`coas` */
 $coas = array(
   array('id' => '1','code' => '1.000.00','name' => 'Kas & Bank','parent_id' => '0','status' => '1','created_at' => '2021-05-12 13:55:14','updated_at' => '2021-05-12 13:55:14','deleted_at' => NULL),
   array('id' => '2','code' => '1.000.01','name' => 'Kas Kecil','parent_id' => '1','status' => '1','created_at' => '2021-05-12 13:55:26','updated_at' => '2021-05-12 13:55:26','deleted_at' => NULL),
@@ -910,14 +813,30 @@ $coas = array(
   array('id' => '93','code' => '3.200.00','name' => 'Deviden','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:39','updated_at' => '2021-05-12 15:08:39','deleted_at' => NULL),
   array('id' => '94','code' => '3.300.00','name' => 'RETAINED EARNING','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:50','updated_at' => '2021-05-12 15:08:50','deleted_at' => NULL),
   array('id' => '95','code' => '4.000.00','name' => 'Pendapatan','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:09:00','updated_at' => '2021-05-12 15:09:00','deleted_at' => NULL),
-  array('id' => '96','code' => '4.000.01','name' => 'Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36','deleted_at' => NULL)
+  array('id' => '96','code' => '4.000.01','name' => 'Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36','deleted_at' => NULL),
+  array('id' => '97','code' => '4.000.01.01','name' => 'Penjualan - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:20:33','deleted_at' => NULL),
+  array('id' => '98','code' => '4.000.01.01.01','name' => 'Penjualan Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:21:41','deleted_at' => '2021-05-12 16:21:41'),
+  array('id' => '99','code' => '4.000.01.01.02','name' => 'Penjualan Non Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 16:31:40','deleted_at' => NULL),
+  array('id' => '100','code' => '4.000.01.01.03','name' => 'Penjualan Proyek - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 16:34:13','deleted_at' => NULL),
+  array('id' => '101','code' => '4.000.01.02','name' => 'Penjualan - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:03:34','updated_at' => '2021-05-12 17:03:34','deleted_at' => NULL),
+  array('id' => '102','code' => '4.000.01.02.01','name' => 'Penjualan Retail - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:05:37','updated_at' => '2021-05-12 17:05:37','deleted_at' => NULL),
+  array('id' => '103','code' => '4.000.01.02.02','name' => 'Penjualan Non Retail - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:06:39','updated_at' => '2021-05-12 17:06:39','deleted_at' => NULL),
+  array('id' => '104','code' => '4.000.01.02.03','name' => 'Penjualan Proyek - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:07:43','updated_at' => '2021-05-12 17:07:43','deleted_at' => NULL),
+  array('id' => '105','code' => '4.000.01.03','name' => 'Penjualan - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:09:47','updated_at' => '2021-05-12 17:09:47','deleted_at' => NULL),
+  array('id' => '106','code' => '4.000.01.03.01','name' => 'Penjualan Retail - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:11:08','updated_at' => '2021-05-12 17:11:08','deleted_at' => NULL),
+  array('id' => '107','code' => '4.000.01.03.02','name' => 'Penjualan Non Retail - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:18:52','updated_at' => '2021-05-12 18:18:52','deleted_at' => NULL),
+  array('id' => '108','code' => '4.000.01.03.03','name' => 'Penjualan Proyek - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:20:30','updated_at' => '2021-05-12 18:20:30','deleted_at' => NULL),
+  array('id' => '109','code' => '4.000.01.04','name' => 'Penjualan - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:22:06','updated_at' => '2021-05-12 18:22:06','deleted_at' => NULL),
+  array('id' => '110','code' => '4.000.01.04.01','name' => 'Penjualan Retail - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:26:59','updated_at' => '2021-05-12 18:26:59','deleted_at' => NULL),
+  array('id' => '111','code' => '4.000.01.04.02','name' => 'Penjualan Non Retail - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:36:10','updated_at' => '2021-05-12 18:36:10','deleted_at' => NULL),
+  array('id' => '112','code' => '4.000.01.04.03','name' => 'Penjualan Proyek - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:44:12','updated_at' => '2021-05-12 18:44:12','deleted_at' => NULL)
 );
 
-/* `tjs`.`cogs` */
+/* `smartmar_main`.`cogs` */
 $cogs = array(
 );
 
-/* `tjs`.`colors` */
+/* `smartmar_main`.`colors` */
 $colors = array(
   array('id' => '1','code' => 'IVY','name' => 'Ivory','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MWT','name' => 'Medium White','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -952,7 +871,7 @@ $colors = array(
   array('id' => '31','code' => 'VIO','name' => 'Violet','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`companies` */
+/* `smartmar_main`.`companies` */
 $companies = array(
   array('id' => '1','code' => 'MKJRTH','name' => 'MKJ RETAIL HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'PTAHIG','name' => 'PTA HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -965,7 +884,7 @@ $companies = array(
   array('id' => '9','code' => 'OWNER','name' => 'OWNER','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`countries` */
+/* `smartmar_main`.`countries` */
 $countries = array(
   array('id' => '1','code' => 'AW','name' => 'Aruba','phone_code' => '297','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'AF','name' => 'Afghanistan','phone_code' => '93','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1218,7 +1137,7 @@ $countries = array(
   array('id' => '249','code' => 'ZW','name' => 'Zimbabwe','phone_code' => '263','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `tjs`.`currencies` */
+/* `smartmar_main`.`currencies` */
 $currencies = array(
   array('id' => '1','code' => 'USD','name' => 'Dolar Amerika','symbol' => '$','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'EUR','name' => 'Euro','symbol' => '€','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1227,11 +1146,11 @@ $currencies = array(
   array('id' => '5','code' => 'IDR','name' => 'Indonesia','symbol' => 'Rp','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `tjs`.`currency_prices` */
+/* `smartmar_main`.`currency_prices` */
 $currency_prices = array(
 );
 
-/* `tjs`.`currency_rates` */
+/* `smartmar_main`.`currency_rates` */
 $currency_rates = array(
   array('id' => '1','currency_id' => '1','company_id' => '3','conversion' => '15550','created_at' => '2020-03-23 11:08:39','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
   array('id' => '2','currency_id' => '1','company_id' => '3','conversion' => '15000','created_at' => '2020-03-23 11:09:59','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
@@ -1248,17 +1167,17 @@ $currency_rates = array(
   array('id' => '13','currency_id' => '1','company_id' => '6','conversion' => '16000','created_at' => '2020-05-29 14:13:10','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`customers` */
+/* `smartmar_main`.`customers` */
 $customers = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$xIX3NMRaqZeUW135YBNpkOvlyL.TZxrwXd/ZzFAHdDiXKp.YU/o8G','verification' => '2021-05-12 13:52:27','created_at' => '2021-05-12 13:52:27','updated_at' => '2021-05-12 13:52:27')
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$KUfWmwg9qJd8P8pGhygd.OsOUWeT4H64P6w1OINpHyvyjO5Qev8Mi','verification' => '2021-05-12 15:13:18','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18')
 );
 
-/* `tjs`.`divisions` */
+/* `smartmar_main`.`divisions` */
 $divisions = array(
   array('id' => '1','code' => 'KM','name' => 'Karya Modern','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`emkls` */
+/* `smartmar_main`.`emkls` */
 $emkls = array(
   array('id' => '1','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '1','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1270,15 +1189,15 @@ $emkls = array(
   array('id' => '8','company_id' => '3','import_id' => '2','country_id' => '44','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`emkl_rates` */
+/* `smartmar_main`.`emkl_rates` */
 $emkl_rates = array(
 );
 
-/* `tjs`.`failed_jobs` */
+/* `smartmar_main`.`failed_jobs` */
 $failed_jobs = array(
 );
 
-/* `tjs`.`freights` */
+/* `smartmar_main`.`freights` */
 $freights = array(
   array('id' => '1','country_id' => '44','city_id' => '264','container' => '1','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '105','city_id' => '264','container' => '1','shipping' => '1','cost' => '300','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1286,13 +1205,13 @@ $freights = array(
   array('id' => '4','country_id' => '105','city_id' => '264','container' => '2','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`grades` */
+/* `smartmar_main`.`grades` */
 $grades = array(
   array('id' => '1','code' => 'KW1','name' => 'Kw1','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'KW2','name' => 'Kw2','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`hs_codes` */
+/* `smartmar_main`.`hs_codes` */
 $hs_codes = array(
   array('id' => '1','code' => '6907.21.93','name' => 'Glazed','alias' => 'Water Absorption Below 0.5%(persen)','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '6907.22.93','name' => 'Glazed','alias' => 'Water Absorption 0.5%-10%','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1301,22 +1220,22 @@ $hs_codes = array(
   array('id' => '5','code' => '6907.41.92','name' => 'Unglazed','alias' => 'BULLNOSE/STEPNOSING/LIST PLAINT','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`imports` */
+/* `smartmar_main`.`imports` */
 $imports = array(
   array('id' => '1','code' => 'HYBRID','name' => 'HYBRID','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','code' => 'MANUAL','name' => 'MANUAL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '3','code' => 'PACKAGE','name' => 'PACKAGE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`jobs` */
+/* `smartmar_main`.`jobs` */
 $jobs = array(
 );
 
-/* `tjs`.`journals` */
+/* `smartmar_main`.`journals` */
 $journals = array(
 );
 
-/* `tjs`.`marketing_structures` */
+/* `smartmar_main`.`marketing_structures` */
 $marketing_structures = array(
   array('id' => '1','company_id' => '2','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '0','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '5','interest_in_payment' => '3','nett_profit' => '4','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '1','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '2','interest_in_payment' => '0','nett_profit' => '2','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1324,7 +1243,7 @@ $marketing_structures = array(
   array('id' => '4','company_id' => '8','rental_cost' => '5','travel_sales_cost' => '0','marketing_cost' => '4','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '4','interest_in_payment' => '0','nett_profit' => '5','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`migrations` */
+/* `smartmar_main`.`migrations` */
 $migrations = array(
   array('id' => '1','migration' => '2016_06_01_000001_create_oauth_auth_codes_table','batch' => '1'),
   array('id' => '2','migration' => '2016_06_01_000002_create_oauth_access_tokens_table','batch' => '1'),
@@ -1384,43 +1303,43 @@ $migrations = array(
   array('id' => '56','migration' => '2021_05_12_124145_create_journals_table','batch' => '1')
 );
 
-/* `tjs`.`oauth_access_tokens` */
+/* `smartmar_main`.`oauth_access_tokens` */
 $oauth_access_tokens = array(
 );
 
-/* `tjs`.`oauth_auth_codes` */
+/* `smartmar_main`.`oauth_auth_codes` */
 $oauth_auth_codes = array(
 );
 
-/* `tjs`.`oauth_clients` */
+/* `smartmar_main`.`oauth_clients` */
 $oauth_clients = array(
 );
 
-/* `tjs`.`oauth_personal_access_clients` */
+/* `smartmar_main`.`oauth_personal_access_clients` */
 $oauth_personal_access_clients = array(
 );
 
-/* `tjs`.`oauth_refresh_tokens` */
+/* `smartmar_main`.`oauth_refresh_tokens` */
 $oauth_refresh_tokens = array(
 );
 
-/* `tjs`.`orders` */
+/* `smartmar_main`.`orders` */
 $orders = array(
 );
 
-/* `tjs`.`order_details` */
+/* `smartmar_main`.`order_details` */
 $order_details = array(
 );
 
-/* `tjs`.`order_invoices` */
+/* `smartmar_main`.`order_invoices` */
 $order_invoices = array(
 );
 
-/* `tjs`.`order_invoice_details` */
+/* `smartmar_main`.`order_invoice_details` */
 $order_invoice_details = array(
 );
 
-/* `tjs`.`patterns` */
+/* `smartmar_main`.`patterns` */
 $patterns = array(
   array('id' => '1','code' => 'PLN','name' => 'Plain','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MRB','name' => 'Marble','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1461,7 +1380,7 @@ $patterns = array(
   array('id' => '37','code' => 'SAN','name' => 'Sand','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`pricing_policies` */
+/* `smartmar_main`.`pricing_policies` */
 $pricing_policies = array(
   array('id' => '1','product_id' => '1','showroom_cost' => '2298','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2298','nett_profit' => '5746','saving' => '1149','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '108026','project_price' => '120000','price_list' => '300000','store_price_list' => '280000','discount_retail_sales' => '196000','discount_retail_spv' => '168000','discount_retail_manager' => '140000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
   array('id' => '2','product_id' => '3','showroom_cost' => '2668','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2668','nett_profit' => '6671','saving' => '1334','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '125414','project_price' => '160000','price_list' => '400000','store_price_list' => '300000','discount_retail_sales' => '210000','discount_retail_spv' => '180000','discount_retail_manager' => '150000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
@@ -3239,7 +3158,7 @@ $pricing_policies = array(
   array('id' => '1774','product_id' => '2812','showroom_cost' => '0','sales_travel_cost' => '265','marketing_cost' => '0','interest' => '265','sales_commission' => '133','fixed_cost' => '636','nett_profit' => '530','saving' => '265','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '45','project_price' => '72500','price_list' => '77500','store_price_list' => '76000','discount_retail_sales' => '75500','discount_retail_spv' => '75000','discount_retail_manager' => '74000','created_at' => '2021-05-10 09:38:16','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL)
 );
 
-/* `tjs`.`products` */
+/* `smartmar_main`.`products` */
 $products = array(
   array('id' => '1','type_id' => '1','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '2','type_id' => '2','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
@@ -6073,7 +5992,7 @@ $products = array(
   array('id' => '2830','type_id' => '1065','company_id' => '3','hs_code_id' => '4','brand_id' => '17','country_id' => '103','supplier_id' => '92','grade_id' => '2','carton_pallet' => '0','carton_pcs' => '2','container_standart' => '4','container_stock' => '1','container_max_stock' => '1','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL)
 );
 
-/* `tjs`.`product_shadings` */
+/* `smartmar_main`.`product_shadings` */
 $product_shadings = array(
   array('id' => '1','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
   array('id' => '2','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
@@ -6104,29 +6023,29 @@ $product_shadings = array(
   array('id' => '27','product_id' => '1','warehouse_code' => '1G2','stock_code' => '101.00004','code' => '200','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:08')
 );
 
-/* `tjs`.`projects` */
+/* `smartmar_main`.`projects` */
 $projects = array(
 );
 
-/* `tjs`.`project_consultant_meetings` */
+/* `smartmar_main`.`project_consultant_meetings` */
 $project_consultant_meetings = array(
 );
 
-/* `tjs`.`project_products` */
+/* `smartmar_main`.`project_products` */
 $project_products = array(
 );
 
-/* `tjs`.`project_samples` */
+/* `smartmar_main`.`project_samples` */
 $project_samples = array(
 );
 
-/* `tjs`.`specifications` */
+/* `smartmar_main`.`specifications` */
 $specifications = array(
   array('id' => '1','code' => '01','name' => 'Volume','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '02','name' => 'Tonnage','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`suppliers` */
+/* `smartmar_main`.`suppliers` */
 $suppliers = array(
   array('id' => '1','country_id' => '44','code' => 'SUPP-0001','name' => 'AQIAO','email' => NULL,'phone' => NULL,'address' => '#710China Ceramics theater Central area.C.C.I.H Jihua West Road 68 Chancheng district Foshan City GD.','pic' => 'Kate','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','code' => 'SUPP-0002','name' => 'BINLY','email' => NULL,'phone' => NULL,'address' => 'Fengtang Industrial DistrictFenngtang Town Chaozhou City Guangdong Province P.R.China 521000','pic' => 'sally','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -6225,7 +6144,7 @@ TA-WANKANER DIST-MORBI GUJARAT - INDIA.
   array('id' => '92','country_id' => '103','code' => 'SUPP-0092','name' => 'IKAD','email' => NULL,'phone' => NULL,'address' => 'Jl Raya Pasar Kemis KM 5.5, Desa Kutajaya','pic' => 'Nanik','limit_credit' => '0','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `tjs`.`supplier_currencies` */
+/* `smartmar_main`.`supplier_currencies` */
 $supplier_currencies = array(
   array('id' => '1','supplier_id' => '1','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
   array('id' => '2','supplier_id' => '1','currency_id' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
@@ -6414,7 +6333,7 @@ $supplier_currencies = array(
   array('id' => '185','supplier_id' => '92','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12')
 );
 
-/* `tjs`.`surfaces` */
+/* `smartmar_main`.`surfaces` */
 $surfaces = array(
   array('id' => '1','code' => 'MAT','name' => 'Matt','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SGF','name' => 'Sugar ','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -6433,11 +6352,11 @@ $surfaces = array(
   array('id' => '15','code' => '3D','name' => '3d','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`tokens` */
+/* `smartmar_main`.`tokens` */
 $tokens = array(
 );
 
-/* `tjs`.`types` */
+/* `smartmar_main`.`types` */
 $types = array(
   array('id' => '1','category_id' => '63','division_id' => '1','surface_id' => '3','color_id' => '2','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/gJ4efz2iaSm9AMTx8X5kKGrVwquwEJRwBXQ097MT.jpg','code' => '6100D','material' => '1','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '1','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/yf5qPNRtNQaZ2n26o5SnKk6ggmn1hw7cZStSafB6.jpg','code' => '6S001T','material' => '3','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -7653,7 +7572,7 @@ $types = array(
   array('id' => '1212','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '5','pattern_id' => '29','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/ygCoUWjww4Xdiyk1A8Pc3fglDP2bdX4KsciQ1YTi.jpg','code' => '8709','material' => '2','faces' => '1','length' => '80','width' => '80','height' => '0','weight' => '48','thickness' => '0','conversion' => '1','stockable' => '0','min_stock' => '0','max_stock' => '0','small_stock' => '0','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL)
 );
 
-/* `tjs`.`units` */
+/* `smartmar_main`.`units` */
 $units = array(
   array('id' => '1','code' => 'SQM','name' => 'Sqm','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SET','name' => 'Set','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -7661,22 +7580,22 @@ $units = array(
   array('id' => '4','code' => 'BOX','name' => 'Box','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`users` */
+/* `smartmar_main`.`users` */
 $users = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$caVMP9Eje2XinT7xmoGFSeuLxvoBkjIvthFV5rNRSEAQfFL8qF04q','branch' => '1','verification' => '2021-05-12 13:52:27','status' => '1','created_at' => '2021-05-12 13:52:27','updated_at' => '2021-05-12 13:52:27','deleted_at' => NULL),
-  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$ziRcNXpUq7ZosgecuSCmZOFIn2qjyK5vCq/27V3ArUmHNuMvN6KiS','branch' => '1','verification' => '2021-05-12 13:52:27','status' => '1','created_at' => '2021-05-12 13:52:27','updated_at' => '2021-05-12 13:52:27','deleted_at' => NULL)
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$wXiXCfiaPMkrZcF/IAAY3OMgoo38XQw.rZYVjzhLYs4zIZ6cQuD3O','branch' => '1','verification' => '2021-05-12 15:13:18','status' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18','deleted_at' => NULL),
+  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$NDH6du4XrvPk.HiIMGJxketoarpJWEi5OdfyNvd/rOTpTUnKVgLJS','branch' => '1','verification' => '2021-05-12 15:13:18','status' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18','deleted_at' => NULL)
 );
 
-/* `tjs`.`user_roles` */
+/* `smartmar_main`.`user_roles` */
 $user_roles = array(
-  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-12 13:52:27','updated_at' => '2021-05-12 13:52:27'),
-  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-12 13:52:27','updated_at' => '2021-05-12 13:52:27')
+  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18'),
+  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18')
 );
 
-/* `tjs`.`warehouses` */
+/* `smartmar_main`.`warehouses` */
 $warehouses = array(
 );
 
-/* `tjs`.`wishlists` */
+/* `smartmar_main`.`wishlists` */
 $wishlists = array(
 );

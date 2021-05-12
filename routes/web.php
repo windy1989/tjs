@@ -367,6 +367,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('update/{id}', 'CoaController@update');
                 Route::post('destroy', 'CoaController@destroy');
             });
+
+            Route::prefix('cash_bank')->group(function() {
+                Route::get('/', 'CashBankController@index');
+                Route::post('datatable', 'CashBankController@datatable');
+                Route::post('create', 'CashBankController@create');
+            });
         });
 
         Route::prefix('setting')->group(function() {
