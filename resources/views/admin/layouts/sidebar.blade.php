@@ -171,6 +171,12 @@
                             <span>Project</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/job_desc') }}" class="nav-link {{ Request::segment(2) == 'job_desc' ? 'active' : '' }}">
+                            <i class="icon-library2"></i>
+                            <span>Job Desc</span>
+                        </a>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'accounting' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-book2"></i> 

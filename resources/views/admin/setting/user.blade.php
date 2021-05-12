@@ -114,19 +114,18 @@
                   <label>Role :<span class="text-danger">*</span></label>
                   <select name="role[]" id="role" class="select2" multiple>
                      <option value="1">Director</option>
-                     <option value="2">CMO</option>
-                     <option value="3">Secretary</option>
-                     <option value="4">Finance</option>
-                     <option value="5">Accounting</option>
-                     <option value="6">Retail Manager</option>
-                     <option value="7">Sales Manager</option>
-                     <option value="8">Sales Project</option>
-                     <option value="9">Administration</option>
-                     <option value="10">Digital Marketing</option>
-                     <option value="11">Purchase</option>
-                     <option value="12">Admin Sales / Stock</option>
-                     <option value="13">AR & Delivery</option>
-                     <option value="14">After Sales</option>
+                     <option value="2">Secretary</option>
+                     <option value="3">Head Of Finance</option>
+                     <option value="4">Head Of Accounting</option>
+                     <option value="5">Sales & Marketing Manager</option>
+                     <option value="6">Sales Project</option>
+                     <option value="7">Head Of Administration</option>
+                     <option value="8">Digital Marketing</option>
+                     <option value="9">Purchasing</option>
+                     <option value="10">Admin Sales & Stock</option>
+                     <option value="11">Piutang & Pengiriman</option>
+                     <option value="12">Assisten Hiro</option>
+                     <option value="13">Assisten</option>
                   </select>
                </div>
                <div class="form-group text-center mt-4">

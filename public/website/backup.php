@@ -1,37 +1,18 @@
 <?php
 /**
  * Export to PHP Array plugin for PHPMyAdmin
- * @version 4.9.5
+ * @version 5.1.0
  */
 
 /**
- * Database `smartmar_main`
+ * Database `tjs`
  */
 
-/* `smartmar_main`.`activity_logs` */
+/* `tjs`.`activity_logs` */
 $activity_logs = array(
-  array('id' => '1','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01","name":"Penjualan - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:12:35.000000Z","created_at":"2021-05-12T09:12:35.000000Z","id":97}','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:12:35'),
-  array('id' => '2','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.01","name":"Penjualan Retail - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:18:10.000000Z","created_at":"2021-05-12T09:18:10.000000Z","id":98}','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:18:10'),
-  array('id' => '3','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:19:04','updated_at' => '2021-05-12 16:19:04'),
-  array('id' => '4','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:20:33','updated_at' => '2021-05-12 16:20:33'),
-  array('id' => '5','log_name' => 'default','description' => 'Delete the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-12 16:21:41','updated_at' => '2021-05-12 16:21:41'),
-  array('id' => '6','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.02","name":"Penjualan Non Retail - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:31:40.000000Z","created_at":"2021-05-12T09:31:40.000000Z","id":99}','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 16:31:40'),
-  array('id' => '7','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.01.03","name":"Penjualan Proyek - Sby","parent_id":"96","status":"1","updated_at":"2021-05-12T09:34:13.000000Z","created_at":"2021-05-12T09:34:13.000000Z","id":100}','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 16:34:13'),
-  array('id' => '8','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02","name":"Penjualan - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:03:34.000000Z","created_at":"2021-05-12T10:03:34.000000Z","id":101}','created_at' => '2021-05-12 17:03:34','updated_at' => '2021-05-12 17:03:34'),
-  array('id' => '9','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.01","name":"Penjualan Retail - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:05:37.000000Z","created_at":"2021-05-12T10:05:37.000000Z","id":102}','created_at' => '2021-05-12 17:05:37','updated_at' => '2021-05-12 17:05:37'),
-  array('id' => '10','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.02","name":"Penjualan Non Retail - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:06:39.000000Z","created_at":"2021-05-12T10:06:39.000000Z","id":103}','created_at' => '2021-05-12 17:06:39','updated_at' => '2021-05-12 17:06:39'),
-  array('id' => '11','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.02.03","name":"Penjualan Proyek - Jkt","parent_id":"96","status":"1","updated_at":"2021-05-12T10:07:43.000000Z","created_at":"2021-05-12T10:07:43.000000Z","id":104}','created_at' => '2021-05-12 17:07:43','updated_at' => '2021-05-12 17:07:43'),
-  array('id' => '12','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03","name":"Penjualan - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T10:09:47.000000Z","created_at":"2021-05-12T10:09:47.000000Z","id":105}','created_at' => '2021-05-12 17:09:47','updated_at' => '2021-05-12 17:09:47'),
-  array('id' => '13','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.01","name":"Penjualan Retail - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T10:11:08.000000Z","created_at":"2021-05-12T10:11:08.000000Z","id":106}','created_at' => '2021-05-12 17:11:08','updated_at' => '2021-05-12 17:11:08'),
-  array('id' => '14','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.02","name":"Penjualan Non Retail - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:18:52.000000Z","created_at":"2021-05-12T11:18:52.000000Z","id":107}','created_at' => '2021-05-12 18:18:52','updated_at' => '2021-05-12 18:18:52'),
-  array('id' => '15','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.03.03","name":"Penjualan Proyek - Sby (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:20:30.000000Z","created_at":"2021-05-12T11:20:30.000000Z","id":108}','created_at' => '2021-05-12 18:20:30','updated_at' => '2021-05-12 18:20:30'),
-  array('id' => '16','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04","name":"Penjualan - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:22:06.000000Z","created_at":"2021-05-12T11:22:06.000000Z","id":109}','created_at' => '2021-05-12 18:22:06','updated_at' => '2021-05-12 18:22:06'),
-  array('id' => '17','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.01","name":"Penjualan Retail - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:26:59.000000Z","created_at":"2021-05-12T11:26:59.000000Z","id":110}','created_at' => '2021-05-12 18:26:59','updated_at' => '2021-05-12 18:26:59'),
-  array('id' => '18','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.02","name":"Penjualan Non Retail - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:36:10.000000Z","created_at":"2021-05-12T11:36:10.000000Z","id":111}','created_at' => '2021-05-12 18:36:10','updated_at' => '2021-05-12 18:36:10'),
-  array('id' => '19','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"4.000.01.04.03","name":"Penjualan Proyek - Jkt (Non Pajak)","parent_id":"96","status":"1","updated_at":"2021-05-12T11:44:12.000000Z","created_at":"2021-05-12T11:44:12.000000Z","id":112}','created_at' => '2021-05-12 18:44:12','updated_at' => '2021-05-12 18:44:12')
 );
 
-/* `smartmar_main`.`agents` */
+/* `tjs`.`agents` */
 $agents = array(
   array('id' => '1','country_id' => '44','category_id' => '63','min_price' => '1','max_price' => '7','fee' => '50','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','category_id' => '63','min_price' => '7','max_price' => '20','fee' => '55','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -42,7 +23,7 @@ $agents = array(
   array('id' => '7','country_id' => '105','category_id' => '68','min_price' => '7','max_price' => '50','fee' => '120','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`banners` */
+/* `tjs`.`banners` */
 $banners = array(
   array('id' => '1','image' => 'public/banner/nAlWzlFGLmUXPVuOrgBamwxXWyTAXMVbzIQyTOeL.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','image' => 'public/banner/DUKTTUj04JJlJHImXrr4QNo1swIOd6xucmBtGGT1.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -51,7 +32,7 @@ $banners = array(
   array('id' => '5','image' => 'public/banner/bTXgt0MG2x0DvaQHILRgEi1lL7CsleJ93B7hCUEY.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`brands` */
+/* `tjs`.`brands` */
 $brands = array(
   array('id' => '1','image' => NULL,'code' => 'AG','name' => 'Arte Gress','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','image' => 'public/brand/25sp2CmVWjZI0xXXXIunhvqnoTGO7tZzhA7isLMJ.png','code' => 'BT','name' => 'Brighton','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -82,11 +63,15 @@ $brands = array(
   array('id' => '27','image' => NULL,'code' => 'TT','name' => 'Tahta','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`carts` */
+/* `tjs`.`carts` */
 $carts = array(
 );
 
-/* `smartmar_main`.`categories` */
+/* `tjs`.`cash_banks` */
+$cash_banks = array(
+);
+
+/* `tjs`.`categories` */
 $categories = array(
   array('id' => '1','name' => 'Fitting','slug' => 'fitting','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','name' => 'Other','slug' => 'other','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -198,7 +183,7 @@ $categories = array(
   array('id' => '108','name' => 'Water Treatment Plant','slug' => 'water-treatment-plant','parent_id' => '11','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`cities` */
+/* `tjs`.`cities` */
 $cities = array(
   array('id' => '1','name' => 'KABUPATEN SIMEULUE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','name' => 'KABUPATEN ACEH SINGKIL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -716,7 +701,7 @@ $cities = array(
   array('id' => '514','name' => 'KOTA JAYAPURA','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`coas` */
+/* `tjs`.`coas` */
 $coas = array(
   array('id' => '1','code' => '1.000.00','name' => 'Kas & Bank','parent_id' => '0','status' => '1','created_at' => '2021-05-12 13:55:14','updated_at' => '2021-05-12 13:55:14','deleted_at' => NULL),
   array('id' => '2','code' => '1.000.01','name' => 'Kas Kecil','parent_id' => '1','status' => '1','created_at' => '2021-05-12 13:55:26','updated_at' => '2021-05-12 13:55:26','deleted_at' => NULL),
@@ -816,27 +801,129 @@ $coas = array(
   array('id' => '96','code' => '4.000.01','name' => 'Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36','deleted_at' => NULL),
   array('id' => '97','code' => '4.000.01.01','name' => 'Penjualan - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:20:33','deleted_at' => NULL),
   array('id' => '98','code' => '4.000.01.01.01','name' => 'Penjualan Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:21:41','deleted_at' => '2021-05-12 16:21:41'),
-  array('id' => '99','code' => '4.000.01.01.02','name' => 'Penjualan Non Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 16:31:40','deleted_at' => NULL),
-  array('id' => '100','code' => '4.000.01.01.03','name' => 'Penjualan Proyek - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 16:34:13','deleted_at' => NULL),
+  array('id' => '99','code' => '4.000.01.01.02','name' => 'Penjualan Non Retail - Sby','parent_id' => '97','status' => '1','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 22:11:40','deleted_at' => NULL),
+  array('id' => '100','code' => '4.000.01.01.03','name' => 'Penjualan Proyek - Sby','parent_id' => '97','status' => '1','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 22:11:52','deleted_at' => NULL),
   array('id' => '101','code' => '4.000.01.02','name' => 'Penjualan - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:03:34','updated_at' => '2021-05-12 17:03:34','deleted_at' => NULL),
-  array('id' => '102','code' => '4.000.01.02.01','name' => 'Penjualan Retail - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:05:37','updated_at' => '2021-05-12 17:05:37','deleted_at' => NULL),
-  array('id' => '103','code' => '4.000.01.02.02','name' => 'Penjualan Non Retail - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:06:39','updated_at' => '2021-05-12 17:06:39','deleted_at' => NULL),
-  array('id' => '104','code' => '4.000.01.02.03','name' => 'Penjualan Proyek - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:07:43','updated_at' => '2021-05-12 17:07:43','deleted_at' => NULL),
+  array('id' => '102','code' => '4.000.01.02.01','name' => 'Penjualan Retail - Jkt','parent_id' => '101','status' => '1','created_at' => '2021-05-12 17:05:37','updated_at' => '2021-05-12 22:12:36','deleted_at' => NULL),
+  array('id' => '103','code' => '4.000.01.02.02','name' => 'Penjualan Non Retail - Jkt','parent_id' => '101','status' => '1','created_at' => '2021-05-12 17:06:39','updated_at' => '2021-05-12 22:12:45','deleted_at' => NULL),
+  array('id' => '104','code' => '4.000.01.02.03','name' => 'Penjualan Proyek - Jkt','parent_id' => '101','status' => '1','created_at' => '2021-05-12 17:07:43','updated_at' => '2021-05-12 22:13:06','deleted_at' => NULL),
   array('id' => '105','code' => '4.000.01.03','name' => 'Penjualan - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:09:47','updated_at' => '2021-05-12 17:09:47','deleted_at' => NULL),
-  array('id' => '106','code' => '4.000.01.03.01','name' => 'Penjualan Retail - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:11:08','updated_at' => '2021-05-12 17:11:08','deleted_at' => NULL),
-  array('id' => '107','code' => '4.000.01.03.02','name' => 'Penjualan Non Retail - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:18:52','updated_at' => '2021-05-12 18:18:52','deleted_at' => NULL),
-  array('id' => '108','code' => '4.000.01.03.03','name' => 'Penjualan Proyek - Sby (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:20:30','updated_at' => '2021-05-12 18:20:30','deleted_at' => NULL),
+  array('id' => '106','code' => '4.000.01.03.01','name' => 'Penjualan Retail - Sby (Non Pajak)','parent_id' => '105','status' => '1','created_at' => '2021-05-12 17:11:08','updated_at' => '2021-05-12 22:13:30','deleted_at' => NULL),
+  array('id' => '107','code' => '4.000.01.03.02','name' => 'Penjualan Non Retail - Sby (Non Pajak)','parent_id' => '105','status' => '1','created_at' => '2021-05-12 18:18:52','updated_at' => '2021-05-12 22:13:53','deleted_at' => NULL),
+  array('id' => '108','code' => '4.000.01.03.03','name' => 'Penjualan Proyek - Sby (Non Pajak)','parent_id' => '105','status' => '1','created_at' => '2021-05-12 18:20:30','updated_at' => '2021-05-12 22:14:25','deleted_at' => NULL),
   array('id' => '109','code' => '4.000.01.04','name' => 'Penjualan - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:22:06','updated_at' => '2021-05-12 18:22:06','deleted_at' => NULL),
-  array('id' => '110','code' => '4.000.01.04.01','name' => 'Penjualan Retail - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:26:59','updated_at' => '2021-05-12 18:26:59','deleted_at' => NULL),
-  array('id' => '111','code' => '4.000.01.04.02','name' => 'Penjualan Non Retail - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:36:10','updated_at' => '2021-05-12 18:36:10','deleted_at' => NULL),
-  array('id' => '112','code' => '4.000.01.04.03','name' => 'Penjualan Proyek - Jkt (Non Pajak)','parent_id' => '96','status' => '1','created_at' => '2021-05-12 18:44:12','updated_at' => '2021-05-12 18:44:12','deleted_at' => NULL)
+  array('id' => '110','code' => '4.000.01.04.01','name' => 'Penjualan Retail - Jkt (Non Pajak)','parent_id' => '109','status' => '1','created_at' => '2021-05-12 18:26:59','updated_at' => '2021-05-12 22:14:47','deleted_at' => NULL),
+  array('id' => '111','code' => '4.000.01.04.02','name' => 'Penjualan Non Retail - Jkt (Non Pajak)','parent_id' => '109','status' => '1','created_at' => '2021-05-12 18:36:10','updated_at' => '2021-05-12 22:15:04','deleted_at' => NULL),
+  array('id' => '112','code' => '4.000.01.04.03','name' => 'Penjualan Proyek - Jkt (Non Pajak)','parent_id' => '109','status' => '1','created_at' => '2021-05-12 18:44:12','updated_at' => '2021-05-12 22:15:31','deleted_at' => NULL),
+  array('id' => '113','code' => '4.000.02','name' => 'Penjualan Jasa','parent_id' => '95','status' => '1','created_at' => '2021-05-12 22:28:54','updated_at' => '2021-05-12 22:40:30','deleted_at' => NULL),
+  array('id' => '114','code' => '4.000.02.01','name' => 'Penjualan Jasa - Sby','parent_id' => '113','status' => '1','created_at' => '2021-05-12 22:33:37','updated_at' => '2021-05-12 22:33:37','deleted_at' => NULL),
+  array('id' => '115','code' => '4.000.02.02','name' => 'Penjualan Jasa - Jkt','parent_id' => '113','status' => '1','created_at' => '2021-05-12 22:35:57','updated_at' => '2021-05-12 22:35:57','deleted_at' => NULL),
+  array('id' => '116','code' => '4.000.02.03','name' => 'Penjualan Jasa - Sby (Non Pajak)','parent_id' => '113','status' => '1','created_at' => '2021-05-12 22:37:31','updated_at' => '2021-05-12 22:37:31','deleted_at' => NULL),
+  array('id' => '117','code' => '4.000.02.04','name' => 'Penjualan Jasa - Jkt (Non Pajak)','parent_id' => '113','status' => '1','created_at' => '2021-05-12 22:38:16','updated_at' => '2021-05-12 22:38:16','deleted_at' => NULL),
+  array('id' => '118','code' => '4.000.03','name' => 'Retur Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 22:47:31','updated_at' => '2021-05-12 22:52:46','deleted_at' => NULL),
+  array('id' => '119','code' => '4.000.04','name' => 'Potongan Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 22:48:48','updated_at' => '2021-05-12 22:52:55','deleted_at' => NULL),
+  array('id' => '120','code' => '4.100.00','name' => 'Sales Term Discount','parent_id' => '0','status' => '1','created_at' => '2021-05-12 22:52:30','updated_at' => '2021-05-12 22:52:30','deleted_at' => NULL),
+  array('id' => '121','code' => '5.000.00','name' => 'COGS','parent_id' => '0','status' => '1','created_at' => '2021-05-12 22:53:48','updated_at' => '2021-05-12 22:53:48','deleted_at' => NULL),
+  array('id' => '122','code' => '5.000.01','name' => 'COGS - Sby','parent_id' => '121','status' => '1','created_at' => '2021-05-12 23:00:08','updated_at' => '2021-05-12 23:00:08','deleted_at' => NULL),
+  array('id' => '123','code' => '5.000.01.01','name' => 'COGS Retail - Sby','parent_id' => '122','status' => '1','created_at' => '2021-05-12 23:01:33','updated_at' => '2021-05-12 23:01:33','deleted_at' => NULL),
+  array('id' => '124','code' => '5.000.01.02','name' => 'COGS Non Retail - Sby','parent_id' => '122','status' => '1','created_at' => '2021-05-12 23:02:13','updated_at' => '2021-05-12 23:02:13','deleted_at' => NULL),
+  array('id' => '125','code' => '5.000.01.03','name' => 'COGS Proyek - Sby','parent_id' => '122','status' => '1','created_at' => '2021-05-12 23:03:54','updated_at' => '2021-05-12 23:03:54','deleted_at' => NULL),
+  array('id' => '126','code' => '5.000.01.04','name' => 'COGS Jasa - Sby','parent_id' => '122','status' => '1','created_at' => '2021-05-12 23:04:39','updated_at' => '2021-05-12 23:04:39','deleted_at' => NULL),
+  array('id' => '127','code' => '5.000.02','name' => 'COGS - Jkt','parent_id' => '121','status' => '1','created_at' => '2021-05-12 23:09:30','updated_at' => '2021-05-12 23:09:30','deleted_at' => NULL),
+  array('id' => '128','code' => '5.000.02.01','name' => 'COGS Retail - Jkt','parent_id' => '127','status' => '1','created_at' => '2021-05-12 23:10:57','updated_at' => '2021-05-12 23:10:57','deleted_at' => NULL),
+  array('id' => '129','code' => '5.000.02.02','name' => 'COGS Non Retail - Jkt','parent_id' => '127','status' => '1','created_at' => '2021-05-12 23:11:45','updated_at' => '2021-05-12 23:11:45','deleted_at' => NULL),
+  array('id' => '130','code' => '5.000.02.03','name' => 'COGS Proyek - Jkt','parent_id' => '127','status' => '1','created_at' => '2021-05-12 23:12:34','updated_at' => '2021-05-12 23:12:34','deleted_at' => NULL),
+  array('id' => '131','code' => '5.000.02.04','name' => 'COGS Jasa - Jkt','parent_id' => '127','status' => '1','created_at' => '2021-05-12 23:16:04','updated_at' => '2021-05-12 23:16:04','deleted_at' => NULL),
+  array('id' => '132','code' => '6.000.00','name' => 'BIAYA PEMASARAN UMUM & ADM','parent_id' => '0','status' => '1','created_at' => '2021-05-12 23:17:21','updated_at' => '2021-05-12 23:17:21','deleted_at' => NULL),
+  array('id' => '133','code' => '6.100.00','name' => 'Biaya Pemasaran','parent_id' => '132','status' => '1','created_at' => '2021-05-12 23:27:01','updated_at' => '2021-05-12 23:27:01','deleted_at' => NULL),
+  array('id' => '134','code' => '6.100.01','name' => 'Biaya Pemasaran - Sby','parent_id' => '133','status' => '1','created_at' => '2021-05-12 23:28:05','updated_at' => '2021-05-12 23:28:05','deleted_at' => NULL),
+  array('id' => '135','code' => '6.100.01.01','name' => 'Biaya Iklan - Sby','parent_id' => '134','status' => '1','created_at' => '2021-05-12 23:29:47','updated_at' => '2021-05-12 23:29:47','deleted_at' => NULL),
+  array('id' => '136','code' => '6.100.01.02','name' => 'Biaya Komisi - Sby','parent_id' => '134','status' => '1','created_at' => '2021-05-12 23:30:22','updated_at' => '2021-05-12 23:30:22','deleted_at' => NULL),
+  array('id' => '137','code' => '6.100.01.03','name' => 'Biaya Entertainment - Sby','parent_id' => '134','status' => '1','created_at' => '2021-05-12 23:30:59','updated_at' => '2021-05-12 23:30:59','deleted_at' => NULL),
+  array('id' => '138','code' => '6.100.01.04','name' => 'Biaya Pemasaran Lainnya - Sby','parent_id' => '134','status' => '1','created_at' => '2021-05-12 23:31:41','updated_at' => '2021-05-12 23:31:41','deleted_at' => NULL),
+  array('id' => '139','code' => '6.100.02','name' => 'Biaya Pemasaran - Jkt','parent_id' => '133','status' => '1','created_at' => '2021-05-12 23:32:29','updated_at' => '2021-05-12 23:32:29','deleted_at' => NULL),
+  array('id' => '140','code' => '6.100.02.01','name' => 'Biaya Iklan - Jkt','parent_id' => '139','status' => '1','created_at' => '2021-05-12 23:33:49','updated_at' => '2021-05-12 23:33:49','deleted_at' => NULL),
+  array('id' => '141','code' => '6.100.02.02','name' => 'Biaya Komisi - Jkt','parent_id' => '139','status' => '1','created_at' => '2021-05-12 23:34:28','updated_at' => '2021-05-12 23:34:28','deleted_at' => NULL),
+  array('id' => '142','code' => '6.100.02.03','name' => 'Biaya Entertainment - Jkt','parent_id' => '139','status' => '1','created_at' => '2021-05-12 23:35:08','updated_at' => '2021-05-12 23:35:08','deleted_at' => NULL),
+  array('id' => '143','code' => '6.100.02.04','name' => 'Biaya Pemasaran Lainnya - Jkt','parent_id' => '139','status' => '1','created_at' => '2021-05-12 23:35:42','updated_at' => '2021-05-12 23:35:42','deleted_at' => NULL),
+  array('id' => '144','code' => '6.200.00','name' => 'Biaya Umum & Administrasi','parent_id' => '132','status' => '1','created_at' => '2021-05-12 23:48:35','updated_at' => '2021-05-12 23:48:35','deleted_at' => NULL),
+  array('id' => '145','code' => '6.200.01','name' => 'Gaji & Tunjangan Karyawan','parent_id' => '144','status' => '1','created_at' => '2021-05-12 23:50:17','updated_at' => '2021-05-12 23:50:17','deleted_at' => NULL),
+  array('id' => '146','code' => '6.200.01.01','name' => 'Gaji & Tunjangan Karyawan - Sby','parent_id' => '145','status' => '1','created_at' => '2021-05-12 23:53:27','updated_at' => '2021-05-12 23:53:27','deleted_at' => NULL),
+  array('id' => '147','code' => '6.200.01.01.01','name' => 'Biaya Gaji, Lembur & THR - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-12 23:55:05','updated_at' => '2021-05-12 23:55:05','deleted_at' => NULL),
+  array('id' => '148','code' => '6.200.01.01.02','name' => 'Biaya Bonus Pesangon & Kompensasi - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-12 23:56:04','updated_at' => '2021-05-12 23:56:04','deleted_at' => NULL),
+  array('id' => '149','code' => '6.200.01.01.03','name' => 'Biaya Transport Karyawan - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-12 23:56:42','updated_at' => '2021-05-12 23:56:42','deleted_at' => NULL),
+  array('id' => '150','code' => '6.200.01.01.04','name' => 'Biaya Upah & Honorer - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-12 23:57:22','updated_at' => '2021-05-12 23:57:22','deleted_at' => NULL),
+  array('id' => '151','code' => '6.200.01.01.05','name' => 'Biaya Catering & Makan Karyawan - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-12 23:58:57','updated_at' => '2021-05-12 23:58:57','deleted_at' => NULL),
+  array('id' => '152','code' => '6.200.01.01.06','name' => 'Biaya Tunjangan Kesehatan - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-13 00:00:10','updated_at' => '2021-05-13 00:00:10','deleted_at' => NULL),
+  array('id' => '153','code' => '6.200.01.01.07','name' => 'Biaya Asuransi Karyawan - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-13 00:00:54','updated_at' => '2021-05-13 00:00:54','deleted_at' => NULL),
+  array('id' => '154','code' => '6.200.01.01.08','name' => 'Biaya THR - Sby','parent_id' => '146','status' => '1','created_at' => '2021-05-13 00:01:31','updated_at' => '2021-05-13 00:01:31','deleted_at' => NULL),
+  array('id' => '155','code' => '6.200.01.02','name' => 'Gaji & Tunjangan Karyawan - Jkt','parent_id' => '145','status' => '1','created_at' => '2021-05-13 00:02:11','updated_at' => '2021-05-13 00:02:11','deleted_at' => NULL),
+  array('id' => '156','code' => '6.200.01.02.01','name' => 'Biaya Gaji, Lembur & THR - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:03:53','updated_at' => '2021-05-13 00:03:53','deleted_at' => NULL),
+  array('id' => '157','code' => '6.200.01.02.02','name' => 'Biaya Bonus Pesangon & Kompensasi - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:04:39','updated_at' => '2021-05-13 00:04:39','deleted_at' => NULL),
+  array('id' => '158','code' => '6.200.01.02.03','name' => 'Biaya Transport Karyawan - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:05:31','updated_at' => '2021-05-13 00:05:31','deleted_at' => NULL),
+  array('id' => '159','code' => '6.200.01.02.04','name' => 'Biaya Upah & Honorer - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:06:11','updated_at' => '2021-05-13 00:06:11','deleted_at' => NULL),
+  array('id' => '160','code' => '6.200.01.02.05','name' => 'Biaya Catering & Makan Karyawan - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:06:52','updated_at' => '2021-05-13 00:06:52','deleted_at' => NULL),
+  array('id' => '161','code' => '6.200.01.02.06','name' => 'Biaya Tunjangan Kesehatan - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:07:26','updated_at' => '2021-05-13 00:07:26','deleted_at' => NULL),
+  array('id' => '162','code' => '6.200.01.02.07','name' => 'Biaya Asuransi Karyawan - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:08:04','updated_at' => '2021-05-13 00:08:04','deleted_at' => NULL),
+  array('id' => '163','code' => '6.200.01.02.08','name' => 'Biaya THR - Jkt','parent_id' => '155','status' => '1','created_at' => '2021-05-13 00:08:35','updated_at' => '2021-05-13 00:08:35','deleted_at' => NULL),
+  array('id' => '164','code' => '6.2100.01','name' => 'Beban Utiliti, Adm, Sewa & Lainnya','parent_id' => '132','status' => '1','created_at' => '2021-05-13 00:11:37','updated_at' => '2021-05-13 00:11:37','deleted_at' => NULL),
+  array('id' => '165','code' => '6.2100.01.01','name' => 'Beban Lainya - Sby','parent_id' => '164','status' => '1','created_at' => '2021-05-13 00:12:58','updated_at' => '2021-05-13 00:12:58','deleted_at' => NULL),
+  array('id' => '166','code' => '6.2100.01.01.01','name' => 'Biaya Listrik - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:22:03','updated_at' => '2021-05-13 00:22:03','deleted_at' => NULL),
+  array('id' => '167','code' => '6.2100.01.01.02','name' => 'Biaya PAM - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:22:48','updated_at' => '2021-05-13 00:22:48','deleted_at' => NULL),
+  array('id' => '168','code' => '6.2100.01.01.03','name' => 'Biaya Telekomunikasi - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:23:20','updated_at' => '2021-05-13 00:23:20','deleted_at' => NULL),
+  array('id' => '169','code' => '6.2100.01.01.04','name' => 'Biaya Koran & Majalah - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:23:57','updated_at' => '2021-05-13 00:23:57','deleted_at' => NULL),
+  array('id' => '170','code' => '6.2100.01.01.05','name' => 'Biaya Ekspedisi, Pos & Materai - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:25:06','updated_at' => '2021-05-13 00:25:06','deleted_at' => NULL),
+  array('id' => '171','code' => '6.2100.01.01.06','name' => 'Biaya Perjalanan Dinas - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:25:48','updated_at' => '2021-05-13 00:25:48','deleted_at' => NULL),
+  array('id' => '172','code' => '6.2100.01.01.07','name' => 'Biaya Perlengkapan Kantor - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:26:20','updated_at' => '2021-05-13 00:26:20','deleted_at' => NULL),
+  array('id' => '173','code' => '6.2100.01.01.08','name' => 'STNK, KIR & Pajak Kendaraan - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:26:54','updated_at' => '2021-05-13 00:26:54','deleted_at' => NULL),
+  array('id' => '174','code' => '6.2100.01.01.09','name' => 'Biaya Pajak - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:27:25','updated_at' => '2021-05-13 00:27:25','deleted_at' => NULL),
+  array('id' => '175','code' => '6.2100.01.01.10','name' => 'Biaya Retribusi & Sumbangan - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:28:04','updated_at' => '2021-05-13 00:28:04','deleted_at' => NULL),
+  array('id' => '176','code' => '6.2100.01.01.11','name' => 'Biaya Sewa Gedung - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:28:41','updated_at' => '2021-05-13 00:28:41','deleted_at' => NULL),
+  array('id' => '177','code' => '6.2100.01.01.12','name' => 'Biaya Umum & Adm Lainnya - Sby','parent_id' => '165','status' => '1','created_at' => '2021-05-13 00:29:18','updated_at' => '2021-05-13 00:29:18','deleted_at' => NULL),
+  array('id' => '178','code' => '6.2100.01.02','name' => 'Beban Lainya - Jkt','parent_id' => '164','status' => '1','created_at' => '2021-05-13 00:30:09','updated_at' => '2021-05-13 00:30:09','deleted_at' => NULL),
+  array('id' => '179','code' => '6.2100.01.02.01','name' => 'Biaya Listrik - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:33:40','updated_at' => '2021-05-13 00:33:40','deleted_at' => NULL),
+  array('id' => '180','code' => '6.2100.01.02.02','name' => 'Biaya PAM - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:34:12','updated_at' => '2021-05-13 00:34:12','deleted_at' => NULL),
+  array('id' => '181','code' => '6.2100.01.02.03','name' => 'Biaya Telekomunikasi - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:34:43','updated_at' => '2021-05-13 00:34:43','deleted_at' => NULL),
+  array('id' => '182','code' => '6.2100.01.02.04','name' => 'Biaya Koran & Majalah - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:35:23','updated_at' => '2021-05-13 00:35:23','deleted_at' => NULL),
+  array('id' => '183','code' => '6.2100.01.02.05','name' => 'Biaya Ekspedisi, Pos & Materai - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:35:59','updated_at' => '2021-05-13 00:35:59','deleted_at' => NULL),
+  array('id' => '184','code' => '6.2100.01.02.06','name' => 'Biaya Perjalanan Dinas - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:36:42','updated_at' => '2021-05-13 00:36:42','deleted_at' => NULL),
+  array('id' => '185','code' => '6.2100.01.02.07','name' => 'Biaya Perlengkapan Kantor - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:39:00','updated_at' => '2021-05-13 00:39:00','deleted_at' => NULL),
+  array('id' => '186','code' => '6.2100.01.02.08','name' => 'STNK, KIR & Pajak Kendaraan - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:40:10','updated_at' => '2021-05-13 00:40:10','deleted_at' => NULL),
+  array('id' => '187','code' => '6.2100.01.02.09','name' => 'Biaya Pajak - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:40:45','updated_at' => '2021-05-13 00:40:45','deleted_at' => NULL),
+  array('id' => '188','code' => '6.2100.01.02.10','name' => 'Biaya Retribusi & Sumbangan - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:41:12','updated_at' => '2021-05-13 00:41:40','deleted_at' => NULL),
+  array('id' => '189','code' => '6.2100.01.02.11','name' => 'Biaya Sewa Gedung - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:43:44','updated_at' => '2021-05-13 00:43:44','deleted_at' => NULL),
+  array('id' => '190','code' => '6.2100.01.02.12','name' => 'Biaya Umum & Adm Lainnya - Jkt','parent_id' => '178','status' => '1','created_at' => '2021-05-13 00:44:10','updated_at' => '2021-05-13 00:44:10','deleted_at' => NULL),
+  array('id' => '191','code' => '6.2200.01','name' => 'Repair & Maintenance Expense','parent_id' => '0','status' => '1','created_at' => '2021-05-13 00:48:26','updated_at' => '2021-05-13 00:48:26','deleted_at' => NULL),
+  array('id' => '192','code' => '6.2200.01.01','name' => 'Biaya Maintenance - Sby','parent_id' => '191','status' => '1','created_at' => '2021-05-13 00:49:47','updated_at' => '2021-05-13 00:49:47','deleted_at' => NULL),
+  array('id' => '193','code' => '6.2200.01.01.01','name' => 'Biaya Pemeliharaan Gedung - Sby','parent_id' => '192','status' => '1','created_at' => '2021-05-13 00:51:26','updated_at' => '2021-05-13 00:51:26','deleted_at' => NULL),
+  array('id' => '194','code' => '6.2200.01.01.02','name' => 'Biaya Pemeliharaan Peralatan Kantor - Sby','parent_id' => '192','status' => '1','created_at' => '2021-05-13 00:52:06','updated_at' => '2021-05-13 00:52:06','deleted_at' => NULL),
+  array('id' => '195','code' => '6.2200.01.01.03','name' => 'Biaya Pemeliharaan Kendaraan - Sby','parent_id' => '192','status' => '1','created_at' => '2021-05-13 00:52:38','updated_at' => '2021-05-13 00:52:38','deleted_at' => NULL),
+  array('id' => '196','code' => '6.2200.01.02','name' => 'Biaya Maintenance - Jkt','parent_id' => '191','status' => '1','created_at' => '2021-05-13 00:53:29','updated_at' => '2021-05-13 00:53:29','deleted_at' => NULL),
+  array('id' => '197','code' => '6.2200.01.02.01','name' => 'Biaya Pemeliharaan Gedung - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:55:45','updated_at' => '2021-05-13 00:55:45','deleted_at' => NULL),
+  array('id' => '198','code' => '6.2200.01.02.02','name' => 'Biaya Pemeliharaan Peralatan Kantor - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:56:20','updated_at' => '2021-05-13 00:56:20','deleted_at' => NULL),
+  array('id' => '199','code' => '6.2200.01.02.03','name' => 'Biaya Pemeliharaan Kendaraan - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:56:57','updated_at' => '2021-05-13 00:56:57','deleted_at' => NULL),
+  array('id' => '200','code' => '6.300.00','name' => 'Biaya Penyusutan & Amortisasi','parent_id' => '0','status' => '1','created_at' => '2021-05-13 00:58:11','updated_at' => '2021-05-13 00:58:11','deleted_at' => NULL),
+  array('id' => '201','code' => '6.300.01','name' => 'Biaya Penyusutan Gedung','parent_id' => '200','status' => '1','created_at' => '2021-05-13 00:59:54','updated_at' => '2021-05-13 00:59:54','deleted_at' => NULL),
+  array('id' => '202','code' => '6.300.02','name' => 'Biaya Penyusutan Kendaraan','parent_id' => '200','status' => '1','created_at' => '2021-05-13 01:00:57','updated_at' => '2021-05-13 01:00:57','deleted_at' => NULL),
+  array('id' => '203','code' => '6.300.03','name' => 'Biaya Penyusutan Peralatan','parent_id' => '200','status' => '1','created_at' => '2021-05-13 01:01:57','updated_at' => '2021-05-13 01:01:57','deleted_at' => NULL),
+  array('id' => '204','code' => '6.300.04','name' => 'Biaya Penyusutan Inventaris kantor','parent_id' => '200','status' => '1','created_at' => '2021-05-13 01:02:30','updated_at' => '2021-05-13 01:02:30','deleted_at' => NULL),
+  array('id' => '205','code' => '7.100.00','name' => 'PENDAPATAN DILUAR USAHA','parent_id' => '0','status' => '1','created_at' => '2021-05-13 01:08:35','updated_at' => '2021-05-13 01:08:35','deleted_at' => NULL),
+  array('id' => '206','code' => '7.100.01','name' => 'Pendapatan Jasa Giro','parent_id' => '205','status' => '1','created_at' => '2021-05-13 01:10:39','updated_at' => '2021-05-13 01:10:39','deleted_at' => NULL),
+  array('id' => '207','code' => '7.100.02','name' => 'Pendapatan Bunga Deposito','parent_id' => '205','status' => '1','created_at' => '2021-05-13 01:11:08','updated_at' => '2021-05-13 01:11:08','deleted_at' => NULL),
+  array('id' => '208','code' => '7.100.03','name' => 'Penjualan Inventory / Perlengkapan','parent_id' => '205','status' => '1','created_at' => '2021-05-13 01:11:45','updated_at' => '2021-05-13 01:11:45','deleted_at' => NULL),
+  array('id' => '209','code' => '7.100.99','name' => 'Pendapatan Lain-Lain','parent_id' => '205','status' => '1','created_at' => '2021-05-13 01:12:21','updated_at' => '2021-05-13 01:12:21','deleted_at' => NULL),
+  array('id' => '210','code' => '7.200.00','name' => 'BIAYA DILUAR USAHA','parent_id' => '0','status' => '1','created_at' => '2021-05-13 01:13:00','updated_at' => '2021-05-13 01:13:00','deleted_at' => NULL),
+  array('id' => '211','code' => '7.200.01','name' => 'Biaya Bunga Pinjaman Lainnya','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:14:40','updated_at' => '2021-05-13 01:14:40','deleted_at' => NULL),
+  array('id' => '212','code' => '7.200.02','name' => 'Biaya Adm Bank & Buku Cek/Giro','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:15:13','updated_at' => '2021-05-13 01:15:13','deleted_at' => NULL),
+  array('id' => '213','code' => '7.200.03','name' => 'Pajak Jasa Giro','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:15:46','updated_at' => '2021-05-13 01:15:46','deleted_at' => NULL),
+  array('id' => '214','code' => '7.200.99','name' => 'Beban Lain-Lain','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:16:21','updated_at' => '2021-05-13 01:16:21','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`cogs` */
+/* `tjs`.`cogs` */
 $cogs = array(
 );
 
-/* `smartmar_main`.`colors` */
+/* `tjs`.`colors` */
 $colors = array(
   array('id' => '1','code' => 'IVY','name' => 'Ivory','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MWT','name' => 'Medium White','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -871,7 +958,7 @@ $colors = array(
   array('id' => '31','code' => 'VIO','name' => 'Violet','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`companies` */
+/* `tjs`.`companies` */
 $companies = array(
   array('id' => '1','code' => 'MKJRTH','name' => 'MKJ RETAIL HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'PTAHIG','name' => 'PTA HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -884,7 +971,7 @@ $companies = array(
   array('id' => '9','code' => 'OWNER','name' => 'OWNER','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`countries` */
+/* `tjs`.`countries` */
 $countries = array(
   array('id' => '1','code' => 'AW','name' => 'Aruba','phone_code' => '297','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'AF','name' => 'Afghanistan','phone_code' => '93','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1137,7 +1224,7 @@ $countries = array(
   array('id' => '249','code' => 'ZW','name' => 'Zimbabwe','phone_code' => '263','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`currencies` */
+/* `tjs`.`currencies` */
 $currencies = array(
   array('id' => '1','code' => 'USD','name' => 'Dolar Amerika','symbol' => '$','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'EUR','name' => 'Euro','symbol' => '€','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1146,11 +1233,11 @@ $currencies = array(
   array('id' => '5','code' => 'IDR','name' => 'Indonesia','symbol' => 'Rp','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`currency_prices` */
+/* `tjs`.`currency_prices` */
 $currency_prices = array(
 );
 
-/* `smartmar_main`.`currency_rates` */
+/* `tjs`.`currency_rates` */
 $currency_rates = array(
   array('id' => '1','currency_id' => '1','company_id' => '3','conversion' => '15550','created_at' => '2020-03-23 11:08:39','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
   array('id' => '2','currency_id' => '1','company_id' => '3','conversion' => '15000','created_at' => '2020-03-23 11:09:59','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
@@ -1167,17 +1254,17 @@ $currency_rates = array(
   array('id' => '13','currency_id' => '1','company_id' => '6','conversion' => '16000','created_at' => '2020-05-29 14:13:10','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`customers` */
+/* `tjs`.`customers` */
 $customers = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$KUfWmwg9qJd8P8pGhygd.OsOUWeT4H64P6w1OINpHyvyjO5Qev8Mi','verification' => '2021-05-12 15:13:18','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18')
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$BsxkJZndPz4HRKm4wtlYouxwK6hPKpv4JoBqQlNuzQXoeSoFrnLbG','verification' => '2021-05-13 01:31:34','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34')
 );
 
-/* `smartmar_main`.`divisions` */
+/* `tjs`.`divisions` */
 $divisions = array(
   array('id' => '1','code' => 'KM','name' => 'Karya Modern','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`emkls` */
+/* `tjs`.`emkls` */
 $emkls = array(
   array('id' => '1','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '1','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1189,15 +1276,15 @@ $emkls = array(
   array('id' => '8','company_id' => '3','import_id' => '2','country_id' => '44','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`emkl_rates` */
+/* `tjs`.`emkl_rates` */
 $emkl_rates = array(
 );
 
-/* `smartmar_main`.`failed_jobs` */
+/* `tjs`.`failed_jobs` */
 $failed_jobs = array(
 );
 
-/* `smartmar_main`.`freights` */
+/* `tjs`.`freights` */
 $freights = array(
   array('id' => '1','country_id' => '44','city_id' => '264','container' => '1','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '105','city_id' => '264','container' => '1','shipping' => '1','cost' => '300','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1205,13 +1292,13 @@ $freights = array(
   array('id' => '4','country_id' => '105','city_id' => '264','container' => '2','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`grades` */
+/* `tjs`.`grades` */
 $grades = array(
   array('id' => '1','code' => 'KW1','name' => 'Kw1','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'KW2','name' => 'Kw2','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`hs_codes` */
+/* `tjs`.`hs_codes` */
 $hs_codes = array(
   array('id' => '1','code' => '6907.21.93','name' => 'Glazed','alias' => 'Water Absorption Below 0.5%(persen)','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '6907.22.93','name' => 'Glazed','alias' => 'Water Absorption 0.5%-10%','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1220,22 +1307,128 @@ $hs_codes = array(
   array('id' => '5','code' => '6907.41.92','name' => 'Unglazed','alias' => 'BULLNOSE/STEPNOSING/LIST PLAINT','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`imports` */
+/* `tjs`.`imports` */
 $imports = array(
   array('id' => '1','code' => 'HYBRID','name' => 'HYBRID','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','code' => 'MANUAL','name' => 'MANUAL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '3','code' => 'PACKAGE','name' => 'PACKAGE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`jobs` */
+/* `tjs`.`jobs` */
 $jobs = array(
 );
 
-/* `smartmar_main`.`journals` */
+/* `tjs`.`job_descs` */
+$job_descs = array(
+  array('id' => '1','position' => '1','job' => 'Mengelola perusahaan agar lebih maju','branch' => '1','created_at' => '2021-05-13 01:03:14','updated_at' => '2021-05-13 01:03:18'),
+  array('id' => '2','position' => '2','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memaintain email secretary.bravat dan eva.smartmarble</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengirim penawaran berupa katalog dan company profile</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat rekap penawaran maupun surat menyurat</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat rekapan omzet SP, Faktur, dan Uang Masuk setiap 3 hari sekali</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melihat update data dari BCI Asia</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memberikan katalog kepada sales, dan menyiapkan contoh granite untuk arsitek</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengurus kartu kredit (telpon ke bank, menukar poin, menulis pengeluaran, aktivasi KK, menerima rekening giro, dll)</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memesan, menyiapkan, dan membereskan makan siang Pak David</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Arsip dokumen asli, dan menyiapkan segala kebutuhan dokumen untuk urusan-urusan tertentu</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat tanda terima untuk MKJ, maupun tanda terima pembelian kebutuhan kantor seperti valentino, liek motor, dll</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengirim dokumen/barang ke jakarta via kurir</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyediakan konsumsi untuk Pahlawan 7</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Posting lowongan di jobstreet, memilah kandidat dan membantu proses interview</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membantu pengurusan visa, paspor, rapid test, booking hotel, dan tiket pesawat tamu &amp; Sales MKJ</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;">Membantu<span style="font-family: \'Times New Roman\', serif; font-size: 12pt; text-align: center;"> </span>mengantar<span style="font-family: \'Times New Roman\', serif; font-size: 12pt; text-align: center;"> </span>dokumen<span style="font-family: \'Times New Roman\', serif; font-size: 12pt; text-align: center;">/</span>barang<span style="font-family: \'Times New Roman\', serif; font-size: 12pt; text-align: center;"> </span>tertentu</li>
+</ol>','branch' => '1','created_at' => '2021-05-13 00:29:57','updated_at' => '2021-05-13 00:29:57'),
+  array('id' => '3','position' => '3','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menghitung gaji karyawan Perwira Sby, Perwira SMB, dan CV Perwira Indo Persada</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mentransfer gaji karyawan harian &amp; bulanan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan pembayaran supplier &amp; perhitungannya </span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan perhitungan &amp; pembayaran ke kontraktor</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan perhitungan&amp; pembayaran komisi sales</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menghitung omzet yang masuk per 3 hari sekali setiap bulan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membantu membayar kebutuhan pribadi direktur</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Merancang strategi alokasi dana untuk operasional perusahaan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membantu transaksi penarikan uang di bank untuk urusan AL Bu Sanny</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memposting transaksi yang sudah dilakukan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyetujui pembelian barang untuk customer dengan mempertimbangkan HPP &amp; menghitung gross profit</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 00:29:57','updated_at' => '2021-05-13 00:29:57'),
+  array('id' => '4','position' => '4','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Meeting annual dengan Direktur</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyiapkan format dan COA untuk menyusun laporan keuangan pada sistem yang akan dibuat</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membantu pekerjaan Bu Shanti yang terpending</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyusun dan membagi tugas antara finance dan accounting</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Meeting dengan Direktur tentang struktur perusahaan dan proses operasional yang akan dijalankan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat laporan keuangan perusahaan pada tahun 2021 dan mempersiapkan untuk membuat IPO</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengatur strategi keuangan dan membuat evaluasi serta analisa keuangan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menghitung untuk RAB dan juga budget</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 00:45:26','updated_at' => '2021-05-13 00:45:26'),
+  array('id' => '5','position' => '5','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Berkoordinasi bersama para sales project untuk pencapaian target sales setiap bulan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mencari prospek yang meliputi arsitek, kontraktor, dan owner</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan presentasi produk kepada para prospek</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menjalin hubungan baik dengan para prospek</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyusun database customer</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 00:45:26','updated_at' => '2021-05-13 00:45:26'),
+  array('id' => '6','position' => '6','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mencapai target sales setiap bulan untuk tahun 2021 -&gt; minimal 1M/bulan (omzet faktur)</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mencari prospek yang meliputi project pembangunan private houses, offices, residential, commercial building, dll</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melengkapi data project &amp; klien secara update dan rutin diberikan kepada sales manager </span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat data kunjungan ke project setiap hari dan hasil kunjungan/progress report setiap hari</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menguasai product knowledge</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan presentasi produk kepada para prospek</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:02:03','updated_at' => '2021-05-13 01:02:03'),
+  array('id' => '7','position' => '7','job' => '<ol>
+<li>Menghitung HPP</li>
+<li>Melakukan specifying project</li>
+<li>Berhubungan dengan supplier lokal/import</li>
+<li>Memonitoring pembelian ke supplier</li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menentukan harga jual untuk project</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat berita acara untuk fee project</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memonitoring penjualan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memonitoring pengiriman</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memonitoring data stock</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Handle agen medan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Marketing support (retail/project) untuk membantu handle customer</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Memback up team promosi online &amp; offline</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menyiapkan sample</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menghandle customer complain</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:02:03','updated_at' => '2021-05-13 01:02:03'),
+  array('id' => '8','position' => '8','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Berkoordinasi dengan bagian desain dan sales manager untuk merancang tampilan promosi produk &amp; event<strong> </strong>di media social (corporate ig, shopee, dan tokped)</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Berkoordinasi dengan head of administration dan bagian sales &amp; stock untuk mengupload harga dan ketersediaan stock di shopee &amp; tokped</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Melakukan posting secara berkala di medsos</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:12:34','updated_at' => '2021-05-13 01:12:34'),
+  array('id' => '9','position' => '9','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">melakukan retur pembelian</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">melakukan pembelian barang ke supplier</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">membuat penawaran untuk sales project (data sudah didapat dari head of administration)</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:12:34','updated_at' => '2021-05-13 01:12:34'),
+  array('id' => '10','position' => '10','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengecek ketersediaan barang</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Merekap stock</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membantu menghitung HPP</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:16:14','updated_at' => '2021-05-13 01:16:14'),
+  array('id' => '11','position' => '11','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengatur jadwal pengiriman produk ke proyek (dari proses persiapan barang sampai terkirim)</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat kode master barang di ACTS</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat LPB di ACTS</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat surat pesanan </span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat rekapan omzet SP dan Faktur setiap 3 hari sekali</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat faktur penjualan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat faktur pajak</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Membuat dokumen tagihan seperti kwitansi &amp; dokumen" yang diperlukan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Menghitung omzet faktur per 3 hari sekali setiap bulan</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengingatkan jatuh tempo pembayaran customer</span></li>
+<li style="margin: 0cm 0cm 0cm 0px; line-height: 150%; font-size: 11pt; font-family: Calibri, sans-serif;"><span style="font-size: 12.0pt; line-height: 150%; font-family: \'Times New Roman\', serif;">Mengontrol piutang yang sudah jatuh tempo</span></li>
+</ol>','branch' => '1','created_at' => '2021-05-13 01:16:14','updated_at' => '2021-05-13 01:16:14'),
+  array('id' => '12','position' => '12','job' => '-','branch' => '1','created_at' => '2021-05-13 01:20:56','updated_at' => '2021-05-13 01:20:56'),
+  array('id' => '13','position' => '13','job' => '-','branch' => '1','created_at' => '2021-05-13 01:20:56','updated_at' => '2021-05-13 01:20:56')
+);
+
+/* `tjs`.`journals` */
 $journals = array(
 );
 
-/* `smartmar_main`.`marketing_structures` */
+/* `tjs`.`marketing_structures` */
 $marketing_structures = array(
   array('id' => '1','company_id' => '2','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '0','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '5','interest_in_payment' => '3','nett_profit' => '4','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '1','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '2','interest_in_payment' => '0','nett_profit' => '2','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1243,7 +1436,7 @@ $marketing_structures = array(
   array('id' => '4','company_id' => '8','rental_cost' => '5','travel_sales_cost' => '0','marketing_cost' => '4','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '4','interest_in_payment' => '0','nett_profit' => '5','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`migrations` */
+/* `tjs`.`migrations` */
 $migrations = array(
   array('id' => '1','migration' => '2016_06_01_000001_create_oauth_auth_codes_table','batch' => '1'),
   array('id' => '2','migration' => '2016_06_01_000002_create_oauth_access_tokens_table','batch' => '1'),
@@ -1300,46 +1493,48 @@ $migrations = array(
   array('id' => '53','migration' => '2021_05_08_193317_create_project_consultant_meetings_table','batch' => '1'),
   array('id' => '54','migration' => '2021_05_09_020645_create_project_samples_table','batch' => '1'),
   array('id' => '55','migration' => '2021_05_12_123456_create_coas_table','batch' => '1'),
-  array('id' => '56','migration' => '2021_05_12_124145_create_journals_table','batch' => '1')
+  array('id' => '56','migration' => '2021_05_12_124145_create_journals_table','batch' => '1'),
+  array('id' => '57','migration' => '2021_05_12_183519_create_cash_banks_table','batch' => '1'),
+  array('id' => '58','migration' => '2021_05_12_235723_create_job_descs_table','batch' => '1')
 );
 
-/* `smartmar_main`.`oauth_access_tokens` */
+/* `tjs`.`oauth_access_tokens` */
 $oauth_access_tokens = array(
 );
 
-/* `smartmar_main`.`oauth_auth_codes` */
+/* `tjs`.`oauth_auth_codes` */
 $oauth_auth_codes = array(
 );
 
-/* `smartmar_main`.`oauth_clients` */
+/* `tjs`.`oauth_clients` */
 $oauth_clients = array(
 );
 
-/* `smartmar_main`.`oauth_personal_access_clients` */
+/* `tjs`.`oauth_personal_access_clients` */
 $oauth_personal_access_clients = array(
 );
 
-/* `smartmar_main`.`oauth_refresh_tokens` */
+/* `tjs`.`oauth_refresh_tokens` */
 $oauth_refresh_tokens = array(
 );
 
-/* `smartmar_main`.`orders` */
+/* `tjs`.`orders` */
 $orders = array(
 );
 
-/* `smartmar_main`.`order_details` */
+/* `tjs`.`order_details` */
 $order_details = array(
 );
 
-/* `smartmar_main`.`order_invoices` */
+/* `tjs`.`order_invoices` */
 $order_invoices = array(
 );
 
-/* `smartmar_main`.`order_invoice_details` */
+/* `tjs`.`order_invoice_details` */
 $order_invoice_details = array(
 );
 
-/* `smartmar_main`.`patterns` */
+/* `tjs`.`patterns` */
 $patterns = array(
   array('id' => '1','code' => 'PLN','name' => 'Plain','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MRB','name' => 'Marble','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1380,7 +1575,7 @@ $patterns = array(
   array('id' => '37','code' => 'SAN','name' => 'Sand','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`pricing_policies` */
+/* `tjs`.`pricing_policies` */
 $pricing_policies = array(
   array('id' => '1','product_id' => '1','showroom_cost' => '2298','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2298','nett_profit' => '5746','saving' => '1149','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '108026','project_price' => '120000','price_list' => '300000','store_price_list' => '280000','discount_retail_sales' => '196000','discount_retail_spv' => '168000','discount_retail_manager' => '140000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
   array('id' => '2','product_id' => '3','showroom_cost' => '2668','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2668','nett_profit' => '6671','saving' => '1334','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '125414','project_price' => '160000','price_list' => '400000','store_price_list' => '300000','discount_retail_sales' => '210000','discount_retail_spv' => '180000','discount_retail_manager' => '150000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
@@ -3158,7 +3353,7 @@ $pricing_policies = array(
   array('id' => '1774','product_id' => '2812','showroom_cost' => '0','sales_travel_cost' => '265','marketing_cost' => '0','interest' => '265','sales_commission' => '133','fixed_cost' => '636','nett_profit' => '530','saving' => '265','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '45','project_price' => '72500','price_list' => '77500','store_price_list' => '76000','discount_retail_sales' => '75500','discount_retail_spv' => '75000','discount_retail_manager' => '74000','created_at' => '2021-05-10 09:38:16','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`products` */
+/* `tjs`.`products` */
 $products = array(
   array('id' => '1','type_id' => '1','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '2','type_id' => '2','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
@@ -5992,7 +6187,7 @@ $products = array(
   array('id' => '2830','type_id' => '1065','company_id' => '3','hs_code_id' => '4','brand_id' => '17','country_id' => '103','supplier_id' => '92','grade_id' => '2','carton_pallet' => '0','carton_pcs' => '2','container_standart' => '4','container_stock' => '1','container_max_stock' => '1','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`product_shadings` */
+/* `tjs`.`product_shadings` */
 $product_shadings = array(
   array('id' => '1','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
   array('id' => '2','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
@@ -6023,29 +6218,29 @@ $product_shadings = array(
   array('id' => '27','product_id' => '1','warehouse_code' => '1G2','stock_code' => '101.00004','code' => '200','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:08')
 );
 
-/* `smartmar_main`.`projects` */
+/* `tjs`.`projects` */
 $projects = array(
 );
 
-/* `smartmar_main`.`project_consultant_meetings` */
+/* `tjs`.`project_consultant_meetings` */
 $project_consultant_meetings = array(
 );
 
-/* `smartmar_main`.`project_products` */
+/* `tjs`.`project_products` */
 $project_products = array(
 );
 
-/* `smartmar_main`.`project_samples` */
+/* `tjs`.`project_samples` */
 $project_samples = array(
 );
 
-/* `smartmar_main`.`specifications` */
+/* `tjs`.`specifications` */
 $specifications = array(
   array('id' => '1','code' => '01','name' => 'Volume','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '02','name' => 'Tonnage','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`suppliers` */
+/* `tjs`.`suppliers` */
 $suppliers = array(
   array('id' => '1','country_id' => '44','code' => 'SUPP-0001','name' => 'AQIAO','email' => NULL,'phone' => NULL,'address' => '#710China Ceramics theater Central area.C.C.I.H Jihua West Road 68 Chancheng district Foshan City GD.','pic' => 'Kate','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','code' => 'SUPP-0002','name' => 'BINLY','email' => NULL,'phone' => NULL,'address' => 'Fengtang Industrial DistrictFenngtang Town Chaozhou City Guangdong Province P.R.China 521000','pic' => 'sally','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -6144,7 +6339,7 @@ TA-WANKANER DIST-MORBI GUJARAT - INDIA.
   array('id' => '92','country_id' => '103','code' => 'SUPP-0092','name' => 'IKAD','email' => NULL,'phone' => NULL,'address' => 'Jl Raya Pasar Kemis KM 5.5, Desa Kutajaya','pic' => 'Nanik','limit_credit' => '0','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`supplier_currencies` */
+/* `tjs`.`supplier_currencies` */
 $supplier_currencies = array(
   array('id' => '1','supplier_id' => '1','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
   array('id' => '2','supplier_id' => '1','currency_id' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
@@ -6333,7 +6528,7 @@ $supplier_currencies = array(
   array('id' => '185','supplier_id' => '92','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12')
 );
 
-/* `smartmar_main`.`surfaces` */
+/* `tjs`.`surfaces` */
 $surfaces = array(
   array('id' => '1','code' => 'MAT','name' => 'Matt','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SGF','name' => 'Sugar ','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -6352,11 +6547,11 @@ $surfaces = array(
   array('id' => '15','code' => '3D','name' => '3d','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`tokens` */
+/* `tjs`.`tokens` */
 $tokens = array(
 );
 
-/* `smartmar_main`.`types` */
+/* `tjs`.`types` */
 $types = array(
   array('id' => '1','category_id' => '63','division_id' => '1','surface_id' => '3','color_id' => '2','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/gJ4efz2iaSm9AMTx8X5kKGrVwquwEJRwBXQ097MT.jpg','code' => '6100D','material' => '1','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '1','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/yf5qPNRtNQaZ2n26o5SnKk6ggmn1hw7cZStSafB6.jpg','code' => '6S001T','material' => '3','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -7572,7 +7767,7 @@ $types = array(
   array('id' => '1212','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '5','pattern_id' => '29','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/ygCoUWjww4Xdiyk1A8Pc3fglDP2bdX4KsciQ1YTi.jpg','code' => '8709','material' => '2','faces' => '1','length' => '80','width' => '80','height' => '0','weight' => '48','thickness' => '0','conversion' => '1','stockable' => '0','min_stock' => '0','max_stock' => '0','small_stock' => '0','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`units` */
+/* `tjs`.`units` */
 $units = array(
   array('id' => '1','code' => 'SQM','name' => 'Sqm','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SET','name' => 'Set','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -7580,22 +7775,22 @@ $units = array(
   array('id' => '4','code' => 'BOX','name' => 'Box','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`users` */
+/* `tjs`.`users` */
 $users = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$wXiXCfiaPMkrZcF/IAAY3OMgoo38XQw.rZYVjzhLYs4zIZ6cQuD3O','branch' => '1','verification' => '2021-05-12 15:13:18','status' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18','deleted_at' => NULL),
-  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$NDH6du4XrvPk.HiIMGJxketoarpJWEi5OdfyNvd/rOTpTUnKVgLJS','branch' => '1','verification' => '2021-05-12 15:13:18','status' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18','deleted_at' => NULL)
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$wAsh3T2XUrl1Oyy9ZkXP7u6uG8LSRYAslwJczNmy2jfITVkIAQt2S','branch' => '1','verification' => '2021-05-13 01:31:34','status' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34','deleted_at' => NULL),
+  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$JkWjUWwjLg7kZb.I5F2YcujdG636xED3fLe70Hh/CMPUVvSnU3dzy','branch' => '1','verification' => '2021-05-13 01:31:34','status' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34','deleted_at' => NULL)
 );
 
-/* `smartmar_main`.`user_roles` */
+/* `tjs`.`user_roles` */
 $user_roles = array(
-  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18'),
-  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-12 15:13:18','updated_at' => '2021-05-12 15:13:18')
+  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34'),
+  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34')
 );
 
-/* `smartmar_main`.`warehouses` */
+/* `tjs`.`warehouses` */
 $warehouses = array(
 );
 
-/* `smartmar_main`.`wishlists` */
+/* `tjs`.`wishlists` */
 $wishlists = array(
 );

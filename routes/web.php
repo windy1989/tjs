@@ -358,6 +358,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::get('detail/{id}', 'ProjectController@detail');
         });
 
+        Route::prefix('job_desc')->group(function() {
+            Route::get('/', 'JobDescController@index');
+        });
+
         Route::prefix('accounting')->group(function() {
             Route::prefix('coa')->group(function() {
                 Route::get('/', 'CoaController@index');

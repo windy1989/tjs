@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRole extends Model {
+class JobDesc extends Model {
 
     use HasFactory;
 
-    protected $table      = 'user_roles';
+    protected $table      = 'job_descs';
     protected $primaryKey = 'id';
     protected $fillable   = [
-        'user_id',
-        'role'
+        'position',
+        'job',
+        'branch'
     ];
 
-    public function role() 
+    public function position() 
     {
-        switch($this->role) {
+        switch($this->position) {
             case '1':
                 $position = 'Director';
                 break;
@@ -59,11 +60,28 @@ class UserRole extends Model {
                 $position = 'Assisten';
                 break;
             default:
-                $role = 'Invalid';
+                $position = 'Invalid';
                 break;
         }
 
-        return $role;
+        return $position;
+    }
+
+    public function branch() 
+    {
+        switch($this->branch) {
+            case '1':
+                $branch = 'Surabaya';
+                break;
+            case '2':
+                $branch = 'Jakarta';
+                break;
+            default:
+                $branch = 'Invalid';
+                break;
+        }
+
+        return $branch;
     }
 
 }
