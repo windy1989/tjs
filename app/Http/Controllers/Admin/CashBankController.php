@@ -60,9 +60,9 @@ class CashBankController extends Controller {
                     });
                 }     
                 
-                if($request->account) {
-                    $query->where('debit', $request->account)
-                        ->orWhere('credit', $request->account);
+                if($request->coa) {
+                    $query->where('debit', $request->coa)
+                        ->orWhere('credit', $request->coa);
                 }
                 
                 if($request->user_id) {
@@ -112,9 +112,9 @@ class CashBankController extends Controller {
                     });
                 }     
 
-                if($request->account) {
-                    $query->where('debit', $request->account)
-                        ->orWhere('credit', $request->account);
+                if($request->coa) {
+                    $query->where('debit', $request->coa)
+                        ->orWhere('credit', $request->coa);
                 }
                 
                 if($request->user_id) {
@@ -186,8 +186,8 @@ class CashBankController extends Controller {
             'type'        => 'required',
             'description' => 'required'
         ], [
-            'debit.required'       => 'Please select a coa account.',
-            'credit.required'      => 'Please select a reverse account.',
+            'debit.required'       => 'Please select a coa debit.',
+            'credit.required'      => 'Please select a coa credit.',
             'nominal.required'     => 'Nominal cannot be empty.',
             'date.required'        => 'Date cannot be empty.',
             'type.required'        => 'Please select a type.',

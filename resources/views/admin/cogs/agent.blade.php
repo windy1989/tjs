@@ -99,31 +99,25 @@
                      @endforeach
                   </select>
                </div>
-               <div class="form-group">
+               <div class="form-group form-group-feedback form-group-feedback-right">
                   <label>Min Price :<span class="text-danger">*</span></label>
-                  <div class="input-group">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                     </div>
-                     <input type="number" name="min_price" id="min_price" class="form-control" placeholder="Enter min price">
+                  <div class="position-relative">
+                     <input type="number" name="min_price" id="min_price" class="form-control" placeholder="0">
+                     <div class="form-control-feedback font-weight-bold">$</div>
                   </div>
                </div>
-               <div class="form-group">
+               <div class="form-group form-group-feedback form-group-feedback-right">
                   <label>Max Price :<span class="text-danger">*</span></label>
-                  <div class="input-group">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                     </div>
-                     <input type="number" name="max_price" id="max_price" class="form-control" placeholder="Enter max price">
+                  <div class="position-relative">
+                     <input type="number" name="max_price" id="max_price" class="form-control" placeholder="0">
+                     <div class="form-control-feedback font-weight-bold">$</div>
                   </div>
                </div>
-               <div class="form-group">
+               <div class="form-group form-group-feedback form-group-feedback-right">
                   <label>Fee :<span class="text-danger">*</span></label>
-                  <div class="input-group">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                     </div>
-                     <input type="number" name="fee" id="fee" class="form-control" placeholder="Enter fee">
+                  <div class="position-relative">
+                     <input type="number" name="fee" id="fee" class="form-control" placeholder="0">
+                     <div class="form-control-feedback font-weight-bold">$</div>
                   </div>
                </div>
             </form>

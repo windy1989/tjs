@@ -33,13 +33,13 @@
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Code</h5>
 				<div class="header-elements form-inline">
-               <select name="filter_brand_id" id="filter_brand_id" class="form-control mr-3" onchange="loadDataTable()">
+               <select name="filter_brand_id" id="filter_brand_id" class="custom-select mr-3" onchange="loadDataTable()">
 						<option value="">All Brand</option>
                   @foreach($brand as $b)
                      <option value="{{ $b->id }}">{{ $b->name }}</option>
                   @endforeach
 					</select>
-					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
+					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Status</option>
 						<option value="1">Active</option>
 						<option value="2">Not Active</option>
@@ -182,59 +182,47 @@
                      <p class="mt-4">
                         <div class="row">
                            <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Carton :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
-                                 <div class="input-group">
-                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formula()" placeholder="Enter number">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Pcs</span>
-                                    </div>
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>Pcs :</label>
+                                 <div class="position-relative">
+                                    <input type="number" name="carton_pcs" id="carton_pcs" class="form-control" onkeyup="formula()" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">/ Carton</div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Pallet :</label>
-                                 <small class="font-italic float-right font-weight-bold text-danger">TILE PRODUCT</small>
-                                 <div class="input-group">
-                                    <input type="number" name="carton_pallet" id="carton_pallet" class="form-control" placeholder="Enter number">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Carton</span>
-                                    </div>
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>Carton :</label>
+                                 <div class="position-relative">
+                                    <input type="number" name="carton_pallet" id="carton_pallet" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">/ Pallet</div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Carton :</label>
-                                 <div class="input-group">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>SQM :</label>
+                                 <div class="position-relative">
                                     <input type="number" name="carton_sqm" id="carton_sqm" class="form-control" placeholder="0" disabled>
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">SQM</span>
-                                    </div>
+                                    <div class="form-control-feedback font-weight-bold">/ Carton</div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-3">
-                              <div class="form-group">
-                                 <label>Stock Unit :<span class="text-danger">*</span></label>
-                                 <div class="input-group">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>Cubic Meters :<span class="text-danger">*</span></label>
+                                 <div class="position-relative">
                                     <input type="number" name="cubic_meter" id="cubic_meter" class="form-control" disabled>
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Cubic Meters</span>
-                                    </div>
+                                    <div class="form-control-feedback font-weight-bold">/ Stock Unit</div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-3">
-                              <div class="form-group">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
                                  <label>Stock Unit :<span class="text-danger">*</span></label>
-                                 <div class="input-group">
-                                    <input type="number" name="container_stock" id="container_stock" class="form-control" placeholder="Enter number">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Container</span>
-                                    </div>
+                                 <div class="position-relative">
+                                    <input type="number" name="container_stock" id="container_stock" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">/ Container</div>
                                  </div>
                               </div>
                            </div>
@@ -249,13 +237,11 @@
                               </div>
                            </div>
                            <div class="col-md-3">
-                              <div class="form-group">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
                                  <label>Max Stock Unit :<span class="text-danger">*</span></label>
-                                 <div class="input-group">
-                                    <input type="number" name="container_max_stock" id="container_max_stock" class="form-control" placeholder="Enter number">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Container</span>
-                                    </div>
+                                 <div class="position-relative">
+                                    <input type="number" name="container_max_stock" id="container_max_stock" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">/ Container</div>
                                  </div>
                               </div>
                            </div>

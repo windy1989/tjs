@@ -84,13 +84,11 @@
                      @endforeach
                   </select>
                </div>
-               <div class="form-group">
+               <div class="form-group form-group-feedback form-group-feedback-right">
                   <label>Conversion :<span class="text-danger">*</span></label>
-                  <div class="input-group">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">Rp</span>
-                     </div>
-                     <input type="text" name="conversion" id="conversion" class="form-control" placeholder="Enter conversion">
+                  <div class="position-relative">
+                     <input type="number" name="conversion" id="conversion" class="form-control" placeholder="0">
+                     <div class="form-control-feedback font-weight-bold">Rp</div>
                   </div>
                </div>
             </form>

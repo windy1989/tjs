@@ -33,7 +33,7 @@
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Type</h5>
 				<div class="header-elements">
-					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
+					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Status</option>
 						<option value="1">Active</option>
 						<option value="2">Not Active</option>
@@ -200,58 +200,48 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-6">
-                              <div class="form-group">
+                           <div class="col-md-4">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
                                  <label>Length :</label>
-                                 <div class="input-group">
-                                    <input type="number" name="length" id="length" class="form-control" placeholder="Enter length">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Cm</span>
-                                    </div>
+                                 <div class="position-relative">
+                                    <input type="number" name="length" id="length" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">Cm</div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>Width :</label>
+                                 <div class="position-relative">
+                                    <input type="number" name="width" id="width" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">Cm</div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
+                                 <label>Height :</label>
+                                 <div class="position-relative">
+                                    <input type="number" name="height" id="height" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">Cm</div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Width :</label>
-                                 <div class="input-group">
-                                    <input type="number" name="width" id="width" class="form-control" placeholder="Enter width">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Cm</span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Height :</label>
-                                 <div class="input-group">
-                                    <input type="number" name="height" id="height" class="form-control" placeholder="Enter height">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Cm</span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="form-group">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
                                  <label>Weight :<span class="text-danger">*</span></label>
-                                 <div class="input-group">
-                                    <input type="number" name="weight" id="weight" class="form-control" placeholder="Enter weight">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">Kg</span>
-                                    </div>
+                                 <div class="position-relative">
+                                    <input type="number" name="weight" id="weight" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">Kg</div>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-md-4">
-                              <div class="form-group">
+                           <div class="col-md-6">
+                              <div class="form-group form-group-feedback form-group-feedback-right">
                                  <label>Thickness :</label>
-                                 <div class="input-group">
-                                    <input type="number" name="thickness" id="thickness" class="form-control" placeholder="Enter thickness">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text">mm</span>
-                                    </div>
+                                 <div class="position-relative">
+                                    <input type="number" name="thickness" id="thickness" class="form-control" placeholder="0">
+                                    <div class="form-control-feedback font-weight-bold">mm</div>
                                  </div>
                               </div>
                            </div>
@@ -307,25 +297,25 @@
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Small Stock :<span class="text-danger">*</span></label>
-                                 <input type="number" name="small_stock" id="small_stock" class="form-control" placeholder="Enter small stock">
+                                 <input type="number" name="small_stock" id="small_stock" class="form-control" placeholder="0">
                               </div>
                            </div>
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Min Stock :<span class="text-danger">*</span></label>
-                                 <input type="number" name="min_stock" id="min_stock" class="form-control" placeholder="Enter min stock">
+                                 <input type="number" name="min_stock" id="min_stock" class="form-control" placeholder="0">
                               </div>
                            </div>
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Max Stock :<span class="text-danger">*</span></label>
-                                 <input type="number" name="max_stock" id="max_stock" class="form-control" placeholder="Enter max stock">
+                                 <input type="number" name="max_stock" id="max_stock" class="form-control" placeholder="0">
                               </div>
                            </div>
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Conversion :<span class="text-danger">*</span></label>
-                                 <input type="number" name="conversion" id="conversion" class="form-control" placeholder="Enter conversion">
+                                 <input type="number" name="conversion" id="conversion" class="form-control" placeholder="0">
                               </div>
                            </div>
                         </div>
@@ -335,9 +325,9 @@
                      <p class="mt-4">
                         <div class="form-group">
                            <div class="input-group">
-                           <div class="custom-file">
-                              <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
-                           </div>
+                              <div class="custom-file">
+                                 <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                              </div>
                            </div>
                         </div>
                         <div class="form-group">
@@ -408,6 +398,10 @@
    }
 
    function toShow() {
+      $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active');
+      $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
+      $('.tab-pane').removeClass('show active');
+      $('.tab-pane#highlighted-justified-tab1').addClass('show active');
       $('#modal_form').modal('show');
       $('#validation_alert').hide();
       $('#validation_content').html('');
@@ -424,7 +418,7 @@
       $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
       $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active');
       $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
-      $('.tab-pane').removeClass('active');
+      $('.tab-pane').removeClass('show active');
       $('.tab-pane#highlighted-justified-tab1').addClass('show active');
       $('#category_id').val(null).change();
       $('#division_id').val(null).change();

@@ -33,7 +33,7 @@
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Brand</h5>
 				<div class="header-elements">
-					<select name="filter_status" id="filter_status" class="form-control" onchange="loadDataTable()">
+					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Status</option>
 						<option value="1">Active</option>
 						<option value="2">Not Active</option>

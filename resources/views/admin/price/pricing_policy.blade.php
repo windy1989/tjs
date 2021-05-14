@@ -76,115 +76,115 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Showroom Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="showroom_cost" id="showroom_cost" class="form-control" placeholder="Enter showroom cost">
+                        <input type="number" name="showroom_cost" id="showroom_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Sales Travel Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="sales_travel_cost" id="sales_travel_cost" class="form-control" placeholder="Enter sales travel cost">
+                        <input type="number" name="sales_travel_cost" id="sales_travel_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Marketing Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="marketing_cost" id="marketing_cost" class="form-control" placeholder="Enter marketing cost">
+                        <input type="number" name="marketing_cost" id="marketing_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Interest :<span class="text-danger">*</span></label>
-                        <input type="number" name="interest" id="interest" class="form-control" placeholder="Enter interest">
+                        <input type="number" name="interest" id="interest" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Sales Commission :<span class="text-danger">*</span></label>
-                        <input type="number" name="sales_commission" id="sales_commission" class="form-control" placeholder="Enter sales commission">
+                        <input type="number" name="sales_commission" id="sales_commission" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Fixed Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="fixed_cost" id="fixed_cost" class="form-control" placeholder="Enter fixed cost">
+                        <input type="number" name="fixed_cost" id="fixed_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Nett Profit :<span class="text-danger">*</span></label>
-                        <input type="number" name="nett_profit" id="nett_profit" class="form-control" placeholder="Enter nett profit">
+                        <input type="number" name="nett_profit" id="nett_profit" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Saving :<span class="text-danger">*</span></label>
-                        <input type="number" name="saving" id="saving" class="form-control" placeholder="Enter saving">
+                        <input type="number" name="saving" id="saving" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Middlemant :<span class="text-danger">*</span></label>
-                        <input type="number" name="middlemant" id="middlemant" class="form-control" placeholder="Enter middlemant">
+                        <input type="number" name="middlemant" id="middlemant" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Project :<span class="text-danger">*</span></label>
-                        <input type="number" name="project" id="project" class="form-control" placeholder="Enter project">
+                        <input type="number" name="project" id="project" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>On Site Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="on_site_cost" id="on_site_cost" class="form-control" placeholder="Enter on site cost">
+                        <input type="number" name="on_site_cost" id="on_site_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Storage Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="storage_cost" id="storage_cost" class="form-control" placeholder="Enter storage cost">
+                        <input type="number" name="storage_cost" id="storage_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Bottom Price :<span class="text-danger">*</span></label>
-                        <input type="number" name="bottom_price" id="bottom_price" class="form-control" placeholder="Enter bottom_price">
+                        <input type="number" name="bottom_price" id="bottom_price" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Project Price :<span class="text-danger">*</span></label>
-                        <input type="number" name="project_price" id="project_price" class="form-control" placeholder="Enter project price">
+                        <input type="number" name="project_price" id="project_price" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Price List :<span class="text-danger">*</span></label>
-                        <input type="number" name="price_list" id="price_list" class="form-control" placeholder="Enter price list">
+                        <input type="number" name="price_list" id="price_list" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Store Price List :<span class="text-danger">*</span></label>
-                        <input type="number" name="store_price_list" id="store_price_list" class="form-control" placeholder="Enter store price list">
+                        <input type="number" name="store_price_list" id="store_price_list" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Discount Retail Sales :<span class="text-danger">*</span></label>
-                        <input type="number" name="discount_retail_sales" id="discount_retail_sales" class="form-control" placeholder="Enter discount retail sales">
+                        <input type="number" name="discount_retail_sales" id="discount_retail_sales" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Discount Retail SPV :<span class="text-danger">*</span></label>
-                        <input type="number" name="discount_retail_spv" id="discount_retail_spv" class="form-control" placeholder="Enter discount retail SPV">
+                        <input type="number" name="discount_retail_spv" id="discount_retail_spv" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Discount Retail Manager :<span class="text-danger">*</span></label>
-                        <input type="number" name="discount_retail_manager" id="discount_retail_manager" class="form-control" placeholder="Enter discount retail manager">
+                        <input type="number" name="discount_retail_manager" id="discount_retail_manager" class="form-control" placeholder="0">
                      </div>
                   </div>
                </div>

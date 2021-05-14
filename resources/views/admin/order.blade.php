@@ -31,7 +31,7 @@
                <div class="col-md-4">
                   <div class="form-group">
                      <label>Nominal :</label>
-                     <select name="filter_nominal" id="filter_nominal" class="form-control">
+                     <select name="filter_nominal" id="filter_nominal" class="custom-select">
                         <option value="">All Nominal</option>
                         <option value="1">Hundreds</option>
                         <option value="2">Millions</option>
@@ -42,7 +42,7 @@
                <div class="col-md-4">
                   <div class="form-group">
                      <label>Type :</label>
-                     <select name="filter_type" id="filter_type" class="form-control">
+                     <select name="filter_type" id="filter_type" class="custom-select">
                         <option value="">All Type</option>
                         <option value="1">Cash</option>
                         <option value="2">Cashless</option>
@@ -52,7 +52,7 @@
                <div class="col-md-4">
                   <div class="form-group">
                      <label>Status :</label>
-                     <select name="filter_status" id="filter_status" class="form-control">
+                     <select name="filter_status" id="filter_status" class="custom-select">
                         <option value="">All Status</option>
                         <option value="1">Unpaid</option>
                         <option value="2">Paid</option>

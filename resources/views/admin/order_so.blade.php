@@ -128,7 +128,7 @@
 									</center>
 								</td>
 								<td class="align-middle">
-									<input type="number" class="form-control" placeholder="Enter target price">
+									<input type="number" class="form-control" placeholder="0">
 								</td>
 								<td class="align-middle">
 									<span class="font-weight-semibold">Rp {{ number_format($od->product->pricingPolicy->discount_retail_sales, 0, ',', '.') }}</span>

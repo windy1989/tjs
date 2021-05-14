@@ -80,73 +80,73 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Rental Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="rental_cost" id="rental_cost" class="form-control" placeholder="Enter rental cost">
+                        <input type="number" name="rental_cost" id="rental_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Travel Sales Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="travel_sales_cost" id="travel_sales_cost" class="form-control" placeholder="Enter travel sales cost">
+                        <input type="number" name="travel_sales_cost" id="travel_sales_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Marketing Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="marketing_cost" id="marketing_cost" class="form-control" placeholder="Enter marketing cost">
+                        <input type="number" name="marketing_cost" id="marketing_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>On Site Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="on_site_cost" id="on_site_cost" class="form-control" placeholder="Enter on site cost">
+                        <input type="number" name="on_site_cost" id="on_site_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Storage Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="storage_cost" id="storage_cost" class="form-control" placeholder="Enter storage cost">
+                        <input type="number" name="storage_cost" id="storage_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Fixed Cost :<span class="text-danger">*</span></label>
-                        <input type="number" name="fixed_cost" id="fixed_cost" class="form-control" placeholder="Enter fixed cost">
+                        <input type="number" name="fixed_cost" id="fixed_cost" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Interest In Payment :<span class="text-danger">*</span></label>
-                        <input type="number" name="interest_in_payment" id="interest_in_payment" class="form-control" placeholder="Enter interest in payment">
+                        <input type="number" name="interest_in_payment" id="interest_in_payment" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Nett Profit :<span class="text-danger">*</span></label>
-                        <input type="number" name="nett_profit" id="nett_profit" class="form-control" placeholder="Enter nett profit">
+                        <input type="number" name="nett_profit" id="nett_profit" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Saving :<span class="text-danger">*</span></label>
-                        <input type="number" name="saving" id="saving" class="form-control" placeholder="Enter saving">
+                        <input type="number" name="saving" id="saving" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Sales Commission :<span class="text-danger">*</span></label>
-                        <input type="number" name="sales_commission" id="sales_commission" class="form-control" placeholder="Enter sales commission">
+                        <input type="number" name="sales_commission" id="sales_commission" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Middlemant Commission :<span class="text-danger">*</span></label>
-                        <input type="number" name="middlemant_commission" id="middlemant_commission" class="form-control" placeholder="Enter middlemant commission">
+                        <input type="number" name="middlemant_commission" id="middlemant_commission" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Project Commission :<span class="text-danger">*</span></label>
-                        <input type="number" name="project_commission" id="project_commission" class="form-control" placeholder="Enter project commission">
+                        <input type="number" name="project_commission" id="project_commission" class="form-control" placeholder="0">
                      </div>
                   </div>
                </div>

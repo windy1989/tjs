@@ -97,24 +97,24 @@
                      <table cellpadding="10" cellspacing="0" width="100%">
                         <tbody>
                            <tr>
-                              <th width="20%" class="align-middle">Carton Pcs</th>
-                              <td class="align-middle">: {{ $product->carton_pcs }}</td>
+                              <th width="20%" class="align-middle">Pcs</th>
+                              <td class="align-middle">: {{ $product->carton_pcs }} <sub>/ carton</sub></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Carton Pallet</th>
-                              <td class="align-middle">: {{ $product->carton_pallet }}</td>
+                              <th width="20%" class="align-middle">Carton</th>
+                              <td class="align-middle">: {{ $product->carton_pallet }} <sub>/ pallet</sub></td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Stock Container</th>
-                              <td class="align-middle">: {{ $product->container_stock }}</td>
+                              <th width="20%" class="align-middle">Stock Unit</th>
+                              <td class="align-middle">: {{ $product->container_stock }} <sub>/ container</sub></td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Standart Container</th>
-                              <td class="align-middle">: {{ $product->container_standart }}</td>
+                              <td class="align-middle">: {{ $product->containerStandart() }}</td>
                            </tr>
                            <tr>
-                              <th width="20%" class="align-middle">Max Stock Container</th>
-                              <td class="align-middle">: {{ $product->container_max_stock }}</td>
+                              <th width="20%" class="align-middle">Max Stock Unit</th>
+                              <td class="align-middle">: {{ $product->container_max_stock }} <sub>/ container</sub></td>
                            </tr>
                         </tbody>
                      </table>

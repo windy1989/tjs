@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Cogs Price</span>
+					<span class="font-weight-semibold">Accounting Budgeting</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -22,27 +22,75 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-					<a href="javascript:void(0);" class="breadcrumb-item">Cogs</a>
-					<span class="breadcrumb-item active">Price</span>
+					<a href="javascript:void(0);" class="breadcrumb-item">Accounting</a>
+					<span class="breadcrumb-item active">Budgeting</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="content">
+      <div class="card">
+			<div class="card-header header-elements-inline">
+				<h5 class="card-title">Filter</h5>
+			</div>
+         <div class="card-body">
+            <div class="form-group">
+               <label>COA :<span class="text-danger">*</span></label>
+               <select name="filter_coa" id="filter_coa" class="select2">
+                  <option value="">-- Choose --</option>
+                  @foreach($parent as $p)
+                     @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                     @if($sub_1->count() > 0)
+                        @foreach($sub_1 as $s1)
+                           @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                           @if($sub_2->count() > 0)
+                              @foreach($sub_2 as $s2)
+                                 @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                 @if($sub_3->count() > 0)
+                                    @foreach($sub_3 as $s3)
+                                       <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                    @endforeach
+                                 @else
+                                    <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                 @endif
+                              @endforeach
+                           @else
+                              <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                           @endif
+                        @endforeach
+                     @else
+                        <option value="{{ $p->id }}">{{ $p->name }}</option>
+                     @endif
+                  @endforeach
+               </select>
+            </div>
+            <div class="form-group">
+               <label>Date :</label>
+               <div class="input-group-prepend">
+                  <input type="month" name="filter_start_date" id="filter_start_date" class="form-control">
+                  <span class="input-group-text">to</span>
+                  <input type="month" name="filter_finish_date" id="filter_finish_date" class="form-control">
+               </div>
+            </div>
+            <div class="form-group text-right">
+               <button type="button" onclick="resetFilter()" class="btn bg-danger"><i class="icon-sync"></i> Reset</button>
+               <button type="button" onclick="loadDataTable()" class="btn bg-purple"><i class="icon-filter4"></i> Search</button>
+            </div>
+         </div>
+      </div>
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Price</h5>
+				<h5 class="card-title">List Data Budgeting</h5>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
-               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+               <table id="datatable_serverside" class="table table-bordered table-striped w-100 display nowrap">
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
-                        <th>Date & Time</th>
-                        <th>Product</th>
-                        <th>Currency</th>
-                        <th>Price</th>
+                        <th>COA</th>
+                        <th>Date</th>
+                        <th>Nominal</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -56,7 +104,7 @@
    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header bg-light">
-            <h5 class="modal-title" id="exampleModalLabel">Form Price</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form Budgeting</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -67,21 +115,42 @@
                   <ul id="validation_content"></ul>
                </div>
                <div class="form-group">
-                  <label>Product :<span class="text-danger">*</span></label>
-                  <select name="product_id" id="product_id"></select>
-               </div>
-               <div class="form-group">
-                  <label>Currency :<span class="text-danger">*</span></label>
-                  <select name="currency_id" id="currency_id" class="select2">
+                  <label>COA :<span class="text-danger">*</span></label>
+                  <select name="coa_id" id="coa_id" class="select2">
                      <option value="">-- Choose --</option>
-                     @foreach($currency as $c)
-                        <option value="{{ $c->id }}">{{ $c->code }}</option>
+                     @foreach($parent as $p)
+                        @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                        @if($sub_1->count() > 0)
+                           @foreach($sub_1 as $s1)
+                              @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_2->count() > 0)
+                                 @foreach($sub_2 as $s2)
+                                    @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_3->count() > 0)
+                                       @foreach($sub_3 as $s3)
+                                          <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                              @endif
+                           @endforeach
+                        @else
+                           <option value="{{ $p->id }}">{{ $p->name }}</option>
+                        @endif
                      @endforeach
                   </select>
                </div>
                <div class="form-group">
-                  <label>Price :<span class="text-danger">*</span></label>
-                  <input type="number" name="price" id="price" class="form-control" placeholder="0">
+                  <label>Month :<span class="text-danger">*</span></label>
+                  <input type="month" name="month" id="month" class="form-control">
+               </div>
+               <div class="form-group">
+                  <label>Nominal :<span class="text-danger">*</span></label>
+                  <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0">
                </div>
             </form>
          </div>
@@ -98,8 +167,14 @@
 <script>
    $(function() {
       loadDataTable();
-      select2ServerSide('#product_id', '{{ url("admin/select2/product") }}');
    });
+
+   function resetFilter() {
+      $('#filter_coa').val(null).trigger('change');
+      $('#filter_start_date').val(null);
+      $('#filter_finish_date').val(null);
+      loadDataTable();
+   }
 
    function cancel() {
       reset();
@@ -120,8 +195,7 @@
 
   function reset() {
       $('#form_data').trigger('reset');
-      $('#product_id').val(null).change();
-      $('#currency_id').val(null).change();
+      $('#coa_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -138,12 +212,17 @@
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[0, 'asc']],
+         order: [[1, 'asc']],
          ajax: {
-            url: '{{ url("admin/cogs/price/datatable") }}',
+            url: '{{ url("admin/accounting/budgeting/datatable") }}',
             type: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+               coa: $('#filter_coa').val(),
+               start_date: $('#filter_start_date').val(),
+               finish_date: $('#filter_finish_date').val()
             },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
@@ -162,10 +241,9 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
-            { name: 'created_at', searchable: false, className: 'text-center align-middle' },
-            { name: 'product_id', className: 'text-center align-middle' },
-            { name: 'currency_id', className: 'text-center align-middle' },
-            { name: 'conversion', searchable: false, className: 'text-center align-middle' },
+            { name: 'coa_id', className: 'text-center align-middle' },
+            { name: 'month', searchable: false, className: 'text-center align-middle' },
+            { name: 'nominal', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
@@ -173,7 +251,7 @@
 
    function create() {
       $.ajax({
-         url: '{{ url("admin/cogs/price/create") }}',
+         url: '{{ url("admin/accounting/budgeting/create") }}',
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),
@@ -221,7 +299,7 @@
    function show(id) {
       toShow();
       $.ajax({
-         url: '{{ url("admin/cogs/price/show") }}',
+         url: '{{ url("admin/accounting/budgeting/show") }}',
          type: 'POST',
          dataType: 'JSON',
          data: {
@@ -235,9 +313,9 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
-            $('#product_id').html('<option value="' + response.product_id + '" selected>' + response.product_code + '</option>');
-            $('#currency_id').val(response.currency_id).change();
-            $('#price').val(response.price);
+            $('#coa_id').val(response.coa_id).change();
+            $('#month').val(response.month);
+            $('#nominal').val(response.nominal);
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },
          error: function() {
@@ -254,7 +332,7 @@
 
    function update(id) {
       $.ajax({
-         url: '{{ url("admin/cogs/price/update") }}' + '/' + id,
+         url: '{{ url("admin/accounting/budgeting/update") }}' + '/' + id,
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),
@@ -314,7 +392,7 @@
             }),
             Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
                $.ajax({
-                  url: '{{ url("admin/cogs/price/destroy") }}',
+                  url: '{{ url("admin/accounting/budgeting/destroy") }}',
                   type: 'POST',
                   dataType: 'JSON',
                   data: {

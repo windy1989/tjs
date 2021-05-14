@@ -133,7 +133,7 @@
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Payment Method :<sup class="text-danger">*</sup></label>
-                        <select name="payment_method" id="payment_method" class="form-control">
+                        <select name="payment_method" id="payment_method" class="custom-select">
                            <option value="">-- Choose --</option>
                            <option value="1">Giro</option>
                            <option value="2">SKBDN</option>
@@ -144,7 +144,7 @@
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Supply Method :<sup class="text-danger">*</sup></label>
-                        <select name="supply_method" id="supply_method" class="form-control">
+                        <select name="supply_method" id="supply_method" class="custom-select">
                            <option value="">-- Choose --</option>
                            <option value="1">Full</option>
                            <option value="2">Partial</option>
@@ -154,7 +154,7 @@
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>PPN :<sup class="text-danger">*</sup></label>
-                        <select name="ppn" id="ppn" class="form-control">
+                        <select name="ppn" id="ppn" class="custom-select">
                            <option value="">-- Choose --</option>
                            <option value="1">Yes</option>
                            <option value="0">No</option>

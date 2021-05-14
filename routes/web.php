@@ -377,6 +377,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('datatable', 'CashBankController@datatable');
                 Route::post('create', 'CashBankController@create');
             });
+
+            Route::prefix('budgeting')->group(function() {
+                Route::get('/', 'BudgetingController@index');
+                Route::post('datatable', 'BudgetingController@datatable');
+                Route::post('create', 'BudgetingController@create');
+                Route::post('show', 'BudgetingController@show');
+                Route::post('update/{id}', 'BudgetingController@update');
+                Route::post('destroy', 'BudgetingController@destroy');
+            });
         });
 
         Route::prefix('setting')->group(function() {

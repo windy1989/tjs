@@ -338,7 +338,7 @@
                                           <td class="align-middle">{{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                           <td class="align-middle">
                                              @if($pp->recommended_price < 1)
-                                                <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="Price" required>
+                                                <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="0" required>
                                              @else
                                                 {{ number_format($pp->recommended_price, 0, ',', '.') }}
                                              @endif   
@@ -430,7 +430,7 @@
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Qty :<sup class="text-danger">*</sup></label>
-                                    <input type="number" name="sample_qty" id="sample_qty" class="form-control" placeholder="Enter qty">
+                                    <input type="number" name="sample_qty" id="sample_qty" class="form-control" placeholder="0">
                                  </div>
                               </div>
                               <div class="col-md-6">
@@ -526,7 +526,7 @@
                                              @if($project->progress >= 35)
                                                 {{ $pp->discount }}%
                                              @else
-                                                <input type="number" name="product_discount[]" class="form-control" value="0" placeholder="Discount" required>
+                                                <input type="number" name="product_discount[]" class="form-control" value="0" placeholder="0" required>
                                              @endif      
                                           </td> 
                                        </tr>
@@ -765,15 +765,15 @@
                      <input type="hidden" name="product_price[]" value="` + response.price + `">
                      <td class="align-middle">` + response.code + `</td>   
                      <td class="align-middle">
-                        <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="Qty" required>
+                        <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
                      </td>  
                      <td class="align-middle">
                         <div class="input-group">
-                           <input type="number" name="product_target_price[]" class="form-control" placeholder="Price" required>
+                           <input type="number" name="product_target_price[]" class="form-control" placeholder="0" required>
                         </div>
                      </td>  
                      <td class="align-middle">
-                        <select name="product_unit[]" class="form-control" required>
+                        <select name="product_unit[]" class="custom-select" required>
                            <option value="1">Pcs</option>   
                            <option value="2">Box</option>   
                            <option value="3">Meter</option>   

@@ -37,8 +37,8 @@
             <div class="row">
                <div class="col-md-9">
                   <div class="form-group">
-                     <label>Account :<span class="text-danger">*</span></label>
-                     <select name="filter_account" id="filter_account" class="select2">
+                     <label>COA :<span class="text-danger">*</span></label>
+                     <select name="filter_coa" id="filter_coa" class="select2">
                         <option value="">-- Choose --</option>
                         @foreach($parent as $p)
                            @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
@@ -136,8 +136,8 @@
                      <tr class="text-center">
                         <th>No</th>
                         <th>User</th>
-                        <th>Account</th>
-                        <th>Reverse</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
                         <th>Nominal</th>
                         <th>Date</th>
                         <th>Description</th>
@@ -166,7 +166,7 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
-                        <label>Account :<span class="text-danger">*</span></label>
+                        <label>Debit :<span class="text-danger">*</span></label>
                         <select name="debit" id="debit" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($parent as $p)
@@ -198,7 +198,7 @@
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
-                        <label>Reverse :<span class="text-danger">*</span></label>
+                        <label>Credit :<span class="text-danger">*</span></label>
                         <select name="credit" id="credit" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($parent as $p)
@@ -237,7 +237,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Nominal :<sup class="text-danger">*</sup></label>
-                        <input type="number" name="nominal" id="nominal" class="form-control" placeholder="Enter nominal">
+                        <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0">
                      </div>
                   </div>
                </div>
@@ -275,7 +275,7 @@
    });
 
    function resetFilter() {
-      $('#filter_account').val(null).trigger('change');
+      $('#filter_coa').val(null).trigger('change');
       $('#filter_user_id').val(null).trigger('change');
       $('#filter_start_date').val(null);
       $('#filter_finish_date').val(null);
@@ -314,7 +314,7 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-               account: $('#filter_account').val(),
+               coa: $('#filter_coa').val(),
                user_id: $('#filter_user_id').val(),
                start_date: $('#filter_start_date').val(),
                finish_date: $('#filter_finish_date').val(),

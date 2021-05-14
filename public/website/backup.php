@@ -10,6 +10,10 @@
 
 /* `tjs`.`activity_logs` */
 $activity_logs = array(
+  array('id' => '1','log_name' => 'default','description' => 'Add accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"coa_id":"4","month":"2021-05","nominal":"5000000","updated_at":"2021-05-14T07:48:38.000000Z","created_at":"2021-05-14T07:48:38.000000Z","id":1}','created_at' => '2021-05-14 14:48:38','updated_at' => '2021-05-14 14:48:38'),
+  array('id' => '2','log_name' => 'default','description' => 'Change the accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:09','updated_at' => '2021-05-14 14:49:09'),
+  array('id' => '3','log_name' => 'default','description' => 'Change the accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:16','updated_at' => '2021-05-14 14:49:16'),
+  array('id' => '4','log_name' => 'default','description' => 'Delete the accounting coa data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:19','updated_at' => '2021-05-14 14:49:19')
 );
 
 /* `tjs`.`agents` */
@@ -61,6 +65,10 @@ $brands = array(
   array('id' => '25','image' => NULL,'code' => 'SV','name' => 'Slavano','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '26','image' => 'public/brand/wSa3oPznQhjwbGkyJNMI6g2kTg2EdH15RBFmIxYg.png','code' => 'TR','name' => 'Treemme Italy','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '27','image' => NULL,'code' => 'TT','name' => 'Tahta','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
+);
+
+/* `tjs`.`budgetings` */
+$budgetings = array(
 );
 
 /* `tjs`.`carts` */
@@ -800,7 +808,7 @@ $coas = array(
   array('id' => '95','code' => '4.000.00','name' => 'Pendapatan','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:09:00','updated_at' => '2021-05-12 15:09:00','deleted_at' => NULL),
   array('id' => '96','code' => '4.000.01','name' => 'Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36','deleted_at' => NULL),
   array('id' => '97','code' => '4.000.01.01','name' => 'Penjualan - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:20:33','deleted_at' => NULL),
-  array('id' => '98','code' => '4.000.01.01.01','name' => 'Penjualan Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:21:41','deleted_at' => '2021-05-12 16:21:41'),
+  array('id' => '98','code' => '4.000.01.01.01','name' => 'Penjualan Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:21:41','deleted_at' => NULL),
   array('id' => '99','code' => '4.000.01.01.02','name' => 'Penjualan Non Retail - Sby','parent_id' => '97','status' => '1','created_at' => '2021-05-12 16:31:40','updated_at' => '2021-05-12 22:11:40','deleted_at' => NULL),
   array('id' => '100','code' => '4.000.01.01.03','name' => 'Penjualan Proyek - Sby','parent_id' => '97','status' => '1','created_at' => '2021-05-12 16:34:13','updated_at' => '2021-05-12 22:11:52','deleted_at' => NULL),
   array('id' => '101','code' => '4.000.01.02','name' => 'Penjualan - Jkt','parent_id' => '96','status' => '1','created_at' => '2021-05-12 17:03:34','updated_at' => '2021-05-12 17:03:34','deleted_at' => NULL),
@@ -1256,7 +1264,7 @@ $currency_rates = array(
 
 /* `tjs`.`customers` */
 $customers = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$BsxkJZndPz4HRKm4wtlYouxwK6hPKpv4JoBqQlNuzQXoeSoFrnLbG','verification' => '2021-05-13 01:31:34','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34')
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$2hdj1.TA83P.0sPk0WjztO2.cG4yxCAWZZf9L.aW2iLtKjc7NqsH2','verification' => '2021-05-13 01:35:29','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29')
 );
 
 /* `tjs`.`divisions` */
@@ -1495,7 +1503,8 @@ $migrations = array(
   array('id' => '55','migration' => '2021_05_12_123456_create_coas_table','batch' => '1'),
   array('id' => '56','migration' => '2021_05_12_124145_create_journals_table','batch' => '1'),
   array('id' => '57','migration' => '2021_05_12_183519_create_cash_banks_table','batch' => '1'),
-  array('id' => '58','migration' => '2021_05_12_235723_create_job_descs_table','batch' => '1')
+  array('id' => '58','migration' => '2021_05_12_235723_create_job_descs_table','batch' => '1'),
+  array('id' => '59','migration' => '2021_05_14_142551_create_budgetings_table','batch' => '2')
 );
 
 /* `tjs`.`oauth_access_tokens` */
@@ -7777,14 +7786,14 @@ $units = array(
 
 /* `tjs`.`users` */
 $users = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$wAsh3T2XUrl1Oyy9ZkXP7u6uG8LSRYAslwJczNmy2jfITVkIAQt2S','branch' => '1','verification' => '2021-05-13 01:31:34','status' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34','deleted_at' => NULL),
-  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$JkWjUWwjLg7kZb.I5F2YcujdG636xED3fLe70Hh/CMPUVvSnU3dzy','branch' => '1','verification' => '2021-05-13 01:31:34','status' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34','deleted_at' => NULL)
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$1QfIrOsO0G12PLJ.V5ckDOAfI57gWUNZmVHsMr4JKJEvXKv86HACq','branch' => '1','verification' => '2021-05-13 01:35:29','status' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29','deleted_at' => NULL),
+  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$8NBornKO1QxddQVxO5XlPOULvmH/7jdR6jrGrY161OnlqdMR4Wdku','branch' => '1','verification' => '2021-05-13 01:35:29','status' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29','deleted_at' => NULL)
 );
 
 /* `tjs`.`user_roles` */
 $user_roles = array(
-  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34'),
-  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-13 01:31:34','updated_at' => '2021-05-13 01:31:34')
+  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29'),
+  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29')
 );
 
 /* `tjs`.`warehouses` */

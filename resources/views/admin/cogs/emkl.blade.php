@@ -112,13 +112,11 @@
                      <option value="2">40 Feet</option>
                   </select>
                </div>
-               <div class="form-group">
+               <div class="form-group form-group-feedback form-group-feedback-right">
                   <label>Cost :<span class="text-danger">*</span></label>
-                  <div class="input-group">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">Rp</span>
-                     </div>
-                     <input type="number" name="cost" id="cost" class="form-control" placeholder="Enter cost">
+                  <div class="position-relative">
+                     <input type="number" name="cost" id="cost" class="form-control" placeholder="0">
+                     <div class="form-control-feedback font-weight-bold">Rp</div>
                   </div>
                </div>
             </form>
