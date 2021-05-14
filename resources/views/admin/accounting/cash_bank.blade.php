@@ -35,7 +35,7 @@
 			</div>
          <div class="card-body">
             <div class="row">
-               <div class="col-md-8">
+               <div class="col-md-9">
                   <div class="form-group">
                      <label>Account :<span class="text-danger">*</span></label>
                      <select name="filter_account" id="filter_account" class="select2">
@@ -50,14 +50,14 @@
                                        @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
                                        @if($sub_3->count() > 0)
                                           @foreach($sub_3 as $s3)
-                                             <option value="{{ $s3->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }} &rarr; {{ $s3->name }}</option>
+                                             <option value="{{ $s3->id }}">{{ $s3->name }}</option>
                                           @endforeach
                                        @else
-                                          <option value="{{ $s2->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }}</option>
+                                          <option value="{{ $s2->id }}">{{ $s2->name }}</option>
                                        @endif
                                     @endforeach
                                  @else
-                                    <option value="{{ $s1->id }}">{{ $p->name }} &rarr; {{ $s1->name }}</option>
+                                    <option value="{{ $s1->id }}">{{ $s1->name }}</option>
                                  @endif
                               @endforeach
                            @else
@@ -67,7 +67,7 @@
                      </select>
                   </div>
                </div>
-               <div class="col-md-4">
+               <div class="col-md-3">
                   <div class="form-group">
                      <label>User :</label>
                      <select name="filter_user_id" id="filter_user_id" class="select2">
@@ -102,13 +102,19 @@
             <div class="form-group text-right">
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
-                     <input type="checkbox" class="form-check-input-styled-success" name="filter_type[]" value="1" data-fouc>
+                     <input type="radio" class="form-check-input-styled-success" name="filter_type" checked data-fouc>
+                     All
+                  </label>
+               </div>
+               <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                     <input type="radio" class="form-check-input-styled-success" name="filter_type" value="1" data-fouc>
                      Cash
                   </label>
                </div>
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
-                     <input type="checkbox" class="form-check-input-styled-success" name="filter_type[]" value="2" data-fouc>
+                     <input type="radio" class="form-check-input-styled-success" name="filter_type" value="2" data-fouc>
                      Bank
                   </label>
                </div>
@@ -157,67 +163,71 @@
                <div class="alert alert-danger" id="validation_alert" style="display:none;">
                   <ul id="validation_content"></ul>
                </div>
-               <div class="form-group">
-                  <label>Account :<span class="text-danger">*</span></label>
-                  <select name="debit" id="debit" class="select2">
-                     <option value="">-- Choose --</option>
-                     @foreach($parent as $p)
-                        @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                        @if($sub_1->count() > 0)
-                           @foreach($sub_1 as $s1)
-                              @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_2->count() > 0)
-                                 @foreach($sub_2 as $s2)
-                                    @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_3->count() > 0)
-                                       @foreach($sub_3 as $s3)
-                                          <option value="{{ $s3->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }} &rarr; {{ $s3->name }}</option>
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s2->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $s1->id }}">{{ $p->name }} &rarr; {{ $s1->name }}</option>
-                              @endif
-                           @endforeach
-                        @else
-                           <option value="{{ $p->id }}">{{ $p->name }}</option>
-                        @endif
-                     @endforeach
-                  </select>
-               </div>
-               <div class="form-group">
-                  <label>Reverse :<span class="text-danger">*</span></label>
-                  <select name="credit" id="credit" class="select2">
-                     <option value="">-- Choose --</option>
-                     @foreach($parent as $p)
-                        @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                        @if($sub_1->count() > 0)
-                           @foreach($sub_1 as $s1)
-                              @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_2->count() > 0)
-                                 @foreach($sub_2 as $s2)
-                                    @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_3->count() > 0)
-                                       @foreach($sub_3 as $s3)
-                                          <option value="{{ $s3->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }} &rarr; {{ $s3->name }}</option>
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s2->id }}">{{ $p->name }} &rarr; {{ $s1->name }} &rarr; {{ $s2->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $s1->id }}">{{ $p->name }} &rarr; {{ $s1->name }}</option>
-                              @endif
-                           @endforeach
-                        @else
-                           <option value="{{ $p->id }}">{{ $p->name }}</option>
-                        @endif
-                     @endforeach
-                  </select>
-               </div>
                <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Account :<span class="text-danger">*</span></label>
+                        <select name="debit" id="debit" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($parent as $p)
+                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                          @if($sub_3->count() > 0)
+                                             @foreach($sub_3 as $s3)
+                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                             @endforeach
+                                          @else
+                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                          @endif
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
+                              @endif
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Reverse :<span class="text-danger">*</span></label>
+                        <select name="credit" id="credit" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($parent as $p)
+                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                          @if($sub_3->count() > 0)
+                                             @foreach($sub_3 as $s3)
+                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                             @endforeach
+                                          @else
+                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                          @endif
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
+                              @endif
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Date :<sup class="text-danger">*</sup></label>
@@ -271,7 +281,7 @@
       $('#filter_finish_date').val(null);
       $('#filter_start_nominal').val(null);
       $('#filter_finish_nominal').val(null);
-      $('input[name="filter_type[]"]').attr('checked', false);
+      $('input[name="status"][value=""]').prop('checked', true);
       loadDataTable();
    }
 
@@ -291,10 +301,6 @@
    }
 
    function loadDataTable() {
-      var filter_type = $('input[name="filter_type[]"]:checked').map(function() {
-         return $(this).val();
-      }).get();
-      
       $('#datatable_serverside').DataTable({
          serverSide: true,
          deferRender: true,
@@ -314,7 +320,7 @@
                finish_date: $('#filter_finish_date').val(),
                start_nominal: $('#filter_start_nominal').val(),
                finish_nominal: $('#filter_finish_nominal').val(),
-               type: filter_type
+               type: $('#filter_type').val()
             },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');

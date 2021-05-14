@@ -20,43 +20,43 @@ class UserRole extends Model {
     {
         switch($this->role) {
             case '1':
-                $position = 'Director';
+                $role = 'Director';
                 break;
             case '2':
-                $position = 'Secretary';
+                $role = 'Secretary';
                 break;
             case '3':
-                $position = 'Head Of Finance';
+                $role = 'Head Of Finance';
                 break;
             case '4':
-                $position = 'Head Of Accounting';
+                $role = 'Head Of Accounting';
                 break;
             case '5':
-                $position = 'Sales & Marketing Manager';
+                $role = 'Sales & Marketing Manager';
                 break;
             case '6':
-                $position = 'Sales Project';
+                $role = 'Sales Project';
                 break;
             case '7':
-                $position = 'Head Of Administration';
+                $role = 'Head Of Administration';
                 break;
             case '8':
-                $position = 'Digital Marketing';
+                $role = 'Digital Marketing';
                 break;
             case '9':
-                $position = 'Purchasing';
+                $role = 'Purchasing';
                 break;
             case '10':
-                $position = 'Admin Sales & Stock';
+                $role = 'Admin Sales & Stock';
                 break;
             case '11':
-                $position = 'Piutang & Pengiriman';
+                $role = 'Piutang & Pengiriman';
                 break;
             case '12':
-                $position = 'Assisten Hiro';
+                $role = 'Assisten Hiro';
                 break;
             case '13':
-                $position = 'Assisten';
+                $role = 'Assisten';
                 break;
             default:
                 $role = 'Invalid';

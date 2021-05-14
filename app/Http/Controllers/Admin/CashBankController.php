@@ -17,7 +17,7 @@ class CashBankController extends Controller {
         $data = [
             'title'   => 'Acounting Cash & Bank',
             'user'    => User::all(),
-            'parent'  => Coa::where('code', '1.000.00')->get(),
+            'parent'  => Coa::where('parent_id', 0)->oldest('code')->get(),
             'content' => 'admin.accounting.cash_bank'
         ];
 
@@ -88,7 +88,7 @@ class CashBankController extends Controller {
                 }
 
                 if($request->type) {
-                    $query->whereIn('type', $request->type);
+                    $query->where('type', $request->type);
                 }
             })
             ->offset($start)
@@ -140,7 +140,7 @@ class CashBankController extends Controller {
                 }
 
                 if($request->type) {
-                    $query->whereIn('type', $request->type);
+                    $query->where('type', $request->type);
                 }
             })
             ->count();
