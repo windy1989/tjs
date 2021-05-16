@@ -388,6 +388,16 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
+        Route::prefix('report')->group(function() {
+            Route::prefix('balance_sheet')->group(function() {
+                Route::get('/', 'ReportController@balanceSheet');
+            });
+
+            Route::prefix('profit_loss')->group(function() {
+                Route::get('/', 'ReportController@profitLoss');
+            });
+        });
+
         Route::prefix('setting')->group(function() {
             Route::prefix('user')->group(function() {
                 Route::get('/', 'UserController@index');

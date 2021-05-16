@@ -201,10 +201,10 @@
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Report">
                             <li class="nav-item">
-                                <a href="{{ url('admin/report/stock') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'stock' ? 'active' : '' }}">Stock</a>
+                                <a href="{{ url('admin/report/balance_sheet') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'balance_sheet' ? 'active' : '' }}">Balance Sheet</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/report/sales') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'sales' ? 'active' : '' }}">Sales</a>
+                                <a href="{{ url('admin/report/profit_loss') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'profit_loss' ? 'active' : '' }}">Profit & Loss</a>
                             </li>
                         </ul>
                     </li>
