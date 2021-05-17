@@ -370,7 +370,6 @@
          type: 'POST',
          dataType: 'JSON',
          data: {
-            company_id: $('#company_id').val(),
             brand_id: $('#brand_id').val(),
             country_id: $('#country_id').val(),
             type_id: $('#type_id').val(),
