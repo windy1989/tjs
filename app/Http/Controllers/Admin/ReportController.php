@@ -24,11 +24,17 @@ class ReportController extends Controller {
     public function profitLoss(Request $request) 
     {
         $filter = $request->filter ? $request->filter : date('Y-m');
-        // dd(SMB::reportProfitLoss($filter));
+        $total  = [
+            'total_sale_actual_current' => 0,
+            'total_sale_budget' => 0,
+            'total_sale_variance' => 0
+        ];
+
         $data   = [
             'title'       => 'Report Profit & Loss',
             'profit_loss' => SMB::reportProfitLoss($filter),
             'filter'      => $filter,
+            'total'       => $total,
             'content'     => 'admin.report.profit_loss'
         ];
 

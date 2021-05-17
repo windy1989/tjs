@@ -675,7 +675,7 @@ class SMB {
          $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
          $total_balance_last     = $balance_debit_last - $balance_credit_last;
 
-         $budget         = Budgeting::where('coa_id', $ss->id)->whereRaw($where_raw_current)->orderByDesc('created_at')->get();
+         $budget         = Budgeting::where('coa_id', $ss->id)->whereRaw("MONTH(month) = $month_current AND YEAR(month) = $year_current")->orderByDesc('created_at')->get();
          $budget_nominal = $budget->count() > 0 ? $budget[0]->nominal : 0;
 
          $grandtotal_income_actual_current += $total_balance_current;
@@ -711,7 +711,7 @@ class SMB {
          $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
          $total_balance_last     = $balance_debit_last - $balance_credit_last;
 
-         $budget         = Budgeting::where('coa_id', $sss->id)->whereRaw($where_raw_current)->orderByDesc('created_at')->get();
+         $budget         = Budgeting::where('coa_id', $sss->id)->whereRaw("MONTH(month) = $month_current AND YEAR(month) = $year_current")->orderByDesc('created_at')->get();
          $budget_nominal = $budget->count() > 0 ? $budget[0]->nominal : 0;
 
          $grandtotal_income_actual_current += $total_balance_current;

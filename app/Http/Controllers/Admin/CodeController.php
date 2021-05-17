@@ -12,7 +12,9 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use App\Models\PricingPolicy;
 use App\Models\ProductShading;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -21,6 +23,53 @@ class CodeController extends Controller {
 
     public function index()
     {
+        $old = DB::connection('seeder')->table('master_stok')->where('kodemerk', 'BV')->get();
+        foreach($old as $o) {
+            $country = Country::where('code', $o->country)->first();
+            $product = Code::create([
+                'type_id'             => 328,
+                'company_id'          => 3,
+                'hs_code_id'          => 3,
+                'brand_id'            => 3,
+                'country_id'          => $country ? $country->id : 103,
+                'supplier_id'         => 44,
+                'grade_id'            => 1,
+                'carton_pallet'       => is_numeric($o->ctnpallet) ? $o->ctnpallet : 0,
+                'carton_pcs'          => is_numeric($o->pcsctn) ? $o->pcsctn : 0,
+                'container_standart'  => is_numeric($o->contstan) ? $o->contstan : 0,
+                'container_stock'     => is_numeric($o->stokcont) ? $o->stokcont : 0,
+                'container_max_stock' => is_numeric($o->maxcont) ? $o->maxcont : 0,
+                'description'         => '-',
+                'status'              => $o->status == 'Active' ? 1 : 2
+            ]);
+
+            $pp = DB::connection('seeder')->table('master_price')->where('tjsitemcode', $o->kode_stok)->first();
+            if($pp) {
+                PricingPolicy::create([
+                    'product_id'              => $product->id,
+                    'showroom_cost'           => $pp->sc,
+                    'sales_travel_cost'       => $pp->tc,
+                    'marketing_cost'          => $pp->mc,
+                    'interest'                => $pp->interest,
+                    'sales_commission'        => $pp->sic,
+                    'fixed_cost'              => $pp->fc,
+                    'nett_profit'             => $pp->rpc,
+                    'saving'                  => $pp->tc,
+                    'middlemant'              => $pp->tc,
+                    'project'                 => $pp->tc,
+                    'on_site_cost'            => $pp->tc,
+                    'storage_cost'            => $pp->tc,
+                    'bottom_price'            => $pp->tc,
+                    'project_price'           => $pp->tc,
+                    'price_list'              => $pp->tc,
+                    'store_price_list'        => $pp->tc,
+                    'discount_retail_sales'   => $pp->tc,
+                    'discount_retail_spv'     => $pp->tc,
+                    'discount_retail_manager' => $pp->tc
+                ]);
+            }
+        }
+
         $data = [
             'title'     => 'Product Code',
             'company'   => Company::where('status', 1)->get(),

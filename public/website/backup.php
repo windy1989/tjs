@@ -1,22 +1,89 @@
 <?php
 /**
  * Export to PHP Array plugin for PHPMyAdmin
- * @version 5.1.0
+ * @version 4.9.5
  */
 
 /**
- * Database `tjs`
+ * Database `smartmar_main`
  */
 
-/* `tjs`.`activity_logs` */
+/* `smartmar_main`.`activity_logs` */
 $activity_logs = array(
-  array('id' => '1','log_name' => 'default','description' => 'Add accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '{"coa_id":"4","month":"2021-05","nominal":"5000000","updated_at":"2021-05-14T07:48:38.000000Z","created_at":"2021-05-14T07:48:38.000000Z","id":1}','created_at' => '2021-05-14 14:48:38','updated_at' => '2021-05-14 14:48:38'),
-  array('id' => '2','log_name' => 'default','description' => 'Change the accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:09','updated_at' => '2021-05-14 14:49:09'),
-  array('id' => '3','log_name' => 'default','description' => 'Change the accounting budgeting data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:16','updated_at' => '2021-05-14 14:49:16'),
-  array('id' => '4','log_name' => 'default','description' => 'Delete the accounting coa data','subject_type' => 'App\\Models\\Budgeting','subject_id' => NULL,'causer_type' => 'users','causer_id' => '1','properties' => '[]','created_at' => '2021-05-14 14:49:19','updated_at' => '2021-05-14 14:49:19')
+  array('id' => '1','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:09:54','updated_at' => '2021-05-17 10:09:54'),
+  array('id' => '2','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:12:17','updated_at' => '2021-05-17 10:12:17'),
+  array('id' => '3','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:13:58','updated_at' => '2021-05-17 10:13:58'),
+  array('id' => '4','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:15:23','updated_at' => '2021-05-17 10:15:23'),
+  array('id' => '5','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:15:57','updated_at' => '2021-05-17 10:15:57'),
+  array('id' => '6','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:17:26','updated_at' => '2021-05-17 10:17:26'),
+  array('id' => '7','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:17:58','updated_at' => '2021-05-17 10:17:58'),
+  array('id' => '8','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 10:18:55','updated_at' => '2021-05-17 10:18:55'),
+  array('id' => '9','log_name' => 'default','description' => 'Add accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '{"code":"1.000.03.03.03","name":"Bank BCA Non Pajak - Kas Sby (4688.559.888)","parent_id":"15","status":"1","updated_at":"2021-05-17T03:23:03.000000Z","created_at":"2021-05-17T03:23:03.000000Z","id":215}','created_at' => '2021-05-17 10:23:03','updated_at' => '2021-05-17 10:23:03'),
+  array('id' => '10','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 12:59:08','updated_at' => '2021-05-17 12:59:08'),
+  array('id' => '11','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 12:59:31','updated_at' => '2021-05-17 12:59:31'),
+  array('id' => '12','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:00:05','updated_at' => '2021-05-17 13:00:05'),
+  array('id' => '13','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:00:37','updated_at' => '2021-05-17 13:00:37'),
+  array('id' => '14','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:00:54','updated_at' => '2021-05-17 13:00:54'),
+  array('id' => '15','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:01:07','updated_at' => '2021-05-17 13:01:07'),
+  array('id' => '16','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:01:45','updated_at' => '2021-05-17 13:01:45'),
+  array('id' => '17','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:01:55','updated_at' => '2021-05-17 13:01:55'),
+  array('id' => '18','log_name' => 'default','description' => 'Change the accounting coa data','subject_type' => 'App\\Models\\Coa','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 13:08:54','updated_at' => '2021-05-17 13:08:54'),
+  array('id' => '19','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:46:36','updated_at' => '2021-05-17 14:46:36'),
+  array('id' => '20','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:46:49','updated_at' => '2021-05-17 14:46:49'),
+  array('id' => '21','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:46:57','updated_at' => '2021-05-17 14:46:57'),
+  array('id' => '22','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:47:02','updated_at' => '2021-05-17 14:47:02'),
+  array('id' => '23','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:47:44','updated_at' => '2021-05-17 14:47:44'),
+  array('id' => '24','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:48:09','updated_at' => '2021-05-17 14:48:09'),
+  array('id' => '25','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:48:19','updated_at' => '2021-05-17 14:48:19'),
+  array('id' => '26','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:48:27','updated_at' => '2021-05-17 14:48:27'),
+  array('id' => '27','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:48:50','updated_at' => '2021-05-17 14:48:50'),
+  array('id' => '28','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:00','updated_at' => '2021-05-17 14:49:00'),
+  array('id' => '29','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:10','updated_at' => '2021-05-17 14:49:10'),
+  array('id' => '30','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:16','updated_at' => '2021-05-17 14:49:16'),
+  array('id' => '31','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:24','updated_at' => '2021-05-17 14:49:24'),
+  array('id' => '32','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:30','updated_at' => '2021-05-17 14:49:30'),
+  array('id' => '33','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:35','updated_at' => '2021-05-17 14:49:35'),
+  array('id' => '34','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:45','updated_at' => '2021-05-17 14:49:45'),
+  array('id' => '35','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:49:51','updated_at' => '2021-05-17 14:49:51'),
+  array('id' => '36','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:50:12','updated_at' => '2021-05-17 14:50:12'),
+  array('id' => '37','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:50:27','updated_at' => '2021-05-17 14:50:27'),
+  array('id' => '38','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:50:32','updated_at' => '2021-05-17 14:50:32'),
+  array('id' => '39','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:50:42','updated_at' => '2021-05-17 14:50:42'),
+  array('id' => '40','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:50:53','updated_at' => '2021-05-17 14:50:53'),
+  array('id' => '41','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:03','updated_at' => '2021-05-17 14:51:03'),
+  array('id' => '42','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:09','updated_at' => '2021-05-17 14:51:09'),
+  array('id' => '43','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:16','updated_at' => '2021-05-17 14:51:16'),
+  array('id' => '44','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:29','updated_at' => '2021-05-17 14:51:29'),
+  array('id' => '45','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:35','updated_at' => '2021-05-17 14:51:35'),
+  array('id' => '46','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:40','updated_at' => '2021-05-17 14:51:40'),
+  array('id' => '47','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:47','updated_at' => '2021-05-17 14:51:47'),
+  array('id' => '48','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:51:53','updated_at' => '2021-05-17 14:51:53'),
+  array('id' => '49','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:52:06','updated_at' => '2021-05-17 14:52:06'),
+  array('id' => '50','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 14:52:12','updated_at' => '2021-05-17 14:52:12'),
+  array('id' => '51','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:27:25','updated_at' => '2021-05-17 16:27:25'),
+  array('id' => '52','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:27:33','updated_at' => '2021-05-17 16:27:33'),
+  array('id' => '53','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:27:39','updated_at' => '2021-05-17 16:27:39'),
+  array('id' => '54','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:27:46','updated_at' => '2021-05-17 16:27:46'),
+  array('id' => '55','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:27:52','updated_at' => '2021-05-17 16:27:52'),
+  array('id' => '56','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:28:01','updated_at' => '2021-05-17 16:28:01'),
+  array('id' => '57','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:28:14','updated_at' => '2021-05-17 16:28:14'),
+  array('id' => '58','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:29:07','updated_at' => '2021-05-17 16:29:07'),
+  array('id' => '59','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:31:32','updated_at' => '2021-05-17 16:31:32'),
+  array('id' => '60','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:31:43','updated_at' => '2021-05-17 16:31:43'),
+  array('id' => '61','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:31:50','updated_at' => '2021-05-17 16:31:50'),
+  array('id' => '62','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:21','updated_at' => '2021-05-17 16:35:21'),
+  array('id' => '63','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:28','updated_at' => '2021-05-17 16:35:28'),
+  array('id' => '64','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:37','updated_at' => '2021-05-17 16:35:37'),
+  array('id' => '65','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:43','updated_at' => '2021-05-17 16:35:43'),
+  array('id' => '66','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:49','updated_at' => '2021-05-17 16:35:49'),
+  array('id' => '67','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:35:57','updated_at' => '2021-05-17 16:35:57'),
+  array('id' => '68','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:36:05','updated_at' => '2021-05-17 16:36:05'),
+  array('id' => '69','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:36:12','updated_at' => '2021-05-17 16:36:12'),
+  array('id' => '70','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:36:19','updated_at' => '2021-05-17 16:36:19'),
+  array('id' => '71','log_name' => 'default','description' => 'Change the product code data','subject_type' => 'App\\Models\\Product','subject_id' => NULL,'causer_type' => 'users','causer_id' => '2','properties' => '[]','created_at' => '2021-05-17 16:36:27','updated_at' => '2021-05-17 16:36:27')
 );
 
-/* `tjs`.`agents` */
+/* `smartmar_main`.`agents` */
 $agents = array(
   array('id' => '1','country_id' => '44','category_id' => '63','min_price' => '1','max_price' => '7','fee' => '50','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','category_id' => '63','min_price' => '7','max_price' => '20','fee' => '55','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -27,7 +94,7 @@ $agents = array(
   array('id' => '7','country_id' => '105','category_id' => '68','min_price' => '7','max_price' => '50','fee' => '120','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`banners` */
+/* `smartmar_main`.`banners` */
 $banners = array(
   array('id' => '1','image' => 'public/banner/nAlWzlFGLmUXPVuOrgBamwxXWyTAXMVbzIQyTOeL.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','image' => 'public/banner/DUKTTUj04JJlJHImXrr4QNo1swIOd6xucmBtGGT1.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -36,7 +103,7 @@ $banners = array(
   array('id' => '5','image' => 'public/banner/bTXgt0MG2x0DvaQHILRgEi1lL7CsleJ93B7hCUEY.jpg','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `tjs`.`brands` */
+/* `smartmar_main`.`brands` */
 $brands = array(
   array('id' => '1','image' => NULL,'code' => 'AG','name' => 'Arte Gress','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','image' => 'public/brand/25sp2CmVWjZI0xXXXIunhvqnoTGO7tZzhA7isLMJ.png','code' => 'BT','name' => 'Brighton','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -67,19 +134,19 @@ $brands = array(
   array('id' => '27','image' => NULL,'code' => 'TT','name' => 'Tahta','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`budgetings` */
+/* `smartmar_main`.`budgetings` */
 $budgetings = array(
 );
 
-/* `tjs`.`carts` */
+/* `smartmar_main`.`carts` */
 $carts = array(
 );
 
-/* `tjs`.`cash_banks` */
+/* `smartmar_main`.`cash_banks` */
 $cash_banks = array(
 );
 
-/* `tjs`.`categories` */
+/* `smartmar_main`.`categories` */
 $categories = array(
   array('id' => '1','name' => 'Fitting','slug' => 'fitting','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','name' => 'Other','slug' => 'other','parent_id' => '0','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -191,7 +258,7 @@ $categories = array(
   array('id' => '108','name' => 'Water Treatment Plant','slug' => 'water-treatment-plant','parent_id' => '11','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`cities` */
+/* `smartmar_main`.`cities` */
 $cities = array(
   array('id' => '1','name' => 'KABUPATEN SIMEULUE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','name' => 'KABUPATEN ACEH SINGKIL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -709,9 +776,9 @@ $cities = array(
   array('id' => '514','name' => 'KOTA JAYAPURA','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`coas` */
+/* `smartmar_main`.`coas` */
 $coas = array(
-  array('id' => '1','code' => '1.000.00','name' => 'Kas & Bank','parent_id' => '0','status' => '1','created_at' => '2021-05-12 13:55:14','updated_at' => '2021-05-12 13:55:14','deleted_at' => NULL),
+  array('id' => '1','code' => '1.000.00','name' => 'KAS & BANK','parent_id' => '0','status' => '1','created_at' => '2021-05-12 13:55:14','updated_at' => '2021-05-17 12:59:08','deleted_at' => NULL),
   array('id' => '2','code' => '1.000.01','name' => 'Kas Kecil','parent_id' => '1','status' => '1','created_at' => '2021-05-12 13:55:26','updated_at' => '2021-05-12 13:55:26','deleted_at' => NULL),
   array('id' => '3','code' => '1.000.01.01','name' => 'Kas Kecil - Sby','parent_id' => '2','status' => '1','created_at' => '2021-05-12 13:56:00','updated_at' => '2021-05-12 14:12:20','deleted_at' => NULL),
   array('id' => '4','code' => '1.000.01.02','name' => 'Kas Kecil - Jkt','parent_id' => '2','status' => '1','created_at' => '2021-05-12 13:56:51','updated_at' => '2021-05-12 14:12:25','deleted_at' => NULL),
@@ -720,20 +787,20 @@ $coas = array(
   array('id' => '7','code' => '1.000.02.02','name' => 'Kas Besar - Jkt','parent_id' => '5','status' => '1','created_at' => '2021-05-12 13:58:26','updated_at' => '2021-05-12 14:12:38','deleted_at' => NULL),
   array('id' => '8','code' => '1.000.03','name' => 'Bank','parent_id' => '1','status' => '1','created_at' => '2021-05-12 13:58:54','updated_at' => '2021-05-12 13:58:54','deleted_at' => NULL),
   array('id' => '9','code' => '1.000.03.01','name' => 'Bank - Sby','parent_id' => '8','status' => '1','created_at' => '2021-05-12 14:02:05','updated_at' => '2021-05-12 14:12:43','deleted_at' => NULL),
-  array('id' => '10','code' => '1.000.03.01.01','name' => 'Bank BCA - Sby','parent_id' => '9','status' => '1','created_at' => '2021-05-12 14:03:54','updated_at' => '2021-05-12 14:12:48','deleted_at' => NULL),
-  array('id' => '11','code' => '1.000.03.01.02','name' => 'Bank Mandiri - Sby','parent_id' => '9','status' => '1','created_at' => '2021-05-12 14:04:20','updated_at' => '2021-05-12 14:12:56','deleted_at' => NULL),
+  array('id' => '10','code' => '1.000.03.01.01','name' => 'Bank BCA - Sby (468.343.4178)','parent_id' => '9','status' => '1','created_at' => '2021-05-12 14:03:54','updated_at' => '2021-05-17 10:09:54','deleted_at' => NULL),
+  array('id' => '11','code' => '1.000.03.01.02','name' => 'Bank Mandiri - Sby (141.0.555.9.555.90)','parent_id' => '9','status' => '1','created_at' => '2021-05-12 14:04:20','updated_at' => '2021-05-17 10:13:58','deleted_at' => NULL),
   array('id' => '12','code' => '1.000.03.02','name' => 'Bank - Jkt','parent_id' => '8','status' => '1','created_at' => '2021-05-12 14:04:47','updated_at' => '2021-05-12 14:13:01','deleted_at' => NULL),
-  array('id' => '13','code' => '1.000.03.02.01','name' => 'Bank BCA - Jkt','parent_id' => '12','status' => '1','created_at' => '2021-05-12 14:05:17','updated_at' => '2021-05-12 14:13:06','deleted_at' => NULL),
-  array('id' => '14','code' => '1.000.03.02.02','name' => 'Bank Mandiri - Jkt','parent_id' => '12','status' => '1','created_at' => '2021-05-12 14:06:14','updated_at' => '2021-05-12 14:13:11','deleted_at' => NULL),
+  array('id' => '13','code' => '1.000.03.02.01','name' => 'Bank BCA - Jkt (329.37.22222)','parent_id' => '12','status' => '1','created_at' => '2021-05-12 14:05:17','updated_at' => '2021-05-17 10:17:58','deleted_at' => NULL),
+  array('id' => '14','code' => '1.000.03.02.02','name' => 'Bank Mandiri - Jkt (1.4000.888.222.01)','parent_id' => '12','status' => '1','created_at' => '2021-05-12 14:06:14','updated_at' => '2021-05-17 10:18:55','deleted_at' => NULL),
   array('id' => '15','code' => '1.000.03.03','name' => 'Bank - Sby (Non Pajak)','parent_id' => '8','status' => '1','created_at' => '2021-05-12 14:06:43','updated_at' => '2021-05-12 14:13:22','deleted_at' => NULL),
-  array('id' => '16','code' => '1.000.03.03.01','name' => 'Bank BCA - Sby (Non Pajak)','parent_id' => '15','status' => '1','created_at' => '2021-05-12 14:07:39','updated_at' => '2021-05-12 14:13:40','deleted_at' => NULL),
-  array('id' => '17','code' => '1.000.03.03.02','name' => 'Bank Mandiri - Sby (Non Pajak)','parent_id' => '15','status' => '1','created_at' => '2021-05-12 14:08:13','updated_at' => '2021-05-12 14:14:03','deleted_at' => NULL),
+  array('id' => '16','code' => '1.000.03.03.01','name' => 'Bank BCA Non Pajak - Sby (468.397.8178)','parent_id' => '15','status' => '1','created_at' => '2021-05-12 14:07:39','updated_at' => '2021-05-17 10:12:17','deleted_at' => NULL),
+  array('id' => '17','code' => '1.000.03.03.02','name' => 'Bank Mandiri Non Pajak - Sby (141.00.568.9999.0)','parent_id' => '15','status' => '1','created_at' => '2021-05-12 14:08:13','updated_at' => '2021-05-17 10:15:23','deleted_at' => NULL),
   array('id' => '18','code' => '1.000.03.04','name' => 'Bank - Jkt (Non Pajak)','parent_id' => '8','status' => '1','created_at' => '2021-05-12 14:08:37','updated_at' => '2021-05-12 14:14:22','deleted_at' => NULL),
-  array('id' => '19','code' => '1.000.03.04.01','name' => 'Bank BCA - Jkt (Non Pajak)','parent_id' => '18','status' => '1','created_at' => '2021-05-12 14:09:11','updated_at' => '2021-05-12 14:14:33','deleted_at' => NULL),
+  array('id' => '19','code' => '1.000.03.04.01','name' => 'Bank BCA Non Pajak - Jkt (829.1341.888)','parent_id' => '18','status' => '1','created_at' => '2021-05-12 14:09:11','updated_at' => '2021-05-17 10:17:26','deleted_at' => NULL),
   array('id' => '20','code' => '1.000.03.04.02','name' => 'Bank Mandiri - Jkt (Non Pajak)','parent_id' => '18','status' => '1','created_at' => '2021-05-12 14:09:48','updated_at' => '2021-05-12 14:14:45','deleted_at' => NULL),
   array('id' => '21','code' => '1.000.04','name' => 'Kas Transfer (Post Silang)','parent_id' => '1','status' => '1','created_at' => '2021-05-12 14:11:45','updated_at' => '2021-05-12 14:11:45','deleted_at' => NULL),
   array('id' => '22','code' => '1.000.05','name' => 'Deposito','parent_id' => '1','status' => '1','created_at' => '2021-05-12 14:12:04','updated_at' => '2021-05-12 14:12:04','deleted_at' => NULL),
-  array('id' => '23','code' => '1.100.00','name' => 'Piutang','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:18:05','updated_at' => '2021-05-12 14:18:05','deleted_at' => NULL),
+  array('id' => '23','code' => '1.100.00','name' => 'PIUTANG','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:18:05','updated_at' => '2021-05-17 12:59:31','deleted_at' => NULL),
   array('id' => '24','code' => '1.100.01','name' => 'Uang muka pembelian','parent_id' => '23','status' => '1','created_at' => '2021-05-12 14:18:28','updated_at' => '2021-05-12 14:18:28','deleted_at' => NULL),
   array('id' => '25','code' => '1.100.01.01','name' => 'Uang muka pembelian - Sby','parent_id' => '24','status' => '1','created_at' => '2021-05-12 14:18:46','updated_at' => '2021-05-12 14:18:46','deleted_at' => NULL),
   array('id' => '26','code' => '1.100.01.02','name' => 'Uang muka pembelian - Jkt','parent_id' => '24','status' => '1','created_at' => '2021-05-12 14:19:07','updated_at' => '2021-05-12 14:19:07','deleted_at' => NULL),
@@ -741,7 +808,7 @@ $coas = array(
   array('id' => '28','code' => '1.100.02.01','name' => 'Piutang Usaha - Sby','parent_id' => '27','status' => '1','created_at' => '2021-05-12 14:19:40','updated_at' => '2021-05-12 14:20:16','deleted_at' => NULL),
   array('id' => '29','code' => '1.100.02.02','name' => 'Piutang Usaha - Jkt','parent_id' => '27','status' => '1','created_at' => '2021-05-12 14:20:39','updated_at' => '2021-05-12 14:20:39','deleted_at' => NULL),
   array('id' => '30','code' => '1.100.03','name' => 'Advance Purchase','parent_id' => '23','status' => '1','created_at' => '2021-05-12 14:21:15','updated_at' => '2021-05-12 14:21:15','deleted_at' => NULL),
-  array('id' => '31','code' => '1.200.00','name' => 'Persediaan Barang Dagang','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:21:29','updated_at' => '2021-05-12 14:21:29','deleted_at' => NULL),
+  array('id' => '31','code' => '1.200.00','name' => 'PERSEDIAAN BARANG DAGANG','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:21:29','updated_at' => '2021-05-17 13:00:05','deleted_at' => NULL),
   array('id' => '32','code' => '1.200.01','name' => 'Persediaan Barang - Sby','parent_id' => '31','status' => '1','created_at' => '2021-05-12 14:21:50','updated_at' => '2021-05-12 14:21:50','deleted_at' => NULL),
   array('id' => '33','code' => '1.200.01.01','name' => 'Persediaan Barang Retail - Sby','parent_id' => '32','status' => '1','created_at' => '2021-05-12 14:22:11','updated_at' => '2021-05-12 14:22:11','deleted_at' => NULL),
   array('id' => '34','code' => '1.200.01.02','name' => 'Persediaan Barang Non Retail- Sby','parent_id' => '32','status' => '1','created_at' => '2021-05-12 14:22:25','updated_at' => '2021-05-12 14:23:15','deleted_at' => NULL),
@@ -752,7 +819,7 @@ $coas = array(
   array('id' => '39','code' => '1.200.02.03','name' => 'Persediaan Barang Proyek - Jkt','parent_id' => '36','status' => '1','created_at' => '2021-05-12 14:24:43','updated_at' => '2021-05-12 14:24:43','deleted_at' => NULL),
   array('id' => '40','code' => '1.201.00','name' => 'Barang Terkirim','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:25:03','updated_at' => '2021-05-12 14:25:03','deleted_at' => NULL),
   array('id' => '41','code' => '1.300.00','name' => 'Perlengkapan','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:25:14','updated_at' => '2021-05-12 14:25:14','deleted_at' => NULL),
-  array('id' => '42','code' => '1.400.00','name' => 'Biaya Dibayar Dimuka','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:25:26','updated_at' => '2021-05-12 14:25:26','deleted_at' => NULL),
+  array('id' => '42','code' => '1.400.00','name' => 'BIAYA DIBAYAR DIMUKA','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:25:26','updated_at' => '2021-05-17 13:00:37','deleted_at' => NULL),
   array('id' => '43','code' => '1.400.01','name' => 'Asuransi Dibayar Dimuka','parent_id' => '42','status' => '1','created_at' => '2021-05-12 14:25:41','updated_at' => '2021-05-12 14:25:41','deleted_at' => NULL),
   array('id' => '44','code' => '1.400.02','name' => 'Sewa Dibayar Dimuka','parent_id' => '42','status' => '1','created_at' => '2021-05-12 14:25:57','updated_at' => '2021-05-12 14:25:57','deleted_at' => NULL),
   array('id' => '45','code' => '1.400.03','name' => 'Legal / PBB Dibayar Dimuka','parent_id' => '42','status' => '1','created_at' => '2021-05-12 14:26:11','updated_at' => '2021-05-12 14:26:11','deleted_at' => NULL),
@@ -765,7 +832,7 @@ $coas = array(
   array('id' => '52','code' => '1.500.03','name' => 'Tax - PPh 23','parent_id' => '49','status' => '1','created_at' => '2021-05-12 14:30:06','updated_at' => '2021-05-12 14:30:06','deleted_at' => NULL),
   array('id' => '53','code' => '1.500.04','name' => 'Tax - PPh 25','parent_id' => '49','status' => '1','created_at' => '2021-05-12 14:30:20','updated_at' => '2021-05-12 14:30:20','deleted_at' => NULL),
   array('id' => '54','code' => '1.500.05','name' => 'Other Prepaid Tax','parent_id' => '49','status' => '1','created_at' => '2021-05-12 14:30:34','updated_at' => '2021-05-12 14:30:34','deleted_at' => NULL),
-  array('id' => '55','code' => '1.600.00','name' => 'Aktiva Tetap','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:30:50','updated_at' => '2021-05-12 14:30:50','deleted_at' => NULL),
+  array('id' => '55','code' => '1.600.00','name' => 'AKTIVA TETAP','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:30:50','updated_at' => '2021-05-17 13:00:54','deleted_at' => NULL),
   array('id' => '56','code' => '1.600.01','name' => 'Tanah','parent_id' => '55','status' => '1','created_at' => '2021-05-12 14:31:08','updated_at' => '2021-05-12 14:31:08','deleted_at' => NULL),
   array('id' => '57','code' => '1.600.02','name' => 'Gedung','parent_id' => '55','status' => '1','created_at' => '2021-05-12 14:31:30','updated_at' => '2021-05-12 14:31:30','deleted_at' => NULL),
   array('id' => '58','code' => '1.600.03','name' => 'Kendaraan','parent_id' => '55','status' => '1','created_at' => '2021-05-12 14:51:35','updated_at' => '2021-05-12 14:51:35','deleted_at' => NULL),
@@ -776,7 +843,7 @@ $coas = array(
   array('id' => '63','code' => '1.610.02','name' => 'Akumulasi Penyusutan Kendaraan','parent_id' => '61','status' => '1','created_at' => '2021-05-12 14:53:01','updated_at' => '2021-05-12 14:53:01','deleted_at' => NULL),
   array('id' => '64','code' => '1.610.03','name' => 'Akumulasi Penyusutan Peralatan','parent_id' => '61','status' => '1','created_at' => '2021-05-12 14:53:20','updated_at' => '2021-05-12 14:53:20','deleted_at' => NULL),
   array('id' => '65','code' => '1.610.04','name' => 'Akumulasi Penyusutan Inventaris Kantor','parent_id' => '61','status' => '1','created_at' => '2021-05-12 14:53:33','updated_at' => '2021-05-12 14:53:33','deleted_at' => NULL),
-  array('id' => '66','code' => '2.000.00','name' => 'Hutang','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:53:55','updated_at' => '2021-05-12 14:53:55','deleted_at' => NULL),
+  array('id' => '66','code' => '2.000.00','name' => 'HUTANG','parent_id' => '0','status' => '1','created_at' => '2021-05-12 14:53:55','updated_at' => '2021-05-17 13:01:07','deleted_at' => NULL),
   array('id' => '67','code' => '2.000.01','name' => 'Uang Muka Penjualan','parent_id' => '66','status' => '1','created_at' => '2021-05-12 14:54:14','updated_at' => '2021-05-12 14:54:14','deleted_at' => NULL),
   array('id' => '68','code' => '2.000.01.01','name' => 'Uang Muka Penjualan - Sby','parent_id' => '67','status' => '1','created_at' => '2021-05-12 14:54:33','updated_at' => '2021-05-12 14:54:33','deleted_at' => NULL),
   array('id' => '69','code' => '2.000.01.02','name' => 'Uang Muka Penjualan -Jkt','parent_id' => '67','status' => '1','created_at' => '2021-05-12 14:54:47','updated_at' => '2021-05-12 14:54:47','deleted_at' => NULL),
@@ -801,11 +868,11 @@ $coas = array(
   array('id' => '88','code' => '2.300.07','name' => 'Telpon','parent_id' => '81','status' => '1','created_at' => '2021-05-12 15:00:05','updated_at' => '2021-05-12 15:00:05','deleted_at' => NULL),
   array('id' => '89','code' => '2.300.08','name' => 'Other Accrued Expenses','parent_id' => '81','status' => '1','created_at' => '2021-05-12 15:00:19','updated_at' => '2021-05-12 15:00:19','deleted_at' => NULL),
   array('id' => '90','code' => '2.400.00','name' => 'Hutang Pembelian Belum Ditagih','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:06:35','updated_at' => '2021-05-12 15:06:35','deleted_at' => NULL),
-  array('id' => '91','code' => '3.000.00','name' => 'Modal','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:14','updated_at' => '2021-05-12 15:08:14','deleted_at' => NULL),
+  array('id' => '91','code' => '3.000.00','name' => 'MODAL','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:14','updated_at' => '2021-05-17 13:01:45','deleted_at' => NULL),
   array('id' => '92','code' => '3.100.00','name' => 'OPENING BALANCE EQUITY','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:28','updated_at' => '2021-05-12 15:08:28','deleted_at' => NULL),
   array('id' => '93','code' => '3.200.00','name' => 'Deviden','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:39','updated_at' => '2021-05-12 15:08:39','deleted_at' => NULL),
   array('id' => '94','code' => '3.300.00','name' => 'RETAINED EARNING','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:08:50','updated_at' => '2021-05-12 15:08:50','deleted_at' => NULL),
-  array('id' => '95','code' => '4.000.00','name' => 'Pendapatan','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:09:00','updated_at' => '2021-05-12 15:09:00','deleted_at' => NULL),
+  array('id' => '95','code' => '4.000.00','name' => 'PENDAPATAN','parent_id' => '0','status' => '1','created_at' => '2021-05-12 15:09:00','updated_at' => '2021-05-17 13:01:55','deleted_at' => NULL),
   array('id' => '96','code' => '4.000.01','name' => 'Penjualan','parent_id' => '95','status' => '1','created_at' => '2021-05-12 15:09:36','updated_at' => '2021-05-12 15:09:36','deleted_at' => NULL),
   array('id' => '97','code' => '4.000.01.01','name' => 'Penjualan - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:12:35','updated_at' => '2021-05-12 16:20:33','deleted_at' => NULL),
   array('id' => '98','code' => '4.000.01.01.01','name' => 'Penjualan Retail - Sby','parent_id' => '96','status' => '1','created_at' => '2021-05-12 16:18:10','updated_at' => '2021-05-12 16:21:41','deleted_at' => NULL),
@@ -910,7 +977,7 @@ $coas = array(
   array('id' => '197','code' => '6.2200.01.02.01','name' => 'Biaya Pemeliharaan Gedung - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:55:45','updated_at' => '2021-05-13 00:55:45','deleted_at' => NULL),
   array('id' => '198','code' => '6.2200.01.02.02','name' => 'Biaya Pemeliharaan Peralatan Kantor - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:56:20','updated_at' => '2021-05-13 00:56:20','deleted_at' => NULL),
   array('id' => '199','code' => '6.2200.01.02.03','name' => 'Biaya Pemeliharaan Kendaraan - Jkt','parent_id' => '196','status' => '1','created_at' => '2021-05-13 00:56:57','updated_at' => '2021-05-13 00:56:57','deleted_at' => NULL),
-  array('id' => '200','code' => '6.300.00','name' => 'Biaya Penyusutan & Amortisasi','parent_id' => '0','status' => '1','created_at' => '2021-05-13 00:58:11','updated_at' => '2021-05-13 00:58:11','deleted_at' => NULL),
+  array('id' => '200','code' => '6.300.00','name' => 'BIAYA PENYUSUTAN & AMORTISASI','parent_id' => '0','status' => '1','created_at' => '2021-05-13 00:58:11','updated_at' => '2021-05-17 13:08:54','deleted_at' => NULL),
   array('id' => '201','code' => '6.300.01','name' => 'Biaya Penyusutan Gedung','parent_id' => '200','status' => '1','created_at' => '2021-05-13 00:59:54','updated_at' => '2021-05-13 00:59:54','deleted_at' => NULL),
   array('id' => '202','code' => '6.300.02','name' => 'Biaya Penyusutan Kendaraan','parent_id' => '200','status' => '1','created_at' => '2021-05-13 01:00:57','updated_at' => '2021-05-13 01:00:57','deleted_at' => NULL),
   array('id' => '203','code' => '6.300.03','name' => 'Biaya Penyusutan Peralatan','parent_id' => '200','status' => '1','created_at' => '2021-05-13 01:01:57','updated_at' => '2021-05-13 01:01:57','deleted_at' => NULL),
@@ -924,14 +991,15 @@ $coas = array(
   array('id' => '211','code' => '7.200.01','name' => 'Biaya Bunga Pinjaman Lainnya','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:14:40','updated_at' => '2021-05-13 01:14:40','deleted_at' => NULL),
   array('id' => '212','code' => '7.200.02','name' => 'Biaya Adm Bank & Buku Cek/Giro','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:15:13','updated_at' => '2021-05-13 01:15:13','deleted_at' => NULL),
   array('id' => '213','code' => '7.200.03','name' => 'Pajak Jasa Giro','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:15:46','updated_at' => '2021-05-13 01:15:46','deleted_at' => NULL),
-  array('id' => '214','code' => '7.200.99','name' => 'Beban Lain-Lain','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:16:21','updated_at' => '2021-05-13 01:16:21','deleted_at' => NULL)
+  array('id' => '214','code' => '7.200.99','name' => 'Beban Lain-Lain','parent_id' => '210','status' => '1','created_at' => '2021-05-13 01:16:21','updated_at' => '2021-05-13 01:16:21','deleted_at' => NULL),
+  array('id' => '215','code' => '1.000.03.03.03','name' => 'Bank BCA Non Pajak - Kas Sby (4688.559.888)','parent_id' => '15','status' => '1','created_at' => '2021-05-17 10:23:03','updated_at' => '2021-05-17 10:23:03','deleted_at' => NULL)
 );
 
-/* `tjs`.`cogs` */
+/* `smartmar_main`.`cogs` */
 $cogs = array(
 );
 
-/* `tjs`.`colors` */
+/* `smartmar_main`.`colors` */
 $colors = array(
   array('id' => '1','code' => 'IVY','name' => 'Ivory','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MWT','name' => 'Medium White','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -966,7 +1034,7 @@ $colors = array(
   array('id' => '31','code' => 'VIO','name' => 'Violet','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`companies` */
+/* `smartmar_main`.`companies` */
 $companies = array(
   array('id' => '1','code' => 'MKJRTH','name' => 'MKJ RETAIL HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'PTAHIG','name' => 'PTA HIGH','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -979,7 +1047,7 @@ $companies = array(
   array('id' => '9','code' => 'OWNER','name' => 'OWNER','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`countries` */
+/* `smartmar_main`.`countries` */
 $countries = array(
   array('id' => '1','code' => 'AW','name' => 'Aruba','phone_code' => '297','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'AF','name' => 'Afghanistan','phone_code' => '93','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1232,7 +1300,7 @@ $countries = array(
   array('id' => '249','code' => 'ZW','name' => 'Zimbabwe','phone_code' => '263','status' => '2','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `tjs`.`currencies` */
+/* `smartmar_main`.`currencies` */
 $currencies = array(
   array('id' => '1','code' => 'USD','name' => 'Dolar Amerika','symbol' => '$','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
   array('id' => '2','code' => 'EUR','name' => 'Euro','symbol' => '€','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL),
@@ -1241,11 +1309,11 @@ $currencies = array(
   array('id' => '5','code' => 'IDR','name' => 'Indonesia','symbol' => 'Rp','status' => '1','created_at' => '2021-05-10 09:38:10','updated_at' => '2021-05-10 09:38:10','deleted_at' => NULL)
 );
 
-/* `tjs`.`currency_prices` */
+/* `smartmar_main`.`currency_prices` */
 $currency_prices = array(
 );
 
-/* `tjs`.`currency_rates` */
+/* `smartmar_main`.`currency_rates` */
 $currency_rates = array(
   array('id' => '1','currency_id' => '1','company_id' => '3','conversion' => '15550','created_at' => '2020-03-23 11:08:39','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
   array('id' => '2','currency_id' => '1','company_id' => '3','conversion' => '15000','created_at' => '2020-03-23 11:09:59','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL),
@@ -1262,17 +1330,17 @@ $currency_rates = array(
   array('id' => '13','currency_id' => '1','company_id' => '6','conversion' => '16000','created_at' => '2020-05-29 14:13:10','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`customers` */
+/* `smartmar_main`.`customers` */
 $customers = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$2hdj1.TA83P.0sPk0WjztO2.cG4yxCAWZZf9L.aW2iLtKjc7NqsH2','verification' => '2021-05-13 01:35:29','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29')
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','phone' => '088999157717','password' => '$2y$10$RHQ6koNiUJEN8oo4Diecq.J0D96CDCT1ubk4IrFt/WSGAUmhAr9Xe','verification' => '2021-05-14 15:08:55','created_at' => '2021-05-14 15:08:55','updated_at' => '2021-05-14 15:08:55')
 );
 
-/* `tjs`.`divisions` */
+/* `smartmar_main`.`divisions` */
 $divisions = array(
   array('id' => '1','code' => 'KM','name' => 'Karya Modern','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`emkls` */
+/* `smartmar_main`.`emkls` */
 $emkls = array(
   array('id' => '1','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '1','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','import_id' => '2','country_id' => '105','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1284,15 +1352,15 @@ $emkls = array(
   array('id' => '8','company_id' => '3','import_id' => '2','country_id' => '44','city_id' => '264','container' => '2','cost' => '10000000','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`emkl_rates` */
+/* `smartmar_main`.`emkl_rates` */
 $emkl_rates = array(
 );
 
-/* `tjs`.`failed_jobs` */
+/* `smartmar_main`.`failed_jobs` */
 $failed_jobs = array(
 );
 
-/* `tjs`.`freights` */
+/* `smartmar_main`.`freights` */
 $freights = array(
   array('id' => '1','country_id' => '44','city_id' => '264','container' => '1','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','country_id' => '105','city_id' => '264','container' => '1','shipping' => '1','cost' => '300','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1300,13 +1368,13 @@ $freights = array(
   array('id' => '4','country_id' => '105','city_id' => '264','container' => '2','shipping' => '1','cost' => '400','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`grades` */
+/* `smartmar_main`.`grades` */
 $grades = array(
   array('id' => '1','code' => 'KW1','name' => 'Kw1','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'KW2','name' => 'Kw2','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`hs_codes` */
+/* `smartmar_main`.`hs_codes` */
 $hs_codes = array(
   array('id' => '1','code' => '6907.21.93','name' => 'Glazed','alias' => 'Water Absorption Below 0.5%(persen)','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '6907.22.93','name' => 'Glazed','alias' => 'Water Absorption 0.5%-10%','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1315,18 +1383,18 @@ $hs_codes = array(
   array('id' => '5','code' => '6907.41.92','name' => 'Unglazed','alias' => 'BULLNOSE/STEPNOSING/LIST PLAINT','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`imports` */
+/* `smartmar_main`.`imports` */
 $imports = array(
   array('id' => '1','code' => 'HYBRID','name' => 'HYBRID','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','code' => 'MANUAL','name' => 'MANUAL','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '3','code' => 'PACKAGE','name' => 'PACKAGE','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`jobs` */
+/* `smartmar_main`.`jobs` */
 $jobs = array(
 );
 
-/* `tjs`.`job_descs` */
+/* `smartmar_main`.`job_descs` */
 $job_descs = array(
   array('id' => '1','position' => '1','job' => 'Mengelola perusahaan agar lebih maju','branch' => '1','created_at' => '2021-05-13 01:03:14','updated_at' => '2021-05-13 01:03:18'),
   array('id' => '2','position' => '2','job' => '<ol style="margin-bottom: 0cm; margin-top: 0px;">
@@ -1432,11 +1500,11 @@ $job_descs = array(
   array('id' => '13','position' => '13','job' => '-','branch' => '1','created_at' => '2021-05-13 01:20:56','updated_at' => '2021-05-13 01:20:56')
 );
 
-/* `tjs`.`journals` */
+/* `smartmar_main`.`journals` */
 $journals = array(
 );
 
-/* `tjs`.`marketing_structures` */
+/* `smartmar_main`.`marketing_structures` */
 $marketing_structures = array(
   array('id' => '1','company_id' => '2','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '0','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '5','interest_in_payment' => '3','nett_profit' => '4','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
   array('id' => '2','company_id' => '6','rental_cost' => '0','travel_sales_cost' => '0','marketing_cost' => '1','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '2','interest_in_payment' => '0','nett_profit' => '2','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL),
@@ -1444,7 +1512,7 @@ $marketing_structures = array(
   array('id' => '4','company_id' => '8','rental_cost' => '5','travel_sales_cost' => '0','marketing_cost' => '4','on_site_cost' => '0','storage_cost' => '0','fixed_cost' => '4','interest_in_payment' => '0','nett_profit' => '5','saving' => '2','sales_commission' => '1','middlemant_commission' => '0','project_commission' => '0','created_at' => '2021-05-10 09:38:17','updated_at' => '2021-05-10 09:38:17','deleted_at' => NULL)
 );
 
-/* `tjs`.`migrations` */
+/* `smartmar_main`.`migrations` */
 $migrations = array(
   array('id' => '1','migration' => '2016_06_01_000001_create_oauth_auth_codes_table','batch' => '1'),
   array('id' => '2','migration' => '2016_06_01_000002_create_oauth_access_tokens_table','batch' => '1'),
@@ -1504,46 +1572,46 @@ $migrations = array(
   array('id' => '56','migration' => '2021_05_12_124145_create_journals_table','batch' => '1'),
   array('id' => '57','migration' => '2021_05_12_183519_create_cash_banks_table','batch' => '1'),
   array('id' => '58','migration' => '2021_05_12_235723_create_job_descs_table','batch' => '1'),
-  array('id' => '59','migration' => '2021_05_14_142551_create_budgetings_table','batch' => '2')
+  array('id' => '59','migration' => '2021_05_14_142551_create_budgetings_table','batch' => '1')
 );
 
-/* `tjs`.`oauth_access_tokens` */
+/* `smartmar_main`.`oauth_access_tokens` */
 $oauth_access_tokens = array(
 );
 
-/* `tjs`.`oauth_auth_codes` */
+/* `smartmar_main`.`oauth_auth_codes` */
 $oauth_auth_codes = array(
 );
 
-/* `tjs`.`oauth_clients` */
+/* `smartmar_main`.`oauth_clients` */
 $oauth_clients = array(
 );
 
-/* `tjs`.`oauth_personal_access_clients` */
+/* `smartmar_main`.`oauth_personal_access_clients` */
 $oauth_personal_access_clients = array(
 );
 
-/* `tjs`.`oauth_refresh_tokens` */
+/* `smartmar_main`.`oauth_refresh_tokens` */
 $oauth_refresh_tokens = array(
 );
 
-/* `tjs`.`orders` */
+/* `smartmar_main`.`orders` */
 $orders = array(
 );
 
-/* `tjs`.`order_details` */
+/* `smartmar_main`.`order_details` */
 $order_details = array(
 );
 
-/* `tjs`.`order_invoices` */
+/* `smartmar_main`.`order_invoices` */
 $order_invoices = array(
 );
 
-/* `tjs`.`order_invoice_details` */
+/* `smartmar_main`.`order_invoice_details` */
 $order_invoice_details = array(
 );
 
-/* `tjs`.`patterns` */
+/* `smartmar_main`.`patterns` */
 $patterns = array(
   array('id' => '1','code' => 'PLN','name' => 'Plain','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'MRB','name' => 'Marble','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -1584,7 +1652,7 @@ $patterns = array(
   array('id' => '37','code' => 'SAN','name' => 'Sand','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`pricing_policies` */
+/* `smartmar_main`.`pricing_policies` */
 $pricing_policies = array(
   array('id' => '1','product_id' => '1','showroom_cost' => '2298','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2298','nett_profit' => '5746','saving' => '1149','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '108026','project_price' => '120000','price_list' => '300000','store_price_list' => '280000','discount_retail_sales' => '196000','discount_retail_spv' => '168000','discount_retail_manager' => '140000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
   array('id' => '2','product_id' => '3','showroom_cost' => '2668','sales_travel_cost' => '0','marketing_cost' => '0','interest' => '0','sales_commission' => '0','fixed_cost' => '2668','nett_profit' => '6671','saving' => '1334','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '125414','project_price' => '160000','price_list' => '400000','store_price_list' => '300000','discount_retail_sales' => '210000','discount_retail_spv' => '180000','discount_retail_manager' => '150000','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL),
@@ -3362,7 +3430,7 @@ $pricing_policies = array(
   array('id' => '1774','product_id' => '2812','showroom_cost' => '0','sales_travel_cost' => '265','marketing_cost' => '0','interest' => '265','sales_commission' => '133','fixed_cost' => '636','nett_profit' => '530','saving' => '265','middlemant' => '0','project' => '0','on_site_cost' => '0','storage_cost' => '0','bottom_price' => '45','project_price' => '72500','price_list' => '77500','store_price_list' => '76000','discount_retail_sales' => '75500','discount_retail_spv' => '75000','discount_retail_manager' => '74000','created_at' => '2021-05-10 09:38:16','updated_at' => '2021-05-10 09:38:16','deleted_at' => NULL)
 );
 
-/* `tjs`.`products` */
+/* `smartmar_main`.`products` */
 $products = array(
   array('id' => '1','type_id' => '1','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '2','type_id' => '2','company_id' => '6','hs_code_id' => '4','brand_id' => '12','country_id' => '44','supplier_id' => '8','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '1000','container_max_stock' => '1000','description' => '<p>-</p>','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
@@ -3432,26 +3500,26 @@ $products = array(
   array('id' => '66','type_id' => '62','company_id' => '3','hs_code_id' => '1','brand_id' => '12','country_id' => '44','supplier_id' => '47','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '915','container_max_stock' => '915','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '67','type_id' => '63','company_id' => '3','hs_code_id' => '1','brand_id' => '12','country_id' => '44','supplier_id' => '47','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '915','container_max_stock' => '915','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '68','type_id' => '64','company_id' => '3','hs_code_id' => '1','brand_id' => '12','country_id' => '44','supplier_id' => '47','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '915','container_max_stock' => '915','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '69','type_id' => '65','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '70','type_id' => '66','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '71','type_id' => '67','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '72','type_id' => '68','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '73','type_id' => '69','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '74','type_id' => '70','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '75','type_id' => '71','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '76','type_id' => '72','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '77','type_id' => '73','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '78','type_id' => '74','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '79','type_id' => '75','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '80','type_id' => '76','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '81','type_id' => '77','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '82','type_id' => '78','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '2','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '83','type_id' => '79','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '2','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '84','type_id' => '80','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '2','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '85','type_id' => '81','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '2','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '86','type_id' => '82','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '2','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '87','type_id' => '83','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '2','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
-  array('id' => '88','type_id' => '84','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '38','carton_pcs' => '2','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
+  array('id' => '69','type_id' => '65','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:27:25','deleted_at' => NULL),
+  array('id' => '70','type_id' => '66','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:27:33','deleted_at' => NULL),
+  array('id' => '71','type_id' => '67','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:27:39','deleted_at' => NULL),
+  array('id' => '72','type_id' => '68','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:27:46','deleted_at' => NULL),
+  array('id' => '73','type_id' => '69','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:27:52','deleted_at' => NULL),
+  array('id' => '74','type_id' => '70','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:28:01','deleted_at' => NULL),
+  array('id' => '75','type_id' => '71','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:29:07','deleted_at' => NULL),
+  array('id' => '76','type_id' => '72','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:31:32','deleted_at' => NULL),
+  array('id' => '77','type_id' => '73','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:31:43','deleted_at' => NULL),
+  array('id' => '78','type_id' => '74','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '0','container_max_stock' => '0','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:31:50','deleted_at' => NULL),
+  array('id' => '79','type_id' => '75','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:21','deleted_at' => NULL),
+  array('id' => '80','type_id' => '76','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:28','deleted_at' => NULL),
+  array('id' => '81','type_id' => '77','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:37','deleted_at' => NULL),
+  array('id' => '82','type_id' => '78','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '40','carton_pcs' => '4','container_standart' => '1','container_stock' => '850','container_max_stock' => '850','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:43','deleted_at' => NULL),
+  array('id' => '83','type_id' => '79','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '1','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:49','deleted_at' => NULL),
+  array('id' => '84','type_id' => '80','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '1','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:35:57','deleted_at' => NULL),
+  array('id' => '85','type_id' => '81','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '1','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:36:05','deleted_at' => NULL),
+  array('id' => '86','type_id' => '82','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '1','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:36:12','deleted_at' => NULL),
+  array('id' => '87','type_id' => '83','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '24','carton_pcs' => '2','container_standart' => '1','container_stock' => '612','container_max_stock' => '612','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:36:19','deleted_at' => NULL),
+  array('id' => '88','type_id' => '84','company_id' => '2','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '38','carton_pcs' => '2','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-17 16:36:27','deleted_at' => NULL),
   array('id' => '89','type_id' => '85','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '38','carton_pcs' => '2','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '90','type_id' => '86','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '38','carton_pcs' => '2','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
   array('id' => '91','type_id' => '87','company_id' => '3','hs_code_id' => '1','brand_id' => '2','country_id' => '44','supplier_id' => '16','grade_id' => '1','carton_pallet' => '38','carton_pcs' => '2','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL),
@@ -3810,38 +3878,38 @@ $products = array(
   array('id' => '444','type_id' => '300','company_id' => '3','hs_code_id' => '4','brand_id' => '19','country_id' => '103','supplier_id' => '1','grade_id' => '1','carton_pallet' => '12','carton_pcs' => '1','container_standart' => '4','container_stock' => '100','container_max_stock' => '100','description' => '-','status' => '2','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
   array('id' => '445','type_id' => '301','company_id' => '3','hs_code_id' => '4','brand_id' => '19','country_id' => '103','supplier_id' => '1','grade_id' => '1','carton_pallet' => '12','carton_pcs' => '1','container_standart' => '4','container_stock' => '100','container_max_stock' => '100','description' => '-','status' => '2','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
   array('id' => '446','type_id' => '302','company_id' => '3','hs_code_id' => '4','brand_id' => '19','country_id' => '103','supplier_id' => '1','grade_id' => '1','carton_pallet' => '12','carton_pcs' => '1','container_standart' => '4','container_stock' => '100','container_max_stock' => '100','description' => '-','status' => '2','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '447','type_id' => '1074','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '448','type_id' => '1075','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '449','type_id' => '1076','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '450','type_id' => '1077','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '451','type_id' => '1078','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '452','type_id' => '1079','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '453','type_id' => '1080','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '454','type_id' => '1081','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '455','type_id' => '1082','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '456','type_id' => '1083','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '457','type_id' => '1084','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '458','type_id' => '1085','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '459','type_id' => '1086','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '460','type_id' => '1087','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '461','type_id' => '1088','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '462','type_id' => '1089','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '463','type_id' => '1090','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '464','type_id' => '1091','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '465','type_id' => '1092','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '466','type_id' => '1093','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '467','type_id' => '1094','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '468','type_id' => '1095','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '469','type_id' => '1096','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '470','type_id' => '1097','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '471','type_id' => '1098','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '472','type_id' => '1099','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '473','type_id' => '1100','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '474','type_id' => '1101','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '475','type_id' => '1102','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '476','type_id' => '1103','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '477','type_id' => '1104','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
-  array('id' => '478','type_id' => '1105','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '2','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
+  array('id' => '447','type_id' => '1074','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:46:36','deleted_at' => NULL),
+  array('id' => '448','type_id' => '1075','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:46:49','deleted_at' => NULL),
+  array('id' => '449','type_id' => '1076','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:46:57','deleted_at' => NULL),
+  array('id' => '450','type_id' => '1077','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:47:02','deleted_at' => NULL),
+  array('id' => '451','type_id' => '1078','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:47:44','deleted_at' => NULL),
+  array('id' => '452','type_id' => '1079','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:48:09','deleted_at' => NULL),
+  array('id' => '453','type_id' => '1080','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:48:19','deleted_at' => NULL),
+  array('id' => '454','type_id' => '1081','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:48:27','deleted_at' => NULL),
+  array('id' => '455','type_id' => '1082','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:48:50','deleted_at' => NULL),
+  array('id' => '456','type_id' => '1083','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:00','deleted_at' => NULL),
+  array('id' => '457','type_id' => '1084','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:10','deleted_at' => NULL),
+  array('id' => '458','type_id' => '1085','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:16','deleted_at' => NULL),
+  array('id' => '459','type_id' => '1086','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:24','deleted_at' => NULL),
+  array('id' => '460','type_id' => '1087','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:30','deleted_at' => NULL),
+  array('id' => '461','type_id' => '1088','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:35','deleted_at' => NULL),
+  array('id' => '462','type_id' => '1089','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:45','deleted_at' => NULL),
+  array('id' => '463','type_id' => '1090','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:49:51','deleted_at' => NULL),
+  array('id' => '464','type_id' => '1091','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:50:12','deleted_at' => NULL),
+  array('id' => '465','type_id' => '1092','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:50:27','deleted_at' => NULL),
+  array('id' => '466','type_id' => '1093','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:50:32','deleted_at' => NULL),
+  array('id' => '467','type_id' => '1094','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:50:42','deleted_at' => NULL),
+  array('id' => '468','type_id' => '1095','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:50:53','deleted_at' => NULL),
+  array('id' => '469','type_id' => '1096','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:03','deleted_at' => NULL),
+  array('id' => '470','type_id' => '1097','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:09','deleted_at' => NULL),
+  array('id' => '471','type_id' => '1098','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:16','deleted_at' => NULL),
+  array('id' => '472','type_id' => '1099','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:29','deleted_at' => NULL),
+  array('id' => '473','type_id' => '1100','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:35','deleted_at' => NULL),
+  array('id' => '474','type_id' => '1101','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:40','deleted_at' => NULL),
+  array('id' => '475','type_id' => '1102','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:47','deleted_at' => NULL),
+  array('id' => '476','type_id' => '1103','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:51:53','deleted_at' => NULL),
+  array('id' => '477','type_id' => '1104','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:52:06','deleted_at' => NULL),
+  array('id' => '478','type_id' => '1105','company_id' => '3','hs_code_id' => '1','brand_id' => '24','country_id' => '105','supplier_id' => '85','grade_id' => '1','carton_pallet' => '30','carton_pcs' => '3','container_standart' => '1','container_stock' => '600','container_max_stock' => '600','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-17 14:52:12','deleted_at' => NULL),
   array('id' => '479','type_id' => '1106','company_id' => '3','hs_code_id' => '4','brand_id' => '2','country_id' => '44','supplier_id' => '69','grade_id' => '1','carton_pallet' => '32','carton_pcs' => '3','container_standart' => '2','container_stock' => '530','container_max_stock' => '530','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
   array('id' => '480','type_id' => '1107','company_id' => '3','hs_code_id' => '4','brand_id' => '2','country_id' => '44','supplier_id' => '52','grade_id' => '1','carton_pallet' => '32','carton_pcs' => '3','container_standart' => '2','container_stock' => '590','container_max_stock' => '590','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
   array('id' => '481','type_id' => '1108','company_id' => '3','hs_code_id' => '4','brand_id' => '2','country_id' => '44','supplier_id' => '1','grade_id' => '1','carton_pallet' => '32','carton_pcs' => '3','container_standart' => '2','container_stock' => '580','container_max_stock' => '580','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:14','updated_at' => '2021-05-10 09:38:14','deleted_at' => NULL),
@@ -6196,60 +6264,58 @@ $products = array(
   array('id' => '2830','type_id' => '1065','company_id' => '3','hs_code_id' => '4','brand_id' => '17','country_id' => '103','supplier_id' => '92','grade_id' => '2','carton_pallet' => '0','carton_pcs' => '2','container_standart' => '4','container_stock' => '1','container_max_stock' => '1','description' => '-','status' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-10 09:38:15','deleted_at' => NULL)
 );
 
-/* `tjs`.`product_shadings` */
+/* `smartmar_main`.`product_shadings` */
 $product_shadings = array(
-  array('id' => '1','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
-  array('id' => '2','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
-  array('id' => '3','product_id' => '13','warehouse_code' => '1G27','stock_code' => 'KMGIJ-B66-COLBY FOREST BLACK-11-03','code' => '3-Nov','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
-  array('id' => '4','product_id' => '16','warehouse_code' => '1G27','stock_code' => 'KMGK.-605T-17','code' => '17','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:03'),
-  array('id' => '5','product_id' => '16','warehouse_code' => '1G27','stock_code' => 'KMGKA-605T-602','code' => '602','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:04'),
-  array('id' => '6','product_id' => '18','warehouse_code' => '1G28','stock_code' => 'KMGKA-6B6039-L42','code' => 'L42','qty' => '2','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:04'),
-  array('id' => '7','product_id' => '18','warehouse_code' => '1G27','stock_code' => 'KMGKA-6B6039-L88','code' => 'L88','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:04'),
-  array('id' => '8','product_id' => '25','warehouse_code' => '1G27','stock_code' => 'KMGKA-6006P-F2','code' => 'F2','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:05'),
-  array('id' => '9','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGK.-6607-1','code' => '1','qty' => '9','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:05'),
-  array('id' => '10','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGK.-6607-24','code' => '24','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:05'),
-  array('id' => '11','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGKA-6607-A45','code' => 'A45','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:05'),
-  array('id' => '12','product_id' => '29','warehouse_code' => '1G28','stock_code' => 'KMGLG-PY699-T3','code' => 'T3','qty' => '6','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '13','product_id' => '37','warehouse_code' => '1G27','stock_code' => 'KMGKA-J6W03-11','code' => '11','qty' => '7','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '14','product_id' => '61','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '15','product_id' => '61','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '16','product_id' => '79','warehouse_code' => '1G28','stock_code' => 'KMBFL-6F1-284616','code' => '284616','qty' => '30','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '17','product_id' => '87','warehouse_code' => '1G28','stock_code' => 'KMBFL-6FM2-283815','code' => '283815','qty' => '4','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:06'),
-  array('id' => '18','product_id' => '96','warehouse_code' => '1G28','stock_code' => 'KMBFL-6E2-281717','code' => '281717','qty' => '8','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '19','product_id' => '97','warehouse_code' => '1G28','stock_code' => 'KMBFL-6N1-285216','code' => '285216','qty' => '16','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '20','product_id' => '123','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C1-284816','code' => '284816','qty' => '112','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '21','product_id' => '124','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C2-284816','code' => '284816','qty' => '10','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '22','product_id' => '125','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C3-324916','code' => '324916','qty' => '77','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '23','product_id' => '129','warehouse_code' => '1G28','stock_code' => 'KMBFL-6L1-322216','code' => '322216','qty' => '78','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '24','product_id' => '138','warehouse_code' => '1G28','stock_code' => 'KMBFL-6Y1-322317','code' => '322317','qty' => '115','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:07'),
-  array('id' => '25','product_id' => '140','warehouse_code' => '1G28','stock_code' => 'KMBFL-6YM1-283716','code' => '283716','qty' => '32','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:08'),
-  array('id' => '26','product_id' => '143','warehouse_code' => '1G28','stock_code' => 'KMBFL-6M2-324716','code' => '324716','qty' => '14','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:08'),
-  array('id' => '27','product_id' => '1','warehouse_code' => '1G2','stock_code' => '101.00004','code' => '200','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-11 17:00:08')
+  array('id' => '1','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:19'),
+  array('id' => '2','product_id' => '10','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:20'),
+  array('id' => '3','product_id' => '13','warehouse_code' => '1G27','stock_code' => 'KMGIJ-B66-COLBY FOREST BLACK-11-03','code' => '3-Nov','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:20'),
+  array('id' => '4','product_id' => '16','warehouse_code' => '1G27','stock_code' => 'KMGK.-605T-17','code' => '17','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:20'),
+  array('id' => '5','product_id' => '16','warehouse_code' => '1G27','stock_code' => 'KMGKA-605T-602','code' => '602','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:21'),
+  array('id' => '6','product_id' => '18','warehouse_code' => '1G28','stock_code' => 'KMGKA-6B6039-L42','code' => 'L42','qty' => '2','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:21'),
+  array('id' => '7','product_id' => '18','warehouse_code' => '1G27','stock_code' => 'KMGKA-6B6039-L88','code' => 'L88','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:21'),
+  array('id' => '8','product_id' => '25','warehouse_code' => '1G27','stock_code' => 'KMGKA-6006P-F2','code' => 'F2','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:21'),
+  array('id' => '9','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGK.-6607-1','code' => '1','qty' => '9','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:22'),
+  array('id' => '10','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGK.-6607-24','code' => '24','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:22'),
+  array('id' => '11','product_id' => '27','warehouse_code' => '1G27','stock_code' => 'KMGKA-6607-A45','code' => 'A45','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:22'),
+  array('id' => '12','product_id' => '29','warehouse_code' => '1G28','stock_code' => 'KMGLG-PY699-T3','code' => 'T3','qty' => '6','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:23'),
+  array('id' => '13','product_id' => '37','warehouse_code' => '1G27','stock_code' => 'KMGKA-J6W03-11','code' => '11','qty' => '7','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:23'),
+  array('id' => '14','product_id' => '61','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-1','code' => '1','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:23'),
+  array('id' => '15','product_id' => '61','warehouse_code' => '1G27','stock_code' => 'KMGIJ-009-4','code' => '4','qty' => '1','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:23'),
+  array('id' => '18','product_id' => '96','warehouse_code' => '1G28','stock_code' => 'KMBFL-6E2-281717','code' => '281717','qty' => '8','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:24'),
+  array('id' => '19','product_id' => '97','warehouse_code' => '1G28','stock_code' => 'KMBFL-6N1-285216','code' => '285216','qty' => '16','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:24'),
+  array('id' => '20','product_id' => '123','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C1-284816','code' => '284816','qty' => '112','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:24'),
+  array('id' => '21','product_id' => '124','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C2-284816','code' => '284816','qty' => '10','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:24'),
+  array('id' => '22','product_id' => '125','warehouse_code' => '1G28','stock_code' => 'KMBFL-6C3-324916','code' => '324916','qty' => '77','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:25'),
+  array('id' => '23','product_id' => '129','warehouse_code' => '1G28','stock_code' => 'KMBFL-6L1-322216','code' => '322216','qty' => '78','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:25'),
+  array('id' => '24','product_id' => '138','warehouse_code' => '1G28','stock_code' => 'KMBFL-6Y1-322317','code' => '322317','qty' => '115','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:25'),
+  array('id' => '25','product_id' => '140','warehouse_code' => '1G28','stock_code' => 'KMBFL-6YM1-283716','code' => '283716','qty' => '32','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:26'),
+  array('id' => '26','product_id' => '143','warehouse_code' => '1G28','stock_code' => 'KMBFL-6M2-324716','code' => '324716','qty' => '14','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:26'),
+  array('id' => '27','product_id' => '1','warehouse_code' => '1G2','stock_code' => '101.00004','code' => '200','qty' => '3','created_at' => '2021-05-10 09:38:15','updated_at' => '2021-05-17 16:34:26')
 );
 
-/* `tjs`.`projects` */
+/* `smartmar_main`.`projects` */
 $projects = array(
 );
 
-/* `tjs`.`project_consultant_meetings` */
+/* `smartmar_main`.`project_consultant_meetings` */
 $project_consultant_meetings = array(
 );
 
-/* `tjs`.`project_products` */
+/* `smartmar_main`.`project_products` */
 $project_products = array(
 );
 
-/* `tjs`.`project_samples` */
+/* `smartmar_main`.`project_samples` */
 $project_samples = array(
 );
 
-/* `tjs`.`specifications` */
+/* `smartmar_main`.`specifications` */
 $specifications = array(
   array('id' => '1','code' => '01','name' => 'Volume','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => '02','name' => 'Tonnage','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`suppliers` */
+/* `smartmar_main`.`suppliers` */
 $suppliers = array(
   array('id' => '1','country_id' => '44','code' => 'SUPP-0001','name' => 'AQIAO','email' => NULL,'phone' => NULL,'address' => '#710China Ceramics theater Central area.C.C.I.H Jihua West Road 68 Chancheng district Foshan City GD.','pic' => 'Kate','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','country_id' => '44','code' => 'SUPP-0002','name' => 'BINLY','email' => NULL,'phone' => NULL,'address' => 'Fengtang Industrial DistrictFenngtang Town Chaozhou City Guangdong Province P.R.China 521000','pic' => 'sally','limit_credit' => '100000000','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -6348,7 +6414,7 @@ TA-WANKANER DIST-MORBI GUJARAT - INDIA.
   array('id' => '92','country_id' => '103','code' => 'SUPP-0092','name' => 'IKAD','email' => NULL,'phone' => NULL,'address' => 'Jl Raya Pasar Kemis KM 5.5, Desa Kutajaya','pic' => 'Nanik','limit_credit' => '0','term_of_payment' => '30','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL)
 );
 
-/* `tjs`.`supplier_currencies` */
+/* `smartmar_main`.`supplier_currencies` */
 $supplier_currencies = array(
   array('id' => '1','supplier_id' => '1','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
   array('id' => '2','supplier_id' => '1','currency_id' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12'),
@@ -6537,7 +6603,7 @@ $supplier_currencies = array(
   array('id' => '185','supplier_id' => '92','currency_id' => '5','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12')
 );
 
-/* `tjs`.`surfaces` */
+/* `smartmar_main`.`surfaces` */
 $surfaces = array(
   array('id' => '1','code' => 'MAT','name' => 'Matt','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SGF','name' => 'Sugar ','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -6556,11 +6622,11 @@ $surfaces = array(
   array('id' => '15','code' => '3D','name' => '3d','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`tokens` */
+/* `smartmar_main`.`tokens` */
 $tokens = array(
 );
 
-/* `tjs`.`types` */
+/* `smartmar_main`.`types` */
 $types = array(
   array('id' => '1','category_id' => '63','division_id' => '1','surface_id' => '3','color_id' => '2','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/gJ4efz2iaSm9AMTx8X5kKGrVwquwEJRwBXQ097MT.jpg','code' => '6100D','material' => '1','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
   array('id' => '2','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '1','pattern_id' => '1','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/yf5qPNRtNQaZ2n26o5SnKk6ggmn1hw7cZStSafB6.jpg','code' => '6S001T','material' => '3','faces' => '1','length' => '60','width' => '60','height' => NULL,'weight' => '28','thickness' => '0.85','conversion' => '1','stockable' => '1','min_stock' => '500','max_stock' => '1000','small_stock' => '9','status' => '1','created_at' => '2021-05-10 09:38:12','updated_at' => '2021-05-10 09:38:12','deleted_at' => NULL),
@@ -7776,7 +7842,7 @@ $types = array(
   array('id' => '1212','category_id' => '62','division_id' => '1','surface_id' => '3','color_id' => '5','pattern_id' => '29','specification_id' => '2','buy_unit_id' => '1','stock_unit_id' => '4','selling_unit_id' => '1','image' => 'public/product/ygCoUWjww4Xdiyk1A8Pc3fglDP2bdX4KsciQ1YTi.jpg','code' => '8709','material' => '2','faces' => '1','length' => '80','width' => '80','height' => '0','weight' => '48','thickness' => '0','conversion' => '1','stockable' => '0','min_stock' => '0','max_stock' => '0','small_stock' => '0','status' => '1','created_at' => '2021-05-10 09:38:13','updated_at' => '2021-05-10 09:38:13','deleted_at' => NULL)
 );
 
-/* `tjs`.`units` */
+/* `smartmar_main`.`units` */
 $units = array(
   array('id' => '1','code' => 'SQM','name' => 'Sqm','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
   array('id' => '2','code' => 'SET','name' => 'Set','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL),
@@ -7784,22 +7850,84 @@ $units = array(
   array('id' => '4','code' => 'BOX','name' => 'Box','status' => '1','created_at' => '2021-05-10 09:38:11','updated_at' => '2021-05-10 09:38:11','deleted_at' => NULL)
 );
 
-/* `tjs`.`users` */
+/* `smartmar_main`.`users` */
 $users = array(
-  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$1QfIrOsO0G12PLJ.V5ckDOAfI57gWUNZmVHsMr4JKJEvXKv86HACq','branch' => '1','verification' => '2021-05-13 01:35:29','status' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29','deleted_at' => NULL),
-  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$8NBornKO1QxddQVxO5XlPOULvmH/7jdR6jrGrY161OnlqdMR4Wdku','branch' => '1','verification' => '2021-05-13 01:35:29','status' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29','deleted_at' => NULL)
+  array('id' => '1','photo' => NULL,'name' => 'Calvin Dito Pratama','email' => 'calvindito7@gmail.com','password' => '$2y$10$629LtdtueCjEExupbnzYT.QOHJ6jFG8tFMuF29AUFhfFZekndb2qS','branch' => '1','verification' => '2021-05-14 15:08:55','status' => '1','created_at' => '2021-05-14 15:08:55','updated_at' => '2021-05-14 15:08:55','deleted_at' => NULL),
+  array('id' => '2','photo' => NULL,'name' => 'SMB','email' => 'smartmarbleandbath@gmail.com','password' => '$2y$10$zU3cA/nNyK.Hn87S8hyddOQK.9NxBdPoOllp1wRt/Jpsln132qrpC','branch' => '1','verification' => '2021-05-14 15:08:55','status' => '1','created_at' => '2021-05-14 15:08:55','updated_at' => '2021-05-14 15:08:55','deleted_at' => NULL)
 );
 
-/* `tjs`.`user_roles` */
+/* `smartmar_main`.`user_roles` */
 $user_roles = array(
-  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29'),
-  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-13 01:35:29','updated_at' => '2021-05-13 01:35:29')
+  array('id' => '1','user_id' => '1','role' => '1','created_at' => '2021-05-14 15:08:55','updated_at' => '2021-05-14 15:08:55'),
+  array('id' => '2','user_id' => '2','role' => '1','created_at' => '2021-05-14 15:08:55','updated_at' => '2021-05-14 15:08:55')
 );
 
-/* `tjs`.`warehouses` */
+/* `smartmar_main`.`warehouses` */
 $warehouses = array(
+  array('id' => '1','code' => '1G24','name' => '1G DISPLAY SALE','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '2','code' => '1G60','name' => '1G PEMOTONGAN','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '3','code' => '1G23','name' => '1G SALE ','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '4','code' => '1G26','name' => '1G SHOWROOM BRAVAT','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '5','code' => '1G20','name' => '1G. ANFALAN','status' => '2','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '6','code' => '1G17','name' => '1G. RECEH PTC ','status' => '2','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '7','code' => '1G19','name' => '1G. WARINGIN','status' => '2','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '8','code' => '1G8','name' => '1G.DIRECT','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '9','code' => '1G16','name' => '1G.DISPLAY KMJ-1','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '10','code' => '1G3','name' => '1G.DISPLAY KMJ-2','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '11','code' => '1G27','name' => '1G.DISTRIBUSI','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '12','code' => '1G32','name' => '1G.GD.RECEH ','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '13','code' => '1G1','name' => '1G.INDUK','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '14','code' => '1G9','name' => '1G.PABRIK','status' => '2','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '15','code' => '1G21','name' => '1G.PAMERAN','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '16','code' => '1G13','name' => '1G.PROMOSI','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '17','code' => '1G25','name' => '1G.PROYEK','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '18','code' => '1G18','name' => '1G.PTC 1','status' => '2','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '19','code' => '1G4','name' => '1G.RECEH INDUK','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '20','code' => '1G30','name' => '1G.RECEH TOKO','status' => '1','created_at' => '2021-05-17 13:45:03','updated_at' => '2021-05-17 13:45:03'),
+  array('id' => '21','code' => '1G22','name' => '1G.RECEH WARINGIN','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '22','code' => '1G28','name' => '1G.RETAIL ','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '23','code' => '1G31','name' => '1G.RETUR','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '24','code' => '1G5','name' => '1G.RUSAK','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '25','code' => '1G33','name' => '1G.SALE TOKO','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '26','code' => '1G2','name' => '1G.TOKO 1','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '27','code' => '1G29','name' => '1G.TOKO 2','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '28','code' => '1G15','name' => '1G.TRANSIT','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '29','code' => '2G8','name' => '2G.DIRECT','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '30','code' => '1G12','name' => '2G.DISPLAY KM GALLERY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '31','code' => '2G3','name' => '2G.DISPLAY SBY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '32','code' => '1G7','name' => '2G.GALLERY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '33','code' => '2G1','name' => '2G.INDUK SBY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '34','code' => '2G2','name' => '2G.KECIL SBY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '35','code' => '2G9','name' => '2G.PROMOSI','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '36','code' => '2G12','name' => '2G.PROMOSI (PAMERAN)','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '37','code' => '1G14','name' => '2G.RECEH GALLERY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '38','code' => '2G10','name' => '2G.RECEH SBY','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '39','code' => '2G5','name' => '2G.RUSAK','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '40','code' => '2G11','name' => '2G.TRANSIT','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '41','code' => '3G7','name' => '3G.DISPLAY BALI','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '42','code' => '3G6','name' => '3G.INDUK BALI','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '43','code' => '3G4','name' => '3G.RECEH BALI','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '44','code' => '3G5','name' => '3G.RUSAK BALI','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '45','code' => '3G30','name' => '3G.TRANSIT BALI','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '46','code' => '4G7','name' => '4G DISPLAY SMB','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '47','code' => '4G1','name' => '4G.JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '48','code' => '4G4','name' => '4G.PROMOSI JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '49','code' => '4G6','name' => '4G.PROYEK JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '50','code' => '4G2','name' => '4G.RECEH JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '51','code' => '4G3','name' => '4G.RUSAK JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '52','code' => '4G5','name' => '4G.TRANSIT JAKARTA','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '53','code' => '6G4','name' => '6G.PROMOSI SEMARANG','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '54','code' => '6G2','name' => '6G.RECEH SEMARANG','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '55','code' => '6G3','name' => '6G.RUSAK SEMARANG','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '56','code' => '6G1','name' => '6G.SEMARANG','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '57','code' => '1G36','name' => 'DISPLAY KM2 Lt 1','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '58','code' => '1G37','name' => 'DISPLAY KM2 Lt 3','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '59','code' => '1G35','name' => 'DISPLAY KM2 Lt 5','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '60','code' => '1G6','name' => 'G JAKARTA','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '61','code' => 'GC','name' => 'G.Cina','status' => '2','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05'),
+  array('id' => '62','code' => 'GT','name' => 'G.Transit (China)','status' => '1','created_at' => '2021-05-17 14:00:05','updated_at' => '2021-05-17 14:00:05')
 );
 
-/* `tjs`.`wishlists` */
+/* `smartmar_main`.`wishlists` */
 $wishlists = array(
 );
