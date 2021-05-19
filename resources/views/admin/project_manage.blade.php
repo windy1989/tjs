@@ -800,11 +800,11 @@
             },
             error: function() {
                loadingClose('#step-2');
-               swal('Server Error!', 'Please contact developer', 'error');
+               swalInit.fire('Server Error!', 'Please contact developer', 'error');
             }
          });
       } else {
-         swal('Ooppsss!', 'Please select a product', 'info');
+         swalInit.fire('Ooppsss!', 'Please select a product', 'info');
       }
    }
 
@@ -833,7 +833,7 @@
          consultant_person.val(null);
          consultant_result.val(null);
       } else {
-         swal('Ooppsss!', 'Please entry all field', 'info');
+         swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
       }
    }
 
@@ -883,11 +883,11 @@
             },
             error: function() {
                loadingClose('#step-5');
-               swal('Server Error!', 'Please contact developer', 'error');
+               swalInit.fire('Server Error!', 'Please contact developer', 'error');
             }
          });
       } else {
-         swal('Ooppsss!', 'Please entry all field', 'info');
+         swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
       }
    }
 </script>

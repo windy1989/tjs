@@ -83,13 +83,13 @@
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-danger" name="status" value="2" data-fouc>
+                        <input type="radio" class="form-check-input" name="status" value="2">
                         Not Active
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
-                        <input type="radio" class="form-check-input-styled-success" name="status" value="1" checked data-fouc>
+                        <input type="radio" class="form-check-input" name="status" value="1" checked>
                         Active
                      </label>
                   </div>
@@ -130,6 +130,7 @@
 
   function reset() {
       $('#form_data').trigger('reset');
+      $('input[name="status"][value="1"]').prop('checked', true);
       $('#preview_image').attr('href', '{{ asset("website/empty.jpg") }}');
       $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
       $('#validation_alert').hide();

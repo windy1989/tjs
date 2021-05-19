@@ -374,6 +374,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
             Route::prefix('cash_bank')->group(function() {
                 Route::get('/', 'CashBankController@index');
+                Route::post('row_detail', 'CashBankController@rowDetail');
                 Route::post('datatable', 'CashBankController@datatable');
                 Route::post('create', 'CashBankController@create');
             });

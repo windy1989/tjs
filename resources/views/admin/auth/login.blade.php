@@ -167,11 +167,11 @@
             },
             error: function() {
                loadingClose('.modal-content');
-               swal('Server error!', '', 'error');
+               swalInit.fire('Server error!', '', 'error');
             }
          });
       } else {
-         swal('Please enter email!', '', 'info');
+         swalInit.fire('Please enter email!', '', 'info');
       }
    }
 </script>

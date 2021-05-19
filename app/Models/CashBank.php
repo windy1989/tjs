@@ -13,10 +13,8 @@ class CashBank extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'user_id',
-        'debit',
-        'credit',
+        'coa_id',
         'code',
-        'nominal',
         'date',
         'type',
         'description'
@@ -48,19 +46,19 @@ class CashBank extends Model {
         return $str_type . '-' . date('my') . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
     }
 
+    public function coa()
+    {
+        return $this->belongsTo('App\Models\Coa');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User'); 
     }
 
-    public function coaDebit()
+    public function cashBankDetail()
     {
-        return $this->belongsTo('App\Models\Coa', 'debit', 'id');
-    }
-
-    public function coaCredit()
-    {
-        return $this->belongsTo('App\Models\Coa', 'credit', 'id');
+        return $this->hasMany('App\Models\CashBankDetail'); 
     }
 
     public function type() 

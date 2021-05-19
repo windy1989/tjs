@@ -16,10 +16,8 @@ class CreateCashBanksTable extends Migration
         Schema::create('cash_banks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->bigInteger('debit');
-            $table->bigInteger('credit');
+            $table->bigInteger('coa_id');
             $table->string('code')->unique();
-            $table->double('nominal');
             $table->date('date');
             $table->char('type', 1);
             $table->text('description');
