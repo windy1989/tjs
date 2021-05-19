@@ -130,19 +130,29 @@
                         <table class="table table-bordered table-striped">
                            <thead class="table-secondary">
                               <tr class="text-center">
+                                 <th>Image</th>
                                  <th>Product</th>
+                                 <th>Size</th>
                                  <th>Qty</th>
-                                 <th>Target Price</th>
                                  <th>Unit</th>
+                                 <th>Target Price</th>
                               </tr>
                            </thead>
                            <tbody>
                               @foreach($project->projectProduct as $pp)
                                  <tr class="text-center">
+                                    <td class="align-middle">
+                                       @if(Storage::exists($pp->product->type->image)) 
+                                          <a href="{{ asset(Storage::url($pp->product->type->image)) }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ asset(Storage::url($pp->product->type->image)) }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
+                                       @else
+                                          <a href="{{ asset('website/empty.jpg') }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ asset('website/empty.jpg') }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
+                                       @endif
+                                    </td>
                                     <td class="align-middle">{{ $pp->product->code() }}</td>   
+                                    <td class="align-middle">{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</td>   
                                     <td class="align-middle">{{ $pp->qty }}</td>   
-                                    <td class="align-middle">{{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                     <td class="align-middle">{{ $pp->unit() }}</td> 
+                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                  </tr>
                               @endforeach
                            </tbody>
@@ -165,10 +175,11 @@
                               <table class="table table-bordered table-striped">
                                  <thead class="table-secondary">
                                     <tr class="text-center">
+                                       <th>Image</th>
                                        <th>Product</th>
-                                       <th>Qty</th>
-                                       <th>Target Price</th>
                                        <th>Size</th>
+                                       <th>Qty</th>
+                                       <th>Unit</th>
                                        <th>Delete</th>
                                     </tr>
                                  </thead>
@@ -334,13 +345,13 @@
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
                                           <td class="align-middle">{{ $pp->product->code() }}</td>   
                                           <td class="align-middle">{{ $pp->qty }}</td>   
-                                          <td class="align-middle">{{ number_format($pp->price, 0, ',', '.') }}</td>   
-                                          <td class="align-middle">{{ number_format($pp->target_price, 0, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->price, 0, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                           <td class="align-middle">
                                              @if($pp->recommended_price < 1)
                                                 <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="0" required>
                                              @else
-                                                {{ number_format($pp->recommended_price, 0, ',', '.') }}
+                                                Rp {{ number_format($pp->recommended_price, 0, ',', '.') }}
                                              @endif   
                                           </td>   
                                           <td class="align-middle">{{ $pp->unit() }}</td> 
@@ -518,9 +529,9 @@
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
                                           <td class="align-middle">{{ $pp->product->code() }}</td>   
                                           <td class="align-middle">{{ $pp->qty }}</td>    
-                                          <td class="align-middle">{{ number_format($pp->target_price, 0, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                           <td class="align-middle">
-                                             {{ number_format($pp->recommended_price, 0, ',', '.') }}
+                                             Rp {{ number_format($pp->recommended_price, 0, ',', '.') }}
                                           </td>   
                                           <td class="align-middle">
                                              @if($project->progress >= 35)
@@ -757,20 +768,17 @@
                loadingOpen('#step-2');
             },
             success: function(response) {
-               loadingClose('#step-2');
+               loadingClose('#step-2'); 
                id.val(null).trigger('change');
                $('#data_product').append(`
                   <tr class="text-center">
                      <input type="hidden" name="product_id[]" value="` + response.id + `">
                      <input type="hidden" name="product_price[]" value="` + response.price + `">
+                     <td class="align-middle">` + response.image + `</td>   
                      <td class="align-middle">` + response.code + `</td>   
+                     <td class="align-middle">` + response.size + `</td>   
                      <td class="align-middle">
                         <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
-                     </td>  
-                     <td class="align-middle">
-                        <div class="input-group">
-                           <input type="number" name="product_target_price[]" class="form-control" placeholder="0" required>
-                        </div>
                      </td>  
                      <td class="align-middle">
                         <select name="product_unit[]" class="custom-select" required>
@@ -779,6 +787,11 @@
                            <option value="3">Meter</option>   
                         </select>
                      </td>   
+                     <td class="align-middle">
+                        <div class="input-group">
+                           <input type="number" name="product_target_price[]" class="form-control" placeholder="0" required>
+                        </div>
+                     </td>  
                      <td class="align-middle">
                         <button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                      </td>

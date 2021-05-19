@@ -15,11 +15,38 @@ class CashBank extends Model {
         'user_id',
         'debit',
         'credit',
+        'code',
         'nominal',
         'date',
         'type',
         'description'
     ];
+
+    public static function generateCode($type)
+    {
+        $query = CashBank::selectRaw('RIGHT(code, 3) as code')
+            ->orderByDesc('id')
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
+            ->limit(1)
+            ->get();
+
+        if($query->count() > 0) {
+            $code = (int)$query[0]->code + 1;
+        } else {
+            $code = '001';
+        }
+
+        if($type == 1) {
+            $str_type = 'CASH';
+        } else if($type == 2) {
+            $str_type = 'BANK';
+        } else if($type == 3) {
+            $str_type = 'JOURNAL';
+        }
+
+        return $str_type . '-' . date('my') . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
+    }
 
     public function user()
     {
@@ -44,6 +71,9 @@ class CashBank extends Model {
                 break;
             case '2':
                 $type = 'Bank';
+                break;
+            case '3':
+                $type = 'Journal';
                 break;
             default:
                 $type = 'Invalid';

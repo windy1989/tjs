@@ -29,6 +29,7 @@ class CashBankController extends Controller {
         $column = [
             'id',
             'user_id',
+            'code',
             'debit',
             'credit',
             'nominal',
@@ -47,7 +48,8 @@ class CashBankController extends Controller {
         $query_data = CashBank::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->whereHas('user', function($query) use ($search) {
+                        $query->where('code', 'like', "%$search%")
+                            ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
                             ->orWhereHas('debit', function($query) use ($search) {
@@ -99,7 +101,8 @@ class CashBankController extends Controller {
         $total_filtered = CashBank::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->whereHas('user', function($query) use ($search) {
+                        $query->where('code', 'like', "%$search%")
+                            ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
                             ->orWhereHas('debit', function($query) use ($search) {
@@ -152,6 +155,7 @@ class CashBankController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->user->name,
+                    $val->code,
                     $val->coaDebit->name,
                     $val->coaCredit->name,
                     number_format($val->nominal),
@@ -204,6 +208,7 @@ class CashBankController extends Controller {
                 'user_id'     => session('bo_id'),
                 'debit'       => $request->debit,
                 'credit'      => $request->credit,
+                'code'        => CashBank::generateCode($request->type),
                 'nominal'     => $request->nominal,
                 'date'        => $request->date,
                 'type'        => $request->type,
@@ -221,7 +226,7 @@ class CashBankController extends Controller {
                     'debit'       => $query->debit,
                     'credit'      => $query->credit,
                     'nominal'     => $query->nominal,
-                    'description' => '[' . $query->type() . '] ' . $query->description
+                    'description' => $query->code
                 ]);
 
                 $response = [

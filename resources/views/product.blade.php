@@ -175,19 +175,6 @@
                         </ul>
                      </div>
                      <div class="mb-5 clearfix">
-                        <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
-                        <ul class="sidebar-filter-product">
-                           @foreach($brand as $b)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
-                                 </div>
-                              </li>
-                           @endforeach
-                        </ul>
-                     </div>
-                     <div class="mb-5 clearfix">
                         <h4 class="mb-3 text-uppercase" style="font-size:15px;">Size</h4>
                         <ul class="sidebar-filter-product">
                            @foreach($size as $s)

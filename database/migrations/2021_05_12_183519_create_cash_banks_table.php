@@ -18,6 +18,7 @@ class CreateCashBanksTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('debit');
             $table->bigInteger('credit');
+            $table->string('code')->unique();
             $table->double('nominal');
             $table->date('date');
             $table->char('type', 1);

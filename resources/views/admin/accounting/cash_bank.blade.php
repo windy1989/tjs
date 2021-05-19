@@ -102,7 +102,7 @@
             <div class="form-group text-right">
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
-                     <input type="radio" class="form-check-input-styled-success" name="filter_type" checked data-fouc>
+                     <input type="radio" class="form-check-input-styled-success" name="filter_type" value="" checked data-fouc>
                      All
                   </label>
                </div>
@@ -116,6 +116,12 @@
                   <label class="form-check-label">
                      <input type="radio" class="form-check-input-styled-success" name="filter_type" value="2" data-fouc>
                      Bank
+                  </label>
+               </div>
+               <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                     <input type="radio" class="form-check-input-styled-success" name="filter_type" value="3" data-fouc>
+                     Journal
                   </label>
                </div>
             </div>
@@ -136,6 +142,7 @@
                      <tr class="text-center">
                         <th>No</th>
                         <th>User</th>
+                        <th>Code</th>
                         <th>Debit</th>
                         <th>Credit</th>
                         <th>Nominal</th>
@@ -163,87 +170,91 @@
                <div class="alert alert-danger" id="validation_alert" style="display:none;">
                   <ul id="validation_content"></ul>
                </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Debit :<span class="text-danger">*</span></label>
-                        <select name="debit" id="debit" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($parent as $p)
-                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                          @if($sub_3->count() > 0)
-                                             @foreach($sub_3 as $s3)
-                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                             @endforeach
-                                          @else
-                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                          @endif
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
-                              @endif
-                           @endforeach
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Credit :<span class="text-danger">*</span></label>
-                        <select name="credit" id="credit" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($parent as $p)
-                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                          @if($sub_3->count() > 0)
-                                             @foreach($sub_3 as $s3)
-                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                             @endforeach
-                                          @else
-                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                          @endif
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
-                              @endif
-                           @endforeach
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Date :<sup class="text-danger">*</sup></label>
-                        <input type="date" name="date" id="date" class="form-control">
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Nominal :<sup class="text-danger">*</sup></label>
-                        <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0">
-                     </div>
-                  </div>
+               <div class="form-group">
+                  <label>Date :<sup class="text-danger">*</sup></label>
+                  <input type="date" name="date" id="date" class="form-control">
                </div>
                <div class="form-group">
                   <label>Description :<sup class="text-danger">*</sup></label>
                   <textarea name="description" id="description" style="resize:none;" class="form-control" placeholder="Enter description"></textarea>
+               </div>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Debit :</label>
+                        <select name="debit[]" id="debit" class="select2">
+                           <option value="">-- Debit --</option>
+                           @foreach($parent as $p)
+                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                          @if($sub_3->count() > 0)
+                                             @foreach($sub_3 as $s3)
+                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                             @endforeach
+                                          @else
+                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                          @endif
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
+                              @endif
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Credit :</label>
+                        <select name="credit[]" id="credit" class="select2">
+                           <option value="">-- Credit --</option>
+                           @foreach($parent as $p)
+                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                          @if($sub_3->count() > 0)
+                                             @foreach($sub_3 as $s3)
+                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
+                                             @endforeach
+                                          @else
+                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
+                                          @endif
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
+                              @endif
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label>Nominal :</label>
+                        <input type="number" name="nominal[]" id="nominal" class="form-control" placeholder="0">
+                     </div>
+                  </div>
+                  <div class="col-md-1">
+                     <div class="form-group">
+                        <label class="text-white">.</label>
+                        <button type="button" class="btn bg-success col-12" onclick="newContent()"><i class="icon-plus22"></i></button>
+                     </div>
+                  </div>
                </div>
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
@@ -256,6 +267,12 @@
                      <label class="form-check-label">
                         <input type="radio" class="form-check-input-styled-info" name="type" value="2" data-fouc>
                         Bank
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input-styled-info" name="type" value="3" data-fouc>
+                        Journal
                      </label>
                   </div>
                </div>
@@ -281,7 +298,7 @@
       $('#filter_finish_date').val(null);
       $('#filter_start_nominal').val(null);
       $('#filter_finish_nominal').val(null);
-      $('input[name="status"][value=""]').prop('checked', true);
+      $('input[name="filter_type"][value=""]').attr('checked', true);
       loadDataTable();
    }
 
@@ -340,6 +357,7 @@
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'user_id', className: 'text-center align-middle' },
+            { name: 'code', className: 'text-center align-middle' },
             { name: 'debit', className: 'text-center align-middle' },
             { name: 'credit', className: 'text-center align-middle' },
             { name: 'nominal', searchable: false, className: 'text-center align-middle' },
