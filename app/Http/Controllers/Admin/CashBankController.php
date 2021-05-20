@@ -158,13 +158,28 @@ class CashBankController extends Controller {
     public function rowDetail(Request $request)
     {
         $data   = CashBankDetail::where('cash_bank_id', $request->id)->get();
-        $string = '<ul class="mt-3">';
+        $string = '<div class="list-feed">';
 
         foreach($data as $d) {
-            $string .= '<li>' . $d->coaDebit->name . '<b>&nbsp;[Debit]</b><br>' . $d->coaCredit->name . '<b>&nbsp;[Credit]</b><br>' . number_format($d->nominal) . '</li>';
+            $string .= '
+                <div class="list-feed-item">
+                    <div>
+                        <b>[DEBIT]</b>&nbsp;&nbsp;&nbsp;
+                        ' . $d->coaDebit->name . '
+                    </div>
+                    <div>
+                        <b>[CREDIT]</b>&nbsp;&nbsp;&nbsp;
+                        ' . $d->coaCredit->name . '
+                    </div>
+                    <div>
+                        <b>[NOMINAL]</b>&nbsp;&nbsp;&nbsp;
+                        <span class="text-muted">' . number_format($d->nominal) . '</span>
+                    </div>
+                </div>
+            ';
         }
 
-        $string .= '</ul>';
+        $string .= '</div>';
 
         return response()->json($string);
     }
@@ -195,7 +210,7 @@ class CashBankController extends Controller {
         } else {
             $query = CashBank::create([
                 'user_id'     => session('bo_id'),
-                'code'        => CashBank::generateCode($request->type),
+                'code'        => CashBank::generateCode($request->type, $request->date),
                 'date'        => $request->date,
                 'type'        => $request->type,
                 'description' => $request->description
@@ -210,11 +225,13 @@ class CashBankController extends Controller {
                         'nominal'      => $request->nominal_detail[$key]
                     ]);
 
-                    Journal::create([
+                    Journal::insert([
                         'debit'       => $dd,
                         'credit'      => $request->credit_detail[$key],
                         'nominal'     => $request->nominal_detail[$key],
-                        'description' => $query->code
+                        'description' => $query->code,
+                        'created_at'  => date('Y-m-d', strtotime($query->date)) . ' ' . date('H:i:s'),
+                        'updated_at'  => date('Y-m-d H:i:s')
                     ]);
                 }
 

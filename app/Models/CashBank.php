@@ -19,7 +19,7 @@ class CashBank extends Model {
         'description'
     ];
 
-    public static function generateCode($type)
+    public static function generateCode($type, $date)
     {
         $query = CashBank::selectRaw('RIGHT(code, 3) as code')
             ->orderByDesc('id')
@@ -42,7 +42,7 @@ class CashBank extends Model {
             $str_type = 'JOURNAL';
         }
 
-        return $str_type . '-' . date('my') . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
+        return $str_type . '-' . date('my', strtotime($date)) . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
     }
 
     public function user()
