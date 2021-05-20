@@ -160,20 +160,12 @@
                                        <td>{{ $product->type->specification->name }}</td>
                                     </tr>
                                     <tr>
-                                       <td>Material</td>
-                                       <td>{{ $product->type->material() }}</td>
-                                    </tr>
-                                    <tr>
                                        <td>Length</td>
                                        <td>{{ $product->type->length }} Cm</td>
                                     </tr>
                                     <tr>
                                        <td>Width</td>
                                        <td>{{ $product->type->width }} Cm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Height</td>
-                                       <td>{{ $product->type->height }} Cm</td>
                                     </tr>
                                     <tr>
                                        <td>Weight</td>
@@ -245,26 +237,26 @@
                   <thead class="alert-info">
                      <tr class="text-center">
                         <th>Shading</th>
-                        <th>Initial Stock</th>
-                        <th>Last Stock</th>
+                        <th>Available</th>
+                        <th>Balance</th>
                      </tr>
                   </thead>
                   <tbody id="data_shading"></tbody>
                   <tfoot>
                      <tr>
-                        <th colspan="2" class="text-right">Total Request</th>
+                        <th colspan="2" class="text-right">Request Stock</th>
                         <th id="total_request_stock">0</th>
                      </tr>
                      <tr>
-                        <th colspan="2" class="text-right">Total Stock</th>
+                        <th colspan="2" class="text-right">Available Stock</th>
                         <th id="total_stock">0</th>
                      </tr>
                      <tr>
-                        <th colspan="2" class="text-right">Total Ready</th>
+                        <th colspan="2" class="text-right">Ready Stock</th>
                         <th id="total_ready_stock">0</th>
                      </tr>
                      <tr>
-                        <th colspan="2" class="text-right">Total Indent</th>
+                        <th colspan="2" class="text-right">Indent Stock</th>
                         <th id="total_indent_stock">0</th>
                      </tr>
                   </tfoot>

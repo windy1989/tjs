@@ -13,13 +13,19 @@ class CashBankDetail extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'cash_bank_id',
-        'coa_id',
+        'debit',
+        'credit',
         'nominal'
     ];
 
-    public function coa()
+    public function coaDebit()
     {
-        return $this->belongsTo('App\Models\Coa');
+        return $this->belongsTo('App\Models\Coa', 'debit', 'id');
+    }
+
+    public function coaCredit()
+    {
+        return $this->belongsTo('App\Models\Coa', 'credit', 'id');
     }
 
 }

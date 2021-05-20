@@ -13,7 +13,6 @@ class CashBank extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'user_id',
-        'coa_id',
         'code',
         'date',
         'type',
@@ -44,11 +43,6 @@ class CashBank extends Model {
         }
 
         return $str_type . '-' . date('my') . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
-    }
-
-    public function coa()
-    {
-        return $this->belongsTo('App\Models\Coa');
     }
 
     public function user()

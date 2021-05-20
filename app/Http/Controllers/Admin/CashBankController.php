@@ -31,7 +31,6 @@ class CashBankController extends Controller {
             'detail',
             'id',
             'user_id',
-            'coa_id',
             'code',
             'date',
             'description'
@@ -52,16 +51,9 @@ class CashBankController extends Controller {
                             ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
-                            ->orWhereHas('coa', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%");
-                            })
                             ->orWhereHas('description', 'like', "%$search%");
                     });
                 }     
-                
-                if($request->coa_id) {
-                    $query->where('coa_id', $request->coa_id);
-                }
                 
                 if($request->user_id) {
                     $query->where('user_id', $request->user_id);
@@ -101,16 +93,9 @@ class CashBankController extends Controller {
                             ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
-                            ->orWhereHas('coa', function($query) use ($search) {
-                                $query->where('name', 'like', "%$search%");
-                            })
                             ->orWhereHas('description', 'like', "%$search%");
                     });
                 }     
-                
-                if($request->coa_id) {
-                    $query->where('coa_id', $request->coa_id);
-                }
                 
                 if($request->user_id) {
                     $query->where('user_id', $request->user_id);
@@ -148,7 +133,6 @@ class CashBankController extends Controller {
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $val->user->name,
-                    $val->coa->name,
                     $val->code,
                     date('d F Y', strtotime($val->date)),
                     '[' . $val->type() . '] ' . $val->description
@@ -177,7 +161,7 @@ class CashBankController extends Controller {
         $string = '<ul class="mt-3">';
 
         foreach($data as $d) {
-            $string .= '<li><b>' . $d->coa->name . '</b>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;' . number_format($d->nominal) . '</li>';
+            $string .= '<li>' . $d->coaDebit->name . '<b>&nbsp;[Debit]</b><br>' . $d->coaCredit->name . '<b>&nbsp;[Credit]</b><br>' . number_format($d->nominal) . '</li>';
         }
 
         $string .= '</ul>';
@@ -188,15 +172,15 @@ class CashBankController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'coa_id'         => 'required',
-            'coa_id_detail'  => 'required',
+            'debit_detail'   => 'required',
+            'credit_detail'  => 'required',
             'nominal_detail' => 'required',
             'date'           => 'required',
             'type'           => 'required',
             'description'    => 'required'
         ], [
-            'coa_id.required'         => 'Please select a coa.',
-            'coa_id_detail.required'  => 'Detail transaction cannot be a empty.',
+            'debit_detail.required'   => 'Detail transaction cannot be a empty.',
+            'credit_detail.required'  => 'Detail transaction cannot be a empty.',
             'nominal_detail.required' => 'Detail transaction cannot be a empty.',
             'date.required'           => 'Date cannot be empty.',
             'type.required'           => 'Please select a type.',
@@ -211,7 +195,6 @@ class CashBankController extends Controller {
         } else {
             $query = CashBank::create([
                 'user_id'     => session('bo_id'),
-                'coa_id'      => $request->coa_id,
                 'code'        => CashBank::generateCode($request->type),
                 'date'        => $request->date,
                 'type'        => $request->type,
@@ -219,18 +202,19 @@ class CashBankController extends Controller {
             ]);
 
             if($query) {
-                foreach($request->coa_id_detail as $key => $cid) {
+                foreach($request->debit_detail as $key => $dd) {
                     CashBankDetail::create([
                         'cash_bank_id' => $query->id,
-                        'coa_id'       => $cid,
+                        'debit'        => $dd,
+                        'credit'       => $request->credit_detail[$key],
                         'nominal'      => $request->nominal_detail[$key]
                     ]);
 
                     Journal::create([
-                        'debit'       => $request->coa_id,
-                        'credit'      => $cid,
+                        'debit'       => $dd,
+                        'credit'      => $request->credit_detail[$key],
                         'nominal'     => $request->nominal_detail[$key],
-                        'description' => $request->description
+                        'description' => $query->code
                     ]);
                 }
 

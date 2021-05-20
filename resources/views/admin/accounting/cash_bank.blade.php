@@ -35,38 +35,6 @@
 			</div>
          <div class="card-body">
             <div class="row">
-               <div class="col-md-9">
-                  <div class="form-group">
-                     <label>Account :<span class="text-danger">*</span></label>
-                     <select name="filter_coa_id" id="filter_coa_id" class="select2">
-                        <option value="">-- Choose --</option>
-                        @foreach($parent as $p)
-                           @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                           @if($sub_1->count() > 0)
-                              @foreach($sub_1 as $s1)
-                                 @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                 @if($sub_2->count() > 0)
-                                    @foreach($sub_2 as $s2)
-                                       @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                       @if($sub_3->count() > 0)
-                                          @foreach($sub_3 as $s3)
-                                             <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                          @endforeach
-                                       @else
-                                          <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                       @endif
-                                    @endforeach
-                                 @else
-                                    <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                                 @endif
-                              @endforeach
-                           @else
-                              <option value="{{ $p->id }}">{{ $p->name }}</option>
-                           @endif
-                        @endforeach
-                     </select>
-                  </div>
-               </div>
                <div class="col-md-3">
                   <div class="form-group">
                      <label>User :</label>
@@ -78,17 +46,7 @@
                      </select>
                   </div>
                </div>
-               <div class="col-md-6">
-                  <div class="form-group">
-                     <label>Date :</label>
-                     <div class="input-group-prepend">
-                        <input type="date" name="filter_start_date" id="filter_start_date" class="form-control">
-                        <span class="input-group-text">to</span>
-                        <input type="date" name="filter_finish_date" id="filter_finish_date" class="form-control">
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-6">
+               <div class="col-md-9">
                   <div class="form-group">
                      <label>Nominal :</label>
                      <div class="input-group-prepend">
@@ -98,14 +56,24 @@
                      </div>
                   </div>
                </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <label>Date :</label>
+                     <div class="input-group-prepend">
+                        <input type="date" name="filter_start_date" id="filter_start_date" class="form-control">
+                        <span class="input-group-text">to</span>
+                        <input type="date" name="filter_finish_date" id="filter_finish_date" class="form-control">
+                     </div>
+                  </div>
+               </div>
             </div>
             <div class="form-group text-right">
                <div class="form-check form-check-inline">
-                     <label class="form-check-label">
-                        <input type="radio" name="filter_type" class="form-check-input" value="" checked>
-                        All
-                     </label>
-                  </div>
+                  <label class="form-check-label">
+                     <input type="radio" name="filter_type" class="form-check-input" value="" checked>
+                     All
+                  </label>
+               </div>
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
                      <input type="radio" name="filter_type" value="1" class="form-check-input">
@@ -143,7 +111,6 @@
                         <th>#</th>
                         <th>No</th>
                         <th>User</th>
-                        <th>Account</th>
                         <th>Code</th>
                         <th>Date</th>
                         <th>Description</th>
@@ -169,45 +136,9 @@
                <div class="alert alert-danger" id="validation_alert" style="display:none;">
                   <ul id="validation_content"></ul>
                </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Debit :<sup class="text-danger">*</sup></label>
-                        <select name="coa_id" id="coa_id" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($parent as $p)
-                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                          @if($sub_3->count() > 0)
-                                             @foreach($sub_3 as $s3)
-                                                <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                             @endforeach
-                                          @else
-                                             <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                          @endif
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
-                              @endif
-                           @endforeach
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Date :<sup class="text-danger">*</sup></label>
-                        <input type="date" name="date" id="date" class="form-control">
-                     </div>
-                  </div>
+               <div class="form-group">
+                  <label>Date :<sup class="text-danger">*</sup></label>
+                  <input type="date" name="date" id="date" class="form-control">
                </div>
                <div class="form-group">
                   <label>Description :<sup class="text-danger">*</sup></label>
@@ -215,10 +146,10 @@
                </div>
                <div class="form-group"><hr></div>
                <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class="form-group">
-                        <label>Credit :</label>
-                        <select name="coa_id_detail" id="coa_id_detail" class="select2">
+                        <label>Debit :<sup class="text-danger">*</sup></label>
+                        <select name="debit_detail" id="debit_detail" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($parent as $p)
                               @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
@@ -247,13 +178,45 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Credit :</label>
+                        <select name="credit_detail" id="credit_detail" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($parent as $p)
+                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
+                              @if($sub_1->count() > 0)
+                                 @foreach($sub_1 as $s1)
+                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                    @if($sub_2->count() > 0)
+                                       @foreach($sub_2 as $s2)
+                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
+                                          @if($sub_3->count() > 0)
+                                             @foreach($sub_3 as $s3)
+                                                <option value="{{ $s3->id }};{{ $s3->name }}">{{ $s3->name }}</option>
+                                             @endforeach
+                                          @else
+                                             <option value="{{ $s2->id }};{{ $s2->name }}">{{ $s2->name }}</option>
+                                          @endif
+                                       @endforeach
+                                    @else
+                                       <option value="{{ $s1->id }};{{ $s1->name }}">{{ $s1->name }}</option>
+                                    @endif
+                                 @endforeach
+                              @else
+                                 <option value="{{ $p->id }};{{ $p->name }}">{{ $p->name }}</option>
+                              @endif
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
                      <div class="form-group">
                         <label>Nominal :</label>
                         <input type="number" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0">
                      </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-1">
                      <div class="form-group">
                         <label class="text-white">.</label>
                         <button type="button" class="btn bg-success col-12" onclick="addContent()"><i class="icon-plus22"></i></button>
@@ -264,6 +227,7 @@
                   <table class="table table-bordered">
                      <thead class="table-secondary">
                         <tr class="text-center">
+                           <th>Debit</th>
                            <th>Credit</th>
                            <th>Nominal</th>
                            <th>Delete</th>
@@ -364,17 +328,21 @@
    }
 
    function addContent() {
-      let coa_id_detail  = $('#coa_id_detail');
+      let debit_detail   = $('#debit_detail');
+      let credit_detail  = $('#credit_detail');
       let nominal_detail = $('#nominal_detail');
 
-      if(coa_id_detail.val() && nominal_detail.val()) {
-         let arr_coa_id_detail  = coa_id_detail.val().split(';');
+      if(debit_detail.val() && credit_detail.val() && nominal_detail.val()) {
+         let arr_debit_detail  = debit_detail.val().split(';');
+         let arr_credit_detail = credit_detail.val().split(';');
 
          $('#data_content').append(`
             <tr class="text-center">
-               <input type="hidden" name="coa_id_detail[]" value="` + arr_coa_id_detail[0] + `">
+               <input type="hidden" name="debit_detail[]" value="` + arr_debit_detail[0] + `">
+               <input type="hidden" name="credit_detail[]" value="` + arr_credit_detail[0] + `">
                <input type="hidden" name="nominal_detail[]" value="` + nominal_detail.val() + `">
-               <td class="align-middle">` + arr_coa_id_detail[1] + `</td>   
+               <td class="align-middle">` + arr_debit_detail[1] + `</td>   
+               <td class="align-middle">` + arr_credit_detail[1] + `</td>   
                <td class="align-middle">` + Intl.NumberFormat('id-ID').format(nominal_detail.val()) + `</td>   
                <td class="align-middle">
                   <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
@@ -382,7 +350,8 @@
             </tr>
          `);
 
-         coa_id_detail.val(null).change();
+         debit_detail.val(null).change();
+         credit_detail.val(null).change();
          nominal_detail.val(null);
       } else {
          swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
@@ -390,7 +359,6 @@
    }
 
    function resetFilter() {
-      $('#filter_coa_id').val(null).trigger('change');
       $('#filter_user_id').val(null).trigger('change');
       $('#filter_start_date').val(null);
       $('#filter_finish_date').val(null);
@@ -402,7 +370,6 @@
 
   function reset() {
       $('#form_data').trigger('reset');
-      $('#coa_id').val(null).change();
       $('#data_content').html('');
       $('input[name="type"][value="1"]').prop('checked', true);
       $('#validation_alert').hide();
@@ -429,13 +396,12 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-               coa_id: $('#filter_coa_id').val(),
                user_id: $('#filter_user_id').val(),
                start_date: $('#filter_start_date').val(),
                finish_date: $('#filter_finish_date').val(),
                start_nominal: $('#filter_start_nominal').val(),
                finish_nominal: $('#filter_finish_nominal').val(),
-               type: $('#filter_type').val()
+               type: $('input[name="filter_type"]:checked').val()
             },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
@@ -456,7 +422,6 @@
             { name: 'detail', orderable: false, searchable: false, className: 'text-center align-middle details-control' },
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'user_id', className: 'text-center align-middle' },
-            { name: 'coa_id', className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle nowrap' },
             { name: 'date', searchable: false, className: 'text-center align-middle' },
             { name: 'description', className: 'text-center align-middle' }
