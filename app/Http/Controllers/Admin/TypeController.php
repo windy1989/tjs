@@ -12,6 +12,7 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use App\Models\Specification;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +21,27 @@ class TypeController extends Controller {
     
     public function index()
     {
+        $data = DB::connection('seeder')->table('master_tipe')->get();
+        foreach($data as $d) {
+            $type = Type::where('code', $d->kode)->first();
+            if(!$type) {
+                $category = Category::where('name', "%$d->kodegrup%")->first();
+                $surface  = Surface::where('name', 'like', "%$d->surface%")->first();
+                $color  = Color::where('name', 'like', "%$d->color%")->first();
+                $pattern  = Pattern::where('name', 'like', "%$d->pattern%")->first();
+                $specification  = Specification::where('name', 'like', "%$d->ll%")->first();
+                $buyUnit  = Unit::where('name', 'like', "%$d->buy%")->first();
+                $stockUnit  = Unit::where('name', 'like', "%$d->stock%")->first();
+                $sellingUnit  = Unit::where('name', 'like', "%$d->selling%")->first();
+
+                $create = Type::create([
+                    
+                ]);
+            }
+        }
+
+        return true;
+
         $data = [
             'title'         => 'Product Type',
             'category'      => Category::where('status', 1)->where('parent_id', 0)->oldest('name')->get(),

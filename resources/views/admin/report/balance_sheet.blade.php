@@ -263,7 +263,7 @@
                         <div class="row p-1 border border">
                            <div class="col-md-8 text-uppercase font-weight-bold">Total Assets</div>
                            <div class="col-md-4 font-weight-bold">
-                              {{ number_format(collect($balance_sheet['assets']['total'])->flatten()->sum()) }}
+                              {{ number_format(abs(collect($balance_sheet['assets']['total'])->flatten()->sum())) }}
                            </div>
                         </div>
                      </div>
@@ -271,7 +271,7 @@
                         <div class="row p-1 border border">
                            <div class="col-md-8 text-uppercase font-weight-bold">Total Responbility & Equity</div>
                            <div class="col-md-4 font-weight-bold">
-                              {{ number_format(collect($balance_sheet['responbility_equity']['total'])->flatten()->sum()) }}
+                              {{ number_format(abs(collect($balance_sheet['responbility_equity']['total'])->flatten()->sum())) }}
                            </div>
                         </div>
                      </div>

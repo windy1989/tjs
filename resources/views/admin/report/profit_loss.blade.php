@@ -42,10 +42,16 @@
             <div class="form-group"><hr></div>
             <ul class="nav nav-tabs nav-tabs-highlight nav-justified">
                <li class="nav-item">
-                  <a href="#solid-bordered-justified-tab1" class="nav-link active" data-toggle="tab">Surabaya & Jakarta</a>
+                  <a href="#solid-bordered-justified-tab1" class="nav-link active" data-toggle="tab">Summary</a>
                </li>
                <li class="nav-item">
-                  <a href="#solid-bordered-justified-tab2" class="nav-link" data-toggle="tab">Non Operating</a>
+                  <a href="#solid-bordered-justified-tab2" class="nav-link" data-toggle="tab">Surabaya</a>
+               </li>
+               <li class="nav-item">
+                  <a href="#solid-bordered-justified-tab3" class="nav-link" data-toggle="tab">Jakarta</a>
+               </li>
+               <li class="nav-item">
+                  <a href="#solid-bordered-justified-tab4" class="nav-link" data-toggle="tab">Non Operating</a>
                </li>
             </ul>
             <div class="tab-content">
@@ -73,118 +79,194 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <td colspan="12" class="font-weight-bold text-uppercase">Income</td>
+                              <tr class="font-weight-bold">
+                                 <th colspan="12">INCOME</th>
                               </tr>
-                              <tr>
-                                 <th colspan="12" class="align-middle font-weight-bold">
-                                    {{ $profit_loss['sby_jkt']['income']['sale']['name'] }}
-                                 </th>
+                              <tr class="font-weight-bold">
+                                 <th colspan="12">Sale</th>
                               </tr>
-                              @foreach($profit_loss['sby_jkt']['income']['sale']['sub'] as $s)
+                              @php 
+                                 $total_sale_actual_current   = 0;
+                                 $total_sale_budget           = 0;
+                                 $total_sale_variance_current = 0;
+                                 $total_sale_actual_last      = 0;
+                                 $total_sale_variance_last    = 0;
+                              @endphp
+                              @foreach($profit_loss['summary']['sale'] as $s)
                                  @php 
-                                    $total['total_sale_actual_current'] += $s['current']['actual'];
-                                    $total['total_sale_budget']         += $s['current']['budget'];
-                                    $total['total_sale_variance']       += $s['current']['actual'] - $s['current']['budget'];
+                                    $total_sale_actual_current   += $s['actual']['current'];
+                                    $total_sale_budget           += $s['budget'];
+                                    $total_sale_variance_current += $s['variance']['nominal']['current'];
+                                    $total_sale_actual_last      += $s['actual']['last'];
+                                    $total_sale_variance_last    += $s['variance']['nominal']['last'];
                                  @endphp
                                  <tr>
-                                    <td class="align-middle">{{ $s['name'] }}</td>
-                                    <td class="align-middle text-right">{{ number_format($s['current']['actual']) }}</td>
-                                    <td class="align-middle text-center">
-                                       @if($s['current']['actual'] > 0 && $profit_loss['sby_jkt']['income']['total_actual_current'] > 0) 
-                                          {{ round($s['current']['actual'] / $profit_loss['sby_jkt']['income']['total_actual_current']) }}%
+                                    <td class="text-left">{{ $s['name'] }}</td>   
+                                    <td class="text-right">{{ number_format($s['actual']['current']) }}</td>   
+                                    <td class="text-center">
+                                       @if($s['actual']['current'] > 0 && $profit_loss['summary']['total']['income']['actual']['current'] > 0) 
+                                          {{ round($s['actual']['current'] / $profit_loss['summary']['total']['income']['current']) }}%
                                        @else
                                           0%
-                                       @endif   
-                                    </td>
-                                    <td class="align-middle text-right">{{ number_format($s['current']['budget']) }}</td>
-                                    <td class="align-middle text-center">
-                                       @if($s['current']['budget'] > 0 && $profit_loss['sby_jkt']['income']['total_budget'] > 0)
-                                          {{ round($s['current']['budget'] / $profit_loss['sby_jkt']['income']['total_budget']) }}%
+                                       @endif  
+                                    </td>  
+                                    <td class="text-right">{{ number_format($s['budget']) }}</td>   
+                                    <td class="text-center">
+                                       @if($s['budget'] > 0 && $profit_loss['summary']['total']['income']['budget'] > 0) 
+                                          {{ round($s['budget'] / $profit_loss['summary']['total']['budget']) }}%
                                        @else
                                           0%
-                                       @endif
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       {{ number_format($s['current']['actual'] - $s['current']['budget']) }}
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       @if($s['current']['actual'] > 0 && $s['current']['budget'] > 0)
-                                          {{ round(($s['current']['actual'] - $s['current']['budget']) / $s['current']['budget']) }}%
+                                       @endif     
+                                    </td> 
+                                    <td class="text-right">{{ number_format($s['variance']['nominal']['current']) }}</td>   
+                                    <td class="text-center">{{ number_format($s['variance']['percent']['current']) }}%</td> 
+                                    <td class="text-right">{{ number_format($s['actual']['last']) }}</td>  
+                                    <td class="text-center">
+                                       @if($s['actual']['last'] > 0 && $profit_loss['summary']['total']['income']['actual']['last'] > 0) 
+                                          {{ round($s['actual']['last'] / $profit_loss['summary']['total']['income']['last']) }}%
                                        @else
                                           0%
-                                       @endif
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       {{ number_format($s['last']['actual']) }}
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       @if($s['last']['actual'] > 0 && $profit_loss['sby_jkt']['income']['total_actual_last'] > 0)
-                                          {{ round($s['last']['actual'] / $profit_loss['sby_jkt']['income']['total_actual_last']) }}%
-                                       @else
-                                          0%
-                                       @endif
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       {{ number_format($s['current']['actual'] - $s['last']['actual']) }}
-                                    </td>
-                                    <td class="align-middle text-right">
-                                       @if($s['current']['actual'] > 0 && $s['last']['actual'] > 0)
-                                          {{ round(($s['current']['actual'] - $s['last']['actual']) / $s['last']['actual']) }}%
-                                       @else
-                                          0%
-                                       @endif
-                                    </td>
-                                 </tr>
+                                       @endif  
+                                    </td>  
+                                    <td class="text-right">{{ number_format($s['variance']['nominal']['last']) }}</td>   
+                                    <td class="text-center">{{ number_format($s['variance']['percent']['last']) }}%</td> 
+                                 </tr> 
                               @endforeach
-                              <tr class="table-secondary font-weight-bold font-italic">
-                                 <td class="align-middle text-right">Total Sale</td>
-                                 <td class="align-middle text-right">{{ number_format($total['total_sale_actual_current']) }}</td>
-                                 <td class="align-middle text-center">
-                                    @if($total['total_sale_actual_current'] > 0 && $profit_loss['sby_jkt']['income']['total_actual_current'] > 0)
-                                       {{ round($total['total_sale_actual_current'] / $profit_loss['sby_jkt']['income']['total_actual_current']) }}%
+                              <tr class="table-secondary font-italic">
+                                 <th class="text-right font-weight-bold">Total Sale</th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_actual_current) }}</th>
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_actual_current > 0 && $profit_loss['summary']['total']['income']['actual']['current'] > 0) 
+                                       {{ round($total_sale_actual_current / $profit_loss['summary']['total']['income']['current']) }}%
                                     @else
                                        0%
-                                    @endif
-                                 </td>
-                                 <td class="align-middle text-right">{{ number_format($total['total_sale_budget']) }}</td>
-                                 <td class="align-middle text-center">
-                                    @if($total['total_sale_budget'] > 0 && $profit_loss['sby_jkt']['income']['total_budget'] > 0)
-                                       {{ round($total['total_sale_budget'] / $profit_loss['sby_jkt']['income']['total_budget']) }}%
+                                    @endif     
+                                 </th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_budget) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_budget > 0 && $profit_loss['summary']['total']['income']['budget'] > 0) 
+                                       {{ round($total_sale_budget / $profit_loss['summary']['total']['budget']) }}%
                                     @else
                                        0%
-                                    @endif
-                                 </td>
-                                 <td class="align-middle text-right">
-                                    {{ number_format($s['current']['actual'] - $s['current']['budget']) }}
-                                 </td>
-                                 <td class="align-middle text-right">
-                                    @if($total['total_sale_budget'] > 0 && $total['total_sale_variance'] > 0)
-                                       {{ round($total['total_sale_budget'] / $total['total_sale_variance']) }}%
+                                    @endif     
+                                 </th> 
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_variance_current) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_variance_current > 0 && $total_sale_budget > 0) 
+                                       {{ round($total_sale_variance_current / $total_sale_budget) }}%
                                     @else
                                        0%
-                                    @endif
-                                 </td>
-                                 {{-- <td class="align-middle text-right">
-                                    {{ number_format($s['last']['actual']) }}
-                                 </td>
-                                 <td class="align-middle text-right">
-                                    @if($s['last']['actual'] > 0 && $profit_loss['sby_jkt']['income']['total_actual_last'] > 0)
-                                       {{ round($s['last']['actual'] / $profit_loss['sby_jkt']['income']['total_actual_last']) }}%
+                                    @endif     
+                                 </th> 
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_actual_last) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_actual_last > 0 && $profit_loss['summary']['total']['income']['actual']['last'] > 0) 
+                                       {{ round($total_sale_actual_last / $profit_loss['summary']['total']['income']['actual']['last']) }}%
                                     @else
                                        0%
-                                    @endif
-                                 </td>
-                                 <td class="align-middle text-right">
-                                    {{ number_format($s['current']['actual'] - $s['last']['actual']) }}
-                                 </td>
-                                 <td class="align-middle text-right">
-                                    @if($s['current']['actual'] > 0 && $s['last']['actual'] > 0)
-                                       {{ round(($s['current']['actual'] - $s['last']['actual']) / $s['last']['actual']) }}%
+                                    @endif     
+                                 </th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_variance_last) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_variance_last > 0 && $total_sale_actual_last > 0) 
+                                       {{ round($total_sale_variance_last / $total_sale_actual_last) }}%
                                     @else
                                        0%
-                                    @endif
-                                 </td> --}}
+                                    @endif     
+                                 </th>
+                              </tr>
+                              <tr class="font-weight-bold">
+                                 <th colspan="12">Sale Service</th>
+                              </tr>
+                              @php 
+                                 $total_sale_service_actual_current   = 0;
+                                 $total_sale_service_budget           = 0;
+                                 $total_sale_service_variance_current = 0;
+                                 $total_sale_service_actual_last      = 0;
+                                 $total_sale_service_variance_last    = 0;
+                              @endphp
+                              @foreach($profit_loss['summary']['sale_service'] as $ss)
+                                 @php 
+                                    $total_sale_service_actual_current   += $ss['actual']['current'];
+                                    $total_sale_service_budget           += $ss['budget'];
+                                    $total_sale_service_variance_current += $ss['variance']['nominal']['current'];
+                                    $total_sale_service_actual_last      += $ss['actual']['last'];
+                                    $total_sale_service_variance_last    += $ss['variance']['nominal']['last'];
+                                 @endphp
+                                 <tr>
+                                    <td class="text-left">{{ $ss['name'] }}</td>   
+                                    <td class="text-right">{{ number_format($ss['actual']['current']) }}</td>   
+                                    <td class="text-center">
+                                       @if($ss['actual']['current'] > 0 && $profit_loss['summary']['total']['income']['actual']['current'] > 0) 
+                                          {{ round($ss['actual']['current'] / $profit_loss['summary']['total']['income']['current']) }}%
+                                       @else
+                                          0%
+                                       @endif  
+                                    </td>  
+                                    <td class="text-right">{{ number_format($ss['budget']) }}</td>   
+                                    <td class="text-center">
+                                       @if($ss['budget'] > 0 && $profit_loss['summary']['total']['income']['budget'] > 0) 
+                                          {{ round($ss['budget'] / $profit_loss['summary']['total']['budget']) }}%
+                                       @else
+                                          0%
+                                       @endif     
+                                    </td> 
+                                    <td class="text-right">{{ number_format($ss['variance']['nominal']['current']) }}</td>   
+                                    <td class="text-center">{{ number_format($ss['variance']['percent']['current']) }}%</td> 
+                                    <td class="text-right">{{ number_format($ss['actual']['last']) }}</td>  
+                                    <td class="text-center">
+                                       @if($ss['actual']['last'] > 0 && $profit_loss['summary']['total']['income']['actual']['last'] > 0) 
+                                          {{ round($ss['actual']['last'] / $profit_loss['summary']['total']['income']['last']) }}%
+                                       @else
+                                          0%
+                                       @endif  
+                                    </td>  
+                                    <td class="text-right">{{ number_format($ss['variance']['nominal']['last']) }}</td>   
+                                    <td class="text-center">{{ number_format($ss['variance']['percent']['last']) }}%</td> 
+                                 </tr> 
+                              @endforeach
+                              <tr class="table-secondary font-italic">
+                                 <th class="text-right font-weight-bold">Total Sale Service</th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_service_actual_current) }}</th>
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_service_actual_current > 0 && $profit_loss['summary']['total']['income']['actual']['current'] > 0) 
+                                       {{ round($total_sale_service_actual_current / $profit_loss['summary']['total']['income']['current']) }}%
+                                    @else
+                                       0%
+                                    @endif     
+                                 </th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_service_budget) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_service_budget > 0 && $profit_loss['summary']['total']['income']['budget'] > 0) 
+                                       {{ round($total_sale_service_budget / $profit_loss['summary']['total']['budget']) }}%
+                                    @else
+                                       0%
+                                    @endif     
+                                 </th> 
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_service_variance_current) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_service_variance_current > 0 && $total_sale_service_budget > 0) 
+                                       {{ round($total_sale_service_variance_current / $total_sale_service_budget) }}%
+                                    @else
+                                       0%
+                                    @endif     
+                                 </th> 
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_service_actual_last) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_service_actual_last > 0 && $profit_loss['summary']['total']['income']['actual']['last'] > 0) 
+                                       {{ round($total_sale_service_actual_last / $profit_loss['summary']['total']['income']['actual']['last']) }}%
+                                    @else
+                                       0%
+                                    @endif     
+                                 </th>
+                                 <th class="text-right font-weight-bold">{{ number_format($total_sale_service_variance_last) }}</th>   
+                                 <th class="text-center font-weight-bold">
+                                    @if($total_sale_service_variance_last > 0 && $total_sale_service_actual_last > 0) 
+                                       {{ round($total_sale_service_variance_last / $total_sale_service_actual_last) }}%
+                                    @else
+                                       0%
+                                    @endif     
+                                 </th>
                               </tr>
                            </tbody>
                         </table>

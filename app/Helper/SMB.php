@@ -655,98 +655,105 @@ class SMB {
       $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
       $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
 
-      $grandtotal_income_actual_current = 0;
-      $grandtotal_income_budget         = 0;
-      $grandtotal_income_actual_last    = 0;
+      $summary_income_actual_current = 0;
+      $summary_income_actual_last    = 0;
+      $summary_income_budget         = 0;
 
-      $sale        = Coa::where('code', '4.000.01')->first();
-      $sale_sub    = Coa::where('parent_id', $sale->id)->get();
-      $sale_result = [];
-      foreach($sale_sub as $ss) {
-         $sub_1     = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
-         $sub_2     = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge = $sub_1->merge(collect([$ss->id])->merge($sub_2));
+      $summary_sale        = Coa::whereIn('code', ['4.000.01.01', '4.000.01.02'])->get();
+      $summary_sale_result = [];
+      foreach($summary_sale as $ss) {
+         $sale     = Coa::find($ss->id);
+         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         foreach($sale_sub as $ss) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ss->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = $balance_debit_current - $balance_credit_current;
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = $balance_debit_last - $balance_credit_last;
+            $budget                 = Budgeting::whereMonth('month', $month_current)->whereYear('month', $year_current)->orderByDesc('month')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
 
-         $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-         $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-         $total_balance_current  = $balance_debit_current - $balance_credit_current;
-         $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-         $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-         $total_balance_last     = $balance_debit_last - $balance_credit_last;
+            $summary_income_actual_current += $total_balance_current;
+            $summary_income_actual_last    += $total_balance_last;
+            $summary_income_budget         += $budget_nominal;
 
-         $budget         = Budgeting::where('coa_id', $ss->id)->whereRaw("MONTH(month) = $month_current AND YEAR(month) = $year_current")->orderByDesc('created_at')->get();
-         $budget_nominal = $budget->count() > 0 ? $budget[0]->nominal : 0;
-
-         $grandtotal_income_actual_current += $total_balance_current;
-         $grandtotal_income_budget         += $budget_nominal;
-         $grandtotal_income_actual_last    += $total_balance_current - $total_balance_last;
-
-         $sale_result[] = [
-            'current' => [
-               'actual'   => $total_balance_current,
+            $summary_sale_result[] = [
+               'name'     => $ss->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
                'budget'   => $budget_nominal,
-               'variance' => $total_balance_current - $budget_nominal
-            ],
-            'last' => [
-               'actual'   => $total_balance_last,
-               'variance' => $total_balance_current - $total_balance_last
-            ],
-            'name' => $ss->name
-         ];
-      }     
-
-      $sale_service        = Coa::where('code', '4.000.02')->first();
-      $sale_service_sub    = Coa::where('parent_id', $sale->id)->get();
-      $sale_service_result = [];
-      foreach($sale_service_sub as $sss) {
-         $sub_1     = collect(Coa::select('id')->where('parent_id', $sss->id)->get()->toArray());
-         $sub_2     = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge = $sub_1->merge(collect([$sss->id])->merge($sub_2));
-
-         $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-         $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-         $total_balance_current  = $balance_debit_current - $balance_credit_current;
-         $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-         $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-         $total_balance_last     = $balance_debit_last - $balance_credit_last;
-
-         $budget         = Budgeting::where('coa_id', $sss->id)->whereRaw("MONTH(month) = $month_current AND YEAR(month) = $year_current")->orderByDesc('created_at')->get();
-         $budget_nominal = $budget->count() > 0 ? $budget[0]->nominal : 0;
-
-         $grandtotal_income_actual_current += $total_balance_current;
-         $grandtotal_income_budget         += $budget_nominal;
-         $grandtotal_income_actual_last    += $total_balance_current - $total_balance_last;
-
-         $sale_service_result[] = [
-            'current' => [
-               'actual'   => $total_balance_current,
-               'budget'   => $budget_nominal,
-               'variance' => $total_balance_current - $budget_nominal
-            ],
-            'last' => [
-               'actual'   => $total_balance_last,
-               'variance' => $total_balance_current - $total_balance_last
-            ],
-            'name' => $sss->name
-         ];
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
+                     'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  ]
+               ]
+            ];
+         }
       }
-      
+
+      $summary_sale_service        = Coa::whereIn('code', ['4.000.02'])->get();
+      $summary_sale_service_result = [];
+      foreach($summary_sale_service as $sss) {
+         $sale     = Coa::find($sss->id);
+         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         foreach($sale_sub as $ss) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ss->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = $balance_debit_current - $balance_credit_current;
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = $balance_debit_last - $balance_credit_last;
+            $budget                 = Budgeting::whereMonth('month', $month_current)->whereYear('month', $year_current)->orderByDesc('month')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $summary_income_actual_current += $total_balance_current;
+            $summary_income_actual_last    += $total_balance_last;
+            $summary_income_budget         += $budget_nominal;
+
+            $summary_sale_service_result[] = [
+               'name'     => $ss->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
+                     'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
       $result = [
-         'sby_jkt' => [
-            'income' => [ 
-               'sale' => [
-                  'name' => $sale->name,
-                  'sub'  => $sale_result
+         'summary' => [
+            'sale'         => $summary_sale_result,
+            'sale_service' => $summary_sale_service_result,
+            'total'        => [
+               'income' => [
+                  'budget' => $summary_income_budget,
+                  'actual' => ['current' => $summary_income_actual_current, 'last' => $summary_income_actual_last]
                ],
-               'sale_service' => [
-                  'name' => $sale_service->name,
-                  'sub'  => $sale_service_result
-               ],
-               'total_actual_current' => $grandtotal_income_actual_current,
-               'total_budget'         => $grandtotal_income_budget,
-               'total_actual_last'    => $grandtotal_income_actual_last
-            ],
-         ],
+            ]
+         ]
       ];
 
       return $result;
