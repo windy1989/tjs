@@ -25,9 +25,15 @@ class ReportController extends Controller {
     {
         $filter = $request->filter ? $request->filter : date('Y-m');
         $total  = [
-            'total_sale_actual_current' => 0,
-            'total_sale_budget' => 0,
-            'total_sale_variance' => 0
+            'income_actual_percent_current' => 0,
+            'income_actual_percent_last'    => 0,
+            'income_budget_percent'         => 0,
+            'cogs_actual_percent_current'   => 0,
+            'cogs_actual_percent_last'      => 0,
+            'cogs_budget_percent'           => 0,
+            'fee_actual_percent_current'    => 0,
+            'fee_actual_percent_last'       => 0,
+            'fee_budget_percent'            => 0
         ];
 
         $data   = [
