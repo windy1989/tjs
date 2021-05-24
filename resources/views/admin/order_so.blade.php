@@ -110,11 +110,7 @@
 						@foreach($order->orderDetail as $od)
 							<tr class="text-center">
 								<td clas="align-middle">
-									@if(Storage::exists($od->product->type->image)) 
-										<a href="{{ asset(Storage::url($od->product->type->image)) }}" data-lightbox="{{  $od->product->code() }}" data-title="{{  $od->product->code() }}"><img src="{{ asset(Storage::url($od->product->type->image)) }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
-									@else
-										<a href="{{  asset('website/empty.jpg') }}" data-lightbox="{{  $od->product->code() }}" data-title="{{  $od->product->code() }}"><img src="{{ asset('website/empty.jpg') }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
-									@endif
+									<a href="{{ $od->product->type->image() }}" data-lightbox="{{ $od->product->code() }}" data-title="{{ $od->product->code() }}"><img src="{{ $od->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
 								</td>
 								<td class="align-middle">
 									<h6 class="mb-0">{{ $od->product->code() }}</h6>

@@ -24,7 +24,9 @@ class PricingPolicyController extends Controller {
         $column = [
             'detail',
             'id',
+            'image',
             'product_id',
+            'size',
             'showroom_cost',
             'fixed_cost',
             'marketing_cost',
@@ -114,10 +116,14 @@ class PricingPolicyController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
+                $image = '<a href="' . $val->product->type->image() . '" data-lightbox="' . $val->product->code() . '" data-title="' . $val->product->code() . '"><img src="' . $val->product->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
+
                 $response['data'][] = [
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
+                    $image,
                     $val->product->code(),
+                    $val->product->type->length . 'x' . $val->product->type->width,
                     number_format($val->showroom_cost),
                     number_format($val->fixed_cost),
                     number_format($val->marketing_cost),

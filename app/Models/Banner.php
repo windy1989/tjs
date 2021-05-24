@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,6 +18,17 @@ class Banner extends Model {
         'image',
         'status'
     ];
+
+    public function image() 
+    {
+        if(Storage::exists($this->image)) {
+            $image = asset(Storage::url($this->image));
+        } else {
+            $image = asset('website/empty.jpg');
+        }
+
+        return $image;
+    }
 
     public function status() 
     {

@@ -106,11 +106,7 @@ class TypeController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if(Storage::exists($val->image)) {
-                    $image = '<a href="' . asset(Storage::url($val->image)) . '" data-lightbox="' . $val->code . '" data-title="' . $val->code . '"><img src="' . asset(Storage::url($val->image)) . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-                } else {
-                    $image = '<a href="' . asset('website/empty.jpg') . '" data-lightbox="' . $val->code . '" data-title="' . $val->code . '"><img src="' . asset('website/empty.jpg') . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-                }
+                $image = '<a href="' . $val->image() . '" data-lightbox="' . $val->code . '" data-title="' . $val->code . '"><img src="' . $val->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
 
                 $response['data'][] = [
                     $nomor,
@@ -248,12 +244,6 @@ class TypeController extends Controller {
     public function show(Request $request)
     {
         $data = Type::find($request->id);
-        if(Storage::exists($data->image)) {
-            $image = asset(Storage::url($data->image));
-        } else {
-            $image = asset('website/empty.jpg');
-        }
-
         return response()->json([
             'category_id'      => $data->category_id,
             'division_id'      => $data->division_id,
@@ -264,7 +254,7 @@ class TypeController extends Controller {
             'buy_unit_id'      => $data->buy_unit_id,
             'stock_unit_id'    => $data->stock_unit_id,
             'selling_unit_id'  => $data->selling_unit_id,
-            'image'            => $image,
+            'image'            => $val->image(),
             'code'             => $data->code,
             'material'         => $data->material,
             'faces'            => $data->faces,

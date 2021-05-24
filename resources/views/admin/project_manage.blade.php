@@ -142,11 +142,7 @@
                               @foreach($project->projectProduct as $pp)
                                  <tr class="text-center">
                                     <td class="align-middle">
-                                       @if(Storage::exists($pp->product->type->image)) 
-                                          <a href="{{ asset(Storage::url($pp->product->type->image)) }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ asset(Storage::url($pp->product->type->image)) }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
-                                       @else
-                                          <a href="{{ asset('website/empty.jpg') }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ asset('website/empty.jpg') }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
-                                       @endif
+                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
                                     </td>
                                     <td class="align-middle">{{ $pp->product->code() }}</td>   
                                     <td class="align-middle">{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</td>   

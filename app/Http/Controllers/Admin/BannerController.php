@@ -69,11 +69,7 @@ class BannerController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if(Storage::exists($val->image)) {
-                    $image = '<a href="' . asset(Storage::url($val->image)) . '" data-lightbox="' . $val->image . '" data-title="' . $val->image . '"><img src="' . asset(Storage::url($val->image)) . '" style="max-width:170px;" class="img-fluid img-thumbnail"></a>';
-                } else {
-                    $image = '<a href="' . asset('website/empty.jpg') . '" data-lightbox="' . $val->image . '" data-title="' . $val->image . '"><img src="' . asset('website/empty.jpg') . '" style="max-width:170px;" class="img-fluid img-thumbnail"></a>';
-                }
+                $image = '<a href="' . $val->image() . '" data-lightbox="' . $val->image() . '" data-title="' . $val->image() . '"><img src="' . $val->image() . '" style="max-width:170px;" class="img-fluid img-thumbnail"></a>';
 
                 $response['data'][] = [
                     $nomor,
@@ -153,7 +149,7 @@ class BannerController extends Controller {
     {
         $data = Banner::find($request->id);
         return response()->json([
-            'image'  => asset(Storage::url($data->image)),
+            'image'  => $val->image(),
             'status' => $data->status
         ]);
     }

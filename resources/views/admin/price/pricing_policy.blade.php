@@ -40,7 +40,9 @@
                      <tr class="text-center">
                         <th>#</th>
                         <th>No</th>
+                        <th>Image</th>
                         <th>Product</th>
+                        <th>Size</th>
                         <th>Showroom Cost</th>
                         <th>Fixed Cost</th>
                         <th>Marketing Cost</th>
@@ -330,7 +332,9 @@
          columns: [
             { name: 'detail', orderable: false, searchable: false, className: 'text-center align-middle details-control' },
             { name: 'id', searchable: false, className: 'text-center align-middle' },
+            { name: 'image', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'product_id', className: 'text-center align-middle' },
+            { name: 'size', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'showroom_cost', searchable: false, className: 'text-center align-middle' },
             { name: 'fixed_cost', searchable: false, className: 'text-center align-middle' },
             { name: 'marketing_cost', searchable: false, className: 'text-center align-middle' },

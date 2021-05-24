@@ -164,15 +164,9 @@
                   <p class="mt-4">
                      <div class="form-group">
                         <div class="text-center">
-                           @if(Storage::exists($type->image))
-                              <a href="{{ asset(Storage::url($type->image)) }}" id="detail_image" data-lightbox="Image" data-title="Preview Image">
-                                 <img src="{{ asset(Storage::url($type->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:350px;">
-                              </a>
-                           @else
-                              <a href="{{ asset('website/empty.jpg') }}" id="detail_image" data-lightbox="Image" data-title="Preview Image">
-                                 <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:350px;">
-                              </a>
-                           @endif
+                           <a href="{{ $type->image() }}" id="detail_image" data-lightbox="Image" data-title="Preview Image">
+                              <img src="{{ $type->image() }}" class="img-fluid img-thumbnail w-100" style="max-width:350px;">
+                           </a>
                         </div>
                      </div>
                   </p>

@@ -2,7 +2,7 @@
    <div class="slider-inner">
       <div class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="false" data-loop="true" data-animate-in="rollIn" data-speed="450" data-animate-out="rollOut" data-autoplay="5000">
          @foreach($banner as $key => $b)
-            <img src="{{ asset(Storage::url($b->image)) }}" alt="Slider {{ $key + 1 }}" class="img-fluid">
+            <img src="{{ $b->image() }}" alt="Slider {{ $key + 1 }}" class="img-fluid">
          @endforeach
       </div>
    </div>
@@ -37,7 +37,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -71,7 +71,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -105,7 +105,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ Storage::exists($p->type->image) ? asset(Storage::url($p->type->image)) : asset('website/empty.jpg') }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>

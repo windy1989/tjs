@@ -74,11 +74,7 @@ class BrandController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if(Storage::exists($val->image)) {
-                    $image = '<a href="' . asset(Storage::url($val->image)) . '" data-lightbox="' . $val->name . '" data-title="' . $val->name . '"><img src="' . asset(Storage::url($val->image)) . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-                } else {
-                    $image = '<a href="' . asset('website/empty.jpg') . '" data-lightbox="' . $val->name . '" data-title="' . $val->name . '"><img src="' . asset('website/empty.jpg') . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-                }
+                $image = '<a href="' . $val->image() . '" data-lightbox="' . $val->name . '" data-title="' . $val->name . '"><img src="' . $val->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
 
                 $response['data'][] = [
                     $nomor,

@@ -214,12 +214,7 @@ class ProjectController extends Controller {
     {
         $data  = Product::find($request->id);
         $price = $data->pricingPolicy;
-
-        if(Storage::exists($data->type->image)) {
-            $image = '<a href="' . asset(Storage::url($data->type->image)) . '" data-lightbox="' . $data->code() . '" data-title="' . $data->code() . '"><img src="' . asset(Storage::url($data->type->image)) . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-        } else {
-            $image = '<a href="' . asset('website/empty.jpg') . '" data-lightbox="' . $data->code() . '" data-title="' . $data->code() . '"><img src="' . asset('website/empty.jpg') . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
-        }
+        $image = '<a href="' . $data->type->image() . '" data-lightbox="' . $data->code() . '" data-title="' . $data->code() . '"><img src="' . $data->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
 
         return response()->json([
             'id'     => $data->id,

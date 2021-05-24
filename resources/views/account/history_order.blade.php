@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                        <center>
                                           <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                             <img width="64" height="64" src="{{ Storage::exists($od->product->type->image) ? asset(Storage::url($od->product->type->image)) : asset('website/empty.jpg') }}" class="img-fluid img-thumbnail">
+                                             <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
                                           </a>
                                        </center>
                                     </div>

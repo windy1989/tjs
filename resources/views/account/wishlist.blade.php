@@ -26,7 +26,7 @@
                         </td>
                         <td class="cart-product-thumbnail">
                            <a href="{{ url('product/detail/' . base64_encode($w->id)) }}">
-                              <img width="64" height="64" src="{{ Storage::exists($w->product->type->image) ? asset(Storage::url($w->product->type->image)) : asset('website/empty.jpg') }}" class="img-fluid">
+                              <img width="64" height="64" src="{{ $w->product->type->image() }}" class="img-fluid">
                            </a>
                         </td>
                         <td class="cart-product-name">

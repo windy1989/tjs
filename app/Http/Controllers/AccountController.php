@@ -411,7 +411,7 @@ class AccountController extends Controller {
 
                     $photo = $request->file('photo')->store('public/customer');
                 } else {
-                    $photo = $profile->image;
+                    $photo = $profile->photo;
                 }
 
                 $profile->update([
