@@ -149,7 +149,7 @@ class BannerController extends Controller {
     {
         $data = Banner::find($request->id);
         return response()->json([
-            'image'  => $val->image(),
+            'image'  => $data->image(),
             'status' => $data->status
         ]);
     }

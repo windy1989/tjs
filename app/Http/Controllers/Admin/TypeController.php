@@ -254,7 +254,7 @@ class TypeController extends Controller {
             'buy_unit_id'      => $data->buy_unit_id,
             'stock_unit_id'    => $data->stock_unit_id,
             'selling_unit_id'  => $data->selling_unit_id,
-            'image'            => $val->image(),
+            'image'            => $data->image(),
             'code'             => $data->code,
             'material'         => $data->material,
             'faces'            => $data->faces,
