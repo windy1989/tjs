@@ -1048,8 +1048,8 @@ class SMB {
 
       $fee_shrinkage        = Coa::whereIn('code', ['6.300.00'])->get();
       $fee_shrinkage_result = [];
-      foreach($fee_shrinkage as $sfs) {
-         $fee_shrinkage     = Coa::find($sfs->id);
+      foreach($fee_shrinkage as $fs) {
+         $fee_shrinkage     = Coa::find($fs->id);
          $fee_shrinkage_sub = Coa::where('parent_id', $fee_shrinkage->id)->get();
          foreach($fee_shrinkage_sub as $fss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fss->id)->get()->toArray());
@@ -1066,69 +1066,9 @@ class SMB {
             $variance_current       = $total_balance_current - $budget_nominal;
             $variance_last          = $total_balance_current - $total_balance_last;
 
-            $nett_actual_current += $total_balance_current;
-            $nett_actual_last    += $total_balance_last;
-            $nett_budget         += $budget_nominal;
-
-            $actual = [
-               'nominal' => [
-                  'current' => $total_balance_current, 
-                  'last'    => $total_balance_last
-               ],
-               'percent' => [
-                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
-                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
-               ]
-            ];
-
-            $budgeting = [
-               'nominal' => $budget_nominal,
-               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
-            ];
-
-            $variance = [
-               'nominal' => [
-                  'current' => $variance_current, 
-                  'last'    => $variance_last
-               ],
-               'percent' => [
-                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
-                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
-               ]
-            ];
-
-            $fee_shrinkage_result[] = [
-               'name'     => $fss->name,
-               'actual'   => $actual,
-               'budget'   => $budgeting,
-               'variance' => $variance
-            ];
-         }
-      }
-
-      $fee_shrinkage        = Coa::whereIn('code', ['6.300.00'])->get();
-      $fee_shrinkage_result = [];
-      foreach($fee_shrinkage as $sfs) {
-         $fee_shrinkage     = Coa::find($sfs->id);
-         $fee_shrinkage_sub = Coa::where('parent_id', $fee_shrinkage->id)->get();
-         foreach($fee_shrinkage_sub as $fss) {
-            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fss->id)->get()->toArray());
-            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-            $sub_merge              = $sub_1->merge(collect([$fss->id])->merge($sub_2));
-            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
-            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
-            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
-            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
-            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fss->id)->orderByDesc('id')->limit(1)->get();
-            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
-            $variance_current       = $total_balance_current - $budget_nominal;
-            $variance_last          = $total_balance_current - $total_balance_last;
-
-            $nett_actual_current += $total_balance_current;
-            $nett_actual_last    += $total_balance_last;
-            $nett_budget         += $budget_nominal;
+            $nett_actual_current -= $total_balance_current;
+            $nett_actual_last    -= $total_balance_last;
+            $nett_budget         -= $budget_nominal;
 
             $actual = [
                'nominal' => [
@@ -1181,9 +1121,10 @@ class SMB {
       $fee_outside_budget_nominal     = $fee_outside_budget->count() > 0 ? $fee_outside_budget[0]->nominal : 0;
       $fee_outside_variance_current   = $total_fee_outside_current - $fee_outside_budget_nominal;
       $fee_outside_variance_last      = $total_fee_outside_current - $total_fee_outside_last;
-      $nett_actual_current   += $total_fee_outside_current;
-      $nett_actual_last      += $total_fee_outside_last;
-      $nett_budget           += $fee_outside_budget_nominal;
+
+      $nett_actual_current -= $total_fee_outside_current;
+      $nett_actual_last    -= $total_fee_outside_last;
+      $nett_budget         -= $fee_outside_budget_nominal;
 
       $income_outside                   = Coa::where('code', '7.100.00')->first();
       $income_outside_sub_1             = collect(Coa::select('id')->where('parent_id', $income_outside->id)->get()->toArray());
@@ -1201,9 +1142,9 @@ class SMB {
       $income_outside_variance_current  = $total_income_outside_current - $income_outside_budget_nominal;
       $income_outside_variance_last     = $total_income_outside_current - $total_income_outside_last;
 
-      $nett_actual_current     += $total_income_outside_current;
-      $nett_actual_last        += $total_income_outside_last;
-      $nett_budget             += $income_outside_budget_nominal;
+      $nett_actual_current -= $total_income_outside_current;
+      $nett_actual_last    -= $total_income_outside_last;
+      $nett_budget         -= $income_outside_budget_nominal;
 
       $fee_income_outside_result = [
          [
@@ -1311,11 +1252,11 @@ class SMB {
          $gross_variance_percent_last = round(($gross_variance_nominal_last / $gross_actual_nominal_last) * 100);
       }
 
-      $nett_actual_nominal_current   = $gross_actual_nominal_current - $nett_actual_current;
+      $nett_actual_nominal_current   = $nett_actual_current;
       $nett_actual_nominal_last      = $gross_actual_nominal_current - $nett_actual_last;
       $nett_actual_percent_current   = 0;
       $nett_actual_percent_last      = 0;
-      $nett_budget_nominal           = $gross_budget_nominal - $nett_budget;
+      $nett_budget_nominal           = $nett_budget;
       $nett_budget_percent           = 0;
       $nett_variance_nominal_current = $nett_actual_nominal_current - $nett_budget_nominal;
       $nett_variance_nominal_last    = $nett_actual_nominal_current - $nett_actual_nominal_last;
