@@ -377,6 +377,9 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('row_detail', 'CashBankController@rowDetail');
                 Route::post('datatable', 'CashBankController@datatable');
                 Route::post('create', 'CashBankController@create');
+                Route::post('show', 'CashBankController@show');
+                Route::post('update/{id}', 'CashBankController@update');
+                Route::post('destroy', 'CashBankController@destroy');
             });
 
             Route::prefix('budgeting')->group(function() {

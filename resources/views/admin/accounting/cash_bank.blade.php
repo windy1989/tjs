@@ -9,10 +9,10 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
+					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="filter()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="reset()" data-toggle="modal" data-target="#modal_form">
+					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
 						<b><i class="icon-plus3"></i></b> Add Data
 					</button>
 				</div>
@@ -94,8 +94,8 @@
                </div>
             </div>
             <div class="form-group text-right">
-               <button type="button" onclick="resetFilter()" class="btn bg-danger"><i class="icon-sync"></i> Reset</button>
-               <button type="button" onclick="loadDataTable()" class="btn bg-purple"><i class="icon-filter4"></i> Search</button>
+               <button type="button" onclick="filter('reset')" class="btn bg-danger"><i class="icon-sync"></i> Reset</button>
+               <button type="button" onclick="filter()" class="btn bg-purple"><i class="icon-filter4"></i> Search</button>
             </div>
          </div>
       </div>
@@ -114,6 +114,7 @@
                         <th>Code</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Action</th>
                      </tr>
                   </thead>
                </table>
@@ -261,6 +262,8 @@
          </div>
          <div class="modal-footer">
             <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
+            <button type="button" class="btn bg-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="icon-cross3"></i> Cancel</button>
+            <button type="button" class="btn bg-warning" id="btn_update" onclick="update()" style="display:none;"><i class="icon-pencil7"></i> Save</button>
             <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Add</button>
          </div>
       </div>
@@ -269,11 +272,7 @@
 
 <script>
    $(function() {
-      var table = loadDataTable();
-
-      $('#data_content').on('click', '#delete_data_content', function() {
-         $(this).closest('tr').remove();
-      });
+      filter();
 
       $('#datatable_serverside tbody').on('click', 'td.details-control', function() {
          var tr    = $(this).closest('tr');
@@ -297,11 +296,14 @@
             icon.first().addClass('icon-minus3');
          }
       });
+      
+      $('#data_content').on('click', '#delete_data_content', function() {
+         $(this).closest('tr').remove();
+      });
    });
 
    function rowDetail(data) {
       var content = '';
-
       $.ajax({
          url: '{{ url("admin/accounting/cash_bank/row_detail") }}',
          type: 'POST',
@@ -358,6 +360,24 @@
       }
    }
 
+   function cancel() {
+      reset();
+      $('#modal_form').modal('hide');
+      $('#btn_create').show();
+      $('#btn_update').hide();
+      $('#btn_cancel').hide();
+   }
+
+   function toShow() {
+      $('#data_content').html('');
+      $('#modal_form').modal('show');
+      $('#validation_alert').hide();
+      $('#validation_content').html('');
+      $('#btn_create').hide();
+      $('#btn_update').show();
+      $('#btn_cancel').show();
+   }
+
    function resetFilter() {
       $('#filter_user_id').val(null).trigger('change');
       $('#filter_start_date').val(null);
@@ -365,10 +385,17 @@
       $('#filter_start_nominal').val(null);
       $('#filter_finish_nominal').val(null);
       $('input[name="filter_type"][value=""]').prop('checked', true);
-      loadDataTable();
    }
 
-  function reset() {
+   function filter(param = null) {
+      if(param == 'reset') {
+         resetFilter();
+      }
+
+      window.table = loadDataTable();
+   }
+
+   function reset() {
       $('#form_data').trigger('reset');
       $('#data_content').html('');
       $('input[name="type"][value="1"]').prop('checked', true);
@@ -376,7 +403,7 @@
       $('#validation_content').html('');
    }
 
-  function success() {
+   function success() {
       reset();
       $('#modal_form').modal('hide');
       $('#datatable_serverside').DataTable().ajax.reload(null, false);
@@ -424,7 +451,8 @@
             { name: 'user_id', className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle nowrap' },
             { name: 'date', searchable: false, className: 'text-center align-middle' },
-            { name: 'description', className: 'text-center align-middle' }
+            { name: 'description', className: 'text-center align-middle' },
+            { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }
@@ -474,5 +502,148 @@
             });
          }
       });
+   }
+
+   function show(id) {
+      toShow();
+      $.ajax({
+         url: '{{ url("admin/accounting/cash_bank/show") }}',
+         type: 'POST',
+         dataType: 'JSON',
+         data: {
+            id: id
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            loadingOpen('.modal-content');
+         },
+         success: function(response) {
+            loadingClose('.modal-content');
+            $('#date').val(response.date);
+            $('#description').val(response.description);
+
+            $.each(response.cash_bank_detail, function(i, val) {
+               $('#data_content').append(`
+                  <tr class="text-center">
+                     <input type="hidden" name="debit_detail[]" value="` + val.debit_id + `">
+                     <input type="hidden" name="credit_detail[]" value="` + val.credit_id + `">
+                     <input type="hidden" name="nominal_detail[]" value="` + val.nominal + `">
+                     <td class="align-middle">` + val.debit_name + `</td>   
+                     <td class="align-middle">` + val.credit_name + `</td>   
+                     <td class="align-middle">` + Intl.NumberFormat('id-ID').format(val.nominal) + `</td>   
+                     <td class="align-middle">
+                        <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                     </td>
+                  </tr>
+               `);
+            });
+
+            $('#btn_update').attr('onclick', 'update(' + id + ')');
+         },
+         error: function() {
+            cancel();
+            loadingClose('.modal-content');
+            swalInit.fire({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
+   }
+
+   function update(id) {
+      $.ajax({
+         url: '{{ url("admin/accounting/cash_bank/update") }}' + '/' + id,
+         type: 'POST',
+         dataType: 'JSON',
+         data: $('#form_data').serialize(),
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            $('#validation_alert').hide();
+            $('#validation_content').html('');
+            loadingOpen('.modal-content');
+         },
+         success: function(response) {
+            loadingClose('.modal-content');
+            if(response.status == 200) {
+               success();
+               notif('success', 'bg-success', response.message);
+            } else if(response.status == 422) {
+               $('#validation_alert').show();
+               $('.modal-body').scrollTop(0);
+               notif('warning', 'bg-warning', 'Validation');
+               
+               $.each(response.error, function(i, val) {
+                  $.each(val, function(i, val) {
+                     $('#validation_content').append(`
+                        <li>` + val + `</li>
+                     `);
+                  });
+               });
+            } else {
+               notif('error', 'bg-danger', response.message);
+            }
+         },
+         error: function() {
+            $('.modal-body').scrollTop(0);
+            loadingClose('.modal-content');
+            swalInit.fire({
+               title: 'Server Error',
+               text: 'Please contact developer',
+               type: 'error'
+            });
+         }
+      });
+   }
+
+   function destroy(id) {
+      var notyConfirm = new Noty({
+         theme: 'limitless',
+         text: '<h6 class="font-weight-bold mb-3">Are sure you want to delete?</h6><label>Deleted data can no longer be recovered.</label>',
+         timeout: false,
+         modal: true,
+         layout: 'center',
+         closeWith: 'button',
+         type: 'confirm',
+         buttons: [
+            Noty.button('<i class="icon-cross3"></i>', 'btn bg-danger', function() {
+               notyConfirm.close();
+            }),
+            Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
+               $.ajax({
+                  url: '{{ url("admin/accounting/cash_bank/destroy") }}',
+                  type: 'POST',
+                  dataType: 'JSON',
+                  data: {
+                     id: id
+                  },
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  success: function(response) {
+                     if(response.status == 200) {
+                        $('#datatable_serverside').DataTable().ajax.reload(null, false);
+                        notif('success', 'bg-success', response.message);
+                        notyConfirm.close();
+                     } else {
+                        notif('error', 'bg-danger', response.message);
+                     }
+                  },
+                  error: function() {
+                     swalInit.fire({
+                        title: 'Server Error',
+                        text: 'Please contact developer',
+                        type: 'error'
+                     });
+                  }
+               });
+            })
+         ]
+      }).show();
    }
 </script>

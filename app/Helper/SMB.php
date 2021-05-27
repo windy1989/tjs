@@ -32,7 +32,7 @@ class SMB {
       $cash_bank_merge  = $cash_bank_sub_1->merge($cash_bank_sub_2->merge($cash_bank_sub_3->merge([$cash_bank->id])));
       $cash_bank_debit  = Journal::whereIn('debit', $cash_bank_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $cash_bank_credit = Journal::whereIn('credit', $cash_bank_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_cash_bank  = $cash_bank_debit - $cash_bank_credit;
+      $total_cash_bank  = abs($cash_bank_debit - $cash_bank_credit);
 
       $petty_cash        = Coa::where('code', '1.000.01')->first();
       $petty_cash_sub    = Coa::where('parent_id', $petty_cash->id)->get();
@@ -43,7 +43,7 @@ class SMB {
          $sub_merge             = $sub_1->merge(collect([$pcs->id])->merge($sub_2));
          $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
+         $total_balance         = abs($balance_debit - $balance_credit);
          $grandtotal_cash_bank += $total_balance;
 
          $petty_cash_result[] = [
@@ -61,7 +61,7 @@ class SMB {
          $sub_merge             = $sub_1->merge(collect([$bcs->id])->merge($sub_2));
          $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
+         $total_balance         = abs($balance_debit - $balance_credit);
          $grandtotal_cash_bank += $total_balance;
 
          $big_cash_result[] = [
@@ -79,7 +79,7 @@ class SMB {
          $sub_merge             = $sub_1->merge(collect([$bss->id])->merge($sub_2));
          $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
+         $total_balance         = abs($balance_debit - $balance_credit);
          $grandtotal_cash_bank += $total_balance;
 
          $bank_sby_result[] = [
@@ -97,7 +97,7 @@ class SMB {
          $sub_merge             = $sub_1->merge(collect([$bjs->id])->merge($sub_2));
          $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
+         $total_balance         = abs($balance_debit - $balance_credit);
          $grandtotal_cash_bank += $total_balance;
 
          $bank_jkt_result[] = [
@@ -113,7 +113,7 @@ class SMB {
       $receivable_merge       = $receivable_sub_1->merge($receivable_sub_2->merge($receivable_sub_3->merge([$receivable->id])));
       $receivable_debit       = Journal::whereIn('debit', $receivable_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $receivable_credit      = Journal::whereIn('credit', $receivable_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_receivable       = $receivable_debit - $receivable_credit;
+      $total_receivable       = abs($receivable_debit - $receivable_credit);
       $grandtotal_receivable += $total_receivable;
 
       $dp_purchase        = Coa::where('code', '1.100.01')->first();
@@ -125,7 +125,7 @@ class SMB {
          $sub_merge              = $sub_1->merge(collect([$dps->id])->merge($sub_2));
          $balance_debit          = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit         = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance          = $balance_debit - $balance_credit;
+         $total_balance          = abs($balance_debit - $balance_credit);
          $grandtotal_receivable += $total_balance;
 
          $dp_purchase_result[] = [
@@ -143,7 +143,7 @@ class SMB {
          $sub_merge              = $sub_1->merge(collect([$res->id])->merge($sub_2));
          $balance_debit          = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit         = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance          = $balance_debit - $balance_credit;
+         $total_balance          = abs($balance_debit - $balance_credit);
          $grandtotal_receivable += $total_balance;
 
          $receivable_effort_result[] = [
@@ -159,7 +159,7 @@ class SMB {
       $advance_purchase_merge  = $advance_purchase_sub_1->merge($advance_purchase_sub_2->merge($advance_purchase_sub_3->merge([$advance_purchase->id])));
       $advance_purchase_debit  = Journal::whereIn('debit', $advance_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $advance_purchase_credit = Journal::whereIn('credit', $advance_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_advance_purchase  = $advance_purchase_debit - $advance_purchase_credit;
+      $total_advance_purchase  = abs($advance_purchase_debit - $advance_purchase_credit);
       $grandtotal_receivable  += $total_advance_purchase;
 
       $supply             = Coa::where('code', '1.200.00')->first();
@@ -169,7 +169,7 @@ class SMB {
       $supply_merge       = $supply_sub_1->merge($supply_sub_2->merge($supply_sub_3->merge([$supply->id])));
       $supply_debit       = Journal::whereIn('debit', $supply_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $supply_credit      = Journal::whereIn('credit', $supply_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_supply       = $supply_debit - $supply_credit;
+      $total_supply       = abs($supply_debit - $supply_credit);
       $grandtotal_supply += $total_supply;
 
       $supply_item_sby        = Coa::where('code', '1.200.01')->first();
@@ -181,7 +181,7 @@ class SMB {
          $sub_merge          = $sub_1->merge(collect([$siss->id])->merge($sub_2));
          $balance_debit      = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit     = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance      = $balance_debit - $balance_credit;
+         $total_balance      = abs($balance_debit - $balance_credit);
          $grandtotal_supply += $total_balance;
 
          $supply_item_sby_result[] = [
@@ -199,7 +199,7 @@ class SMB {
          $sub_merge          = $sub_1->merge(collect([$sijs->id])->merge($sub_2));
          $balance_debit      = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit     = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance      = $balance_debit - $balance_credit;
+         $total_balance      = abs($balance_debit - $balance_credit);
          $grandtotal_supply += $total_balance;
 
          $supply_item_jkt_result[] = [
@@ -215,7 +215,7 @@ class SMB {
       $sent_item_merge    = $sent_item_sub_1->merge($sent_item_sub_2->merge($sent_item_sub_3->merge([$sent_item->id])));
       $sent_item_debit    = Journal::whereIn('debit', $sent_item_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $sent_item_credit   = Journal::whereIn('credit', $sent_item_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_sent_item    = $sent_item_debit - $sent_item_credit;
+      $total_sent_item    = abs($sent_item_debit - $sent_item_credit);
       $grandtotal_supply += $total_sent_item;
 
       $equip                     = Coa::where('code', '1.300.00')->first();
@@ -225,7 +225,7 @@ class SMB {
       $equip_merge               = $equip_sub_1->merge($equip_sub_2->merge($equip_sub_3->merge([$equip->id])));
       $equip_debit               = Journal::whereIn('debit', $equip_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $equip_credit              = Journal::whereIn('credit', $equip_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_equip               = $equip_debit - $equip_credit;
+      $total_equip               = abs($equip_debit - $equip_credit);
       $grandtotal_assets_facile += $total_equip;
 
       $fee_dp        = Coa::where('code', '1.400.00')->first();
@@ -237,7 +237,7 @@ class SMB {
          $sub_merge                 = $sub_1->merge(collect([$fds->id])->merge($sub_2));;
          $balance_debit             = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit            = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance             = $balance_debit - $balance_credit;
+         $total_balance             = abs($balance_debit - $balance_credit);
          $grandtotal_assets_facile += $total_balance;
 
          $fee_dp_result[] = [
@@ -255,7 +255,7 @@ class SMB {
          $sub_merge                 = $sub_1->merge(collect([$pts->id])->merge($sub_2));
          $balance_debit             = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit            = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance             = $balance_debit - $balance_credit;
+         $total_balance             = abs($balance_debit - $balance_credit);
          $grandtotal_assets_facile += $total_balance;
 
          $prepaid_tax_result[] = [
@@ -273,7 +273,7 @@ class SMB {
          $sub_merge                      = $sub_1->merge(collect([$acs->id])->merge($sub_2));
          $balance_debit                  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit                 = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance                  = $balance_debit - $balance_credit;
+         $total_balance                  = abs($balance_debit - $balance_credit);
          $grandtotal_assets_consistenly += $total_balance;
 
          $assets_consistenly_result[] = [
@@ -291,7 +291,7 @@ class SMB {
          $sub_merge                         = $sub_1->merge(collect([$ass->id])->merge($sub_2));
          $balance_debit                     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit                    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance                     = $balance_debit - $balance_credit;
+         $total_balance                     = abs($balance_debit - $balance_credit);
          $grandtotal_accumulated_shrinkage += $total_balance;
 
          $accumulated_shrinkage_result[] = [
@@ -307,7 +307,7 @@ class SMB {
       $debt_merge       = $debt_sub_1->merge($debt_sub_2->merge($debt_sub_3->merge([$debt->id])));
       $debt_debit       = Journal::whereIn('debit', $debt_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $debt_credit      = Journal::whereIn('credit', $debt_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_debt       = $debt_debit - $debt_credit;
+      $total_debt       = abs($debt_debit - $debt_credit);
       $grandtotal_debt += $total_debt;
 
       $dp_sale        = Coa::where('code', '2.000.01')->first();
@@ -319,7 +319,7 @@ class SMB {
          $sub_merge        = $sub_1->merge(collect([$dss->id])->merge($sub_2));
          $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
+         $total_balance    = abs($balance_debit - $balance_credit);
          $grandtotal_debt += $total_balance;
 
          $dp_sale_result[] = [
@@ -337,7 +337,7 @@ class SMB {
          $sub_merge        = $sub_1->merge(collect([$dss->id])->merge($sub_2));
          $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
+         $total_balance    = abs($balance_debit - $balance_credit);
          $grandtotal_debt += $total_balance;
 
          $dp_sale_result[] = [
@@ -355,7 +355,7 @@ class SMB {
          $sub_merge        = $sub_1->merge(collect([$dbs->id])->merge($sub_2));
          $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
+         $total_balance    = abs($balance_debit - $balance_credit);
          $grandtotal_debt += $total_balance;
 
          $debt_business_result[] = [
@@ -363,16 +363,6 @@ class SMB {
             'balance' => $total_balance
          ];
       }
-
-      $advance_sales        = Coa::where('code', '2.200.03')->first();
-      $advance_sales_sub_1  = collect(Coa::select('id')->where('parent_id', $advance_sales->id)->get()->toArray());
-      $advance_sales_sub_2  = collect(Coa::select('id')->whereIn('parent_id', $advance_sales_sub_1->flatten())->get()->toArray());
-      $advance_sales_sub_3  = collect(Coa::select('id')->whereIn('parent_id', $advance_sales_sub_2->flatten())->get()->toArray());
-      $advance_sales_merge  = $advance_sales_sub_1->merge($advance_sales_sub_2->merge($advance_sales_sub_3->merge([$advance_purchase->id])));
-      $advance_sales_debit  = Journal::whereIn('debit', $advance_sales_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $advance_sales_credit = Journal::whereIn('credit', $advance_sales_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_advance_sales  = $advance_sales_debit - $advance_sales_credit;
-      $grandtotal_debt     += $total_advance_sales;
 
       $tax        = Coa::where('code', '2.100.00')->first();
       $tax_sub    = Coa::where('parent_id', $tax->id)->get();
@@ -383,7 +373,7 @@ class SMB {
          $sub_merge                = $sub_1->merge(collect([$ts->id])->merge($sub_2));
          $balance_debit            = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit           = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance            = $balance_debit - $balance_credit;
+         $total_balance            = abs($balance_debit - $balance_credit);
          $grandtotal_responbility += $total_balance;
 
          $tax_result[] = [
@@ -401,7 +391,7 @@ class SMB {
          $sub_merge                = $sub_1->merge(collect([$ops->id])->merge($sub_2));
          $balance_debit            = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit           = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance            = $balance_debit - $balance_credit;
+         $total_balance            = abs($balance_debit - $balance_credit);
          $grandtotal_responbility += $total_balance;
 
          $other_payable_result[] = [
@@ -417,7 +407,7 @@ class SMB {
       $debt_purchase_merge      = $debt_purchase_sub_1->merge($debt_purchase_sub_2->merge($debt_purchase_sub_3->merge([$debt_purchase->id])));
       $debt_purchase_debit      = Journal::whereIn('debit', $debt_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $debt_purchase_credit     = Journal::whereIn('credit', $debt_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_debt_purchase      = $debt_purchase_debit - $debt_purchase_credit;
+      $total_debt_purchase      = abs($debt_purchase_debit - $debt_purchase_credit);
       $grandtotal_responbility += $total_debt_purchase;
 
       $capital            = Coa::where('code', '3.000.00')->first();
@@ -427,7 +417,7 @@ class SMB {
       $capital_merge      = $capital_sub_1->merge($capital_sub_2->merge($capital_sub_3->merge([$capital->id])));
       $capital_debit      = Journal::whereIn('debit', $capital_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $capital_credit     = Journal::whereIn('credit', $capital_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_capital      = $capital_debit - $capital_credit;
+      $total_capital      = abs($capital_debit - $capital_credit);
       $grandtotal_equity += $total_capital;
 
       $opening_balance        = Coa::where('code', '3.100.00')->first();
@@ -437,7 +427,7 @@ class SMB {
       $opening_balance_merge  = $opening_balance_sub_1->merge($opening_balance_sub_2->merge($opening_balance_sub_3->merge([$opening_balance->id])));
       $opening_balance_debit  = Journal::whereIn('debit', $opening_balance_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $opening_balance_credit = Journal::whereIn('credit', $opening_balance_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_opening_balance  = $opening_balance_debit - $opening_balance_credit;
+      $total_opening_balance  = abs($opening_balance_debit - $opening_balance_credit);
       $grandtotal_equity     += $total_opening_balance;
 
       $deviden            = Coa::where('code', '3.200.00')->first();
@@ -447,7 +437,7 @@ class SMB {
       $deviden_merge      = $deviden_sub_1->merge($deviden_sub_2->merge($deviden_sub_3->merge([$deviden->id])));
       $deviden_debit      = Journal::whereIn('debit', $deviden_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $deviden_credit     = Journal::whereIn('credit', $deviden_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_deviden      = $deviden_debit - $deviden_credit;
+      $total_deviden      = abs($deviden_debit - $deviden_credit);
       $grandtotal_equity += $total_deviden;
 
       $retained_earning        = Coa::where('code', '3.300.00')->first();
@@ -457,8 +447,8 @@ class SMB {
       $retained_earning_merge  = $retained_earning_sub_1->merge($retained_earning_sub_2->merge($retained_earning_sub_3->merge([$retained_earning->id])));
       $retained_earning_debit  = Journal::whereIn('debit', $retained_earning_merge->flatten())->whereRaw($where_raw)->sum('nominal');
       $retained_earning_credit = Journal::whereIn('credit', $retained_earning_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_retained_earning  = $retained_earning_debit - $retained_earning_credit;
-      $grandtotal_equity       += $total_retained_earning;
+      $total_retained_earning  = abs($retained_earning_debit - $retained_earning_credit);
+      $grandtotal_equity      += $total_retained_earning;
 
       $result = [
          'assets' => [
@@ -589,12 +579,7 @@ class SMB {
                   'name'    => $debt_business->name,
                   'balance' => null,
                   'sub'     => $debt_business_result
-               ],
-               [
-                  'name'    => $advance_sales->name,
-                  'balance' => $total_advance_sales,
-                  'sub'     => []
-               ]  
+               ]
             ],
             'responbility' => [
                [
@@ -717,8 +702,8 @@ class SMB {
                      'last'    => $variance_last
                   ],
                   'percent' => [
-                     'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                     'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                   ]
                ]
             ];
@@ -761,8 +746,8 @@ class SMB {
                      'last'    => $variance_last
                   ],
                   'percent' => [
-                     'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                     'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                   ]
                ]
             ];
@@ -805,8 +790,8 @@ class SMB {
                      'last'    => $variance_last
                   ],
                   'percent' => [
-                     'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                     'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                   ]
                ]
             ];
@@ -845,14 +830,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -861,8 +846,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -907,14 +892,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -923,8 +908,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -969,14 +954,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -985,8 +970,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -1031,14 +1016,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -1047,8 +1032,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -1091,14 +1076,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -1107,8 +1092,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -1151,14 +1136,14 @@ class SMB {
                   'last'    => $total_balance_last
                ],
                'percent' => [
-                  'current' => ($total_balance_current > 0 && $income_actual_current > 0) ? round($total_balance_current / $income_actual_current) : 0,
-                  'last'    => ($total_balance_last > 0 && $income_actual_last > 0) ? round($total_balance_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
                ]
             ];
 
             $budgeting = [
                'nominal' => $budget_nominal,
-               'percent' => ($budget_nominal > 0 && $income_budget > 0) ? round($budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
             ];
 
             $variance = [
@@ -1167,8 +1152,8 @@ class SMB {
                   'last'    => $variance_last
                ],
                'percent' => [
-                  'current' => ($variance_current > 0 && $budget_nominal > 0) ? round($variance_current / $budget_nominal) : 0,
-                  'last'    => ($variance_last > 0 && $total_balance_last > 0) ? round($variance_last / $total_balance_last) : 0
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
                ]
             ];
 
@@ -1229,13 +1214,13 @@ class SMB {
                   'last'    => $total_fee_outside_last
                ],
                'percent' => [
-                  'current' => ($total_fee_outside_current > 0 && $income_actual_current > 0) ? round($total_fee_outside_current / $income_actual_current) : 0,
-                  'last'    => ($total_fee_outside_last > 0 && $income_actual_last > 0) ? round($total_fee_outside_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_fee_outside_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_fee_outside_last / $income_actual_last) * 100) : 0
                ]
             ],
             'budget' => [
                'nominal' => $fee_outside_budget_nominal,
-               'percent' => ($fee_outside_budget_nominal > 0 && $income_budget > 0) ? round($fee_outside_budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($fee_outside_budget_nominal / $income_budget) * 100) : 0
             ],
             'variance' => [
                'nominal' => [
@@ -1243,8 +1228,8 @@ class SMB {
                   'last'    => $fee_outside_variance_last
                ],
                'percent' => [
-                  'current' => ($fee_outside_variance_current > 0 && $fee_outside_budget_nominal > 0) ? round($fee_outside_variance_current / $fee_outside_budget_nominal) : 0,
-                  'last'    => ($fee_outside_variance_last > 0 && $total_fee_outside_last > 0) ? round($fee_outside_variance_last / $total_fee_outside_last) : 0
+                  'current' => ($fee_outside_budget_nominal > 0) ? round(($fee_outside_variance_current / $fee_outside_budget_nominal) * 100) : 0,
+                  'last'    => ($total_fee_outside_last > 0) ? round(($fee_outside_variance_last / $total_fee_outside_last) * 100) : 0
                ]
             ]
          ],
@@ -1256,13 +1241,13 @@ class SMB {
                   'last'    => $total_income_outside_last
                ],
                'percent' => [
-                  'current' => ($total_income_outside_current > 0 && $income_actual_current > 0) ? round($total_income_outside_current / $income_actual_current) : 0,
-                  'last'    => ($total_income_outside_last > 0 && $income_actual_last > 0) ? round($total_income_outside_last / $income_actual_last) : 0
+                  'current' => ($income_actual_current > 0) ? round(($total_income_outside_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_income_outside_last / $income_actual_last) * 100) : 0
                ]
             ],
             'budget' => [
                'nominal' => $income_outside_budget_nominal,
-               'percent' => ($income_outside_budget_nominal > 0 && $income_budget > 0) ? round($income_outside_budget_nominal / $income_budget) : 0
+               'percent' => ($income_budget > 0) ? round(($income_outside_budget_nominal / $income_budget) * 100) : 0
             ],
             'variance' => [
                'nominal' => [
@@ -1270,8 +1255,8 @@ class SMB {
                   'last'    => $income_outside_variance_last
                ],
                'percent' => [
-                  'current' => ($income_outside_variance_current > 0 && $income_outside_budget_nominal > 0) ? round($income_outside_variance_current / $income_outside_budget_nominal) : 0,
-                  'last'    => ($income_outside_variance_last > 0 && $total_income_outside_last > 0) ? round($income_outside_variance_last / $total_income_outside_last) : 0
+                  'current' => ($income_outside_budget_nominal > 0) ? round(($income_outside_variance_current / $income_outside_budget_nominal) * 100) : 0,
+                  'last'    => ($total_income_outside_last > 0) ? round(($income_outside_variance_last / $total_income_outside_last) * 100) : 0
                ]
             ]
          ]
@@ -1306,24 +1291,24 @@ class SMB {
       $gross_variance_percent_current = 0;
       $gross_variance_percent_last    = 0;
       
-      if($gross_actual_nominal_current > 0 && $income_actual_current > 0) {
-         $gross_actual_percent_current = round($gross_actual_nominal_current / $income_actual_current);
+      if($income_actual_current > 0) {
+         $gross_actual_percent_current = round(($gross_actual_nominal_current / $income_actual_current) * 100);
       }
 
-      if($gross_budget_nominal > 0 && $income_budget > 0) {
-         $gross_budget_percent = round($gross_budget_nominal / $income_budget);
+      if($income_budget > 0) {
+         $gross_budget_percent = round(($gross_budget_nominal / $income_budget) * 100);
       }
 
-      if($gross_variance_nominal_current > 0 && $gross_budget_nominal > 0) {
-         $gross_variance_percent_current = round($gross_variance_nominal_current / $gross_budget_nominal);
+      if($gross_budget_nominal > 0) {
+         $gross_variance_percent_current = round(($gross_variance_nominal_current / $gross_budget_nominal) * 100);
       }
 
-      if($gross_actual_nominal_last > 0 && $income_actual_last > 0) {
-         $gross_actual_percent_last = round($gross_actual_nominal_current / $income_actual_last);
+      if($income_actual_last > 0) {
+         $gross_actual_percent_last = round(($gross_actual_nominal_current / $income_actual_last) * 100);
       }
 
-      if($gross_variance_nominal_last > 0 && $gross_actual_nominal_last > 0) {
-         $gross_variance_percent_last = round($gross_variance_nominal_last / $gross_actual_nominal_last);
+      if($gross_actual_nominal_last > 0) {
+         $gross_variance_percent_last = round(($gross_variance_nominal_last / $gross_actual_nominal_last) * 100);
       }
 
       $nett_actual_nominal_current   = $gross_actual_nominal_current - $nett_actual_current;
@@ -1337,24 +1322,24 @@ class SMB {
       $nett_variance_percent_current = 0;
       $nett_variance_percent_last    = 0;
 
-      if($nett_actual_nominal_current > 0 && $income_actual_current > 0) {
-         $nett_actual_percent_current = round($nett_actual_nominal_current / $income_actual_current);
+      if($income_actual_current > 0) {
+         $nett_actual_percent_current = round(($nett_actual_nominal_current / $income_actual_current) * 100);
       }
 
-      if($nett_budget_nominal > 0 && $income_budget > 0) {
-         $nett_budget_percent = round($nett_budget_nominal / $income_budget);
+      if($income_budget > 0) {
+         $nett_budget_percent = round(($nett_budget_nominal / $income_budget) * 100);
       }
 
-      if($nett_variance_nominal_current > 0 && $nett_budget_nominal > 0) {
-         $nett_variance_percent_current = round($nett_variance_nominal_current / $nett_budget_nominal);
+      if($nett_budget_nominal > 0) {
+         $nett_variance_percent_current = round(($nett_variance_nominal_current / $nett_budget_nominal) * 100);
       }
 
-      if($nett_actual_nominal_last > 0 && $income_actual_last > 0) {
-         $nett_actual_percent_last = round($nett_actual_nominal_last / $income_actual_last);
+      if($income_actual_last > 0) {
+         $nett_actual_percent_last = round(($nett_actual_nominal_last / $income_actual_last) * 100);
       }
 
-      if($nett_variance_nominal_last > 0 && $nett_actual_nominal_last > 0) {
-         $nett_variance_percent_last = round($nett_variance_nominal_last / $nett_actual_nominal_last);
+      if($nett_actual_nominal_last > 0) {
+         $nett_variance_percent_last = round(($nett_variance_nominal_last / $nett_actual_nominal_last) * 100);
       }
 
       $grandtotal = [

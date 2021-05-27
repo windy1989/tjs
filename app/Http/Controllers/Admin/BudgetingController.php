@@ -227,7 +227,7 @@ class BudgetingController extends Controller {
             activity()
                 ->performedOn(new Budgeting())
                 ->causedBy(session('bo_id'))
-                ->log('Delete the accounting coa data');
+                ->log('Delete the accounting budgeting data');
 
             $response = [
                 'status'  => 200,

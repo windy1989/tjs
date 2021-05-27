@@ -135,7 +135,11 @@ class CashBankController extends Controller {
                     $val->user->name,
                     $val->code,
                     date('d F Y', strtotime($val->date)),
-                    $val->description
+                    $val->description,
+                    '
+                        <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
+                        <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
+                    '
                 ];
 
                 $nomor++;
@@ -251,6 +255,125 @@ class CashBankController extends Controller {
                     'message' => 'Data failed to add.'
                 ];
             }
+        }
+
+        return response()->json($response);
+    }
+
+    public function show(Request $request)
+    {
+        $data             = CashBank::find($request->id);
+        $cash_bank_detail = [];
+
+        foreach($data->cashBankDetail as $cbd) {
+            $cash_bank_detail[] = [
+                'debit_id'    => $cbd->debit,
+                'debit_name'  => $cbd->coaDebit->name,
+                'credit_id'   => $cbd->credit,
+                'credit_name' => $cbd->coaCredit->name,
+                'nominal'     => $cbd->nominal
+            ];
+        }
+
+        return response()->json([
+            'date'             => $data->date,
+            'type'             => $data->type,
+            'description'      => $data->description,
+            'cash_bank_detail' => $cash_bank_detail
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $query      = CashBank::find($id);
+        $validation = Validator::make($request->all(), [
+            'debit_detail'   => 'required',
+            'credit_detail'  => 'required',
+            'nominal_detail' => 'required',
+            'date'           => 'required',
+            'type'           => 'required',
+            'description'    => 'required'
+        ], [
+            'debit_detail.required'   => 'Detail transaction cannot be a empty.',
+            'credit_detail.required'  => 'Detail transaction cannot be a empty.',
+            'nominal_detail.required' => 'Detail transaction cannot be a empty.',
+            'date.required'           => 'Date cannot be empty.',
+            'type.required'           => 'Please select a type.',
+            'description.required'    => 'Description cannot be empty.'
+        ]);
+
+        if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query->update([
+                'date'        => $request->date,
+                'type'        => $request->type,
+                'description' => $request->description
+            ]);
+
+            if($query) {
+                CashBankDetail::where('cash_bank_id', $query->id)->delete();
+                Journal::where('description', $query->code)->delete();
+
+                foreach($request->debit_detail as $key => $dd) {
+                    CashBankDetail::create([
+                        'cash_bank_id' => $query->id,
+                        'debit'        => $dd,
+                        'credit'       => $request->credit_detail[$key],
+                        'nominal'      => $request->nominal_detail[$key]
+                    ]);
+
+                    Journal::insert([
+                        'debit'       => $dd,
+                        'credit'      => $request->credit_detail[$key],
+                        'nominal'     => $request->nominal_detail[$key],
+                        'description' => $query->code,
+                        'created_at'  => date('Y-m-d', strtotime($query->date)) . ' ' . date('H:i:s'),
+                        'updated_at'  => date('Y-m-d H:i:s')
+                    ]);
+                }
+
+                activity()
+                    ->performedOn(new CashBank())
+                    ->causedBy(session('bo_id'))
+                    ->log('Change the accounting cash bank data');
+
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data updated successfully.'
+                ];
+            } else {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to update.'
+                ];
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    public function destroy(Request $request) 
+    {
+        $query = CashBank::where('id', $request->id)->delete();
+        if($query) {
+            activity()
+                ->performedOn(new CashBank())
+                ->causedBy(session('bo_id'))
+                ->log('Delete the accounting cash bank data');
+
+            $response = [
+                'status'  => 200,
+                'message' => 'Data deleted successfully.'
+            ];
+        } else {
+            $response = [
+                'status'  => 500,
+                'message' => 'Data failed to delete.'
+            ];
         }
 
         return response()->json($response);
