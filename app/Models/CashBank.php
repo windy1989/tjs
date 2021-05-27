@@ -21,10 +21,22 @@ class CashBank extends Model {
 
     public static function generateCode($type, $date)
     {
-        $query = CashBank::selectRaw('RIGHT(code, 3) as code')
+        if($type == 1) {
+            $total_str = 4;
+            $str_type  = 'CASH';
+        } else if($type == 2) {
+            $total_str = 4;
+            $str_type  = 'BANK';
+        } else if($type == 3) {
+            $total_str = 7;
+            $str_type  = 'JOURNAL';
+        }
+
+        $query = CashBank::selectRaw("RIGHT(code, 3) as code")
+            ->whereMonth('date', date('m', strtotime($date)))
+            ->whereYear('date', date('Y', strtotime($date)))
+            ->whereRaw("LEFT(code, $total_str) = ?", [$str_type])
             ->orderByDesc('id')
-            ->whereMonth('created_at', date('m'))
-            ->whereYear('created_at', date('Y'))
             ->limit(1)
             ->get();
 
@@ -34,13 +46,6 @@ class CashBank extends Model {
             $code = '001';
         }
 
-        if($type == 1) {
-            $str_type = 'CASH';
-        } else if($type == 2) {
-            $str_type = 'BANK';
-        } else if($type == 3) {
-            $str_type = 'JOURNAL';
-        }
 
         return $str_type . '-' . date('my', strtotime($date)) . '-' . str_pad($code, 3, 0, STR_PAD_LEFT);
     }

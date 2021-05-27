@@ -148,14 +148,6 @@
                                        <td>{{ $product->type->surface->name }}</td>
                                     </tr>
                                     <tr>
-                                       <td>Color</td>
-                                       <td>{{ $product->type->color->name }}</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Pattern</td>
-                                       <td>{{ $product->type->pattern->name }}</td>
-                                    </tr>
-                                    <tr>
                                        <td>Loading Limit</td>
                                        <td>{{ $product->type->specification->name }}</td>
                                     </tr>
@@ -170,10 +162,6 @@
                                     <tr>
                                        <td>Weight</td>
                                        <td>{{ $product->type->weight }} Kg</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Grade</td>
-                                       <td>{{ $product->grade->name }}</td>
                                     </tr>
                                  </tbody>
                               </table>

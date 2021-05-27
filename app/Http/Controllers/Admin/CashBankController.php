@@ -135,7 +135,7 @@ class CashBankController extends Controller {
                     $val->user->name,
                     $val->code,
                     date('d F Y', strtotime($val->date)),
-                    '[' . $val->type() . '] ' . $val->description
+                    $val->description
                 ];
 
                 $nomor++;
