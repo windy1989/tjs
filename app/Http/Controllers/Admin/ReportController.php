@@ -28,7 +28,6 @@ class ReportController extends Controller {
             'income_actual_percent_current' => 0,
             'income_actual_percent_last'    => 0,
             'income_budget_percent'         => 0,
-            'cogs_actual_percent_current'   => 0,
             'cogs_actual_percent_last'      => 0,
             'cogs_budget_percent'           => 0,
             'fee_actual_percent_current'    => 0,
