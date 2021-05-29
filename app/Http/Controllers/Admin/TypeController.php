@@ -41,6 +41,8 @@ class TypeController extends Controller {
             'id',
             'image',
             'code',
+            'category_id',
+            'thickness',
             'surface_id',
             'color_id',
             'pattern_id',
@@ -59,6 +61,9 @@ class TypeController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
+                            ->orWhereHas('category', function($query) use ($search) {
+                                $query->where('name', 'like', "%$search%");
+                            })
                             ->orWhereHas('surface', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
@@ -84,6 +89,9 @@ class TypeController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
+                            ->orWhereHas('category', function($query) use ($search) {
+                                $query->where('name', 'like', "%$search%");
+                            })
                             ->orWhereHas('surface', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
@@ -112,6 +120,8 @@ class TypeController extends Controller {
                     $nomor,
                     $image,
                     $val->code,
+                    $val->category->name,
+                    $val->thickness . ' mm',
                     $val->surface->name,
                     $val->color->name,
                     $val->pattern->name,

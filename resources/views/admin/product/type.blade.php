@@ -48,6 +48,8 @@
                         <th>No</th>
                         <th>Image</th>
                         <th>Code</th>
+                        <th>Category</th>
+                        <th>Thickness</th>
                         <th>Surface</th>
                         <th>Color</th>
                         <th>Pattern</th>
@@ -473,6 +475,8 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'image', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
+            { name: 'category_id', className: 'text-center align-middle' },
+            { name: 'thickness', searchable: false, className: 'text-center align-middle' },
             { name: 'surface_id', className: 'text-center align-middle' },
             { name: 'color_id', className: 'text-center align-middle' },
             { name: 'pattern_id', className: 'text-center align-middle' },
