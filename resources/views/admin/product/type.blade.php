@@ -194,10 +194,10 @@
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Loading Limit :<span class="text-danger">*</span></label>
-                                 <select name="specification_id" id="specification_id" class="select2">
+                                 <select name="loading_limit_id" id="loading_limit_id" class="select2">
                                     <option value="">-- Choose --</option>
-                                    @foreach($specification as $s)
-                                       <option value="{{ $s->id }}">{{ $s->name }}</option>
+                                    @foreach($loading_limit as $ll)
+                                       <option value="{{ $ll->id }}">{{ $ll->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -428,7 +428,7 @@
       $('#surface_id').val(null).change();
       $('#color_id').val(null).change();
       $('#pattern_id').val(null).change();
-      $('#specification_id').val(null).change();
+      $('#loading_limit_id').val(null).change();
       $('#buy_unit_id').val(null).change();
       $('#stock_unit_id').val(null).change();
       $('#selling_unit_id').val(null).change();
@@ -558,7 +558,7 @@
             $('#surface_id').val(response.surface_id).change();
             $('#color_id').val(response.color_id).change();
             $('#pattern_id').val(response.pattern_id).change();
-            $('#specification_id').val(response.specification_id).change();
+            $('#loading_limit_id').val(response.loading_limit_id).change();
             $('#buy_unit_id').val(response.buy_unit_id).change();
             $('#stock_unit_id').val(response.stock_unit_id).change();
             $('#selling_unit_id').val(response.selling_unit_id).change();

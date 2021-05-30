@@ -202,13 +202,13 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('destroy', 'UnitController@destroy');
             });
 
-            Route::prefix('specification')->group(function() {
-                Route::get('/', 'SpecificationController@index');
-                Route::post('datatable', 'SpecificationController@datatable');
-                Route::post('create', 'SpecificationController@create');
-                Route::post('show', 'SpecificationController@show');
-                Route::post('update/{id}', 'SpecificationController@update');
-                Route::post('destroy', 'SpecificationController@destroy');
+            Route::prefix('loading_limit')->group(function() {
+                Route::get('/', 'LoadingLimitController@index');
+                Route::post('datatable', 'LoadingLimitController@datatable');
+                Route::post('create', 'LoadingLimitController@create');
+                Route::post('show', 'LoadingLimitController@show');
+                Route::post('update/{id}', 'LoadingLimitController@update');
+                Route::post('destroy', 'LoadingLimitController@destroy');
             });
 
             Route::prefix('warehouse')->group(function() {

@@ -94,7 +94,7 @@
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Loading Limit</th>
-                              <td class="align-middle">: {{ $type->specification->name }}</td>
+                              <td class="align-middle">: {{ $type->loadingLimit->name }}</td>
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Length</th>

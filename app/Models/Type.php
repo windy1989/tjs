@@ -20,7 +20,7 @@ class Type extends Model {
         'surface_id',
         'color_id',
         'pattern_id',
-        'specification_id',
+        'loading_limit_id',
         'buy_unit_id',
         'stock_unit_id',
         'selling_unit_id',
@@ -114,9 +114,9 @@ class Type extends Model {
         return $this->belongsTo('App\Models\Pattern');
     }
 
-    public function specification()
+    public function loadingLimit()
     {
-        return $this->belongsTo('App\Models\Specification');
+        return $this->belongsTo('App\Models\LoadingLimit');
     }
 
     public function buyUnit()

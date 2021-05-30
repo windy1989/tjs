@@ -10,7 +10,7 @@ use App\Models\Surface;
 use App\Models\Category;
 use App\Models\Division;
 use Illuminate\Http\Request;
-use App\Models\Specification;
+use App\Models\LoadingLimit;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +27,7 @@ class TypeController extends Controller {
             'surface'       => Surface::where('status', 1)->get(),
             'color'         => Color::where('status', 1)->get(),
             'pattern'       => Pattern::where('status', 1)->get(),
-            'specification' => Specification::where('status', 1)->get(),
+            'loading_limit' => LoadingLimit::where('status', 1)->get(),
             'unit'          => Unit::where('status', 1)->get(),
             'content'       => 'admin.product.type'
         ];
@@ -157,7 +157,7 @@ class TypeController extends Controller {
             'division_id'      => 'required',
             'color_id'         => 'required',
             'pattern_id'       => 'required',
-            'specification_id' => 'required',
+            'loading_limit_id' => 'required',
             'buy_unit_id'      => 'required',
             'stock_unit_id'    => 'required',
             'selling_unit_id'  => 'required',
@@ -176,7 +176,7 @@ class TypeController extends Controller {
             'division_id.required'      => 'Please select a division.',
             'color_id.required'         => 'Please select a color.',
             'pattern_id.required'       => 'Please select a pattern.',
-            'specification_id.required' => 'Please select a loading limit.',
+            'loading_limit_id.required' => 'Please select a loading limit.',
             'buy_unit_id.required'      => 'Please select a buy unit.',
             'stock_unit_id.required'    => 'Please select a stock unit.',
             'selling_unit_id.required'  => 'Please select a selling unit.',
@@ -208,7 +208,7 @@ class TypeController extends Controller {
                 'surface_id'       => $request->surface_id,
                 'color_id'         => $request->color_id,
                 'pattern_id'       => $request->pattern_id,
-                'specification_id' => $request->specification_id,
+                'loading_limit_id' => $request->loading_limit_id,
                 'buy_unit_id'      => $request->buy_unit_id,
                 'stock_unit_id'    => $request->stock_unit_id,
                 'selling_unit_id'  => $request->selling_unit_id,
@@ -260,7 +260,7 @@ class TypeController extends Controller {
             'surface_id'       => $data->surface_id,
             'color_id'         => $data->color_id,
             'pattern_id'       => $data->pattern_id,
-            'specification_id' => $data->specification_id,
+            'loading_limit_id' => $data->loading_limit_id,
             'buy_unit_id'      => $data->buy_unit_id,
             'stock_unit_id'    => $data->stock_unit_id,
             'selling_unit_id'  => $data->selling_unit_id,
@@ -290,7 +290,7 @@ class TypeController extends Controller {
             'division_id'      => 'required',
             'color_id'         => 'required',
             'pattern_id'       => 'required',
-            'specification_id' => 'required',
+            'loading_limit_id' => 'required',
             'buy_unit_id'      => 'required',
             'stock_unit_id'    => 'required',
             'selling_unit_id'  => 'required',
@@ -309,7 +309,7 @@ class TypeController extends Controller {
             'division_id.required'      => 'Please select a division.',
             'color_id.required'         => 'Please select a color.',
             'pattern_id.required'       => 'Please select a pattern.',
-            'specification_id.required' => 'Please select a loading limit.',
+            'loading_limit_id.required' => 'Please select a loading limit.',
             'buy_unit_id.required'      => 'Please select a buy unit.',
             'stock_unit_id.required'    => 'Please select a stock unit.',
             'selling_unit_id.required'  => 'Please select a selling unit.',
@@ -351,7 +351,7 @@ class TypeController extends Controller {
                 'surface_id'       => $request->surface_id,
                 'color_id'         => $request->color_id,
                 'pattern_id'       => $request->pattern_id,
-                'specification_id' => $request->specification_id,
+                'loading_limit_id' => $request->loading_limit_id,
                 'buy_unit_id'      => $request->buy_unit_id,
                 'stock_unit_id'    => $request->stock_unit_id,
                 'selling_unit_id'  => $request->selling_unit_id,

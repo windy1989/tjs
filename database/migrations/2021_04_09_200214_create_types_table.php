@@ -20,7 +20,7 @@ class CreateTypesTable extends Migration
             $table->bigInteger('surface_id')->nullable();
             $table->bigInteger('color_id');
             $table->bigInteger('pattern_id');
-            $table->bigInteger('specification_id');
+            $table->bigInteger('loading_limit_id');
             $table->bigInteger('buy_unit_id');
             $table->bigInteger('stock_unit_id');
             $table->bigInteger('selling_unit_id');

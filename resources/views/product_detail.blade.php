@@ -149,7 +149,7 @@
                                     </tr>
                                     <tr>
                                        <td>Loading Limit</td>
-                                       <td>{{ $product->type->specification->name }}</td>
+                                       <td>{{ $product->type->loadingLimit->name }}</td>
                                     </tr>
                                     <tr>
                                        <td>Length</td>

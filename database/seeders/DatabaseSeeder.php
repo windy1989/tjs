@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeSeeder::class);
         $this->call(HsCodeSeeder::class);
         $this->call(UnitSeeder::class);
-        $this->call(SpecificationSeeder::class);
+        $this->call(LoadingLimitSeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(SupplierSeeder::class);

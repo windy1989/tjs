@@ -80,7 +80,7 @@
                                 <a href="{{ url('admin/master_data/unit') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'unit' ? 'active' : '' }}">Unit</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/master_data/specification') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'specification' ? 'active' : '' }}">Specification</a>
+                                <a href="{{ url('admin/master_data/loading_limit') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'loading_limit' ? 'active' : '' }}">Loading Limit</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/master_data/warehouse') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'warehouse' ? 'active' : '' }}">Warehouse</a>

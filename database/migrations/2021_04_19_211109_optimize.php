@@ -102,7 +102,7 @@ class Optimize extends Migration
             $table->index('surface_id'); 
             $table->index('color_id'); 
             $table->index('pattern_id'); 
-            $table->index('specification_id'); 
+            $table->index('loading_limit_id'); 
             $table->index('buy_unit_id'); 
             $table->index('stock_unit_id'); 
             $table->index('selling_unit_id'); 

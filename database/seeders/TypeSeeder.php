@@ -24,7 +24,7 @@ class TypeSeeder extends Seeder
                 'surface_id'       => $t['surface_id'],
                 'color_id'         => $t['color_id'],
                 'pattern_id'       => $t['pattern_id'],
-                'specification_id' => $t['specification_id'],
+                'loading_limit_id' => $t['loading_limit_id'],
                 'buy_unit_id'      => $t['buy_unit_id'],
                 'stock_unit_id'    => $t['stock_unit_id'],
                 'selling_unit_id'  => $t['selling_unit_id'],

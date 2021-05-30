@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Master Specification</span>
+					<span class="font-weight-semibold">Master Loading Limit</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -23,7 +23,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Master Data</a>
-					<span class="breadcrumb-item active">Specification</span>
+					<span class="breadcrumb-item active">Loading Limit</span>
 				</div>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 	<div class="content">
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Specification</h5>
+				<h5 class="card-title">List Data Loading Limit</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Status</option>
@@ -62,7 +62,7 @@
    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header bg-light">
-            <h5 class="modal-title" id="exampleModalLabel">Form Specification</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form Loading Limit</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -149,7 +149,7 @@
          iDisplayInLength: 10,
          order: [[0, 'asc']],
          ajax: {
-            url: '{{ url("admin/master_data/specification/datatable") }}',
+            url: '{{ url("admin/master_data/loading_limit/datatable") }}',
             type: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -184,7 +184,7 @@
 
    function create() {
       $.ajax({
-         url: '{{ url("admin/master_data/specification/create") }}',
+         url: '{{ url("admin/master_data/loading_limit/create") }}',
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),
@@ -232,7 +232,7 @@
    function show(id) {
       toShow();
       $.ajax({
-         url: '{{ url("admin/master_data/specification/show") }}',
+         url: '{{ url("admin/master_data/loading_limit/show") }}',
          type: 'POST',
          dataType: 'JSON',
          data: {
@@ -265,7 +265,7 @@
 
    function update(id) {
       $.ajax({
-         url: '{{ url("admin/master_data/specification/update") }}' + '/' + id,
+         url: '{{ url("admin/master_data/loading_limit/update") }}' + '/' + id,
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),
@@ -325,7 +325,7 @@
             }),
             Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
                $.ajax({
-                  url: '{{ url("admin/master_data/specification/destroy") }}',
+                  url: '{{ url("admin/master_data/loading_limit/destroy") }}',
                   type: 'POST',
                   dataType: 'JSON',
                   data: {
