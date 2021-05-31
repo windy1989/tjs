@@ -47,6 +47,9 @@
                         <h6 class="card-title font-weight-bold text-uppercase">Assets</h6>
                      </div>
                      <div class="card-body">
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Cash & Bank</div>
+                        </div>
                         @foreach($balance_sheet['assets']['cash_bank'] as $cb)
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $cb['name'] }}</div>
@@ -68,6 +71,9 @@
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['assets']['total']['total_cash_bank']) }}
                            </div>
+                        </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Account Receivable</div>
                         </div>
                         @foreach($balance_sheet['assets']['receivable'] as $r)
                            <div class="row p-1 border">
@@ -91,6 +97,9 @@
                               {{ number_format($balance_sheet['assets']['total']['total_receivable']) }}
                            </div>
                         </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Supply</div>
+                        </div>
                         @foreach($balance_sheet['assets']['supply'] as $su)
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $su['name'] }}</div>
@@ -112,6 +121,9 @@
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['assets']['total']['total_supply']) }}
                            </div>
+                        </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Assets Facile</div>
                         </div>
                         @foreach($balance_sheet['assets']['assets_facile'] as $af)
                            <div class="row p-1 border">
@@ -135,6 +147,9 @@
                               {{ number_format($balance_sheet['assets']['total']['total_assets_facile']) }}
                            </div>
                         </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Assets Consistenly</div>
+                        </div>
                         @foreach($balance_sheet['assets']['assets_consistenly'] as $ac)
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $ac['name'] }}</div>
@@ -156,6 +171,9 @@
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['assets']['total']['total_assets_consistenly']) }}
                            </div>
+                        </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Accumulated Shrinkage</div>
                         </div>
                         @foreach($balance_sheet['assets']['accumulated_shrinkage'] as $as)
                            <div class="row p-1 border">
@@ -188,6 +206,9 @@
                         <h6 class="card-title font-weight-bold text-uppercase">Responbility & Equity</h6>
                      </div>
                      <div class="card-body">
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Debt</div>
+                        </div>
                         @foreach($balance_sheet['responbility_equity']['debt'] as $d)
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $d['name'] }}</div>
@@ -210,6 +231,9 @@
                               {{ number_format($balance_sheet['responbility_equity']['total']['total_debt']) }}
                            </div>
                         </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Responbility</div>
+                        </div>
                         @foreach($balance_sheet['responbility_equity']['responbility'] as $r)
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $r['name'] }}</div>
@@ -231,6 +255,9 @@
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['responbility_equity']['total']['total_responbility']) }}
                            </div>
+                        </div>
+                        <div class="row border p-1">
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Equity</div>
                         </div>
                         @foreach($balance_sheet['responbility_equity']['equity'] as $e)
                            <div class="row p-1 border">
