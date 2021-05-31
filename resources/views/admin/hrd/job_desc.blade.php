@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Job Desc</span>
+					<span class="font-weight-semibold">HRD Job Desc</span>
 				</h4>
 			</div>
 		</div>
@@ -12,6 +12,7 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
+					<a href="javascript:void(0);" class="breadcrumb-item">HRD</a>
 					<span class="breadcrumb-item active">Job Desc</span>
 				</div>
 			</div>

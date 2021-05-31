@@ -11,10 +11,10 @@ class JobDescController extends Controller {
     public function index()
     {
         $data = [
-            'title'        => 'Job Desc',
+            'title'        => 'HRD Job Desc',
             'job_desc_sby' => JobDesc::where('branch', 1)->get(),
             'job_desc_jkt' => JobDesc::where('branch', 2)->get(),
-            'content'      => 'admin.job_desc'
+            'content'      => 'admin.hrd.job_desc'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -5,7 +5,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>SMB Admin - {{ $title }}</title>
 	<link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
 	<link href="{{ asset('template/back-office/global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet">
@@ -38,4 +37,5 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqPPnf_dlgNNPrPeuwjuWsw7UB2ntYYeI&libraries=places&v=weekly"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
 	<script src="{{ asset('template/back-office/custom.js') }}"></script>
+	<title>{{ $title }} - SMB Admin</title>
 </head>
