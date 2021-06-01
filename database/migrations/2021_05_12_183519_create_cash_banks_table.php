@@ -21,6 +21,7 @@ class CreateCashBanksTable extends Migration
             $table->char('type', 1);
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 
