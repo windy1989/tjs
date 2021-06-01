@@ -201,7 +201,7 @@
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="card" style="height:2117px;">
+                  <div class="card" style="height:2408px;">
                      <div class="card-header bg-white">
                         <h6 class="card-title font-weight-bold text-uppercase">Responbility & Equity</h6>
                      </div>
