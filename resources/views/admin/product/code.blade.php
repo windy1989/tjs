@@ -288,7 +288,7 @@
                                     <th>Warehouse</th>
                                     <th>Ventura</th>
                                     <th>Code</th>
-                                    <th>qty</th>
+                                    <th>Qty</th>
                                  </tr>
                               </thead>
                               <tbody class="text-center" id="data_shading"></tbody>
