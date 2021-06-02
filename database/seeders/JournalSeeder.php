@@ -24,7 +24,8 @@ class JournalSeeder extends Seeder
                 'nominal'     => $j['nominal'],
                 'description' => $j['description'],
                 'created_at'  => $j['created_at'],
-                'updated_at'  => $j['updated_at']
+                'updated_at'  => $j['updated_at'],
+                'deleted_at'  => $j['deleted_at']
             ]);
         }
     }
