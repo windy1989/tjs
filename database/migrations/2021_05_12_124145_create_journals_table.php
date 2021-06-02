@@ -20,6 +20,7 @@ class CreateJournalsTable extends Migration
             $table->double('nominal');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 

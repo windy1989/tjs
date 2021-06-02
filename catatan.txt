@@ -1,0 +1,11 @@
+- balance sheet coa akumulasi depresiasi bisa minus
+- total posisi responbility
+- cash & bank summary total detail
+- edit detail cash & bank
+- coa form budgeting double
+- PNL budgeting rumus sama seperti actual
+- angka balance sheet berjalan per tahun
+- tampilkan semua coa di semua accounting
+- code input manual
+- posisi other income dibalik
+- error input cash & bank
