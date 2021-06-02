@@ -1172,8 +1172,8 @@ class SMB {
          $gross_variance_percent_last = round(($gross_variance_nominal_last / $gross_actual_nominal_last) * 100);
       }
 
-      $nett_actual_nominal_current   = $nett_actual_current;
-      $nett_actual_nominal_last      = $gross_actual_nominal_current - $nett_actual_last;
+      $nett_actual_nominal_current   = $gross_actual_nominal_current + $nett_actual_current;
+      $nett_actual_nominal_last      = $gross_actual_nominal_last + $nett_actual_last;
       $nett_actual_percent_current   = 0;
       $nett_actual_percent_last      = 0;
       $nett_budget_nominal           = $nett_budget;
