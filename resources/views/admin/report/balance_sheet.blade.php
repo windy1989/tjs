@@ -179,7 +179,7 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $as['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($as['balance']) ? abs($as['balance'])) : '' }}
+                                 {{ is_numeric($as['balance']) ? abs($as['balance']) : '' }}
                               </div>
                            </div>
                            @if($as['sub'])
@@ -213,7 +213,7 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $d['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($d['balance']) ? abs($d['balance'])) : '' }}
+                                 {{ is_numeric($d['balance']) ? abs($d['balance']) : '' }}
                               </div>
                            </div>
                            @if($d['sub'])
