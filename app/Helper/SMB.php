@@ -986,9 +986,9 @@ class SMB {
             $variance_current       = $total_balance_current - $budget_nominal;
             $variance_last          = $total_balance_current - $total_balance_last;
 
-            $nett_actual_current += $total_balance_current;
-            $nett_actual_last    += $total_balance_last;
-            $nett_budget         += $budget_nominal;
+            $nett_actual_current -= $total_balance_current;
+            $nett_actual_last    -= $total_balance_last;
+            $nett_budget         -= $budget_nominal;
 
             $actual = [
                'nominal' => [
@@ -1042,9 +1042,9 @@ class SMB {
       $fee_outside_variance_current   = $total_fee_outside_current - $fee_outside_budget_nominal;
       $fee_outside_variance_last      = $total_fee_outside_current - $total_fee_outside_last;
 
-      $nett_actual_current -= $total_fee_outside_current;
-      $nett_actual_last    -= $total_fee_outside_last;
-      $nett_budget         -= $fee_outside_budget_nominal;
+      $nett_actual_current += $total_fee_outside_current;
+      $nett_actual_last    += $total_fee_outside_last;
+      $nett_budget         += $fee_outside_budget_nominal;
 
       $income_outside                   = Coa::where('code', '7.100.00')->first();
       $income_outside_sub_1             = collect(Coa::select('id')->where('parent_id', $income_outside->id)->get()->toArray());
@@ -1062,9 +1062,9 @@ class SMB {
       $income_outside_variance_current  = $total_income_outside_current - $income_outside_budget_nominal;
       $income_outside_variance_last     = $total_income_outside_current - $total_income_outside_last;
 
-      $nett_actual_current -= $total_income_outside_current;
-      $nett_actual_last    -= $total_income_outside_last;
-      $nett_budget         -= $income_outside_budget_nominal;
+      $nett_actual_current += $total_income_outside_current;
+      $nett_actual_last    += $total_income_outside_last;
+      $nett_budget         += $income_outside_budget_nominal;
 
       $fee_income_outside_result = [
          [
