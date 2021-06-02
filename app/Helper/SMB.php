@@ -12,7 +12,7 @@ class SMB {
    {
       $month     = date('m', strtotime($filter));
       $year      = date('Y', strtotime($filter));
-      $where_raw = "MONTH(created_at) = $month AND YEAR(created_at) = $year";
+      $where_raw = "MONTH(created_at) <= $month AND YEAR(created_at) = $year";
 
       $grandtotal_cash_bank             = 0;
       $grandtotal_receivable            = 0;
@@ -252,7 +252,7 @@ class SMB {
          $balance_debit                     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $balance_credit                    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
          $total_balance                     = $balance_debit - $balance_credit;
-         $grandtotal_accumulated_shrinkage += abs($total_balance);
+         $grandtotal_accumulated_shrinkage += $total_balance;
 
          $accumulated_shrinkage_result[] = [
             'name'    => $ass->name,
@@ -985,9 +985,9 @@ class SMB {
             $variance_current       = $total_balance_current - $budget_nominal;
             $variance_last          = $total_balance_current - $total_balance_last;
 
-            $nett_actual_current -= $total_balance_current;
-            $nett_actual_last    -= $total_balance_last;
-            $nett_budget         -= $budget_nominal;
+            $nett_actual_current += $total_balance_current;
+            $nett_actual_last    += $total_balance_last;
+            $nett_budget         += $budget_nominal;
 
             $actual = [
                'nominal' => [
@@ -1041,9 +1041,9 @@ class SMB {
       $fee_outside_variance_current   = $total_fee_outside_current - $fee_outside_budget_nominal;
       $fee_outside_variance_last      = $total_fee_outside_current - $total_fee_outside_last;
 
-      $nett_actual_current += $total_fee_outside_current;
-      $nett_actual_last    += $total_fee_outside_last;
-      $nett_budget         += $fee_outside_budget_nominal;
+      $nett_actual_current -= $total_fee_outside_current;
+      $nett_actual_last    -= $total_fee_outside_last;
+      $nett_budget         -= $fee_outside_budget_nominal;
 
       $income_outside                   = Coa::where('code', '7.100.00')->first();
       $income_outside_sub_1             = collect(Coa::select('id')->where('parent_id', $income_outside->id)->get()->toArray());
@@ -1061,38 +1061,11 @@ class SMB {
       $income_outside_variance_current  = $total_income_outside_current - $income_outside_budget_nominal;
       $income_outside_variance_last     = $total_income_outside_current - $total_income_outside_last;
 
-      $nett_actual_current += $total_income_outside_current;
-      $nett_actual_last    += $total_income_outside_last;
-      $nett_budget         += $income_outside_budget_nominal;
+      $nett_actual_current -= $total_income_outside_current;
+      $nett_actual_last    -= $total_income_outside_last;
+      $nett_budget         -= $income_outside_budget_nominal;
 
       $fee_income_outside_result = [
-         [
-            'name' => $fee_outside->name,
-            'actual' => [
-               'nominal' => [
-                  'current' => $total_fee_outside_current, 
-                  'last'    => $total_fee_outside_last
-               ],
-               'percent' => [
-                  'current' => ($income_actual_current > 0) ? round(($total_fee_outside_current / $income_actual_current) * 100) : 0,
-                  'last'    => ($income_actual_last > 0) ? round(($total_fee_outside_last / $income_actual_last) * 100) : 0
-               ]
-            ],
-            'budget' => [
-               'nominal' => $fee_outside_budget_nominal,
-               'percent' => ($income_budget > 0) ? round(($fee_outside_budget_nominal / $income_budget) * 100) : 0
-            ],
-            'variance' => [
-               'nominal' => [
-                  'current' => $fee_outside_variance_current, 
-                  'last'    => $fee_outside_variance_last
-               ],
-               'percent' => [
-                  'current' => ($fee_outside_budget_nominal > 0) ? round(($fee_outside_variance_current / $fee_outside_budget_nominal) * 100) : 0,
-                  'last'    => ($total_fee_outside_last > 0) ? round(($fee_outside_variance_last / $total_fee_outside_last) * 100) : 0
-               ]
-            ]
-         ],
          [
             'name' => $income_outside->name,
             'actual' => [
@@ -1117,6 +1090,33 @@ class SMB {
                'percent' => [
                   'current' => ($income_outside_budget_nominal > 0) ? round(($income_outside_variance_current / $income_outside_budget_nominal) * 100) : 0,
                   'last'    => ($total_income_outside_last > 0) ? round(($income_outside_variance_last / $total_income_outside_last) * 100) : 0
+               ]
+            ]
+         ],
+         [
+            'name' => $fee_outside->name,
+            'actual' => [
+               'nominal' => [
+                  'current' => $total_fee_outside_current, 
+                  'last'    => $total_fee_outside_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_fee_outside_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_fee_outside_last / $income_actual_last) * 100) : 0
+               ]
+            ],
+            'budget' => [
+               'nominal' => $fee_outside_budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($fee_outside_budget_nominal / $income_budget) * 100) : 0
+            ],
+            'variance' => [
+               'nominal' => [
+                  'current' => $fee_outside_variance_current, 
+                  'last'    => $fee_outside_variance_last
+               ],
+               'percent' => [
+                  'current' => ($fee_outside_budget_nominal > 0) ? round(($fee_outside_variance_current / $fee_outside_budget_nominal) * 100) : 0,
+                  'last'    => ($total_fee_outside_last > 0) ? round(($fee_outside_variance_last / $total_fee_outside_last) * 100) : 0
                ]
             ]
          ]
@@ -1175,7 +1175,7 @@ class SMB {
       $nett_actual_nominal_last      = $gross_actual_nominal_last + $nett_actual_last;
       $nett_actual_percent_current   = 0;
       $nett_actual_percent_last      = 0;
-      $nett_budget_nominal           = $nett_budget;
+      $nett_budget_nominal           = $gross_budget_nominal + $nett_budget;
       $nett_budget_percent           = 0;
       $nett_variance_nominal_current = $nett_actual_nominal_current - $nett_budget_nominal;
       $nett_variance_nominal_last    = $nett_actual_nominal_current - $nett_actual_nominal_last;

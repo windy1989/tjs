@@ -8,6 +8,8 @@ use App\Models\Journal;
 use App\Models\CashBank;
 use Illuminate\Http\Request;
 use App\Models\CashBankDetail;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +20,7 @@ class CashBankController extends Controller {
         $data = [
             'title'   => 'Acounting Cash & Bank',
             'user'    => User::all(),
-            'parent'  => Coa::where('parent_id', 0)->oldest('code')->get(),
+            'coa'     => Coa::where('status', 1)->oldest('code')->get(),
             'content' => 'admin.accounting.cash_bank'
         ];
 
@@ -32,6 +34,7 @@ class CashBankController extends Controller {
             'id',
             'user_id',
             'code',
+            'total',
             'date',
             'description'
         ];
@@ -134,6 +137,7 @@ class CashBankController extends Controller {
                     $nomor,
                     $val->user->name,
                     $val->code,
+                    number_format($val->cashBankDetail->sum('nominal')),
                     date('d F Y', strtotime($val->date)),
                     $val->description,
                     '
@@ -191,6 +195,7 @@ class CashBankController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
+            'code'           => 'required|unique:cash_banks,code',
             'debit_detail'   => 'required',
             'credit_detail'  => 'required',
             'nominal_detail' => 'required',
@@ -198,6 +203,8 @@ class CashBankController extends Controller {
             'type'           => 'required',
             'description'    => 'required'
         ], [
+            'code.required'           => 'Code cannot be a empty.',
+            'code.unique'             => 'Code already exists.',
             'debit_detail.required'   => 'Detail transaction cannot be a empty.',
             'credit_detail.required'  => 'Detail transaction cannot be a empty.',
             'nominal_detail.required' => 'Detail transaction cannot be a empty.',
@@ -214,7 +221,7 @@ class CashBankController extends Controller {
         } else {
             $query = CashBank::create([
                 'user_id'     => session('bo_id'),
-                'code'        => CashBank::generateCode($request->type, $request->date),
+                'code'        => $request->code,
                 'date'        => $request->date,
                 'type'        => $request->type,
                 'description' => $request->description
@@ -268,14 +275,15 @@ class CashBankController extends Controller {
         foreach($data->cashBankDetail as $cbd) {
             $cash_bank_detail[] = [
                 'debit_id'    => $cbd->debit,
-                'debit_name'  => $cbd->coaDebit->name,
+                'debit_name'  => '[' . $cbd->coaDebit->code . '] ' . $cbd->coaDebit->name,
                 'credit_id'   => $cbd->credit,
-                'credit_name' => $cbd->coaCredit->name,
+                'credit_name' => '[' . $cbd->coaCredit->code . '] ' . $cbd->coaCredit->name,
                 'nominal'     => $cbd->nominal
             ];
         }
 
         return response()->json([
+            'code'             => $data->code,
             'date'             => $data->date,
             'type'             => $data->type,
             'description'      => $data->description,
@@ -287,6 +295,7 @@ class CashBankController extends Controller {
     {
         $query      = CashBank::find($id);
         $validation = Validator::make($request->all(), [
+            'code'           => ['required', Rule::unique('cash_banks', 'code')->ignore($id)],
             'debit_detail'   => 'required',
             'credit_detail'  => 'required',
             'nominal_detail' => 'required',
@@ -294,6 +303,8 @@ class CashBankController extends Controller {
             'type'           => 'required',
             'description'    => 'required'
         ], [
+            'code.required'           => 'Code cannot be a empty.',
+            'code.unique'             => 'Code already exists.',
             'debit_detail.required'   => 'Detail transaction cannot be a empty.',
             'credit_detail.required'  => 'Detail transaction cannot be a empty.',
             'nominal_detail.required' => 'Detail transaction cannot be a empty.',
@@ -309,6 +320,7 @@ class CashBankController extends Controller {
             ];
         } else {
             $query->update([
+                'code'        => $request->code,
                 'date'        => $request->date,
                 'type'        => $request->type,
                 'description' => $request->description
@@ -316,7 +328,7 @@ class CashBankController extends Controller {
 
             if($query) {
                 CashBankDetail::where('cash_bank_id', $query->id)->delete();
-                Journal::where('description', $query->code)->delete();
+                DB::table('cash_banks')->where('description', $query->code)->delete();
 
                 foreach($request->debit_detail as $key => $dd) {
                     CashBankDetail::create([
@@ -330,7 +342,7 @@ class CashBankController extends Controller {
                         'debit'       => $dd,
                         'credit'      => $request->credit_detail[$key],
                         'nominal'     => $request->nominal_detail[$key],
-                        'description' => $query->code,
+                        'description' => $request->code,
                         'created_at'  => date('Y-m-d', strtotime($query->date)) . ' ' . date('H:i:s'),
                         'updated_at'  => date('Y-m-d H:i:s')
                     ]);

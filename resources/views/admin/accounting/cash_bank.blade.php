@@ -112,6 +112,7 @@
                         <th>No</th>
                         <th>User</th>
                         <th>Code</th>
+                        <th>Total</th>
                         <th>Date</th>
                         <th>Description</th>
                         <th>Action</th>
@@ -137,9 +138,19 @@
                <div class="alert alert-danger" id="validation_alert" style="display:none;">
                   <ul id="validation_content"></ul>
                </div>
-               <div class="form-group">
-                  <label>Date :<sup class="text-danger">*</sup></label>
-                  <input type="date" name="date" id="date" class="form-control">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Code :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="code" id="code" class="form-control" placeholder="Enter code">
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Date :<sup class="text-danger">*</sup></label>
+                        <input type="date" name="date" id="date" class="form-control">
+                     </div>
+                  </div>
                </div>
                <div class="form-group">
                   <label>Description :<sup class="text-danger">*</sup></label>
@@ -152,29 +163,8 @@
                         <label>Debit :<sup class="text-danger">*</sup></label>
                         <select name="debit_detail" id="debit_detail" class="select2">
                            <option value="">-- Choose --</option>
-                           @foreach($parent as $p)
-                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                          @if($sub_3->count() > 0)
-                                             @foreach($sub_3 as $s3)
-                                                <option value="{{ $s3->id }};{{ $s3->name }}">{{ $s3->name }}</option>
-                                             @endforeach
-                                          @else
-                                             <option value="{{ $s2->id }};{{ $s2->name }}">{{ $s2->name }}</option>
-                                          @endif
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s1->id }};{{ $s1->name }}">{{ $s1->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $p->id }};{{ $p->name }}">{{ $p->name }}</option>
-                              @endif
+                           @foreach($coa as $c)
+                              <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
                            @endforeach
                         </select>
                      </div>
@@ -184,29 +174,8 @@
                         <label>Credit :</label>
                         <select name="credit_detail" id="credit_detail" class="select2">
                            <option value="">-- Choose --</option>
-                           @foreach($parent as $p)
-                              @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_1->count() > 0)
-                                 @foreach($sub_1 as $s1)
-                                    @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_2->count() > 0)
-                                       @foreach($sub_2 as $s2)
-                                          @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                          @if($sub_3->count() > 0)
-                                             @foreach($sub_3 as $s3)
-                                                <option value="{{ $s3->id }};{{ $s3->name }}">{{ $s3->name }}</option>
-                                             @endforeach
-                                          @else
-                                             <option value="{{ $s2->id }};{{ $s2->name }}">{{ $s2->name }}</option>
-                                          @endif
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s1->id }};{{ $s1->name }}">{{ $s1->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $p->id }};{{ $p->name }}">{{ $p->name }}</option>
-                              @endif
+                           @foreach($coa as $c)
+                              <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
                            @endforeach
                         </select>
                      </div>
@@ -330,22 +299,22 @@
    }
 
    function addContent() {
-      let debit_detail   = $('#debit_detail');
-      let credit_detail  = $('#credit_detail');
+      let debit_detail   = $('#debit_detail option:selected');
+      let credit_detail  = $('#credit_detail option:selected');
       let nominal_detail = $('#nominal_detail');
 
       if(debit_detail.val() && credit_detail.val() && nominal_detail.val()) {
-         let arr_debit_detail  = debit_detail.val().split(';');
-         let arr_credit_detail = credit_detail.val().split(';');
-
          $('#data_content').append(`
             <tr class="text-center">
-               <input type="hidden" name="debit_detail[]" value="` + arr_debit_detail[0] + `">
-               <input type="hidden" name="credit_detail[]" value="` + arr_credit_detail[0] + `">
-               <input type="hidden" name="nominal_detail[]" value="` + nominal_detail.val() + `">
-               <td class="align-middle">` + arr_debit_detail[1] + `</td>   
-               <td class="align-middle">` + arr_credit_detail[1] + `</td>   
-               <td class="align-middle">` + Intl.NumberFormat('id-ID').format(nominal_detail.val()) + `</td>   
+               <input type="hidden" name="debit_detail[]" value="` + debit_detail.val() + `">
+               <input type="hidden" name="credit_detail[]" value="` + credit_detail.val() + `">
+               <td class="align-middle">` + debit_detail.text() + `</td>   
+               <td class="align-middle">` + credit_detail.text() + `</td>   
+               <td class="align-middle">
+                  <div class="form-group">
+                     <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `">
+                  </div>
+               </td>   
                <td class="align-middle">
                   <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                </td>
@@ -450,6 +419,7 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'user_id', className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle nowrap' },
+            { name: 'total', searchable: false, orderable: false, className: 'text-center align-middle nowrap' },
             { name: 'date', searchable: false, className: 'text-center align-middle' },
             { name: 'description', className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
@@ -521,6 +491,7 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
+            $('#code').val(response.code);
             $('#date').val(response.date);
             $('#description').val(response.description);
 
@@ -529,10 +500,13 @@
                   <tr class="text-center">
                      <input type="hidden" name="debit_detail[]" value="` + val.debit_id + `">
                      <input type="hidden" name="credit_detail[]" value="` + val.credit_id + `">
-                     <input type="hidden" name="nominal_detail[]" value="` + val.nominal + `">
                      <td class="align-middle">` + val.debit_name + `</td>   
                      <td class="align-middle">` + val.credit_name + `</td>   
-                     <td class="align-middle">` + Intl.NumberFormat('id-ID').format(val.nominal) + `</td>   
+                     <td class="align-middle">
+                        <div class="form-group">
+                           <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `">
+                        </div>
+                     </td>   
                      <td class="align-middle">
                         <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                      </td>

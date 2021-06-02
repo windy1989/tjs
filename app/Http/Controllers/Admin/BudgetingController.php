@@ -14,7 +14,7 @@ class BudgetingController extends Controller {
     {
         $data = [
             'title'   => 'Accounting Budgeting',
-            'parent'  => Coa::all(),    
+            'coa'     => Coa::oldest('code')->get(),    
             'content' => 'admin.accounting.budgeting'
         ];
 
@@ -97,7 +97,7 @@ class BudgetingController extends Controller {
             foreach($query_data as $val) {
                 $response['data'][] = [
                     $nomor,
-                    $val->coa->name,
+                    '[' . $val->coa->code . '] ' . $val->coa->name,
                     date('F Y', strtotime($val->month)),
                     number_format($val->nominal),
                     '

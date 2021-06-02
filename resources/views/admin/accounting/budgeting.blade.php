@@ -38,29 +38,8 @@
                <label>COA :<span class="text-danger">*</span></label>
                <select name="filter_coa" id="filter_coa" class="select2">
                   <option value="">-- Choose --</option>
-                  @foreach($parent as $p)
-                     @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                     @if($sub_1->count() > 0)
-                        @foreach($sub_1 as $s1)
-                           @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                           @if($sub_2->count() > 0)
-                              @foreach($sub_2 as $s2)
-                                 @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                 @if($sub_3->count() > 0)
-                                    @foreach($sub_3 as $s3)
-                                       <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                    @endforeach
-                                 @else
-                                    <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                 @endif
-                              @endforeach
-                           @else
-                              <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                           @endif
-                        @endforeach
-                     @else
-                        <option value="{{ $p->id }}">{{ $p->name }}</option>
-                     @endif
+                  @foreach($coa as $c)
+                     <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
                   @endforeach
                </select>
             </div>
@@ -118,29 +97,8 @@
                   <label>COA :<span class="text-danger">*</span></label>
                   <select name="coa_id" id="coa_id" class="select2">
                      <option value="">-- Choose --</option>
-                     @foreach($parent as $p)
-                        @php $sub_1 = App\Models\Coa::where('parent_id', $p->id)->where('status', 1)->oldest('code')->get(); @endphp
-                        @if($sub_1->count() > 0)
-                           @foreach($sub_1 as $s1)
-                              @php $sub_2 = App\Models\Coa::where('parent_id', $s1->id)->where('status', 1)->oldest('code')->get(); @endphp
-                              @if($sub_2->count() > 0)
-                                 @foreach($sub_2 as $s2)
-                                    @php $sub_3 = App\Models\Coa::where('parent_id', $s2->id)->where('status', 1)->oldest('code')->get(); @endphp
-                                    @if($sub_3->count() > 0)
-                                       @foreach($sub_3 as $s3)
-                                          <option value="{{ $s3->id }}">{{ $s3->name }}</option>
-                                       @endforeach
-                                    @else
-                                       <option value="{{ $s2->id }}">{{ $s2->name }}</option>
-                                    @endif
-                                 @endforeach
-                              @else
-                                 <option value="{{ $s1->id }}">{{ $s1->name }}</option>
-                              @endif
-                           @endforeach
-                        @else
-                           <option value="{{ $p->id }}">{{ $p->name }}</option>
-                        @endif
+                     @foreach($coa as $c)
+                        <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
                      @endforeach
                   </select>
                </div>

@@ -54,14 +54,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $cb['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($cb['balance']) ? number_format(abs($cb['balance'])) : '' }}
+                                 {{ is_numeric($cb['balance']) ? number_format($cb['balance']) : '' }}
                               </div>
                            </div>
                            @if($cb['sub'])
                               @foreach($cb['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -69,7 +69,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Cash & Bank</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_cash_bank'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_cash_bank']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -79,14 +79,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $r['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($r['balance']) ? number_format(abs($r['balance'])) : '' }}
+                                 {{ is_numeric($r['balance']) ? number_format($r['balance']) : '' }}
                               </div>
                            </div>
                            @if($r['sub'])
                               @foreach($r['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -94,7 +94,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Account Receivable</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_receivable'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_receivable']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -104,14 +104,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $su['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($su['balance']) ? number_format(abs($su['balance'])) : '' }}
+                                 {{ is_numeric($su['balance']) ? number_format($su['balance']) : '' }}
                               </div>
                            </div>
                            @if($su['sub'])
                               @foreach($su['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -119,7 +119,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Supply</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_supply'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_supply']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -129,14 +129,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $af['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($af['balance']) ? number_format(abs($af['balance'])) : '' }}
+                                 {{ is_numeric($af['balance']) ? number_format($af['balance']) : '' }}
                               </div>
                            </div>
                            @if($af['sub'])
                               @foreach($af['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -144,7 +144,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Assets Facile</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_assets_facile'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_assets_facile']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -154,14 +154,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $ac['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($ac['balance']) ? number_format(abs($ac['balance'])) : '' }}
+                                 {{ is_numeric($ac['balance']) ? number_format($ac['balance']) : '' }}
                               </div>
                            </div>
                            @if($ac['sub'])
                               @foreach($ac['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -169,7 +169,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Assets Consistenly</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_assets_consistenly'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_assets_consistenly']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -179,14 +179,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $as['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($as['balance']) ? abs($as['balance']) : '' }}
+                                 {{ is_numeric($as['balance']) ? $as['balance'] : '' }}
                               </div>
                            </div>
                            @if($as['sub'])
                               @foreach($as['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -194,7 +194,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Accumulated Shrinkage</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['assets']['total']['total_accumulated_shrinkage'])) }}
+                              {{ number_format($balance_sheet['assets']['total']['total_accumulated_shrinkage']) }}
                            </div>
                         </div>
                      </div>
@@ -213,14 +213,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $d['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($d['balance']) ? abs($d['balance']) : '' }}
+                                 {{ is_numeric($d['balance']) ? $d['balance'] : '' }}
                               </div>
                            </div>
                            @if($d['sub'])
                               @foreach($d['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -228,7 +228,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Debt</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['responbility_equity']['total']['total_debt'])) }}
+                              {{ number_format($balance_sheet['responbility_equity']['total']['total_debt']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -238,14 +238,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $r['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($r['balance']) ? number_format(abs($r['balance'])) : '' }}
+                                 {{ is_numeric($r['balance']) ? number_format($r['balance']) : '' }}
                               </div>
                            </div>
                            @if($r['sub'])
                               @foreach($r['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -253,7 +253,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Responbility</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['responbility_equity']['total']['total_responbility'])) }}
+                              {{ number_format($balance_sheet['responbility_equity']['total']['total_responbility']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
@@ -263,14 +263,14 @@
                            <div class="row p-1 border">
                               <div class="col-md-9 font-weight-semibold">{{ $e['name'] }}</div>
                               <div class="col-md-3">
-                                 {{ is_numeric($e['balance']) ? number_format(abs($e['balance'])) : '' }}
+                                 {{ is_numeric($e['balance']) ? number_format($e['balance']) : '' }}
                               </div>
                            </div>
                            @if($e['sub'])
                               @foreach($e['sub'] as $s)
                                  <div class="row p-1 border">
                                     <div class="col-md-9"><span class="ml-4">{{ $s['name'] }}</span></div>
-                                    <div class="col-md-3">{{ number_format(abs($s['balance'])) }}</div>
+                                    <div class="col-md-3">{{ number_format($s['balance']) }}</div>
                                  </div>
                               @endforeach
                            @endif
@@ -278,7 +278,7 @@
                         <div class="row border p-1">
                            <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Equity</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
-                              {{ number_format(abs($balance_sheet['responbility_equity']['total']['total_equity'])) }}
+                              {{ number_format($balance_sheet['responbility_equity']['total']['total_equity']) }}
                            </div>
                         </div>
                      </div>
@@ -290,7 +290,7 @@
                         <div class="row p-1 border border">
                            <div class="col-md-8 text-uppercase font-weight-bold">Total Assets</div>
                            <div class="col-md-4 font-weight-bold">
-                              {{ number_format(abs(collect($balance_sheet['assets']['total'])->flatten()->sum())) }}
+                              {{ number_format(collect($balance_sheet['assets']['total'])->flatten()->sum()) }}
                            </div>
                         </div>
                      </div>
@@ -298,7 +298,7 @@
                         <div class="row p-1 border border">
                            <div class="col-md-8 text-uppercase font-weight-bold">Total Responbility & Equity</div>
                            <div class="col-md-4 font-weight-bold">
-                              {{ number_format(abs(collect($balance_sheet['responbility_equity']['total'])->flatten()->sum())) }}
+                              {{ number_format(collect($balance_sheet['responbility_equity']['total'])->flatten()->sum()) }}
                            </div>
                         </div>
                      </div>
