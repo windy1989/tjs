@@ -967,9 +967,9 @@ class SMB {
       $income_outside_variance_current  = $total_income_outside_current - $income_outside_budget_nominal;
       $income_outside_variance_last     = $total_income_outside_current - $total_income_outside_last;
 
-      $nett_actual_current += $total_fee_outside_current - $total_income_outside_current;
-      $nett_actual_last    += $total_fee_outside_last - $total_income_outside_last;
-      $nett_budget         += $fee_outside_budget_nominal - $income_outside_budget_nominal;
+      $nett_actual_current -= $total_fee_outside_current - $total_income_outside_current;
+      $nett_actual_last    -= $total_fee_outside_last - $total_income_outside_last;
+      $nett_budget         -= $fee_outside_budget_nominal - $income_outside_budget_nominal;
 
       $fee_income_outside_result = [
          [

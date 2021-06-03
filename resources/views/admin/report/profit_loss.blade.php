@@ -350,16 +350,7 @@
                                  </tr> 
                               @endforeach
                               <tr class="bg-primary-300 text-uppercase">
-                                 <th class="text-left font-weight-bold">
-                                    Total Cogs
-                                    {{-- @php $test_str = ''; @endphp 
-                                    @foreach($profit_loss['summary']['sale'] as $test)
-                                       @if(Str::contains($test['name'], 'COGS Retail - Sby'))
-                                          @php $test_str = 'oke'; @endphp 
-                                       @endif
-                                    @endforeach
-                                    {{ $test_str }} --}}
-                                 </th>
+                                 <th class="text-left font-weight-bold">Total Cogs</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
                                     @if($total_cogs_actual_current > 0) 
@@ -599,7 +590,7 @@
                                  </tr> 
                               @endforeach
                               <tr class="table-secondary font-italic">
-                                 <th class="text-right font-weight-bold">Total Fee Other</th>
+                                 <th class="text-right font-weight-bold">Total Order Expenses</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_fee_other_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
                                     @if($profit_loss['summary']['total']['income']['actual']['current'] > 0)
@@ -729,7 +720,7 @@
                                  </th>
                               </tr>
                               <tr class="bg-primary-300 text-uppercase">
-                                 <th class="text-left font-weight-bold">Total Fee</th>
+                                 <th class="text-left font-weight-bold">Total Expenses</th>
                                  <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['total']['fee']['actual']['current']) }}</th>
                                  <th class="text-center font-weight-bold">{{ $total['fee_actual_percent_current'] }}%</th>
                                  <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['total']['fee']['budget']) }}</th>   
@@ -769,7 +760,7 @@
                               </tr>
                               <tr><td colspan="12"></td></tr>
                               <tr class="font-weight-bold">
-                                 <th colspan="12">Fee Shrinkage</th>
+                                 <th colspan="12">Fee Depreciation</th>
                               </tr>
                               @php 
                                  $total_fee_shrinkage_actual_current   = 0;
