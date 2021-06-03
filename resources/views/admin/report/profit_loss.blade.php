@@ -352,13 +352,13 @@
                               <tr class="bg-primary-300 text-uppercase">
                                  <th class="text-left font-weight-bold">
                                     Total Cogs
-                                    @php $test_str = ''; @endphp 
+                                    {{-- @php $test_str = ''; @endphp 
                                     @foreach($profit_loss['summary']['sale'] as $test)
                                        @if(Str::contains($test['name'], 'COGS Retail - Sby'))
                                           @php $test_str = 'oke'; @endphp 
                                        @endif
                                     @endforeach
-                                    {{ $test_str }}
+                                    {{ $test_str }} --}}
                                  </th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
