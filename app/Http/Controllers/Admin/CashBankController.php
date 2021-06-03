@@ -321,6 +321,7 @@ class CashBankController extends Controller {
             ];
         } else {
             $query->update([
+                'user_id'     => session('bo_id'),
                 'code'        => $request->code,
                 'date'        => $request->date,
                 'type'        => $request->type,

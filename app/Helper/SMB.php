@@ -300,7 +300,7 @@ class SMB {
       $total_deviden      = abs($deviden_debit - $deviden_credit);
       $grandtotal_equity += $total_deviden;
 
-      $retained_earning        = self::profitLossSummary($filter);
+      $retained_earning        = self::profitLossSummary($filter, '<=');
       $total_retained_earning  = $retained_earning['grandtotal']['nett']['actual']['current']['nominal'];
       $grandtotal_equity      += abs($total_retained_earning);
 
@@ -467,14 +467,14 @@ class SMB {
       ];
    }
 
-   private static function profitLossSummary($filter)
+   private static function profitLossSummary($filter, $expression = '=')
    {
       $month_current     = date('m', strtotime($filter));
       $year_current      = date('Y', strtotime($filter));
-      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
+      $where_raw_current = "MONTH(created_at) $expression $month_current AND YEAR(created_at) = $year_current";
       $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
       $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
-      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+      $where_raw_last    = "MONTH(created_at) $expression $month_last AND YEAR(created_at) = $year_last";
 
       $income_actual_current   = 0;
       $income_actual_last      = 0;
