@@ -28,13 +28,10 @@ class SMB {
       $petty_cash_sub    = Coa::where('parent_id', $petty_cash->id)->get();
       $petty_cash_result = [];
       foreach($petty_cash_sub as $pcs) {
-         $sub_1                 = collect(Coa::select('id')->where('parent_id', $pcs->id)->get()->toArray());
-         $sub_2                 = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge             = $sub_1->merge(collect([$pcs->id])->merge($sub_2));
-         $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
-         $grandtotal_cash_bank += abs($total_balance);
+         $balance_debit         = Journal::where('debit', $pcs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit        = Journal::where('credit', $pcs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance         = abs($balance_debit - $balance_credit);
+         $grandtotal_cash_bank += $total_balance;
 
          $petty_cash_result[] = [
             'name'    => $pcs->name,
@@ -46,13 +43,10 @@ class SMB {
       $big_cash_sub    = Coa::where('parent_id', $big_cash->id)->get();
       $big_cash_result = [];
       foreach($big_cash_sub as $bcs) {
-         $sub_1                 = collect(Coa::select('id')->where('parent_id', $bcs->id)->get()->toArray());
-         $sub_2                 = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge             = $sub_1->merge(collect([$bcs->id])->merge($sub_2));
-         $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
-         $grandtotal_cash_bank += abs($total_balance);
+         $balance_debit         = Journal::where('debit', $bcs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit        = Journal::where('credit', $bcs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance         = abs($balance_debit - $balance_credit);
+         $grandtotal_cash_bank += $total_balance;
 
          $big_cash_result[] = [
             'name'    => $bcs->name,
@@ -64,13 +58,10 @@ class SMB {
       $bank_sby_sub    = Coa::where('parent_id', $bank_sby->id)->get();
       $bank_sby_result = [];
       foreach($bank_sby_sub as $bss) {
-         $sub_1                 = collect(Coa::select('id')->where('parent_id', $bss->id)->get()->toArray());
-         $sub_2                 = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge             = $sub_1->merge(collect([$bss->id])->merge($sub_2));
-         $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
-         $grandtotal_cash_bank += abs($total_balance);
+         $balance_debit         = Journal::where('debit', $bss->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit        = Journal::where('credit', $bss->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance         = abs($balance_debit - $balance_credit);
+         $grandtotal_cash_bank += $total_balance;
 
          $bank_sby_result[] = [
             'name'    => $bss->name,
@@ -82,13 +73,10 @@ class SMB {
       $bank_jkt_sub    = Coa::where('parent_id', $bank_jkt->id)->get();
       $bank_jkt_result = [];
       foreach($bank_jkt_sub as $bjs) {
-         $sub_1                 = collect(Coa::select('id')->where('parent_id', $bjs->id)->get()->toArray());
-         $sub_2                 = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge             = $sub_1->merge(collect([$bjs->id])->merge($sub_2));
-         $balance_debit         = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit        = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance         = $balance_debit - $balance_credit;
-         $grandtotal_cash_bank += abs($total_balance);
+         $balance_debit         = Journal::where('debit', $bjs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit        = Journal::where('credit', $bjs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance         = abs($balance_debit - $balance_credit);
+         $grandtotal_cash_bank += $total_balance;
 
          $bank_jkt_result[] = [
             'name'    => $bjs->name,
@@ -100,13 +88,10 @@ class SMB {
       $dp_purchase_sub    = Coa::where('parent_id', $dp_purchase->id)->get();
       $dp_purchase_result = [];
       foreach($dp_purchase_sub as $dps) {
-         $sub_1                  = collect(Coa::select('id')->where('parent_id', $dps->id)->get()->toArray());
-         $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge              = $sub_1->merge(collect([$dps->id])->merge($sub_2));
-         $balance_debit          = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit         = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance          = $balance_debit - $balance_credit;
-         $grandtotal_receivable += abs($total_balance);
+         $balance_debit          = Journal::where('debit', $dps->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit         = Journal::where('credit', $dps->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance          = abs($balance_debit - $balance_credit);
+         $grandtotal_receivable += $total_balance;
 
          $dp_purchase_result[] = [
             'name'    => $dps->name,
@@ -118,13 +103,10 @@ class SMB {
       $receivable_effort_sub    = Coa::where('parent_id', $receivable_effort->id)->get();
       $receivable_effort_result = [];
       foreach($receivable_effort_sub as $res) {
-         $sub_1                  = collect(Coa::select('id')->where('parent_id', $res->id)->get()->toArray());
-         $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge              = $sub_1->merge(collect([$res->id])->merge($sub_2));
-         $balance_debit          = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit         = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance          = $balance_debit - $balance_credit;
-         $grandtotal_receivable += abs($total_balance);
+         $balance_debit          = Journal::where('debit', $res->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit         = Journal::where('credit', $res->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance          = abs($balance_debit - $balance_credit);
+         $grandtotal_receivable += $total_balance;
 
          $receivable_effort_result[] = [
             'name'    => $res->name,
@@ -133,26 +115,19 @@ class SMB {
       }
 
       $advance_purchase        = Coa::where('code', '1.100.03')->first();
-      $advance_purchase_sub_1  = collect(Coa::select('id')->where('parent_id', $advance_purchase->id)->get()->toArray());
-      $advance_purchase_sub_2  = collect(Coa::select('id')->whereIn('parent_id', $advance_purchase_sub_1->flatten())->get()->toArray());
-      $advance_purchase_sub_3  = collect(Coa::select('id')->whereIn('parent_id', $advance_purchase_sub_2->flatten())->get()->toArray());
-      $advance_purchase_merge  = $advance_purchase_sub_1->merge($advance_purchase_sub_2->merge($advance_purchase_sub_3->merge([$advance_purchase->id])));
-      $advance_purchase_debit  = Journal::whereIn('debit', $advance_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $advance_purchase_credit = Journal::whereIn('credit', $advance_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_advance_purchase  = $advance_purchase_debit - $advance_purchase_credit;
-      $grandtotal_receivable  += abs($total_advance_purchase);
+      $advance_purchase_debit  = Journal::where('debit', $advance_purchase->id)->whereRaw($where_raw)->sum('nominal');
+      $advance_purchase_credit = Journal::where('credit', $advance_purchase->id)->whereRaw($where_raw)->sum('nominal');
+      $total_advance_purchase  = abs($advance_purchase_debit - $advance_purchase_credit);
+      $grandtotal_receivable  += $total_advance_purchase;
 
       $supply_item_sby        = Coa::where('code', '1.200.01')->first();
       $supply_item_sby_sub    = Coa::where('parent_id', $supply_item_sby->id)->get();
       $supply_item_sby_result = [];
       foreach($supply_item_sby_sub as $siss) {
-         $sub_1              = collect(Coa::select('id')->where('parent_id', $siss->id)->get()->toArray());
-         $sub_2              = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge          = $sub_1->merge(collect([$siss->id])->merge($sub_2));
-         $balance_debit      = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit     = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance      = $balance_debit - $balance_credit;
-         $grandtotal_supply += abs($total_balance);
+         $balance_debit      = Journal::where('debit', $siss->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit     = Journal::where('credit', $siss->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance      = abs($balance_debit - $balance_credit);
+         $grandtotal_supply += $total_balance;
 
          $supply_item_sby_result[] = [
             'name'    => $siss->name,
@@ -164,13 +139,10 @@ class SMB {
       $supply_item_jkt_sub    = Coa::where('parent_id', $supply_item_jkt->id)->get();
       $supply_item_jkt_result = [];
       foreach($supply_item_jkt_sub as $sijs) {
-         $sub_1              = collect(Coa::select('id')->where('parent_id', $sijs->id)->get()->toArray());
-         $sub_2              = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge          = $sub_1->merge(collect([$sijs->id])->merge($sub_2));
-         $balance_debit      = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit     = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance      = $balance_debit - $balance_credit;
-         $grandtotal_supply += abs($total_balance);
+         $balance_debit      = Journal::where('debit', $sijs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit     = Journal::where('credit', $sijs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance      = abs($balance_debit - $balance_credit);
+         $grandtotal_supply += $total_balance;
 
          $supply_item_jkt_result[] = [
             'name'    => $sijs->name,
@@ -179,26 +151,19 @@ class SMB {
       }
 
       $sent_item          = Coa::where('code', '1.201.00')->first();
-      $sent_item_sub_1    = collect(Coa::select('id')->where('parent_id', $sent_item->id)->get()->toArray());
-      $sent_item_sub_2    = collect(Coa::select('id')->whereIn('parent_id', $sent_item_sub_1->flatten())->get()->toArray());
-      $sent_item_sub_3    = collect(Coa::select('id')->whereIn('parent_id', $sent_item_sub_2->flatten())->get()->toArray());
-      $sent_item_merge    = $sent_item_sub_1->merge($sent_item_sub_2->merge($sent_item_sub_3->merge([$sent_item->id])));
-      $sent_item_debit    = Journal::whereIn('debit', $sent_item_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $sent_item_credit   = Journal::whereIn('credit', $sent_item_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_sent_item    = $sent_item_debit - $sent_item_credit;
-      $grandtotal_supply += abs($total_sent_item);
+      $sent_item_debit    = Journal::where('debit', $sent_item->id)->whereRaw($where_raw)->sum('nominal');
+      $sent_item_credit   = Journal::where('credit', $sent_item->id)->whereRaw($where_raw)->sum('nominal');
+      $total_sent_item    = abs($sent_item_debit - $sent_item_credit);
+      $grandtotal_supply += $total_sent_item;
 
       $fee_dp        = Coa::where('code', '1.400.00')->first();
       $fee_dp_sub    = Coa::where('parent_id', $fee_dp->id)->get();
       $fee_dp_result = [];
       foreach($fee_dp_sub as $fds) {
-         $sub_1                     = collect(Coa::select('id')->where('parent_id', $fds->id)->get()->toArray());
-         $sub_2                     = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                 = $sub_1->merge(collect([$fds->id])->merge($sub_2));;
-         $balance_debit             = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit            = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance             = $balance_debit - $balance_credit;
-         $grandtotal_assets_facile += abs($total_balance);
+         $balance_debit             = Journal::where('debit', $fds->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit            = Journal::where('credit', $fds->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance             = abs($balance_debit - $balance_credit);
+         $grandtotal_assets_facile += $total_balance;
 
          $fee_dp_result[] = [
             'name'    => $fds->name,
@@ -210,13 +175,10 @@ class SMB {
       $prepaid_tax_sub    = Coa::where('parent_id', $prepaid_tax->id)->get();
       $prepaid_tax_result = [];
       foreach($prepaid_tax_sub as $pts) {
-         $sub_1                     = collect(Coa::select('id')->where('parent_id', $pts->id)->get()->toArray());
-         $sub_2                     = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                 = $sub_1->merge(collect([$pts->id])->merge($sub_2));
-         $balance_debit             = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit            = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance             = $balance_debit - $balance_credit;
-         $grandtotal_assets_facile += abs($total_balance);
+         $balance_debit             = Journal::where('debit', $pts->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit            = Journal::where('credit', $pts->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance             = abs($balance_debit - $balance_credit);
+         $grandtotal_assets_facile += $total_balance;
 
          $prepaid_tax_result[] = [
             'name'    => $pts->name,
@@ -228,13 +190,10 @@ class SMB {
       $assets_consistenly_sub    = Coa::where('parent_id', $assets_consistenly->id)->get();
       $assets_consistenly_result = [];
       foreach($assets_consistenly_sub as $acs) {
-         $sub_1                          = collect(Coa::select('id')->where('parent_id', $acs->id)->get()->toArray());
-         $sub_2                          = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                      = $sub_1->merge(collect([$acs->id])->merge($sub_2));
-         $balance_debit                  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit                 = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance                  = $balance_debit - $balance_credit;
-         $grandtotal_assets_consistenly += abs($total_balance);
+         $balance_debit                  = Journal::where('debit', $acs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit                 = Journal::where('credit', $acs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance                  = abs($balance_debit - $balance_credit);
+         $grandtotal_assets_consistenly += $total_balance;
 
          $assets_consistenly_result[] = [
             'name'    => $acs->name,
@@ -246,11 +205,8 @@ class SMB {
       $accumulated_shrinkage_sub    = Coa::where('parent_id', $accumulated_shrinkage->id)->get();
       $accumulated_shrinkage_result = [];
       foreach($accumulated_shrinkage_sub as $ass) {
-         $sub_1                             = collect(Coa::select('id')->where('parent_id', $ass->id)->get()->toArray());
-         $sub_2                             = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                         = $sub_1->merge(collect([$ass->id])->merge($sub_2));
-         $balance_debit                     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit                    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
+         $balance_debit                     = Journal::where('debit', $ass->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit                    = Journal::where('credit', $ass->id)->whereRaw($where_raw)->sum('nominal');
          $total_balance                     = $balance_debit - $balance_credit;
          $grandtotal_accumulated_shrinkage += $total_balance;
 
@@ -264,31 +220,10 @@ class SMB {
       $dp_sale_sub    = Coa::where('parent_id', $dp_sale->id)->get();
       $dp_sale_result = [];
       foreach($dp_sale_sub as $dss) {
-         $sub_1            = collect(Coa::select('id')->where('parent_id', $dss->id)->get()->toArray());
-         $sub_2            = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge        = $sub_1->merge(collect([$dss->id])->merge($sub_2));
-         $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
-         $grandtotal_debt += abs($total_balance);
-
-         $dp_sale_result[] = [
-            'name'    => $dss->name,
-            'balance' => $total_balance
-         ];
-      }
-
-      $dp_sale        = Coa::where('code', '2.000.01')->first();
-      $dp_sale_sub    = Coa::where('parent_id', $dp_sale->id)->get();
-      $dp_sale_result = [];
-      foreach($dp_sale_sub as $dss) {
-         $sub_1            = collect(Coa::select('id')->where('parent_id', $dss->id)->get()->toArray());
-         $sub_2            = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge        = $sub_1->merge(collect([$dss->id])->merge($sub_2));
-         $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
-         $grandtotal_debt += abs($total_balance);
+         $balance_debit    = Journal::where('debit', $dss->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit   = Journal::where('credit', $dss->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance    = abs($balance_debit - $balance_credit);
+         $grandtotal_debt += $total_balance;
 
          $dp_sale_result[] = [
             'name'    => $dss->name,
@@ -300,13 +235,10 @@ class SMB {
       $debt_business_sub    = Coa::where('parent_id', $debt_business->id)->get();
       $debt_business_result = [];
       foreach($debt_business_sub as $dbs) {
-         $sub_1            = collect(Coa::select('id')->where('parent_id', $dbs->id)->get()->toArray());
-         $sub_2            = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge        = $sub_1->merge(collect([$dbs->id])->merge($sub_2));
-         $balance_debit    = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit   = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance    = $balance_debit - $balance_credit;
-         $grandtotal_debt += abs($total_balance);
+         $balance_debit    = Journal::where('debit', $dbs->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit   = Journal::where('credit', $dbs->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance    = abs($balance_debit - $balance_credit);
+         $grandtotal_debt += $total_balance;
 
          $debt_business_result[] = [
             'name'    => $dbs->name,
@@ -318,13 +250,10 @@ class SMB {
       $tax_sub    = Coa::where('parent_id', $tax->id)->get();
       $tax_result = [];
       foreach($tax_sub as $ts) {
-         $sub_1                    = collect(Coa::select('id')->where('parent_id', $ts->id)->get()->toArray());
-         $sub_2                    = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                = $sub_1->merge(collect([$ts->id])->merge($sub_2));
-         $balance_debit            = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit           = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance            = $balance_debit - $balance_credit;
-         $grandtotal_responbility += abs($total_balance);
+         $balance_debit            = Journal::where('debit', $ts->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit           = Journal::where('credit', $ts->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance            = abs($balance_debit - $balance_credit);
+         $grandtotal_responbility += $total_balance;
 
          $tax_result[] = [
             'name'    => $ts->name,
@@ -336,13 +265,10 @@ class SMB {
       $other_payable_sub    = Coa::where('parent_id', $other_payable->id)->get();
       $other_payable_result = [];
       foreach($other_payable_sub as $ops) {
-         $sub_1                    = collect(Coa::select('id')->where('parent_id', $ops->id)->get()->toArray());
-         $sub_2                    = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
-         $sub_merge                = $sub_1->merge(collect([$ops->id])->merge($sub_2));
-         $balance_debit            = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $balance_credit           = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw)->sum('nominal');
-         $total_balance            = $balance_debit - $balance_credit;
-         $grandtotal_responbility += abs($total_balance);
+         $balance_debit            = Journal::where('debit', $ops->id)->whereRaw($where_raw)->sum('nominal');
+         $balance_credit           = Journal::where('credit', $ops->id)->whereRaw($where_raw)->sum('nominal');
+         $total_balance            = abs($balance_debit - $balance_credit);
+         $grandtotal_responbility += $total_balance;
 
          $other_payable_result[] = [
             'name'    => $ops->name,
@@ -351,44 +277,28 @@ class SMB {
       }
 
       $debt_purchase            = Coa::where('code', '2.400.00')->first();
-      $debt_purchase_sub_1      = collect(Coa::select('id')->where('parent_id', $debt_purchase->id)->get()->toArray());
-      $debt_purchase_sub_2      = collect(Coa::select('id')->whereIn('parent_id', $debt_purchase_sub_1->flatten())->get()->toArray());
-      $debt_purchase_sub_3      = collect(Coa::select('id')->whereIn('parent_id', $debt_purchase_sub_2->flatten())->get()->toArray());
-      $debt_purchase_merge      = $debt_purchase_sub_1->merge($debt_purchase_sub_2->merge($debt_purchase_sub_3->merge([$debt_purchase->id])));
-      $debt_purchase_debit      = Journal::whereIn('debit', $debt_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $debt_purchase_credit     = Journal::whereIn('credit', $debt_purchase_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_debt_purchase      = $debt_purchase_debit - $debt_purchase_credit;
-      $grandtotal_responbility += abs($total_debt_purchase);
+      $debt_purchase_debit      = Journal::where('debit', $debt_purchase->id)->whereRaw($where_raw)->sum('nominal');
+      $debt_purchase_credit     = Journal::where('credit', $debt_purchase->id)->whereRaw($where_raw)->sum('nominal');
+      $total_debt_purchase      = abs($debt_purchase_debit - $debt_purchase_credit);
+      $grandtotal_responbility += $total_debt_purchase;
 
       $capital            = Coa::where('code', '3.000.00')->first();
-      $capital_sub_1      = collect(Coa::select('id')->where('parent_id', $capital->id)->get()->toArray());
-      $capital_sub_2      = collect(Coa::select('id')->whereIn('parent_id', $capital_sub_1->flatten())->get()->toArray());
-      $capital_sub_3      = collect(Coa::select('id')->whereIn('parent_id', $capital_sub_2->flatten())->get()->toArray());
-      $capital_merge      = $capital_sub_1->merge($capital_sub_2->merge($capital_sub_3->merge([$capital->id])));
-      $capital_debit      = Journal::whereIn('debit', $capital_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $capital_credit     = Journal::whereIn('credit', $capital_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_capital      = $capital_debit - $capital_credit;
-      $grandtotal_equity += abs($total_capital);
+      $capital_debit      = Journal::where('debit', $capital->id)->whereRaw($where_raw)->sum('nominal');
+      $capital_credit     = Journal::where('credit', $capital->id)->whereRaw($where_raw)->sum('nominal');
+      $total_capital      = abs($capital_debit - $capital_credit);
+      $grandtotal_equity += $total_capital;
 
       $opening_balance        = Coa::where('code', '3.100.00')->first();
-      $opening_balance_sub_1  = collect(Coa::select('id')->where('parent_id', $opening_balance->id)->get()->toArray());
-      $opening_balance_sub_2  = collect(Coa::select('id')->whereIn('parent_id', $opening_balance_sub_1->flatten())->get()->toArray());
-      $opening_balance_sub_3  = collect(Coa::select('id')->whereIn('parent_id', $opening_balance_sub_2->flatten())->get()->toArray());
-      $opening_balance_merge  = $opening_balance_sub_1->merge($opening_balance_sub_2->merge($opening_balance_sub_3->merge([$opening_balance->id])));
-      $opening_balance_debit  = Journal::whereIn('debit', $opening_balance_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $opening_balance_credit = Journal::whereIn('credit', $opening_balance_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_opening_balance  = $opening_balance_debit - $opening_balance_credit;
-      $grandtotal_equity     += abs($total_opening_balance);
+      $opening_balance_debit  = Journal::where('debit', $opening_balance->id)->whereRaw($where_raw)->sum('nominal');
+      $opening_balance_credit = Journal::where('credit', $opening_balance->id)->whereRaw($where_raw)->sum('nominal');
+      $total_opening_balance  = abs($opening_balance_debit - $opening_balance_credit);
+      $grandtotal_equity     += $total_opening_balance;
 
       $deviden            = Coa::where('code', '3.200.00')->first();
-      $deviden_sub_1      = collect(Coa::select('id')->where('parent_id', $deviden->id)->get()->toArray());
-      $deviden_sub_2      = collect(Coa::select('id')->whereIn('parent_id', $deviden_sub_1->flatten())->get()->toArray());
-      $deviden_sub_3      = collect(Coa::select('id')->whereIn('parent_id', $deviden_sub_2->flatten())->get()->toArray());
-      $deviden_merge      = $deviden_sub_1->merge($deviden_sub_2->merge($deviden_sub_3->merge([$deviden->id])));
-      $deviden_debit      = Journal::whereIn('debit', $deviden_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $deviden_credit     = Journal::whereIn('credit', $deviden_merge->flatten())->whereRaw($where_raw)->sum('nominal');
-      $total_deviden      = $deviden_debit - $deviden_credit;
-      $grandtotal_equity += abs($total_deviden);
+      $deviden_debit      = Journal::where('debit', $deviden->id)->whereRaw($where_raw)->sum('nominal');
+      $deviden_credit     = Journal::where('credit', $deviden->id)->whereRaw($where_raw)->sum('nominal');
+      $total_deviden      = abs($deviden_debit - $deviden_credit);
+      $grandtotal_equity += $total_deviden;
 
       $retained_earning        = self::profitLossSummary($filter);
       $total_retained_earning  = $retained_earning['grandtotal']['nett']['actual']['current']['nominal'];
@@ -1041,10 +951,6 @@ class SMB {
       $fee_outside_variance_current   = $total_fee_outside_current - $fee_outside_budget_nominal;
       $fee_outside_variance_last      = $total_fee_outside_current - $total_fee_outside_last;
 
-      $nett_actual_current -= $total_fee_outside_current;
-      $nett_actual_last    -= $total_fee_outside_last;
-      $nett_budget         -= $fee_outside_budget_nominal;
-
       $income_outside                   = Coa::where('code', '7.100.00')->first();
       $income_outside_sub_1             = collect(Coa::select('id')->where('parent_id', $income_outside->id)->get()->toArray());
       $income_outside_sub_2             = collect(Coa::select('id')->whereIn('parent_id', $income_outside_sub_1->flatten())->get()->toArray());
@@ -1061,9 +967,9 @@ class SMB {
       $income_outside_variance_current  = $total_income_outside_current - $income_outside_budget_nominal;
       $income_outside_variance_last     = $total_income_outside_current - $total_income_outside_last;
 
-      $nett_actual_current -= $total_income_outside_current;
-      $nett_actual_last    -= $total_income_outside_last;
-      $nett_budget         -= $income_outside_budget_nominal;
+      $nett_actual_current += $total_fee_outside_current - $total_income_outside_current;
+      $nett_actual_last    += $total_fee_outside_last - $total_income_outside_last;
+      $nett_budget         += $fee_outside_budget_nominal - $income_outside_budget_nominal;
 
       $fee_income_outside_result = [
          [
@@ -1171,11 +1077,11 @@ class SMB {
          $gross_variance_percent_last = round(($gross_variance_nominal_last / $gross_actual_nominal_last) * 100);
       }
 
-      $nett_actual_nominal_current   = $gross_actual_nominal_current + $nett_actual_current;
-      $nett_actual_nominal_last      = $gross_actual_nominal_last + $nett_actual_last;
+      $nett_actual_nominal_current   = $gross_actual_nominal_current - $nett_actual_current;
+      $nett_actual_nominal_last      = $gross_actual_nominal_last - $nett_actual_last;
       $nett_actual_percent_current   = 0;
       $nett_actual_percent_last      = 0;
-      $nett_budget_nominal           = $gross_budget_nominal + $nett_budget;
+      $nett_budget_nominal           = $gross_budget_nominal - $nett_budget;
       $nett_budget_percent           = 0;
       $nett_variance_nominal_current = $nett_actual_nominal_current - $nett_budget_nominal;
       $nett_variance_nominal_last    = $nett_actual_nominal_current - $nett_actual_nominal_last;
