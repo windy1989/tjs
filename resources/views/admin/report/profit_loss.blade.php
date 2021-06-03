@@ -350,7 +350,16 @@
                                  </tr> 
                               @endforeach
                               <tr class="bg-primary-300 text-uppercase">
-                                 <th class="text-left font-weight-bold">Total Cogs</th>
+                                 <th class="text-left font-weight-bold">
+                                    Total Cogs
+                                    @php $test_str = ''; @endphp 
+                                    @foreach($profit_loss['summary']['sale'] as $test)
+                                       @if(Str::contains($test['name'], 'COGS Retail - Sby'))
+                                          @php $test_str = 'oke'; @endphp 
+                                       @endif
+                                    @endforeach
+                                    {{ $test_str }}
+                                 </th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
                                     @if($total_cogs_actual_current > 0) 
@@ -844,14 +853,24 @@
                                  $total_fee_income_outside_actual_last      = 0;
                                  $total_fee_income_outside_variance_last    = 0;
                               @endphp
-                              @foreach($profit_loss['summary']['fee_income_outside'] as $fio)
-                                 @php 
-                                    $total_fee_income_outside_actual_current   += $fio['actual']['nominal']['current'];
-                                    $total_fee_income_outside_budget           += $fio['budget']['nominal'];
-                                    $total_fee_income_outside_variance_current += $fio['variance']['nominal']['current'];
-                                    $total_fee_income_outside_actual_last      += $fio['actual']['nominal']['last'];
-                                    $total_fee_income_outside_variance_last    += $fio['variance']['nominal']['last'];
-                                 @endphp
+                              @foreach($profit_loss['summary']['fee_income_outside'] as $key => $fio)
+                                 @if($key == 0)
+                                    @php 
+                                       $total_fee_income_outside_actual_current   += $fio['actual']['nominal']['current'];
+                                       $total_fee_income_outside_budget           += $fio['budget']['nominal'];
+                                       $total_fee_income_outside_variance_current += $fio['variance']['nominal']['current'];
+                                       $total_fee_income_outside_actual_last      += $fio['actual']['nominal']['last'];
+                                       $total_fee_income_outside_variance_last    += $fio['variance']['nominal']['last'];
+                                    @endphp
+                                 @else
+                                    @php 
+                                       $total_fee_income_outside_actual_current   -= $fio['actual']['nominal']['current'];
+                                       $total_fee_income_outside_budget           -= $fio['budget']['nominal'];
+                                       $total_fee_income_outside_variance_current -= $fio['variance']['nominal']['current'];
+                                       $total_fee_income_outside_actual_last      -= $fio['actual']['nominal']['last'];
+                                       $total_fee_income_outside_variance_last    -= $fio['variance']['nominal']['last'];
+                                    @endphp
+                                 @endif
                                  <tr>
                                     <td class="text-left">{{ $fio['name'] }}</td>   
                                     <td class="text-right">{{ number_format($fio['actual']['nominal']['current']) }}</td>   

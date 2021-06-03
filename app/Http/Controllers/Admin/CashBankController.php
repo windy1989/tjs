@@ -328,7 +328,7 @@ class CashBankController extends Controller {
 
             if($query) {
                 CashBankDetail::where('cash_bank_id', $query->id)->delete();
-                DB::table('cash_banks')->where('description', $query->code)->delete();
+                DB::table('journals')->where('description', $query->code)->delete();
 
                 foreach($request->debit_detail as $key => $dd) {
                     CashBankDetail::create([
