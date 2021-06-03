@@ -590,7 +590,7 @@
                                  </tr> 
                               @endforeach
                               <tr class="table-secondary font-italic">
-                                 <th class="text-right font-weight-bold">Total Order Expenses</th>
+                                 <th class="text-right font-weight-bold">Total Other Expenses</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_fee_other_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
                                     @if($profit_loss['summary']['total']['income']['actual']['current'] > 0)
@@ -760,7 +760,7 @@
                               </tr>
                               <tr><td colspan="12"></td></tr>
                               <tr class="font-weight-bold">
-                                 <th colspan="12">Fee Depreciation</th>
+                                 <th colspan="12">Depreciation</th>
                               </tr>
                               @php 
                                  $total_fee_shrinkage_actual_current   = 0;
@@ -792,7 +792,7 @@
                                  </tr> 
                               @endforeach
                               <tr class="table-secondary font-italic">
-                                 <th class="text-right font-weight-bold">Total Fee Shrinkage</th>
+                                 <th class="text-right font-weight-bold">Total Depreciation</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_fee_shrinkage_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
                                     @if($profit_loss['summary']['total']['income']['actual']['current'] > 0)
