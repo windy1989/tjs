@@ -21,7 +21,7 @@
 	<div class="content">
 		<div class="card">
 			<div class="card-body">
-            <h6 class="text-muted text-uppercase text-center">Periode {{ date('F Y', strtotime($filter)) }}</h6>
+            <h6 class="text-muted text-uppercase text-center font-weight-bold">Periode {{ date('F Y', strtotime($filter)) }}</h6>
             <form action="{{ url('admin/report/balance_sheet') }}" method="GET" id="form_filter">
                @csrf
                <div class="form-group">
