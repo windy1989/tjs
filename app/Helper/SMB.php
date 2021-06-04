@@ -171,7 +171,7 @@ class SMB {
          ];
       }
 
-      $prepaid_tax        = Coa::where('code', '1.400.00')->first();
+      $prepaid_tax        = Coa::where('code', '1.500.00')->first();
       $prepaid_tax_sub    = Coa::where('parent_id', $prepaid_tax->id)->get();
       $prepaid_tax_result = [];
       foreach($prepaid_tax_sub as $pts) {
@@ -463,7 +463,10 @@ class SMB {
    public static function reportProfitLoss($filter)
    {
       return [
-         'summary' => self::profitLossSummary($filter)
+         'summary'       => self::profitLossSummary($filter),
+         'surabaya'      => self::profitLossSurabaya($filter),
+         'jakarta'       => self::profitLossJakarta($filter),
+         'non_operation' => self::profitLossNonOperation($filter)
       ];
    }
 
@@ -1175,6 +1178,1201 @@ class SMB {
          'fee_income_outside' => $fee_income_outside_result,
          'total'              => $total,
          'grandtotal'         => $grandtotal
+      ];
+   }
+
+   private static function profitLossSurabaya($filter)
+   {
+      $month_current     = date('m', strtotime($filter));
+      $year_current      = date('Y', strtotime($filter));
+      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
+      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
+      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+
+      $income_actual_current   = 0;
+      $income_actual_last      = 0;
+      $income_budget           = 0;
+      $income_variance_current = 0;
+      $income_variance_last    = 0;
+      $cogs_actual_current     = 0;
+      $cogs_actual_last        = 0;
+      $cogs_budget             = 0;
+      $cogs_variance_current   = 0;
+      $cogs_variance_last      = 0;
+      $fee_actual_current      = 0;
+      $fee_actual_last         = 0;
+      $fee_budget              = 0;
+      $fee_variance_current    = 0;
+      $fee_variance_last       = 0;
+      $nett_actual_current     = 0;
+      $nett_actual_last        = 0;
+      $nett_budget             = 0;
+
+      $sale        = Coa::whereIn('code', ['4.000.01.01'])->get();
+      $sale_result = [];
+      foreach($sale as $ss) {
+         $sale     = Coa::find($ss->id);
+         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         foreach($sale_sub as $ss) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ss->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $ss->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $income_actual_current   += $total_balance_current;
+            $income_actual_last      += $total_balance_last;
+            $income_budget           += $budget_nominal;
+            $income_variance_current += $variance_current;
+            $income_variance_last    += $variance_last;
+
+            $sale_result[] = [
+               'name'     => $ss->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $sale_service        = Coa::whereIn('code', ['4.000.02.01', '4.000.02.03'])->get();
+      $sale_service_result = [];
+      foreach($sale_service as $sss) {
+         $sub_1                  = collect(Coa::select('id')->where('parent_id', $sss->id)->get()->toArray());
+         $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+         $sub_merge              = $sub_1->merge(collect([$sss->id])->merge($sub_2));
+         $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+         $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+         $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+         $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+         $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+         $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+         $budget                 = Budgeting::where('month', $filter)->where('coa_id', $sss->id)->orderByDesc('id')->limit(1)->get();
+         $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+         $variance_current       = $total_balance_current - $budget_nominal;
+         $variance_last          = $total_balance_current - $total_balance_last;
+
+         $income_actual_current   += $total_balance_current;
+         $income_actual_last      += $total_balance_last;
+         $income_budget           += $budget_nominal;
+         $income_variance_current += $variance_current;
+         $income_variance_last    += $variance_last;
+
+         $sale_service_result[] = [
+            'name'     => $sss->name,
+            'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+            'budget'   => $budget_nominal,
+            'variance' => [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ]
+         ];
+      }
+
+      $cogs        = Coa::whereIn('code', ['5.000.01'])->get();
+      $cogs_result = [];
+      foreach($cogs as $sc) {
+         $cogs     = Coa::find($sc->id);
+         $cogs_sub = Coa::where('parent_id', $cogs->id)->get();
+         foreach($cogs_sub as $cs) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $cs->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$cs->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $cs->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $cogs_actual_current   += $total_balance_current;
+            $cogs_actual_last      += $total_balance_last;
+            $cogs_budget           += $budget_nominal;
+            $cogs_variance_current += $variance_current;
+            $cogs_variance_last    += $variance_last;
+
+            $cogs_result[] = [
+               'name'     => $cs->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $salary_wages        = Coa::whereIn('code', ['6.200.01.01'])->get();
+      $salary_wages_result = [];
+      foreach($salary_wages as $ssw) {
+         $salary_wages     = Coa::find($ssw->id);
+         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->get();
+         foreach($salary_wages_sub as $sws) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $sws->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$sws->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $sws->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $salary_wages_result[] = [
+               'name'     => $sws->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_marketing        = Coa::whereIn('code', ['6.100.01'])->get();
+      $fee_marketing_result = [];
+      foreach($fee_marketing as $sfm) {
+         $fee_marketing     = Coa::find($sfm->id);
+         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->get();
+         foreach($fee_marketing_sub as $fms) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fms->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fms->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_marketing_result[] = [
+               'name'     => $fms->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_other        = Coa::whereIn('code', ['6.2100.01.01'])->get();
+      $fee_other_result = [];
+      foreach($fee_other as $sfo) {
+         $fee_other     = Coa::find($sfo->id);
+         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->get();
+         foreach($fee_other_sub as $fos) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fos->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fos->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fos->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_other_result[] = [
+               'name'     => $fos->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_maintenance        = Coa::whereIn('code', ['6.2200.01.01'])->get();
+      $fee_maintenance_result = [];
+      foreach($fee_maintenance as $sfm) {
+         $fee_maintenance     = Coa::find($sfm->id);
+         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->get();
+         foreach($fee_maintenance_sub as $fms) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fms->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fms->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_maintenance_result[] = [
+               'name'     => $fms->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $total = [
+         'income' => [
+            'budget'   => $income_budget,
+            'actual'   => ['current' => $income_actual_current, 'last' => $income_actual_last],
+            'variance' => ['current' => $income_variance_current, 'last' => $income_variance_last]
+         ],
+         'cogs' => [
+            'budget'   => $cogs_budget,
+            'actual'   => ['current' => $cogs_actual_current, 'last' => $cogs_actual_last],
+            'variance' => ['current' => $cogs_variance_current, 'last' => $cogs_variance_last]
+         ],
+         'fee' => [
+            'budget'   => $fee_budget,
+            'actual'   => ['current' => $fee_actual_current, 'last' => $fee_actual_last],
+            'variance' => ['current' => $fee_variance_current, 'last' => $fee_variance_last]
+         ],
+      ];
+
+      $nett_actual_nominal_current   = $income_actual_current - $cogs_actual_current - $fee_actual_current;
+      $nett_actual_nominal_last      = $income_actual_last - $cogs_actual_last - $fee_actual_last;
+      $nett_actual_percent_current   = 0;
+      $nett_actual_percent_last      = 0;
+      $nett_budget_nominal           = $income_budget - $cogs_budget - $fee_budget;
+      $nett_budget_percent           = 0;
+      $nett_variance_nominal_current = $nett_actual_nominal_current - $nett_budget_nominal;
+      $nett_variance_nominal_last    = $nett_actual_nominal_current - $nett_actual_nominal_last;
+      $nett_variance_percent_current = 0;
+      $nett_variance_percent_last    = 0;
+
+      if($income_actual_current > 0) {
+         $nett_actual_percent_current = round(($nett_actual_nominal_current / $income_actual_current) * 100);
+      }
+
+      if($income_budget > 0) {
+         $nett_budget_percent = round(($nett_budget_nominal / $income_budget) * 100);
+      }
+
+      if($nett_budget_nominal > 0) {
+         $nett_variance_percent_current = round(($nett_variance_nominal_current / $nett_budget_nominal) * 100);
+      }
+
+      if($income_actual_last > 0) {
+         $nett_actual_percent_last = round(($nett_actual_nominal_last / $income_actual_last) * 100);
+      }
+
+      if($nett_actual_nominal_last > 0) {
+         $nett_variance_percent_last = round(($nett_variance_nominal_last / $nett_actual_nominal_last) * 100);
+      }
+
+      $grandtotal = [
+         'nett' => [
+            'actual' => [
+               'current' => [
+                  'nominal' => $nett_actual_nominal_current,
+                  'percent' => $nett_actual_percent_current
+               ],
+               'last' => [
+                  'nominal' => $nett_actual_nominal_last,
+                  'percent' => $nett_actual_percent_last
+               ]
+            ],
+            'budget' => [
+               'nominal' => $nett_budget_nominal,
+               'percent' => $nett_budget_percent
+            ],
+            'variance' => [
+               'current' => [
+                  'nominal' => $nett_variance_nominal_current,
+                  'percent' => $nett_variance_percent_current
+               ],
+               'last' => [
+                  'nominal' => $nett_variance_nominal_last,
+                  'percent' => $nett_variance_percent_last
+               ]
+            ],
+         ] 
+      ];
+
+      return [
+         'sale'            => $sale_result,
+         'sale_service'    => $sale_service_result,
+         'cogs'            => $cogs_result,
+         'salary_wages'    => $salary_wages_result,
+         'fee_marketing'   => $fee_marketing_result,
+         'fee_other'       => $fee_other_result,
+         'fee_maintenance' => $fee_maintenance_result,
+         'total'           => $total,
+         'grandtotal'      => $grandtotal
+      ];
+   }
+
+   private static function profitLossJakarta($filter)
+   {
+      $month_current     = date('m', strtotime($filter));
+      $year_current      = date('Y', strtotime($filter));
+      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
+      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
+      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+
+      $income_actual_current   = 0;
+      $income_actual_last      = 0;
+      $income_budget           = 0;
+      $income_variance_current = 0;
+      $income_variance_last    = 0;
+      $cogs_actual_current     = 0;
+      $cogs_actual_last        = 0;
+      $cogs_budget             = 0;
+      $cogs_variance_current   = 0;
+      $cogs_variance_last      = 0;
+      $fee_actual_current      = 0;
+      $fee_actual_last         = 0;
+      $fee_budget              = 0;
+      $fee_variance_current    = 0;
+      $fee_variance_last       = 0;
+      $nett_actual_current     = 0;
+      $nett_actual_last        = 0;
+      $nett_budget             = 0;
+
+      $sale        = Coa::whereIn('code', ['4.000.01.02'])->get();
+      $sale_result = [];
+      foreach($sale as $ss) {
+         $sale     = Coa::find($ss->id);
+         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         foreach($sale_sub as $ss) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ss->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $ss->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $income_actual_current   += $total_balance_current;
+            $income_actual_last      += $total_balance_last;
+            $income_budget           += $budget_nominal;
+            $income_variance_current += $variance_current;
+            $income_variance_last    += $variance_last;
+
+            $sale_result[] = [
+               'name'     => $ss->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $sale_service        = Coa::whereIn('code', ['4.000.02.02', '4.000.02.04'])->get();
+      $sale_service_result = [];
+      foreach($sale_service as $sss) {
+         $sub_1                  = collect(Coa::select('id')->where('parent_id', $sss->id)->get()->toArray());
+         $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+         $sub_merge              = $sub_1->merge(collect([$sss->id])->merge($sub_2));
+         $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+         $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+         $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+         $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+         $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+         $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+         $budget                 = Budgeting::where('month', $filter)->where('coa_id', $sss->id)->orderByDesc('id')->limit(1)->get();
+         $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+         $variance_current       = $total_balance_current - $budget_nominal;
+         $variance_last          = $total_balance_current - $total_balance_last;
+
+         $income_actual_current   += $total_balance_current;
+         $income_actual_last      += $total_balance_last;
+         $income_budget           += $budget_nominal;
+         $income_variance_current += $variance_current;
+         $income_variance_last    += $variance_last;
+
+         $sale_service_result[] = [
+            'name'     => $sss->name,
+            'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+            'budget'   => $budget_nominal,
+            'variance' => [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ]
+         ];
+      }
+
+      $cogs        = Coa::whereIn('code', ['5.000.02'])->get();
+      $cogs_result = [];
+      foreach($cogs as $sc) {
+         $cogs     = Coa::find($sc->id);
+         $cogs_sub = Coa::where('parent_id', $cogs->id)->get();
+         foreach($cogs_sub as $cs) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $cs->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$cs->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $cs->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $cogs_actual_current   += $total_balance_current;
+            $cogs_actual_last      += $total_balance_last;
+            $cogs_budget           += $budget_nominal;
+            $cogs_variance_current += $variance_current;
+            $cogs_variance_last    += $variance_last;
+
+            $cogs_result[] = [
+               'name'     => $cs->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $salary_wages        = Coa::whereIn('code', ['6.200.01.02'])->get();
+      $salary_wages_result = [];
+      foreach($salary_wages as $ssw) {
+         $salary_wages     = Coa::find($ssw->id);
+         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->get();
+         foreach($salary_wages_sub as $sws) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $sws->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$sws->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $sws->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $salary_wages_result[] = [
+               'name'     => $sws->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_marketing        = Coa::whereIn('code', ['6.100.02'])->get();
+      $fee_marketing_result = [];
+      foreach($fee_marketing as $sfm) {
+         $fee_marketing     = Coa::find($sfm->id);
+         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->get();
+         foreach($fee_marketing_sub as $fms) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fms->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fms->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_marketing_result[] = [
+               'name'     => $fms->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_other        = Coa::whereIn('code', ['6.2100.01.02'])->get();
+      $fee_other_result = [];
+      foreach($fee_other as $sfo) {
+         $fee_other     = Coa::find($sfo->id);
+         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->get();
+         foreach($fee_other_sub as $fos) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fos->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fos->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fos->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_other_result[] = [
+               'name'     => $fos->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $fee_maintenance        = Coa::whereIn('code', ['6.2200.01.02'])->get();
+      $fee_maintenance_result = [];
+      foreach($fee_maintenance as $sfm) {
+         $fee_maintenance     = Coa::find($sfm->id);
+         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->get();
+         foreach($fee_maintenance_sub as $fms) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$fms->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $fms->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $fee_actual_current   += $total_balance_current;
+            $fee_actual_last      += $total_balance_last;
+            $fee_budget           += $budget_nominal;
+            $fee_variance_current += $variance_current;
+            $fee_variance_last    += $variance_last;
+
+            $actual = [
+               'nominal' => [
+                  'current' => $total_balance_current, 
+                  'last'    => $total_balance_last
+               ],
+               'percent' => [
+                  'current' => ($income_actual_current > 0) ? round(($total_balance_current / $income_actual_current) * 100) : 0,
+                  'last'    => ($income_actual_last > 0) ? round(($total_balance_last / $income_actual_last) * 100) : 0
+               ]
+            ];
+
+            $budgeting = [
+               'nominal' => $budget_nominal,
+               'percent' => ($income_budget > 0) ? round(($budget_nominal / $income_budget) * 100) : 0
+            ];
+
+            $variance = [
+               'nominal' => [
+                  'current' => $variance_current, 
+                  'last'    => $variance_last
+               ],
+               'percent' => [
+                  'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                  'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+               ]
+            ];
+
+            $fee_maintenance_result[] = [
+               'name'     => $fms->name,
+               'actual'   => $actual,
+               'budget'   => $budgeting,
+               'variance' => $variance
+            ];
+         }
+      }
+
+      $total = [
+         'income' => [
+            'budget'   => $income_budget,
+            'actual'   => ['current' => $income_actual_current, 'last' => $income_actual_last],
+            'variance' => ['current' => $income_variance_current, 'last' => $income_variance_last]
+         ],
+         'cogs' => [
+            'budget'   => $cogs_budget,
+            'actual'   => ['current' => $cogs_actual_current, 'last' => $cogs_actual_last],
+            'variance' => ['current' => $cogs_variance_current, 'last' => $cogs_variance_last]
+         ],
+         'fee' => [
+            'budget'   => $fee_budget,
+            'actual'   => ['current' => $fee_actual_current, 'last' => $fee_actual_last],
+            'variance' => ['current' => $fee_variance_current, 'last' => $fee_variance_last]
+         ],
+      ];
+
+      $nett_actual_nominal_current   = $income_actual_current - $cogs_actual_current - $fee_actual_current;
+      $nett_actual_nominal_last      = $income_actual_last - $cogs_actual_last - $fee_actual_last;
+      $nett_actual_percent_current   = 0;
+      $nett_actual_percent_last      = 0;
+      $nett_budget_nominal           = $income_budget - $cogs_budget - $fee_budget;
+      $nett_budget_percent           = 0;
+      $nett_variance_nominal_current = $nett_actual_nominal_current - $nett_budget_nominal;
+      $nett_variance_nominal_last    = $nett_actual_nominal_current - $nett_actual_nominal_last;
+      $nett_variance_percent_current = 0;
+      $nett_variance_percent_last    = 0;
+
+      if($income_actual_current > 0) {
+         $nett_actual_percent_current = round(($nett_actual_nominal_current / $income_actual_current) * 100);
+      }
+
+      if($income_budget > 0) {
+         $nett_budget_percent = round(($nett_budget_nominal / $income_budget) * 100);
+      }
+
+      if($nett_budget_nominal > 0) {
+         $nett_variance_percent_current = round(($nett_variance_nominal_current / $nett_budget_nominal) * 100);
+      }
+
+      if($income_actual_last > 0) {
+         $nett_actual_percent_last = round(($nett_actual_nominal_last / $income_actual_last) * 100);
+      }
+
+      if($nett_actual_nominal_last > 0) {
+         $nett_variance_percent_last = round(($nett_variance_nominal_last / $nett_actual_nominal_last) * 100);
+      }
+
+      $grandtotal = [
+         'nett' => [
+            'actual' => [
+               'current' => [
+                  'nominal' => $nett_actual_nominal_current,
+                  'percent' => $nett_actual_percent_current
+               ],
+               'last' => [
+                  'nominal' => $nett_actual_nominal_last,
+                  'percent' => $nett_actual_percent_last
+               ]
+            ],
+            'budget' => [
+               'nominal' => $nett_budget_nominal,
+               'percent' => $nett_budget_percent
+            ],
+            'variance' => [
+               'current' => [
+                  'nominal' => $nett_variance_nominal_current,
+                  'percent' => $nett_variance_percent_current
+               ],
+               'last' => [
+                  'nominal' => $nett_variance_nominal_last,
+                  'percent' => $nett_variance_percent_last
+               ]
+            ],
+         ] 
+      ];
+
+      return [
+         'sale'            => $sale_result,
+         'sale_service'    => $sale_service_result,
+         'cogs'            => $cogs_result,
+         'salary_wages'    => $salary_wages_result,
+         'fee_marketing'   => $fee_marketing_result,
+         'fee_other'       => $fee_other_result,
+         'fee_maintenance' => $fee_maintenance_result,
+         'total'           => $total,
+         'grandtotal'      => $grandtotal
+      ];
+   }
+
+   private static function profitLossNonOperation($filter)
+   {
+      $month_current     = date('m', strtotime($filter));
+      $year_current      = date('Y', strtotime($filter));
+      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
+      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
+      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+
+      $depreciation_actual_current   = 0;
+      $depreciation_actual_last      = 0;
+      $depreciation_budget           = 0;
+      $depreciation_variance_current = 0;
+      $depreciation_variance_last    = 0;
+      $income_actual_current         = 0;
+      $income_actual_last            = 0;
+      $income_budget                 = 0;
+      $income_variance_current       = 0;
+      $income_variance_last          = 0;
+      $deduction_actual_current      = 0;
+      $deduction_actual_last         = 0;
+      $deduction_budget              = 0;
+      $deduction_variance_current    = 0;
+      $deduction_variance_last       = 0;
+
+      $depreciation        = Coa::whereIn('code', ['6.300.00'])->get();
+      $depreciation_result = [];
+      foreach($depreciation as $d) {
+         $depreciation     = Coa::find($d->id);
+         $depreciation_sub = Coa::where('parent_id', $depreciation->id)->get();
+         foreach($depreciation_sub as $ds) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ds->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ds->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $ds->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $depreciation_actual_current   += $total_balance_current;
+            $depreciation_actual_last      += $total_balance_last;
+            $depreciation_budget           += $budget_nominal;
+            $depreciation_variance_current += $variance_current;
+            $depreciation_variance_last    += $variance_last;
+
+            $depreciation_result[] = [
+               'name'     => $ds->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $other_income        = Coa::whereIn('code', ['7.100.00'])->get();
+      $other_income_result = [];
+      foreach($other_income as $oi) {
+         $other_income     = Coa::find($oi->id);
+         $other_income_sub = Coa::where('parent_id', $other_income->id)->get();
+         foreach($other_income_sub as $ois) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ois->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ois->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $ois->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $income_actual_current   += $total_balance_current;
+            $income_actual_last      += $total_balance_last;
+            $income_budget           += $budget_nominal;
+            $income_variance_current += $variance_current;
+            $income_variance_last    += $variance_last;
+
+            $other_income_result[] = [
+               'name'     => $ois->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $other_deduction        = Coa::whereIn('code', ['7.200.00'])->get();
+      $other_deduction_result = [];
+      foreach($other_deduction as $od) {
+         $other_deduction     = Coa::find($od->id);
+         $other_deduction_sub = Coa::where('parent_id', $other_deduction->id)->get();
+         foreach($other_deduction_sub as $ods) {
+            $sub_1                  = collect(Coa::select('id')->where('parent_id', $ods->id)->get()->toArray());
+            $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
+            $sub_merge              = $sub_1->merge(collect([$ods->id])->merge($sub_2));
+            $balance_debit_current  = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $balance_credit_current = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_current)->sum('nominal');
+            $total_balance_current  = abs($balance_debit_current - $balance_credit_current);
+            $balance_debit_last     = Journal::whereIn('debit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $balance_credit_last    = Journal::whereIn('credit', $sub_merge)->whereRaw($where_raw_last)->sum('nominal');
+            $total_balance_last     = abs($balance_debit_last - $balance_credit_last);
+            $budget                 = Budgeting::where('month', $filter)->where('coa_id', $ods->id)->orderByDesc('id')->limit(1)->get();
+            $budget_nominal         = $budget->count() > 0 ? $budget[0]->nominal : 0;
+            $variance_current       = $total_balance_current - $budget_nominal;
+            $variance_last          = $total_balance_current - $total_balance_last;
+
+            $deduction_actual_current   += $total_balance_current;
+            $deduction_actual_last      += $total_balance_last;
+            $deduction_budget           += $budget_nominal;
+            $deduction_variance_current += $variance_current;
+            $deduction_variance_last    += $variance_last;
+
+            $other_deduction_result[] = [
+               'name'     => $ods->name,
+               'actual'   => ['current' => $total_balance_current, 'last' => $total_balance_last],
+               'budget'   => $budget_nominal,
+               'variance' => [
+                  'nominal' => [
+                     'current' => $variance_current, 
+                     'last'    => $variance_last
+                  ],
+                  'percent' => [
+                     'current' => ($budget_nominal > 0) ? round(($variance_current / $budget_nominal) * 100) : 0,
+                     'last'    => ($total_balance_last > 0) ? round(($variance_last / $total_balance_last) * 100) : 0
+                  ]
+               ]
+            ];
+         }
+      }
+
+      $income_deduction_actual_current   = $deduction_actual_current - $income_actual_current;
+      $income_deduction_actual_last      = $deduction_actual_last - $income_actual_last;
+      $income_deduction_budget           = $deduction_budget - $income_budget;
+      $income_deduction_variance_current = $income_deduction_actual_current - $income_deduction_budget;
+      $income_deduction_variance_last    = $income_deduction_actual_current - $income_deduction_actual_last;
+
+      $non_operation_actual_current   = $depreciation_actual_current + $income_deduction_actual_current;
+      $non_operation_actual_last      = $depreciation_actual_last + $income_deduction_actual_last;
+      $non_operation_budget           = $depreciation_budget + $income_deduction_budget;
+      $non_operation_variance_current = $non_operation_actual_current - $non_operation_budget;
+      $non_operation_variance_last    = $non_operation_actual_current - $non_operation_actual_last;
+
+      $total = [
+         'depreciation' => [
+            'budget'   => $depreciation_budget,
+            'actual'   => ['current' => $depreciation_actual_current, 'last' => $depreciation_actual_last],
+            'variance' => ['current' => $depreciation_variance_current, 'last' => $depreciation_variance_last]
+         ],
+         'other_income' => [
+            'budget'   => $income_budget,
+            'actual'   => ['current' => $income_actual_current, 'last' => $income_actual_last],
+            'variance' => ['current' => $income_variance_current, 'last' => $income_variance_last]
+         ],
+         'other_deduction' => [
+            'budget'   => $deduction_budget,
+            'actual'   => ['current' => $deduction_actual_current, 'last' => $deduction_actual_last],
+            'variance' => ['current' => $deduction_variance_current, 'last' => $deduction_variance_last]
+         ],
+         'income_deduction' => [
+            'budget'   => $income_deduction_budget,
+            'actual'   => ['current' => $income_deduction_actual_current, 'last' => $income_deduction_actual_last],
+            'variance' => ['current' => $income_deduction_variance_current, 'last' => $income_deduction_variance_last]
+         ],
+         'non_operation' => [
+            'budget'   => $non_operation_budget,
+            'actual'   => ['current' => $non_operation_actual_current, 'last' => $non_operation_actual_last],
+            'variance' => ['current' => $non_operation_variance_current, 'last' => $non_operation_variance_last]
+         ]
+      ];
+
+      return [
+         'depreciation'    => $depreciation_result,
+         'other_income'    => $other_income_result,
+         'other_deduction' => $other_deduction_result,
+         'total'           => $total
       ];
    }
 

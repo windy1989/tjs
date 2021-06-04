@@ -63,7 +63,7 @@ var DatatableButtons = function() {
                     text: 'Custom button',
                     className: 'btn bg-teal-400',
                     action: function(e, dt, node, config) {
-                        swalInit.fire({
+                        swal({
                             title: "Good job!",
                             text: "Custom button activated",
                             confirmButtonColor: "#66BB6A",

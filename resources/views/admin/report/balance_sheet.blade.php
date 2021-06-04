@@ -44,7 +44,7 @@
                <div class="col-md-6">
                   <div class="card">
                      <div class="card-header bg-white">
-                        <h6 class="card-title font-weight-bold text-uppercase">Assets</h6>
+                        <h6 class="card-title font-weight-bold text-uppercase">Current Assets</h6>
                      </div>
                      <div class="card-body">
                         <div class="row border p-1">
@@ -98,7 +98,7 @@
                            </div>
                         </div>
                         <div class="row border p-1">
-                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Supply</div>
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Inventory</div>
                         </div>
                         @foreach($balance_sheet['assets']['supply'] as $su)
                            <div class="row p-1 border">
@@ -117,13 +117,13 @@
                            @endif
                         @endforeach
                         <div class="row border p-1">
-                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Supply</div>
+                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Inventory</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['assets']['total']['total_supply']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
-                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Assets Facile</div>
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Other Current Assets</div>
                         </div>
                         @foreach($balance_sheet['assets']['assets_facile'] as $af)
                            <div class="row p-1 border">
@@ -142,7 +142,7 @@
                            @endif
                         @endforeach
                         <div class="row border p-1">
-                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Assets Facile</div>
+                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Other Current Assets</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['assets']['total']['total_assets_facile']) }}
                            </div>
@@ -203,11 +203,11 @@
                <div class="col-md-6">
                   <div class="card" style="height:2408px;">
                      <div class="card-header bg-white">
-                        <h6 class="card-title font-weight-bold text-uppercase">Responbility & Equity</h6>
+                        <h6 class="card-title font-weight-bold text-uppercase">Current Liabilities</h6>
                      </div>
                      <div class="card-body">
                         <div class="row border p-1">
-                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Debt</div>
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Account Payable</div>
                         </div>
                         @foreach($balance_sheet['responbility_equity']['debt'] as $d)
                            <div class="row p-1 border">
@@ -226,13 +226,13 @@
                            @endif
                         @endforeach
                         <div class="row border p-1">
-                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Debt</div>
+                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Account Payable</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['responbility_equity']['total']['total_debt']) }}
                            </div>
                         </div>
                         <div class="row border p-1">
-                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Responbility</div>
+                           <div class="col-md-12 text-uppercase font-weight-bolder font-italic">Other Current Liabilities</div>
                         </div>
                         @foreach($balance_sheet['responbility_equity']['responbility'] as $r)
                            <div class="row p-1 border">
@@ -251,7 +251,7 @@
                            @endif
                         @endforeach
                         <div class="row border p-1">
-                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Responbility</div>
+                           <div class="col-md-9 text-uppercase font-weight-bolder font-italic">Total Other Current Liabilities</div>
                            <div class="col-md-3 text-right font-weight-bolder font-italic">
                               {{ number_format($balance_sheet['responbility_equity']['total']['total_responbility']) }}
                            </div>
@@ -288,7 +288,7 @@
                   <div class="row p-2">
                      <div class="col-md-6">
                         <div class="row p-1 border border">
-                           <div class="col-md-8 text-uppercase font-weight-bold">Total Assets</div>
+                           <div class="col-md-8 text-uppercase font-weight-bold">Total Current Assets</div>
                            <div class="col-md-4 font-weight-bold">
                               {{ number_format(collect($balance_sheet['assets']['total'])->flatten()->sum()) }}
                            </div>
@@ -296,7 +296,7 @@
                      </div>
                      <div class="col-md-6">
                         <div class="row p-1 border border">
-                           <div class="col-md-8 text-uppercase font-weight-bold">Total Responbility & Equity</div>
+                           <div class="col-md-8 text-uppercase font-weight-bold">Total Current Liabilities</div>
                            <div class="col-md-4 font-weight-bold">
                               {{ number_format(collect($balance_sheet['responbility_equity']['total'])->flatten()->sum()) }}
                            </div>

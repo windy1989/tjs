@@ -7,6 +7,10 @@ input[type=number] {
    -moz-appearance: textfield;
 }
 
+.navbar-brand img {
+   height: 2.5rem !important;
+}
+
 .pac-container {
    z-index: 1051 !important;
 }
