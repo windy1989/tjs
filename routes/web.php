@@ -402,6 +402,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('profit_loss')->group(function() {
                 Route::get('/', 'ReportController@profitLoss');
             });
+
+            Route::prefix('ledger')->group(function() {
+                Route::get('/', 'ReportController@ledger');
+                Route::post('datatable', 'ReportController@ledgerDatatable');
+                Route::post('row_detail', 'ReportController@ledgerRowDetail');
+            });
         });
 
         Route::prefix('setting')->group(function() {

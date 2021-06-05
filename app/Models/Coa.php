@@ -43,4 +43,19 @@ class Coa extends Model {
         return $query;
     }
 
+    public function journalDebit()
+    {
+        return $this->hasMany('App\Models\Journal', 'debit', 'id');
+    }
+
+    public function journalCredit()
+    {
+        return $this->hasMany('App\Models\Journal', 'credit', 'id');
+    }
+
+    public function budgeting()
+    {
+        return $this->hasMany('App\Models\Budgeting');
+    }
+
 }

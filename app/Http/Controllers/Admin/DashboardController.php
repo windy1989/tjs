@@ -10,7 +10,7 @@ class DashboardController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Admin - Dashboard',
+            'title'   => 'Dashboard',
             'content' => 'admin.dashboard'
         ];
 
