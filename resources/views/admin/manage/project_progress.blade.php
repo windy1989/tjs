@@ -10,12 +10,12 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Project Manage</span>
+					<span class="font-weight-semibold">Manage Project Progress</span>
 				</h4>
 			</div>
          <div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/manage/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -25,8 +25,9 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-					<a href="{{ url('admin/project') }}" class="breadcrumb-item">Project</a>
-					<span class="breadcrumb-item active">Manage</span>
+					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
+					<a href="{{ url('admin/manage/project') }}" class="breadcrumb-item">Project</a>
+					<span class="breadcrumb-item active">Detail</span>
 				</div>
 			</div>
 		</div>
@@ -751,7 +752,7 @@
 
       if(id.val()) {
          $.ajax({
-            url: '{{ url("admin/project/get_product") }}',
+            url: '{{ url("admin/manage/project/get_product") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {
@@ -841,7 +842,7 @@
 
       if(sample_product_id.val() && sample_date.val() && sample_qty.val() && sample_size.val()) {
          $.ajax({
-            url: '{{ url("admin/project/get_product") }}',
+            url: '{{ url("admin/manage/project/get_product") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {

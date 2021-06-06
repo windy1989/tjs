@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Customer</span>
+					<span class="font-weight-semibold">Manage Customer</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -19,6 +19,7 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
+					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item">Manage</a>
 					<span class="breadcrumb-item active">Customer</span>
 				</div>
 			</div>
@@ -62,7 +63,7 @@
          iDisplayInLength: 10,
          order: [[0, 'asc']],
          ajax: {
-            url: '{{ url("admin/customer/datatable") }}',
+            url: '{{ url("admin/manage/customer/datatable") }}',
             type: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

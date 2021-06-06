@@ -11,8 +11,8 @@ class CustomerController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Customer',
-            'content' => 'admin.customer'
+            'title'   => 'Manage Customer',
+            'content' => 'admin.manage.customer'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

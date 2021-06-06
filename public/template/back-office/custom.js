@@ -49,16 +49,6 @@ $(function() {
    });
 });
 
-function autocompleteLocation(selector) {
-   var auto_complete_map = new google.maps.places.Autocomplete((document.getElementById(selector)), {
-      types: ['geocode']
-   });
-
-   google.maps.event.addListener(auto_complete_map, 'place_changed', function() {
-      auto_complete_map.getPlace();
-   });
-}
-
 function previewImage(event, selector) {
    if(event.files && event.files[0]) {
       var reader = new FileReader();

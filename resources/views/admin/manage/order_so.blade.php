@@ -4,12 +4,12 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Order SO</span>
+					<span class="font-weight-semibold">Manage Order SO</span>
 				</h4>
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/order') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/manage/order') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -19,7 +19,8 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-					<a href="{{ url('admin/order') }}" class="breadcrumb-item">Order</a>
+					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
+					<a href="{{ url('admin/manage/order') }}" class="breadcrumb-item">Order</a>
 					<span class="breadcrumb-item active">SO</span>
 				</div>
 			</div>

@@ -115,7 +115,7 @@
                </div>
                <div class="form-group">
                   <label>Address :<span class="text-danger">*</span></label>
-                  <input type="text" name="address" id="address" class="form-control" placeholder="Enter address">
+                  <textarea name="address" id="address" class="form-control" placeholder="Enter address" style="resize:none;"></textarea>
                </div>
                <div class="form-group">
                   <label>PIC :<span class="text-danger">*</span></label>
@@ -164,7 +164,6 @@
 <script>
    $(function() {
       loadDataTable();
-      autocompleteLocation('address');
    });
 
    function cancel() {

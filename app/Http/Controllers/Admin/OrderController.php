@@ -12,9 +12,9 @@ class OrderController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Order',
+            'title'    => 'Manage Order',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.order'
+            'content'  => 'admin.manage.order'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -150,7 +150,7 @@ class OrderController extends Controller {
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('admin/order/so/' . $val->id) . '" class="btn bg-brown btn-sm">SO</a>
+                        <a href="' . url('admin/manage/order/so/' . $val->id) . '" class="btn bg-brown btn-sm">SO</a>
                     '
                 ];
 
@@ -179,9 +179,9 @@ class OrderController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Order SO',
+            'title'   => 'Manage Order SO',
             'order'   => $query,
-            'content' => 'admin.order_so'
+            'content' => 'admin.manage.order_so'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

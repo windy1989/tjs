@@ -19,10 +19,10 @@ class ProjectController extends Controller {
     public function index() 
     {
         $data = [
-            'title'   => 'Project',
+            'title'   => 'Manage Project',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
-            'content' => 'admin.project'
+            'content' => 'admin.manage.project'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -79,7 +79,7 @@ class ProjectController extends Controller {
             $nomor = $start + 1;
             foreach($query_data as $val) {
                 if($val->progress == 100) {
-                    $action = '<a href="' . url('admin/project/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
+                    $action = '<a href="' . url('admin/manage/project/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:25px;">
@@ -91,7 +91,7 @@ class ProjectController extends Controller {
                         </div>
                     ';
                 } else {
-                    $action = '<a href="' . url('admin/project/manage/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Manage"><i class="icon-hammer-wrench"></i></a>';
+                    $action = '<a href="' . url('admin/manage/project/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:25px;">
@@ -226,7 +226,7 @@ class ProjectController extends Controller {
         ]);
     }
 
-    public function manage(Request $request, $id)
+    public function progress(Request $request, $id)
     {
         $query = Project::find($id);
         $step  = $request->submit;
@@ -461,11 +461,11 @@ class ProjectController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Manage Project',
+                'title'   => 'Manage Project Progress',
                 'country' => Country::where('status', 1)->get(),
                 'city'    => City::all(),
                 'project' => $query,
-                'content' => 'admin.project_manage'
+                'content' => 'admin.manage.project_progress'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
