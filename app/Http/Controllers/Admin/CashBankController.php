@@ -11,6 +11,7 @@ use App\Models\CashBankDetail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CashBankController extends Controller {
@@ -132,11 +133,13 @@ class CashBankController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
+                $code = '<a href="' . $val->image() . '" data-lightbox="' . $val->code . '" data-title="' . $val->code . '">' . $val->code . '</a>';
+
                 $response['data'][] = [
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $val->user->name,
-                    $val->code,
+                    $code,
                     number_format($val->cashBankDetail->sum('nominal')),
                     date('d F Y', strtotime($val->date)),
                     $val->description,
@@ -195,6 +198,7 @@ class CashBankController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
+            'image'          => 'required|mimes:jpg,jpeg,png',
             'code'           => 'required|unique:cash_banks,code',
             'debit_detail'   => 'required',
             'credit_detail'  => 'required',
@@ -203,6 +207,9 @@ class CashBankController extends Controller {
             'type'           => 'required',
             'description'    => 'required'
         ], [
+            'image.required'          => 'Image cannot be a empty.',
+            'image.image'             => 'File must be an image.',
+            'image.mimes'             => 'Image must have an extension jpg, jpeg, png.',
             'code.required'           => 'Code cannot be a empty.',
             'code.unique'             => 'Code already exists.',
             'debit_detail.required'   => 'Detail transaction cannot be a empty.',
@@ -220,6 +227,7 @@ class CashBankController extends Controller {
             ];
         } else {
             $query = CashBank::create([
+                'image'       => $request->file('image')->store('public/cash_bank'),
                 'user_id'     => session('bo_id'),
                 'code'        => $request->code,
                 'date'        => $request->date,
@@ -283,6 +291,7 @@ class CashBankController extends Controller {
         }
 
         return response()->json([
+            'image'            => $data->image(),
             'code'             => $data->code,
             'date'             => $data->date,
             'type'             => $data->type,
@@ -296,6 +305,7 @@ class CashBankController extends Controller {
         $query      = CashBank::find($id);
         $code       = $query->code;
         $validation = Validator::make($request->all(), [
+            'image'          => 'mimes:jpg,jpeg,png',
             'code'           => ['required', Rule::unique('cash_banks', 'code')->ignore($id)],
             'debit_detail'   => 'required',
             'credit_detail'  => 'required',
@@ -304,6 +314,8 @@ class CashBankController extends Controller {
             'type'           => 'required',
             'description'    => 'required'
         ], [
+            'image.image'             => 'File must be an image.',
+            'image.mimes'             => 'Image must have an extension jpg, jpeg, png.',
             'code.required'           => 'Code cannot be a empty.',
             'code.unique'             => 'Code already exists.',
             'debit_detail.required'   => 'Detail transaction cannot be a empty.',
@@ -320,7 +332,18 @@ class CashBankController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
+            if($request->has('image')) {
+                if(Storage::exists($query->image)) {
+                    Storage::delete($query->image);
+                }
+
+                $image = $request->file('image')->store('public/cash_bank');
+            } else {
+                $image = $query->image;
+            }
+
             $query->update([
+                'image'       => $image,
                 'user_id'     => session('bo_id'),
                 'code'        => $request->code,
                 'date'        => $request->date,

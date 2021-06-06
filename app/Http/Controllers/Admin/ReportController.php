@@ -150,7 +150,7 @@ class ReportController extends Controller {
                 $where_raw      = "MONTH(created_at) <= $month AND YEAR(created_at) = $year";
                 $balance_debit  = $val->journalDebit()->whereRaw($where_raw)->sum('nominal');
                 $balance_credit = $val->journalCredit()->whereRaw($where_raw)->sum('nominal');
-                $total_balance  = $balance_debit > 0 ? $balance_debit - $balance_credit : $balance_debit + $balance_credit;
+                $total_balance  = $balance_debit - $balance_credit;
 
                 if($total_balance == 0) {
                     $string_balance = '<span class="text-primary font-weight-bold">0</span>';
@@ -195,6 +195,7 @@ class ReportController extends Controller {
                 $query->whereYear('created_at', date('Y', strtotime($request->date)))
                     ->whereMonth('created_at', date('m', strtotime($request->date)));
             })
+            ->oldest('created_at')
             ->get();
 
         foreach($journal as $j) {

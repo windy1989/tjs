@@ -20,6 +20,7 @@ class CashBankSeeder extends Seeder
         foreach($cash_banks as $cb) {
             CashBank::insert([
                 'id'          => $cb['id'],
+                'image'       => $cb['image'],
                 'user_id'     => $cb['user_id'],
                 'code'        => $cb['code'],
                 'date'        => $cb['date'],

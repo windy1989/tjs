@@ -255,9 +255,6 @@
                                 <a href="{{ url('admin/report/receivable') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'receivable' ? 'active' : '' }}">Receivable</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/report/cash_flow') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'cash_flow' ? 'active' : '' }}">Cash Flow</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('admin/report/close_book') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'close_book' ? 'active' : '' }}">Close Book</a>
                             </li>
                         </ul>

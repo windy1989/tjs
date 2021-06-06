@@ -139,6 +139,25 @@
                   <ul id="validation_content"></ul>
                </div>
                <div class="row">
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <div class="text-center">
+                           <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                              <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                           </a>
+                           <p class="text-danger font-italic mt-3">
+                              The only files supported are <b>jpeg, jpg, png</b>
+                           </p>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="input-group">
+                           <div class="custom-file">
+                              <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Code :<sup class="text-danger">*</sup></label>
@@ -368,6 +387,8 @@
       $('#form_data').trigger('reset');
       $('#data_content').html('');
       $('input[name="type"][value="1"]').prop('checked', true);
+      $('#preview_image').attr('href', '{{ asset("website/empty.jpg") }}');
+      $('#preview_image img').attr('src', '{{ asset("website/empty.jpg") }}');
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -432,7 +453,10 @@
          url: '{{ url("admin/accounting/cash_bank/create") }}',
          type: 'POST',
          dataType: 'JSON',
-         data: $('#form_data').serialize(),
+         data: new FormData($('#form_data')[0]),
+         contentType: false,
+         processData: false,
+         cache: true,
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
@@ -491,6 +515,8 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
+            $('#preview_image').attr('href', response.image);
+            $('#preview_image img').attr('src', response.image);
             $('#code').val(response.code);
             $('#date').val(response.date);
             $('#description').val(response.description);
@@ -533,7 +559,10 @@
          url: '{{ url("admin/accounting/cash_bank/update") }}' + '/' + id,
          type: 'POST',
          dataType: 'JSON',
-         data: $('#form_data').serialize(),
+         data: new FormData($('#form_data')[0]),
+         contentType: false,
+         processData: false,
+         cache: true,
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
