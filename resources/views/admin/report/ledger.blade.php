@@ -62,6 +62,8 @@
                         <th>No</th>
                         <th>Date</th>
                         <th>Source</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
                         <th>Balance</th>
                      </tr>
                   </thead>
@@ -178,6 +180,8 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'date', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'name', className: 'align-middle' },
+            { name: 'debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
+            { name: 'credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'balance', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 

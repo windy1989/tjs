@@ -64,6 +64,8 @@ class ReportController extends Controller {
             'id',
             'date',
             'name',
+            'debit',
+            'credit',
             'balance'
         ];
 
@@ -165,6 +167,8 @@ class ReportController extends Controller {
                     $nomor,
                     date('F Y', strtotime($request->date)),
                     '<b>[' . $val->code . ']</b> ' . $val->name,
+                    '<span class="text-success font-weight-bold">' . number_format($balance_debit) . '</span>',
+                    '<span class="text-danger font-weight-bold">' . number_format($balance_credit) . '</span>',
                     $string_balance
                 ];
 
