@@ -49,6 +49,14 @@ $(function() {
    });
 });
 
+$.dateString = function(param) {
+   var date   = new Date(param);
+   var string = date.toDateString();
+   var parse  = string.split(' ');
+
+   return parse[2] + ' ' + parse[1] + ' ' + parse[3];
+};
+
 function previewImage(event, selector) {
    if(event.files && event.files[0]) {
       var reader = new FileReader();

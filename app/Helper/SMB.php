@@ -8,6 +8,15 @@ use App\Models\Budgeting;
 
 class SMB {
 
+   public static function diffTime($start_date, $finish_date) 
+   {
+      $start  = date_create($start_date);
+      $finish = date_create($finish_date);
+      $diff   = date_diff($start, $finish);
+
+      return $diff->days;
+   }
+
    public static function reportBalanceSheet($filter)
    {
       $month     = date('m', strtotime($filter));

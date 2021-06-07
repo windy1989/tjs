@@ -38,7 +38,7 @@
                </div>
                <div class="col-md-6">
                   <div class="form-group">
-                     <label>Month :</label>
+                     <label>Date :</label>
                      <div class="input-group">
                         <input type="date" name="filter_start_date" id="filter_start_date" max="{{ date('Y-m-d') }}" class="form-control">
                         <div class="input-group-prepend">
@@ -46,7 +46,6 @@
                         </div>
                         <input type="date" name="filter_finish_date" id="filter_finish_date" max="{{ date('Y-m-d') }}" class="form-control">
                      </div>
-                     <input type="month" name="filter_date" id="filter_date" class="form-control" placeholder="0" value="{{ date('Y-m') }}">
                   </div>
                </div>
             </div>
@@ -56,10 +55,12 @@
             </div>
          </div>
       </div>
+      <div class="mb-3">
+         <h6 class="mb-0 font-weight-semibold text-center text-uppercase">
+            <span id="string_filter_periode"></span>
+         </h6>
+      </div>
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Ledger</h5>
-			</div>
 			<div class="card-body">
             <div class="table-responsive">
                <table id="datatable_serverside" class="table table-bordered table-striped w-100">
@@ -67,12 +68,12 @@
                      <tr class="text-center">
                         <th>#</th>
                         <th>No</th>
-                        <th>Date</th>
                         <th>Source</th>
                         <th>Beginning</th>
                         <th>Debit</th>
                         <th>Credit</th>
                         <th>Ending</th>
+                        <th>Balance</th>
                      </tr>
                   </thead>
                </table>
@@ -83,15 +84,18 @@
 
 <script>
    $(function() {
+      $('.sidebar-main-toggle').click();
       filter();
 
       $('#datatable_serverside tbody').on('click', 'td.details-control', function() {
+         loadingOpen('#datatable_serverside');
          var tr    = $(this).closest('tr');
          var badge = tr.find('span.badge');
          var icon  = tr.find('i');
          var row   = table.row(tr);
 
          if(row.child.isShown()) {
+            loadingClose('#datatable_serverside');
             row.child.hide();
             tr.removeClass('shown');
             badge.first().removeClass('badge-danger');
@@ -99,6 +103,7 @@
             icon.first().removeClass('icon-minus3');
             icon.first().addClass('icon-plus3');
          } else {
+            loadingClose('#datatable_serverside');
             row.child(rowDetail(row.data())).show();
             tr.addClass('shown');
             badge.first().removeClass('badge-success');
@@ -110,7 +115,6 @@
    });
 
    function rowDetail(data) {
-      console.log($('#filter_date').val())
       var content = '';
       $.ajax({
          url: '{{ url("admin/report/ledger/row_detail") }}',
@@ -118,7 +122,8 @@
          async: false,
          data: {
             id: $(data[0]).data('id'),
-            date: $('#filter_date').val()
+            start_date: $('#filter_start_date').val(),
+            finish_date: $('#filter_finish_date').val()
          },
          headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -140,12 +145,26 @@
 
    function resetFilter() {
       $('#filter_coa_id').val(null).trigger('change');
-      $('#filter_date').val('{{ date("Y-m") }}');
+      $('#filter_start_date').val(null);
+      $('#filter_finish_date').val(null);
    }
 
    function filter(param = null) {
       if(param == 'reset') {
          resetFilter();
+      }
+
+      var start_date  = $('#filter_start_date').val();
+      var finish_date = $('#filter_finish_date').val();
+
+      if(start_date && finish_date) {
+         $('#string_filter_periode').html('Periode <br>' + $.dateString(start_date) + ' - ' + $.dateString(finish_date));
+      } else if(start_date) {
+         $('#string_filter_periode').html('Periode <br>' + $.dateString(start_date));
+      } else if(finish_date) {
+         $('#string_filter_periode').html('Periode <br>' + $.dateString(finish_date));
+      } else {
+         $('#string_filter_periode').html('All Periode');
       }
 
       window.table = loadDataTable();
@@ -166,7 +185,8 @@
             },
             data: {
                coa_id: $('#filter_coa_id').val(),
-               date: $('#filter_date').val()
+               start_date: $('#filter_start_date').val(),
+               finish_date: $('#filter_finish_date').val()
             },
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
@@ -186,12 +206,12 @@
          columns: [
             { name: 'detail', orderable: false, searchable: false, className: 'text-center align-middle details-control' },
             { name: 'id', searchable: false, className: 'text-center align-middle' },
-            { name: 'date', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'name', className: 'align-middle' },
             { name: 'beginning', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
-            { name: 'ending', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
+            { name: 'ending', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
+            { name: 'balance', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }
