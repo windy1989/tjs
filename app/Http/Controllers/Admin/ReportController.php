@@ -64,9 +64,10 @@ class ReportController extends Controller {
             'id',
             'date',
             'name',
+            'beginning',
             'debit',
             'credit',
-            'balance'
+            'ending'
         ];
 
         $start  = $request->start;
@@ -97,16 +98,16 @@ class ReportController extends Controller {
                     $query->where('id', $request->coa_id);
                 }
                 
-                $query->where(function($query) use ($request) {
-                    $query->whereHas('journalDebit', function($query) use ($request) {
-                            $query->whereMonth('created_at', date('m', strtotime($request->date)))
-                                ->whereYear('created_at', date('Y', strtotime($request->date)));
-                        })
-                        ->orWhereHas('journalCredit', function($query) use ($request) {
-                            $query->whereMonth('created_at', date('m', strtotime($request->date)))
-                                ->whereYear('created_at', date('Y', strtotime($request->date)));
-                        });
-                });
+                // $query->where(function($query) use ($request) {
+                //     $query->whereHas('journalDebit', function($query) use ($request) {
+                //             $query->whereMonth('created_at', date('m', strtotime($request->date)))
+                //                 ->whereYear('created_at', date('Y', strtotime($request->date)));
+                //         })
+                //         ->orWhereHas('journalCredit', function($query) use ($request) {
+                //             $query->whereMonth('created_at', date('m', strtotime($request->date)))
+                //                 ->whereYear('created_at', date('Y', strtotime($request->date)));
+                //         });
+                // });
             })
             ->where('status', 1)
             ->offset($start)
@@ -129,16 +130,16 @@ class ReportController extends Controller {
                     $query->where('id', $request->coa_id);
                 }
                 
-                $query->where(function($query) use ($request) {
-                    $query->whereHas('journalDebit', function($query) use ($request) {
-                            $query->whereMonth('created_at', date('m', strtotime($request->date)))
-                                ->whereYear('created_at', date('Y', strtotime($request->date)));
-                        })
-                        ->orWhereHas('journalCredit', function($query) use ($request) {
-                            $query->whereMonth('created_at', date('m', strtotime($request->date)))
-                                ->whereYear('created_at', date('Y', strtotime($request->date)));
-                        });
-                });
+                // $query->where(function($query) use ($request) {
+                //     $query->whereHas('journalDebit', function($query) use ($request) {
+                //             $query->whereMonth('created_at', date('m', strtotime($request->date)))
+                //                 ->whereYear('created_at', date('Y', strtotime($request->date)));
+                //         })
+                //         ->orWhereHas('journalCredit', function($query) use ($request) {
+                //             $query->whereMonth('created_at', date('m', strtotime($request->date)))
+                //                 ->whereYear('created_at', date('Y', strtotime($request->date)));
+                //         });
+                // });
             })
             ->where('status', 1)
             ->count();
@@ -147,19 +148,31 @@ class ReportController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                $month          = date('m', strtotime($request->date));
-                $year           = date('Y', strtotime($request->date));
-                $where_raw      = "MONTH(created_at) <= $month AND YEAR(created_at) = $year";
-                $balance_debit  = $val->journalDebit()->whereRaw($where_raw)->sum('nominal');
-                $balance_credit = $val->journalCredit()->whereRaw($where_raw)->sum('nominal');
-                $total_balance  = $balance_debit - $balance_credit;
+                $month = date('m', strtotime($request->date));
+                $year  = date('Y', strtotime($request->date));
 
-                if($total_balance == 0) {
-                    $string_balance = '<span class="text-primary font-weight-bold">0</span>';
-                } else if($total_balance >= 0) {
-                    $string_balance = '<span class="text-success font-weight-bold">' . number_format($total_balance) . '</span>';
+                $beginning_where_raw = "MONTH(created_at) < $month AND YEAR(created_at) = $year";
+                $beginning_debit     = $val->journalDebit()->whereRaw($beginning_where_raw)->sum('nominal');
+                $beginning_credit    = $val->journalCredit()->whereRaw($beginning_where_raw)->sum('nominal');
+                $beginning_total     = $beginning_debit - $beginning_credit;
+                if($beginning_total == 0) {
+                    $beginning_string = '<span class="text-primary font-weight-bold">0</span>';
+                } else if($beginning_total >= 0) {
+                    $beginning_string = '<span class="text-success font-weight-bold">' . number_format($beginning_total) . '</span>';
                 } else {
-                    $string_balance = '<span class="text-danger font-weight-bold">' . number_format($total_balance) . '</span>';
+                    $beginning_string = '<span class="text-danger font-weight-bold">' . number_format($beginning_total) . '</span>';
+                }
+
+                $ending_where_raw = "MONTH(created_at) <= $month AND YEAR(created_at) = $year";
+                $ending_debit     = $val->journalDebit()->whereRaw($ending_where_raw)->sum('nominal');
+                $ending_credit    = $val->journalCredit()->whereRaw($ending_where_raw)->sum('nominal');
+                $ending_total     = $ending_debit - $ending_credit;
+                if($ending_total == 0) {
+                    $ending_string = '<span class="text-primary font-weight-bold">0</span>';
+                } else if($ending_total >= 0) {
+                    $ending_string = '<span class="text-success font-weight-bold">' . number_format($ending_total) . '</span>';
+                } else {
+                    $ending_string = '<span class="text-danger font-weight-bold">' . number_format($ending_total) . '</span>';
                 }
 
                 $response['data'][] = [
@@ -167,9 +180,10 @@ class ReportController extends Controller {
                     $nomor,
                     date('F Y', strtotime($request->date)),
                     '<b>[' . $val->code . ']</b> ' . $val->name,
-                    '<span class="text-success font-weight-bold">' . number_format($balance_debit) . '</span>',
-                    '<span class="text-danger font-weight-bold">' . number_format($balance_credit) . '</span>',
-                    $string_balance
+                    $beginning_string,
+                    '<span class="text-success font-weight-bold">' . number_format($ending_debit) . '</span>',
+                    '<span class="text-danger font-weight-bold">' . number_format($ending_credit) . '</span>',
+                    $ending_string
                 ];
 
                 $nomor++;

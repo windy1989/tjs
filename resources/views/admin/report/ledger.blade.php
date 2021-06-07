@@ -38,7 +38,14 @@
                </div>
                <div class="col-md-6">
                   <div class="form-group">
-                     <label>Nominal :</label>
+                     <label>Month :</label>
+                     <div class="input-group">
+                        <input type="date" name="filter_start_date" id="filter_start_date" max="{{ date('Y-m-d') }}" class="form-control">
+                        <div class="input-group-prepend">
+                           <span class="input-group-text">To</span>
+                        </div>
+                        <input type="date" name="filter_finish_date" id="filter_finish_date" max="{{ date('Y-m-d') }}" class="form-control">
+                     </div>
                      <input type="month" name="filter_date" id="filter_date" class="form-control" placeholder="0" value="{{ date('Y-m') }}">
                   </div>
                </div>
@@ -62,9 +69,10 @@
                         <th>No</th>
                         <th>Date</th>
                         <th>Source</th>
+                        <th>Beginning</th>
                         <th>Debit</th>
                         <th>Credit</th>
-                        <th>Balance</th>
+                        <th>Ending</th>
                      </tr>
                   </thead>
                </table>
@@ -180,9 +188,10 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'date', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'name', className: 'align-middle' },
+            { name: 'beginning', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
-            { name: 'balance', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
+            { name: 'ending', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }
