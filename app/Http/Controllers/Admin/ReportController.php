@@ -193,7 +193,7 @@ class ReportController extends Controller {
             })
             ->where(function($query) use ($request) {
                 $query->whereYear('created_at', date('Y', strtotime($request->date)))
-                    ->whereMonth('created_at', date('m', strtotime($request->date)));
+                    ->whereMonth('created_at', '<=', date('m', strtotime($request->date)));
             })
             ->oldest('created_at')
             ->get();
@@ -205,7 +205,7 @@ class ReportController extends Controller {
                 $nominal = '<span class="text-success font-weight-bold">' . number_format($j->nominal) . '</span>';
             } else {
                 $type    = '<span class="text-danger font-weight-bold font-italic">Credit</span>';
-                $nominal = '<span class="text-danger font-weight-bold">-' . number_format($j->nominal) . '</span>';
+                $nominal = '<span class="text-danger font-weight-bold">' . number_format($j->nominal) . '</span>';
             }
 
             $string .= '
