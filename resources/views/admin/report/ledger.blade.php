@@ -38,13 +38,13 @@
                </div>
                <div class="col-md-6">
                   <div class="form-group">
-                     <label>Date :</label>
+                     <label>Month :</label>
                      <div class="input-group">
-                        <input type="date" name="filter_start_date" id="filter_start_date" max="{{ date('Y-m-d') }}" class="form-control">
+                        <input type="month" name="filter_start_date" id="filter_start_date" max="{{ date('Y-m') }}" class="form-control">
                         <div class="input-group-prepend">
                            <span class="input-group-text">To</span>
                         </div>
-                        <input type="date" name="filter_finish_date" id="filter_finish_date" max="{{ date('Y-m-d') }}" class="form-control">
+                        <input type="month" name="filter_finish_date" id="filter_finish_date" max="{{ date('Y-m') }}" class="form-control">
                      </div>
                   </div>
                </div>

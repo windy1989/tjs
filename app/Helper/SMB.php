@@ -14,14 +14,14 @@ class SMB {
       $finish = date_create($finish_date);
       $diff   = date_diff($start, $finish);
 
-      return $diff->days;
+      return $diff;
    }
 
    public static function reportBalanceSheet($filter)
    {
       $month     = date('m', strtotime($filter));
       $year      = date('Y', strtotime($filter));
-      $where_raw = "MONTH(created_at) <= $month AND YEAR(created_at) = $year";
+      $where_raw = "YEAR(created_at) = '$year' AND MONTH(created_at) <= '$month'";
 
       $grandtotal_cash_bank             = 0;
       $grandtotal_receivable            = 0;
@@ -483,10 +483,10 @@ class SMB {
    {
       $month_current     = date('m', strtotime($filter));
       $year_current      = date('Y', strtotime($filter));
-      $where_raw_current = "MONTH(created_at) $expression $month_current AND YEAR(created_at) = $year_current";
-      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
-      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
-      $where_raw_last    = "MONTH(created_at) $expression $month_last AND YEAR(created_at) = $year_last";
+      $where_raw_current = "YEAR(created_at) = '$year_current' AND MONTH(created_at) $expression '$month_current'";
+      $month_last        = date('m', strtotime('-1 months', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 months', strtotime($filter)));
+      $where_raw_last    = "YEAR(created_at) = '$year_last' AND MONTH(created_at) $expression '$month_last'";
 
       $income_actual_current   = 0;
       $income_actual_last      = 0;
@@ -1194,10 +1194,10 @@ class SMB {
    {
       $month_current     = date('m', strtotime($filter));
       $year_current      = date('Y', strtotime($filter));
-      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
-      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
-      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
-      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+      $where_raw_current = "YEAR(created_at) = '$year_current' AND MONTH(created_at) = '$month_current'";
+      $month_last        = date('m', strtotime('-1 months', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 months', strtotime($filter)));
+      $where_raw_last    = "YEAR(created_at) = '$year_last' AND MONTH(created_at) = '$month_last'";
 
       $income_actual_current   = 0;
       $income_actual_last      = 0;
@@ -1689,10 +1689,10 @@ class SMB {
    {
       $month_current     = date('m', strtotime($filter));
       $year_current      = date('Y', strtotime($filter));
-      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
-      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
-      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
-      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+      $where_raw_current = "YEAR(created_at) = '$year_current' AND MONTH(created_at) = '$month_current'";
+      $month_last        = date('m', strtotime('-1 months', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 months', strtotime($filter)));
+      $where_raw_last    = "YEAR(created_at) = '$year_last' AND MONTH(created_at) = '$month_last'";
 
       $income_actual_current   = 0;
       $income_actual_last      = 0;
@@ -2184,10 +2184,10 @@ class SMB {
    {
       $month_current     = date('m', strtotime($filter));
       $year_current      = date('Y', strtotime($filter));
-      $where_raw_current = "MONTH(created_at) = $month_current AND YEAR(created_at) = $year_current";
-      $month_last        = date('m', strtotime('-1 month', strtotime($filter)));
-      $year_last         = date('Y', strtotime('-1 month', strtotime($filter)));
-      $where_raw_last    = "MONTH(created_at) = $month_last AND YEAR(created_at) = $year_last";
+      $where_raw_current = "YEAR(created_at) = '$year_current' AND MONTH(created_at) = '$month_current'";
+      $month_last        = date('m', strtotime('-1 months', strtotime($filter)));
+      $year_last         = date('Y', strtotime('-1 months', strtotime($filter)));
+      $where_raw_last    = "YEAR(created_at) = '$year_last' AND MONTH(created_at) = '$month_last'";
 
       $depreciation_actual_current   = 0;
       $depreciation_actual_last      = 0;

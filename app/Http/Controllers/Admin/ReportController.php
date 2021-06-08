@@ -101,30 +101,34 @@ class ReportController extends Controller {
                 if($request->start_date && $request->finsih_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', '>=', $request->start_date)
-                                    ->whereDate('created_at', '<=', $request->finish_date);
+                                $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                                    ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', '>', $request->start_date)
-                                    ->whereDate('created_at', '<=', $request->finish_date);
+                                $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                                    ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
                             });
                     });
                 } else if($request->start_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->start_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->start_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->start_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->start_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->start_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->start_date)));
                             });
                     });
                 } else if($request->finish_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->finish_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->finish_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->finish_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->finish_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->finish_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->finish_date)));
                             });
                     });
                 }
@@ -153,30 +157,34 @@ class ReportController extends Controller {
                 if($request->start_date && $request->finsih_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', '>=', $request->start_date)
-                                    ->whereDate('created_at', '<=', $request->finish_date);
+                                $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                                    ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', '>=', $request->start_date)
-                                    ->whereDate('created_at', '<=', $request->finish_date);
+                                $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                                    ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
                             });
                     });
                 } else if($request->start_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->start_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->start_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->start_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->start_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->start_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->start_date)));
                             });
                     });
                 } else if($request->finish_date) {
                     $query->where(function($query) use ($request) {
                         $query->whereHas('journalDebit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->finish_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->finish_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->finish_date)));
                             })
                             ->orWhereHas('journalCredit', function($query) use ($request) {
-                                $query->whereDate('created_at', $request->finish_date);
+                                $query->whereMonth('created_at', date('m', strtotime($request->finish_date)))
+                                    ->whereYear('created_at', date('Y', strtotime($request->finish_date)));
                             });
                     });
                 }
@@ -188,23 +196,31 @@ class ReportController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                $diff_time            = SMB::diffTime($request->start_date, $request->finish_date);
-                $date_begining_start  = date('Y-m-d', strtotime("-$diff_time days", strtotime($request->start_date)));
-                $date_begining_finish = date('Y-m-d', strtotime("-$diff_time days", strtotime($request->finish_date)));
-                $date_ending_start    = $request->start_date;
-                $date_ending_finish   = $request->finish_date;
+                $diff_time_start      = SMB::diffTime($request->start_date, $request->finish_date)->m + 1;
+                $diff_time_end        = $diff_time_start - 1;
+                $date_begining_start  = date('Y-m-01', strtotime("-$diff_time_start months", strtotime($request->start_date)));
+                $date_begining_finish = date('Y-m-t', strtotime("-1 months", strtotime($request->start_date)));
+                $date_ending_start    = date('Y-m-01', strtotime($request->start_date));
+                $date_ending_finish   = date('Y-m-t', strtotime($request->finish_date));
+
+                $beginning_month_start  = date('m', strtotime($date_begining_start));
+                $beginning_year_start   = date('Y', strtotime($date_begining_start));
+                $beginning_month_finish = date('m', strtotime($date_begining_finish));
+                $beginning_year_finish  = date('Y', strtotime($date_begining_finish));
+                $ending_month_start     = date('m', strtotime($date_ending_start));
+                $ending_year_start      = date('Y', strtotime($date_ending_start));
+                $ending_month_finish    = date('m', strtotime($date_ending_finish));
+                $ending_year_finish     = date('Y', strtotime($date_ending_finish));
 
                 if($request->start_date && $request->finish_date) {
-                    $beginning_where_raw = "DATE(created_at) >= '$date_begining_start' AND DATE(created_at) < '$date_begining_finish'";
+                    $beginning_where_raw = "DATE(created_at) >= '$date_begining_start' AND DATE(created_at) <= '$date_begining_finish'";
                     $ending_where_raw    = "DATE(created_at) >= '$date_ending_start' AND DATE(created_at) <= '$date_ending_finish'";
                 } else if($request->start_date) {
-                    $diff_one_month      = date('Y-m-d', strtotime('-1 months', strtotime($request->start_date)));
-                    $beginning_where_raw = "DATE(created_at) = '$diff_one_month'";
-                    $ending_where_raw    = "DATE(created_at) = '$request->start_date'";
+                    $beginning_where_raw = "YEAR(created_at) <= '$beginning_year_start' AND MONTH(created_at) = '$beginning_month_start'";
+                    $ending_where_raw    = "YEAR(created_at) <= '$ending_year_start' AND MONTH(created_at) = '$ending_month_start'";
                 } else if($request->finish_date) {
-                    $diff_one_month      = date('Y-m-d', strtotime('-1 month', strtotime($request->finish_date)));
-                    $beginning_where_raw = "DATE(created_at) = '$diff_one_month'";
-                    $ending_where_raw    = "DATE(created_at) = '$request->finish_date'";
+                    $beginning_where_raw = "YEAR(created_at) <= '$beginning_year_finish' AND MONTH(created_at) = '$beginning_month_finish'";
+                    $ending_where_raw    = "YEAR(created_at) <= '$ending_year_finish' AND MONTH(created_at) = '$ending_month_finish'";
                 } else {
                     $beginning_where_raw = "created_at IS NOT NULL";
                     $ending_where_raw    = "created_at IS NOT NULL";
