@@ -54,7 +54,7 @@ $.dateString = function(param) {
    var string = date.toDateString();
    var parse  = string.split(' ');
 
-   return parse[2] + ' ' + parse[1] + ' ' + parse[3];
+   return parse[1] + ' ' + parse[3];
 };
 
 function previewImage(event, selector) {

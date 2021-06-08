@@ -15,10 +15,10 @@ class CreateJournalsTable extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
+            $table->morphs('journalable');
             $table->bigInteger('debit');
             $table->bigInteger('credit');
             $table->double('nominal');
-            $table->text('description');
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

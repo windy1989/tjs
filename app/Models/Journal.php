@@ -14,10 +14,17 @@ class Journal extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
+        'journalable_type',
+        'journalable_id',
         'debit',
         'credit',
         'nominal',
         'description'
     ];
+
+    public function journalable()
+    {
+        return $this->morphTo();
+    }
 
 }
