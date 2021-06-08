@@ -67,8 +67,7 @@ class ReportController extends Controller {
             'beginning',
             'debit',
             'credit',
-            'ending',
-            'balance'
+            'ending'
         ];
 
         $start  = $request->start;
@@ -196,7 +195,7 @@ class ReportController extends Controller {
                 $date_ending_finish   = $request->finish_date;
 
                 if($request->start_date && $request->finish_date) {
-                    $beginning_where_raw = "DATE(created_at) >= '$date_begining_start' AND DATE(created_at) <= '$date_begining_finish'";
+                    $beginning_where_raw = "DATE(created_at) >= '$date_begining_start' AND DATE(created_at) < '$date_begining_finish'";
                     $ending_where_raw    = "DATE(created_at) >= '$date_ending_start' AND DATE(created_at) <= '$date_ending_finish'";
                 } else if($request->start_date) {
                     $diff_one_month      = date('Y-m-d', strtotime('-1 months', strtotime($request->start_date)));
@@ -230,8 +229,7 @@ class ReportController extends Controller {
                     number_format($beginning_total),
                     number_format($ending_debit),
                     number_format($ending_credit),
-                    number_format($ending_total),
-                    '<span class="font-weight-bold">' . number_format($beginning_total + $ending_total) . '</span>'
+                    number_format($beginning_total + $ending_total)
                 ];
 
                 $nomor++;

@@ -73,7 +73,6 @@
                         <th>Debit</th>
                         <th>Credit</th>
                         <th>Ending</th>
-                        <th>Balance</th>
                      </tr>
                   </thead>
                </table>
@@ -210,8 +209,7 @@
             { name: 'beginning', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
-            { name: 'ending', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
-            { name: 'balance', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
+            { name: 'ending', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }
