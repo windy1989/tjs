@@ -152,7 +152,7 @@
                             <i class="icon-database"></i> 
                             <span>Manage</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Accounting">
+                        <ul class="nav nav-group-sub" data-submenu-title="Manage">
                             <li class="nav-item">
                                 <a href="{{ url('admin/manage/customer') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'customer' ? 'active' : '' }}">Customer</a>
                             </li>
@@ -169,7 +169,7 @@
                             <i class="icon-percent"></i> 
                             <span>Purchase</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Accounting">
+                        <ul class="nav nav-group-sub" data-submenu-title="Purchase">
                             <li class="nav-item">
                                 <a href="{{ url('admin/purchase/request') }}" class="nav-link {{ Request::segment(2) == 'purchase' && Request::segment(3) == 'request' ? 'active' : '' }}">Request</a>
                             </li>
@@ -186,7 +186,7 @@
                             <i class="icon-person"></i> 
                             <span>Sales</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Accounting">
+                        <ul class="nav nav-group-sub" data-submenu-title="Sales">
                             <li class="nav-item">
                                 <a href="{{ url('admin/sales/request') }}" class="nav-link {{ Request::segment(2) == 'sales' && Request::segment(3) == 'request' ? 'active' : '' }}">Request</a>
                             </li>
@@ -203,7 +203,7 @@
                             <i class="icon-stack-text"></i> 
                             <span>HRD</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Accounting">
+                        <ul class="nav nav-group-sub" data-submenu-title="HRD">
                             <li class="nav-item">
                                 <a href="{{ url('admin/hrd/job_desc') }}" class="nav-link {{ Request::segment(2) == 'hrd' && Request::segment(3) == 'job_desc' ? 'active' : '' }}">Job Desc</a>
                             </li>
