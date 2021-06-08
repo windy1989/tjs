@@ -272,8 +272,9 @@ class ReportController extends Controller {
                 $query->where('debit', $request->id)->orWhere('credit', $request->id);
             })
             ->where(function($query) use ($request) {
-                if($request->start_date && $request->finsih_date) {
-                    $query->whereDate('created_at', '>=', $request->start_date)->whereDate('created_at', '<=', $request->finish_date);
+                if($request->start_date && $request->finish_date) {
+                    $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                        ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
                 } else if($request->start_date) {
                     $query->whereDate('created_at', $request->start_date);
                 } else if($request->finish_date) {
