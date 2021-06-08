@@ -296,7 +296,6 @@ class CashBankController extends Controller {
     public function update(Request $request, $id)
     {
         $query      = CashBank::find($id);
-        $code       = $query->code;
         $validation = Validator::make($request->all(), [
             'code'           => ['required', Rule::unique('cash_banks', 'code')->ignore($id)],
             'debit_detail'   => 'required',
@@ -332,7 +331,10 @@ class CashBankController extends Controller {
 
             if($query) {
                 CashBankDetail::where('cash_bank_id', $query->id)->delete();
-                DB::table('journals')->where('description', $code)->delete();
+                DB::table('journals')
+                    ->where('journalable_type', 'cash_banks')
+                    ->where('journalable_id', $query->id)
+                    ->delete();
 
                 foreach($request->debit_detail as $key => $dd) {
                     CashBankDetail::create([
