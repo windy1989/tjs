@@ -18,14 +18,15 @@ class JournalSeeder extends Seeder
 
         foreach($journals as $j) {
             Journal::insert([
-                'id'          => $j['id'],
-                'debit'       => $j['debit'],
-                'credit'      => $j['credit'],
-                'nominal'     => $j['nominal'],
-                'description' => $j['description'],
-                'created_at'  => $j['created_at'],
-                'updated_at'  => $j['updated_at'],
-                'deleted_at'  => $j['deleted_at']
+                'id'               => $j['id'],
+                'journalable_type' => $j['journalable_type'],
+                'journalable_id'   => $j['journalable_id'],
+                'debit'            => $j['debit'],
+                'credit'           => $j['credit'],
+                'nominal'          => $j['nominal'],
+                'created_at'       => $j['created_at'],
+                'updated_at'       => $j['updated_at'],
+                'deleted_at'       => $j['deleted_at']
             ]);
         }
     }

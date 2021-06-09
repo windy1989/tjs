@@ -379,7 +379,11 @@ class CashBankController extends Controller {
     {
         $query = CashBank::find($request->id);
         if($query->delete()) {
-            Journal::where('description', $query->code)->delete();
+            DB::table('journals')
+                ->where('journalable_type', 'cash_banks')
+                ->where('journalable_id', $query->id)
+                ->delete();
+                    
             activity()
                 ->performedOn(new CashBank())
                 ->causedBy(session('bo_id'))
