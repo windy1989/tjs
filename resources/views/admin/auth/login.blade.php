@@ -24,8 +24,14 @@
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/sweet_alert.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/jgrowl.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/noty.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/extensions/session_timeout.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/prism.min.js') }}"></script>
+	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/sticky.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/number-format/jquery.number.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/lightbox/dist/js/lightbox.min.js') }}"></script>
