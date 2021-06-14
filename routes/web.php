@@ -217,6 +217,35 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
+        Route::prefix('delivery')->group(function() {
+            Route::prefix('vendor')->group(function() {
+                Route::get('/', 'VendorController@index');
+                Route::post('datatable', 'VendorController@datatable');
+                Route::post('create', 'VendorController@create');
+                Route::post('show', 'VendorController@show');
+                Route::post('update/{id}', 'VendorController@update');
+                Route::post('destroy', 'VendorController@destroy');
+            });
+
+            Route::prefix('transport')->group(function() {
+                Route::get('/', 'TransportController@index');
+                Route::post('datatable', 'TransportController@datatable');
+                Route::post('create', 'TransportController@create');
+                Route::post('show', 'TransportController@show');
+                Route::post('update/{id}', 'TransportController@update');
+                Route::post('destroy', 'TransportController@destroy');
+            });
+
+            Route::prefix('price')->group(function() {
+                Route::get('/', 'PriceController@index');
+                Route::post('datatable', 'PriceController@datatable');
+                Route::post('create', 'PriceController@create');
+                Route::post('show', 'PriceController@show');
+                Route::post('update/{id}', 'PriceController@update');
+                Route::post('destroy', 'PriceController@destroy');
+            });
+        });
+
         Route::prefix('product')->group(function() {
             Route::prefix('type')->group(function() {
                 Route::get('/', 'TypeController@index');

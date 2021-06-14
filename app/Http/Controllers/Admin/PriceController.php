@@ -1,0 +1,250 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Delivery;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+
+class PriceController extends Controller {
+
+    public function index()
+    {
+        $data = [
+            'title'   => 'Delivery Price',
+            'content' => 'admin.delivery.price'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function datatable(Request $request) 
+    {
+        $column = [
+            'id',
+            'vendor_id',
+            'transport_id',
+            'origin',
+            'destination',
+            'price'
+        ];
+
+        $start  = $request->start;
+        $length = $request->length;
+        $order  = $column[$request->input('order.0.column')];
+        $dir    = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+
+        $total_data = Delivery::count();
+        
+        $query_data = Delivery::where(function($query) use ($search, $request) {
+                if($search) {
+                    $query->where(function($query) use ($search) {
+                        $query->whereHas('vendor', function($query) use ($search) {
+                                $query->whereRaw('code', 'like', "%$search%");
+                            })
+                            ->whereHas('transport', function($query) use ($search) {
+                                $query->whereRaw('brand', 'like', "%$search%");
+                            })
+                            ->whereHas('origin', function($query) use ($search) {
+                                $query->whereRaw('name', 'like', "%$search%");
+                            })
+                            ->whereHas('destination', function($query) use ($search) {
+                                $query->whereRaw('name', 'like', "%$search%");
+                            });
+                    });
+                }     
+            })
+            ->offset($start)
+            ->limit($length)
+            ->orderBy($order, $dir)
+            ->get();
+
+        $total_filtered = Delivery::where(function($query) use ($search, $request) {
+                if($search) {
+                    $query->where(function($query) use ($search) {
+                        $query->whereHas('vendor', function($query) use ($search) {
+                                $query->whereRaw('code', 'like', "%$search%");
+                            })
+                            ->whereHas('transport', function($query) use ($search) {
+                                $query->whereRaw('brand', 'like', "%$search%");
+                            })
+                            ->whereHas('origin', function($query) use ($search) {
+                                $query->whereRaw('name', 'like', "%$search%");
+                            })
+                            ->whereHas('destination', function($query) use ($search) {
+                                $query->whereRaw('name', 'like', "%$search%");
+                            });
+                    });
+                }       
+            })
+            ->count();
+
+        $response['data'] = [];
+        if($query_data <> FALSE) {
+            $nomor = $start + 1;
+            foreach($query_data as $val) {
+                $response['data'][] = [
+                    $nomor,
+                    $val->vendor->name,
+                    $val->transport->brand,
+                    $val->origin->name,
+                    $val->destination->name,
+                    number_format($val->price),
+                    '
+                        <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
+                        <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
+                    '
+                ];
+
+                $nomor++;
+            }
+        }
+
+        $response['recordsTotal'] = 0;
+        if($total_data <> FALSE) {
+            $response['recordsTotal'] = $total_data;
+        }
+
+        $response['recordsFiltered'] = 0;
+        if($total_filtered <> FALSE) {
+            $response['recordsFiltered'] = $total_filtered;
+        }
+
+        return response()->json($response);
+    }
+
+    public function create(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'vendor_id'    => 'required',
+            'transport_id' => 'required',
+            'origin'       => 'required',
+            'destination'  => 'required',
+            'price'        => 'required'
+        ], [
+            'vendor_id.required'    => 'Please select a vendor',
+            'transport_id.required' => 'Please select a transport',
+            'origin.required'       => 'Please select a origin',
+            'destination.required'  => 'Please select a destination',
+            'brand.required'        => 'price cannot be empty'
+        ]);
+
+        if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query = Delivery::create([
+                'vendor_id'    => $request->vendor_id,
+                'transport_id' => $request->transport_id,
+                'origin'       => $request->origin,
+                'destination'  => $request->destination,
+                'price'        => $request->price
+            ]);
+
+            if($query) {
+                activity()
+                    ->performedOn(new Delivery())
+                    ->causedBy(session('bo_id'))
+                    ->withProperties($query)
+                    ->log('Add delivery price data');
+
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data added successfully.'
+                ];
+            } else {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to add.'
+                ];
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    public function show(Request $request)
+    {
+        $data = Delivery::find($request->id);
+        return response()->json($data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(), [
+            'vendor_id'    => 'required',
+            'transport_id' => 'required',
+            'origin'       => 'required',
+            'destination'  => 'required',
+            'price'        => 'required'
+        ], [
+            'vendor_id.required'    => 'Please select a vendor',
+            'transport_id.required' => 'Please select a transport',
+            'origin.required'       => 'Please select a origin',
+            'destination.required'  => 'Please select a destination',
+            'brand.required'        => 'price cannot be empty'
+        ]);
+
+        if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query = Delivery::where('id', $id)->update([
+                'vendor_id'    => $request->vendor_id,
+                'transport_id' => $request->transport_id,
+                'origin'       => $request->origin,
+                'destination'  => $request->destination,
+                'price'        => $request->price
+            ]);
+
+            if($query) {
+                activity()
+                    ->performedOn(new Delivery())
+                    ->causedBy(session('bo_id'))
+                    ->log('Change the price delivery data');
+
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data updated successfully.'
+                ];
+            } else {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to update.'
+                ];
+            }
+        }
+
+        return response()->json($response);
+    }
+
+    public function destroy(Request $request) 
+    {
+        $query = Delivery::where('id', $request->id)->delete();
+        if($query) {
+            activity()
+                ->performedOn(new Delivery())
+                ->causedBy(session('bo_id'))
+                ->log('Delete the price delivery data');
+
+            $response = [
+                'status'  => 200,
+                'message' => 'Data deleted successfully.'
+            ];
+        } else {
+            $response = [
+                'status'  => 500,
+                'message' => 'Data failed to delete.'
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+}

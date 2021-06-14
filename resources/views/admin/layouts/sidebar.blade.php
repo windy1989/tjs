@@ -87,6 +87,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'delivery' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-truck"></i> 
+                            <span>Delivery</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Delivery">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/delivery/vendor') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'vendor' ? 'active' : '' }}">Vendor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/delivery/transport') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'transport' ? 'active' : '' }}">Transport</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/delivery/price') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'price' ? 'active' : '' }}">Price</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'product' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-box"></i> 
