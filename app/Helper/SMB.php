@@ -2337,15 +2337,15 @@ class SMB {
          }
       }
 
-      $income_deduction_actual_current   = $deduction_actual_current - $income_actual_current;
-      $income_deduction_actual_last      = $deduction_actual_last - $income_actual_last;
-      $income_deduction_budget           = $deduction_budget - $income_budget;
-      $income_deduction_variance_current = $income_deduction_actual_current - $income_deduction_budget;
-      $income_deduction_variance_last    = $income_deduction_actual_current - $income_deduction_actual_last;
+      $income_deduction_actual_current   = $income_actual_current - $deduction_actual_current;
+      $income_deduction_actual_last      = $income_actual_last - $deduction_actual_last;
+      $income_deduction_budget           = $income_budget - $deduction_budget;
+      $income_deduction_variance_current = $income_deduction_budget - $income_deduction_actual_current;
+      $income_deduction_variance_last    = $income_deduction_actual_last - $income_deduction_actual_current;
 
-      $non_operation_actual_current   = $depreciation_actual_current + $income_deduction_actual_current;
-      $non_operation_actual_last      = $depreciation_actual_last + $income_deduction_actual_last;
-      $non_operation_budget           = $depreciation_budget + $income_deduction_budget;
+      $non_operation_actual_current   = $depreciation_actual_current - $income_actual_current + $deduction_actual_current;
+      $non_operation_actual_last      = $depreciation_actual_last - $income_actual_last + $deduction_actual_last;
+      $non_operation_budget           = $depreciation_budget - $income_budget + $deduction_budget;
       $non_operation_variance_current = $non_operation_actual_current - $non_operation_budget;
       $non_operation_variance_last    = $non_operation_actual_current - $non_operation_actual_last;
 

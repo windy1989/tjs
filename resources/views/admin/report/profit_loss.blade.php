@@ -2734,7 +2734,7 @@
                               <tr><td colspan="12"></td></tr>
                               <tr class="bg-teal-300 text-uppercase">
                                  <th class="text-left font-weight-bold">Total Non Operation</th>
-                                 <th class="text-right font-weight-bold">{{ number_format($profit_loss['non_operation']['total']['income_deduction']['actual']['current']) }}</th>
+                                 <th class="text-right font-weight-bold">{{ number_format($profit_loss['non_operation']['total']['non_operation']['actual']['current']) }}</th>
                                  <th class="text-center font-weight-bold">
                                     {{ $total['income_actual_percent_current'] }}%    
                                  </th>
