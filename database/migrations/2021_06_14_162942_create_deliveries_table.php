@@ -19,7 +19,9 @@ class CreateDeliveriesTable extends Migration
             $table->bigInteger('transport_id');
             $table->bigInteger('origin');
             $table->bigInteger('destination');
-            $table->double('price');
+            $table->double('capacity');
+            $table->double('price_per_kg');
+            $table->double('price_per_meter');
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

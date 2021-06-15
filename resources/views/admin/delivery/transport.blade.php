@@ -74,18 +74,13 @@
                   <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter brand">
                </div>
                <div class="form-group">
-                  <label>Weight :<span class="text-danger">*</span></label>
-                  <input type="number" name="weight" id="weight" class="form-control" placeholder="Enter weight">
-               </div>
-               <div class="form-group">
-                  <label>Large :<span class="text-danger">*</span></label>
-                  <input type="number" name="large" id="large" class="form-control" placeholder="Enter large">
-               </div>
-               <div class="form-group">
                   <label>Type :<span class="text-danger">*</span></label>
                   <select name="type" id="type" class="custom-select">
                      <option value="">-- Choose --</option>
                      <option value="1">Tronton</option>
+                     <option value="2">Double</option>
+                     <option value="3">Trailer</option>
+                     <option value="4">Flat Bed</option>
                   </select>
                </div>
             </form>
@@ -124,7 +119,6 @@
 
   function reset() {
       $('#form_data').trigger('reset');
-      $('input[name="status"][value="1"]').prop('checked', true);
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -168,7 +162,6 @@
             { name: 'plat_number', className: 'text-center align-middle' },
             { name: 'brand', className: 'text-center align-middle' },
             { name: 'type', searchable: false, className: 'text-center align-middle' },
-            { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
@@ -240,8 +233,6 @@
             loadingClose('.modal-content');
             $('#plat_number').val(response.plat_number);
             $('#brand').val(response.brand);
-            $('#weight').val(response.weight);
-            $('#large').val(response.large);
             $('#type').val(response.type);
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\City;
+use App\Models\Vendor;
 use App\Models\Delivery;
+use App\Models\Transport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -12,8 +15,11 @@ class PriceController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Delivery Price',
-            'content' => 'admin.delivery.price'
+            'title'     => 'Delivery Price',
+            'vendor'    => Vendor::where('status', 1)->get(),
+            'transport' => Transport::all(),
+            'city'      => City::all(),
+            'content'   => 'admin.delivery.price'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -25,9 +31,10 @@ class PriceController extends Controller {
             'id',
             'vendor_id',
             'transport_id',
-            'origin',
-            'destination',
-            'price'
+            'route',
+            'capacity',
+            'price_per_kg',
+            'price_per_meter'
         ];
 
         $start  = $request->start;
@@ -89,9 +96,10 @@ class PriceController extends Controller {
                     $nomor,
                     $val->vendor->name,
                     $val->transport->brand,
-                    $val->origin->name,
-                    $val->destination->name,
-                    number_format($val->price),
+                    $val->origin->name . ' &rarr; ' . $val->destination->name,
+                    number_format($val->capacity),
+                    number_format($val->price_per_kg),
+                    number_format($val->price_per_meter),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
@@ -118,17 +126,21 @@ class PriceController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'vendor_id'    => 'required',
-            'transport_id' => 'required',
-            'origin'       => 'required',
-            'destination'  => 'required',
-            'price'        => 'required'
+            'vendor_id'       => 'required',
+            'transport_id'    => 'required',
+            'origin'          => 'required',
+            'destination'     => 'required',
+            'capacity'        => 'required',
+            'price_per_kg'    => 'required',
+            'price_per_meter' => 'required'
         ], [
-            'vendor_id.required'    => 'Please select a vendor',
-            'transport_id.required' => 'Please select a transport',
-            'origin.required'       => 'Please select a origin',
-            'destination.required'  => 'Please select a destination',
-            'brand.required'        => 'price cannot be empty'
+            'vendor_id.required'       => 'Please select a vendor',
+            'transport_id.required'    => 'Please select a transport',
+            'origin.required'          => 'Please select a origin',
+            'destination.required'     => 'Please select a destination',
+            'capacity.required'        => 'Capacity cannot be empty',
+            'price_per_kg.required'    => 'Price per kg cannot be empty',
+            'price_per_meter.required' => 'Price per meter cannot be empty'
         ]);
 
         if($validation->fails()) {
@@ -138,11 +150,13 @@ class PriceController extends Controller {
             ];
         } else {
             $query = Delivery::create([
-                'vendor_id'    => $request->vendor_id,
-                'transport_id' => $request->transport_id,
-                'origin'       => $request->origin,
-                'destination'  => $request->destination,
-                'price'        => $request->price
+                'vendor_id'       => $request->vendor_id,
+                'transport_id'    => $request->transport_id,
+                'origin'          => $request->origin,
+                'destination'     => $request->destination,
+                'capacity'        => $request->capacity,
+                'price_per_kg'    => $request->price_per_kg,
+                'price_per_meter' => $request->price_per_meter
             ]);
 
             if($query) {
@@ -176,17 +190,21 @@ class PriceController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'vendor_id'    => 'required',
-            'transport_id' => 'required',
-            'origin'       => 'required',
-            'destination'  => 'required',
-            'price'        => 'required'
+            'vendor_id'       => 'required',
+            'transport_id'    => 'required',
+            'origin'          => 'required',
+            'destination'     => 'required',
+            'capacity'        => 'required',
+            'price_per_kg'    => 'required',
+            'price_per_meter' => 'required'
         ], [
-            'vendor_id.required'    => 'Please select a vendor',
-            'transport_id.required' => 'Please select a transport',
-            'origin.required'       => 'Please select a origin',
-            'destination.required'  => 'Please select a destination',
-            'brand.required'        => 'price cannot be empty'
+            'vendor_id.required'       => 'Please select a vendor',
+            'transport_id.required'    => 'Please select a transport',
+            'origin.required'          => 'Please select a origin',
+            'destination.required'     => 'Please select a destination',
+            'capacity.required'        => 'Capacity cannot be empty',
+            'price_per_kg.required'    => 'Price per kg cannot be empty',
+            'price_per_meter.required' => 'Price per meter cannot be empty'
         ]);
 
         if($validation->fails()) {
@@ -196,11 +214,13 @@ class PriceController extends Controller {
             ];
         } else {
             $query = Delivery::where('id', $id)->update([
-                'vendor_id'    => $request->vendor_id,
-                'transport_id' => $request->transport_id,
-                'origin'       => $request->origin,
-                'destination'  => $request->destination,
-                'price'        => $request->price
+                'vendor_id'       => $request->vendor_id,
+                'transport_id'    => $request->transport_id,
+                'origin'          => $request->origin,
+                'destination'     => $request->destination,
+                'capacity'        => $request->capacity,
+                'price_per_kg'    => $request->price_per_kg,
+                'price_per_meter' => $request->price_per_meter
             ]);
 
             if($query) {

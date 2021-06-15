@@ -97,15 +97,11 @@ class TransportController extends Controller {
         $validation = Validator::make($request->all(), [
             'plat_number' => 'required|unique:transports,plat_number',
             'brand'       => 'required',
-            'weight'      => 'required',
-            'large'       => 'required',
             'type'        => 'required'
         ], [
             'plat_number.required' => 'Plat number cannot be empty',
             'plat_number.unique'   => 'Plat number exists',
             'brand.required'       => 'Brand cannot be empty',
-            'weight.required'      => 'Weight cannot be empty.',
-            'large.required'       => 'Large cannot be empty.',
             'type.required'        => 'Please select a type.'
         ]);
 
@@ -118,8 +114,6 @@ class TransportController extends Controller {
             $query = Transport::create([
                 'plat_number' => $request->plat_number,
                 'brand'       => $request->brand,
-                'weight'      => $request->weight,
-                'large'       => $request->large,
                 'type'        => $request->type
             ]);
 
@@ -156,15 +150,11 @@ class TransportController extends Controller {
         $validation = Validator::make($request->all(), [
             'plat_number' => ['required', Rule::unique('transports', 'plat_number')->ignore($id)],
             'brand'       => 'required',
-            'weight'      => 'required',
-            'large'       => 'required',
             'type'        => 'required'
         ], [
             'plat_number.required' => 'Plat number cannot be empty',
             'plat_number.unique'   => 'Plat number exists',
             'brand.required'       => 'Brand cannot be empty',
-            'weight.required'      => 'Weight cannot be empty.',
-            'large.required'       => 'Large cannot be empty.',
             'type.required'        => 'Please select a type.'
         ]);
 

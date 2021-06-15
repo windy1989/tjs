@@ -17,8 +17,6 @@ class CreateTransportsTable extends Migration
             $table->id();
             $table->string('plat_number')->unique();
             $table->string('brand');
-            $table->double('weight');
-            $table->double('large');
             $table->char('type', 1);
             $table->timestamps();
             $table->softDeletes('deleted_at');

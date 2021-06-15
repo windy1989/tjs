@@ -16,9 +16,30 @@ class Transport extends Model {
     protected $fillable   = [
         'plat_number',
         'brand',
-        'weight',
-        'large',
         'type'
     ];
+
+    public function type() 
+    {
+        switch($this->type) {
+            case '1':
+                $type = 'Tronton';
+                break;
+            case '2':
+                $type = 'Double';
+                break;
+            case '3':
+                $type = 'Trailer';
+                break;
+            case '4':
+                $type = 'Flat Bed';
+                break;
+            default:
+                $type = 'Invalid';
+                break;
+        }
+
+        return $type;
+    }
 
 }

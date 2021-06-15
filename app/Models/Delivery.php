@@ -18,7 +18,9 @@ class Delivery extends Model {
         'transport_id',
         'origin',
         'destination',
-        'price'
+        'capacity',
+        'price_per_kg',
+        'price_per_meter'
     ];
 
     public function vendor()

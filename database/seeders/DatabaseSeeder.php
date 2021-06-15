@@ -44,5 +44,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BudgetingSeeder::class);
         $this->call(CashBankSeeder::class);
         $this->call(JournalSeeder::class);
+        $this->call(VendorSeeder::class);
+        $this->call(TransportSeeder::class);
+        $this->call(DeliverySeeder::class);
     }
 }
