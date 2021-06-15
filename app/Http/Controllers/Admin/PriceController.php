@@ -95,8 +95,8 @@ class PriceController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->vendor->name,
-                    $val->transport->brand,
-                    $val->origin->name . ' &rarr; ' . $val->destination->name,
+                    $val->transport->fleet,
+                    $val->origins->name . ' &rarr; ' . $val->destinations->name,
                     number_format($val->capacity),
                     number_format($val->price_per_kg),
                     number_format($val->price_per_meter),

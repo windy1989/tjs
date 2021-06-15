@@ -15,9 +15,9 @@ class CreateTransportsTable extends Migration
     {
         Schema::create('transports', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('transport_type_id');
             $table->string('plat_number')->unique();
-            $table->string('brand');
-            $table->char('type', 1);
+            $table->string('fleet');
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

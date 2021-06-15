@@ -75,7 +75,7 @@
                         <select name="transport_id" id="transport_id" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($transport as $t)
-                              <option value="{{ $t->id }}">{{ $t->name }}</option>
+                              <option value="{{ $t->id }}">{{ $t->fleet }}</option>
                            @endforeach
                         </select>
                      </div>

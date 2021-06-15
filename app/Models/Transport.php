@@ -14,32 +14,14 @@ class Transport extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
+        'transport_type_id',
         'plat_number',
-        'brand',
-        'type'
+        'fleet'
     ];
 
-    public function type() 
+    public function transportType() 
     {
-        switch($this->type) {
-            case '1':
-                $type = 'Tronton';
-                break;
-            case '2':
-                $type = 'Double';
-                break;
-            case '3':
-                $type = 'Trailer';
-                break;
-            case '4':
-                $type = 'Flat Bed';
-                break;
-            default:
-                $type = 'Invalid';
-                break;
-        }
-
-        return $type;
+        return $this->belongsTo('App\Models\TransportType');
     }
 
 }

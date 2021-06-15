@@ -97,6 +97,9 @@
                                 <a href="{{ url('admin/delivery/vendor') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'vendor' ? 'active' : '' }}">Vendor</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('admin/delivery/transport_type') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'transport_type' ? 'active' : '' }}">Type</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('admin/delivery/transport') }}" class="nav-link {{ Request::segment(2) == 'delivery' && Request::segment(3) == 'transport' ? 'active' : '' }}">Transport</a>
                             </li>
                             <li class="nav-item">

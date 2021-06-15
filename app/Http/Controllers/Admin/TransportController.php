@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Transport;
 use Illuminate\Http\Request;
+use App\Models\TransportType;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +14,9 @@ class TransportController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Delivery Transport',
-            'content' => 'admin.delivery.transport'
+            'title'          => 'Delivery Transport',
+            'transport_type' => TransportType::all(),
+            'content'        => 'admin.delivery.transport'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -25,8 +27,8 @@ class TransportController extends Controller {
         $column = [
             'id',
             'plat_number',
-            'brand',
-            'type'
+            'fleet',
+            'transport_type_id'
         ];
 
         $start  = $request->start;
@@ -41,7 +43,10 @@ class TransportController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('plat_number', 'like', "%$search%")
-                            ->orWhere('brand', 'like', "%$search%");
+                            ->orWhere('fleet', 'like', "%$search%")
+                            ->orWhereHas('transportType', function($query) use ($request) {
+                                    $query->where('name', 'like', "%$search%");
+                                });
                     });
                 }     
             })
@@ -54,7 +59,10 @@ class TransportController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('plat_number', 'like', "%$search%")
-                            ->orWhere('brand', 'like', "%$search%");
+                            ->orWhere('fleet', 'like', "%$search%")
+                            ->orWhereHas('transportType', function($query) use ($request) {
+                                    $query->where('name', 'like', "%$search%");
+                                });
                     });
                 }       
             })
@@ -67,8 +75,8 @@ class TransportController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->plat_number,
-                    $val->brand,
-                    $val->type(),
+                    $val->fleet,
+                    $val->transportType->name,
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
@@ -95,14 +103,14 @@ class TransportController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'plat_number' => 'required|unique:transports,plat_number',
-            'brand'       => 'required',
-            'type'        => 'required'
+            'plat_number'       => 'required|unique:transports,plat_number',
+            'fleet'             => 'required',
+            'transport_type_id' => 'required'
         ], [
-            'plat_number.required' => 'Plat number cannot be empty',
-            'plat_number.unique'   => 'Plat number exists',
-            'brand.required'       => 'Brand cannot be empty',
-            'type.required'        => 'Please select a type.'
+            'plat_number.required'       => 'Plat number cannot be empty',
+            'plat_number.unique'         => 'Plat number exists',
+            'fleet.required'             => 'Fleet cannot be empty',
+            'transport_type_id.required' => 'Please select a type.'
         ]);
 
         if($validation->fails()) {
@@ -112,9 +120,9 @@ class TransportController extends Controller {
             ];
         } else {
             $query = Transport::create([
-                'plat_number' => $request->plat_number,
-                'brand'       => $request->brand,
-                'type'        => $request->type
+                'transport_type_id' => $request->transport_type_id,
+                'plat_number'       => $request->plat_number,
+                'fleet'             => $request->fleet
             ]);
 
             if($query) {
@@ -148,14 +156,14 @@ class TransportController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'plat_number' => ['required', Rule::unique('transports', 'plat_number')->ignore($id)],
-            'brand'       => 'required',
-            'type'        => 'required'
+            'plat_number'       => ['required', Rule::unique('transports', 'plat_number')->ignore($id)],
+            'fleet'             => 'required',
+            'transport_type_id' => 'required'
         ], [
-            'plat_number.required' => 'Plat number cannot be empty',
-            'plat_number.unique'   => 'Plat number exists',
-            'brand.required'       => 'Brand cannot be empty',
-            'type.required'        => 'Please select a type.'
+            'plat_number.required'       => 'Plat number cannot be empty',
+            'plat_number.unique'         => 'Plat number exists',
+            'fleet.required'             => 'Fleet cannot be empty',
+            'transport_type_id.required' => 'Please select a type.'
         ]);
 
         if($validation->fails()) {
@@ -165,11 +173,9 @@ class TransportController extends Controller {
             ];
         } else {
             $query = Transport::where('id', $id)->update([
-                'plat_number' => $request->plat_number,
-                'brand'       => $request->brand,
-                'weight'      => $request->weight,
-                'large'       => $request->large,
-                'type'        => $request->type
+                'transport_type_id' => $request->transport_type_id,
+                'plat_number'       => $request->plat_number,
+                'fleet'             => $request->fleet
             ]);
 
             if($query) {

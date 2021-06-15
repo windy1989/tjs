@@ -227,6 +227,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('destroy', 'VendorController@destroy');
             });
 
+            Route::prefix('transport_type')->group(function() {
+                Route::get('/', 'TransportTypeController@index');
+                Route::post('datatable', 'TransportTypeController@datatable');
+                Route::post('create', 'TransportTypeController@create');
+                Route::post('show', 'TransportTypeController@show');
+                Route::post('update/{id}', 'TransportTypeController@update');
+                Route::post('destroy', 'TransportTypeController@destroy');
+            });
+
             Route::prefix('transport')->group(function() {
                 Route::get('/', 'TransportController@index');
                 Route::post('datatable', 'TransportController@datatable');

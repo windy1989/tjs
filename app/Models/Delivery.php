@@ -33,14 +33,14 @@ class Delivery extends Model {
         return $this->belongsTo('App\Models\Transport');
     }
 
-    public function origin()
+    public function origins()
     {
-        return $this->belongsTo('App\Models\City', 'origin', 'id');
+        return $this->belongsTo('App\Models\City', 'origin');
     }
 
-    public function destination()
+    public function destinations()
     {
-        return $this->belongsTo('App\Models\City', 'destination', 'id');
+        return $this->belongsTo('App\Models\City', 'destination');
     }
 
 }
