@@ -16,7 +16,7 @@ class TransportSeeder extends Seeder
     {
         require public_path('website/backup.php');
 
-        foreach($transport as $t) {
+        foreach($transports as $t) {
             Transport::insert([
                 'id'          => $t['id'],
                 'plat_number' => $t['plat_number'],
