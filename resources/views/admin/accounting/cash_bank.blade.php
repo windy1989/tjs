@@ -494,6 +494,7 @@
             $('#code').val(response.code);
             $('#date').val(response.date);
             $('#description').val(response.description);
+            $('input[name="type"][value="' + response.type + '"]').prop('checked', true);
 
             $.each(response.cash_bank_detail, function(i, val) {
                $('#data_content').append(`
