@@ -39,9 +39,16 @@ Route::prefix('information')->group(function() {
 }); 
 
 Route::prefix('checkout')->group(function() {
-    Route::match(['get', 'post'], 'cash', 'CheckoutController@cash');
-    Route::get('cash/cash_success', 'CheckoutController@cashSuccess');
-    Route::match(['get', 'post'], 'cashless', 'CheckoutController@cashless');
+    Route::prefix('cash')->group(function() {
+        Route::match(['get', 'post'], '/', 'CheckoutController@cash');
+        Route::get('cash_success', 'CheckoutController@cashSuccess');
+    });
+
+    Route::prefix('cashless')->group(function() {
+        Route::match(['get', 'post'], '/', 'CheckoutController@cashless');
+        Route::post('get_delivery', 'CheckoutController@cashlessGetDelivery');
+        Route::post('grandtotal', 'CheckoutController@cashlessGrandtotal');
+    });
 }); 
 
 Route::prefix('webhook')->group(function() {

@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use QrCode;
 use Xendit\Invoice;
 use App\Models\Cart;
+use App\Models\City;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Delivery;
 use App\Jobs\EmailProcess;
 use App\Models\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ProductShading;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller {
     
@@ -136,6 +139,44 @@ class CheckoutController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
+    public function cashlessGetDelivery(Request $request)
+    {
+        $data     = [];
+        $city_id  = $request->city_id;
+        $weight   = (double)$request->weight;
+        $delivery = Delivery::where('destination_id', $city_id)
+            ->where('capacity', '>=', $weight)
+            ->orderBy('price_per_kg', 'asc')
+            ->groupBy('transport_id')
+            ->get();
+
+        foreach($delivery as $d) {
+            $data[] = [
+                'id'             => $d->id,
+                'price'          => 'Rp ' . number_format($d->price_per_kg * $weight, '0', ',', '.'),
+                'transport_name' => $d->transport->fleet
+            ];
+        }
+
+        return response()->json($data);
+    }
+
+    public function cashlessGrandtotal(Request $request)
+    {
+        $subtotal     = (double)$request->subtotal;
+        $weight       = (double)$request->weight;
+        $delivery     = Delivery::find($request->delivery_id);
+        $shipping_fee = $delivery ? $delivery->price_per_kg * $weight : 0;
+        $transport    = $delivery ? $delivery->transport->fleet : 'Not Selected';
+        $grandtotal   = $subtotal + $shipping_fee;
+
+        return response()->json([
+            'transport'    => $transport,
+            'shipping_fee' => 'Rp ' . number_format($shipping_fee, '0', ',', '.'),
+            'grandtotal'   => 'Rp ' . number_format($grandtotal, '0', ',', '.')
+        ]);
+    }
+
     public function cashless(Request $request)
     {
         $customer = Customer::find(session('fo_id'));
@@ -146,19 +187,43 @@ class CheckoutController extends Controller {
         }
         
         if($request->has('_token') && session()->token() == $request->_token) {
-            $params = [
-                'external_id' => 'demo_147580196270',
-                'payer_email' => 'sample_email@xendit.co',
-                'description' => 'Trip to Bali',
-                'amount'      => 32000
-            ];
+            $validation = Validator::make($request->all(), [
+                'receiver_name' => 'required',
+                'email'         => 'required|email',
+                'phone'         => 'required|min:9|numeric',
+                'city_id'       => 'required',
+                'address'       => 'required',
+                'delivery_id'   => 'required'
+            ], [
+                'receiver_name.required' => 'Receiver name cannot be empty.',
+                'email.required'         => 'Email cannot be empty.',
+                'email.email'            => 'Email not valid.',
+                'phone.required'         => 'Phone cannot be empty',
+                'phone.min'              => 'Phone must be at least 9 characters long',
+                'phone.numeric'          => 'Phone must be number',
+                'city_id.required'       => 'Please select a city.',
+                'address.required'       => 'Address cannot be empty.',
+                'delivery_id.required'   => 'Please select a transport.'
+            ]);
 
-            $createInvoice = Invoice::create($params);
-            return redirect($createInvoice['invoice_url']);
+            if($validation->fails()) {
+                return redirect()->back()->withErrors($validation)->withInput();
+            } else {
+                $params = [
+                    'external_id' => 'demo_147580196270',
+                    'payer_email' => 'sample_email@xendit.co',
+                    'description' => 'Trip to Bali',
+                    'amount'      => 32000
+                ];
+
+                $createInvoice = Invoice::create($params);
+                return redirect($createInvoice['invoice_url']);
+            }
         } else {
             $data = [
                 'title'    => 'Checkout',
                 'customer' => $customer,
+                'city'     => City::orderBy('name', 'asc')->get(),
                 'content'  => 'checkout.cashless'
             ];
     

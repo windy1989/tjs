@@ -34,6 +34,7 @@ class AccountController extends Controller {
                             'fo_photo'        => $account->photo,
                             'fo_name'         => $account->name,
                             'fo_email'        => $account->email,
+                            'fo_phone'        => $account->phone,
                             'fo_verification' => $account->verification
                         ]);
 
