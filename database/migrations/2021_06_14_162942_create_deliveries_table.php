@@ -17,8 +17,7 @@ class CreateDeliveriesTable extends Migration
             $table->id();
             $table->bigInteger('vendor_id');
             $table->bigInteger('transport_id');
-            $table->bigInteger('origin');
-            $table->bigInteger('destination');
+            $table->bigInteger('destination_id');
             $table->double('capacity');
             $table->double('price_per_kg');
             $table->double('price_per_meter');

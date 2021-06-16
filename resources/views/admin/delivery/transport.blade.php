@@ -39,9 +39,7 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
-                        <th>Plat Number</th>
                         <th>Fleet</th>
-                        <th>Type</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -66,21 +64,8 @@
                   <ul id="validation_content"></ul>
                </div>
                <div class="form-group">
-                  <label>Plat Number :<span class="text-danger">*</span></label>
-                  <input type="text" name="plat_number" id="plat_number" class="form-control" placeholder="Enter plat number">
-               </div>
-               <div class="form-group">
                   <label>Fleet :<span class="text-danger">*</span></label>
                   <input type="text" name="fleet" id="fleet" class="form-control" placeholder="Enter fleet">
-               </div>
-               <div class="form-group">
-                  <label>Type :<span class="text-danger">*</span></label>
-                  <select name="transport_type_id" id="transport_type_id" class="select2">
-                     <option value="">-- Choose --</option>
-                     @foreach($transport_type as $tt)
-                        <option value="{{ $tt->id }}">{{ $tt->name }}</option>
-                     @endforeach
-                  </select>
                </div>
             </form>
          </div>
@@ -118,7 +103,6 @@
 
   function reset() {
       $('#form_data').trigger('reset');
-      $('#transport_type_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -159,9 +143,7 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
-            { name: 'plat_number', className: 'text-center align-middle' },
             { name: 'fleet', className: 'text-center align-middle' },
-            { name: 'transport_type_id', className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
@@ -231,9 +213,7 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
-            $('#plat_number').val(response.plat_number);
             $('#fleet').val(response.fleet);
-            $('#transport_type_id').val(response.transport_type_id).change();
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },
          error: function() {

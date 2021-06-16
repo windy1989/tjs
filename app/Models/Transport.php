@@ -14,14 +14,7 @@ class Transport extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
-        'transport_type_id',
-        'plat_number',
         'fleet'
     ];
-
-    public function transportType() 
-    {
-        return $this->belongsTo('App\Models\TransportType');
-    }
 
 }

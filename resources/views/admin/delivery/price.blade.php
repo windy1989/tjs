@@ -41,7 +41,7 @@
                         <th>No</th>
                         <th>Vendor</th>
                         <th>Transport</th>
-                        <th>Route</th>
+                        <th>Destination</th>
                         <th>Capacity</th>
                         <th>Price Per Kg</th>
                         <th>Price Per Meter</th>
@@ -75,7 +75,7 @@
                         <select name="transport_id" id="transport_id" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($transport as $t)
-                              <option value="{{ $t->id }}">{{ $t->fleet }} {{ $t->transportType->name }}</option>
+                              <option value="{{ $t->id }}">{{ $t->fleet }}</option>
                            @endforeach
                         </select>
                      </div>
@@ -91,21 +91,10 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Origin :<span class="text-danger">*</span></label>
-                        <select name="origin" id="origin" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($city as $c)
-                              <option value="{{ $c->id }}">{{ $c->name }}</option>
-                           @endforeach
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                      <div class="form-group">
                         <label>Destination :<span class="text-danger">*</span></label>
-                        <select name="destination" id="destination" class="select2">
+                        <select name="destination_id" id="destination_id" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($city as $c)
                               <option value="{{ $c->id }}">{{ $c->name }}</option>
@@ -173,8 +162,7 @@
       $('#form_data').trigger('reset');
       $('#vendor_id').val(null).change();
       $('#transport_id').val(null).change();
-      $('#origin').val(null).change();
-      $('#destination').val(null).change();
+      $('#destination_id').val(null).change();
       $('#validation_alert').hide();
       $('#validation_content').html('');
    }
@@ -217,7 +205,7 @@
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'vendor_id', className: 'text-center align-middle' },
             { name: 'transport_id', className: 'text-center align-middle' },
-            { name: 'route', searchable: false, orderable: false, className: 'text-center align-middle' },
+            { name: 'destination_id', className: 'text-center align-middle' },
             { name: 'capacity', searchable: false, className: 'text-center align-middle' },
             { name: 'price_per_kg', searchable: false, className: 'text-center align-middle' },
             { name: 'price_per_meter', searchable: false, className: 'text-center align-middle' },
@@ -292,8 +280,7 @@
             loadingClose('.modal-content');
             $('#vendor_id').val(response.vendor_id).change();
             $('#transport_id').val(response.transport_id).change();
-            $('#origin').val(response.origin).change();
-            $('#destination').val(response.destination).change();
+            $('#destination_id').val(response.destination).change();
             $('#capacity').val(response.capacity);
             $('#price_per_kg').val(response.price_per_kg);
             $('#price_per_meter').val(response.price_per_meter);

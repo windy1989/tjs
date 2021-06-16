@@ -47,6 +47,5 @@ class DatabaseSeeder extends Seeder
         $this->call(VendorSeeder::class);
         $this->call(TransportSeeder::class);
         $this->call(DeliverySeeder::class);
-        $this->call(TransportTypeSeeder::class);
     }
 }

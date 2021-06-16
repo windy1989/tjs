@@ -16,8 +16,7 @@ class Delivery extends Model {
     protected $fillable   = [
         'vendor_id',
         'transport_id',
-        'origin',
-        'destination',
+        'destination_id',
         'capacity',
         'price_per_kg',
         'price_per_meter'
@@ -33,14 +32,9 @@ class Delivery extends Model {
         return $this->belongsTo('App\Models\Transport');
     }
 
-    public function origins()
+    public function destination()
     {
-        return $this->belongsTo('App\Models\City', 'origin');
-    }
-
-    public function destinations()
-    {
-        return $this->belongsTo('App\Models\City', 'destination');
+        return $this->belongsTo('App\Models\City', 'destination_id');
     }
 
 }

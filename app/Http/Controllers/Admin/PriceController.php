@@ -31,7 +31,7 @@ class PriceController extends Controller {
             'id',
             'vendor_id',
             'transport_id',
-            'route',
+            'destination_id',
             'capacity',
             'price_per_kg',
             'price_per_meter'
@@ -54,9 +54,6 @@ class PriceController extends Controller {
                             ->whereHas('transport', function($query) use ($search) {
                                 $query->whereRaw('brand', 'like', "%$search%");
                             })
-                            ->whereHas('origin', function($query) use ($search) {
-                                $query->whereRaw('name', 'like', "%$search%");
-                            })
                             ->whereHas('destination', function($query) use ($search) {
                                 $query->whereRaw('name', 'like', "%$search%");
                             });
@@ -77,9 +74,6 @@ class PriceController extends Controller {
                             ->whereHas('transport', function($query) use ($search) {
                                 $query->whereRaw('brand', 'like', "%$search%");
                             })
-                            ->whereHas('origin', function($query) use ($search) {
-                                $query->whereRaw('name', 'like', "%$search%");
-                            })
                             ->whereHas('destination', function($query) use ($search) {
                                 $query->whereRaw('name', 'like', "%$search%");
                             });
@@ -95,9 +89,9 @@ class PriceController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->vendor->name,
-                    $val->transport->fleet . ' ' . $val->transport->transportType->name,
-                    $val->origins->name . ' &rarr; ' . $val->destinations->name,
-                    number_format($val->capacity),
+                    $val->transport->fleet,
+                    $val->destination->name,
+                    number_format($val->capacity) . ' Kg',
                     number_format($val->price_per_kg),
                     number_format($val->price_per_meter),
                     '
@@ -128,16 +122,14 @@ class PriceController extends Controller {
         $validation = Validator::make($request->all(), [
             'vendor_id'       => 'required',
             'transport_id'    => 'required',
-            'origin'          => 'required',
-            'destination'     => 'required',
+            'destination_id'  => 'required',
             'capacity'        => 'required',
             'price_per_kg'    => 'required',
             'price_per_meter' => 'required'
         ], [
             'vendor_id.required'       => 'Please select a vendor',
             'transport_id.required'    => 'Please select a transport',
-            'origin.required'          => 'Please select a origin',
-            'destination.required'     => 'Please select a destination',
+            'destination_id.required'  => 'Please select a destination',
             'capacity.required'        => 'Capacity cannot be empty',
             'price_per_kg.required'    => 'Price per kg cannot be empty',
             'price_per_meter.required' => 'Price per meter cannot be empty'
@@ -152,8 +144,7 @@ class PriceController extends Controller {
             $query = Delivery::create([
                 'vendor_id'       => $request->vendor_id,
                 'transport_id'    => $request->transport_id,
-                'origin'          => $request->origin,
-                'destination'     => $request->destination,
+                'destination_id'  => $request->destination_id,
                 'capacity'        => $request->capacity,
                 'price_per_kg'    => $request->price_per_kg,
                 'price_per_meter' => $request->price_per_meter
@@ -192,16 +183,14 @@ class PriceController extends Controller {
         $validation = Validator::make($request->all(), [
             'vendor_id'       => 'required',
             'transport_id'    => 'required',
-            'origin'          => 'required',
-            'destination'     => 'required',
+            'destination_id'  => 'required',
             'capacity'        => 'required',
             'price_per_kg'    => 'required',
             'price_per_meter' => 'required'
         ], [
             'vendor_id.required'       => 'Please select a vendor',
             'transport_id.required'    => 'Please select a transport',
-            'origin.required'          => 'Please select a origin',
-            'destination.required'     => 'Please select a destination',
+            'destination_id.required'  => 'Please select a destination',
             'capacity.required'        => 'Capacity cannot be empty',
             'price_per_kg.required'    => 'Price per kg cannot be empty',
             'price_per_meter.required' => 'Price per meter cannot be empty'
@@ -216,8 +205,7 @@ class PriceController extends Controller {
             $query = Delivery::where('id', $id)->update([
                 'vendor_id'       => $request->vendor_id,
                 'transport_id'    => $request->transport_id,
-                'origin'          => $request->origin,
-                'destination'     => $request->destination,
+                'destination_id'  => $request->destination_id,
                 'capacity'        => $request->capacity,
                 'price_per_kg'    => $request->price_per_kg,
                 'price_per_meter' => $request->price_per_meter
