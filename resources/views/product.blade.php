@@ -7,7 +7,7 @@
    <div class="content-wrap p-0 mt-4">
       <div class="container clearfix">
          <form method="GET" class="mt-0" action="{{ url('product') }}">
-            <div class="row gutter-40 justify-content-center col-mb-80">
+            <div class="row gutter-50 justify-content-center col-mb-80">
                <div class="postcontent col-lg-9 order-lg-last">
                   <div class="row mb-3">
                      <div class="col-md-4 d-none d-xl-block">
