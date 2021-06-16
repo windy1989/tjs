@@ -24,6 +24,7 @@ class CashBankSeeder extends Seeder
                 'code'        => $cb['code'],
                 'date'        => $cb['date'],
                 'type'        => $cb['type'],
+                'description' => $cb['description'],
                 'created_at'  => $cb['created_at'],
                 'updated_at'  => $cb['updated_at'],
                 'deleted_at'  => $cb['deleted_at']
