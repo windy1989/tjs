@@ -15,6 +15,9 @@ class CreateOrderPaymentsTable extends Migration
     {
         Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('order_id');
+            $table->string('method');
+            $table->string('channel');
             $table->timestamps();
         });
     }

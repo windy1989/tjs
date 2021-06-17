@@ -393,7 +393,7 @@
   </head>
   <body>
     <span class="preheader">
-      This is an invoice for your purchase on {{ date('d-m-Y', strtotime($order->created_at)) }}. Please submit payment by {{ date('d-m-Y', strtotime('+1 day', strtotime($order->created_at))) }}
+      This is proof of your transaction
     </span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
@@ -411,7 +411,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <h1>Hi {{ $order->customer->name }},</h1>
-                        <p>Thanks for your order. This is an invoice for your recent purchase.</p>
+                        <p>Thanks for your order. This is an proof of transaction.</p>
                         <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td class="attributes_content">

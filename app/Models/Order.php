@@ -116,4 +116,9 @@ class Order extends Model {
         return $this->hasOne('App\Models\OrderShipping');
     }
 
+    public function orderPayment()
+    {
+        return $this->hasOne('App\Models\OrderPayment');
+    }
+
 }

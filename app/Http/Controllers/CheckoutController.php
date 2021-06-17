@@ -126,7 +126,7 @@ class CheckoutController extends Controller {
                 $qr_code  = 'public/order/SMB-QrCode-' . str_replace('/', '', $order->number) . '.png';
 
                 Storage::put($qr_code, $generate);
-                Order::find($order->id)->update(['subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
+                Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
 
                 $payload  = [
                     'email'      => $customer->email,
