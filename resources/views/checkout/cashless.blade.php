@@ -264,7 +264,7 @@
 
 	function getDelivery() {
 		$.ajax({
-			url: '{{ url("checkout/cashless/get_delivery") }}',
+			url: '{{ url("checkout/process/get_delivery") }}',
 			type: 'POST',
          dataType: 'JSON',
          data: {
@@ -300,7 +300,7 @@
 
 	function grandtotal() {
 		$.ajax({
-			url: '{{ url("checkout/cashless/grandtotal") }}',
+			url: '{{ url("checkout/process/grandtotal") }}',
 			type: 'POST',
          dataType: 'JSON',
          data: {

@@ -39,15 +39,12 @@ Route::prefix('information')->group(function() {
 }); 
 
 Route::prefix('checkout')->group(function() {
-    Route::prefix('cash')->group(function() {
-        Route::match(['get', 'post'], '/', 'CheckoutController@cash');
-        Route::get('cash_success', 'CheckoutController@cashSuccess');
-    });
-
-    Route::prefix('cashless')->group(function() {
-        Route::match(['get', 'post'], '/', 'CheckoutController@cashless');
-        Route::post('get_delivery', 'CheckoutController@cashlessGetDelivery');
-        Route::post('grandtotal', 'CheckoutController@cashlessGrandtotal');
+    Route::match(['get', 'post'], '{param}', 'CheckoutController@index');
+    Route::get('notif/{param}', 'CheckoutController@notif');
+    
+    Route::prefix('process')->group(function() {
+        Route::post('get_delivery', 'CheckoutController@getDelivery');
+        Route::post('grandtotal', 'CheckoutController@grandtotal');
     });
 }); 
 

@@ -353,7 +353,7 @@
                                  <th class="text-left font-weight-bold">Total Cogs</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
-                                    @if($total_cogs_actual_current > 0) 
+                                    @if($profit_loss['summary']['total']['income']['actual']['current'] > 0) 
                                        {{ round(($total_cogs_actual_current / $profit_loss['summary']['total']['income']['actual']['current']) * 100) }}%
                                     @else
                                        0%
@@ -1244,7 +1244,7 @@
                                  <th class="text-left font-weight-bold">Total Cogs</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
-                                    @if($total_cogs_actual_current > 0) 
+                                    @if($profit_loss['surabaya']['total']['income']['actual']['current'] > 0) 
                                        {{ round(($total_cogs_actual_current / $profit_loss['surabaya']['total']['income']['actual']['current']) * 100) }}%
                                     @else
                                        0%
@@ -1848,7 +1848,7 @@
                                  </th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_sale_service_budget) }}</th>   
                                  <th class="text-center font-weight-bold">
-                                    @if($total_sale_service_budget > 0 | $profit_loss['jakarta']['total']['income']['budget'] > 0) 
+                                    @if($profit_loss['jakarta']['total']['income']['budget'] > 0) 
                                        @php $total['income_budget_percent'] += round(($total_sale_service_budget / $profit_loss['jakarta']['total']['income']['budget']) * 100); @endphp 
                                        {{ round(($total_sale_service_budget / $profit_loss['jakarta']['total']['income']['budget']) * 100) }}%
                                     @else
@@ -1960,7 +1960,7 @@
                                  <th class="text-left font-weight-bold">Total Cogs</th>
                                  <th class="text-right font-weight-bold">{{ number_format($total_cogs_actual_current) }}</th>
                                  <th class="text-center font-weight-bold">
-                                    @if($total_cogs_actual_current > 0) 
+                                    @if($profit_loss['jakarta']['total']['income']['actual']['current'] > 0) 
                                        {{ round(($total_cogs_actual_current / $profit_loss['jakarta']['total']['income']['actual']['current']) * 100) }}%
                                     @else
                                        0%

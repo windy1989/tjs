@@ -18,9 +18,11 @@ class Order extends Model {
         'code',
         'discount',
         'subtotal',
+        'shipping',
         'grandtotal',
         'payment',
         'change',
+        'description',
         'type',
         'status'
     ];
@@ -44,7 +46,7 @@ class Order extends Model {
         }
 
         $code = str_pad($number, 6, 0, STR_PAD_LEFT);
-        return 'SO/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+        return 'INV/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
     }
 
     public function type() 
@@ -101,6 +103,11 @@ class Order extends Model {
     public function orderDetail()
     {
         return $this->hasMany('App\Models\OrderDetail');
+    }
+
+    public function orderShipping()
+    {
+        return $this->hasOne('App\Models\OrderShipping');
     }
 
 }

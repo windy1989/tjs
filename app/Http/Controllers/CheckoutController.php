@@ -13,53 +13,84 @@ use App\Jobs\EmailProcess;
 use App\Models\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\OrderShipping;
 use App\Models\ProductShading;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller {
     
-    public function cash(Request $request)
+    public function index(Request $request, $param)
     {
         $customer = Customer::find(session('fo_id'));
         if(!session('fo_id') || !$customer) {
             return redirect('account/login');
         } else if($customer->cart->count() < 1) {
             return redirect('product');
+        } else if(empty($param)) {
+            return redirect('cart');
         }
 
         if($request->has('_token') && session()->token() == $request->_token) {
-            $order = Order::create([
+            if($param == 'cashless') {
+                $validation = Validator::make($request->all(), [
+                    'receiver_name' => 'required',
+                    'email'         => 'required|email',
+                    'phone'         => 'required|min:9|numeric',
+                    'city_id'       => 'required',
+                    'address'       => 'required',
+                    'delivery_id'   => 'required'
+                ], [
+                    'receiver_name.required' => 'Receiver name cannot be empty.',
+                    'email.required'         => 'Email cannot be empty.',
+                    'email.email'            => 'Email not valid.',
+                    'phone.required'         => 'Phone cannot be empty',
+                    'phone.min'              => 'Phone must be at least 9 characters long',
+                    'phone.numeric'          => 'Phone must be number',
+                    'city_id.required'       => 'Please select a city.',
+                    'address.required'       => 'Address cannot be empty.',
+                    'delivery_id.required'   => 'Please select a transport.'
+                ]);
+
+                if($validation->fails()) {
+                    return redirect()->back()->withErrors($validation)->withInput();
+                }
+            }
+
+            $total_checkout = 0;
+            $total_weight   = 0;
+            $order          = Order::create([
                 'customer_id' => session('fo_id'),
-                'number'      => Order::generateNumber('RTL'),
-                'code'        => Order::generateCode('RTL'),
-                'type'        => 1,
+                'number'      => Order::generateNumber($param == 'cash' ? 'RTL' : 'ONL'),
+                'code'        => Order::generateCode($param == 'cash' ? 'RTL' : 'ONL'),
+                'description' => $request->description,
+                'type'        => $param == 'cash' ? 1 : 2,
                 'status'      => 1
             ]);
 
-            $total = 0;
             foreach($customer->cart as $c) {
-                $formula        = $c->product->cogs;
-                $pricing        = $c->product->pricingPolicy;
-                $showroom_cost  = $pricing ? $pricing->showroom_cost : 0;
-                $marketing_cost = $pricing ? $pricing->marketing_cost : 0;
-                $bottom_price   = $pricing ? $pricing->bottom_price : 0;
-                $fixed_cost     = $pricing ? $pricing->fixed_cost : 0;
-                $cogs_idr       = $formula ? $formula->cogs_idr : 0;
-                $cogs_pta_idr   = $formula ? $formula->cogs_pta_idr : 0;
-                $cogs_smb_idr   = $formula ? $formula->cogs_smb_idr : 0;
-                $subtotal       = $c->product->price() * $c->qty;
-                $total         += $subtotal;
+                $formula         = $c->product->cogs;
+                $pricing         = $c->product->pricingPolicy;
+                $showroom_cost   = $pricing ? $pricing->showroom_cost : 0;
+                $marketing_cost  = $pricing ? $pricing->marketing_cost : 0;
+                $bottom_price    = $pricing ? $pricing->bottom_price : 0;
+                $fixed_cost      = $pricing ? $pricing->fixed_cost : 0;
+                $cogs_idr        = $formula ? $formula->cogs_idr : 0;
+                $cogs_pta_idr    = $formula ? $formula->cogs_pta_idr : 0;
+                $cogs_smb_idr    = $formula ? $formula->cogs_smb_idr : 0;
+                $subtotal        = $c->product->price() * $c->qty;
+                $total_checkout += $subtotal;
+                $total_weight   += $c->product->type->weight;
 
-                $request = abs($c->qty);
+                $qty     = abs($c->qty);
                 $indent  = 0;
                 $stock   = $c->product->productShading->sum('qty');
 
-                if($request > $stock) {
-                    $indent = $request - $stock;
+                if($qty > $stock) {
+                    $indent = $qty - $stock;
                 }
 
-                $ready   = abs($request - $indent);
+                $ready   = abs($qty - $indent);
                 $shading = ProductShading::where('product_id', $c->product->id)->orderBy('qty', 'asc')->get();
 
                 foreach($shading as $s) {
@@ -82,64 +113,80 @@ class CheckoutController extends Controller {
                     'cogs_perwira'     => $cogs_pta_idr,
                     'cogs_smartmarble' => $cogs_smb_idr,
                     'profit'           => $subtotal - $cogs_idr,
-                    'qty'              => $request,
+                    'qty'              => $qty,
                     'ready'            => $ready,
                     'indent'           => $indent,
                     'total'            => $subtotal
                 ]);
             }
 
-            $generate = QrCode::format('png')->merge('/public/website/icon.png')->size(200)->generate($order->number);
-            $qr_code  = 'public/order/SMB-QrCode-' . str_replace('/', '', $order->number) . '.png';
-            Storage::put($qr_code, $generate);
-
-            Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total, 'grandtotal' => $total]);
             Cart::where('customer_id', session('fo_id'))->delete();
+            if($param == 'cash') {
+                $generate = QrCode::format('png')->merge('/public/website/icon.png')->size(200)->generate($order->number);
+                $qr_code  = 'public/order/SMB-QrCode-' . str_replace('/', '', $order->number) . '.png';
 
-            $payload  = [
-                'email'      => $customer->email,
-                'name'       => $customer->name,
-                'order'      => Order::find($order->id),
-                'attachment' => true,
-                'link'       => url('account/history_order/detail/' . base64_encode($order->id)),
-                'view'       => 'order_cash',
-                'subject'    => 'SMB | Order ' . $order->number
-            ];
+                Storage::put($qr_code, $generate);
+                Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
 
-            dispatch(new EmailProcess($payload));
-            return redirect('checkout/cash/cash_success?number=' . base64_encode($order->number));
+                $payload  = [
+                    'email'      => $customer->email,
+                    'name'       => $customer->name,
+                    'order'      => Order::find($order->id),
+                    'attachment' => true,
+                    'link'       => url('account/history_order/detail/' . base64_encode($order->id)),
+                    'view'       => 'order_cash',
+                    'subject'    => 'SMB | Order ' . $order->number
+                ];
+
+                dispatch(new EmailProcess($payload));
+                return redirect('checkout/notif/success?number=' . base64_encode($order->number));
+            } else {
+                $delivery     = Delivery::find($request->delivery_id);
+                $shipping_fee = $delivery->price_per_kg * $total_weight;
+                $grandtotal   = $total_checkout + $shipping_fee;
+
+                Order::find($order->id)->update([
+                    'subtotal'   => $total_checkout,
+                    'shipping'   => $shipping_fee,
+                    'grandtotal' => $grandtotal
+                ]);
+
+                OrderShipping::create([
+                    'order_id'      => $order->id,
+                    'city_id'       => $request->city_id,
+                    'delivery_id'   => $request->delivery_id,
+                    'receiver_name' => $request->receiver_name,
+                    'email'         => $request->email,
+                    'address'       => $request->address
+                ]);
+
+                $param_invoice = [
+                    'external_id'          => $order->number,
+                    'payer_email'          => $request->email,
+                    'description'          => $order->code,
+                    'amount'               => $grandtotal,
+                    'should_send_email'    => true,
+                    'success_redirect_url' => url('checkout/notif/success?number=' . base64_encode($order->number)),
+                    'failure_redirect_url' => url('checkout/notif/failed?number=' . base64_encode($order->number)),
+                    'currency'             => 'IDR'
+                ];
+
+                $generate_invoice = Invoice::create($param_invoice);
+                return redirect($generate_invoice['invoice_url']);
+            }
         } else {
             $data = [
                 'title'    => 'Checkout',
                 'customer' => $customer,
-                'content'  => 'checkout.cash'
+                'city'     => City::orderBy('name', 'asc')->get(),
+                'content'  => 'checkout.' . $param
             ];
 
             return view('layouts.index', ['data' => $data]);
         }
     }
 
-    public function cashSuccess(Request $request)
-    {
-        $number = base64_decode($request->number);
-        $order  = Order::where('number', $number)->first();
-
-        if(!session('fo_id')) {
-            return redirect('account/login');
-        } else if(!$order) {
-            return redirect('/');
-        }
-
-        $data = [
-            'title'   => 'Order Successfully Created',
-            'order'   => $order,
-            'content' => 'checkout.cash_success'
-        ];
-
-        return view('layouts.index', ['data' => $data]);
-    }
-
-    public function cashlessGetDelivery(Request $request)
+    public function getDelivery(Request $request)
     {
         $data     = [];
         $city_id  = $request->city_id;
@@ -161,7 +208,7 @@ class CheckoutController extends Controller {
         return response()->json($data);
     }
 
-    public function cashlessGrandtotal(Request $request)
+    public function grandtotal(Request $request)
     {
         $subtotal     = (double)$request->subtotal;
         $weight       = (double)$request->weight;
@@ -177,59 +224,24 @@ class CheckoutController extends Controller {
         ]);
     }
 
-    public function cashless(Request $request)
+    public function notif(Request $request, $param)
     {
-        $customer = Customer::find(session('fo_id'));
-        if(!session('fo_id') || !$customer) {
+        $number = base64_decode($request->number);
+        $order  = Order::where('number', $number)->first();
+
+        if(!session('fo_id')) {
             return redirect('account/login');
-        } else if($customer->cart->count() < 1) {
-            return redirect('product');
+        } else if(!$order) {
+            return redirect('/');
         }
-        
-        if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'receiver_name' => 'required',
-                'email'         => 'required|email',
-                'phone'         => 'required|min:9|numeric',
-                'city_id'       => 'required',
-                'address'       => 'required',
-                'delivery_id'   => 'required'
-            ], [
-                'receiver_name.required' => 'Receiver name cannot be empty.',
-                'email.required'         => 'Email cannot be empty.',
-                'email.email'            => 'Email not valid.',
-                'phone.required'         => 'Phone cannot be empty',
-                'phone.min'              => 'Phone must be at least 9 characters long',
-                'phone.numeric'          => 'Phone must be number',
-                'city_id.required'       => 'Please select a city.',
-                'address.required'       => 'Address cannot be empty.',
-                'delivery_id.required'   => 'Please select a transport.'
-            ]);
 
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
-            } else {
-                $params = [
-                    'external_id' => 'demo_147580196270',
-                    'payer_email' => 'sample_email@xendit.co',
-                    'description' => 'Trip to Bali',
-                    'amount'      => 32000
-                ];
+        $data = [
+            'title'   => 'Order Notification',
+            'order'   => $order,
+            'content' => 'checkout.' . $param
+        ];
 
-                $createInvoice = Invoice::create($params);
-                return redirect($createInvoice['invoice_url']);
-            }
-        } else {
-            $data = [
-                'title'    => 'Checkout',
-                'customer' => $customer,
-                'city'     => City::orderBy('name', 'asc')->get(),
-                'content'  => 'checkout.cashless'
-            ];
-    
-            return view('layouts.index', ['data' => $data]);
-        }
-        
+        return view('layouts.index', ['data' => $data]);
     }
 
 }

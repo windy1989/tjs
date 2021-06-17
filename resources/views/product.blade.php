@@ -97,12 +97,8 @@
                         @endforeach
                      </div>
                   @else
-                     <center>
-                        <h2 class="text-uppercase">Data Not Found</h2>
+                     <center class="mt-5">
                         <img src="{{ asset('website/data-empty.png') }}" style="max-width:80%;" class="img-fluid">
-                        <p class="mt-2 text-muted">
-                           Looks like the product you're looking for doesn't exist or maybe you forgot to clear the search bar!
-                        </p>
                      </center>
                   @endif
                   {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}
