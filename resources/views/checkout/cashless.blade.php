@@ -117,7 +117,7 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h4>Information Order</h4>
+								<h4>Shipping Address</h4>
 								<div class="form-group"><hr></div>
 								<div class="row">
 									<div class="col-md-6">
@@ -162,7 +162,7 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h4>Shipping</h4>
+								<h4>Fleet</h4>
 								<div class="form-group"><hr></div>
 								<div class="form-group">
 									<label>Transport :<span class="text-danger">*</span></label>

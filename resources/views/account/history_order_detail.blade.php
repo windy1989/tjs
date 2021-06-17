@@ -80,24 +80,91 @@
                      @endforeach
                   </tbody>
                </table>
+               <div class="row">
+                  <div class="col-md-6 mt-4 mb-3">
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <h4 class="text-uppercase">Billing Address</h4>
+                              <table class="table cart">
+                                 <tbody>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Name</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">{{ $order->orderShipping->receiver_name }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Email</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">{{ $order->orderShipping->email }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Phone</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">{{ $order->orderShipping->phone }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">City</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">{{ $order->orderShipping->city->name }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Address</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">{{ $order->orderShipping->address }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
                <div class="fancy-title title-border title-center mt-4 mb-4">
 						<h1 style="color:rgba(0, 0, 0, .3);" class="text-uppercase">{{ $order->status() }}</h1>
 					</div>
                <div class="row justify-content-end">
-                  <div class="col-lg-12">
+                  <div class="col-lg-12 mb-5">
                      <div class="card">
                         <div class="card-body">
                            <div class="table-responsive">
                               <h4 class="text-uppercase">Summary</h4>
                               <table class="table cart">
                                  <tbody>
-                                    <tr class="cart_item">
-                                       <td rowspan="6">
-                                          <center>
-                                             <img src="{{ asset(Storage::url($order->qr_code)) }}" class="img-fluid">
-                                          </center>
-                                       </td>
-                                    </tr>
+                                    @if(Storage::exists($order->qr_code))
+                                       <tr class="cart_item">
+                                          <td rowspan="6">
+                                             <center>
+                                                <img src="{{ asset(Storage::url($order->qr_code)) }}" class="img-fluid">
+                                             </center>
+                                          </td>
+                                       </tr>
+                                    @endif
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
                                           <strong style="font-size:13px;" class="text-uppercase">Subtotal</strong>
@@ -165,6 +232,11 @@
                      </div>
                   </div>
                </div>
+               @if($order->status == 1 && $order->type == 2)
+                  <div class="text-right mt-4">
+                     <a href="{{ $order->xendit()->url }}" class="button button-green button-3d">Pay Now</a>
+                  </div>
+               @endif
             </div>
          </div>
       </div>

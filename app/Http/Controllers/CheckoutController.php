@@ -126,7 +126,7 @@ class CheckoutController extends Controller {
                 $qr_code  = 'public/order/SMB-QrCode-' . str_replace('/', '', $order->number) . '.png';
 
                 Storage::put($qr_code, $generate);
-                Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
+                Order::find($order->id)->update(['subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
 
                 $payload  = [
                     'email'      => $customer->email,
@@ -145,18 +145,13 @@ class CheckoutController extends Controller {
                 $shipping_fee = $delivery->price_per_kg * $total_weight;
                 $grandtotal   = $total_checkout + $shipping_fee;
 
-                Order::find($order->id)->update([
-                    'subtotal'   => $total_checkout,
-                    'shipping'   => $shipping_fee,
-                    'grandtotal' => $grandtotal
-                ]);
-
                 OrderShipping::create([
                     'order_id'      => $order->id,
                     'city_id'       => $request->city_id,
                     'delivery_id'   => $request->delivery_id,
                     'receiver_name' => $request->receiver_name,
                     'email'         => $request->email,
+                    'phone'         => $request->phone,
                     'address'       => $request->address
                 ]);
 
@@ -172,6 +167,13 @@ class CheckoutController extends Controller {
                 ];
 
                 $generate_invoice = Invoice::create($param_invoice);
+                Order::find($order->id)->update([
+                    'xendit'     => json_encode(['id' => $generate_invoice['id'], 'url' => $generate_invoice['invoice_url']]),
+                    'subtotal'   => $total_checkout,
+                    'shipping'   => $shipping_fee,
+                    'grandtotal' => $grandtotal
+                ]);
+
                 return redirect($generate_invoice['invoice_url']);
             }
         } else {

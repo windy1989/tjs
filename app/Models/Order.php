@@ -13,6 +13,7 @@ class Order extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'customer_id',
+        'xendit',
         'qr_code',
         'number',
         'code',
@@ -26,6 +27,11 @@ class Order extends Model {
         'type',
         'status'
     ];
+
+    public function xendit()
+    {
+        return json_decode($this->xendit);
+    }
 
     public static function generateNumber($param)
     {

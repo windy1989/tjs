@@ -91,14 +91,10 @@
 												</tr>
 											@endforeach
 										</tbody>
-										<tfoot>
-											<tr>
-												<th colspan="7">
-													<textarea name="description" id="description" class="form-control" placeholder="Enter description">{{ old('description') }}</textarea>
-												</th>
-											</tr>
-										</tfoot>
 									</table>
+								</div>
+								<div class="form-group">
+									<textarea name="description" id="description" class="form-control mb-0" placeholder="Enter description">{{ old('description') }}</textarea>
 								</div>
 							</div>
 						</div>

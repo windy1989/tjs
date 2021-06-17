@@ -5,41 +5,43 @@
 </section>
 <section id="content">
    <div class="content-wrap">
-      <div class="container">
-         <div class="card mb-5">
-            <div class="card-body">
-               <nav class="navbar navbar-expand-lg navbar-light">
-                  <button class="navbar-toggler btn btn-white focus-custom col-12" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                     <span class="navbar-toggler-icon"></span> 
-                     @if($status == 1)
-                        UNPAID
-                     @elseif($status == 2)
-                        PAID
-                     @elseif($status == 3)
-                        PACKED
-                     @elseif($status == 4)
-                        DELIVERY
-                     @elseif($status == 5)
-                        FINISH
-                     @elseif($status == 6)
-                        CANCEL
-                     @else
-                        ALL
-                     @endif
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                     <div class="navbar-nav p-2 mx-auto">
-                        <a class="nav-item nav-link a-link-order {{ $status == null ? 'active-link-custom' : '' }}" href="{{ url('account/history_order') }}">All</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 1 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=1') }}">Unpaid</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 2 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=2') }}">Paid</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 3 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=3') }}">Packed</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 4 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=4') }}">Delivery</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 5 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=5') }}">Finish</a>
-                        <a class="nav-item nav-link a-link-order {{ $status == 6 ? 'active-link-custom' : '' }}" href="{{ url('account/history_order?status=6') }}">Cancel</a>
-                     </div>
-                  </div>
-               </nav>
-               <div class="form-group"><hr></div>
+      <div class="container-fluid clearfix" style="width:85% !important;">
+         <div class="row clearfix">
+            <div class="col-md-3">
+               <div class="list-group">
+                  <a href="{{ url('account/history_order') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == null ? 'active' : '' }}">
+                     <div>All</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=1') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 1 ? 'active' : '' }}">
+                     <div>Unpaid</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=2') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 2 ? 'active' : '' }}">
+                     <div>Paid</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=3') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 3 ? 'active' : '' }}">
+                     <div>Packed</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=4') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 4 ? 'active' : '' }}">
+                     <div>Delivery</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=5') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 5 ? 'active' : '' }}">
+                     <div>Finish</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=6') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 6 ? 'active' : '' }}">
+                     <div>Cancel</div>
+                     <span class="badge badge-light">0</span>
+                  </a>
+               </div>
+            </div>
+            <div class="w-100 line d-block d-md-none"></div>
+            <div class="col-md-9">
+               <div class="clear"></div>
                <form action="" method="GET" class="mb-0">
                   @csrf
                   <div class="row">
@@ -66,84 +68,86 @@
                      </div>
                   </div>
                </form>
-            </div>
-         </div>
-         @if($order->count() > 0)
-            @foreach($order as $o)
-               <div class="card bg-light">
-                  <div class="card-body">
-                     <div class="card-title">
-                        <span style="font-size:17px; font-weight:500;">
-                           No. {{ $o->number }}&nbsp;&nbsp;
-                           @if($o->type == 1) 
-                              <sub class="badge badge-primary">{{ $o->type() }}</sub>
-                           @else
-                              <sub class="badge badge-succes">{{ $o->type() }}</sub>
-                           @endif
-                        </span>
-                        <div class="float-right d-none d-sm-block">
-                           {{ date('d M Y', strtotime($o->created_at)) }}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <table class="table cart mb-5 bg-light table-bordered">
-                  <tbody>
-                     @foreach($o->orderDetail as $od)
-                        <tr class="cart_item">
-                           <td class="cart-product-name text-center">
-                              <div class="row">
-                                 <div class="col-lg-3 col-md-12">
-                                    <div class="form-group">
-                                       <center>
-                                          <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                             <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
-                                          </a>
-                                       </center>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-3 col-md-12">
-                                    <div class="form-group">
-                                       {{ $od->product->code() }}
-                                       <div style="font-size:14px;">
-                                          <div class="text-muted">
-                                             {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
-                                          </div>
-                                          x{{ $od->qty }}
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-3 col-md-12">
-                                    <div class="form-group">
-                                       Item Price
-                                       <div>Rp {{ number_format($od->price_list, 0, ',', '.') }}</div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-3 col-md-12">
-                                    <div class="form-group">
-                                       Subtotal
-                                       <div>Rp {{ number_format($od->total, 0, ',', '.') }}</div>
-                                    </div>
+               <div class="mt-3">
+                  @if($order->count() > 0)
+                     @foreach($order as $o)
+                        <div class="card bg-light">
+                           <div class="card-body">
+                              <div class="card-title">
+                                 <span style="font-size:17px; font-weight:500;">NO. {{ $o->number }}</span>
+                                 <div class="float-right d-none d-sm-block">
+                                    {{ date('d M Y', strtotime($o->created_at)) }}
                                  </div>
                               </div>
-                           </td>
-                        </tr>
+                           </div>
+                        </div>
+                        <table class="table cart mb-4 bg-light table-bordered">
+                           <tbody>
+                              @foreach($o->orderDetail as $od)
+                                 <tr class="cart_item">
+                                    <td class="cart-product-name text-center">
+                                       <div class="row">
+                                          <div class="col-lg-3 col-md-12">
+                                             <div class="form-group">
+                                                <center>
+                                                   <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
+                                                      <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
+                                                   </a>
+                                                </center>
+                                             </div>
+                                          </div>
+                                          <div class="col-lg-3 col-md-12">
+                                             <div class="form-group">
+                                                {{ $od->product->code() }}
+                                                <div style="font-size:14px;">
+                                                   <div class="text-muted">
+                                                      {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
+                                                   </div>
+                                                   x{{ $od->qty }}
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-lg-3 col-md-12">
+                                             <div class="form-group">
+                                                Item Price
+                                                <div>Rp {{ number_format($od->price_list, 0, ',', '.') }}</div>
+                                             </div>
+                                          </div>
+                                          <div class="col-lg-3 col-md-12">
+                                             <div class="form-group">
+                                                Subtotal
+                                                <div>Rp {{ number_format($od->total, 0, ',', '.') }}</div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              @endforeach
+                              <tr class="cart_item">
+                                 <td class="mb-0">
+                                    <h5 class="float-left font-weight-medium">
+                                       <div>Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
+                                       <div>Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
+                                       <div>Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
+                                       <div><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
+                                    </h5>
+                                    <div class="text-right">
+                                       <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-aqua">Detail Order</a>
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
                      @endforeach
-                     <tr class="cart_item mb-0">
-                        <td class="text-right">
-                           <h4 class="float-left mt-3">Total Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</h4>
-                           <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-aqua">Detail Order</a>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            @endforeach
-            {{ $order->withQueryString()->onEachSide(1)->links('pagination') }}
-         @else
-            <div class="alert alert-warning">
-               <div class="text-center">Nothing.</div>
+                     {{ $order->withQueryString()->onEachSide(1)->links('pagination') }}
+                  @else
+                     <div class="alert alert-warning">
+                        <div class="text-center">Data not found.</div>
+                     </div>
+                  @endif
+               </div>
             </div>
-         @endif
+         </div>
       </div>
    </div>
 </section>

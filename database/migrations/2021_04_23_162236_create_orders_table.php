@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('customer_id');
+            $table->json('xendit')->nullable();
             $table->string('qr_code')->nullable();
             $table->string('number')->unique();
             $table->string('code')->unique();
