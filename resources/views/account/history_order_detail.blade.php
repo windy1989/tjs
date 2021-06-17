@@ -83,7 +83,7 @@
                <div class="row">
                   <div class="col-md-6 mt-4 mb-3">
                      <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="height:388px;">
                            <div class="table-responsive">
                               <h4 class="text-uppercase">Billing Address</h4>
                               <table class="table cart">
@@ -94,7 +94,7 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong style="font-size:14px;">{{ $order->orderShipping->receiver_name }}</strong>
+                                             <strong style="font-size:14px;">{{ $order->customer->name }}</strong>
                                           </span>
                                        </td>
                                     </tr>
@@ -104,7 +104,7 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong style="font-size:14px;">{{ $order->orderShipping->email }}</strong>
+                                             <strong style="font-size:14px;">{{ $order->customer->email }}</strong>
                                           </span>
                                        </td>
                                     </tr>
@@ -114,7 +114,56 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong style="font-size:14px;">{{ $order->orderShipping->phone }}</strong>
+                                             <strong style="font-size:14px;">{{ $order->customer->phone }}</strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 mt-4 mb-3">
+                     <div class="card">
+                        <div class="card-body" style="height:388px;">
+                           <div class="table-responsive">
+                              <h4 class="text-uppercase">Shipping Address</h4>
+                              <table class="table cart">
+                                 <tbody>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Name</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">
+                                                {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set'  }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Email</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">
+                                                {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set'  }}   
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Phone</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong style="font-size:14px;">
+                                                {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set'  }}   
+                                             </strong>
                                           </span>
                                        </td>
                                     </tr>
@@ -124,7 +173,9 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong style="font-size:14px;">{{ $order->orderShipping->city->name }}</strong>
+                                             <strong style="font-size:14px;">
+                                                {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set'  }}   
+                                             </strong>
                                           </span>
                                        </td>
                                     </tr>
@@ -134,7 +185,9 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong style="font-size:14px;">{{ $order->orderShipping->address }}</strong>
+                                             <strong style="font-size:14px;">
+                                                {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set'  }}   
+                                             </strong>
                                           </span>
                                        </td>
                                     </tr>
@@ -149,7 +202,7 @@
 						<h1 style="color:rgba(0, 0, 0, .3);" class="text-uppercase">{{ $order->status() }}</h1>
 					</div>
                <div class="row justify-content-end">
-                  <div class="col-lg-12 mb-5">
+                  <div class="col-lg-12">
                      <div class="card">
                         <div class="card-body">
                            <div class="table-responsive">
@@ -179,18 +232,6 @@
                                     </tr>
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
-                                          <strong style="font-size:13px;" class="text-uppercase">Handling</strong>
-                                       </td>
-                                       <td class="cart-product-name">
-                                          <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;">
-                                                Rp 0
-                                             </strong>
-                                          </span>
-                                       </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                       <td class="cart-product-name">
                                           <strong style="font-size:13px;" class="text-uppercase">Discount</strong>
                                        </td>
                                        <td class="cart-product-name">
@@ -203,12 +244,12 @@
                                     </tr>
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
-                                          <strong style="font-size:13px;" class="text-uppercase">Total</strong>
+                                          <strong style="font-size:13px;" class="text-uppercase">Shipping Fee</strong>
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:20px;">
-                                                Rp {{ number_format($order->grandtotal, 0, ',', '.') }}
+                                             <strong id="grandtotal" style="font-size:14px;">
+                                                Rp {{ number_format($order->shipping, 0, ',', '.') }}
                                              </strong>
                                           </span>
                                        </td>
@@ -220,7 +261,19 @@
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
                                              <strong id="grandtotal" style="font-size:14px;">
-                                                Cash
+                                                {{ $order->type() }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong style="font-size:13px;" class="text-uppercase">Total</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" style="font-size:20px;">
+                                                Rp {{ number_format($order->grandtotal, 0, ',', '.') }}
                                              </strong>
                                           </span>
                                        </td>

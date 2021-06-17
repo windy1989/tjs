@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
+Route::prefix('webhook')->group(function() {
+    Route::post('xendit', 'WebHookController@xendit');
+}); 
+
 Route::prefix('product')->group(function() {
     Route::get('/', 'ProductController@index');
     Route::get('detail/{id}', 'ProductController@detail');
@@ -46,10 +50,6 @@ Route::prefix('checkout')->group(function() {
         Route::post('get_delivery', 'CheckoutController@getDelivery');
         Route::post('grandtotal', 'CheckoutController@grandtotal');
     });
-}); 
-
-Route::prefix('webhook')->group(function() {
-    Route::post('xendit', 'WebHookController@xendit');
 }); 
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
