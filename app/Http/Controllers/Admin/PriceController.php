@@ -49,13 +49,13 @@ class PriceController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('vendor', function($query) use ($search) {
-                                $query->whereRaw('code', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             })
                             ->whereHas('transport', function($query) use ($search) {
-                                $query->whereRaw('brand', 'like', "%$search%");
+                                $query->where('fleet', 'like', "%$search%");
                             })
                             ->whereHas('destination', function($query) use ($search) {
-                                $query->whereRaw('name', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             });
                     });
                 }     
@@ -69,13 +69,13 @@ class PriceController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('vendor', function($query) use ($search) {
-                                $query->whereRaw('code', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             })
                             ->whereHas('transport', function($query) use ($search) {
-                                $query->whereRaw('brand', 'like', "%$search%");
+                                $query->where('fleet', 'like', "%$search%");
                             })
                             ->whereHas('destination', function($query) use ($search) {
-                                $query->whereRaw('name', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             });
                     });
                 }       
