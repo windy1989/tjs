@@ -280,7 +280,7 @@
             loadingClose('.modal-content');
             $('#vendor_id').val(response.vendor_id).change();
             $('#transport_id').val(response.transport_id).change();
-            $('#destination_id').val(response.destination).change();
+            $('#destination_id').val(response.destination_id).change();
             $('#capacity').val(response.capacity);
             $('#price_per_kg').val(response.price_per_kg);
             $('#price_per_meter').val(response.price_per_meter);
