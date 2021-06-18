@@ -132,7 +132,6 @@ class CheckoutController extends Controller {
                     'email'      => $customer->email,
                     'name'       => $customer->name,
                     'order'      => Order::find($order->id),
-                    'attachment' => true,
                     'link'       => url('account/history_order/detail/' . base64_encode($order->id)),
                     'view'       => 'order_cash',
                     'subject'    => 'SMB | Order ' . $order->number

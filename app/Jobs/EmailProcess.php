@@ -36,12 +36,6 @@ class EmailProcess implements ShouldQueue
     {
         $data = $this->payload;
         Mail::send('emails.' . $data['view'], $data, function($mail) use ($data) {
-            if(array_key_exists('attachment', $data)) {
-                if($data['attachment']) {
-                    $mail->attach(storage_path('app/' . $data['order']->qr_code));
-                }
-            }
-
             $mail->to($data['email'], $data['name']);
             $mail->subject($data['subject']);
             $mail->from(config('mail.mailers.smtp.username'), 'Smart Marble And Bath');

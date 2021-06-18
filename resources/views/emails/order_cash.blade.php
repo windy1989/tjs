@@ -411,7 +411,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <h1>Hi {{ $order->customer->name }},</h1>
-                        <p>Thanks for your order. This is an proof of transaction.</p>
+                        <p>Thanks for your order. This is your qr code.</p>
                         <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
                             <td class="attributes_content">
@@ -419,14 +419,9 @@
                                 <tr>
                                   <td class="attributes_item">
                                     <span class="f-fallback">
-                                      <strong>Amount Due:</strong> {{ number_format($order->grandtotal, 0, ',', '.') }}
-                                    </span>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-                                      <strong>Due By:</strong> {{ date('d-m-Y', strtotime('+1 day', strtotime($order->created_at))) }}
+                                      <center>
+                                        <img src="{{ $message->embed(asset(Storage::url($order->qr_code))) }}" alt="Qr Code">
+                                      </center>
                                     </span>
                                   </td>
                                 </tr>
@@ -441,48 +436,6 @@
                                 <tr>
                                   <td align="center">
                                     <a href="{{ $link }}" class="f-fallback button button--green" style="color:white !important;" target="_blank">Detail Order</a>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-                        <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
-                          <tr>
-                            <td>
-                              <h3>{{ $order->number }}</h3>
-                            </td>
-                            <td>
-                              <h3 class="align-right">{{ date('d-m-Y', strtotime($order->created_at)) }}</h3>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2">
-                              <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                  <th class="purchase_heading" align="left">
-                                    <p class="f-fallback">Product</p>
-                                  </th>
-                                  <th class="purchase_heading" align="right">
-                                    <p class="f-fallback">Amount</p>
-                                  </th>
-                                </tr>
-                                @foreach($order->orderDetail as $od)
-                                  <tr>
-                                    <td width="80%" class="purchase_item">
-                                      <span class="f-fallback">{{ $od->product->code() }}</span>
-                                    </td>
-                                    <td class="align-right" width="20%" class="purchase_item">
-                                      <span class="f-fallback">{{ number_format($od->price_list, 0, ',', '.') }}</span>
-                                    </td>
-                                  </tr>
-                                @endforeach
-                                <tr>
-                                  <td width="80%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total purchase_total--label">Total</p>
-                                  </td>
-                                  <td width="20%" class="purchase_footer" valign="middle">
-                                    <p class="f-fallback purchase_total">{{ number_format($order->grandtotal, 0, ',', '.') }}</p>
                                   </td>
                                 </tr>
                               </table>
