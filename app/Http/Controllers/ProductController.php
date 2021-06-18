@@ -316,7 +316,7 @@ class ProductController extends Controller {
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with(['success' => 'Product successfully entered the cart']);
     }
 
     public function cartQty(Request $request)

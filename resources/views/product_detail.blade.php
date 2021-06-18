@@ -261,6 +261,11 @@
 <script>
    $(function() {
       checkStock();
+
+      var session_flash = "{{ session('success') }}";
+      if(session_flash) {
+         Swal.fire('Success!', session_flash, 'success');
+      }
    });
 
    function checkStock() {

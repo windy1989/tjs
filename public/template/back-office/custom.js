@@ -9,7 +9,7 @@ lightbox.option({
    wrapAround: true
 });
 
-$(function() {
+$(document).ready(function() {
    $('html').tooltip({selector: '[data-popup="tooltip"]'});
    $('.form-check-input-styled').uniform();
    $('.number').number(true);
@@ -17,10 +17,10 @@ $(function() {
    $('.form-check-input-switch').bootstrapSwitch();
 
    setInterval(function() {
-      var d    = new Date();
-      var s    = d.getSeconds();
-      var m    = d.getMinutes();
-      var h    = d.getHours();
+      var d = new Date();
+      var s = d.getSeconds();
+      var m = d.getMinutes();
+      var h = d.getHours();
       $('#header-clock-realtime').text(('0' + h).substr(-2) + ':' + ('0' + m).substr(-2) + ':' + ('0' + s).substr(-2));
    }, 1000);
 

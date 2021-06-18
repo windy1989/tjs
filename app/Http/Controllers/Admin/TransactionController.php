@@ -7,14 +7,14 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OrderController extends Controller {
+class TransactionController extends Controller {
     
     public function index()
     {
         $data = [
-            'title'    => 'Manage Order',
+            'title'    => 'Manage Transaction',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.manage.order'
+            'content'  => 'admin.manage.transaction'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -25,7 +25,7 @@ class OrderController extends Controller {
         $column = [
             'id',
             'customer_id',
-            'code',
+            'number',
             'grandtotal',
             'created_at',
             'type',
@@ -45,7 +45,7 @@ class OrderController extends Controller {
                     $query->whereHas('customer', function($query) use ($search) {
                                     $query->where('name', 'like', "%$search%");
                                 })
-                            ->orWhere('code', 'like', "%$search%");
+                            ->orWhere('number', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {
@@ -95,7 +95,7 @@ class OrderController extends Controller {
                     $query->whereHas('customer', function($query) use ($search) {
                                     $query->where('name', 'like', "%$search%");
                                 })
-                            ->orWhere('code', 'like', "%$search%");
+                            ->orWhere('number', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {
@@ -144,13 +144,13 @@ class OrderController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->customer->name,
-                    $val->code,
+                    $val->number,
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
                     date('d F Y', strtotime($val->created_at)),
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('admin/manage/order/so/' . $val->id) . '" class="btn bg-brown btn-sm">SO</a>
+                        <a href="' . url('admin/manage/transaction/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
                     '
                 ];
 
@@ -171,17 +171,12 @@ class OrderController extends Controller {
         return response()->json($response);
     }
 
-    public function so(Request $request, $id) 
+    public function detail(Request $request, $id) 
     {
-        $query = Order::find($id);
-        if($query->type == 2) {
-            return redirect()->back();
-        }
-
         $data  = [
-            'title'   => 'Manage Order SO',
-            'order'   => $query,
-            'content' => 'admin.manage.order_so'
+            'title'   => 'Detail Transaction',
+            'order'   => Order::find($id),
+            'content' => 'admin.manage.transaction_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

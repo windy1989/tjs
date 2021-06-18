@@ -28,7 +28,6 @@
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/jgrowl.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/notifications/noty.min.js') }}"></script>
-	<script src="{{ asset('template/back-office/global_assets/js/plugins/extensions/session_timeout.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/prism.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/sticky.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
@@ -37,13 +36,4 @@
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
 	<script src="{{ asset('template/back-office/custom.js') }}"></script>
 	<title>{{ $title }} - SMB Admin</title>
-
-	<script>
-		$.sessionTimeout({
-			keepAliveUrl: '/',
-			redirUrl: '{{ url("admin/logout") }}',
-			warnAfter: 7100000,
-			redirAfter: 7200000
-		});
-	</script>
 </head>

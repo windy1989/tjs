@@ -375,14 +375,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('datatable', 'CustomerController@datatable');
             });
 
-            Route::prefix('order')->group(function() {
-                Route::get('/', 'OrderController@index');
-                Route::post('datatable', 'OrderController@datatable');
-                Route::match(['get', 'post'], 'so/{id}', 'OrderController@so');
-                Route::match(['get', 'post'], 'invoice/{id}', 'OrderController@so');
-                Route::match(['get', 'post'], 'po/{id}', 'OrderController@so');
-            });
-
             Route::prefix('project')->group(function() {
                 Route::get('/', 'ProjectController@index');
                 Route::post('datatable', 'ProjectController@datatable');
@@ -390,6 +382,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('get_product', 'ProjectController@getProduct');
                 Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
                 Route::get('detail/{id}', 'ProjectController@detail');
+            });
+
+            Route::prefix('transaction')->group(function() {
+                Route::get('/', 'TransactionController@index');
+                Route::post('datatable', 'TransactionController@datatable');
+                Route::get('detail/{id}', 'TransactionController@detail');
             });
         });
 

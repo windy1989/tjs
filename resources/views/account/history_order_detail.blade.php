@@ -31,7 +31,7 @@
                <table class="table cart table-bordered">
                   <thead>
                      <tr>
-                        <th class="cart-product-thumbnail">Image</th>
+                        <th class="cart-product-thumbnail text-center">Image</th>
                         <th class="cart-product-name">Product</th>
                         <th class="cart-product-price">Unit Price</th>
                         <th class="cart-product-quantity">Qty</th>
@@ -43,7 +43,7 @@
                   <tbody>
                      @foreach($order->orderDetail as $od)
                         <tr class="cart_item">
-                           <td class="cart-product-thumbnail">
+                           <td class="cart-product-quantity">
                               <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
                                  <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid">
                               </a>
@@ -135,7 +135,7 @@
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
                                           <strong style="font-size:14px;">
-                                             {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set'  }}
+                                             {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set' }}
                                           </strong>
                                        </span>
                                     </td>
@@ -147,7 +147,7 @@
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
                                           <strong style="font-size:14px;">
-                                             {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set'  }}   
+                                             {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set' }}   
                                           </strong>
                                        </span>
                                     </td>
@@ -159,7 +159,7 @@
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
                                           <strong style="font-size:14px;">
-                                             {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set'  }}   
+                                             {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set' }}   
                                           </strong>
                                        </span>
                                     </td>
@@ -171,7 +171,7 @@
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
                                           <strong style="font-size:14px;">
-                                             {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set'  }}   
+                                             {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set' }}   
                                           </strong>
                                        </span>
                                     </td>
@@ -183,7 +183,7 @@
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
                                           <strong style="font-size:14px;">
-                                             {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set'  }}   
+                                             {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set' }}   
                                           </strong>
                                        </span>
                                     </td>
@@ -212,7 +212,7 @@
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
                                              <strong id="grandtotal" style="font-size:14px;">
-                                                Rp {{ number_format($order->subtotal, 0, ',', '.') }}
+                                                {{ date('d F Y, H:i', strtotime($order->orderPayment->created_at)) }}
                                              </strong>
                                           </span>
                                        </td>
@@ -224,7 +224,7 @@
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
                                              <strong id="grandtotal" style="font-size:14px;">
-                                                Rp {{ number_format($order->discount, 0, ',', '.') }}
+                                                {{ $order->orderPayment->method }}
                                              </strong>
                                           </span>
                                        </td>
@@ -236,7 +236,7 @@
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
                                              <strong id="grandtotal" style="font-size:14px;">
-                                                Rp {{ number_format($order->shipping, 0, ',', '.') }}
+                                                {{ $order->orderPayment->channel }}
                                              </strong>
                                           </span>
                                        </td>
@@ -330,7 +330,7 @@
                      <div class="style-msg2 successmsg">
 								<div class="msgtitle text-center font-weight-bold text-uppercase">Transport</div>
 								<div class="sb-msg text-center font-weight-semibold">
-									{{ $order->orderShipping ? $order->orderShipping->delivery->transport->fleet : 'Delivery not set'  }}
+									{{ $order->orderShipping ? $order->orderShipping->delivery->transport->fleet : 'Delivery not set' }}
 								</div>
 							</div>
                   </div>

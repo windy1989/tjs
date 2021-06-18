@@ -174,38 +174,19 @@
                                 <a href="{{ url('admin/manage/customer') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'customer' ? 'active' : '' }}">Customer</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/manage/order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('admin/manage/project') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
                             </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'sales' ? 'nav-item-expanded nav-item-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="icon-person"></i> 
-                            <span>Sales</span>
-                        </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Sales">
                             <li class="nav-item">
-                                <a href="{{ url('admin/sales/order') }}" class="nav-link {{ Request::segment(2) == 'sales' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
+                                <a href="{{ url('admin/manage/transaction') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'transaction' ? 'active' : '' }}">Transaction</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/sales/payment') }}" class="nav-link {{ Request::segment(2) == 'sales' && Request::segment(3) == 'payment' ? 'active' : '' }}">Payment</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'purchase' ? 'nav-item-expanded nav-item-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="icon-percent"></i> 
-                            <span>Purchase</span>
-                        </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Purchase">
-                            <li class="nav-item">
-                                <a href="{{ url('admin/purchase/order') }}" class="nav-link {{ Request::segment(2) == 'purchase' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
+                                <a href="{{ url('admin/manage/sales_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'sales_order' ? 'active' : '' }}">Sales Order</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/purchase/payment') }}" class="nav-link {{ Request::segment(2) == 'purchase' && Request::segment(3) == 'payment' ? 'active' : '' }}">Payment</a>
+                                <a href="{{ url('admin/manage/purchase_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'purchase_order' ? 'active' : '' }}">Purchase Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/manage/delivery_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'delivery_order' ? 'active' : '' }}">Delivery Order</a>
                             </li>
                         </ul>
                     </li>

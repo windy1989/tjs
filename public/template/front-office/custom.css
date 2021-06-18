@@ -1,3 +1,7 @@
+.syotimer-cell_type_day {
+   display: none !important;
+}
+
 .list-group a.active {
    background: #222222 !important;
    border: none;
