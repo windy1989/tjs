@@ -32,8 +32,8 @@ class PricingPolicy extends Model {
         'price_list',
         'store_price_list',
         'discount_retail_sales',
-        'discount_retail_spv',
-        'discount_retail_manager'
+        'discount_retail_manager',
+        'discount_retail_director'
     ];
 
     public function product()

@@ -28,7 +28,7 @@ class AdminLogin
 
         if($user_id && $user) {
             foreach($user->userRole as $ur) {
-                $role[] = $ur;
+                $role[] = $ur->role;
             }
 
             session([

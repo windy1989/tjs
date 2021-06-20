@@ -36,6 +36,7 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
+                        <th>Code</th>
                         <th>User</th>
                         <th>Name</th>
                         <th>Progress</th>
@@ -223,6 +224,7 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
+            { name: 'code', className: 'text-center align-middle' },
             { name: 'user_id', className: 'text-center align-middle' },
             { name: 'name', className: 'text-center align-middle' },
             { name: 'progress', searchable: false, className: 'text-center align-middle' },

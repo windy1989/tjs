@@ -32,6 +32,7 @@ class ProjectController extends Controller {
     {
         $column = [
             'id',
+            'code',
             'user_id',
             'name',
             'progress'
@@ -49,6 +50,7 @@ class ProjectController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%")
+                            ->orWhere('code', 'like', "%$search%")
                             ->orWhereHas('user', function($query) use ($search) {
                                     $query->where('name', 'like', "%$search%")
                                         ->orWhere('email', 'like', "%$search%");
@@ -65,6 +67,7 @@ class ProjectController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%")
+                            ->orWhere('code', 'like', "%$search%")
                             ->orWhereHas('user', function($query) use ($search) {
                                     $query->where('name', 'like', "%$search%")
                                         ->orWhere('email', 'like', "%$search%");
@@ -106,6 +109,7 @@ class ProjectController extends Controller {
 
                 $response['data'][] = [
                     $nomor,
+                    $val->code,
                     $val->user->name,
                     $val->name,
                     $progress,
@@ -174,6 +178,7 @@ class ProjectController extends Controller {
                 'user_id'        => session('bo_id'),
                 'country_id'     => $request->country_id,
                 'city_id'        => $request->city_id,
+                'code'           => Project::generateCode(),
                 'name'           => $request->name,
                 'email'          => $request->email,
                 'phone'          => $request->phone,

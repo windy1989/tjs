@@ -15,6 +15,7 @@ class Project extends Model {
         'user_id',
         'country_id',
         'city_id',
+        'code',
         'name',
         'email',
         'phone',
@@ -28,6 +29,23 @@ class Project extends Model {
         'ppn',
         'progress'
     ];
+
+    public static function generateCode()
+    {
+        $query = Project::selectRaw("RIGHT(code, 6) as code")
+            ->orderByDesc('id')
+            ->limit(1)
+            ->get();
+
+        if($query->count() > 0) {
+            $number = (int)$query[0]->code + 1;
+        } else {
+            $number = '0001';
+        }
+
+        $code = str_pad($number, 6, 0, STR_PAD_LEFT);
+        return 'PT/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+    }
 
     public function paymentMethod() 
     {

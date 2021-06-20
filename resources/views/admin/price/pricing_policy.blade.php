@@ -179,14 +179,14 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Discount Retail SPV :<span class="text-danger">*</span></label>
-                        <input type="number" name="discount_retail_spv" id="discount_retail_spv" class="form-control" placeholder="0">
+                        <label>Discount Retail Manager :<span class="text-danger">*</span></label>
+                        <input type="number" name="discount_retail_manager" id="discount_retail_manager" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Discount Retail Manager :<span class="text-danger">*</span></label>
-                        <input type="number" name="discount_retail_manager" id="discount_retail_manager" class="form-control" placeholder="0">
+                        <label>Discount Retail Director :<span class="text-danger">*</span></label>
+                        <input type="number" name="discount_retail_director" id="discount_retail_director" class="form-control" placeholder="0">
                      </div>
                   </div>
                </div>
@@ -426,8 +426,8 @@
             $('#price_list').val(response.price_list);
             $('#store_price_list').val(response.store_price_list);
             $('#discount_retail_sales').val(response.discount_retail_sales);
-            $('#discount_retail_spv').val(response.discount_retail_spv);
             $('#discount_retail_manager').val(response.discount_retail_manager);
+            $('#discount_retail_director').val(response.discount_retail_director);
             $('#btn_update').attr('onclick', 'update(' + id + ')');
          },
          error: function() {

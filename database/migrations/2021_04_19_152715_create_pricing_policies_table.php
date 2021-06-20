@@ -33,8 +33,8 @@ class CreatePricingPoliciesTable extends Migration
             $table->double('price_list')->default(0);
             $table->double('store_price_list')->default(0);
             $table->double('discount_retail_sales')->default(0);
-            $table->double('discount_retail_spv')->default(0);
             $table->double('discount_retail_manager')->default(0);
+            $table->double('discount_retail_director')->default(0);
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

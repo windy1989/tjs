@@ -59,13 +59,18 @@ class CheckoutController extends Controller {
 
             $total_checkout = 0;
             $total_weight   = 0;
+            $param_code     = $param == 'cash' ? 'CH' : 'CS';
             $order          = Order::create([
-                'customer_id' => session('fo_id'),
-                'number'      => Order::generateNumber($param == 'cash' ? 'RTL' : 'ONL'),
-                'code'        => Order::generateCode($param == 'cash' ? 'RTL' : 'ONL'),
-                'description' => $request->description,
-                'type'        => $param == 'cash' ? 1 : 2,
-                'status'      => 1
+                'customer_id'    => session('fo_id'),
+                'step'           => $param == 'cash' ? 1 : 5,
+                'number'         => Order::generateNumber($param_code),
+                'invoice'        => Order::generateCode($param_code, 'invoice'),
+                'sales_order'    => $param == 'cash' ? Order::generateCode($param_code, 'sales_order') : null,
+                'purchase_order' => $param == 'cash' ? Order::generateCode($param_code, 'purchase_order') : null,
+                'delivery_order' => Order::generateCode($param_code, 'delivery_order'),
+                'description'    => $request->description,
+                'type'           => $param == 'cash' ? 1 : 2,
+                'status'         => 1
             ]);
 
             foreach($customer->cart as $c) {
@@ -110,6 +115,7 @@ class CheckoutController extends Controller {
                     'bottom_price'     => $bottom_price,
                     'fixed_cost'       => $fixed_cost,
                     'price_list'       => $c->product->price(),
+                    'target_price'     => $c->product->price(),
                     'cogs_perwira'     => $cogs_pta_idr,
                     'cogs_smartmarble' => $cogs_smb_idr,
                     'profit'           => $subtotal - $cogs_idr,
@@ -128,7 +134,7 @@ class CheckoutController extends Controller {
                 Storage::put($qr_code, $generate);
                 Order::find($order->id)->update(['qr_code' => $qr_code, 'subtotal' => $total_checkout, 'grandtotal' => $total_checkout]);
 
-                $payload  = [
+                $payload = [
                     'email'      => $customer->email,
                     'name'       => $customer->name,
                     'order'      => Order::find($order->id),
@@ -157,7 +163,7 @@ class CheckoutController extends Controller {
                 $param_invoice = [
                     'external_id'          => $order->number,
                     'payer_email'          => $request->email,
-                    'description'          => $order->code,
+                    'description'          => $request->description ? $request->description : 'No Description',
                     'amount'               => $grandtotal,
                     'should_send_email'    => true,
                     'success_redirect_url' => url('checkout/notif/success?number=' . base64_encode($order->number)),

@@ -20,9 +20,67 @@
 						<i class="icon-paragraph-justify3"></i>
 					</a>
 				</li>
+				@if(in_array(1, session('bo_role')) || in_array(5, session('bo_role')))
+					<li class="nav-item text-left">
+						<a href="{{ url('admin/approval') }}" class="navbar-nav-link" data-popup="tooltip" title="Approval">
+							<i class="icon-shield-check"></i>
+							<span class="d-lg-none ml-3">Approval</span>
+							<span class="badge badge-warning badge-pill ml-auto ml-lg-0">
+								{{ App\Models\Approval::where('user_id', session('bo_id'))->where('seen', 0)->count() }}
+							</span>
+						</a>
+					</li>
+				@endif
 			</ul>
-			<div class="ml-md-3 mr-md-auto" style="font-size: 13px;"></div>
-			<ul class="navbar-nav">
+			<span class="badge badge-success my-3 my-lg-0 ml-lg-3 d-none d-lg-block d-xl-block">ONLINE</span>
+			<ul class="navbar-nav ml-lg-auto">
+				<li class="nav-item nav-item-dropdown-lg dropdown">
+					@php 
+						$notify = App\Models\Notification::where('user_id', session('bo_id'))
+							->where('seen', 0)
+							->whereDate('created_at', date('Y-m-d')); 
+					@endphp
+					<a href="#" class="navbar-nav-link navbar-nav-link-toggler" data-toggle="dropdown">
+						<i class="icon-bell2"></i>
+						<span class="d-lg-none ml-3">Notification</span>
+						<span class="badge badge-warning badge-pill ml-auto ml-lg-0">{{ $notify->count() }}</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-lg-350">
+						<div class="dropdown-content-header">
+							<span class="font-weight-semibold">Notification</span>
+						</div>
+						<div class="dropdown-content-body dropdown-scrollable">
+							<ul class="media-list">
+								@if($notify->count() > 0)
+									@foreach($notify->latest()->limit(4)->get() as $n)
+										<li class="media">
+											<div class="media-body">
+												<div class="media-title">
+													<a href="{{ $n->link }}" class="text-dark">
+														<span class="font-weight-semibold">{{ $n->title }}</span>
+														<span class="float-right font-size-sm">
+															{{ date('d F Y, H:i', strtotime($n->created_at)) }}
+														</span>
+													</a>
+												</div>
+												<span class="text-muted">{{ $n->description }}</span>
+											</div>
+										</li>
+									@endforeach
+								@else
+									<li class="media">
+										<div class="media-body">
+											<div class="alert alert-warning text-center">Empty</div>
+										</div>
+									</li>
+								@endif
+							</ul>
+						</div>
+						<div class="dropdown-content-footer justify-content-center p-0 mt-0">
+							<a href="{{ url('admin/notification') }}" class="btn btn-light text-primary font-weight-bold btn-block border-0 rounded-top-0">View All</a>
+						</div>
+					</div>
+				</li>
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						<img src="{{ session('bo_photo') }}" class="rounded-circle mr-2" height="34" alt="">

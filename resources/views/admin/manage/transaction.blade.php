@@ -116,6 +116,7 @@
                         <th>Grandtotal</th>
                         <th>Date</th>
                         <th>Type</th>
+                        <th>Position</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -184,6 +185,7 @@
             { name: 'grandtotal', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'created_at', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'type', searchable: false, className: 'text-center nowrap align-middle' },
+            { name: 'step', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]

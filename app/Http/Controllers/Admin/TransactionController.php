@@ -29,6 +29,7 @@ class TransactionController extends Controller {
             'grandtotal',
             'created_at',
             'type',
+            'step',
             'status'
         ];
 
@@ -148,6 +149,7 @@ class TransactionController extends Controller {
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
                     date('d F Y', strtotime($val->created_at)),
                     $val->type(),
+                    $val->step(),
                     $val->status(),
                     '
                         <a href="' . url('admin/manage/transaction/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
@@ -173,9 +175,15 @@ class TransactionController extends Controller {
 
     public function detail(Request $request, $id) 
     {
+        $order = Order::find($id);
+        if($request->has('_token') && session()->token() == $request->_token) {
+            $order->update(['status' => 6]);
+            return redirect()->back()->with(['success' => 'Order successfully canceled']);
+        }
+
         $data  = [
             'title'   => 'Detail Transaction',
-            'order'   => Order::find($id),
+            'order'   => $order,
             'content' => 'admin.manage.transaction_detail'
         ];
 

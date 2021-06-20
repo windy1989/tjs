@@ -18,8 +18,12 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('customer_id');
             $table->json('xendit')->nullable();
             $table->string('qr_code')->nullable();
+            $table->char('step', 1);
             $table->string('number')->unique();
-            $table->string('code')->unique();
+            $table->string('invoice')->unique();
+            $table->string('sales_order')->nullable();
+            $table->string('purchase_order')->nullable();
+            $table->string('delivery_order')->unique();
             $table->double('discount')->default(0);
             $table->double('subtotal')->default(0);
             $table->double('shipping')->default(0);

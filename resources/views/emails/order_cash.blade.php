@@ -443,7 +443,7 @@
                           </tr>
                         </table>
                         <p>
-                          If you have any questions about this invoice, simply reply to this email or reach out to our 
+                          If you have any questions about <a href="{{ url('/') }}">smartmarbleandbath.com</a>, simply reply to this email or reach out to our 
                           <a href="mailto:smartmarbleandbath@gmail.com">support team</a> 
                           for help.
                         </p>

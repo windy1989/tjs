@@ -22,9 +22,11 @@ class CreateOrderDetailsTable extends Migration
             $table->double('bottom_price')->nullable();
             $table->double('fixed_cost')->nullable();
             $table->double('price_list');
+            $table->double('target_price');
             $table->double('cogs_perwira')->nullable();
             $table->double('cogs_smartmarble')->nullable();
             $table->double('profit')->nullable();
+            $table->date('partial_delivery')->nullable();
             $table->integer('qty');
             $table->integer('ready')->default(0);
             $table->integer('indent')->default(0);

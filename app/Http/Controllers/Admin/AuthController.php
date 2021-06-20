@@ -29,7 +29,7 @@ class AuthController extends Controller {
                     if(Hash::check($request->password, $user->password)) {
                         $role = [];
                         foreach($user->userRole as $ur) {
-                            $role[] = $ur;
+                            $role[] = $ur->role;
                         }
 
                         session([

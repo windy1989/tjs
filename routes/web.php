@@ -63,7 +63,19 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::match(['get', 'post'], 'my_activity', 'AuthController@myActivity');
         Route::get('logout', 'AuthController@logout');
 
-        Route::get('dashboard', 'DashboardController@index');
+        Route::prefix('dashboard')->group(function() {
+            Route::get('/', 'DashboardController@index');
+        });
+        
+        Route::prefix('notification')->group(function() {
+            Route::get('/', 'NotificationController@index');
+        });
+
+        Route::prefix('approval')->group(function() {
+            Route::get('/', 'ApprovalController@index');
+            Route::post('datatable', 'ApprovalController@datatable');
+            Route::match(['get', 'post'], 'detail/{id}', 'ApprovalController@detail');
+        });
 
         Route::prefix('select2')->group(function() {
             Route::post('type', 'Select2Controller@type');
@@ -387,7 +399,13 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('transaction')->group(function() {
                 Route::get('/', 'TransactionController@index');
                 Route::post('datatable', 'TransactionController@datatable');
-                Route::get('detail/{id}', 'TransactionController@detail');
+                Route::match(['get', 'post'], 'detail/{id}', 'TransactionController@detail');
+            });
+
+            Route::prefix('sales_order')->group(function() {
+                Route::get('/', 'SalesOrderController@index');
+                Route::post('datatable', 'SalesOrderController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'SalesOrderController@detail');
             });
         });
 

@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('country_id');
             $table->bigInteger('city_id');
+            $table->string('code')->unique();
             $table->string('name');
             $table->string('email');
             $table->string('phone');

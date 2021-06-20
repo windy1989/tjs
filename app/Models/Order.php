@@ -15,8 +15,12 @@ class Order extends Model {
         'customer_id',
         'xendit',
         'qr_code',
+        'step',
         'number',
-        'code',
+        'invoice',
+        'sales_order',
+        'purchase_order',
+        'delivery_order',
         'discount',
         'subtotal',
         'shipping',
@@ -38,12 +42,22 @@ class Order extends Model {
         return 'SMB' . $param . date('ymdHis');
     }
 
-    public static function generateCode($param)
+    public static function generateCode($param, $column)
     {
-        $query = Order::selectRaw('RIGHT(code, 6) as code')
+        $query = Order::selectRaw("RIGHT($column, 6) as code")
             ->orderByDesc('id')
             ->limit(1)
             ->get();
+
+        if($column == 'invoice') {
+            $str = 'INV';
+        } else if($column == 'sales_order') {
+            $str = 'SO';
+        } else if($column == 'purchase_order') {
+            $str = 'PO';
+        } else if($column == 'delivery_order') {
+            $str = 'DO';
+        } 
 
         if($query->count() > 0) {
             $number = (int)$query[0]->code + 1;
@@ -52,7 +66,33 @@ class Order extends Model {
         }
 
         $code = str_pad($number, 6, 0, STR_PAD_LEFT);
-        return 'INV/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+        return $str . '/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+    }
+
+    public function step() 
+    {
+        switch($this->step) {
+            case '1':
+                $step = 'Sales Order';
+                break;
+            case '2':
+                $step = 'Sales Order Approval';
+                break;
+            case '3':
+                $step = 'Purchase Order';
+                break;
+            case '4':
+                $step = 'Delivery Order';
+                break;
+            case '5':
+                $step = 'Invoice';
+                break;
+            default:
+                $step = 'Invalid';
+                break;
+        }
+
+        return $step;
     }
 
     public function type() 
