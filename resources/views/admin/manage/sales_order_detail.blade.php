@@ -89,7 +89,7 @@
 									<li>Number:</li>
 									<li>Type:</li>
 									<li>Status:</li>
-									@if(!$order->invoice)
+									@if(!$order->approval && !$order->invoice)
 										<li>Full Delivery:</li>
 									@endif
 								</ul>
@@ -98,7 +98,7 @@
 									<li>{{ $order->number }}</li>
 									<li>{{ $order->type() }}</li>
 									<li>{{ $order->status() }}</li>
-									@if(!$order->invoice)
+									@if(!$order->approval && !$order->invoice)
 										<li>
 											<div class="input-group">
 												<span class="input-group-prepend">
@@ -116,7 +116,7 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-					<table class="table table-lg">
+					<table class="table table-sm">
 						<thead>
 							<tr class="text-center">
 								<th>Image</th>
@@ -135,12 +135,13 @@
 								$total_weight       = 0;
 							@endphp
 							@foreach($order->orderDetail as $key => $od)
+								@php $discount = $od->product->pricingPolicy ? $od->product->pricingPolicy->discount_retail_sales : 0; @endphp
 								<input type="hidden" name="order_detail_id[]" value="{{ $od->id }}">
 								<tr class="text-center">
 									<td clas="align-middle">
 										<a href="{{ $od->product->type->image() }}" data-lightbox="{{ $od->product->code() }}" data-title="{{ $od->product->code() }}"><img src="{{ $od->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle">
 										<h6 class="mb-0">{{ $od->product->code() }}</h6>
 										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
 										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
@@ -153,13 +154,13 @@
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">
-											Rp {{ number_format($od->total - $od->product->pricingPolicy->discount_retail_sales, 0, ',', '.') }}
+											Rp {{ number_format($od->total - $discount, 0, ',', '.') }}
 										</span>
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">Rp {{ number_format($od->total, 0, ',', '.') }}</span>
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle nowrap">
 										@if(old('target_price'))
 											@php $target_price = old('target_price')[$key]; @endphp
 										@else
@@ -169,10 +170,10 @@
 											<input type="hidden" name="target_price[]" value="{{ $target_price }}">
 											Rp {{ number_format($target_price) }}
 										@else
-											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" onkeyup="checkBtn({{ $od->id }}, {{ $target_price }})" placeholder="0">
+											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" value="{{ old('target_price'[$key], $od->target_price) }}" onkeyup="checkBtn({{ $od->id }}, {{ $target_price }})" placeholder="0">
 										@endif
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle nowrap">
 										@if(old('partial_delivery'))
 											@php $partial_delivery = old('partial_delivery')[$key]; @endphp
 										@else
@@ -186,7 +187,7 @@
 										@endif
 									</td>
 									@php 
-										$total_max_discount += $od->total - $od->product->pricingPolicy->discount_retail_sales;
+										$total_max_discount += $od->total - $discount;
 										$total_target_price += $target_price; 
 										$total_weight       += $od->product->type->weight * $od->qty
 									@endphp
@@ -195,21 +196,37 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th colspan="4" class="align-middle">
+								<th colspan="3" rowspan="{{ $order->invoice || $order->approval ? '4' : '3' }}" class="align-middle">
 									@if($order->description)
 										{{ $order->description }}
 									@else
 										No Description
 									@endif
 								</th>
-								<th colspan="2" class="text-right align-middle">TOTAL :</th>
-								<td colspan="1" class="text-right text-danger align-middle">
-									<h4 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h4>
-								</td>
 							</tr>
 							<tr>
-								<td colspan="7">
-									<div class="form-group">
+								<th colspan="2" class="text-right align-middle">SUBTOTAL :</th>
+								<th colspan="2" class="text-right text-danger align-middle">
+									<h6 class="font-weight-semibold">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</h6>
+								</th>
+							</tr>
+							@if($order->invoice || $order->approval)
+								<tr>
+									<th colspan="2" class="text-right align-middle">SHIPPING :</th>
+									<th colspan="2" class="text-right text-danger align-middle">
+										<h6 class="font-weight-semibold">Rp {{ number_format($order->shipping, 0, ',', '.') }}</h6>
+									</th>
+								</tr>
+							@endif
+							<tr>
+								<th colspan="2" class="text-right align-middle">TOTAL :</th>
+								<th colspan="2" class="text-right text-danger align-middle">
+									<h6 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h6>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="7">
+									<div class="form-group mt-3 mb-4">
 										<h6 class="text-center font-weight-bold text-uppercase">Transport</h6>
 									</div>
 									@php
@@ -230,27 +247,42 @@
 										}
 									@endphp
 									@if($order->approval || $order->invoice)
-										<table class="table table-lg">
+										<table class="table table-sm">
 											<tbody>
 												<tr>
-													<th width="20%">Name</th>
-													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set' }}</td>
+													<td width="20%">Receiver Name</td>
+													<input type="hidden" name="receiver_name" value="{{ $order->orderShipping->receiver_name }}">
+													<td><b>:</b> {{ $order->orderShipping->receiver_name }}</td>
 												</tr>
 												<tr>
-													<th width="20%">Email</th>
-													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set' }}</td>
+													<td width="20%">Email</td>
+													<input type="hidden" name="email" value="{{ $order->orderShipping->email }}">
+													<td><b>:</b> {{ $order->orderShipping->email }}</td>
 												</tr>
 												<tr>
-													<th width="20%">Phone</th>
-													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set' }}</td>
+													<td width="20%">Phone</td>
+													<input type="hidden" name="phone" value="{{ $order->orderShipping->phone }}">
+													<td><b>:</b> {{ $order->orderShipping->phone }}</td>
 												</tr>
 												<tr>
-													<th width="20%">City</th>
-													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set' }}</td>
+													<td width="20%">City</td>
+													<input type="hidden" name="city_id" value="{{ $order->orderShipping->city_id }}">
+													<td><b>:</b> {{ $order->orderShipping->city->name }}</td>
 												</tr>
 												<tr>
-													<th width="20%">Address</th>
-													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set' }}</td>
+													<td width="20%">Address</td>
+													<input type="hidden" name="address" value="{{ $order->orderShipping->address }}">
+													<td><b>:</b> {{ $order->orderShipping->address }}</td>
+												</tr>
+												<tr>
+													<td width="20%">Transport</td>
+													<input type="hidden" name="delivery_id" value="{{ $order->orderShipping->delivery_id }}">
+													<td>
+														<b>:</b> 
+														{{ $order->orderShipping->delivery->transport->fleet }}
+														&nbsp;&nbsp;
+														({{ $order->orderShipping->delivery->vendor->name }})
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -304,29 +336,27 @@
 											</div>
 										</div>
 									@endif
-								</td>
+								</th>
 							</tr>
 						</tfoot>
 					</table>
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-						@if($order->approval)
-							@if($order->approval->status == 1)
-								<div class="alert alert-info alert-styled-left alert-dismissible">
-									<span class="font-weight-bold text-uppercase">Waiting For Approval!</span>
-									<span class="float-right font-italic">Please be patient, your order is being approved</span>
-								</div>
-							@else
-								<div class="alert alert-success alert-styled-left alert-dismissible">
-									<span class="font-weight-bold text-uppercase">Well Done!</span>
-									<span class="float-right font-italic">Data has been processed</span>
-								</div>
-							@endif
-						@else
+						@if($order->invoice)
+							<div class="alert alert-success alert-styled-left alert-dismissible">
+								<span class="font-weight-bold text-uppercase">Well Done!</span>
+								<span class="float-right font-italic">Data has been processed</span>
+							</div>
+						@elseif(!$order->invoice)
 							<div class="text-right mt-3">
 								<button type="submit" id="btn_approval" class="btn btn-warning btn-labeled btn-labeled-left" onclick="actionSubmit(this)" style="display:none;"><b><i class="icon-check"></i></b> Approval Now</button>
 								<button type="submit" id="btn_invoice" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Invoice</button>
+							</div>
+						@else
+							<div class="alert alert-info alert-styled-left alert-dismissible">
+								<span class="font-weight-bold text-uppercase">Waiting For Approval!</span>
+								<span class="float-right font-italic">Please be patient, your order is being approved</span>
 							</div>
 						@endif
 					</div>
@@ -336,6 +366,10 @@
 	</div>
 
 <script>
+	$(function() {
+		checkBtn();
+	});
+
 	function actionSubmit(event) {
 		$(event).attr('disabled', true);
 		$(event).html('Processing ...');
@@ -397,27 +431,29 @@
 		});
 	}
 
-	function checkBtn(id, target_price_real) {
-		var total_max_discount = parseFloat("{{ $total_max_discount }}");
-		var total_target_price = parseFloat("{{ $total_target_price }}");
-		var target_price_value = parseFloat($('#target_price_' + id).val());
+	function checkBtn(id = null, target_price_real = null) {
+		if(id && target_price_real) {
+			var total_max_discount = parseFloat("{{ $total_max_discount }}");
+			var total_target_price = parseFloat("{{ $total_target_price }}");
+			var target_price_value = parseFloat($('#target_price_' + id).val());
 
-		if(target_price_value >= target_price_real) {
-			var total_all_target_price = total_target_price;
-		} else {
-			var total_all_target_price = (total_target_price - target_price_real) + target_price_value;
-		}
+			if(target_price_value >= target_price_real) {
+				var total_all_target_price = total_target_price;
+			} else {
+				var total_all_target_price = (total_target_price - target_price_real) + target_price_value;
+			}
 
-		if(total_all_target_price < total_max_discount) {
-			$('#btn_invoice').hide();
-			$('#btn_approval').show();
-			$('#input_invoice').val(null);
-			$('#input_approval').val('approval');
-		} else {
-			$('#btn_invoice').show();
-			$('#btn_approval').hide();
-			$('#btn_invoice').val('invoice');
-			$('#input_approval').val(null);
+			if(total_all_target_price < total_max_discount) {
+				$('#btn_invoice').hide();
+				$('#btn_approval').show();
+				$('#input_invoice').val(null);
+				$('#input_approval').val('approval');
+			} else {
+				$('#btn_invoice').show();
+				$('#btn_approval').hide();
+				$('#btn_invoice').val('invoice');
+				$('#input_approval').val(null);
+			}
 		}
 	}
 </script>

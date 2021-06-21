@@ -108,7 +108,7 @@
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[4, 'desc']],
+         order: [[3, 'desc']],
          ajax: {
             url: '{{ url("admin/approval/datatable") }}',
             type: 'POST',

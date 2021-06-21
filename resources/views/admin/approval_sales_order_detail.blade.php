@@ -99,7 +99,7 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-					<table class="table table-lg">
+					<table class="table table-sm">
 						<thead>
 							<tr class="text-center">
 								<th>Image</th>
@@ -113,11 +113,12 @@
 						</thead>
 						<tbody>
 							@foreach($order->orderDetail as $key => $od)
+								@php $discount = $od->product->pricingPolicy ? $od->product->pricingPolicy->discount_retail_sales : 0; @endphp
 								<tr class="text-center">
 									<td clas="align-middle">
 										<a href="{{ $od->product->type->image() }}" data-lightbox="{{ $od->product->code() }}" data-title="{{ $od->product->code() }}"><img src="{{ $od->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle">
 										<h6 class="mb-0">{{ $od->product->code() }}</h6>
 										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
 										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
@@ -130,16 +131,16 @@
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">
-											Rp {{ number_format($od->total - $od->product->pricingPolicy->discount_retail_sales, 0, ',', '.') }}
+											Rp {{ number_format($od->total - $discount, 0, ',', '.') }}
 										</span>
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">Rp {{ number_format($od->total, 0, ',', '.') }}</span>
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle nowrap">
 										Rp {{ number_format($od->target_price) }}
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle nowrap">
 										{{ date('d-m-Y', strtotime($od->partial_delivery)) }}
 									</td>
 								</tr>
@@ -147,27 +148,71 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th colspan="6" class="text-right">TOTAL :</th>
-								<td class="text-right text-danger">
-									<h4 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h4>
-								</td>
+								<th colspan="3" rowspan="4" class="align-middle">
+									@if($order->description)
+										{{ $order->description }}
+									@else
+										No Description
+									@endif
+								</th>
 							</tr>
 							<tr>
-								<td colspan="4">
-									<center>
-										<img src="{{ asset(Storage::url($order->qr_code)) }}">
-									</center>
-								</td>
-								<td colspan="3" class="align-middle text-center">
-									<p class="font-weight-bold text-uppercase">Description</p>
-									<div class="text-muted font-italic">
-										@if($order->description)
-											{{ $order->description }}
-										@else
-											No Description
-										@endif
+								<th colspan="2" class="text-right align-middle">SUBTOTAL :</th>
+								<th colspan="2" class="text-right text-danger align-middle">
+									<h6 class="font-weight-semibold">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</h6>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-right align-middle">SHIPPING :</th>
+								<th colspan="2" class="text-right text-danger align-middle">
+									<h6 class="font-weight-semibold">Rp {{ number_format($order->shipping, 0, ',', '.') }}</h6>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-right align-middle">TOTAL :</th>
+								<th colspan="2" class="text-right text-danger align-middle">
+									<h6 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h6>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="7">
+									<div class="form-group mt-3 mb-4">
+										<h6 class="text-center font-weight-bold text-uppercase">Transport</h6>
 									</div>
-								</td>
+									<table class="table table-sm">
+										<tbody>
+											<tr>
+												<td width="20%">Receiver Name</td>
+												<td><b>:</b> {{ $order->orderShipping->receiver_name }}</td>
+											</tr>
+											<tr>
+												<td width="20%">Email</td>
+												<td><b>:</b> {{ $order->orderShipping->email }}</td>
+											</tr>
+											<tr>
+												<td width="20%">Phone</td>
+												<td><b>:</b> {{ $order->orderShipping->phone }}</td>
+											</tr>
+											<tr>
+												<td width="20%">City</td>
+												<td><b>:</b> {{ $order->orderShipping->city->name }}</td>
+											</tr>
+											<tr>
+												<td width="20%">Address</td>
+												<td><b>:</b> {{ $order->orderShipping->address }}</td>
+											</tr>
+											<tr>
+												<td width="20%">Transport</td>
+												<td>
+													<b>:</b> 
+													{{ $order->orderShipping->delivery->transport->fleet }}
+													&nbsp;&nbsp;
+													({{ $order->orderShipping->delivery->vendor->name }})
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</th>
 							</tr>
 						</tfoot>
 					</table>

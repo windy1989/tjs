@@ -62,12 +62,10 @@ class CheckoutController extends Controller {
             $param_code     = $param == 'cash' ? 'CH' : 'CS';
             $order          = Order::create([
                 'customer_id'    => session('fo_id'),
-                'step'           => $param == 'cash' ? 1 : 4,
                 'number'         => Order::generateNumber($param_code),
-                'invoice'        => Order::generateCode($param_code, 'invoice'),
                 'sales_order'    => $param == 'cash' ? Order::generateCode($param_code, 'sales_order') : null,
-                'purchase_order' => $param == 'cash' ? Order::generateCode($param_code, 'purchase_order') : null,
-                'delivery_order' => Order::generateCode($param_code, 'delivery_order'),
+                'invoice'        => $param == 'cash' ? null : Order::generateCode($param_code, 'invoice'),
+                'purchase_order' => $param == 'cash' ? null : Order::generateCode($param_code, 'purchase_order'),
                 'description'    => $request->description,
                 'type'           => $param == 'cash' ? 1 : 2,
                 'status'         => 1
@@ -115,7 +113,7 @@ class CheckoutController extends Controller {
                     'bottom_price'     => $bottom_price,
                     'fixed_cost'       => $fixed_cost,
                     'price_list'       => $c->product->price(),
-                    'target_price'     => $c->product->price(),
+                    'target_price'     => $subtotal,
                     'cogs_perwira'     => $cogs_pta_idr,
                     'cogs_smartmarble' => $cogs_smb_idr,
                     'profit'           => $subtotal - $cogs_idr,

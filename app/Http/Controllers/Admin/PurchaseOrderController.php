@@ -150,8 +150,8 @@ class PurchaseOrderController extends Controller {
 
                 foreach($request->order_detail_id as $key => $odi) {
                     $order_detail            = OrderDetail::find($odi);
-                    $discount_manager        = $order_detail->product->pricingPolicy->discount_retail_manager;
-                    $discount_director       = $order_detail->product->pricingPolicy->discount_retail_director;
+                    $discount_manager        = $order_detail->product->pricingPolicy ? $order_detail->product->pricingPolicy->discount_retail_manager : 0;
+                    $discount_director       = $order_detail->product->pricingPolicy ?  $order_detail->product->pricingPolicy->discount_retail_director : 0;
                     $total_discount_manager  = $order_detail->total - ($discount_manager * $order_detail->qty);
                     $total_discount_director = $order_detail->total - ($discount_director * $order_detail->qty);
 
@@ -195,7 +195,7 @@ class PurchaseOrderController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Detail Purchase Order',
+            'title'   => 'Purchase Order Detail',
             'order'   => $order,
             'content' => 'admin.manage.purchase_order_detail'
         ];

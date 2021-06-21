@@ -43,7 +43,7 @@ class Order extends Model {
     public static function generateCode($param, $column)
     {
         $query = Order::selectRaw("RIGHT($column, 6) as code")
-            ->orderByDesc('id')
+            ->orderBy('id', 'asc')
             ->limit(1)
             ->get();
 

@@ -33,7 +33,7 @@ class Project extends Model {
     public static function generateCode()
     {
         $query = Project::selectRaw("RIGHT(code, 6) as code")
-            ->orderByDesc('id')
+            ->orderBy('id', 'asc')
             ->limit(1)
             ->get();
 

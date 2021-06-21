@@ -156,6 +156,11 @@ class ApprovalController extends Controller {
                             'target_price' => $od->total
                         ]);
                     }
+
+                    $order->update([
+                        'subtotal'   => $order->orderDetail->sum('total'),
+                        'grandtotal' => $order->orderDetail->sum('total') + $order->shipping
+                    ]);
                 } else {
 
                 }
@@ -163,12 +168,20 @@ class ApprovalController extends Controller {
                 $notif_desc = 'Sorry, your data ' . $description . ' has been rejected';
             } else {
                 if($approval->approvalable_type == 'orders') {
+                    $total_discount = 0;
                     foreach($order->orderDetail as $od) {
+                        $total_discount += $od->total - $od->target_price;
                         OrderDetail::find($od->id)->update([
                             'price_list' => $od->target_price / $od->qty,
                             'total'      => $od->target_price
                         ]);
                     }
+
+                    $order->update([
+                        'subtotal'   => $order->orderDetail->sum('total'),
+                        'discount'   => $total_discount,
+                        'grandtotal' => $order->orderDetail->sum('total') + $order->shipping
+                    ]);
                 } else {
 
                 }

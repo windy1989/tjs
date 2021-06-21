@@ -200,7 +200,7 @@
 										<td><b>:</b> Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
 									</tr>
 									<tr>
-										<th width="20%">Shipping Fee</th>
+										<th width="20%">Shipping</th>
 										<td><b>:</b> Rp {{ number_format($order->shipping, 0, ',', '.') }}</td>
 									</tr>
 									<tr>

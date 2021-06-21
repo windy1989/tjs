@@ -409,6 +409,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::match(['get', 'post'], 'detail/{id}', 'SalesOrderController@detail');
             });
 
+            Route::prefix('invoice')->group(function() {
+                Route::get('/', 'InvoiceController@index');
+                Route::post('datatable', 'InvoiceController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'InvoiceController@detail');
+            });
+
             Route::prefix('purchase_order')->group(function() {
                 Route::get('/', 'PurchaseOrderController@index');
                 Route::post('datatable', 'PurchaseOrderController@datatable');

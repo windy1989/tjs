@@ -44,9 +44,11 @@ class SalesOrderController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Order::whereNotNull('sales_order')
+            ->where('type', 1)
             ->count();
         
         $query_data = Order::whereNotNull('sales_order')
+            ->where('type', 1)
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
@@ -90,6 +92,7 @@ class SalesOrderController extends Controller {
             ->get();
 
         $total_filtered = Order::whereNotNull('sales_order')
+            ->where('type', 1)
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
@@ -133,11 +136,12 @@ class SalesOrderController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->purchase_order && $val->invoice) {
+                if($val->invoice) {
                     $btn = '<a href="' . url('admin/manage/sales_order/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 } else {
                     $btn = '<a href="' . url('admin/manage/sales_order/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 }
+                
                 $response['data'][] = [
                     $nomor,
                     $val->customer->name,
@@ -225,11 +229,13 @@ class SalesOrderController extends Controller {
             } else {
                 $approval_manager  = 0;
                 $approval_director = 0;
+                $total_weight      = 0;
 
                 foreach($request->order_detail_id as $key => $odi) {
                     $order_detail            = OrderDetail::find($odi);
-                    $discount_manager        = $order_detail->product->pricingPolicy->discount_retail_manager;
-                    $discount_director       = $order_detail->product->pricingPolicy->discount_retail_director;
+                    $total_weight           += $order_detail->product->type->weight * $order_detail->qty;
+                    $discount_manager        = $order_detail->product->pricingPolicy ? $order_detail->product->pricingPolicy->discount_retail_manager : 0;
+                    $discount_director       = $order_detail->product->pricingPolicy ?  $order_detail->product->pricingPolicy->discount_retail_director : 0;
                     $total_discount_manager  = $order_detail->total - ($discount_manager * $order_detail->qty);
                     $total_discount_director = $order_detail->total - ($discount_director * $order_detail->qty);
 
@@ -266,29 +272,36 @@ class SalesOrderController extends Controller {
                     $flash_success = 'Order is under approval';
                 } else {
                     $order->update([
-                        'invoice'        => Order::generateCode('CH', 'invoice'),
-                        'purchase_order' => Order::generateCode('CH', 'purchase_order')
-                    ]);
-
-                    OrderShipping::create([
-                        'order_id'      => $order->id,
-                        'city_id'       => $request->city_id,
-                        'delivery_id'   => $request->delivery_id,
-                        'receiver_name' => $request->receiver_name,
-                        'email'         => $request->email,
-                        'phone'         => $request->phone,
-                        'address'       => $request->address
+                        'invoice' => Order::generateCode('CH', 'invoice')
                     ]);
 
                     $flash_success = 'Order <b class="font-italic">' . $order->sales_order .  '</b> is already in the purchase order';
                 }
+
+                $delivery     = Delivery::find($request->delivery_id);
+                $shipping_fee = $delivery->price_per_kg * $total_weight;
+                $order->update([
+                    'subtotal'   => $order->orderDetail->sum('target_price'),
+                    'shipping'   => $shipping_fee,
+                    'grandtotal' => $order->orderDetail->sum('target_price') + $shipping_fee
+                ]);
+
+                OrderShipping::create([
+                    'order_id'      => $order->id,
+                    'city_id'       => $request->city_id,
+                    'delivery_id'   => $request->delivery_id,
+                    'receiver_name' => $request->receiver_name,
+                    'email'         => $request->email,
+                    'phone'         => $request->phone,
+                    'address'       => $request->address
+                ]);
 
                 return redirect('admin/manage/sales_order')->with(['success' => $flash_success]);
             }
         }
 
         $data  = [
-            'title'   => 'Detail Sales Order',
+            'title'   => 'Sales Order Detail',
             'order'   => $order,
             'city'    => City::oldest('name')->get(),
             'content' => 'admin.manage.sales_order_detail'

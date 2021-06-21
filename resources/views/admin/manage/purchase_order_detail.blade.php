@@ -117,7 +117,7 @@
 									<td clas="align-middle">
 										<a href="{{ $od->product->type->image() }}" data-lightbox="{{ $od->product->code() }}" data-title="{{ $od->product->code() }}"><img src="{{ $od->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
 									</td>
-									<td class="align-middle" nowrap>
+									<td class="align-middle nowrap">
 										<h6 class="mb-0">{{ $od->product->code() }}</h6>
 										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
 										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
