@@ -165,6 +165,12 @@ class ApprovalController extends Controller {
                 $notif_desc = 'Success, your data ' . $description . ' has been approved';
             }
 
+            if($approval->approvalable_type == 'orders') {
+                $order->update(['step' => 3]);
+            } else {
+
+            }
+
             $approval->update([
                 'approved_by' => session('bo_id'),
                 'status'      => $status

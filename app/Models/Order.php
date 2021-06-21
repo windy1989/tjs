@@ -82,10 +82,10 @@ class Order extends Model {
                 $step = 'Purchase Order';
                 break;
             case '4':
-                $step = 'Delivery Order';
+                $step = 'Invoice';
                 break;
             case '5':
-                $step = 'Invoice';
+                $step = 'Delivery Order';
                 break;
             default:
                 $step = 'Invalid';

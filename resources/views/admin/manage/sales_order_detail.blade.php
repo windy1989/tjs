@@ -215,7 +215,7 @@
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-						@if($order->step == 1)
+						@if($order->step == 1 || $order->step == 3)
 							<div class="text-right mt-3">
 								<button type="submit" id="btn_approval" class="btn btn-warning btn-labeled btn-labeled-left" onclick="actionSubmit(this)" style="display:none;"><b><i class="icon-check"></i></b> Approval Now</button>
 								<button type="submit" id="btn_purchase_order" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Purchase Order</button>
