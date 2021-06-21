@@ -62,7 +62,7 @@ class CheckoutController extends Controller {
             $param_code     = $param == 'cash' ? 'CH' : 'CS';
             $order          = Order::create([
                 'customer_id'    => session('fo_id'),
-                'step'           => $param == 'cash' ? 1 : 5,
+                'step'           => $param == 'cash' ? 1 : 4,
                 'number'         => Order::generateNumber($param_code),
                 'invoice'        => Order::generateCode($param_code, 'invoice'),
                 'sales_order'    => $param == 'cash' ? Order::generateCode($param_code, 'sales_order') : null,

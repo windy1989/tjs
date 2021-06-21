@@ -29,7 +29,6 @@ class TransactionController extends Controller {
             'grandtotal',
             'created_at',
             'type',
-            'step',
             'status'
         ];
 
@@ -149,7 +148,6 @@ class TransactionController extends Controller {
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
                     date('d F Y', strtotime($val->created_at)),
                     $val->type(),
-                    $val->step(),
                     $val->status(),
                     '
                         <a href="' . url('admin/manage/transaction/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>

@@ -183,6 +183,9 @@
                                 <a href="{{ url('admin/manage/sales_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'sales_order' ? 'active' : '' }}">Sales Order</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('admin/manage/invoice') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'invoice' ? 'active' : '' }}">Invoice</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('admin/manage/purchase_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'purchase_order' ? 'active' : '' }}">Purchase Order</a>
                             </li>
                             <li class="nav-item">

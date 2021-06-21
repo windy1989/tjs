@@ -45,7 +45,7 @@
 		@endif
 		<form action="" method="POST" id="form_data">
 			@csrf
-			<input type="hidden" name="purchase_order" id="input_purchase_order" value="purchase_order">
+			<input type="hidden" name="invoice" id="input_invoice" value="invoice">
 			<input type="hidden" name="approval" id="input_approval">
 			<div class="card">
 				<div class="card-body">
@@ -89,23 +89,27 @@
 									<li>Number:</li>
 									<li>Type:</li>
 									<li>Status:</li>
-									<li>Full Delivery:</li>
+									@if(!$order->invoice)
+										<li>Full Delivery:</li>
+									@endif
 								</ul>
 								<ul class="list list-unstyled text-right mb-0 ml-auto">
 									<li><h5 class="font-weight-semibold my-2">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h5></li>
 									<li>{{ $order->number }}</li>
 									<li>{{ $order->type() }}</li>
 									<li>{{ $order->status() }}</li>
-									<li>
-										<div class="input-group">
-											<span class="input-group-prepend">
-												<span class="input-group-text" style="border-radius:0;">
-													<input type="checkbox" name="full_delivery_check" id="full_delivery_check" onclick="changeAllPartial()" {{ old('full_delivery_check') ? 'checked' : '' }}>
+									@if(!$order->invoice)
+										<li>
+											<div class="input-group">
+												<span class="input-group-prepend">
+													<span class="input-group-text" style="border-radius:0;">
+														<input type="checkbox" name="full_delivery_check" id="full_delivery_check" onclick="changeAllPartial()" {{ old('full_delivery_check') ? 'checked' : '' }}>
+													</span>
 												</span>
-											</span>
-											<input type="date" name="full_delivery_date" id="full_delivery_date" value="{{ old('full_delivery_date') }}" onchange="changeAllPartial()" style="border-radius:0; border: 1px solid lightgray;">
-										</div>
-									</li>
+												<input type="date" name="full_delivery_date" id="full_delivery_date" value="{{ old('full_delivery_date') }}" onchange="changeAllPartial()" style="border-radius:0; border: 1px solid lightgray;">
+											</div>
+										</li>
+									@endif
 								</ul>
 							</div>
 						</div>
@@ -128,6 +132,7 @@
 							@php 
 								$total_max_discount = 0;
 								$total_target_price = 0; 
+								$total_weight       = 0;
 							@endphp
 							@foreach($order->orderDetail as $key => $od)
 								<input type="hidden" name="order_detail_id[]" value="{{ $od->id }}">
@@ -155,59 +160,150 @@
 										<span class="font-weight-semibold">Rp {{ number_format($od->total, 0, ',', '.') }}</span>
 									</td>
 									<td class="align-middle" nowrap>
-										@if($order->step == 1)
-											@if(old('target_price'))
-												@php $target_price = old('target_price')[$key]; @endphp
-											@else
-												@php $target_price = $od->target_price ; @endphp
-											@endif
-											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" onkeyup="checkBtn({{ $od->id }}, {{ $target_price }})" placeholder="0">
+										@if(old('target_price'))
+											@php $target_price = old('target_price')[$key]; @endphp
 										@else
-											@php $target_price = $od->target_price; @endphp
-											Rp {{ number_format($od->target_price) }}
+											@php $target_price = $od->target_price ; @endphp
+										@endif
+										@if($order->approval || $order->invoice)
+											<input type="hidden" name="target_price[]" value="{{ $target_price }}">
+											Rp {{ number_format($target_price) }}
+										@else
+											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" onkeyup="checkBtn({{ $od->id }}, {{ $target_price }})" placeholder="0">
 										@endif
 									</td>
 									<td class="align-middle" nowrap>
-										@if($order->step == 1)
-											@if(old('partial_delivery'))
-												@php $partial_delivery = old('partial_delivery')[$key]; @endphp
-											@else
-												@php $partial_delivery = $od->partial_delivery ; @endphp
-											@endif
-											<input type="date" name="partial_delivery[]" id="partial_delivery" value="{{ $partial_delivery }}" class="form-control" required>
+										@if(old('partial_delivery'))
+											@php $partial_delivery = old('partial_delivery')[$key]; @endphp
 										@else
+											@php $partial_delivery = $od->partial_delivery ; @endphp
+										@endif
+										@if($order->approval || $order->invoice)
+											<input type="hidden" name="partial_delivery[]" value="{{ $partial_delivery }}">
 											{{ date('d-m-Y', strtotime($od->partial_delivery)) }}
+										@else
+											<input type="date" name="partial_delivery[]" id="partial_delivery" value="{{ $partial_delivery }}" class="form-control" required>
 										@endif
 									</td>
 									@php 
 										$total_max_discount += $od->total - $od->product->pricingPolicy->discount_retail_sales;
 										$total_target_price += $target_price; 
+										$total_weight       += $od->product->type->weight * $od->qty
 									@endphp
 								</tr>
 							@endforeach
 						</tbody>
 						<tfoot>
 							<tr>
-								<th colspan="6" class="text-right">TOTAL :</th>
-								<td class="text-right text-danger">
+								<th colspan="4" class="align-middle">
+									@if($order->description)
+										{{ $order->description }}
+									@else
+										No Description
+									@endif
+								</th>
+								<th colspan="2" class="text-right align-middle">TOTAL :</th>
+								<td colspan="1" class="text-right text-danger align-middle">
 									<h4 class="font-weight-semibold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</h4>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4">
-									<center>
-										<img src="{{ asset(Storage::url($order->qr_code)) }}">
-									</center>
-								</td>
-								<td colspan="3" class="align-middle text-center">
-									<p class="font-weight-bold text-uppercase">Description</p>
-									<div class="text-muted font-italic">
-										@if($order->description)
-											{{ $order->description }}
-										@else
-											No Description
-										@endif
+								<td colspan="7">
+									<div class="form-group">
+										<h6 class="text-center font-weight-bold text-uppercase">Transport</h6>
 									</div>
+									@php
+										if($order->orderShipping) {
+											$city_id       = $order->orderShipping->city_id;
+											$delivery      = $order->orderShipping->delivery;
+											$receiver_name = $order->orderShipping->receiver_name;
+											$email         = $order->orderShipping->email;
+											$phone         = $order->orderShipping->phone;
+											$address       = $order->orderShipping->address;
+										} else {
+											$city_id       = null;
+											$delivery      = null;
+											$receiver_name = $order->customer->name;
+											$email         = $order->customer->email;
+											$phone         = $order->customer->phone;
+											$address       = null;
+										}
+									@endphp
+									@if($order->approval || $order->invoice)
+										<table class="table table-lg">
+											<tbody>
+												<tr>
+													<th width="20%">Name</th>
+													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set' }}</td>
+												</tr>
+												<tr>
+													<th width="20%">Email</th>
+													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set' }}</td>
+												</tr>
+												<tr>
+													<th width="20%">Phone</th>
+													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set' }}</td>
+												</tr>
+												<tr>
+													<th width="20%">City</th>
+													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set' }}</td>
+												</tr>
+												<tr>
+													<th width="20%">Address</th>
+													<td><b>:</b> {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set' }}</td>
+												</tr>
+											</tbody>
+										</table>
+									@else
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>City :<span class="text-danger">*</span></label>
+													<select name="city_id" id="city_id" class="select2" onchange="getDelivery()" required>
+														<option value="">-- Choose --</option>
+														@foreach($city as $c)
+															<option value="{{ $c->id }}" {{ $city_id == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
+														@endforeach
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Fleet :<span class="text-danger">*</span></label>
+													<select name="delivery_id" id="delivery_id" class="select2" required>
+														<option value="">-- Choose --</option>
+														@if($delivery)
+															<option value="{{ $delivery->id }}" selected>({{ $delivery->transport->fleet }}) &nbsp;&nbsp; Rp {{ number_format($delivery->price, 0, ',', '.') }}</option> 
+														@endif
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Receiver Name :<span class="text-danger">*</span></label>
+													<input type="text" name="receiver_name" id="receiver_name" class="form-control" value="{{ old('receiver_name', $receiver_name) }}" placeholder="Enter receiver name" required>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Email :<span class="text-danger">*</span></label>
+													<input type="text" name="email" id="email" class="form-control" value="{{ old('email', $email) }}" placeholder="Enter email" required>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Phone :<span class="text-danger">*</span></label>
+													<input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $phone) }}" placeholder="Enter phone" required>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Address :<span class="text-danger">*</span></label>
+													<textarea name="address" id="address" class="form-control" placeholder="Enter address" required>{{ old('address', $address) }}</textarea>
+												</div>
+											</div>
+										</div>
+									@endif
 								</td>
 							</tr>
 						</tfoot>
@@ -215,15 +311,22 @@
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-						@if($order->step == 1 || $order->step == 3)
+						@if($order->approval)
+							@if($order->approval->status == 1)
+								<div class="alert alert-info alert-styled-left alert-dismissible">
+									<span class="font-weight-bold text-uppercase">Waiting For Approval!</span>
+									<span class="float-right font-italic">Please be patient, your order is being approved</span>
+								</div>
+							@else
+								<div class="alert alert-success alert-styled-left alert-dismissible">
+									<span class="font-weight-bold text-uppercase">Well Done!</span>
+									<span class="float-right font-italic">Data has been processed</span>
+								</div>
+							@endif
+						@else
 							<div class="text-right mt-3">
 								<button type="submit" id="btn_approval" class="btn btn-warning btn-labeled btn-labeled-left" onclick="actionSubmit(this)" style="display:none;"><b><i class="icon-check"></i></b> Approval Now</button>
-								<button type="submit" id="btn_purchase_order" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Purchase Order</button>
-							</div>
-						@else
-							<div class="alert alert-info alert-styled-left alert-dismissible">
-								<span class="font-weight-bold text-uppercase">Waiting For Approval!</span>
-								<span class="float-right font-italic">Please be patient, your order is being approved</span>
+								<button type="submit" id="btn_invoice" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Invoice</button>
 							</div>
 						@endif
 					</div>
@@ -255,6 +358,45 @@
 		}
 	}
 
+	function getDelivery() {
+		$.ajax({
+			url: '{{ url("admin/manage/sales_order/get_delivery") }}',
+			type: 'POST',
+         dataType: 'JSON',
+         data: {
+            city_id: $('#city_id').val(),
+				weight: '{{ $total_weight }}'
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+            loadingOpen('.content');
+				$('#delivery_id').html('<option value="">-- Choose --</option>');
+         },
+         success: function(response) {
+            loadingClose('.content');
+				if($('#city_id').val()) {
+					if(response.length > 0) {
+						$.each(response, function(i, val) {
+							$('#delivery_id').append(`
+								<option value="` + val.id + `">(` + val.transport_name + `) &nbsp;&nbsp; ` + val.price + `</option>
+							`);
+						});
+					}
+				}
+         },
+         error: function() {
+            loadingClose('.content');
+				swalInit.fire({
+					title: 'Server Error',
+					text: 'Please contact developer',
+					type: 'error'
+				});
+         }
+		});
+	}
+
 	function checkBtn(id, target_price_real) {
 		var total_max_discount = parseFloat("{{ $total_max_discount }}");
 		var total_target_price = parseFloat("{{ $total_target_price }}");
@@ -267,14 +409,14 @@
 		}
 
 		if(total_all_target_price < total_max_discount) {
-			$('#btn_purchase_order').hide();
+			$('#btn_invoice').hide();
 			$('#btn_approval').show();
-			$('#input_purchase_order').val(null);
+			$('#input_invoice').val(null);
 			$('#input_approval').val('approval');
 		} else {
-			$('#btn_purchase_order').show();
+			$('#btn_invoice').show();
 			$('#btn_approval').hide();
-			$('#input_purchase_order').val('purchase_order');
+			$('#btn_invoice').val('invoice');
 			$('#input_approval').val(null);
 		}
 	}

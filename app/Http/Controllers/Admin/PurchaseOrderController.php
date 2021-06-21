@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\City;
+use PDF;
 use App\Models\Order;
-use App\Models\Approval;
 use App\Models\Customer;
-use App\Models\Delivery;
-use App\Models\UserRole;
-use App\Models\OrderDetail;
 use Illuminate\Http\Request;
-use App\Models\OrderShipping;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
-class SalesOrderController extends Controller {
-    
+class PurchaseOrderController extends Controller {
+
     public function index()
     {
         $data = [
-            'title'    => 'Manage Sales Order',
+            'title'    => 'Manage Purchase Order',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.manage.sales_order'
+            'content'  => 'admin.manage.purchase_order'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -32,7 +26,7 @@ class SalesOrderController extends Controller {
         $column = [
             'id',
             'customer_id',
-            'sales_order',
+            'purchase_order',
             'grandtotal',
             'created_at'
         ];
@@ -43,36 +37,20 @@ class SalesOrderController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Order::whereNotNull('sales_order')
+        $total_data = Order::whereNotNull('purchase_order')
             ->count();
         
-        $query_data = Order::whereNotNull('sales_order')
+        $query_data = Order::whereNotNull('purchase_order')
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
                             $query->where('name', 'like', "%$search%");
                         })
-                        ->orWhere('sales_order', 'like', "%$search%");
+                        ->orWhere('purchase_order', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {
                     $query->where('customer_id', $request->customer_id);
-                }
-
-                if($request->nominal) {
-                    if($request->nominal == 1) {
-                        $query->where('grandtotal', '<=', 999999);
-                    } else if($request->nominal == 2) {
-                        $query->where(function($query) {
-                                $query->where('grandtotal', '>', 999999)
-                                    ->where('grandtotal', '<=', 999999999);
-                            });
-                    } else if($request->nominal == 3) {
-                        $query->where(function($query) {
-                                $query->where('grandtotal', '>', 999999999)
-                                    ->where('grandtotal', '<=', 999999999999);
-                            });
-                    }
                 }
 
                 if($request->start_date && $request->finish_date) {
@@ -89,33 +67,17 @@ class SalesOrderController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Order::whereNotNull('sales_order')
+        $total_filtered = Order::whereNotNull('purchase_order')
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
                             $query->where('name', 'like', "%$search%");
                         })
-                        ->orWhere('sales_order', 'like', "%$search%");
+                        ->orWhere('purchase_order', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {
                     $query->where('customer_id', $request->customer_id);
-                }
-
-                if($request->nominal) {
-                    if($request->nominal == 1) {
-                        $query->where('grandtotal', '<=', 999999);
-                    } else if($request->nominal == 2) {
-                        $query->where(function($query) {
-                                $query->where('grandtotal', '>', 999999)
-                                    ->where('grandtotal', '<=', 999999999);
-                            });
-                    } else if($request->nominal == 3) {
-                        $query->where(function($query) {
-                                $query->where('grandtotal', '>', 999999999)
-                                    ->where('grandtotal', '<=', 999999999999);
-                            });
-                    }
                 }
 
                 if($request->start_date && $request->finish_date) {
@@ -133,18 +95,15 @@ class SalesOrderController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->purchase_order && $val->invoice) {
-                    $btn = '<a href="' . url('admin/manage/sales_order/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
-                } else {
-                    $btn = '<a href="' . url('admin/manage/sales_order/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
-                }
                 $response['data'][] = [
                     $nomor,
                     $val->customer->name,
-                    $val->sales_order,
+                    $val->purchase_order,
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
                     date('d F Y', strtotime($val->created_at)),
-                    $btn
+                    '
+                        <a href="' . url('admin/manage/purchase_order/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>
+                    '
                 ];
 
                 $nomor++;
@@ -164,28 +123,6 @@ class SalesOrderController extends Controller {
         return response()->json($response);
     }
 
-    public function getDelivery(Request $request)
-    {
-        $data     = [];
-        $city_id  = $request->city_id;
-        $weight   = (double)$request->weight;
-        $delivery = Delivery::where('destination_id', $city_id)
-            ->where('capacity', '>=', $weight)
-            ->orderBy('price_per_kg', 'asc')
-            ->groupBy('transport_id')
-            ->get();
-
-        foreach($delivery as $d) {
-            $data[] = [
-                'id'             => $d->id,
-                'price'          => 'Rp ' . number_format($d->price_per_kg * $weight, '0', ',', '.'),
-                'transport_name' => $d->transport->fleet
-            ];
-        }
-
-        return response()->json($data);
-    }
-
     public function detail(Request $request, $id) 
     {
         $order = Order::find($id);
@@ -194,13 +131,7 @@ class SalesOrderController extends Controller {
                 'target_price'       => 'required|array',
                 'target_price.*'     => 'required|numeric',
                 'partial_delivery'   => 'required|array',
-                'partial_delivery.*' => 'required',
-                'receiver_name'      => 'required',
-                'email'              => 'required|email',
-                'phone'              => 'required|min:9|numeric',
-                'city_id'            => 'required',
-                'address'            => 'required',
-                'delivery_id'        => 'required'
+                'partial_delivery.*' => 'required'
             ], [
                 'target_price.required'       => 'Target price cannot be a empty.',
                 'target_price.array'          => 'Target price must be array.',
@@ -208,16 +139,7 @@ class SalesOrderController extends Controller {
                 'target_price.*.numeric'      => 'Target price must be number.',
                 'partial_delivery.required'   => 'Partial delivery cannot be a empty.',
                 'partial_delivery.array'      => 'Partial delivery must be array.',
-                'partial_delivery.*.required' => 'Partial delivery nothing can be empty.',
-                'receiver_name.required'      => 'Receiver name cannot be empty.',
-                'email.required'              => 'Email cannot be empty.',
-                'email.email'                 => 'Email not valid.',
-                'phone.required'              => 'Phone cannot be empty',
-                'phone.min'                   => 'Phone must be at least 9 characters long',
-                'phone.numeric'               => 'Phone must be number',
-                'city_id.required'            => 'Please select a city.',
-                'address.required'            => 'Address cannot be empty.',
-                'delivery_id.required'        => 'Please select a fleet.'
+                'partial_delivery.*.required' => 'Partial delivery nothing can be empty.'
             ]);
 
             if($validation->fails()) {
@@ -265,21 +187,6 @@ class SalesOrderController extends Controller {
 
                     $flash_success = 'Order is under approval';
                 } else {
-                    $order->update([
-                        'invoice'        => Order::generateCode('CH', 'invoice'),
-                        'purchase_order' => Order::generateCode('CH', 'purchase_order')
-                    ]);
-
-                    OrderShipping::create([
-                        'order_id'      => $order->id,
-                        'city_id'       => $request->city_id,
-                        'delivery_id'   => $request->delivery_id,
-                        'receiver_name' => $request->receiver_name,
-                        'email'         => $request->email,
-                        'phone'         => $request->phone,
-                        'address'       => $request->address
-                    ]);
-
                     $flash_success = 'Order <b class="font-italic">' . $order->sales_order .  '</b> is already in the purchase order';
                 }
 
@@ -288,13 +195,20 @@ class SalesOrderController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Detail Sales Order',
+            'title'   => 'Detail Purchase Order',
             'order'   => $order,
-            'city'    => City::oldest('name')->get(),
-            'content' => 'admin.manage.sales_order_detail'
+            'content' => 'admin.manage.purchase_order_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function print($id)
+    {
+        $order = Order::find($id);
+        $pdf   = PDF::loadView('admin.pdf.purchase_order', ['order' => $order]);
+
+        return $pdf->stream($order->purchase_order . '.pdf', ['Attachment' => true]);
     }
 
 }

@@ -15,12 +15,10 @@ class Order extends Model {
         'customer_id',
         'xendit',
         'qr_code',
-        'step',
         'number',
-        'invoice',
         'sales_order',
+        'invoice',
         'purchase_order',
-        'delivery_order',
         'discount',
         'subtotal',
         'shipping',
@@ -49,15 +47,13 @@ class Order extends Model {
             ->limit(1)
             ->get();
 
-        if($column == 'invoice') {
-            $str = 'INV';
-        } else if($column == 'sales_order') {
+        if($column == 'sales_order') {
             $str = 'SO';
+        } else if($column == 'invoice') {
+            $str = 'INV';
         } else if($column == 'purchase_order') {
             $str = 'PO';
-        } else if($column == 'delivery_order') {
-            $str = 'DO';
-        } 
+        }
 
         if($query->count() > 0) {
             $number = (int)$query[0]->code + 1;
@@ -67,32 +63,6 @@ class Order extends Model {
 
         $code = str_pad($number, 6, 0, STR_PAD_LEFT);
         return $str . '/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
-    }
-
-    public function step() 
-    {
-        switch($this->step) {
-            case '1':
-                $step = 'Sales Order';
-                break;
-            case '2':
-                $step = 'Sales Order Approval';
-                break;
-            case '3':
-                $step = 'Purchase Order';
-                break;
-            case '4':
-                $step = 'Invoice';
-                break;
-            case '5':
-                $step = 'Delivery Order';
-                break;
-            default:
-                $step = 'Invalid';
-                break;
-        }
-
-        return $step;
     }
 
     public function type() 
@@ -133,6 +103,9 @@ class Order extends Model {
             case '6':
                 $status = 'Cancel';
                 break;
+            case '7':
+                $status = 'Approval';
+                break;
             default:
                 $status = 'Invalid';
                 break;
@@ -159,6 +132,11 @@ class Order extends Model {
     public function orderPayment()
     {
         return $this->hasOne('App\Models\OrderPayment');
+    }
+
+    public function approval()
+    {
+        return $this->morphOne('App\Models\Approval', 'approvalable');
     }
 
 }

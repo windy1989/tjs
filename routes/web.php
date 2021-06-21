@@ -405,7 +405,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('sales_order')->group(function() {
                 Route::get('/', 'SalesOrderController@index');
                 Route::post('datatable', 'SalesOrderController@datatable');
+                Route::post('get_delivery', 'SalesOrderController@getDelivery');
                 Route::match(['get', 'post'], 'detail/{id}', 'SalesOrderController@detail');
+            });
+
+            Route::prefix('purchase_order')->group(function() {
+                Route::get('/', 'PurchaseOrderController@index');
+                Route::post('datatable', 'PurchaseOrderController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'PurchaseOrderController@detail');
+                Route::match(['get', 'post'], 'print/{id}', 'PurchaseOrderController@print');
             });
         });
 

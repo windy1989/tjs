@@ -162,13 +162,18 @@ class ApprovalController extends Controller {
 
                 $notif_desc = 'Sorry, your data ' . $description . ' has been rejected';
             } else {
+                if($approval->approvalable_type == 'orders') {
+                    foreach($order->orderDetail as $od) {
+                        OrderDetail::find($od->id)->update([
+                            'price_list' => $od->target_price / $od->qty,
+                            'total'      => $od->target_price
+                        ]);
+                    }
+                } else {
+
+                }
+
                 $notif_desc = 'Success, your data ' . $description . ' has been approved';
-            }
-
-            if($approval->approvalable_type == 'orders') {
-                $order->update(['step' => 3]);
-            } else {
-
             }
 
             $approval->update([
