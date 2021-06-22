@@ -101,7 +101,11 @@
 								<td>: {{ date('d F Y', strtotime($order->created_at)) }}</td>
 							</tr>
 							<tr>
-								<td width="7%">INV#</td>
+								<td width="7%">SO</td>
+								<td>: {{ $order->sales_order }}</td>
+							</tr>
+							<tr>
+								<td width="7%">Invoice</td>
 								<td>: {{ $order->invoice }}</td>
 							</tr>
 							<tr>

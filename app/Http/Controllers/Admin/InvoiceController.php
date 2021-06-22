@@ -232,7 +232,11 @@ class InvoiceController extends Controller {
     public function print($id)
     {
         $order = Order::find($id);
-        $pdf = PDF::loadView('admin.pdf.invoice', ['order' => $order]);
+        $pdf   = PDF::loadView('admin.pdf.invoice', [
+            'order' => $order,
+            'brand' => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+        ]);
+
         return $pdf->stream('document.pdf');
     }
 

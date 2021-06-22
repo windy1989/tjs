@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<title>A simple, clean, and responsive HTML invoice template</title>
-
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Invoice {{ $order->invoice }}</title>
 		<style>
 			.invoice-box {
 				font-size: 16px;
-				line-height: 24px;
 				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 				color: #555;
 			}
@@ -19,7 +18,6 @@
 			}
 
 			.invoice-box table td {
-				padding: 5px;
 				vertical-align: top;
 			}
 
@@ -31,19 +29,14 @@
 				padding-bottom: 20px;
 			}
 
-			.invoice-box table tr.top table td.title {
-				font-size: 45px;
-				line-height: 45px;
-				color: #333;
-			}
-
 			.invoice-box table tr.information table td {
 				padding-bottom: 40px;
 			}
 
 			.invoice-box table tr.heading td {
-				background: #eee;
-				border-bottom: 1px solid #ddd;
+				background: #1a73e8;
+				border-bottom: 1px solid #1a73e8;
+				color: white;
 				font-weight: bold;
 			}
 
@@ -78,7 +71,6 @@
 				}
 			}
 
-			/** RTL **/
 			.invoice-box.rtl {
 				direction: rtl;
 				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -93,88 +85,214 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		<div class="invoice-box">
+			<h3 style="text-align:right;">PT. PERWIRA TAMARAYA ABADI</h3>
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
 					<td colspan="2">
 						<table>
 							<tr>
 								<td class="title">
-									<img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+									<img src="{{ asset('website/logo-black.png') }}" width="150">
 								</td>
-
 								<td>
-									Invoice #: 123<br />
-									Created: January 1, 2015<br />
-									Due: February 1, 2015
+									<div style="font-size:9px; font-weight:bold;">JAGAT BUILDING</div>
+									<div style="font-size:9px; font-weight:500;">St. Tomang Raya No 28 - 30</div>
+									<div style="font-size:9px; font-weight:500;">Jakarta 11430</div>
+									<div style="font-size:9px; font-weight:500;">Phone : 0811257180 / 081225575295</div>
+									<div style="font-size:9px; font-weight:500;">Email : infojkt@smartmarbleandbath.com</div>
+								</td>
+								<td style="text-align:right;">
+									<div style="font-size:9px; font-weight:bold;">MODERN CERAMIC</div>
+									<div style="font-size:9px; font-weight:500;">St. Baliwerti 119 - 121</div>
+									<div style="font-size:9px; font-weight:500;">Surabaya, Jawa Timur 60174</div>
+									<div style="font-size:9px; font-weight:500;">Phone : 031-5472860 / 031-5324505</div>
+									<div style="font-size:9px; font-weight:500;">Email : info@smartmarbleandbath.com</div>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-
-				<tr class="information">
+			</table>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
 					<td colspan="2">
 						<table>
 							<tr>
-								<td>
-									Sparksuite, Inc.<br />
-									12345 Sunny Road<br />
-									Sunnyville, CA 12345
-								</td>
-
-								<td>
-									Acme Corp.<br />
-									John Doe<br />
-									john@example.com
+								@foreach($brand as $b)
+									<td>
+										<center>
+											<img src="{{ asset(Storage::url($b->image)) }}" alt="{{ $b->name }}">
+										</center>
+									</td>
+								@endforeach
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="2">
+						<table>
+							<tr>
+								<td style="text-align:center;">
+									<h2><b>INVOICE</b></h2>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-
-				<tr class="heading">
-					<td>Payment Method</td>
-
-					<td>Check #</td>
+			</table><br>
+			<table>
+				<tr>
+					<td colspan="2">
+						<table>
+							<tr style="line-height:0 !important;">
+								<td width="10%" style="font-size:12px;">Date</td>
+								<td style="text-align:left; font-size:12px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
+							</tr>
+							<tr>
+								<td width="10%" style="font-size:12px;">SO</td>
+								<td style="text-align:left; font-size:12px;">: {{ $order->sales_order }}</td>
+							</tr>
+							<tr>
+								<td width="10%" style="font-size:12px;">Invoice</td>
+								<td style="text-align:left; font-size:12px;">: {{ $order->invoice }}</td>
+							</tr>
+							<tr>
+								<td width="10%" style="font-size:12px;">Ship Via</td>
+								<td style="text-align:left; font-size:12px;">: Land Transport</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
-
-				<tr class="details">
-					<td>Check</td>
-
-					<td>1000</td>
+				<tr><td colspan="2"></td></tr>
+				<tr><td colspan="2"></td></tr>
+				<tr>
+					<td style="text-align:left !important;">
+						<table>
+							<tr class="heading">
+								<td><div style="font-size:12px;"><b>CUSTOMER :</b></div></td>
+							</tr>
+						</table>
+						<div style="font-weight:500; font-size:12px;">{{ $order->customer->name }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->customer->phone }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->customer->email }}</div>
+					</td>
+					<td style="text-align:left !important;">
+						<table>
+							<tr class="heading">
+								<td><div style="font-size:12px;"><b>SHIP TO :</b></div></td>
+							</tr>
+						</table>
+						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->receiver_name }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->phone }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->email }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->city->name }}</div>
+						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->city->address }}</div>
+						<div style="font-weight:500; font-size:12px;">
+							Fleet : {{ $order->orderShipping->delivery->transport->fleet }}	
+						</div>
+					</td>
 				</tr>
-
-				<tr class="heading">
-					<td>Item</td>
-
-					<td>Price</td>
+			</table><br>
+			<table border="1" cellpadding="5" cellspacing="0" style="width:100%; font-size:10px;">
+				<thead>
+					<tr style="background:#1a73e8;">
+						<th style="color:white;"><center>No</center></th>
+						<th style="color:white;"><center>Picture</center></th>
+						<th style="color:white;"><center>Item Name</center></th>
+						<th style="color:white;"><center>Qty</center></th>
+						<th style="color:white;"><center>Unit Price</center></th>
+						<th style="color:white;"><center>Total</center></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($order->orderDetail as $key => $od)
+						<tr>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $key + 1 }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									<img src="{{ $od->product->type->image() }}" style="max-width:20px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $od->product->code() }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $od->qty }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									Rp {{ number_format($od->price_list, 0, ',', '.') }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									Rp {{ number_format($od->total, 0, ',', '.') }}
+								</center>
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="4" style="text-align:right;">SUBTOTAL</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;">SHIPPING</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->shipping, 0, ',', '.') }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;">DISCOUNT</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->discount, 0, ',', '.') }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;">TOTAL</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;">STATUS</th>
+						<th colspan="2" style="text-align:left;">
+							@if($order->payment == 0 || $order->payment == null)
+								Unpaid
+							@elseif($order->payment < $order->grandtotal)
+								Down Payment
+							@else
+								Full Payment
+							@endif	
+						</th>
+					</tr>
+				</tfoot>
+			</table><br>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<h6 style="font-size:12px; text-align:center;">Comments or Special Instructions :</h6>
+						<div></div>
+						<div style="font-size:12px; text-align:left;">1. Down Payment is 50% from the total</div>
+						<div style="font-size:12px; text-align:left;">2. The goods must be shipped to Jakarta before May 19th, 2021. If the goods are not in stock, please send the Concealed Body Art. HT5716ZZ11 first.</div>
+					</td>
 				</tr>
-
-				<tr class="item">
-					<td>Website design</td>
-
-					<td>$300.00</td>
-				</tr>
-
-				<tr class="item">
-					<td>Hosting (3 months)</td>
-
-					<td>$75.00</td>
-				</tr>
-
-				<tr class="item last">
-					<td>Domain name (1 year)</td>
-
-					<td>$10.00</td>
-				</tr>
-
-				<tr class="total">
-					<td></td>
-
-					<td>Total: $385.00</td>
+			</table><br><br><br><br>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td style="text-align:center;">
+						<div style="font-size:12px;">Created By</div>
+						<br><br><br>
+						<div style="font-size:12px;">{{ session('bo_name') }}</div>
+					</td>
 				</tr>
 			</table>
 		</div>
