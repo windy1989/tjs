@@ -171,8 +171,8 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Description :</label>
-									<textarea name="description" id="description" class="form-control" placeholder="Enter description" onkeyup="checkSubmitButton()">{{ old('description') }}</textarea>
+									<label>Additional Note :</label>
+									<textarea name="description" id="description" class="form-control" placeholder="Enter additional note" onkeyup="checkSubmitButton()">{{ old('description') }}</textarea>
 								</div>
 							</div>
 						</div>

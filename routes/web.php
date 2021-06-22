@@ -413,6 +413,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('/', 'InvoiceController@index');
                 Route::post('datatable', 'InvoiceController@datatable');
                 Route::match(['get', 'post'], 'detail/{id}', 'InvoiceController@detail');
+                Route::match(['get', 'post'], 'print/{id}', 'InvoiceController@print');
             });
 
             Route::prefix('purchase_order')->group(function() {

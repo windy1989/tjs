@@ -29,7 +29,7 @@
                            Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
                         <div class="d-flex align-items-center justify-content-end">
-                           Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }}</strong>
+                           Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Dos</strong>
                         </div>
                      </div>
                      <div class="line"></div>

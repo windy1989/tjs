@@ -172,8 +172,7 @@ class ApprovalController extends Controller {
                     foreach($order->orderDetail as $od) {
                         $total_discount += $od->total - $od->target_price;
                         OrderDetail::find($od->id)->update([
-                            'price_list' => $od->target_price / $od->qty,
-                            'total'      => $od->target_price
+                            'total' => $od->target_price
                         ]);
                     }
 

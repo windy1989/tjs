@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Manage Sales Order</span>
+					<span class="font-weight-semibold">Manage Invoice</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
-					<span class="breadcrumb-item active">Sales Order</span>
+					<span class="breadcrumb-item active">Invoice</span>
 				</div>
 			</div>
 		</div>
@@ -97,7 +97,7 @@
       </div>
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Sales Order</h5>
+				<h5 class="card-title">List Data Invoice</h5>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
@@ -107,6 +107,7 @@
                         <th>No</th>
                         <th>Customer</th>
                         <th>Code</th>
+                        <th>Payment</th>
                         <th>Grandtotal</th>
                         <th>Status</th>
                         <th>Date</th>
@@ -139,7 +140,7 @@
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[5, 'desc']],
+         order: [[6, 'desc']],
          ajax: {
             url: '{{ url("admin/manage/invoice/datatable") }}',
             type: 'POST',
@@ -171,7 +172,8 @@
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'customer_id', className: 'text-center align-middle' },
-            { name: 'sales_order', className: 'text-center nowrap align-middle' },
+            { name: 'invoice', className: 'text-center nowrap align-middle' },
+            { name: 'payment', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'grandtotal', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'status', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'created_at', searchable: false, className: 'text-center nowrap align-middle' },

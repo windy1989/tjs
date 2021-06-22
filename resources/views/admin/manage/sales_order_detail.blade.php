@@ -154,7 +154,7 @@
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">
-											Rp {{ number_format($od->total - $discount, 0, ',', '.') }}
+											Rp {{ number_format($discount * $od->qty, 0, ',', '.') }}
 										</span>
 									</td>
 									<td class="align-middle">
@@ -348,15 +348,15 @@
 								<span class="font-weight-bold text-uppercase">Well Done!</span>
 								<span class="float-right font-italic">Data has been processed</span>
 							</div>
-						@elseif(!$order->invoice)
-							<div class="text-right mt-3">
-								<button type="submit" id="btn_approval" class="btn btn-warning btn-labeled btn-labeled-left" onclick="actionSubmit(this)" style="display:none;"><b><i class="icon-check"></i></b> Approval Now</button>
-								<button type="submit" id="btn_invoice" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Invoice</button>
-							</div>
-						@else
+						@elseif($order->approval && $order->approval->status == 1)
 							<div class="alert alert-info alert-styled-left alert-dismissible">
 								<span class="font-weight-bold text-uppercase">Waiting For Approval!</span>
 								<span class="float-right font-italic">Please be patient, your order is being approved</span>
+							</div>
+						@else
+							<div class="text-right mt-3">
+								<button type="submit" id="btn_approval" class="btn btn-warning btn-labeled btn-labeled-left" onclick="actionSubmit(this)" style="display:none;"><b><i class="icon-check"></i></b> Approval Now</button>
+								<button type="submit" id="btn_invoice" class="btn btn-primary btn-labeled btn-labeled-left" onclick="actionSubmit(this)"><b><i class="icon-paperplane"></i></b> Create Invoice</button>
 							</div>
 						@endif
 					</div>
@@ -443,7 +443,7 @@
 				var total_all_target_price = (total_target_price - target_price_real) + target_price_value;
 			}
 
-			if(total_all_target_price < total_max_discount) {
+			if(total_max_discount < total_all_target_price) {
 				$('#btn_invoice').hide();
 				$('#btn_approval').show();
 				$('#input_invoice').val(null);

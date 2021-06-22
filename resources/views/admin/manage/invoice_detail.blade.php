@@ -9,8 +9,11 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/manage/sales_order') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/manage/invoice') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
+					</a>
+					<a href="{{ url('admin/manage/invoice/print/' . $order->id) }}" class="btn bg-success ml-2 btn-labeled btn-labeled-left">
+						<b><i class="icon-printer2"></i></b> Print
 					</a>
 				</div>
 			</div>
@@ -69,7 +72,7 @@
 									</center>
 								</div>
 								<div class="col-md-5">
-									<div style="font-size:12px;" class="font-weight-semibold">SHOWROOM & OFFICE MODERN CERAMIC</div>
+									<div style="font-size:12px;" class="font-weight-semibold">MODERN CERAMIC</div>
 									<div style="font-size:12px;" class="font-weight-semibold">St. Baliwerti 119 - 121</div>
 									<div style="font-size:12px;" class="font-weight-semibold">Surabaya, Jawa Timur 60174</div>
 									<div style="font-size:12px;" class="font-weight-semibold">Phone : 031-5472860 / 031-5324505</div>
@@ -89,9 +92,9 @@
 						@endforeach
 					</div>
 					<div class="form-group">
-						<h4 class="font-weight-bold text-center">INVOICE</h4>
+						<h1 class="font-weight-bold text-center">INVOICE</h1>
 					</div>
-					<div class="form-group ml-5 mt-5 font-weight-semibold">
+					<div class="form-group mt-5 font-weight-semibold">
 						<table width="100%">
 							<tr>
 								<td width="7%">Date</td>
@@ -167,17 +170,35 @@
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Total</td>
-									<td colspan="2" class="text-danger">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</td>
+									<td colspan="2" class="text-danger font-weight-bold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</td>
+								</tr>
+								<tr>
+									<td colspan="4" class="text-right">Status</td>
+									<td colspan="2">
+										@if($order->payment == 0 || $order->payment == null)
+											Unpaid
+										@elseif($order->payment < $order->grandtotal)
+											Down Payment
+										@else
+											Full Payment
+										@endif
+									</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Payment</td>
 									<td colspan="2" class="text-danger">
-										<input type="number" name="payment" id="payment" class="form-control form-control-sm" placeholder="0">
+										<input type="number" name="payment" id="payment" class="form-control form-control-sm" value="{{ $order->payment }}" placeholder="0">
 									</td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
+					@if($order->payment < $order->grandtotal)
+						<div class="form-group"><hr></div>
+						<div class="form-group text-right">
+							<button type="submit" id="btn_submit" class="btn bg-success">Submit</button>
+						</div>
+					@endif
 				</div>
 			</div>
 		</form>

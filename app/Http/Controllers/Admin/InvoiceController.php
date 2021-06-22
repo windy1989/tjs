@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Brand;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\OrderPayment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,6 +29,7 @@ class InvoiceController extends Controller {
             'id',
             'customer_id',
             'invoice',
+            'payment',
             'grandtotal',
             'status',
             'created_at'
@@ -169,6 +172,7 @@ class InvoiceController extends Controller {
                     $nomor,
                     $val->customer->name,
                     $val->invoice,
+                    'Rp ' . number_format($val->payment, 0, ',', '.'),
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
                     $status,
                     date('d F Y', strtotime($val->created_at)),
@@ -196,111 +200,23 @@ class InvoiceController extends Controller {
     {
         $order = Order::find($id);
         if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'target_price'       => 'required|array',
-                'target_price.*'     => 'required|numeric',
-                'partial_delivery'   => 'required|array',
-                'partial_delivery.*' => 'required',
-                'receiver_name'      => 'required',
-                'email'              => 'required|email',
-                'phone'              => 'required|min:9|numeric',
-                'city_id'            => 'required',
-                'address'            => 'required',
-                'delivery_id'        => 'required'
-            ], [
-                'target_price.required'       => 'Target price cannot be a empty.',
-                'target_price.array'          => 'Target price must be array.',
-                'target_price.*.required'     => 'Target price nothing can be empty.',
-                'target_price.*.numeric'      => 'Target price must be number.',
-                'partial_delivery.required'   => 'Partial delivery cannot be a empty.',
-                'partial_delivery.array'      => 'Partial delivery must be array.',
-                'partial_delivery.*.required' => 'Partial delivery nothing can be empty.',
-                'receiver_name.required'      => 'Receiver name cannot be empty.',
-                'email.required'              => 'Email cannot be empty.',
-                'email.email'                 => 'Email not valid.',
-                'phone.required'              => 'Phone cannot be empty',
-                'phone.min'                   => 'Phone must be at least 9 characters long',
-                'phone.numeric'               => 'Phone must be number',
-                'city_id.required'            => 'Please select a city.',
-                'address.required'            => 'Address cannot be empty.',
-                'delivery_id.required'        => 'Please select a fleet.'
+            if($request->payment) {
+                $status = 2;
+                OrderPayment::create([
+                    'order_id' => $order->id,
+                    'method'   => 'Cash',
+                    'channel'  => 'Smart Marble'
+                ]);
+            } else {
+                $status = 1;
+            }
+
+            $order->update([
+                'payment' => $request->payment,
+                'status'  => $status
             ]);
 
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
-            } else {
-                $approval_manager  = 0;
-                $approval_director = 0;
-                $total_weight      = 0;
-
-                foreach($request->order_detail_id as $key => $odi) {
-                    $order_detail            = OrderDetail::find($odi);
-                    $total_weight           += $order_detail->product->type->weight * $order_detail->qty;
-                    $discount_manager        = $order_detail->product->pricingPolicy ? $order_detail->product->pricingPolicy->discount_retail_manager : 0;
-                    $discount_director       = $order_detail->product->pricingPolicy ?  $order_detail->product->pricingPolicy->discount_retail_director : 0;
-                    $total_discount_manager  = $order_detail->total - ($discount_manager * $order_detail->qty);
-                    $total_discount_director = $order_detail->total - ($discount_director * $order_detail->qty);
-
-                    if($request->target_price[$key] < $total_discount_manager) {
-                        $approval_manager += 1;
-                    } else {
-                        $approval_director += 1;
-                    }
-
-                    OrderDetail::find($odi)->update([
-                        'target_price'     => $request->target_price[$key],
-                        'partial_delivery' => $request->partial_delivery[$key]
-                    ]);
-                } 
-
-                if($request->approval) {
-                    if($approval_director > 0) {
-                        $role = 1;
-                    } else {
-                        $role = 5;
-                    }
-
-                    $user_id = UserRole::select('user_id')->where('role', $role)->get();
-                    foreach($user_id as $ui) {
-                        Approval::create([
-                            'user_id'           => $ui->user_id,
-                            'approvalable_type' => 'orders',
-                            'approvalable_id'   => $order->id,
-                            'reference'         => session('bo_id'),
-                            'status'            => 1
-                        ]);
-                    }
-
-                    $flash_success = 'Order is under approval';
-                } else {
-                    $order->update([
-                        'invoice'        => Order::generateCode('CH', 'invoice'),
-                        'purchase_order' => Order::generateCode('CH', 'purchase_order')
-                    ]);
-
-                    $flash_success = 'Order <b class="font-italic">' . $order->sales_order .  '</b> is already in the purchase order';
-                }
-
-                $delivery     = Delivery::find($request->delivery_id);
-                $shipping_fee = $delivery->price_per_kg * $total_weight;
-                $order->update([
-                    'subtotal'   => $order->orderDetail->sum('target_price'),
-                    'shipping'   => $shipping_fee,
-                    'grandtotal' => $order->orderDetail->sum('target_price') + $shipping_fee
-                ]);
-
-                OrderShipping::create([
-                    'order_id'      => $order->id,
-                    'city_id'       => $request->city_id,
-                    'delivery_id'   => $request->delivery_id,
-                    'receiver_name' => $request->receiver_name,
-                    'email'         => $request->email,
-                    'phone'         => $request->phone,
-                    'address'       => $request->address
-                ]);
-
-                return redirect('admin/manage/sales_order')->with(['success' => $flash_success]);
-            }
+            return redirect()->back()->with(['success' => 'Data has been processed!']);
         }
 
         $data  = [
@@ -311,6 +227,13 @@ class InvoiceController extends Controller {
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function print($id)
+    {
+        $order = Order::find($id);
+        $pdf = PDF::loadView('admin.pdf.invoice', ['order' => $order]);
+        return $pdf->stream('document.pdf');
     }
 
 }

@@ -131,7 +131,7 @@
 									</td>
 									<td class="align-middle">
 										<span class="font-weight-semibold">
-											Rp {{ number_format($od->total - $discount, 0, ',', '.') }}
+											Rp {{ number_format($discount * $od->qty, 0, ',', '.') }}
 										</span>
 									</td>
 									<td class="align-middle">

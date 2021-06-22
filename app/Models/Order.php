@@ -95,16 +95,13 @@ class Order extends Model {
                 $status = 'Packed';
                 break;
             case '4':
-                $status = 'Delivery';
+                $status = 'On Delivery';
                 break;
             case '5':
-                $status = 'Finish';
+                $status = 'Arrived';
                 break;
             case '6':
                 $status = 'Cancel';
-                break;
-            case '7':
-                $status = 'Approval';
                 break;
             default:
                 $status = 'Invalid';
