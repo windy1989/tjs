@@ -201,12 +201,16 @@ class InvoiceController extends Controller {
         $order = Order::find($id);
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->payment) {
-                $status = 2;
-                OrderPayment::create([
-                    'order_id' => $order->id,
-                    'method'   => 'Cash',
-                    'channel'  => 'Smart Marble'
-                ]);
+                if($order->status == 1 || $order->status == 6) {
+                     $status = 2;
+                    OrderPayment::create([
+                        'order_id' => $order->id,
+                        'method'   => 'Cash',
+                        'channel'  => 'Smart Marble'
+                    ]);
+                } else {
+                    $status = $order->status;
+                }
             } else {
                 $status = 1;
             }
