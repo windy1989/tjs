@@ -57,10 +57,8 @@
                         <option value="">All Status</option>
                         <option value="1">Unpaid</option>
                         <option value="2">Paid</option>
-                        <option value="3">Packed</option>
-                        <option value="4">On Delivery</option>
-                        <option value="5">Arrived</option>
-                        <option value="6">Cancel</option>
+                        <option value="3">Done</option>
+                        <option value="4">Cancel</option>
                      </select>
                   </div>
                </div>

@@ -43,9 +43,9 @@ class TransactionController extends Controller {
         $query_data = Order::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%");
-                                })
-                            ->orWhere('number', 'like', "%$search%");
+                            $query->where('name', 'like', "%$search%");
+                        })
+                        ->orWhere('number', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {
@@ -93,9 +93,9 @@ class TransactionController extends Controller {
         $total_filtered = Order::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%");
-                                })
-                            ->orWhere('number', 'like', "%$search%");
+                            $query->where('name', 'like', "%$search%");
+                        })
+                        ->orWhere('number', 'like', "%$search%");
                 }   
                 
                 if($request->customer_id) {

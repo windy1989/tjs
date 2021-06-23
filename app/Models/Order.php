@@ -92,15 +92,9 @@ class Order extends Model {
                 $status = 'Paid';
                 break;
             case '3':
-                $status = 'Packed';
+                $status = 'Done';
                 break;
             case '4':
-                $status = 'On Delivery';
-                break;
-            case '5':
-                $status = 'Arrived';
-                break;
-            case '6':
                 $status = 'Cancel';
                 break;
             default:

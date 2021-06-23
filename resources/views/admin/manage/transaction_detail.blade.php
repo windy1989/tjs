@@ -237,18 +237,14 @@
 							<div class="form-group"><hr></div>
 							<div class="font-weight-semibold">
 								@if($order->status == 1)
-									Waiting for payment
-								@elseif($order->status == 2)
-									Order has been paid
-								@elseif($order->status == 3)                           
-									Orders are being packed
-								@elseif($order->status == 4)
-									Order has been sent
-								@elseif($order->status == 5)
-									Transaction has been completed
-								@elseif($order->status == 6)
-									Order canceled
-								@endif	
+                              Waiting for payment
+                           @elseif($order->status == 2)
+                              Order has been paid
+                           @elseif($order->status == 3)                           
+                              Transaction has been completed
+                           @elseif($order->status == 4)
+                              Order canceled
+                           @endif
 							</div>
 						</div>
 					</div>

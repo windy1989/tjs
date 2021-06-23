@@ -22,20 +22,12 @@
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 2)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=3') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 3 ? 'active' : '' }}">
-                     <div>Packed</div>
+                     <div>Done</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 3)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=4') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 4 ? 'active' : '' }}">
-                     <div>On Delivery</div>
-                     <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 4)->count() }}</span>
-                  </a>
-                  <a href="{{ url('account/history_order?status=5') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 5 ? 'active' : '' }}">
-                     <div>Arrived</div>
-                     <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 5)->count() }}</span>
-                  </a>
-                  <a href="{{ url('account/history_order?status=6') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 6 ? 'active' : '' }}">
                      <div>Cancel</div>
-                     <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 6)->count() }}</span>
+                     <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 4)->count() }}</span>
                   </a>
                </div>
             </div>

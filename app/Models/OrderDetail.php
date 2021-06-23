@@ -27,7 +27,8 @@ class OrderDetail extends Model {
         'qty',
         'ready',
         'indent',
-        'total'
+        'total',
+        'status'
     ];
 
     public function product()
