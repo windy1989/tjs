@@ -120,8 +120,7 @@ class CheckoutController extends Controller {
                     'qty'              => $qty,
                     'ready'            => $ready,
                     'indent'           => $indent,
-                    'total'            => $subtotal,
-                    'status'           => 1
+                    'total'            => $subtotal
                 ]);
             }
 

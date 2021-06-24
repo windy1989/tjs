@@ -129,6 +129,24 @@ class SMB {
       $total_advance_purchase  = $advance_purchase_debit - $advance_purchase_credit;
       $grandtotal_receivable  += $total_advance_purchase;
 
+      $owner_ledger           = Coa::where('code', '1.100.04')->first();
+      $owner_ledger_debit     = Journal::where('debit', $owner_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $owner_ledger_credit    = Journal::where('credit', $owner_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $total_owner_ledger     = $owner_ledger_debit - $owner_ledger_credit;
+      $grandtotal_receivable += $total_advance_purchase;
+
+      $employee_ledger        = Coa::where('code', '1.100.05')->first();
+      $employee_ledger_debit  = Journal::where('debit', $employee_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $employee_ledger_credit = Journal::where('credit', $employee_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $total_employee_ledger  = $employee_ledger_debit - $employee_ledger_credit;
+      $grandtotal_receivable += $total_employee_ledger;
+
+      $holding_company_ledger        = Coa::where('code', '1.100.06')->first();
+      $holding_company_ledger_debit  = Journal::where('debit', $holding_company_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $holding_company_ledger_credit = Journal::where('credit', $holding_company_ledger->id)->whereRaw($where_raw)->sum('nominal');
+      $total_holding_company_ledger  = $holding_company_ledger_debit - $holding_company_ledger_credit;
+      $grandtotal_receivable        += $total_holding_company_ledger;
+      
       $supply_item_sby        = Coa::where('code', '1.200.01')->first();
       $supply_item_sby_sub    = Coa::where('parent_id', $supply_item_sby->id)->get();
       $supply_item_sby_result = [];
@@ -255,6 +273,30 @@ class SMB {
          ];
       }
 
+      $owner_loan         = Coa::where('code', '2.210.00')->first();
+      $owner_loan_debit   = Journal::where('debit', $owner_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $owner_loan_credit  = Journal::where('credit', $owner_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $total_owner_loan   = $owner_loan_debit - $owner_loan_credit > 0 ? ($owner_loan_debit - $owner_loan_credit) * -1 : abs($owner_loan_debit - $owner_loan_credit);
+      $grandtotal_equity += $total_owner_loan;
+
+      $bank_loan          = Coa::where('code', '2.211.00')->first();
+      $bank_loan_debit    = Journal::where('debit', $bank_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $bank_loan_credit   = Journal::where('credit', $bank_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $total_bank_loan    = $bank_loan_debit - $bank_loan_credit > 0 ? ($bank_loan_debit - $bank_loan_credit) * -1 : abs($bank_loan_debit - $bank_loan_credit);
+      $grandtotal_equity += $total_bank_loan;
+
+      $vehichle_loan        = Coa::where('code', '2.212.00')->first();
+      $vehichle_loan_debit  = Journal::where('debit', $vehichle_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $vehichle_loan_credit = Journal::where('credit', $vehichle_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $total_vehichle_loan  = $vehichle_loan_debit - $vehichle_loan_credit > 0 ? ($vehichle_loan_debit - $vehichle_loan_credit) * -1 : abs($vehichle_loan_debit - $vehichle_loan_credit);
+      $grandtotal_equity   += $total_vehichle_loan;
+
+      $holding_company_loan        = Coa::where('code', '2.213.00')->first();
+      $holding_company_loan_debit  = Journal::where('debit', $holding_company_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $holding_company_loan_credit = Journal::where('credit', $holding_company_loan->id)->whereRaw($where_raw)->sum('nominal');
+      $total_holding_company_loan  = $holding_company_loan_debit - $holding_company_loan_credit > 0 ? ($holding_company_loan_debit - $holding_company_loan_credit) * -1 : abs($holding_company_loan_debit - $holding_company_loan_credit);
+      $grandtotal_equity          += $total_holding_company_loan;
+
       $tax        = Coa::where('code', '2.100.00')->first();
       $tax_sub    = Coa::where('parent_id', $tax->id)->get();
       $tax_result = [];
@@ -352,6 +394,21 @@ class SMB {
                   'name'    => $advance_purchase->name,
                   'balance' => $total_advance_purchase,
                   'sub'     => []
+               ],
+               [
+                  'name'    => $owner_ledger->name,
+                  'balance' => $total_owner_ledger,
+                  'sub'     => []
+               ],
+               [
+                  'name'    => $employee_ledger->name,
+                  'balance' => $total_employee_ledger,
+                  'sub'     => []
+               ],
+               [
+                  'name'    => $holding_company_ledger->name,
+                  'balance' => $total_holding_company_ledger,
+                  'sub'     => []
                ]
             ],
             'supply' => [
@@ -417,6 +474,26 @@ class SMB {
                   'name'    => $debt_business->name,
                   'balance' => null,
                   'sub'     => $debt_business_result
+               ],
+               [
+                  'name'    => $owner_loan->name,
+                  'balance' => $total_owner_loan,
+                  'sub'     => []
+               ],
+               [
+                  'name'    => $bank_loan->name,
+                  'balance' => $total_bank_loan,
+                  'sub'     => []
+               ],
+               [
+                  'name'    => $vehichle_loan->name,
+                  'balance' => $total_vehichle_loan,
+                  'sub'     => []
+               ],
+               [
+                  'name'    => $holding_company_loan->name,
+                  'balance' => $total_holding_company_loan,
+                  'sub'     => []
                ]
             ],
             'responbility' => [
@@ -511,7 +588,7 @@ class SMB {
       $sale_result = [];
       foreach($sale as $ss) {
          $sale     = Coa::find($ss->id);
-         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         $sale_sub = Coa::where('parent_id', $sale->id)->orderBy('code', 'asc')->get();
          foreach($sale_sub as $ss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -555,7 +632,7 @@ class SMB {
       $sale_service_result = [];
       foreach($sale_service as $sss) {
          $sale     = Coa::find($sss->id);
-         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         $sale_sub = Coa::where('parent_id', $sale->id)->orderBy('code', 'asc')->get();
          foreach($sale_sub as $ss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -599,7 +676,7 @@ class SMB {
       $cogs_result = [];
       foreach($cogs as $sc) {
          $cogs     = Coa::find($sc->id);
-         $cogs_sub = Coa::where('parent_id', $cogs->id)->get();
+         $cogs_sub = Coa::where('parent_id', $cogs->id)->orderBy('code', 'asc')->get();
          foreach($cogs_sub as $cs) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $cs->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -643,7 +720,7 @@ class SMB {
       $salary_wages_result = [];
       foreach($salary_wages as $ssw) {
          $salary_wages     = Coa::find($ssw->id);
-         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->get();
+         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->orderBy('code', 'asc')->get();
          foreach($salary_wages_sub as $sws) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $sws->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -705,7 +782,7 @@ class SMB {
       $fee_marketing_result = [];
       foreach($fee_marketing as $sfm) {
          $fee_marketing     = Coa::find($sfm->id);
-         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->get();
+         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->orderBy('code', 'asc')->get();
          foreach($fee_marketing_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -767,7 +844,7 @@ class SMB {
       $fee_other_result = [];
       foreach($fee_other as $sfo) {
          $fee_other     = Coa::find($sfo->id);
-         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->get();
+         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->orderBy('code', 'asc')->get();
          foreach($fee_other_sub as $fos) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fos->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -829,7 +906,7 @@ class SMB {
       $fee_maintenance_result = [];
       foreach($fee_maintenance as $sfm) {
          $fee_maintenance     = Coa::find($sfm->id);
-         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->get();
+         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->orderBy('code', 'asc')->get();
          foreach($fee_maintenance_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -891,7 +968,7 @@ class SMB {
       $fee_shrinkage_result = [];
       foreach($fee_shrinkage as $fs) {
          $fee_shrinkage     = Coa::find($fs->id);
-         $fee_shrinkage_sub = Coa::where('parent_id', $fee_shrinkage->id)->get();
+         $fee_shrinkage_sub = Coa::where('parent_id', $fee_shrinkage->id)->orderBy('code', 'asc')->get();
          foreach($fee_shrinkage_sub as $fss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fss->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1222,7 +1299,7 @@ class SMB {
       $sale_result = [];
       foreach($sale as $ss) {
          $sale     = Coa::find($ss->id);
-         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         $sale_sub = Coa::where('parent_id', $sale->id)->orderBy('code', 'asc')->get();
          foreach($sale_sub as $ss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1306,7 +1383,7 @@ class SMB {
       $cogs_result = [];
       foreach($cogs as $sc) {
          $cogs     = Coa::find($sc->id);
-         $cogs_sub = Coa::where('parent_id', $cogs->id)->get();
+         $cogs_sub = Coa::where('parent_id', $cogs->id)->orderBy('code', 'asc')->get();
          foreach($cogs_sub as $cs) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $cs->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1350,7 +1427,7 @@ class SMB {
       $salary_wages_result = [];
       foreach($salary_wages as $ssw) {
          $salary_wages     = Coa::find($ssw->id);
-         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->get();
+         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->orderBy('code', 'asc')->get();
          foreach($salary_wages_sub as $sws) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $sws->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1412,7 +1489,7 @@ class SMB {
       $fee_marketing_result = [];
       foreach($fee_marketing as $sfm) {
          $fee_marketing     = Coa::find($sfm->id);
-         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->get();
+         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->orderBy('code', 'asc')->get();
          foreach($fee_marketing_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1474,7 +1551,7 @@ class SMB {
       $fee_other_result = [];
       foreach($fee_other as $sfo) {
          $fee_other     = Coa::find($sfo->id);
-         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->get();
+         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->orderBy('code', 'asc')->get();
          foreach($fee_other_sub as $fos) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fos->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1536,7 +1613,7 @@ class SMB {
       $fee_maintenance_result = [];
       foreach($fee_maintenance as $sfm) {
          $fee_maintenance     = Coa::find($sfm->id);
-         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->get();
+         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->orderBy('code', 'asc')->get();
          foreach($fee_maintenance_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1717,7 +1794,7 @@ class SMB {
       $sale_result = [];
       foreach($sale as $ss) {
          $sale     = Coa::find($ss->id);
-         $sale_sub = Coa::where('parent_id', $sale->id)->get();
+         $sale_sub = Coa::where('parent_id', $sale->id)->orderBy('code', 'asc')->get();
          foreach($sale_sub as $ss) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ss->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1801,7 +1878,7 @@ class SMB {
       $cogs_result = [];
       foreach($cogs as $sc) {
          $cogs     = Coa::find($sc->id);
-         $cogs_sub = Coa::where('parent_id', $cogs->id)->get();
+         $cogs_sub = Coa::where('parent_id', $cogs->id)->orderBy('code', 'asc')->get();
          foreach($cogs_sub as $cs) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $cs->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1845,7 +1922,7 @@ class SMB {
       $salary_wages_result = [];
       foreach($salary_wages as $ssw) {
          $salary_wages     = Coa::find($ssw->id);
-         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->get();
+         $salary_wages_sub = Coa::where('parent_id', $salary_wages->id)->orderBy('code', 'asc')->get();
          foreach($salary_wages_sub as $sws) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $sws->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1907,7 +1984,7 @@ class SMB {
       $fee_marketing_result = [];
       foreach($fee_marketing as $sfm) {
          $fee_marketing     = Coa::find($sfm->id);
-         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->get();
+         $fee_marketing_sub = Coa::where('parent_id', $fee_marketing->id)->orderBy('code', 'asc')->get();
          foreach($fee_marketing_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -1969,7 +2046,7 @@ class SMB {
       $fee_other_result = [];
       foreach($fee_other as $sfo) {
          $fee_other     = Coa::find($sfo->id);
-         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->get();
+         $fee_other_sub = Coa::where('parent_id', $fee_other->id)->orderBy('code', 'asc')->get();
          foreach($fee_other_sub as $fos) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fos->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -2031,7 +2108,7 @@ class SMB {
       $fee_maintenance_result = [];
       foreach($fee_maintenance as $sfm) {
          $fee_maintenance     = Coa::find($sfm->id);
-         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->get();
+         $fee_maintenance_sub = Coa::where('parent_id', $fee_maintenance->id)->orderBy('code', 'asc')->get();
          foreach($fee_maintenance_sub as $fms) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $fms->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -2209,7 +2286,7 @@ class SMB {
       $depreciation_result = [];
       foreach($depreciation as $d) {
          $depreciation     = Coa::find($d->id);
-         $depreciation_sub = Coa::where('parent_id', $depreciation->id)->get();
+         $depreciation_sub = Coa::where('parent_id', $depreciation->id)->orderBy('code', 'asc')->get();
          foreach($depreciation_sub as $ds) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ds->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -2253,7 +2330,7 @@ class SMB {
       $other_income_result = [];
       foreach($other_income as $oi) {
          $other_income     = Coa::find($oi->id);
-         $other_income_sub = Coa::where('parent_id', $other_income->id)->get();
+         $other_income_sub = Coa::where('parent_id', $other_income->id)->orderBy('code', 'asc')->get();
          foreach($other_income_sub as $ois) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ois->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
@@ -2297,7 +2374,7 @@ class SMB {
       $other_deduction_result = [];
       foreach($other_deduction as $od) {
          $other_deduction     = Coa::find($od->id);
-         $other_deduction_sub = Coa::where('parent_id', $other_deduction->id)->get();
+         $other_deduction_sub = Coa::where('parent_id', $other_deduction->id)->orderBy('code', 'asc')->get();
          foreach($other_deduction_sub as $ods) {
             $sub_1                  = collect(Coa::select('id')->where('parent_id', $ods->id)->get()->toArray());
             $sub_2                  = collect(Coa::select('id')->whereIn('parent_id', $sub_1->flatten())->get()->toArray());
