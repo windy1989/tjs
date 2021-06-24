@@ -9,10 +9,9 @@ lightbox.option({
    wrapAround: true
 });
 
-$(document).ready(function() {
+$(function() {
    $('html').tooltip({selector: '[data-popup="tooltip"]'});
    $('.form-check-input-styled').uniform();
-   $('.number').number(true);
    $('.select2').select2();
    $('.form-check-input-switch').bootstrapSwitch();
 

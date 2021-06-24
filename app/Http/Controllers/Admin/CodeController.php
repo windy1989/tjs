@@ -54,7 +54,7 @@ class CodeController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Product::count();
+        $total_data = Product::groupBy('id')->count();
         
         $query_data = Product::where(function($query) use ($search, $request) {
                 if($search) {
@@ -97,6 +97,7 @@ class CodeController extends Controller {
             ->offset($start)
             ->limit($length)
             ->orderBy($order, $dir)
+            ->groupBy('id')
             ->get();
 
         $total_filtered = Product::where(function($query) use ($search, $request) {
@@ -137,6 +138,7 @@ class CodeController extends Controller {
                     $query->where('status', $request->status);
                 }
             })
+            ->groupBy('id')
             ->count();
 
         $response['data'] = [];

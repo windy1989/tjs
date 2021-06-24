@@ -150,20 +150,20 @@
 					<td colspan="2">
 						<table>
 							<tr style="line-height:0 !important;">
-								<td width="10%" style="font-size:12px;">Date</td>
-								<td style="text-align:left; font-size:12px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
+								<td width="10%" style="font-size:10px;">Date</td>
+								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
 							</tr>
 							<tr>
-								<td width="10%" style="font-size:12px;">SO</td>
-								<td style="text-align:left; font-size:12px;">: {{ $order->sales_order }}</td>
+								<td width="10%" style="font-size:10px;">SO</td>
+								<td style="text-align:left; font-size:10px;">: {{ $order->sales_order }}</td>
 							</tr>
 							<tr>
-								<td width="10%" style="font-size:12px;">Invoice</td>
-								<td style="text-align:left; font-size:12px;">: {{ $order->invoice }}</td>
+								<td width="10%" style="font-size:10px;">Invoice</td>
+								<td style="text-align:left; font-size:10px;">: {{ $order->invoice }}</td>
 							</tr>
 							<tr>
-								<td width="10%" style="font-size:12px;">Ship Via</td>
-								<td style="text-align:left; font-size:12px;">: Land Transport</td>
+								<td width="10%" style="font-size:10px;">Ship Via</td>
+								<td style="text-align:left; font-size:10px;">: Land Transport</td>
 							</tr>
 						</table>
 					</td>
@@ -174,25 +174,25 @@
 					<td style="text-align:left !important;">
 						<table>
 							<tr class="heading">
-								<td><div style="font-size:12px;"><b>CUSTOMER :</b></div></td>
+								<td><div style="font-size:10px;"><b>CUSTOMER :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:12px;">{{ $order->customer->name }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->customer->phone }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->customer->email }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->customer->name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->customer->phone }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->customer->email }}</div>
 					</td>
 					<td style="text-align:left !important;">
 						<table>
 							<tr class="heading">
-								<td><div style="font-size:12px;"><b>SHIP TO :</b></div></td>
+								<td><div style="font-size:10px;"><b>SHIP TO :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->receiver_name }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->phone }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->email }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->city->name }}</div>
-						<div style="font-weight:500; font-size:12px;">{{ $order->orderShipping->city->address }}</div>
-						<div style="font-weight:500; font-size:12px;">
+						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->receiver_name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->phone }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->email }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->address }}</div>
+						<div style="font-weight:500; font-size:10px;">
 							Fleet : {{ $order->orderShipping->delivery->transport->fleet }}	
 						</div>
 					</td>
@@ -279,19 +279,19 @@
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<h6 style="font-size:12px; text-align:center;">Comments or Special Instructions :</h6>
+						<h6 style="font-size:10px; text-align:center;">Comments or Special Instructions :</h6>
 						<div></div>
-						<div style="font-size:12px; text-align:left;">1. Down Payment is 50% from the total</div>
-						<div style="font-size:12px; text-align:left;">2. The goods must be shipped to Jakarta before May 19th, 2021. If the goods are not in stock, please send the Concealed Body Art. HT5716ZZ11 first.</div>
+						<div style="font-size:10px; text-align:left;">1. Down Payment is 50% from the total</div>
+						<div style="font-size:10px; text-align:left;">2. The goods must be shipped to Jakarta before May 19th, 2021. If the goods are not in stock, please send the Concealed Body Art. HT5716ZZ11 first.</div>
 					</td>
 				</tr>
 			</table><br><br><br><br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td style="text-align:center;">
-						<div style="font-size:12px;">Created By</div>
+						<div style="font-size:10px;">Created By</div>
 						<br><br><br>
-						<div style="font-size:12px;">{{ session('bo_name') }}</div>
+						<div style="font-size:10px;">{{ session('bo_name') }}</div>
 					</td>
 				</tr>
 			</table>

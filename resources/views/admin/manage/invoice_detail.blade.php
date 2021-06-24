@@ -191,7 +191,11 @@
 								<tr>
 									<td colspan="4" class="text-right">Payment</td>
 									<td colspan="2" class="text-danger">
-										<input type="number" name="payment" id="payment" class="form-control form-control-sm" value="{{ $order->payment }}" placeholder="0">
+										@if($order->payment < $order->grandtotal)
+											<input type="number" name="payment" id="payment" class="form-control form-control-sm" value="{{ $order->payment }}" placeholder="0">
+										@else
+											<span class="text-success font-weight-bold">Rp {{ number_format($order->payment, 0, ',', '.') }}</span>
+										@endif
 									</td>
 								</tr>
 							</tfoot>

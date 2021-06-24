@@ -154,18 +154,15 @@ class InvoiceController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->purchase_order) {
-                    $btn = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
-                } else {
-                    $btn = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
-                }
-
                 if($val->payment == 0 || $val->payment == null) {
                     $status = 'Unpaid';
+                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 } else if($val->payment < $val->grandtotal) {
                     $status = 'Down Payment';
+                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 } else {
                     $status = 'Full Payment';
+                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 }
 
                 $response['data'][] = [
@@ -241,7 +238,7 @@ class InvoiceController extends Controller {
             'brand' => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
         ]);
 
-        return $pdf->stream('document.pdf');
+        return $pdf->stream('Invoice ' . str_replace('/', '-', $order->invoice) . '.pdf');
     }
 
 }

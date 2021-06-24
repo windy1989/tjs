@@ -43,6 +43,11 @@ class Coa extends Model {
         return $query;
     }
 
+    public function journal()
+    {
+        return $this->hasMany('App\Models\Journal', 'debit', 'id')->orWhere('credit', $this->id);
+    }
+
     public function journalDebit()
     {
         return $this->hasMany('App\Models\Journal', 'debit', 'id');

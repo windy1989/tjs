@@ -183,7 +183,7 @@
                   <div class="col-md-3">
                      <div class="form-group">
                         <label>Nominal :</label>
-                        <input type="number" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0">
+                        <input type="text" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0">
                      </div>
                   </div>
                   <div class="col-md-1">

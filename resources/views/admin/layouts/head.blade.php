@@ -31,7 +31,6 @@
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/prism.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/ui/sticky.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
-	<script src="{{ asset('template/plugins/number-format/jquery.number.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/lightbox/dist/js/lightbox.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
 	<script src="{{ asset('template/back-office/custom.js') }}"></script>

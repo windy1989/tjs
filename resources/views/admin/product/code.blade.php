@@ -288,7 +288,7 @@
                                     <th>Warehouse</th>
                                     <th>Ventura</th>
                                     <th>Code</th>
-                                    <th>Qty</th>
+                                    <th>Delete</th>
                                  </tr>
                               </thead>
                               <tbody class="text-center" id="data_shading"></tbody>
@@ -412,7 +412,6 @@
             `
                <button type="button" class="btn bg-danger btn-sm" id="delete_data_shading"><i class="icon-trash-alt"></i></button>
                <input type="hidden" name="shading_warehouse_code[]" value="` + arr_shading_warehouse[0] + `">
-               <input type="hidden" name="shading_warehouse_name[]" value="` + arr_shading_warehouse[1] + `">
                <input type="hidden" name="shading_stock_code[]" value="` + shading_stock_code.val() + `">
                <input type="hidden" name="shading_code[]" value="` + shading_code.val() + `">
             `
@@ -433,6 +432,10 @@
    }
 
    function toShow() {
+      $('.nav-tabs-highlight > li.nav-item > a.nav-link').removeClass('active');
+      $('.nav-tabs-highlight > li.nav-item > a[href="#highlighted-justified-tab1"]').addClass('active');
+      $('.tab-pane').removeClass('active');
+      $('.tab-pane#highlighted-justified-tab1').addClass('show active');
       $('#modal_form').modal('show');
       $('#validation_alert').hide();
       $('#validation_content').html('');
@@ -571,6 +574,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
+            $('#datatable_shading').DataTable().clear().draw();
             loadingOpen('.modal-content');
          },
          success: function(response) {
@@ -595,7 +599,12 @@
                   val.warehouse_code,
                   val.stock_code,
                   val.code,
-                  val.qty
+                  `
+                     <button type="button" class="btn bg-danger btn-sm" id="delete_data_shading"><i class="icon-trash-alt"></i></button>
+                     <input type="hidden" name="shading_warehouse_code[]" value="` + val.warehouse_code + `">
+                     <input type="hidden" name="shading_stock_code[]" value="` + val.stock_code + `">
+                     <input type="hidden" name="shading_code[]" value="` + val.code + `">
+                  `
                ]).draw().node();
             });
 

@@ -177,7 +177,7 @@
 							<tr>
 								<th colspan="7">
 									<div class="form-group mt-3 mb-4">
-										<h6 class="text-center font-weight-bold text-uppercase">Transport</h6>
+										<h6 class="text-center font-weight-bold text-uppercase">Delivery</h6>
 									</div>
 									<table class="table table-sm">
 										<tbody>
