@@ -7,7 +7,7 @@
    <div class="content-wrap">
       <div class="container clearfix">
          <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-lg-5 col-md-10 col-12">
                @if(session('success'))
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
                      <i class="icon-check-circle"></i>

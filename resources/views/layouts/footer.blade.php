@@ -4,7 +4,7 @@
 					<div class="row justify-content-center">
 						<div class="col-lg-12">
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-lg-4 col-md-12 mb-2">
 									<div class="widget clearfix">
 										<img src="{{ asset('website/logo-white.png') }}" style="max-width:250px;" alt="Logo" class="footer-logo">
 										<p>
@@ -12,7 +12,7 @@
 										</p>
 									</div>
 								</div>
-								<div class="col-md-4 mb-5">
+								<div class="col-lg-4 col-md-12 mb-5">
 									<div class="widget clearfix">
 										<h4 class="text-center mb-4">Help</h4>
 										<div class="text-center">
@@ -23,7 +23,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-lg-4 col-md-12">
 									<div class="widget clearfix">
 										<h4 class="text-center">Contact</h4>
 										<div class="posts-sm row col-mb-30" id="post-list-footer">

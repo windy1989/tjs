@@ -35,28 +35,28 @@
                      <form id="login-form" name="login-form" class="mb-0" action="{{ url('account/profile') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                           <label class="col-sm-2 text-capitalize col-form-label">Photo</label>
-                           <div class="col-sm-10">
+                           <label class="col-lg-2 col-md-3 text-capitalize col-form-label">Photo</label>
+                           <div class="col-lg-10 col-md-9">
                               <input type="file" name="photo" id="photo" class="form-control">
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-sm-2 text-capitalize col-form-label">Full Name</label>
-                           <div class="col-sm-10">
+                           <label class="col-lg-2 col-md-3 text-capitalize col-form-label">Full Name</label>
+                           <div class="col-lg-10 col-md-9">
                               <input type="text" name="name" id="name" class="form-control" value="{{ $profile->name }}" placeholder="Enter full name" required>
                               @error('name') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-sm-2 text-capitalize col-form-label">Email</label>
-                           <div class="col-sm-10">
+                           <label class="col-lg-2 col-md-3 text-capitalize col-form-label">Email</label>
+                           <div class="col-lg-10 col-md-9">
                               <input type="email" name="email" id="email" class="form-control" value="{{ $profile->email }}" placeholder="Enter email" required>
                               @error('email') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-sm-2 text-capitalize col-form-label">Phone</label>
-                           <div class="col-sm-10">
+                           <label class="col-lg-2 col-md-3 text-capitalize col-form-label">Phone</label>
+                           <div class="col-lg-10 col-md-9">
                               <input type="text" name="phone" id="phone" class="form-control" value="{{ $profile->phone }}" placeholder="Enter phone" required>
                               @error('phone') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>

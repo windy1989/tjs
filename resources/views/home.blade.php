@@ -10,18 +10,18 @@
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
-         <div class="row align-items-stretch gutter-20 min-vh-60">
-            <div class="col-md-4 min-vh-50">
+         <div class="row align-items-stretch gutter-20">
+            <div class="col-md-4">
                <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
                   <img src="{{ asset('website/home-top-smartmarble.jpg') }}" style="max-height:584px;" class="img-fluid">
                </a>
             </div>
-            <div class="col-md-4 min-vh-50">
+            <div class="col-md-4">
                <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
                   <img src="{{ asset('website/home-top-kohler.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
                </a>
             </div>
-            <div class="col-md-4 min-vh-50">
+            <div class="col-md-4">
                <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
                   <img src="{{ asset('website/home-top-bravat.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
                </a>
@@ -33,7 +33,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_cheapest as $p)
-               <div class="product col-lg-3 col-md-4 col-sm-6 col-12">
+               <div class="product col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -67,7 +67,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_new as $p)
-               <div class="product col-lg-3 col-md-4 col-sm-6 col-12">
+               <div class="product col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -101,7 +101,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30" data-layout="fitRows">
             @foreach($product_limited as $p)
-               <div class="product col-lg-3 col-md-4 col-sm-6 col-12">
+               <div class="product col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">

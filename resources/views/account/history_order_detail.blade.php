@@ -28,58 +28,60 @@
                @else
                   <div class="mt-5 mb-5"></div>
                @endif
-               <table class="table cart table-bordered">
-                  <thead>
-                     <tr>
-                        <th class="cart-product-thumbnail text-center">Image</th>
-                        <th class="cart-product-name">Product</th>
-                        <th class="cart-product-price">Unit Price</th>
-                        <th class="cart-product-quantity">Qty</th>
-                        <th class="cart-product-quantity">Ready Stock</th>
-                        <th class="cart-product-quantity">Indent Stock</th>
-                        <th class="cart-product-subtotal">Total</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     @foreach($order->orderDetail as $od)
-                        <tr class="cart_item">
-                           <td class="cart-product-quantity">
-                              <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                 <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid">
-                              </a>
-                           </td>
-                           <td class="cart-product-name">
-                              <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">{{ $od->product->code() }}</a>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">Rp {{ number_format($od->price_list, 0, ',', '.') }}</span>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <div class="quantity">
-                                 <span class="amount">x{{ $od->qty }}</span>
-                              </div>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">
-                                 <span class="d-inline">Ready</span> 
-                                 <strong class="badge badge-success">{{ $od->ready }}</strong>
-                              </span>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">
-                                 <span class="d-inline">Indent</span> 
-                                 <strong class="badge badge-info">{{ $od->indent }}</strong>
-                              </span>
-                           </td>
-                           <td class="cart-product-subtotal">
-                              <span class="amount">
-                                 Rp {{ number_format($od->total, 0, ',', '.') }}
-                              </span>
-                           </td>
+               <div class="table-responsive">
+                  <table class="table cart table-bordered">
+                     <thead>
+                        <tr>
+                           <th class="cart-product-thumbnail text-center">Image</th>
+                           <th class="cart-product-name">Product</th>
+                           <th class="cart-product-price">Unit Price</th>
+                           <th class="cart-product-quantity">Qty</th>
+                           <th class="cart-product-quantity">Ready Stock</th>
+                           <th class="cart-product-quantity">Indent Stock</th>
+                           <th class="cart-product-subtotal">Total</th>
                         </tr>
-                     @endforeach
-                  </tbody>
-               </table>
+                     </thead>
+                     <tbody>
+                        @foreach($order->orderDetail as $od)
+                           <tr class="cart_item">
+                              <td class="cart-product-quantity">
+                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
+                                    <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
+                                 </a>
+                              </td>
+                              <td class="cart-product-name">
+                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">{{ $od->product->code() }}</a>
+                              </td>
+                              <td class="cart-product-quantity">
+                                 <span class="amount">Rp {{ number_format($od->price_list, 0, ',', '.') }}</span>
+                              </td>
+                              <td class="cart-product-quantity">
+                                 <div class="quantity">
+                                    <span class="amount">x{{ $od->qty }}</span>
+                                 </div>
+                              </td>
+                              <td class="cart-product-quantity">
+                                 <span class="amount">
+                                    <span class="d-inline">Ready</span> 
+                                    <strong class="badge badge-success">{{ $od->ready }}</strong>
+                                 </span>
+                              </td>
+                              <td class="cart-product-quantity">
+                                 <span class="amount">
+                                    <span class="d-inline">Indent</span> 
+                                    <strong class="badge badge-info">{{ $od->indent }}</strong>
+                                 </span>
+                              </td>
+                              <td class="cart-product-subtotal">
+                                 <span class="amount">
+                                    Rp {{ number_format($od->total, 0, ',', '.') }}
+                                 </span>
+                              </td>
+                           </tr>
+                        @endforeach
+                     </tbody>
+                  </table>
+               </div>
                <div class="row">
                   <div class="col-md-12 mt-4 mb-3">
                      <div class="border p-4">
@@ -326,7 +328,7 @@
                </div>
                <div class="form-group"><hr></div>
                <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 successmsg">
 								<div class="msgtitle text-center font-weight-bold text-uppercase">Transport</div>
 								<div class="sb-msg text-center font-weight-semibold">
@@ -334,7 +336,7 @@
 								</div>
 							</div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 errormsg">
 								<div class="msgtitle text-center font-weight-bold text-uppercase">Payment Method</div>
 								<div class="sb-msg text-center font-weight-semibold">
@@ -342,7 +344,7 @@
 								</div>
 							</div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 alertmsg">
 								<div class="msgtitle text-center font-weight-bold text-uppercase">Status</div>
 								<div class="sb-msg text-center font-weight-semibold">

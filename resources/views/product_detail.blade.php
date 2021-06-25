@@ -9,13 +9,13 @@
          <div class="single-product">
             <div class="product">
                <div class="row gutter-40">
-                  <div class="col-md-6">
+                  <div class="col-lg-6 col-md-12">
                      <div class="product-image">
                         <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                            <div class="flexslider">
                               <div class="slider-wrap" data-lightbox="gallery">
                                  <div class="slide" data-thumb="{{ $product->type->image() }}">
-                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid"></a>
+                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" class="border" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid"></a>
                                  </div>
                               </div>
                            </div>
@@ -23,7 +23,7 @@
                         <div class="sale-flash badge {{ $product->availability()->color }} p-2">{{ $product->availability()->status }}</div>
                      </div>
                   </div>
-                  <div class="col-md-6 product-desc">
+                  <div class="col-lg-6 col-md-12 product-desc">
                      <div class="d-flex align-items-center justify-content-between">
                         <div class="product-price">
                            Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
@@ -33,16 +33,24 @@
                         </div>
                      </div>
                      <div class="line"></div>
-                     <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0 d-flex justify-content-between align-items-center" method="POST">
+                     <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0" method="POST">
                         @csrf
-                        <div class="quantity clearfix">
-                           <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
-                           <input type="button" value="-" class="minus">
-                           <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
-                           <input type="button" value="+" class="plus">
+                        <div class="row justify-content-center">
+                           <div class="col-lg-4 col-md-4 col-12 mb-1">
+                              <div class="quantity">
+                                 <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
+                                 <input type="button" value="-" class="minus">
+                                 <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
+                                 <input type="button" value="+" class="plus">
+                              </div>
+                           </div>
+                           <div class="col-lg-4 col-md-4 col-12  mt-2 mb-3">
+                              <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">More Detail</a>
+                           </div>
+                           <div class="col-lg-4 col-md-4 col-12">
+                              <button type="submit" class="button button-green m-0">Add to cart</button>
+                           </div>
                         </div>
-                        <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">More Detail</a>
-                        <button type="submit" class="button button-green m-0">Add to cart</button>
                      </form>
                      <div class="line"></div>
                      <form method="POST" action="{{ url('product/add_to_wishlist') }}" class="cart mb-0 d-flex justify-content-between align-items-center">
@@ -109,12 +117,10 @@
                            <span class="text-dark font-weight-semibold">{{ $product->brand->name }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                           <span class="text-muted">Grade:</span>
-                           <span class="text-dark font-weight-semibold">{{ $product->grade->name }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                           <span class="text-muted">Country:</span>
-                           <span class="text-dark font-weight-semibold">{{ $product->country->name }}</span>
+                           <span class="text-muted">Size:</span>
+                           <span class="text-dark font-weight-semibold">
+                              {{ $product->type->length }}x{{ $product->type->width }} Cm
+                           </span>
                         </li>
                         <li class="list-group-item d-flex justify-content-center align-items-center px-0">
                            <div class="addthis_inline_share_toolbox_ykjh"></div>
@@ -152,16 +158,20 @@
                                        <td>{{ $product->type->loadingLimit->name }}</td>
                                     </tr>
                                     <tr>
-                                       <td>Length</td>
-                                       <td>{{ $product->type->length }} Cm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Width</td>
-                                       <td>{{ $product->type->width }} Cm</td>
-                                    </tr>
-                                    <tr>
                                        <td>Weight</td>
                                        <td>{{ $product->type->weight }} Kg</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Thickness</td>
+                                       <td>{{ $product->type->thickness }} mm</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Grade</td>
+                                       <td>{{ $product->grade->name }}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Country</td>
+                                       <td>{{ $product->country->name }}</td>
                                     </tr>
                                  </tbody>
                               </table>
@@ -172,40 +182,42 @@
                </div>
             </div>
          </div>
-         <div class="line"></div>
-         <div class="w-100">
-            <h4>Related Product</h4>
-            <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3" data-items-xl="4">
-               @foreach($related_product as $rp)
-                  <div class="oc-item">
-                     <div class="product border">
-                        <div class="product-image">
-                          <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
-                              <img src="{{ $rp->type->image() }}" alt="{{ $rp->code() }}" class="img-fluid">
-                           </a>
-                           <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
-                        </div>
-                        <div class="product-desc p-3 text-center">
-                           <div class="product-title">
-                              <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                 <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" style="font-weight:500;">{{ $rp->code() }}</a>
-                              </h4>
+         @if($related_product->count() > 0)
+            <div class="line"></div>
+            <div class="w-100">
+               <h4>Related Product</h4>
+               <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3" data-items-xl="4">
+                  @foreach($related_product as $rp)
+                     <div class="oc-item">
+                        <div class="product border">
+                           <div class="product-image">
+                           <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
+                                 <img src="{{ $rp->type->image() }}" alt="{{ $rp->code() }}" class="img-fluid">
+                              </a>
+                              <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
                            </div>
-                           <div class="product-price text-info font-weight-bold">
-                              <span>{{ $rp->type->length }}x{{ $rp->type->width }}</span>
-                           </div>
-                           <div class="product-price font-weight-bold">
-                              <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($rp->price(), 0, ',', '.') }}</ins>
-                           </div>
-                           <div class="product-rating font-weight-bold" style="color:orange;">
-                              {{ $rp->brand->name }}
+                           <div class="product-desc p-3 text-center">
+                              <div class="product-title">
+                                 <h4 class="mb-0 font-weight-normal limit-text-list-product">
+                                    <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" style="font-weight:500;">{{ $rp->code() }}</a>
+                                 </h4>
+                              </div>
+                              <div class="product-price text-info font-weight-bold">
+                                 <span>{{ $rp->type->length }}x{{ $rp->type->width }}</span>
+                              </div>
+                              <div class="product-price font-weight-bold">
+                                 <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($rp->price(), 0, ',', '.') }}</ins>
+                              </div>
+                              <div class="product-rating font-weight-bold" style="color:orange;">
+                                 {{ $rp->brand->name }}
+                              </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-               @endforeach
+                  @endforeach
+               </div>
             </div>
-         </div>
+         @endif
       </div>
    </div>
 </section>

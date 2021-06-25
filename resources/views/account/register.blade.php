@@ -7,7 +7,7 @@
    <div class="content-wrap">
       <div class="container clearfix">
          <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-lg-8 col-md-12">
                @if($errors->any())
                   <div class="alert alert-warning">Data you sent is incorrect</div>
                @endif

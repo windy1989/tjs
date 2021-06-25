@@ -7,7 +7,7 @@
    <div class="content-wrap">
       <div class="container-fluid clearfix" style="width:85% !important;">
          <div class="row clearfix">
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-12">
                <div class="list-group">
                   <a href="{{ url('account/history_order') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == null ? 'active' : '' }}">
                      <div>All</div>
@@ -31,14 +31,14 @@
                   </a>
                </div>
             </div>
-            <div class="w-100 line d-block d-md-none"></div>
-            <div class="col-md-9">
+            <div class="w-100 line d-block d-lg-none"></div>
+            <div class="col-lg-9 col-md-12">
                <div class="clear"></div>
                <form action="{{ url('account/history_order') }}" method="GET" class="mb-0">
                   <input type="hidden" name="status" value="{{ $status }}">
                   @csrf
                   <div class="row">
-                     <div class="col-md-2">
+                     <div class="col-lg-2 col-md-12">
                         <div class="form-group">
                            <select name="type" id="type" class="custom-select">
                               <option value="">All</option>
@@ -47,12 +47,12 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-8">
+                     <div class="col-lg-8 col-md-12">
                         <div class="form-group">
                            <input type="text" name="search" id="search" class="form-control" placeholder="Search number" value="{{ $search }}">
                         </div>
                      </div>
-                     <div class="col-md-2">
+                     <div class="col-lg-2 col-md-12">
                         <div class="form-group">
                            <button type="submit" class="btn btn-success col-12">
                               <i class="icon-search"></i> Search

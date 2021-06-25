@@ -7,7 +7,7 @@
    <div class="content-wrap">
       <div class="container clearfix">
          <div class="row align-items-stretch col-mb-50">
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12">
                <div class="fancy-title title-border title-center">
 						<h3>Surabaya</h3>
 					</div>
@@ -26,7 +26,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12">
                <div class="fancy-title title-border title-center">
 						<h3>Jakarta</h3>
 					</div>

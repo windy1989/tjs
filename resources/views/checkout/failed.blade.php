@@ -2,7 +2,7 @@
 	<div class="content-wrap">
 		<div class="container clearfix">
 			<div class="row justify-content-center">
-				<div class="col-md-6">
+				<div class="col-lg-6 col-md-10 col-12">
 					<div class="card">
 						<div class="card-body text-center">
 							<i class="icon-times-circle text-danger" style="font-size:40px;"></i>

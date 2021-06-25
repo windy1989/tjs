@@ -63,7 +63,7 @@
                   @if($product->count() > 0)
                      <div id="shop" class="shop row grid-container gutter-20" data-layout="fitRows">
                         @foreach($product as $p)
-                           <div class="product col-md-4 mb-4 col-sm-6 col-12">
+                           <div class="product col-md-6 mb-4 col-sm-6 col-12">
                               <div class="grid-inner border">
                                  <div class="bg-light">
                                     <div class="p-2 font-weight-bold text-center">
