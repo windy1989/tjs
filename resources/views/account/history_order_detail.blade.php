@@ -353,8 +353,10 @@
                            @elseif($order->status == 2)
                               Order has been paid
                            @elseif($order->status == 3)                           
-                              Transaction has been completed
-                           @elseif($order->status == 4)
+                              Order has been delivery
+                           @elseif($order->status == 4)                           
+                              Order has been completed
+                           @elseif($order->status == 5)
                               Order canceled
                            @endif
 								</div>

@@ -22,12 +22,16 @@
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 2)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=3') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 3 ? 'active' : '' }}">
-                     <div>Done</div>
+                     <div>On Delivery</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 3)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=4') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 4 ? 'active' : '' }}">
-                     <div>Cancel</div>
+                     <div>Done</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 4)->count() }}</span>
+                  </a>
+                  <a href="{{ url('account/history_order?status=5') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 5 ? 'active' : '' }}">
+                     <div>Cancel</div>
+                     <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 5)->count() }}</span>
                   </a>
                </div>
             </div>
@@ -125,7 +129,10 @@
                                        <div><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
                                     </h5>
                                     <div class="text-right">
-                                       <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-aqua">Detail Order</a>
+                                       @if($o->status == 3) 
+                                          <button type="button" class="button button-red" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
+                                       @endif
+                                       <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-blue">Detail Order</a>
                                     </div>
                                  </td>
                               </tr>
@@ -144,3 +151,76 @@
       </div>
    </div>
 </section>
+
+<script>
+   function confirmationDelivery(id) {
+      Swal.fire({
+         title: 'Are you sure?',
+         text: 'Order confirmation has arrived',
+         icon: 'info',
+         allowOutsideClick: false,
+         showCancelButton: true,
+         confirmButtonText: 'Ya, has arrived',
+         cancelButtonText: 'Not arrived',
+         reverseButtons: true
+      }).then((result) => {
+         if(result.isConfirmed) {
+            $.ajax({
+               url: '{{ url("account/history_order/confirmation_delivery") }}',
+               type: 'POST',
+               dataType: 'JSON',
+               data: {
+                  id: id
+               },
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               success: function(response) {
+                  if(response.status == 200) {
+                     let timerInterval
+                     Swal.fire({
+                        title: response.message,
+                        html: 'I will close in <b></b> milliseconds.',
+                        timer: 1000,
+                        allowOutsideClick: false,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                           Swal.showLoading();
+                           timerInterval = setInterval(() => {
+                              const content = Swal.getHtmlContainer();
+                              if(content) {
+                                 const b = content.querySelector('b');
+                                 if(b) {
+                                    b.textContent = Swal.getTimerLeft();
+                                 }
+                              }
+                           }, 100)
+                        },
+                        willClose: () => {
+                           clearInterval(timerInterval);
+                        }
+                     }).then((result) => {
+                        if(result.dismiss === Swal.DismissReason.timer) {
+                           window.location.href = '{{ url("account/history_order?status=4") }}';
+                        }
+                     });
+                  } else {
+                     Swal.fire({
+                        title: 'Oooppsss!',
+                        text: 'Please try some more time',
+                        icon: 'info'
+                     });
+                  }
+               },
+               error: function() {
+                  Swal.fire({
+                     title: 'Server Error',
+                     text: 'Please try some more time',
+                     icon: 'error'
+                  });
+               }
+            });
+         }
+      })
+   }
+</script>

@@ -13,9 +13,8 @@ class WebHookController extends Controller {
         $order = Order::where('number', $request->external_id)->first();
         if($response->status == 'PAID') {
             Order::find($order->id)->update([
-                'payment'        => $request->amount,
-                'purchase_order' => Order::generateCode('CS', 'purchase_order'),
-                'status'         => 2
+                'payment' => $request->amount,
+                'status'  => 2
             ]);
 
             OrderPayment::create([
@@ -29,7 +28,7 @@ class WebHookController extends Controller {
             ]);
         } else if($response->status == 'EXPIRED') {
             Order::where('number', $request->external_id)->update([
-                'status' => 4
+                'status' => 5
             ]);
         }
     }

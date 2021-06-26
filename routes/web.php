@@ -32,6 +32,7 @@ Route::prefix('account')->group(function() {
     Route::get('wishlist', 'AccountController@wishlist');
     Route::get('history_order', 'AccountController@historyOrder');
     Route::get('history_order/detail/{id}', 'AccountController@historyOrderDetail');
+    Route::post('history_order/confirmation_delivery', 'AccountController@confirmationDelivery');
     Route::match(['get', 'post'], 'profile', 'AccountController@profile');
 });
 
@@ -396,10 +397,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('detail/{id}', 'ProjectController@detail');
             });
 
-            Route::prefix('transaction')->group(function() {
-                Route::get('/', 'TransactionController@index');
-                Route::post('datatable', 'TransactionController@datatable');
-                Route::match(['get', 'post'], 'detail/{id}', 'TransactionController@detail');
+            Route::prefix('order')->group(function() {
+                Route::get('/', 'OrderController@index');
+                Route::post('datatable', 'OrderController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'OrderController@detail');
             });
 
             Route::prefix('sales_order')->group(function() {
@@ -421,6 +422,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('datatable', 'PurchaseOrderController@datatable');
                 Route::match(['get', 'post'], 'detail/{id}', 'PurchaseOrderController@detail');
                 Route::match(['get', 'post'], 'print/{id}', 'PurchaseOrderController@print');
+            });
+
+            Route::prefix('delivery_order')->group(function() {
+                Route::get('/', 'DeliveryOrderController@index');
+                Route::post('datatable', 'DeliveryOrderController@datatable');
+                Route::post('get_data_order', 'DeliveryOrderController@getDataOrder');
+                Route::match(['get', 'post'], 'create', 'DeliveryOrderController@create');
+                Route::match(['get', 'post'], 'information', 'DeliveryOrderController@information');
+                Route::post('destroy', 'DeliveryOrderController@destroy');
             });
         });
 

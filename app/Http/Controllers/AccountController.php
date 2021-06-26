@@ -381,6 +381,24 @@ class AccountController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
+    public function confirmationDelivery(Request $request) 
+    {
+        $query = Order::find($request->id)->update(['status' => 4]);
+        if($query) {
+            $response = [
+                'status'  => 200,
+                'message' => 'Order has been arrived.'
+            ];
+        } else {
+            $response = [
+                'status'  => 500,
+                'message' => 'Data failed to delete.'
+            ];
+        }
+
+        return response()->json($response);
+    }
+
     public function profile(Request $request)
     {
         $profile = Customer::find(session('fo_id'));

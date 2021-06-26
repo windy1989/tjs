@@ -177,7 +177,7 @@
                                 <a href="{{ url('admin/manage/project') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/manage/transaction') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'transaction' ? 'active' : '' }}">Transaction</a>
+                                <a href="{{ url('admin/manage/order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/manage/sales_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'sales_order' ? 'active' : '' }}">Sales Order</a>

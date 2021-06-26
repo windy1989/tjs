@@ -198,7 +198,7 @@ class InvoiceController extends Controller {
         $order = Order::find($id);
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->payment) {
-                if($order->status == 1 || $order->status == 4) {
+                if($order->status == 1 || $order->status == 5) {
                     $status = 2;
                     OrderPayment::create([
                         'order_id' => $order->id,
