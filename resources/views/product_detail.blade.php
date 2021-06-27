@@ -15,7 +15,7 @@
                            <div class="flexslider">
                               <div class="slider-wrap" data-lightbox="gallery">
                                  <div class="slide" data-thumb="{{ $product->type->image() }}">
-                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" class="border" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid"></a>
+                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid img-thumbnail"></a>
                                  </div>
                               </div>
                            </div>
@@ -44,7 +44,7 @@
                                  <input type="button" value="+" class="plus">
                               </div>
                            </div>
-                           <div class="col-lg-4 col-md-4 col-12  mt-2 mb-3">
+                           <div class="col-lg-4 col-md-4 col-12 mt-2 mb-3">
                               <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">More Detail</a>
                            </div>
                            <div class="col-lg-4 col-md-4 col-12">
@@ -130,7 +130,7 @@
                   <div class="w-100"></div>
                   <div class="col-12 mt-5">
                      <div class="tabs clearfix mb-0" id="tab-1">
-                        <ul class="tab-nav clearfix">
+                        <ul class="tab-nav justify-content-center clearfix">
                            <li>
                               <a href="#tabs-1">
                                  <i class="icon-align-justify2"></i> Description
@@ -186,30 +186,31 @@
             <div class="line"></div>
             <div class="w-100">
                <h4>Related Product</h4>
-               <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="3" data-items-xl="4">
+               <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="4" data-items-xl="4">
                   @foreach($related_product as $rp)
                      <div class="oc-item">
                         <div class="product border">
                            <div class="product-image">
-                           <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
+                              <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
                                  <img src="{{ $rp->type->image() }}" alt="{{ $rp->code() }}" class="img-fluid">
                               </a>
                               <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
                            </div>
-                           <div class="product-desc p-3 text-center">
+                           <div class="product-desc p-3">
+                              <div class="product-price font-weight-bold">
+                                 <ins class="text-dark">
+                                    <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                                 </ins>
+                              </div>
                               <div class="product-title">
                                  <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                    <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" style="font-weight:500;">{{ $rp->code() }}</a>
+                                    <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
                                  </h4>
                               </div>
-                              <div class="product-price text-info font-weight-bold">
-                                 <span>{{ $rp->type->length }}x{{ $rp->type->width }}</span>
-                              </div>
-                              <div class="product-price font-weight-bold">
-                                 <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($rp->price(), 0, ',', '.') }}</ins>
-                              </div>
-                              <div class="product-rating font-weight-bold" style="color:orange;">
-                                 {{ $rp->brand->name }}
+                              <div class="product-price font-weight-semibold">
+                                 <span>
+                                    <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
+                                 </span>
                               </div>
                            </div>
                         </div>

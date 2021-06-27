@@ -61,9 +61,9 @@
                   </div>
                   <div class="form-group"><hr></div>
                   @if($product->count() > 0)
-                     <div id="shop" class="shop row grid-container gutter-20" data-layout="fitRows">
+                     <div id="shop" class="shop row grid-container gutter-30">
                         @foreach($product as $p)
-                           <div class="product col-lg-4 col-md-6 mb-4 col-sm-6 col-12">
+                           <div class="product col-lg-4 col-6 mb-4">
                               <div class="grid-inner border">
                                  <div class="bg-light">
                                     <div class="p-2 font-weight-bold text-center">
@@ -76,20 +76,21 @@
                                     </a>
                                     <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                  </div>
-                                 <div class="product-desc p-3 text-center">
+                                 <div class="product-desc p-3">
+                                    <div class="product-price font-weight-bold">
+                                       <ins class="text-dark">
+                                          <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                                       </ins>
+                                    </div>
                                     <div class="product-title">
                                        <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" style="font-weight:500;">{{ $p->code() }}</a>
+                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
                                        </h4>
                                     </div>
-                                    <div class="product-price text-info font-weight-bold">
-                                       <span>{{ $p->type->length }}x{{ $p->type->width }}</span>
-                                    </div>
-                                    <div class="product-price font-weight-bold">
-                                       <ins style="font-size:15px;" class="text-danger">Rp {{ number_format($p->price(), 0, ',', '.') }}</ins>
-                                    </div>
-                                    <div class="product-rating font-weight-bold" style="color:orange;">
-                                       {{ $p->brand->name }}
+                                    <div class="product-price font-weight-semibold">
+                                       <span>
+                                          <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
+                                       </span>
                                     </div>
                                  </div>
                               </div>
@@ -106,8 +107,9 @@
                <div class="sidebar col-lg-3 d-none d-xl-block">
                   <div class="sidebar-widgets-wrap">
                      <div class="clearfix">
-                        <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
-                        <button type="submit" onclick="clickFilter(this)" class="btn btn-dark btn-sm col-12 mt-2"><i class="icon-search"></i></button>
+                        <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Find ...">
+                        <button type="submit" onclick="clickFilter(this)" class="btn btn-dark btn-sm col-12 mt-2">Search</button>
+                        <a href="{{ url('product') }}" class="btn btn-danger btn-sm col-12 mt-2">Reset</a>
                      </div>
                      <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
