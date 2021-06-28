@@ -24,12 +24,14 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/dark.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/swiper.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/demos/ecommerce/css/fonts.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/ecommerce/css/fonts.css') }}"> --}}
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/course/css/fonts.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/course/course.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
