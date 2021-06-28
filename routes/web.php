@@ -431,6 +431,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::match(['get', 'post'], 'create', 'DeliveryOrderController@create');
                 Route::match(['get', 'post'], 'information', 'DeliveryOrderController@information');
                 Route::post('destroy', 'DeliveryOrderController@destroy');
+                Route::match(['get', 'post'], 'print/{id}', 'DeliveryOrderController@print');
             });
         });
 

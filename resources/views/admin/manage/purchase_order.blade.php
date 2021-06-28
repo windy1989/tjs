@@ -38,28 +38,6 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="form-group">
-                     <label>Customer :</label>
-                     <select name="filter_customer_id" id="filter_customer_id" class="select2">
-                        <option value="">All Customer</option>
-                        @foreach($customer as $c)
-                           <option value="{{ $c->id }}">{{ $c->name }}</option>
-                        @endforeach
-                     </select>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group">
-                     <label>Nominal :</label>
-                     <select name="filter_nominal" id="filter_nominal" class="custom-select">
-                        <option value="">All Nominal</option>
-                        <option value="1">Hundreds</option>
-                        <option value="2">Millions</option>
-                        <option value="3">Billions</option>
-                     </select>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group">
                      <label>Date :</label>
                      <div class="input-group">
                         <input type="date" name="filter_start_date" id="filter_start_date" max="{{ date('Y-m-d') }}" class="form-control">
@@ -94,7 +72,7 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
-                        <th>Customer</th>
+                        <th>Vendor</th>
                         <th>Code</th>
                         <th>Grandtotal</th>
                         <th>Date</th>
@@ -113,8 +91,6 @@
    });
 
    function resetFilter() {
-      $('#filter_customer_id').val(null).change();
-      $('#filter_nominal').val(null);
       $('#filter_start_date').val(null);
       $('#filter_finish_date').val(null);
       loadDataTable();
@@ -134,8 +110,6 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-               customer_id: $('#filter_customer_id').val(),
-               nominal: $('#filter_nominal').val(),
                start_date: $('#filter_start_date').val(),
                finish_date: $('#filter_finish_date').val()
             },
@@ -156,9 +130,9 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
-            { name: 'customer_id', className: 'text-center align-middle' },
+            { name: 'vendor', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'purchase_order', className: 'text-center nowrap align-middle' },
-            { name: 'grandtotal', searchable: false, className: 'text-center nowrap align-middle' },
+            { name: 'grandtotal', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'created_at', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]

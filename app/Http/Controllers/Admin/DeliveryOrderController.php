@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
+use App\Models\Brand;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderDelivery;
@@ -105,6 +107,7 @@ class DeliveryOrderController extends Controller {
                     $val->order->status(),
                     date('d F Y', strtotime($val->created_at)),
                     '
+                        <a href="' . url('admin/manage/delivery_order/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer2"></i></a>
                         <button type="button" class="btn bg-info btn-sm" data-popup="tooltip" title="Information" onclick="information(' . $val->id . ')"><i class="icon-info22"></i></button>
                     ' . 
                     $btn
@@ -249,6 +252,17 @@ class DeliveryOrderController extends Controller {
         }
 
         return response()->json($response);
+    }
+
+    public function print($id)
+    {
+        $delivery_order = OrderDelivery::find($id);
+        $pdf            = PDF::loadView('admin.pdf.delivery_order', [
+            'delivery_order' => $delivery_order,
+            'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+        ]);
+
+        return $pdf->stream('Delivery Order ' . str_replace('/', '-', $delivery_order->delivery_order) . '.pdf');
     }
 
 }

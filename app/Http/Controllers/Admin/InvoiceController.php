@@ -200,6 +200,7 @@ class InvoiceController extends Controller {
             if($request->payment) {
                 if($order->status == 1 || $order->status == 5) {
                     $status = 2;
+                    $order->update(['purchase_order' => Order::generateCode('CH', 'purchase_order')]);
                     OrderPayment::create([
                         'order_id' => $order->id,
                         'method'   => 'Cash',

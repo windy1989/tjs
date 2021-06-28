@@ -1,4 +1,3 @@
-@php $grandtotal = $order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty'); @endphp
 <div class="content-wrapper">
 	<div class="page-header page-header-light">
 		<div class="page-header-content header-elements-md-inline">
@@ -13,7 +12,7 @@
 					<a href="{{ url('admin/manage/purchase_order') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
-					<a href="{{ url('admin/manage/purchase_order/print/' . $order->id) }}" class="btn bg-success btn-labeled btn-labeled-left ml-2">
+					<a href="{{ url('admin/manage/purchase_order/print/' . $order->id) }}" class="btn bg-success ml-2 btn-labeled btn-labeled-left">
 						<b><i class="icon-printer2"></i></b> Print
 					</a>
 				</div>
@@ -31,136 +30,138 @@
 		</div>
 	</div>
 	<div class="content">
-		@if($errors->any())
-			<div class="alert alert-danger">
-				<ul>
-					@php $validation = array_unique($errors->all()); @endphp
-					@foreach($validation as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-			</div>
-		@elseif(session('success'))
-			<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-				<span class="font-weight-semibold">Success!</span> 
-				{{ session('success') }}
-			</div>
-		@endif
-		<form action="" method="POST" id="form_data">
-			@csrf
-			<input type="hidden" name="purchase_order" id="input_purchase_order" value="purchase_order">
-			<input type="hidden" name="approval" id="input_approval">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="mb-4">
-								<img src="{{ asset('website/logo-black.png') }}" class="mb-3 mt-2" alt="" style="width: 120px;">
-								<ul class="list list-unstyled mb-0">
-									<li>Jawa Timur, Surabaya</li>
-									<li>Modern Ceramics, Baliwerti 119-121 Kav. 10</li>
-									<li>082131972353</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="mb-4">
-								<div class="text-sm-right">
-									<h4 class="text-primary mb-2 mt-md-2">{{ $order->purchase_order }}</h4>
-									<ul class="list list-unstyled mb-0">
-										<li>Date: <span class="font-weight-semibold">{{ date('F d, Y', strtotime($order->created_at)) }}</span></li>
-										<li>Due date: <span class="font-weight-semibold">{{ date('F d, Y', strtotime('+1 day', strtotime($order->created_at))) }}</span></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<center>
+							<img src="{{ asset('website/logo-black.png') }}" height="80" class="mt-4">
+						</center>
 					</div>
-					<div class="d-md-flex flex-md-wrap">
-						<div class="mb-4 mb-md-2">
-							<span class="text-muted">Purchase Order To:</span>
-							<ul class="list list-unstyled mb-0">
-								<li><h5 class="my-2">Karya Modern</h5></li>
-								<li>0315477964</li>
-								<li><a href="mailto:admin@karyamoderngroup.com">admin@karyamoderngroup.com</a></li>
-							</ul>
-						</div>
-						<div class="mb-2 ml-auto">
-							<span class="text-muted">Payment Details:</span>
-							<div class="d-flex flex-wrap wmin-md-400">
-								<ul class="list list-unstyled mb-0">
-									<li><h5 class="my-2">Total Due:</h5></li>
-									<li>Number:</li>
-								</ul>
-								<ul class="list list-unstyled text-right mb-0 ml-auto">
-									<li><h5 class="font-weight-semibold my-2">Rp {{ number_format($grandtotal, 0, ',', '.') }}</h5></li>
-									<li>{{ $order->number }}</li>
-								</ul>
+					<div class="col-md-8 text-right">
+						<h4 class="font-weight-bold">PT. PERWIRA TAMARAYA ABADI</h4>
+						<div class="row no-gutters">
+							<div class="col-md-5">
+								<div style="font-size:12px;" class="font-weight-semibold">JAGAT BUILDING</div>
+								<div style="font-size:12px;" class="font-weight-semibold">St. Tomang Raya No 28 - 30</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Jakarta 11430</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Phone : 0811257180 / 081225575295</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Email : infojkt@smartmarbleandbath.com</div>
+							</div>
+							<div class="col-md-2">
+								<center>
+									<div class="bg-secondary" style="width:0px; height:88px; border:1px #777777 solid;"></div>
+								</center>
+							</div>
+							<div class="col-md-5">
+								<div style="font-size:12px;" class="font-weight-semibold">MODERN CERAMIC</div>
+								<div style="font-size:12px;" class="font-weight-semibold">St. Baliwerti 119 - 121</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Surabaya, Jawa Timur 60174</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Phone : 031-5472860 / 031-5324505</div>
+								<div style="font-size:12px;" class="font-weight-semibold">Email : info@smartmarbleandbath.com</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="table-responsive">
-					<table class="table table-lg">
-						<thead>
+				<div class="form-group mb-0"><hr class="border-2 border-secondary mb-0"></div>
+				<div class="row justify-content-center">
+					@foreach($brand as $b)
+						<div class="col-md-3">
+							<center>
+								<img src="{{ asset(Storage::url($b->image)) }}" class="img-fluid" alt="{{ $b->name }}">
+							</center>
+						</div>
+					@endforeach
+				</div>
+				<div class="form-group">
+					<h1 class="font-weight-bold text-center">PURCHASE ORDER</h1>
+				</div>
+				<div class="form-group mt-5 font-weight-semibold">
+					<table width="100%">
+						<tr>
+							<td width="7%">Date</td>
+							<td>: {{ date('d F Y', strtotime($order->created_at)) }}</td>
+						</tr>
+						<tr>
+							<td width="7%">SO</td>
+							<td>: {{ $order->sales_order }}</td>
+						</tr>
+						<tr>
+							<td width="7%">Invoice</td>
+							<td>: {{ $order->invoice }}</td>
+						</tr>
+						<tr>
+							<td width="7%">PO</td>
+							<td>: {{ $order->purchase_order }}</td>
+						</tr>
+						<tr>
+							<td width="7%">Ship Via</td>
+							<td>: Land Transport</td>
+						</tr>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<h4 class="bg-primary p-1">Vendor</h4>
+						<div style="font-size:12px;" class="font-weight-semibold">Karya Modern</div>
+						<div style="font-size:12px;" class="font-weight-semibold">031-5472860</div>
+						<div style="font-size:12px;" class="font-weight-semibold">info@karyamodern.com</div>
+						<div style="font-size:12px;" class="font-weight-semibold">Baliwerti 119 - 121, Surabaya Jawa Timur</div>
+					</div>
+					<div class="col-md-6">
+						<h4 class="bg-primary p-1">Ship To</h4>
+						<div style="font-size:12px;" class="font-weight-semibold">{{ $order->orderShipping->receiver_name }}</div>
+						<div style="font-size:12px;" class="font-weight-semibold">{{ $order->orderShipping->phone }}</div>
+						<div style="font-size:12px;" class="font-weight-semibold">{{ $order->orderShipping->email }}</div>
+						<div style="font-size:12px;" class="font-weight-semibold">{{ $order->orderShipping->city->name }}</div>
+						<div style="font-size:12px;" class="font-weight-semibold">{{ $order->orderShipping->city->address }}</div>
+						<div style="font-size:12px;" class="font-weight-semibold">
+							Fleet : {{ $order->orderShipping->delivery->transport->fleet }}
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive mt-4">
+					<table class="table table-bordered table-sm table-striped">
+						<thead class="bg-primary text-white">
 							<tr class="text-center">
-								<th>Image</th>
-								<th>Product</th>
-								<th>Price</th>
+								<th>No</th>
+								<th>Picture</th>
+								<th>Item Name</th>
+								<th>Qty</th>
+								<th>Unit Price</th>
 								<th>Total</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($order->orderDetail as $key => $od)
-								<input type="hidden" name="order_detail_id[]" value="{{ $od->id }}">
 								<tr class="text-center">
-									<td clas="align-middle">
-										<a href="{{ $od->product->type->image() }}" data-lightbox="{{ $od->product->code() }}" data-title="{{ $od->product->code() }}"><img src="{{ $od->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
-									</td>
-									<td class="align-middle nowrap">
-										<h6 class="mb-0">{{ $od->product->code() }}</h6>
-										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
-										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
-										<div class="text-muted">Indent <b>{{ $od->indent }}</b> Item</div>
-									</td>
+									<td class="align-middle">{{ $key + 1 }}</td>
 									<td class="align-middle">
-										<center>
-											Rp {{ number_format($od->bottom_price, 0, ',', '.') }}
-										</center>
+										<img src="{{ $od->product->type->image() }}" style="max-width:80px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
 									</td>
-									<td class="align-middle">
-										<span class="font-weight-semibold">Rp {{ number_format($od->bottom_price * $od->qty, 0, ',', '.') }}</span>
-									</td>
+									<td class="align-middle">{{ $od->product->code() }}</td>
+									<td class="align-middle">{{ $od->qty }}</td>
+									<td class="align-middle">Rp {{ number_format($od->bottom_price, 0, ',', '.') }}</td>
+									<td class="align-middle">Rp {{ number_format($od->bottom_price * $od->qty, 0, ',', '.') }}</td>
 								</tr>
 							@endforeach
 						</tbody>
 						<tfoot>
 							<tr>
-								<th colspan="3" class="text-right">TOTAL :</th>
-								<td class="text-right text-danger">
-									<h4 class="font-weight-semibold">Rp {{ number_format($grandtotal, 0, ',', '.') }}</h4>
-								</td>
+								<td colspan="4" class="text-right">Subtotal</td>
+								<td colspan="2">Rp {{ number_format($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty'), 0, ',', '.') }}</td>
+							</tr>
+							<tr>
+								<td colspan="4" class="text-right">Shipping</td>
+								<td colspan="2">Rp {{ number_format($order->shipping, 0, ',', '.') }}</td>
+							</tr>
+							<tr>
+								<td colspan="4" class="text-right">Total</td>
+								<td colspan="2" class="text-danger font-weight-bold">Rp {{ number_format(($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty')) + $order->shipping, 0, ',', '.') }}</td>
 							</tr>
 						</tfoot>
 					</table>
 				</div>
-				<div class="card-body">
-					<div class="form-group">
-						<div class="text-right mt-3">
-							<button type="submit" id="btn_delivery_order" class="btn btn-primary btn-labeled btn-labeled-left"><b><i class="icon-paperplane"></i></b> Create Delivery Order</button>
-						</div>
-					</div>
-				</div>
 			</div>
-		</form>
+		</div>
 	</div>
-
-<script>
-	$(function() {
-		$('#btn_delivery_order').click(function() {
-			$('#btn_delivery_order').attr('disabled', true);
-			$('#btn_delivery_order').html('Processing ...');
-			$('#form_data').submit();
-		});
-	});
-</script>

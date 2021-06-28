@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Purchase Order {{ $order->purchase_order }}</title>
+		<title>Delivery Order {{ $delivery_order->delivery_order }}</title>
 		<style>
 			.invoice-box {
 				font-size: 16px;
@@ -138,7 +138,7 @@
 						<table>
 							<tr>
 								<td style="text-align:center;">
-									<h2><b>INVOICE</b></h2>
+									<h2><b>DELIVERY ORDER</b></h2>
 								</td>
 							</tr>
 						</table>
@@ -151,19 +151,19 @@
 						<table>
 							<tr style="line-height:0 !important;">
 								<td width="10%" style="font-size:10px;">Date</td>
-								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($delivery_order->created_at)) }}</td>
 							</tr>
 							<tr>
 								<td width="10%" style="font-size:10px;">SO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->sales_order }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ $delivery_order->order->sales_order }}</td>
 							</tr>
 							<tr>
 								<td width="10%" style="font-size:10px;">Invoice</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->invoice }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ $delivery_order->order->invoice }}</td>
 							</tr>
-                            <tr>
-								<td width="10%" style="font-size:10px;">PO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->purchase_order }}</td>
+							<tr>
+								<td width="10%" style="font-size:10px;">DO</td>
+								<td style="text-align:left; font-size:10px;">: {{ $delivery_order->delivery_order }}</td>
 							</tr>
 							<tr>
 								<td width="10%" style="font-size:10px;">Ship Via</td>
@@ -178,13 +178,12 @@
 					<td style="text-align:left !important;">
 						<table>
 							<tr class="heading">
-								<td><div style="font-size:10px;"><b>VENDOR :</b></div></td>
+								<td><div style="font-size:10px;"><b>CUSTOMER :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:10px;">Karya Modern</div>
-						<div style="font-weight:500; font-size:10px;">031-5472860</div>
-						<div style="font-weight:500; font-size:10px;">info@karyamodern.com</div>
-						<div style="font-weight:500; font-size:10px;">Baliwerti 119 - 121, Surabaya Jawa Timur</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->customer->name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->customer->phone }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->customer->email }}</div>
 					</td>
 					<td style="text-align:left !important;">
 						<table>
@@ -192,13 +191,13 @@
 								<td><div style="font-size:10px;"><b>SHIP TO :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->receiver_name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->phone }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->email }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->address }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->orderShipping->receiver_name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->orderShipping->phone }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->orderShipping->email }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->orderShipping->city->name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $delivery_order->order->orderShipping->city->address }}</div>
 						<div style="font-weight:500; font-size:10px;">
-							Fleet : {{ $order->orderShipping->delivery->transport->fleet }}	
+							Fleet : {{ $delivery_order->order->orderShipping->delivery->transport->fleet }}	
 						</div>
 					</td>
 				</tr>
@@ -210,12 +209,10 @@
 						<th style="color:white;"><center>Picture</center></th>
 						<th style="color:white;"><center>Item Name</center></th>
 						<th style="color:white;"><center>Qty</center></th>
-						<th style="color:white;"><center>Unit Price</center></th>
-						<th style="color:white;"><center>Total</center></th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($order->orderDetail as $key => $od)
+					@foreach($delivery_order->order->orderDetail as $key => $od)
 						<tr>
 							<td style="vertical-align:center;">
 								<center>
@@ -237,43 +234,15 @@
 									{{ $od->qty }}
 								</center>
 							</td>
-							<td style="vertical-align:center;">
-								<center>
-									Rp {{ number_format($od->bottom_price, 0, ',', '.') }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									Rp {{ number_format($od->bottom_price * $od->qty, 0, ',', '.') }}
-								</center>
-							</td>
 						</tr>
 					@endforeach
 				</tbody>
 				<tfoot>
 					<tr>
-						<th colspan="4" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty'), 0, ',', '.') }}</th>
-					</tr>
-					<tr>
-						<th colspan="4" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->shipping, 0, ',', '.') }}</th>
-					</tr>
-					<tr>
-						<th colspan="4" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format(($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty')) + $order->shipping, 0, ',', '.') }}</th>
+						<th colspan="3" style="text-align:right;">TOTAL QTY</th>
+						<th style="text-align:left;">{{ number_format($delivery_order->order->orderDetail->sum('qty')) }}</th>
 					</tr>
 				</tfoot>
-			</table><br>
-			<table cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<h6 style="font-size:10px; text-align:center;">Comments or Special Instructions :</h6>
-						<div></div>
-						<div style="font-size:10px; text-align:left;">1. Down Payment is 50% from the total</div>
-						<div style="font-size:10px; text-align:left;">2. The goods must be shipped to Jakarta before May 19th, 2021. If the goods are not in stock, please send the Concealed Body Art. HT5716ZZ11 first.</div>
-					</td>
-				</tr>
 			</table><br><br><br><br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
