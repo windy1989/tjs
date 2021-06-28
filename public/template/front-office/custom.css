@@ -48,10 +48,8 @@
    box-shadow: none;
 }
 
-.header-row #logo a img {
-   margin-top: 20px;
-   margin-bottom: 20px;
-   max-height: 44px !important;
+.header-row > #logo > a > img {
+   max-height: 50px;
 }
 
 .menu-container #tab-shop {
@@ -69,7 +67,7 @@
    letter-spacing: 1px;
 }
 
-.sidebar-filter-product > li > div.form-check > .form-check-input:checked + .form-check-label {
+.sidebar-filter-product > li > div.form-check > .form-check-input:checked+.form-check-label {
    font-weight: bold !important;
    color: #30302E !important;
 }
