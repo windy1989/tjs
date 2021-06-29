@@ -76,12 +76,16 @@ class ReportController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Coa::has('journal')
+        $total_data = Coa::whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->whereColumn('journals.debit', 'coas.id')
+                    ->orWhereColumn('journals.credit', 'coas.id');
+            })
             ->where('status', 1)
             ->count();
         
-        $query_data = Coa::has('journal')
-            ->where(function($query) use ($search, $request) {
+        $query_data = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
@@ -91,25 +95,25 @@ class ReportController extends Controller {
                 if($request->coa_id) {
                     $query->where('id', $request->coa_id);
                 }
-                
-                if($request->start_date && $request->finsih_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        });
+            })
+            ->whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->where(function($query) use ($request) {
+                        $query->whereColumn('journals.debit', 'coas.id')
+                            ->orWhereColumn('journals.credit', 'coas.id');
 
-                        dd(date('Y-m-t', strtotime($request->finish_date)));
-                } else if($request->start_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
-                        });
-                } else if($request->finish_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->finish_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        });
-                }
+                        if($request->start_date && $request->finsih_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                        } else if($request->start_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
+                        } else if($request->finish_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->finish_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                        }
+                    });
             })
             ->where('status', 1)
             ->offset($start)
@@ -117,8 +121,7 @@ class ReportController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Coa::has('journal')
-            ->where(function($query) use ($search, $request) {
+        $total_filtered = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
@@ -128,23 +131,25 @@ class ReportController extends Controller {
                 if($request->coa_id) {
                     $query->where('id', $request->coa_id);
                 }
-                
-                if($request->start_date && $request->finsih_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        });
-                } else if($request->start_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
-                        });
-                } else if($request->finish_date) {
-                    $query->whereHas('journal', function($query) use ($request) {
-                            $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->finish_date)))
-                                ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        });
-                }
+            })
+            ->whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->where(function($query) use ($request) {
+                        $query->whereColumn('journals.debit', 'coas.id')
+                            ->orWhereColumn('journals.credit', 'coas.id');
+
+                        if($request->start_date && $request->finsih_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                        } else if($request->start_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
+                        } else if($request->finish_date) {
+                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->finish_date)))
+                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                        }
+                    });
             })
             ->where('status', 1)
             ->count();

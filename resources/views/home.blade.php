@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-4">
                <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-kohler.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
+                  <img src="{{ asset('website/home-top-treeme.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
                </a>
             </div>
             <div class="col-md-4">
