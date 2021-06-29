@@ -66,13 +66,13 @@
                            <div class="product col-lg-4 col-6 mb-4">
                               <div class="grid-inner border">
                                  <div class="bg-light">
-                                    <div class="p-2 font-weight-bold text-center">
+                                    <div class="p-2 font-weight-bold text-center" style="font-size:13px;">
                                        {{ $p->type->category->name }}
                                     </div>
                                  </div>
                                  <div class="product-image">
                                     <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                                       <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
+                                       <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
                                     </a>
                                     <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                  </div>

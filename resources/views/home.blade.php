@@ -27,17 +27,17 @@
          <div class="topmargin-lg row align-items-stretch gutter-30">
             <div class="col-md-4">
                <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-smartmarble.jpg') }}" style="max-height:584px;" class="img-fluid">
+                  <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid">
                </a>
             </div>
             <div class="col-md-4">
                <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-treeme.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
+                  <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
                </a>
             </div>
             <div class="col-md-4">
                <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-bravat.jpg') }}" style="max-height:584px; background-position: center top;" class="img-fluid">
+                  <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
                </a>
             </div>
          </div>
@@ -51,7 +51,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -86,7 +86,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
@@ -121,7 +121,7 @@
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
