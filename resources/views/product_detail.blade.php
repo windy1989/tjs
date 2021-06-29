@@ -199,17 +199,17 @@
                            <div class="product-desc p-3">
                               <div class="product-price font-weight-bold">
                                  <ins class="text-dark">
-                                    <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                                    <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($rp->price(), 0, ',', '.') }}</h1>
                                  </ins>
                               </div>
                               <div class="product-title">
                                  <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                    <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
+                                    <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $rp->code() }}</a>
                                  </h4>
                               </div>
                               <div class="product-price font-weight-semibold">
                                  <span>
-                                    <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
+                                    <span class="text-warning">{{ $rp->brand->name }}</span> | <span class="text-info">{{ $rp->type->length }}x{{ $rp->type->width }}</span>
                                  </span>
                               </div>
                            </div>
