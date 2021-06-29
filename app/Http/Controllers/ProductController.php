@@ -239,7 +239,7 @@ class ProductController extends Controller {
                 })
             ->where(function($query) use ($product) {
                 $query->where('brand_id', $product->brand_id)
-                    ->orWhereHas('type', function($query) use ($product) {
+                    ->whereHas('type', function($query) use ($product) {
                             $query->where('category_id', $product->type->category_id);
                         });
             })
