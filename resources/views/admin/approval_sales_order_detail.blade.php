@@ -26,16 +26,16 @@
 		</div>
 	</div>
 	<div class="content">
-		@if($approval->approvedBy)
-			@if($approval->status == 2)
+		@if($approved)
+			@if($approved->status == 2)
 				<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
 					<span class="font-weight-semibold">Has been approved!</span> 
-					This data has been approved by <b class="font-italic">{{ $approval->approvedBy->name }}</b>
+					This data has been approved by <b class="font-italic">{{ $approved->approvedBy->name }}</b>
 				</div>
 			@else
 				<div class="alert alert-danger alert-styled-left alert-arrow-left alert-dismissible">
 					<span class="font-weight-semibold">Has been rejected!</span> 
-					This data has been rejected by <b class="font-italic">{{ $approval->approvedBy->name }}</b>
+					This data has been rejected by <b class="font-italic">{{ $approved->approvedBy->name }}</b>
 				</div>
 			@endif
 		@endif
@@ -121,8 +121,6 @@
 									<td class="align-middle">
 										<h6 class="mb-0">{{ $od->product->code() }}</h6>
 										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
-										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
-										<div class="text-muted">Indent <b>{{ $od->indent }}</b> Item</div>
 									</td>
 									<td class="align-middle">
 										<center>
@@ -218,7 +216,7 @@
 					</table>
 				</div>
 				<div class="card-body">
-					@if(!$approval->approvedBy)
+					@if(!$approved)
 						<div class="form-group">
 							<div class="text-right mt-3">
 								<button type="submit" id="btn_reject" class="btn btn-danger btn-labeled btn-labeled-left" onclick="actionSubmit('reject')"><b><i class="icon-cross3"></i></b> Reject</button>

@@ -36,8 +36,6 @@
                            <th class="cart-product-name">Product</th>
                            <th class="cart-product-price">Unit Price</th>
                            <th class="cart-product-quantity">Qty</th>
-                           <th class="cart-product-quantity">Ready Stock</th>
-                           <th class="cart-product-quantity">Indent Stock</th>
                            <th class="cart-product-subtotal">Total</th>
                         </tr>
                      </thead>
@@ -59,18 +57,6 @@
                                  <div class="quantity">
                                     <span class="amount">x{{ $od->qty }}</span>
                                  </div>
-                              </td>
-                              <td class="cart-product-quantity">
-                                 <span class="amount">
-                                    <span class="d-inline">Ready</span> 
-                                    <strong class="badge badge-success">{{ $od->ready }}</strong>
-                                 </span>
-                              </td>
-                              <td class="cart-product-quantity">
-                                 <span class="amount">
-                                    <span class="d-inline">Indent</span> 
-                                    <strong class="badge badge-info">{{ $od->indent }}</strong>
-                                 </span>
                               </td>
                               <td class="cart-product-subtotal">
                                  <span class="amount">

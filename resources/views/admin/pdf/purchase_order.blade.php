@@ -226,12 +226,14 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									<img src="{{ $od->product->type->image() }}" style="max-width:20px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+									<img src="{{ $od->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
 									{{ $od->product->code() }}
+									<div>{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm</div>
+									<div>{{ $od->product->type->category->name }}</div>
 								</center>
 							</td>
 							<td style="vertical-align:center;">

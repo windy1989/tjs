@@ -1,4 +1,16 @@
 $(function() {
+   $('#show_password a').click(function() {
+      if($('#show_password input').attr('type') == 'text') {
+         $('#show_password input').attr('type', 'password');
+         $('#show_password i').addClass('icon-eye-slash');
+         $('#show_password i').removeClass('icon-eye');
+      } else if($('#show_password input').attr('type') == 'password') {
+         $('#show_password input').attr('type', 'text');
+         $('#show_password i').removeClass('icon-eye-slash');
+         $('#show_password i').addClass('icon-eye');
+      }
+   });
+
    $('.side-panel-trigger').off('click').on('click', function() {
       $body.toggleClass('side-panel-open');
       

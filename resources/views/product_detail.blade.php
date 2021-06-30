@@ -44,7 +44,7 @@
                                  <input type="button" value="+" class="plus">
                               </div>
                               <div class="mb-2 mt-2">
-                                 <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">See Detail</a>
+                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#see_detail" class="text-primary font-italic">See Detail</a>
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-6 text-right">
@@ -82,13 +82,6 @@
                                  <div class="sb-msg">
                                     <i class="icon-warning-sign"></i>
                                     <strong>Stock Limited!</strong> Buy now before it runs out
-                                 </div>
-                              </div>
-                           @elseif($product->availability()->status == 'Indent')
-                              <div class="style-msg infomsg w-100 text-center">
-                                 <div class="sb-msg">
-                                    <i class="icon-ban-circle"></i>
-                                    <strong>Stock Indent!</strong> You can enter the favorites first
                                  </div>
                               </div>
                            @else
@@ -223,7 +216,7 @@
    </div>
 </section>
 
-<div class="modal fade" id="detail_stock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="see_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
       <div class="modal-content">
          <div class="modal-header">
@@ -257,14 +250,6 @@
                         <th colspan="2" class="text-right">Available Stock</th>
                         <th id="total_stock">0</th>
                      </tr>
-                     <tr>
-                        <th colspan="2" class="text-right">Ready Stock</th>
-                        <th id="total_ready_stock">0</th>
-                     </tr>
-                     <tr>
-                        <th colspan="2" class="text-right">Indent Stock</th>
-                        <th id="total_indent_stock">0</th>
-                     </tr>
                   </tfoot>
                </table>
             </div>
@@ -279,11 +264,6 @@
 <script>
    $(function() {
       checkStock();
-
-      var session_flash = "{{ session('success') }}";
-      if(session_flash) {
-         Swal.fire('Success!', session_flash, 'success');
-      }
    });
 
    function checkStock() {
@@ -298,8 +278,6 @@
          beforeSend: function() {
             $('#data_shading').html('');
             $('#total_stock').html(0);
-            $('#total_ready_stock').html(0);
-            $('#total_indent_stock').html(0);
             $('#total_request_stock').html(0);
          },
          headers: {
@@ -307,8 +285,6 @@
          },
          success: function(response) {
             $('#total_stock').html(response.total_stock);
-            $('#total_ready_stock').html(response.total_ready);
-            $('#total_indent_stock').html(response.total_indent);
             $('#total_request_stock').html(response.total_request);
             
             if(response.data_shading.length > 0) {

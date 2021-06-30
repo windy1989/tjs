@@ -59,8 +59,6 @@
 											<th>Product</th>
 											<th class="text-center">Unit Price</th>
 											<th class="text-center">Qty</th>
-											<th class="text-center">Ready Stock</th>
-											<th class="text-center">Indent Stock</th>
 											<th class="text-center">Total</th>
 										</tr>
 									</thead>
@@ -73,8 +71,6 @@
 												<td class="align-middle">{{ $od->product->code() }}</td>
 												<td class="align-middle text-center">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
 												<td class="align-middle text-center">x{{ $od->qty }}</td>
-												<td class="align-middle text-center">{{ $od->ready }}</td>
-												<td class="align-middle text-center">{{ $od->indent }}</td>
 												<td class="align-middle text-center">Rp {{ number_format($od->total, 0, ',', '.') }}</td>
 											</tr>
 										@endforeach

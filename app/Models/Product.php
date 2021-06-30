@@ -98,12 +98,9 @@ class Product extends Model {
         if($stock > 18) {
             $color  = 'badge-success';
             $status = 'Ready';
-        } else if($stock > 2 && $stock <= 18) {
+        } else if($stock > 0 && $stock <= 18) {
             $color  = 'badge-warning';
             $status = 'Limited';
-        } else if($stock > 0 && $stock <= 2) {
-            $color  = 'badge-secondary';
-            $status = 'Indent';
         } else {
             $color  = 'badge-danger';
             $status = 'Not Available';

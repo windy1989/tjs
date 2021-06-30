@@ -18,9 +18,7 @@
                         <th class="cart-product-thumbnail">Image</th>
                         <th class="cart-product-name">Product</th>
                         <th class="cart-product-price">Unit Price</th>
-                        <th class="cart-product-quantity">Qty All</th>
-                        <th class="cart-product-quantity">Ready Stock</th>
-                        <th class="cart-product-quantity">Indent Stock</th>
+                        <th class="cart-product-quantity">Qty</th>
                         <th class="cart-product-subtotal">Total</th>
                      </tr>
                   </thead>
@@ -47,41 +45,6 @@
                                  <input type="number" step="1" min="1" name="qty" id="qty_{{ $c->id }}" onchange="cartQty({{ $c->id }}, '{{ base64_encode($c->product->id) }}')" value="{{ $c->qty }}" title="Quantity" class="qty">
                                  <input type="button" value="+" class="plus">
                               </div>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">
-                                 <span class="d-inline">Ready</span> 
-                                 <strong class="badge badge-success" id="total_ready_{{ $c->id }}"> 
-                                    @php
-                                       $total_stock   = $c->product->productShading->sum('qty');
-                                       $total_request = abs($c->qty);
-
-                                       if($total_request > $total_stock) {
-                                          $total_indent = $total_request - $total_stock;
-                                          echo abs($total_request - $total_indent);
-                                       } else {
-                                          echo $total_request;
-                                       }
-                                    @endphp
-                                 </strong>
-                              </span>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">
-                                 <span class="d-inline">Indent</span> 
-                                 <strong class="badge badge-info" id="total_indent_{{ $c->id }}"> 
-                                    @php
-                                       $total_stock   = $c->product->productShading->sum('qty');
-                                       $total_request = abs($c->qty);
-
-                                       if($total_request > $total_stock) {
-                                          echo $total_request - $total_stock;
-                                       } else {
-                                          echo 0;
-                                       }
-                                    @endphp
-                                 </strong>
-                              </span>
                            </td>
                            <td class="cart-product-subtotal">
                               <span class="amount" id="total_price_{{ $c->id }}">
@@ -163,8 +126,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
-            $('#total_ready_' + id).html(response.total_ready);
-            $('#total_indent_' + id).html(response.total_indent);
             $('#total_price_' + id).html(response.total_price);
             $('#grandtotal').html(response.grandtotal);
          }

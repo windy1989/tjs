@@ -22,8 +22,6 @@
 												<th class="cart-product-name">Product</th>
 												<th class="cart-product-price">Unit Price</th>
 												<th class="cart-product-quantity">Qty</th>
-												<th class="cart-product-quantity">Ready Stock</th>
-												<th class="cart-product-quantity">Indent Stock</th>
 												<th class="cart-product-subtotal">Total</th>
 											</tr>
 										</thead>
@@ -47,41 +45,6 @@
 														<div class="quantity">
 															<span class="amount">x{{ $c->qty }}</span>
 														</div>
-													</td>
-													<td class="cart-product-quantity">
-														<span class="amount">
-															<span class="d-inline">Ready</span> 
-															<strong class="badge badge-success"> 
-																@php
-																	$total_stock   = $c->product->productShading->sum('qty');
-																	$total_request = abs($c->qty);
-
-																	if($total_request > $total_stock) {
-																		$total_indent = $total_request - $total_stock;
-																		echo abs($total_request - $total_indent);
-																	} else {
-																		echo $total_request;
-																	}
-																@endphp
-															</strong>
-														</span>
-													</td>
-													<td class="cart-product-quantity">
-														<span class="amount">
-															<span class="d-inline">Indent</span> 
-															<strong class="badge badge-info"> 
-																@php
-																	$total_stock   = $c->product->productShading->sum('qty');
-																	$total_request = abs($c->qty);
-
-																	if($total_request > $total_stock) {
-																		echo $total_request - $total_stock;
-																	} else {
-																		echo 0;
-																	}
-																@endphp
-															</strong>
-														</span>
 													</td>
 													<td class="cart-product-subtotal">
 														<span class="amount">

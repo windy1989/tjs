@@ -47,7 +47,7 @@ class HomeController extends Controller {
             ->get();
 
         $product_limited = Product::whereHas('productShading', function($query) {
-                $query->havingRaw('SUM(qty) > ?', [2])
+                $query->havingRaw('SUM(qty) > ?', [0])
                     ->havingRaw('SUM(qty) <= ?', [18]);
             })
             ->latest()

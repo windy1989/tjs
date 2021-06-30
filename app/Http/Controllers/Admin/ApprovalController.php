@@ -97,16 +97,27 @@ class ApprovalController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
+                $check = Approval::where('approvalable_type', $val->approvalable_type)
+                    ->where('approvalable_id', $val->approvalable_id)
+                    ->whereNotNull('approved_by')
+                    ->first();
+
+                if($check) {
+                    $approved_by = $check->approvedBy->name;
+                    $btn         = '<a href="' . url('admin/approval/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
+                } else {
+                    $approved_by = '-';
+                    $btn         = '<a href="' . url('admin/approval/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
+                }
+
                 $response['data'][] = [
                     $nomor,
                     $val->type(),
                     $val->approvalable_type == 'orders' ? $val->approvalable->sales_order : $val->approvalable->code,
                     date('d F Y', strtotime($val->created_at)),
-                    $val->approved_by ? $val->approvedBy->name : '-',
+                    $approved_by,
                     $val->status(),
-                    '
-                        <a href="' . url('admin/approval/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>
-                    '
+                    $btn
                 ];
 
                 $nomor++;
@@ -132,8 +143,12 @@ class ApprovalController extends Controller {
         $order    = Order::find($approval->approvalable_id);
         $project  = Project::find($approval->approvalable_id);
         $status   = $request->reject ? 3 : 2;
+        $approved = Approval::where('approvalable_type', $approval->approvalable_type)
+            ->where('approvalable_id', $approval->approvalable_id)
+            ->whereNotNull('approved_by')
+            ->first();
+
         $approval->update(['seen' => true]);
-        
         if($approval->approvalable_type == 'orders') {
             $title       = 'Approval Sales Order';
             $view        = 'approval_sales_order_detail';
@@ -206,6 +221,7 @@ class ApprovalController extends Controller {
         $data  = [
             'title'    => $title,
             'approval' => $approval,
+            'approved' => $approved,
             'order'    => $order,
             'project'  => $project,
             'content'  => 'admin.' . $view

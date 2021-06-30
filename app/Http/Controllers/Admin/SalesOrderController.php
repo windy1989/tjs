@@ -225,24 +225,31 @@ class SalesOrderController extends Controller {
             ]);
 
             if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
+                if($request->approval) {
+                    $approval = true;
+                } else {
+                    $approval = false;
+                }
+
+                return redirect()->back()->withErrors($validation)->withInput()->with(['approval' => $approval]);
             } else {
                 $approval_manager  = 0;
                 $approval_director = 0;
                 $total_weight      = 0;
 
                 foreach($request->order_detail_id as $key => $odi) {
+                    $target_price            = $request->target_price[$key];
                     $order_detail            = OrderDetail::find($odi);
                     $total_weight           += $order_detail->product->type->weight * $order_detail->qty;
                     $discount_manager        = $order_detail->product->pricingPolicy ? $order_detail->product->pricingPolicy->discount_retail_manager : 0;
                     $discount_director       = $order_detail->product->pricingPolicy ?  $order_detail->product->pricingPolicy->discount_retail_director : 0;
-                    $total_discount_manager  = $order_detail->total - ($discount_manager * $order_detail->qty);
-                    $total_discount_director = $order_detail->total - ($discount_director * $order_detail->qty);
+                    $total_discount_manager  = $discount_manager * $order_detail->qty;
+                    $total_discount_director = $discount_director * $order_detail->qty;
 
-                    if($request->target_price[$key] < $total_discount_manager) {
-                        $approval_manager += 1;
-                    } else {
+                    if($target_price <= $total_discount_director) {
                         $approval_director += 1;
+                    } else {
+                        $approval_manager += 1;
                     }
 
                     OrderDetail::find($odi)->update([

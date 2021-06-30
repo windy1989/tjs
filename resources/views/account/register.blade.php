@@ -37,9 +37,18 @@
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-sm-3 text-capitalize col-form-label">Password</label>
+                           <label class="col-sm-3 text-capitalize col-form-label">Password:</label>
                            <div class="col-sm-9">
-                              <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+                              <div class="input-group" id="show_password">
+                                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+                                 <div class="input-group-append">
+                                    <span class="input-group-text">
+                                       <a href="javascript:void(0);" aria-hidden="true">
+                                          <i class="icon-eye-slash"></i>
+                                       </a>
+                                    </span>
+                                 </div>
+                              </div>
                               @error('password') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>

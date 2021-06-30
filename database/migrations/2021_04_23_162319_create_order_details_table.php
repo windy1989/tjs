@@ -28,8 +28,6 @@ class CreateOrderDetailsTable extends Migration
             $table->double('profit')->nullable();
             $table->date('partial_delivery')->nullable();
             $table->integer('qty');
-            $table->integer('ready')->default(0);
-            $table->integer('indent')->default(0);
             $table->double('total');
             $table->timestamps();
         });

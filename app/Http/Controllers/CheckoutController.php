@@ -84,26 +84,6 @@ class CheckoutController extends Controller {
                 $subtotal        = $c->product->price() * $c->qty;
                 $total_checkout += $subtotal;
                 $total_weight   += $c->product->type->weight * $c->qty;
-
-                $qty     = abs($c->qty);
-                $indent  = 0;
-                $stock   = $c->product->productShading->sum('qty');
-
-                if($qty > $stock) {
-                    $indent = $qty - $stock;
-                }
-
-                $ready   = abs($qty - $indent);
-                $shading = ProductShading::where('product_id', $c->product->id)->orderBy('qty', 'asc')->get();
-
-                foreach($shading as $s) {
-                    $minus = $s->qty - $ready;
-                    ProductShading::find($s->id)->update(['qty' => $minus > 0 ? $minus : 0]);
-
-                    if($ready > 0) {
-                        $s->qty - $ready;
-                    }
-                }
                 
                 OrderDetail::create([
                     'order_id'         => $order->id,
@@ -117,9 +97,7 @@ class CheckoutController extends Controller {
                     'cogs_perwira'     => $cogs_pta_idr,
                     'cogs_smartmarble' => $cogs_smb_idr,
                     'profit'           => $subtotal - $cogs_idr,
-                    'qty'              => $qty,
-                    'ready'            => $ready,
-                    'indent'           => $indent,
+                    'qty'              => $c->qty,
                     'total'            => $subtotal
                 ]);
             }

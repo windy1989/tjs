@@ -31,7 +31,6 @@
                                  <option value="">All</option>
                                  <option value="ready" {{ $filter['other']['stock'] == 'ready' ? 'selected' : '' }}>Ready</option>
                                  <option value="limited" {{ $filter['other']['stock'] == 'limited' ? 'selected' : '' }}>Limited</option>
-                                 <option value="indent" {{ $filter['other']['stock'] == 'indent' ? 'selected' : '' }}>Indent</option>
                               </select>
                            </div>
                         </div>

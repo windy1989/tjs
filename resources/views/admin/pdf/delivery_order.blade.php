@@ -153,10 +153,12 @@
 								<td width="10%" style="font-size:10px;">Date</td>
 								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($delivery_order->created_at)) }}</td>
 							</tr>
-							<tr>
-								<td width="10%" style="font-size:10px;">SO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $delivery_order->order->sales_order }}</td>
-							</tr>
+							@if($delivery_order->sales_order)
+								<tr>
+									<td width="10%" style="font-size:10px;">SO</td>
+									<td style="text-align:left; font-size:10px;">: {{ $delivery_order->order->sales_order }}</td>
+								</tr>
+							@endif
 							<tr>
 								<td width="10%" style="font-size:10px;">Invoice</td>
 								<td style="text-align:left; font-size:10px;">: {{ $delivery_order->order->invoice }}</td>
@@ -221,12 +223,14 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									<img src="{{ $od->product->type->image() }}" style="max-width:20px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+									<img src="{{ $od->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
 									{{ $od->product->code() }}
+									<div>{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm</div>
+									<div>{{ $od->product->type->category->name }}</div>
 								</center>
 							</td>
 							<td style="vertical-align:center;">
@@ -247,9 +251,24 @@
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td style="text-align:center;">
+						<div style="font-size:10px;">Mengetahui</div>
+						<br><br><br>
+						<div style="font-size:10px;">(....................................)</div>
+					</td>
+					<td style="text-align:center;">
+						<div style="font-size:10px;">Gudang</div>
+						<br><br><br>
+						<div style="font-size:10px;">(....................................)</div>
+					</td>
+					<td style="text-align:center;">
 						<div style="font-size:10px;">Created By</div>
 						<br><br><br>
-						<div style="font-size:10px;">{{ session('bo_name') }}</div>
+						<div style="font-size:10px;">({{ session('bo_name') }})</div>
+					</td>
+					<td style="text-align:center;">
+						<div style="font-size:10px;">Delivery</div>
+						<br><br><br>
+						<div style="font-size:10px;">(....................................)</div>
 					</td>
 				</tr>
 			</table>

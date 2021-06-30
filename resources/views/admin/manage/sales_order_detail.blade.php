@@ -140,8 +140,6 @@
 									<td class="align-middle">
 										<h6 class="mb-0">{{ $od->product->code() }}</h6>
 										<div class="text-muted">Qty <b>{{ $od->qty }}</b> Item</div>
-										<div class="text-muted">Ready <b>{{ $od->ready }}</b> Item</div>
-										<div class="text-muted">Indent <b>{{ $od->indent }}</b> Item</div>
 									</td>
 									<td class="align-middle">
 										<center>
@@ -297,7 +295,7 @@
 													<select name="delivery_id" id="delivery_id" class="select2" required>
 														<option value="">-- Choose --</option>
 														@if($delivery)
-															<option value="{{ $delivery->id }}" selected>({{ $delivery->transport->fleet }}) &nbsp;&nbsp; Rp {{ number_format($delivery->price, 0, ',', '.') }}</option> 
+															<option value="{{ $delivery->id }}" selected>({{ $delivery->transport->fleet }}) &nbsp;&nbsp; Rp {{ number_format($delivery->price_per_kg * $total_weight, 0, ',', '.') }}</option> 
 														@endif
 													</select>
 												</div>
@@ -359,7 +357,18 @@
 
 <script>
 	$(function() {
-		checkBtn();
+		var check_btn_approval = '{{ session("approval") }}';
+		if(check_btn_approval) {
+			$('#btn_invoice').hide();
+			$('#btn_approval').show();
+			$('#input_invoice').val(null);
+			$('#input_approval').val('approval');
+		} else {
+			$('#btn_invoice').show();
+			$('#btn_approval').hide();
+			$('#btn_invoice').val('invoice');
+			$('#input_approval').val(null);
+		}
 	});
 
 	function actionSubmit(event) {
@@ -424,19 +433,17 @@
 	}
 
 	function checkBtn(id = null, max_discount = null) {
-		if(id && max_discount) {
-			var target_price_value = parseFloat($('#target_price_' + id).val());
-			if(target_price_value >= max_discount) {
-				$('#btn_invoice').show();
-				$('#btn_approval').hide();
-				$('#btn_invoice').val('invoice');
-				$('#input_approval').val(null);
-			} else {
-				$('#btn_invoice').hide();
-				$('#btn_approval').show();
-				$('#input_invoice').val(null);
-				$('#input_approval').val('approval');
-			}
+		var target_price_value = parseFloat($('#target_price_' + id).val());
+		if(target_price_value >= max_discount) {
+			$('#btn_invoice').show();
+			$('#btn_approval').hide();
+			$('#btn_invoice').val('invoice');
+			$('#input_approval').val(null);
+		} else {
+			$('#btn_invoice').hide();
+			$('#btn_approval').show();
+			$('#input_invoice').val(null);
+			$('#input_approval').val('approval');
 		}
 	}
 </script>

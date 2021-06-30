@@ -152,7 +152,15 @@
 										<td class="align-middle">
 											<img src="{{ $od->product->type->image() }}" style="max-width:80px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
 										</td>
-										<td class="align-middle">{{ $od->product->code() }}</td>
+										<td class="align-middle">
+											<b>{{ $od->product->code() }}</b>
+											<div class="text-muted">
+												{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm
+											</div>
+											<div class="text-muted">
+												{{ $od->product->type->category->name }}
+											</div>
+										</td>
 										<td class="align-middle">{{ $od->qty }}</td>
 										<td class="align-middle">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
 										<td class="align-middle">Rp {{ number_format($od->total, 0, ',', '.') }}</td>

@@ -145,11 +145,8 @@ class ProductController extends Controller {
                             if($filter['other']['stock'] == 'ready') {
                                 $query->havingRaw('SUM(qty) > ?', [18]);
                             } else if($filter['other']['stock'] == 'limited') {
-                                $query->havingRaw('SUM(qty) > ?', [2])
-                                    ->havingRaw('SUM(qty) <= ?', [18]);
-                            } else if($filter['other']['stock'] == 'indent') {
                                 $query->havingRaw('SUM(qty) > ?', [0])
-                                    ->havingRaw('SUM(qty) <= ?', [2]);
+                                    ->havingRaw('SUM(qty) <= ?', [18]);
                             }
                         });
                 }
@@ -262,14 +259,8 @@ class ProductController extends Controller {
         $product_id    = base64_decode($request->product_id);
         $data_shading  = ProductShading::where('product_id', $product_id)->orderBy('qty', 'asc')->get();
         $total_stock   = ProductShading::where('product_id', $product_id)->sum('qty');
-        $total_indent  = 0;
         $total_request = abs($request->qty);
-        $total_ready   = $total_request;
         $shading       = [];
-
-        if($total_request > $total_stock) {
-            $total_indent = $total_request - $total_stock;
-        }
 
         foreach($data_shading as $ds) {
             $minus     = $ds->qty - $total_request;
@@ -286,8 +277,6 @@ class ProductController extends Controller {
 
         return response()->json([
             'total_stock'   => $total_stock,
-            'total_ready'   => abs($total_ready - $total_indent),
-            'total_indent'  => $total_indent,
             'total_request' => $total_request,
             'data_shading'  => $shading
         ]);
@@ -316,7 +305,7 @@ class ProductController extends Controller {
             ]);
         }
 
-        return redirect()->back()->with(['success' => 'Product successfully entered the cart']);
+        return redirect()->back();
     }
 
     public function cartQty(Request $request)
@@ -330,14 +319,9 @@ class ProductController extends Controller {
         $total_request = abs($request->qty);
         $cart_customer = Cart::where('customer_id', session('fo_id'))->get();
         $cart_row      = Cart::find($id);
-        $total_indent  = 0;
         $total_price   = $cart_row->product->price() * $total_request;
         $grandtotal    = 0;
         $total_stock   = $cart_row->product->productShading->sum('qty');
-
-        if($total_request > $total_stock) {
-            $total_indent = $total_request - $total_stock;
-        }
 
         foreach($cart_customer as $cc) {
             if($cc->id == $id) {
@@ -349,10 +333,8 @@ class ProductController extends Controller {
 
         $cart_row->update(['qty' => $total_request]);
         return response()->json([
-            'total_ready'  => abs($total_request - $total_indent),
-            'total_indent' => $total_indent,
-            'total_price'  => 'Rp ' . number_format($total_price, 0, ',', '.'),
-            'grandtotal'   => 'Rp ' . number_format($grandtotal, 0, ',', '.')
+            'total_price' => 'Rp ' . number_format($total_price, 0, ',', '.'),
+            'grandtotal'  => 'Rp ' . number_format($grandtotal, 0, ',', '.')
         ]);
     }
 

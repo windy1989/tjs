@@ -25,8 +25,6 @@ class OrderDetail extends Model {
         'profit',
         'partial_delivery',
         'qty',
-        'ready',
-        'indent',
         'total',
         'status'
     ];

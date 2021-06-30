@@ -44,7 +44,16 @@
                            </div>
                            <div class="col-12 form-group">
                               <label>Password:</label>
-                              <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+                              <div class="input-group" id="show_password">
+                                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+                                 <div class="input-group-append">
+                                    <span class="input-group-text">
+                                       <a href="javascript:void(0);" aria-hidden="true">
+                                          <i class="icon-eye-slash"></i>
+                                       </a>
+                                    </span>
+                                 </div>
+                              </div>
                            </div>
                            <div class="col-12 form-group mt-3">
                               <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary">Forgot Password?</a>

@@ -29,7 +29,7 @@
 }
 
 .product-thumbnail {
-   height: 300px !important;
+   max-height: 250px !important;
 }
 
 .cursor-none {
