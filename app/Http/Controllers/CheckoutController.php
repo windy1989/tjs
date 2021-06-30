@@ -83,7 +83,7 @@ class CheckoutController extends Controller {
                 $cogs_smb_idr    = $formula ? $formula->cogs_smb_idr : 0;
                 $subtotal        = $c->product->price() * $c->qty;
                 $total_checkout += $subtotal;
-                $total_weight   += $c->product->type->weight;
+                $total_weight   += $c->product->type->weight * $c->qty;
 
                 $qty     = abs($c->qty);
                 $indent  = 0;
@@ -198,6 +198,7 @@ class CheckoutController extends Controller {
         $weight   = (double)$request->weight;
         $delivery = Delivery::where('destination_id', $city_id)
             ->where('capacity', '>=', $weight)
+            ->orderBy('capacity', 'asc')
             ->orderBy('price_per_kg', 'asc')
             ->groupBy('transport_id')
             ->get();

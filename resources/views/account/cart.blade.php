@@ -1,6 +1,9 @@
 <section id="page-title">
    <div class="container">
-      <h1>Cart</h1>
+      <h1>
+         @php $str = explode(' ', session('fo_name')); @endphp
+         {{ $str[0] }} Cart
+      </h1>
    </div>
 </section>
 <section id="content">
@@ -113,8 +116,7 @@
             </div>
             <div class="form-group"><hr></div>
             <div class="text-right">
-               <a href="{{ url('checkout/cash') }}" class="button button-3d mt-2 mt-sm-0 mr-0 text-right">Pay Cash</a>
-               <a href="{{ url('checkout/cashless') }}" class="button button-3d mt-2 mt-sm-0 mr-0 text-right">Pay Cashless</a>
+               <button type="button" onclick="choosePaymentMethod()" class="button button-3d mt-2 mt-sm-0 mr-0 text-right">Checkout Now</button>
             </div>
          @else
             <div class="alert alert-warning">
@@ -126,6 +128,27 @@
 </section>
 
 <script>
+   function choosePaymentMethod() {
+      Swal.fire({
+         title: 'Payment Method',
+         text: 'Please select the payment method according to your wishes',
+         icon: 'info',
+         allowOutsideClick: false,
+         showCancelButton: true,
+         showDenyButton: true,
+         confirmButtonText: 'Online',
+         denyButtonText: 'Pay at Cashier',
+         cancelButtonText: 'Cancel',
+         reverseButtons: true
+      }).then((result) => {
+         if(result.isConfirmed) {
+            window.location.href = '{{ url("checkout/cashless") }}';
+         } else if(result.isDenied) {
+            window.location.href = '{{ url("checkout/cash") }}';
+         }
+      });
+   }
+
    function cartQty(id, product_id) {
       $.ajax({
          url: '{{ url("product/cart_qty") }}',

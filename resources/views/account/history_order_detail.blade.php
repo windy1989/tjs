@@ -298,7 +298,7 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Shipping Fee</strong>
+                                       <strong style="font-size:13px;" class="text-uppercase">Delivery Cost</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
@@ -330,7 +330,7 @@
                <div class="row">
                   <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 successmsg">
-								<div class="msgtitle text-center font-weight-bold text-uppercase">Transport</div>
+								<div class="msgtitle text-center font-weight-bold text-uppercase">Type Of Transport</div>
 								<div class="sb-msg text-center font-weight-semibold">
 									{{ $order->orderShipping ? $order->orderShipping->delivery->transport->fleet : 'Delivery not set' }}
 								</div>

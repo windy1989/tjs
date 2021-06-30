@@ -171,8 +171,8 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Additional Note :</label>
-									<textarea name="description" id="description" class="form-control" placeholder="Enter additional note" onkeyup="checkSubmitButton()">{{ old('description') }}</textarea>
+									<label>Important Note :</label>
+									<textarea name="description" id="description" class="form-control" placeholder="Enter important note" onkeyup="checkSubmitButton()">{{ old('description') }}</textarea>
 								</div>
 							</div>
 						</div>
@@ -196,7 +196,7 @@
 											</tr>
 											<tr class="cart_item">
 												<td class="cart-product-name">
-													<strong>Transport</strong>
+													<strong>Type Of Transport</strong>
 												</td>
 												<td class="cart-product-name">
 													<span class="amount">
@@ -206,7 +206,7 @@
 											</tr>
 											<tr class="cart_item">
 												<td class="cart-product-name">
-													<strong>Shipping Fee</strong>
+													<strong>Delivery Cost</strong>
 												</td>
 												<td class="cart-product-name">
 													<span class="amount">

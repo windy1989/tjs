@@ -84,7 +84,7 @@
 								<td><b>:</b> <span id="order_shipping_city"></span></td>
 							</tr>
 							<tr>
-								<th width="20%">Transport</th>
+								<th width="20%">Type Of Transport</th>
 								<td><b>:</b> <span id="order_shipping_transport"></span></td>
 							</tr>
 							<tr>

@@ -215,7 +215,7 @@
 				<div class="col-md-4">
 					<div class="alert alert-success">
 						<div class="text-center">
-							<h6 class="font-weight-bold text-uppercase">Transport</h6>
+							<h6 class="font-weight-bold text-uppercase">Type Of Transport</h6>
 							<div class="form-group"><hr></div>
 							<div class="font-weight-semibold">{{ $order->orderShipping ? $order->orderShipping->delivery->transport->fleet : 'Delivery not set' }}</div>
 						</div>

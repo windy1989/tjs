@@ -94,7 +94,7 @@
 									</table>
 								</div>
 								<div class="form-group">
-									<textarea name="description" id="description" class="form-control mb-0" placeholder="Enter additional note">{{ old('description') }}</textarea>
+									<textarea name="description" id="description" class="form-control mb-0" placeholder="Enter important note">{{ old('description') }}</textarea>
 								</div>
 							</div>
 						</div>

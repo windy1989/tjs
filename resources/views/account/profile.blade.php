@@ -1,6 +1,6 @@
 <section id="page-title">
    <div class="container">
-      <h1>Profile</h1>
+      <h1>Edit Profile</h1>
    </div>
 </section>
 <section id="content">

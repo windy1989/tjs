@@ -450,7 +450,7 @@ class AccountController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Profile',
+                'title'   => 'Edit Profile',
                 'profile' => $profile,
                 'content' => 'account.profile'
             ];

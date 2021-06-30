@@ -28,7 +28,7 @@
 											<a href="{{ url('information/product_catalog') }}" style="font-size:12px;" class="text-white text-uppercase">Product Catalog</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/pay_cash') }}" style="font-size:12px;" class="text-white text-uppercase">Pay Cash</a>
+											<a href="{{ url('information/payment_method') }}" style="font-size:12px;" class="text-white text-uppercase">Payment Method</a>
 										</div>
 									</div>
 								</div>

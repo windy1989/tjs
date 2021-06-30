@@ -29,25 +29,25 @@
                            Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
                         <div class="d-flex align-items-center justify-content-end">
-                           Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Dos</strong>
+                           Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Carton</strong>
                         </div>
                      </div>
                      <div class="line"></div>
                      <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0" method="POST">
                         @csrf
                         <div class="row justify-content-center">
-                           <div class="col-lg-4 col-md-4 col-12 mb-1">
+                           <div class="col-lg-6 col-md-6 col-6 mb-1">
                               <div class="quantity">
                                  <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
                                  <input type="button" value="-" class="minus">
                                  <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
                                  <input type="button" value="+" class="plus">
                               </div>
+                              <div class="mb-2 mt-2">
+                                 <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">See Detail</a>
+                              </div>
                            </div>
-                           <div class="col-lg-4 col-md-4 col-12 mt-2 mb-3">
-                              <a href="javascript:void(0);" id="notif_indent" data-toggle="modal" data-target="#detail_stock" class="text-primary font-italic">More Detail</a>
-                           </div>
-                           <div class="col-lg-4 col-md-4 col-12">
+                           <div class="col-lg-6 col-md-6 col-6 text-right">
                               <button type="submit" class="button button-green m-0">Add to cart</button>
                            </div>
                         </div>
@@ -227,7 +227,12 @@
    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">DETAIL STOCK</h5>
+            <h5 class="modal-title" id="exampleModalLabel">
+               DETAIL STOCK
+               <div class="mt-2 text-danger font-italic" style="font-size:11px;">
+                  *) Shading is the depiction of depth perception in a 3D model or an image using various levels of darkness.
+               </div>
+            </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>

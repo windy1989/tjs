@@ -82,10 +82,12 @@
 							<td width="7%">Date</td>
 							<td>: {{ date('d F Y', strtotime($order->created_at)) }}</td>
 						</tr>
-						<tr>
-							<td width="7%">SO</td>
-							<td>: {{ $order->sales_order }}</td>
-						</tr>
+						@if($order->sales_order)
+							<tr>
+								<td width="7%">SO</td>
+								<td>: {{ $order->sales_order }}</td>
+							</tr>
+						@endif
 						<tr>
 							<td width="7%">Invoice</td>
 							<td>: {{ $order->invoice }}</td>

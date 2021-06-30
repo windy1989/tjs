@@ -129,11 +129,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@php 
-								$total_max_discount = 0;
-								$total_target_price = 0; 
-								$total_weight       = 0;
-							@endphp
+							@php $total_weight = 0; @endphp
 							@foreach($order->orderDetail as $key => $od)
 								@php $discount = $od->product->pricingPolicy ? $od->product->pricingPolicy->discount_retail_sales : 0; @endphp
 								<input type="hidden" name="order_detail_id[]" value="{{ $od->id }}">
@@ -170,7 +166,7 @@
 											<input type="hidden" name="target_price[]" value="{{ $target_price }}">
 											Rp {{ number_format($target_price) }}
 										@else
-											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" value="{{ old('target_price'[$key], $od->target_price) }}" onkeyup="checkBtn({{ $od->id }}, {{ $target_price }})" placeholder="0">
+											<input type="number" class="form-control" name="target_price[]" id="target_price_{{ $od->id }}" value="{{ $target_price }}" value="{{ old('target_price'[$key], $od->target_price) }}" onkeyup="checkBtn({{ $od->id }}, {{ $discount * $od->qty }})" placeholder="0">
 										@endif
 									</td>
 									<td class="align-middle nowrap">
@@ -186,11 +182,7 @@
 											<input type="date" name="partial_delivery[]" id="partial_delivery" value="{{ $partial_delivery }}" class="form-control" required>
 										@endif
 									</td>
-									@php 
-										$total_max_discount += $od->total - $discount;
-										$total_target_price += $target_price; 
-										$total_weight       += $od->product->type->weight * $od->qty
-									@endphp
+									@php $total_weight += $od->product->type->weight * $od->qty; @endphp
 								</tr>
 							@endforeach
 						</tbody>
@@ -275,7 +267,7 @@
 													<td><b>:</b> {{ $order->orderShipping->address }}</td>
 												</tr>
 												<tr>
-													<td width="20%">Transport</td>
+													<td width="20%">Type Of Transport</td>
 													<input type="hidden" name="delivery_id" value="{{ $order->orderShipping->delivery_id }}">
 													<td>
 														<b>:</b> 
@@ -431,28 +423,19 @@
 		});
 	}
 
-	function checkBtn(id = null, target_price_real = null) {
-		if(id && target_price_real) {
-			var total_max_discount = parseFloat("{{ $total_max_discount }}");
-			var total_target_price = parseFloat("{{ $total_target_price }}");
+	function checkBtn(id = null, max_discount = null) {
+		if(id && max_discount) {
 			var target_price_value = parseFloat($('#target_price_' + id).val());
-
-			if(target_price_value >= target_price_real) {
-				var total_all_target_price = total_target_price;
-			} else {
-				var total_all_target_price = (total_target_price - target_price_real) + target_price_value;
-			}
-
-			if(total_max_discount < total_all_target_price) {
-				$('#btn_invoice').hide();
-				$('#btn_approval').show();
-				$('#input_invoice').val(null);
-				$('#input_approval').val('approval');
-			} else {
+			if(target_price_value >= max_discount) {
 				$('#btn_invoice').show();
 				$('#btn_approval').hide();
 				$('#btn_invoice').val('invoice');
 				$('#input_approval').val(null);
+			} else {
+				$('#btn_invoice').hide();
+				$('#btn_approval').show();
+				$('#input_invoice').val(null);
+				$('#input_approval').val('approval');
 			}
 		}
 	}

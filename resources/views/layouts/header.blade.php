@@ -10,14 +10,17 @@
 		</div>
 		<div class="side-panel-wrap">
 			<div class="widget clearfix">
-				<h4 class="mb-4">My Account</h4>
+				<h4 class="mb-4">
+					@php $str = explode(' ', session('fo_name')); @endphp
+					Hi, {{ $str[0] }}
+				</h4>
 				<nav class="nav-tree">
 					<ul>
 						<li>
 							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
 						</li>
 						<li>
-							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Profile</a>
+							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
 						</li>
 						<li>
 							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-light">{{ $total_cart }}</sup></a>
@@ -86,7 +89,10 @@
 								@if(session('fo_id'))
 									<a href="javascript:void(0);" class="side-panel-trigger text-dark">
 										<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
-										<span class="d-none d-sm-inline-block font-primary font-weight-medium text-dark">My Account</span>
+										<span class="d-none d-sm-inline-block font-primary font-weight-medium text-dark">
+											@php $str = explode(' ', session('fo_name')); @endphp
+											Hi, {{ $str[0] }}
+										</span>
 									</a>
 								@else
 									<a href="{{ url('account/login') }}">

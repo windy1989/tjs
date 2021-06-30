@@ -202,7 +202,7 @@
 												<td><b>:</b> {{ $order->orderShipping->address }}</td>
 											</tr>
 											<tr>
-												<td width="20%">Transport</td>
+												<td width="20%">Type Of Transport</td>
 												<td>
 													<b>:</b> 
 													{{ $order->orderShipping->delivery->transport->fleet }}
