@@ -19,6 +19,7 @@ class CustomerSeeder extends Seeder
         foreach($customers as $c) {
             Customer::insert([
                 'id'           => $c['id'],
+                'photo'        => $c['photo'],
                 'name'         => $c['name'],
                 'email'        => $c['email'],
                 'phone'        => $c['phone'],
