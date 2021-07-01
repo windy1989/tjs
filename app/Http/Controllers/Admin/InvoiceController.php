@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use PDF;
 use App\Models\Brand;
 use App\Models\Order;
+use App\Models\OrderPo;
 use App\Models\Customer;
 use App\Models\OrderPayment;
 use Illuminate\Http\Request;
+use App\Models\OrderDelivery;
 use App\Http\Controllers\Controller;
 
 class InvoiceController extends Controller {
@@ -78,8 +80,6 @@ class InvoiceController extends Controller {
                 if($request->status) {
                     if($request->status == 'unpaid') {
                         $query->where('payment', 0)->orWhereNull('payment');
-                    } else if($request->status == 'down_payment') {
-                        $query->whereRaw('payment > 0 AND payment < grandtotal');
                     } else {
                         $query->whereRaw('payment >= grandtotal');
                     }
@@ -132,8 +132,6 @@ class InvoiceController extends Controller {
                 if($request->status) {
                     if($request->status == 'unpaid') {
                         $query->where('payment', 0)->orWhereNull('payment');
-                    } else if($request->status == 'down_payment') {
-                        $query->whereRaw('payment > 0 AND payment < grandtotal');
                     } else {
                         $query->whereRaw('payment >= grandtotal');
                     }
@@ -156,9 +154,6 @@ class InvoiceController extends Controller {
             foreach($query_data as $val) {
                 if($val->payment == 0 || $val->payment == null) {
                     $status = 'Unpaid';
-                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
-                } else if($val->payment < $val->grandtotal) {
-                    $status = 'Down Payment';
                     $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 } else {
                     $status = 'Full Payment';
@@ -199,15 +194,26 @@ class InvoiceController extends Controller {
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->payment) {
                 if($order->status == 1 || $order->status == 5) {
-                    $status = 2;
-                    $order->update(['purchase_order' => Order::generateCode('CH', 'purchase_order')]);
+                    $status = 3;
+                    
+                    OrderPo::create([
+                        'order_id'       => $order->id,
+                        'purchase_order' => OrderPo::generateCode(),
+                        'status'         => 1
+                    ]);
+
                     OrderPayment::create([
                         'order_id' => $order->id,
                         'method'   => 'Cash',
                         'channel'  => 'Smart Marble'
                     ]);
+
+                    OrderDelivery::create([
+                        'order_id'       => $order->id,
+                        'delivery_order' => OrderDelivery::generateCode()
+                    ]);
                 } else {
-                    $status = $order->status;
+                    $status = 2;
                 }
             } else {
                 $status = 1;

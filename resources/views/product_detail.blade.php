@@ -40,7 +40,7 @@
                               <div class="quantity">
                                  <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
                                  <input type="button" value="-" class="minus">
-                                 <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" title="Quantity" class="qty">
+                                 <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" max="{{ $product->availability()->stock }}" title="Quantity" class="qty">
                                  <input type="button" value="+" class="plus">
                               </div>
                               <div class="mb-2 mt-2">

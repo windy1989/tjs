@@ -229,7 +229,7 @@
 							<td style="vertical-align:center;">
 								<center>
 									{{ $od->product->code() }}
-									<div>{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm</div>
+									<div>{{ $od->product->type->length }}x{{ $od->product->type->width }}</div>
 									<div>{{ $od->product->type->category->name }}</div>
 								</center>
 							</td>

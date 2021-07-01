@@ -61,14 +61,12 @@ class CheckoutController extends Controller {
             $total_weight   = 0;
             $param_code     = $param == 'cash' ? 'CH' : 'CS';
             $order          = Order::create([
-                'customer_id'    => session('fo_id'),
-                'number'         => Order::generateNumber($param_code),
-                'sales_order'    => $param == 'cash' ? Order::generateCode($param_code, 'sales_order') : null,
-                'invoice'        => $param == 'cash' ? null : Order::generateCode($param_code, 'invoice'),
-                'purchase_order' => $param == 'cash' ? null : Order::generateCode($param_code, 'purchase_order'),
-                'description'    => $request->description,
-                'type'           => $param == 'cash' ? 1 : 2,
-                'status'         => 1
+                'customer_id' => session('fo_id'),
+                'number'      => Order::generateNumber($param_code),
+                'sales_order' => $param == 'cash' ? Order::generateCode('sales_order') : null,
+                'description' => $request->description,
+                'type'        => $param == 'cash' ? 1 : 2,
+                'status'      => 1
             ]);
 
             foreach($customer->cart as $c) {

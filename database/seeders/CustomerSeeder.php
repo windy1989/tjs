@@ -14,12 +14,19 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        Customer::create([
-            'name'         => 'Calvin Dito Pratama',
-            'email'        => 'calvindito7@gmail.com',
-            'phone'        => '088999157717',
-            'password'     => bcrypt('123456'),
-            'verification' => date('Y-m-d H:i:s')
-        ]);
+        require public_path('website/customers.php');
+
+        foreach($customers as $c) {
+            Customer::insert([
+                'id'           => $c['id'],
+                'name'         => $c['name'],
+                'email'        => $c['email'],
+                'phone'        => $c['phone'],
+                'password'     => $c['password'],
+                'verification' => $c['verification'],
+                'created_at'   => $c['created_at'],
+                'updated_at'   => $c['updated_at']
+            ]);
+        }
     }
 }

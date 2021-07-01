@@ -427,10 +427,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('delivery_order')->group(function() {
                 Route::get('/', 'DeliveryOrderController@index');
                 Route::post('datatable', 'DeliveryOrderController@datatable');
-                Route::post('get_data_order', 'DeliveryOrderController@getDataOrder');
-                Route::match(['get', 'post'], 'create', 'DeliveryOrderController@create');
-                Route::match(['get', 'post'], 'information', 'DeliveryOrderController@information');
-                Route::post('destroy', 'DeliveryOrderController@destroy');
+                Route::post('information', 'DeliveryOrderController@information');
                 Route::match(['get', 'post'], 'print/{id}', 'DeliveryOrderController@print');
             });
         });

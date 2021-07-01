@@ -64,7 +64,6 @@
                      <select name="filter_status" id="filter_status" class="custom-select">
                         <option value="">All Status</option>
                         <option value="unpaid">Unpaid</option>
-                        <option value="down_payment">Down Payment</option>
                         <option value="full_payment">Full Payment</option>
                      </select>
                   </div>

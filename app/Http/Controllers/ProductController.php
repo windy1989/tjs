@@ -120,22 +120,32 @@ class ProductController extends Controller {
         $product = Product::where(function($query) use ($filter) {
                 if($filter['other']['search']) {
                     $query->whereHas('type', function($query) use ($filter) {
-                            $query->where('code', 'like', '%' . $filter['other']['search'] . '%');
+                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%')
+                                ->orWhereHas('division', function($query) use ($filter) {
+                                    $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                        ->orWhere('code', '%' . $filter['other']['search'] . '%')
+                                        ->orWhere('name', '%' . $filter['other']['search'] . '%');
+                                });
                         })
                         ->orWhereHas('company', function($query) use ($filter) {
-                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
                                 ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
                         })
                         ->orWhereHas('country', function($query) use ($filter) {
-                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
                                 ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
                         })
                         ->orWhereHas('brand', function($query) use ($filter) {
-                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
                                 ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
                         })
                         ->orWhereHas('grade', function($query) use ($filter) {
-                            $query->where('name', 'like', '%' . $filter['other']['search'] . '%')
+                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
+                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
                                 ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
                         });
                 }

@@ -94,12 +94,6 @@ class DeliveryOrderController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->order->status == 4) {
-                    $btn = '';
-                } else {
-                    $btn = '<button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>';
-                }
-
                 $response['data'][] = [
                     $nomor,
                     $val->delivery_order,
@@ -109,8 +103,7 @@ class DeliveryOrderController extends Controller {
                     '
                         <a href="' . url('admin/manage/delivery_order/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer2"></i></a>
                         <button type="button" class="btn bg-info btn-sm" data-popup="tooltip" title="Information" onclick="information(' . $val->id . ')"><i class="icon-info22"></i></button>
-                    ' . 
-                    $btn
+                    '
                 ];
 
                 $nomor++;
@@ -128,81 +121,6 @@ class DeliveryOrderController extends Controller {
         }
 
         return response()->json($response);
-    }
-
-    public function getDataOrder(Request $request)
-    {
-        $order        = Order::find($request->order_id);
-        $order_detail = [];
-
-        foreach($order->orderDetail as $od) {
-            $order_detail[] = [
-                'image'   => $od->product->type->image(),
-                'product' => $od->product->code(),
-                'qty'     => $od->qty
-            ];
-        }
-
-        return response()->json([
-            'order_detail'   => $order_detail,
-            'order_shipping' => [
-                'name'    => $order->orderShipping->receiver_name,
-                'email'   => $order->orderShipping->email,
-                'phone'   => $order->orderShipping->phone,
-                'city'    => $order->orderShipping->city->name,
-                'fleet'   => $order->orderShipping->delivery->transport->fleet,
-                'vendor'  => $order->orderShipping->delivery->vendor->name,
-                'address' => $order->orderShipping->address
-            ]
-        ]);
-    }
-
-    public function create(Request $request)
-    {
-        if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'order_id' => 'required'
-            ], [
-                'order_id.required' => 'Please select a order.'
-            ]);
-
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
-            } else {
-                $query = OrderDelivery::create([
-                    'order_id'       => $request->order_id,
-                    'delivery_order' => OrderDelivery::generateCode()
-                ]);
-
-                if($query) {
-                    Order::find($request->order_id)->update(['status' => 3]);
-                    return redirect()->back()->with(['success' => 'Data added successfully.']);
-                } else {
-                    return redirect()->back()->withInput()->with(['failed' => 'Data failed to added.']);
-                }
-            }
-        } else {
-            $order = Order::where('status', 2)
-                ->whereNotNull('purchase_order')
-                ->whereHas('orderDetail', function($query) {
-                    $query->whereDate('partial_delivery', '<=', date('Y-m-d'))
-                        ->whereNotExists(function($query) {
-                            $query->selectRaw(1)
-                                ->from('order_deliveries')
-                                ->whereColumn('order_deliveries.order_id', 'orders.id');
-                        });
-                })
-                ->oldest('created_at')
-                ->get();
-
-            $data = [
-                'title'   => 'Create Delivery Order',
-                'order'   => $order,
-                'content' => 'admin.manage.delivery_order_create'
-            ];
-
-            return view('admin.layouts.index', ['data' => $data]);
-        }
     }
 
     public function information(Request $request)
@@ -231,27 +149,6 @@ class DeliveryOrderController extends Controller {
                 'address' => $order_delivery->order->orderShipping->address
             ]
         ]);
-    }
-
-    public function destroy(Request $request) 
-    {
-        $data  = OrderDelivery::find($request->id);
-        $order = $data->order;
-
-        if($data->delete()) {
-            Order::find($order->id)->update(['status' => 2]);
-            $response = [
-                'status'  => 200,
-                'message' => 'Data deleted successfully.'
-            ];
-        } else {
-            $response = [
-                'status'  => 500,
-                'message' => 'Data failed to delete.'
-            ];
-        }
-
-        return response()->json($response);
     }
 
     public function print($id)

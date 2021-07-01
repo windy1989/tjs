@@ -21,7 +21,6 @@ class CreateOrdersTable extends Migration
             $table->string('number')->unique();
             $table->string('sales_order')->nullable();
             $table->string('invoice')->nullable();
-            $table->string('purchase_order')->nullable();
             $table->double('discount')->default(0);
             $table->double('subtotal')->default(0);
             $table->double('shipping')->default(0);

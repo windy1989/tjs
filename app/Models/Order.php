@@ -47,14 +47,6 @@ class Order extends Model {
             ->limit(1)
             ->get();
 
-        if($column == 'sales_order') {
-            $str = 'SO';
-        } else if($column == 'invoice') {
-            $str = 'INV';
-        } else if($column == 'purchase_order') {
-            $str = 'PO';
-        }
-
         if($query->count() > 0) {
             $number = (int)$query[0]->code + 1;
         } else {
@@ -62,7 +54,7 @@ class Order extends Model {
         }
 
         $code = str_pad($number, 6, 0, STR_PAD_LEFT);
-        return $str . '/' . $param . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+        return $str . '/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
     }
 
     public function type() 

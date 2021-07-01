@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Purchase Order {{ $order->purchase_order }}</title>
+		<title>Purchase Order {{ $purchase_order->purchase_order }}</title>
 		<style>
 			.invoice-box {
 				font-size: 16px;
@@ -151,21 +151,21 @@
 						<table>
 							<tr style="line-height:0 !important;">
 								<td width="10%" style="font-size:10px;">Date</td>
-								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($purchase_order->created_at)) }}</td>
 							</tr>
-							@if($order->sales_order)
+							@if($purchase_order->order->sales_order)
 								<tr>
 									<td width="10%" style="font-size:10px;">SO</td>
-									<td style="text-align:left; font-size:10px;">: {{ $order->sales_order }}</td>
+									<td style="text-align:left; font-size:10px;">: {{ $purchase_order->order->sales_order }}</td>
 								</tr>
 							@endif
 							<tr>
 								<td width="10%" style="font-size:10px;">Invoice</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->invoice }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ $purchase_order->order->invoice }}</td>
 							</tr>
                             <tr>
 								<td width="10%" style="font-size:10px;">PO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->purchase_order }}</td>
+								<td style="text-align:left; font-size:10px;">: {{ $purchase_order->purchase_order }}</td>
 							</tr>
 							<tr>
 								<td width="10%" style="font-size:10px;">Ship Via</td>
@@ -194,13 +194,13 @@
 								<td><div style="font-size:10px;"><b>SHIP TO :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->receiver_name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->phone }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->email }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $order->orderShipping->city->address }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $purchase_order->order->orderShipping->receiver_name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $purchase_order->order->orderShipping->phone }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $purchase_order->order->orderShipping->email }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $purchase_order->order->orderShipping->city->name }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $purchase_order->order->orderShipping->city->address }}</div>
 						<div style="font-weight:500; font-size:10px;">
-							Fleet : {{ $order->orderShipping->delivery->transport->fleet }}	
+							Fleet : {{ $purchase_order->order->orderShipping->delivery->transport->fleet }}	
 						</div>
 					</td>
 				</tr>
@@ -217,7 +217,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($order->orderDetail as $key => $od)
+					@foreach($purchase_order->order->orderDetail as $key => $od)
 						<tr>
 							<td style="vertical-align:center;">
 								<center>
@@ -232,7 +232,7 @@
 							<td style="vertical-align:center;">
 								<center>
 									{{ $od->product->code() }}
-									<div>{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm</div>
+									<div>{{ $od->product->type->length }}x{{ $od->product->type->width }}</div>
 									<div>{{ $od->product->type->category->name }}</div>
 								</center>
 							</td>
@@ -257,15 +257,17 @@
 				<tfoot>
 					<tr>
 						<th colspan="4" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty'), 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty'), 0, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->shipping, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($purchase_order->order->shipping, 0, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format(($order->orderDetail->sum('bottom_price') * $order->orderDetail->sum('qty')) + $order->shipping, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">
+							Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $purchase_order->order->shipping, 0, ',', '.') }}
+						</th>
 					</tr>
 				</tfoot>
 			</table><br>

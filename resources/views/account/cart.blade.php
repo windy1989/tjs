@@ -42,7 +42,7 @@
                            <td class="cart-product-quantity nowrap">
                               <div class="quantity">
                                  <input type="button" value="-" class="minus">
-                                 <input type="number" step="1" min="1" name="qty" id="qty_{{ $c->id }}" onchange="cartQty({{ $c->id }}, '{{ base64_encode($c->product->id) }}')" value="{{ $c->qty }}" title="Quantity" class="qty">
+                                 <input type="number" step="1" min="1" name="qty" id="qty_{{ $c->id }}" onchange="cartQty({{ $c->id }}, '{{ base64_encode($c->product->id) }}')" value="{{ $c->qty }}" max="{{ $c->product->availability()->stock }}" title="Quantity" class="qty">
                                  <input type="button" value="+" class="plus">
                               </div>
                            </td>

@@ -155,7 +155,7 @@
 										<td class="align-middle">
 											<b>{{ $od->product->code() }}</b>
 											<div class="text-muted">
-												{{ $od->product->type->width }}x{{ $od->product->type->height }} Cm
+												{{ $od->product->type->length }}x{{ $od->product->type->width }}
 											</div>
 											<div class="text-muted">
 												{{ $od->product->type->category->name }}

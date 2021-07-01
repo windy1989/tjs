@@ -12,9 +12,6 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<a href="{{ url('admin/manage/delivery_order/create') }}" class="btn bg-primary btn-labeled btn-labeled-left">
-						<b><i class="icon-plus3"></i></b> Add Data
-					</a>
 				</div>
 			</div>
 		</div>
@@ -283,51 +280,5 @@
             });
          }
       });
-   }
-
-   function destroy(id) {
-      var notyConfirm = new Noty({
-         theme: 'limitless',
-         text: '<h6 class="font-weight-bold mb-3">Are sure you want to delete?</h6><label>Deleted data can no longer be recovered.</label>',
-         timeout: false,
-         modal: true,
-         layout: 'center',
-         closeWith: 'button',
-         type: 'confirm',
-         buttons: [
-            Noty.button('<i class="icon-cross3"></i>', 'btn bg-danger', function() {
-               notyConfirm.close();
-            }),
-            Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
-               $.ajax({
-                  url: '{{ url("admin/manage/delivery_order/destroy") }}',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  data: {
-                     id: id
-                  },
-                  headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  },
-                  success: function(response) {
-                     if(response.status == 200) {
-                        $('#datatable_serverside').DataTable().ajax.reload(null, false);
-                        notif('success', 'bg-success', response.message);
-                        notyConfirm.close();
-                     } else {
-                        notif('error', 'bg-danger', response.message);
-                     }
-                  },
-                  error: function() {
-                     swalInit.fire({
-                        title: 'Server Error',
-                        text: 'Please contact developer',
-                        type: 'error'
-                     });
-                  }
-               });
-            })
-         ]
-      }).show();
    }
 </script>

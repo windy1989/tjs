@@ -279,7 +279,7 @@ class SalesOrderController extends Controller {
                     $flash_success = 'Order is under approval';
                 } else {
                     $order->update([
-                        'invoice' => Order::generateCode('CH', 'invoice')
+                        'invoice' => Order::generateCode('invoice')
                     ]);
 
                     $flash_success = 'Order <b class="font-italic">' . $order->sales_order .  '</b> is already in the purchase order';

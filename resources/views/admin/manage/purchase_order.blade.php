@@ -49,6 +49,28 @@
                   </div>
                </div>
                <div class="col-md-12">
+                  <div class="form-group text-right mb-0">
+                     <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                           <input type="radio" class="form-check-input" name="filter_status" value="" checked>
+                           All
+                        </label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                           <input type="radio" class="form-check-input" name="filter_status" value="1">
+                           Process
+                        </label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                           <input type="radio" class="form-check-input" name="filter_status" value="2">
+                           Done
+                        </label>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
                   <div class="form-group"><hr></div>
                </div>
                <div class="col-md-12">
@@ -72,9 +94,11 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
+                        <th>Order</th>
                         <th>Vendor</th>
                         <th>Code</th>
                         <th>Grandtotal</th>
+                        <th>Status</th>
                         <th>Date</th>
                         <th>Action</th>
                      </tr>
@@ -93,6 +117,7 @@
    function resetFilter() {
       $('#filter_start_date').val(null);
       $('#filter_finish_date').val(null);
+      $('input[name="filter_status"][value=""]').prop('checked', true);
       loadDataTable();
    }
 
@@ -102,7 +127,7 @@
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[4, 'desc']],
+         order: [[5, 'desc']],
          ajax: {
             url: '{{ url("admin/manage/purchase_order/datatable") }}',
             type: 'POST',
@@ -110,6 +135,7 @@
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
+               status: $('input[name="filter_status"]:checked').val(),
                start_date: $('#filter_start_date').val(),
                finish_date: $('#filter_finish_date').val()
             },
@@ -130,9 +156,11 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
+            { name: 'order_id', className: 'text-center align-middle' },
             { name: 'vendor', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'purchase_order', className: 'text-center nowrap align-middle' },
             { name: 'grandtotal', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
+            { name: 'status', orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'created_at', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
