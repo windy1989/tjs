@@ -14,7 +14,7 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        require public_path('website/customers.php');
+        require public_path('website/backup.php');
 
         foreach($customers as $c) {
             Customer::insert([
