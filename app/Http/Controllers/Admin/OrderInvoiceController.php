@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderDelivery;
 use App\Http\Controllers\Controller;
 
-class InvoiceController extends Controller {
+class OrderInvoiceController extends Controller {
 
     public function index()
     {

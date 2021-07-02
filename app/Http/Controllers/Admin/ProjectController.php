@@ -19,10 +19,10 @@ class ProjectController extends Controller {
     public function index() 
     {
         $data = [
-            'title'   => 'Manage Project',
+            'title'   => 'Project Data',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
-            'content' => 'admin.manage.project'
+            'content' => 'admin.project.data'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -82,7 +82,7 @@ class ProjectController extends Controller {
             $nomor = $start + 1;
             foreach($query_data as $val) {
                 if($val->progress == 100) {
-                    $action = '<a href="' . url('admin/manage/project/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
+                    $action = '<a href="' . url('admin/project/data/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:25px;">
@@ -94,7 +94,7 @@ class ProjectController extends Controller {
                         </div>
                     ';
                 } else {
-                    $action = '<a href="' . url('admin/manage/project/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
+                    $action = '<a href="' . url('admin/project/data/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:25px;">
@@ -335,7 +335,7 @@ class ProjectController extends Controller {
             }
 
             if($validation->fails()) {
-                return redirect('admin/project/manage/' . $id . '?' . $step . '=1#' . $step)
+                return redirect('admin/project/data/' . $id . '?' . $step . '=1#' . $step)
                     ->withErrors($validation)
                     ->withInput();
             } else {
@@ -461,16 +461,16 @@ class ProjectController extends Controller {
                         break;
                 }
 
-                return redirect('admin/project/manage/' . $id . '?' . $step . '=1#' . $step)
+                return redirect('admin/project/data/' . $id . '?' . $step . '=1#' . $step)
                     ->with(['success' => 'Data successfully saved.']);
             }
         } else {
             $data = [
-                'title'   => 'Manage Project Progress',
+                'title'   => 'Project Data Progress',
                 'country' => Country::where('status', 1)->get(),
                 'city'    => City::all(),
                 'project' => $query,
-                'content' => 'admin.manage.project_progress'
+                'content' => 'admin.project.data_progress'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);

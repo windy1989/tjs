@@ -14,7 +14,7 @@ use App\Models\OrderShipping;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class SalesOrderController extends Controller {
+class OrderSoController extends Controller {
     
     public function index()
     {

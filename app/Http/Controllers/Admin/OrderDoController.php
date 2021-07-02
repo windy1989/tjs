@@ -10,7 +10,7 @@ use App\Models\OrderDelivery;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class DeliveryOrderController extends Controller {
+class OrderDoController extends Controller {
 
     public function index()
     {

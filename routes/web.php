@@ -388,15 +388,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('datatable', 'CustomerController@datatable');
             });
 
-            Route::prefix('project')->group(function() {
-                Route::get('/', 'ProjectController@index');
-                Route::post('datatable', 'ProjectController@datatable');
-                Route::post('create', 'ProjectController@create');
-                Route::post('get_product', 'ProjectController@getProduct');
-                Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
-                Route::get('detail/{id}', 'ProjectController@detail');
-            });
-
             Route::prefix('order')->group(function() {
                 Route::get('/', 'OrderController@index');
                 Route::post('datatable', 'OrderController@datatable');
@@ -404,31 +395,42 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
 
             Route::prefix('sales_order')->group(function() {
-                Route::get('/', 'SalesOrderController@index');
-                Route::post('datatable', 'SalesOrderController@datatable');
-                Route::post('get_delivery', 'SalesOrderController@getDelivery');
-                Route::match(['get', 'post'], 'detail/{id}', 'SalesOrderController@detail');
+                Route::get('/', 'OrderSoController@index');
+                Route::post('datatable', 'OrderSoController@datatable');
+                Route::post('get_delivery', 'OrderSoController@getDelivery');
+                Route::match(['get', 'post'], 'detail/{id}', 'OrderSoController@detail');
             });
 
             Route::prefix('invoice')->group(function() {
-                Route::get('/', 'InvoiceController@index');
-                Route::post('datatable', 'InvoiceController@datatable');
-                Route::match(['get', 'post'], 'detail/{id}', 'InvoiceController@detail');
-                Route::match(['get', 'post'], 'print/{id}', 'InvoiceController@print');
+                Route::get('/', 'OrderInvoiceController@index');
+                Route::post('datatable', 'OrderInvoiceController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'OrderInvoiceController@detail');
+                Route::match(['get', 'post'], 'print/{id}', 'OrderInvoiceController@print');
             });
 
             Route::prefix('purchase_order')->group(function() {
-                Route::get('/', 'PurchaseOrderController@index');
-                Route::post('datatable', 'PurchaseOrderController@datatable');
-                Route::match(['get', 'post'], 'detail/{id}', 'PurchaseOrderController@detail');
-                Route::match(['get', 'post'], 'print/{id}', 'PurchaseOrderController@print');
+                Route::get('/', 'OrderPoController@index');
+                Route::post('datatable', 'OrderPoController@datatable');
+                Route::match(['get', 'post'], 'detail/{id}', 'OrderPoController@detail');
+                Route::match(['get', 'post'], 'print/{id}', 'OrderPoController@print');
             });
 
             Route::prefix('delivery_order')->group(function() {
-                Route::get('/', 'DeliveryOrderController@index');
-                Route::post('datatable', 'DeliveryOrderController@datatable');
-                Route::post('information', 'DeliveryOrderController@information');
-                Route::match(['get', 'post'], 'print/{id}', 'DeliveryOrderController@print');
+                Route::get('/', 'OrderDoController@index');
+                Route::post('datatable', 'OrderDoController@datatable');
+                Route::post('information', 'OrderDoController@information');
+                Route::match(['get', 'post'], 'print/{id}', 'OrderDoController@print');
+            });
+        });
+
+        Route::prefix('project')->group(function() {
+            Route::prefix('data')->group(function() {
+                Route::get('/', 'ProjectController@index');
+                Route::post('datatable', 'ProjectController@datatable');
+                Route::post('create', 'ProjectController@create');
+                Route::post('get_product', 'ProjectController@getProduct');
+                Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
+                Route::get('detail/{id}', 'ProjectController@detail');
             });
         });
 

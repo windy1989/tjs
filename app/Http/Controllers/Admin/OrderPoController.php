@@ -9,7 +9,7 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PurchaseOrderController extends Controller {
+class OrderPoController extends Controller {
 
     public function index()
     {

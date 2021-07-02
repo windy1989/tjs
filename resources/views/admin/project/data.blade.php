@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Manage Project</span>
+					<span class="font-weight-semibold">Project Data</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -22,8 +22,8 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
-					<span class="breadcrumb-item active">Project</span>
+					<a href="javascript:void(0);" class="breadcrumb-item">Project</a>
+					<span class="breadcrumb-item active">Data</span>
 				</div>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header bg-light">
-            <h5 class="modal-title" id="exampleModalLabel">Form Project</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form Data</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -199,7 +199,7 @@
          iDisplayInLength: 10,
          order: [[0, 'asc']],
          ajax: {
-            url: '{{ url("admin/manage/project/datatable") }}',
+            url: '{{ url("admin/project/data/datatable") }}',
             type: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -235,7 +235,7 @@
 
    function create() {
       $.ajax({
-         url: '{{ url("admin/manage/project/create") }}',
+         url: '{{ url("admin/project/data/create") }}',
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),
