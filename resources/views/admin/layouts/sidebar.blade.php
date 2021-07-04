@@ -104,6 +104,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'news' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-newspaper"></i> 
+                            <span>News</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="News">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/news/category') }}" class="nav-link {{ Request::segment(2) == 'news' && Request::segment(3) == 'category' ? 'active' : '' }}">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/news/news') }}" class="nav-link {{ Request::segment(2) == 'news' && Request::segment(3) == 'news' ? 'active' : '' }}">News</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'product' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-box"></i> 
@@ -170,6 +184,9 @@
                             <span>Manage</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Manage">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/manage/career') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'career' ? 'active' : '' }}">Career</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/manage/customer') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'customer' ? 'active' : '' }}">Customer</a>
                             </li>

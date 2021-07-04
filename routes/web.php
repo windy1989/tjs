@@ -269,6 +269,27 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
+        Route::prefix('news')->group(function() {
+            Route::prefix('category')->group(function() {
+                Route::get('/', 'NewsCategoryController@index');
+                Route::post('datatable', 'NewsCategoryController@datatable');
+                Route::post('create', 'NewsCategoryController@create');
+                Route::post('show', 'NewsCategoryController@show');
+                Route::post('update/{id}', 'NewsCategoryController@update');
+                Route::post('destroy', 'NewsCategoryController@destroy');
+            });
+
+            Route::prefix('news')->group(function() {
+                Route::get('/', 'NewsController@index');
+                Route::post('datatable', 'NewsController@datatable');
+                Route::post('create', 'NewsController@create');
+                Route::post('show', 'NewsController@show');
+                Route::post('update/{id}', 'NewsController@update');
+                Route::post('destroy', 'NewsController@destroy');
+                Route::get('detail/{id}', 'NewsController@detail');
+            });
+        });
+
         Route::prefix('product')->group(function() {
             Route::prefix('type')->group(function() {
                 Route::get('/', 'TypeController@index');

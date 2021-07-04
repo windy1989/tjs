@@ -216,7 +216,7 @@ class ProductController extends Controller {
         $data = [
             'title'    => 'Product',
             'brand'    => Brand::where('status', 1)->get(),
-            'category' => Category::where('parent_id', 0)->where('status', 1)->get(),
+            'category' => Category::where('type', 1)->where('parent_id', 0)->where('status', 1)->get(),
             'color'    => Color::where('status', 1)->get(),
             'pattern'  => Pattern::where('status', 1)->get(),
             'size'     => $size,

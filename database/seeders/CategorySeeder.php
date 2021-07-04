@@ -22,6 +22,7 @@ class CategorySeeder extends Seeder
                 'name'       => $c['name'],
                 'slug'       => $c['slug'],
                 'parent_id'  => $c['parent_id'],
+                'type'       => $c['type'],
                 'status'     => $c['status'],
                 'created_at' => $c['created_at'],
                 'updated_at' => $c['updated_at'],

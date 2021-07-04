@@ -17,8 +17,26 @@ class Category extends Model {
         'name',
         'slug',
         'parent_id',
+        'type',
         'status'
     ];
+
+    public function types() 
+    {
+        switch($this->type) {
+            case '1':
+                $type = 'Product';
+                break;
+            case '2':
+                $type = 'News';
+                break;
+            default:
+                $type = 'Invalid';
+                break;
+        }
+
+        return $type;
+    }
 
     public function status() 
     {

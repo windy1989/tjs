@@ -14,7 +14,7 @@ class CategoryController extends Controller {
     {
         $data = [
             'title'    => 'Master Category',
-            'category' => Category::all(),
+            'category' => Category::where('type', 1)->get(),
             'content'  => 'admin.master_data.category'
         ];
 
@@ -36,9 +36,11 @@ class CategoryController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Category::count();
+        $total_data = Category::where('type', 1)
+            ->count();
         
-        $query_data = Category::where(function($query) use ($search, $request) {
+        $query_data = Category::where('type', 1)
+            ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
@@ -54,7 +56,8 @@ class CategoryController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Category::where(function($query) use ($search, $request) {
+        $total_filtered = Category::where('type', 1)
+            ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
@@ -121,6 +124,7 @@ class CategoryController extends Controller {
                 'name'      => $request->name,
                 'slug'      => Str::slug($request->name, '-'),
                 'parent_id' => $request->parent_id,
+                'type'      => 1,
                 'status'    => $request->status
             ]);
 
