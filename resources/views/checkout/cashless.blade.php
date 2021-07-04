@@ -1,215 +1,238 @@
-<section id="page-title" class="page-title-mini">
-   <div class="container clearfix">
-      <h1>Cashless</h1>
-      <ol class="breadcrumb">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Checkout</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Cashless
-         </li>
-      </ol>
-   </div>
-</section>
-<section id="content">
-	<div class="content-wrap">
-		<div class="container clearfix">
-			<form action="{{ url('checkout/cashless') }}" method="POST" id="form_order">
-				@csrf
-				@if($errors->any())
-					<div class="style-msg2 errormsg">
-						<div class="msgtitle">Something Wrong :</div>
-						<div class="sb-msg">
-							<ul>
-								@foreach($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
+<!DOCTYPE html>
+<html dir="ltr" lang="id-ID">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="author" content="Calvin Dito Pratama">
+   <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/dark.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/swiper.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/css/fonts.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
+   <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
+   <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
+   <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
+   <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+   <script src="{{ asset('template/front-office/custom.js') }}"></script>
+   <title>Smart Marble & Bath | {{ $title }}</title>
+</head>
+<body class="stretched">
+	<div id="wrapper" class="clearfix">
+		<section id="content">
+			<div class="content-wrap">
+				<div class="container clearfix">
+					<div class="text-center mb-5">
+						<img src="{{ asset('website/logo-black.png') }}" alt="">
 					</div>
-				@endif
-				<div class="row col-mb-50 gutter-50 justify-content-end">
-					<div class="w-100"></div>
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h4>Your Product</h4>
-								<div class="table-responsive">
-									<table class="table cart mb-5">
-										<thead>
-											<tr>
-												<th class="cart-product-thumbnail">Image</th>
-												<th class="cart-product-name">Product</th>
-												<th class="cart-product-price">Unit Price</th>
-												<th class="cart-product-quantity">Qty</th>
-												<th class="cart-product-subtotal">Total</th>
-											</tr>
-										</thead>
-										<tbody>
-											@php 
-												$total_checkout = 0; 
-												$total_weight   = 0; 
-											@endphp
-											@foreach($customer->cart as $c)
+					<form action="{{ url('checkout/cashless') }}" method="POST" id="form_order" class="topmargin-lg mb-0">
+						@csrf
+						@if($errors->any())
+							<div class="style-msg2 errormsg">
+								<div class="msgtitle">Something Wrong :</div>
+								<div class="sb-msg">
+									<ul>
+										@foreach($errors->all() as $error)
+											<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+								</div>
+							</div>
+						@endif
+						<div class="row">
+							<div class="col-md-8 mb-3">
+								<div class="fancy-title title-double-border">
+									<h5 class="text-uppercase">Your Product</h5>
+								</div>
+								<p>
+									<div class="table-responsive">
+										<table class="table table-bordered cart">
+											<tbody class="table-secondary">
 												@php 
-													$total_checkout += $c->product->price() * $c->qty; 
-													$total_weight   += $c->product->type->weight * $c->qty; 
+													$total_checkout = 0; 
+													$total_weight   = 0; 
 												@endphp
-												<tr class="cart_item">
-													<td class="cart-product-thumbnail">
-														<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
-															<img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid">
-														</a>
-													</td>
-													<td class="cart-product-name">
-														<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">{{ $c->product->code() }}</a>
-													</td>
-													<td class="cart-product-quantity">
-														<span class="amount">Rp {{ number_format($c->product->price(), 0, ',', '.') }}</span>
-													</td>
-													<td class="cart-product-quantity">
-														<div class="quantity">
-															<span class="amount">x{{ $c->qty }}</span>
-														</div>
-													</td>
-													<td class="cart-product-subtotal">
-														<span class="amount">
-															Rp {{ number_format($c->product->price() * $c->qty, 0, ',', '.') }}
-														</span>
-													</td>
-												</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h4>Shipping Address</h4>
-								<div class="form-group"><hr></div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Receiver Name :<span class="text-danger">*</span></label>
-											<input type="text" name="receiver_name" id="receiver_name" class="form-control" value="{{ old('receiver_name', session('fo_name')) }}" placeholder="Enter receiver name" onkeyup="checkSubmitButton()" required>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Email :<span class="text-danger">*</span></label>
-											<input type="email" name="email" id="email" class="form-control" value="{{ old('email', session('fo_email')) }}" placeholder="Enter email" onkeyup="checkSubmitButton()" required>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Phone :<span class="text-danger">*</span></label>
-											<input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', session('fo_phone')) }}" placeholder="Enter phone" onkeyup="checkSubmitButton()" required>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>City :<span class="text-danger">*</span></label>
-											<select name="city_id" id="city_id" class="form-control" onchange="getDelivery()" required>
-												<option value="">-- Choose --</option>
-												@foreach($city as $c)
-													<option value="{{ $c->id }}">{{ $c->name }}</option>
+												@foreach($customer->cart as $c)
+													@php 
+														$total_checkout += $c->product->price() * $c->qty; 
+														$total_weight   += $c->product->type->weight * $c->qty; 
+													@endphp
+													<tr class="cart_item text-center">
+														<td class="cart-product-name">
+															<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
+																<center>
+																	<img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid img-thumbnail">
+																</center>
+															</a>
+														</td>
+														<td class="cart-product-name">
+															<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">{{ $c->product->code() }}</a>
+														</td>
+														<td class="cart-product-quantity">
+															<span class="amount">Rp {{ number_format($c->product->price(), 0, ',', '.') }}</span>
+														</td>
+														<td class="cart-product-quantity">
+															<div class="quantity">
+																<span class="amount">x{{ $c->qty }}</span>
+															</div>
+														</td>
+														<td class="cart-product-subtotal">
+															<span class="amount">
+																Rp {{ number_format($c->product->price() * $c->qty, 0, ',', '.') }}
+															</span>
+														</td>
+													</tr>
 												@endforeach
-											</select>
+											</tbody>
+										</table>
+									</div>
+								</p>
+								<div class="fancy-title title-double-border">
+									<h5 class="text-uppercase">Shipping Address</h5>
+								</div>
+								<p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="font-size-11">Receiver Name :<span class="text-danger">*</span></label>
+														<input type="text" name="receiver_name" id="receiver_name" class="form-control font-size-12" value="{{ old('receiver_name', session('fo_name')) }}" placeholder="Enter receiver name" onkeyup="checkSubmitButton()" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="font-size-11">Email :<span class="text-danger">*</span></label>
+														<input type="email" name="email" id="email" class="form-control font-size-12" value="{{ old('email', session('fo_email')) }}" placeholder="Enter email" onkeyup="checkSubmitButton()" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="font-size-11">Phone :<span class="text-danger">*</span></label>
+														<input type="text" name="phone" id="phone" class="form-control font-size-12" value="{{ old('phone', session('fo_phone')) }}" placeholder="Enter phone" onkeyup="checkSubmitButton()" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="font-size-11">City :<span class="text-danger">*</span></label>
+														<select name="city_id" id="city_id" class="form-control font-size-12" onchange="getDelivery()" required>
+															<option value="">-- Choose --</option>
+															@foreach($city as $c)
+																<option value="{{ $c->id }}">{{ $c->name }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="font-size-11">Address :<span class="text-danger">*</span></label>
+														<textarea name="address" id="address" class="form-control font-size-12" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Address :<span class="text-danger">*</span></label>
-											<textarea name="address" id="address" class="form-control" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
+								</p>
+								<div class="fancy-title title-double-border">
+									<h5 class="text-uppercase">Fleet</h5>
+								</div>
+								<p>
+									<div class="card">
+										<div class="card-body">
+											<div class="form-group">
+												<label class="font-size-11">Transport :<span class="text-danger">*</span></label>
+												<select name="delivery_id" id="delivery_id" class="form-control font-size-12" onchange="grandtotal()">
+													<option value="">-- Choose --</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="font-size-11">Important Note :</label>
+												<textarea name="description" id="description" class="form-control font-size-12" placeholder="Enter important note">{{ old('description') }}</textarea>
+											</div>
+										</div>
+									</div>
+								</p>
+							</div>
+							<div class="col-md-4">
+								<div class="card border-secondary">
+									<div class="card-body">
+										<h4>Summary</h4>
+										<div class="table-responsive">
+											<table class="table cart">
+												<tbody>
+													<tr class="cart_item">
+														<td class="cart-product-name">
+															<span class="font-size-13 font-weight-normal">Subtotal</span>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount">
+																<span class="font-weight-normal font-size-13" id="subtotal">Rp {{ number_format($total_checkout, 0, ',', '.') }}</span>
+															</span>
+														</td>
+													</tr>
+													<tr class="cart_item">
+														<td class="cart-product-name">
+															<span class="font-size-13 font-weight-normal">Type Of Transport</span>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount">
+																<span class="font-weight-normal font-size-13" id="transport"></span>
+															</span>
+														</td>
+													</tr>
+													<tr class="cart_item">
+														<td class="cart-product-name">
+															<strong class="font-size-13 font-weight-normal">Delivery Cost</strong>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount">
+																<span class="font-weight-normal font-size-13" id="shipping_fee"></span>
+															</span>
+														</td>
+													</tr>
+													<tr class="cart_item">
+														<td class="cart-product-name">
+															<span class="font-weight-semibold text-uppercase font-size-14">Total</span>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount color lead">
+																<span class="font-weight-semibold font-size-14" id="grandtotal"></span>
+															</span>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="fancy-title"></div>
+								<div class="form-group">
+									<div class="row justify-content-center">
+										<div class="col-md-6">
+											<button type="submit" class="btn btn-dark col-12 font-size-14" id="submit_order">Submit Order</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h4>Fleet</h4>
-								<div class="form-group"><hr></div>
-								<div class="form-group">
-									<label>Transport :<span class="text-danger">*</span></label>
-									<select name="delivery_id" id="delivery_id" class="form-control" onchange="grandtotal()">
-										<option value="">-- Choose --</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Important Note :</label>
-									<textarea name="description" id="description" class="form-control" placeholder="Enter important note" onkeyup="checkSubmitButton()">{{ old('description') }}</textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-5">
-						<div class="card">
-							<div class="card-body">
-								<h4>Summary</h4>
-								<div class="table-responsive">
-									<table class="table cart">
-										<tbody>
-											<tr class="cart_item">
-												<td class="cart-product-name">
-													<strong>Subtotal</strong>
-												</td>
-												<td class="cart-product-name">
-													<span class="amount">
-														<strong id="subtotal">Rp {{ number_format($total_checkout, 0, ',', '.') }}</strong>
-													</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="cart-product-name">
-													<strong>Type Of Transport</strong>
-												</td>
-												<td class="cart-product-name">
-													<span class="amount">
-														<strong id="transport"></strong>
-													</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="cart-product-name">
-													<strong>Delivery Cost</strong>
-												</td>
-												<td class="cart-product-name">
-													<span class="amount">
-														<strong id="shipping_fee"></strong>
-													</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="cart-product-name">
-													<strong>Total</strong>
-												</td>
-												<td class="cart-product-name">
-													<span class="amount color lead">
-														<strong style="font-size:20px;" class="text-danger font-weight-bold" id="grandtotal"></strong>
-													</span>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<button type="submit" class="btn btn-dark float-right mt-4" id="submit_order">Submit Order</button>
-					</div>
+					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
-</section>
+</body>
 
 <script>
 	$(function() {
@@ -305,3 +328,8 @@
 		});
 	}
 </script>
+
+<script src="{{ asset('template/front-office/js/plugins.min.js') }}"></script>
+<script src="{{ asset('template/front-office/js/functions.js') }}"></script>
+</body>
+</html>

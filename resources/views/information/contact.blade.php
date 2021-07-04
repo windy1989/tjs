@@ -1,7 +1,7 @@
 <section id="page-title">
    <div class="container clearfix">
       <h1>Contact</h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb font-size-12">
          <li class="breadcrumb-item">
             <a href="{{ url('/') }}">Home</a>
          </li>

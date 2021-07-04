@@ -159,11 +159,10 @@ class CheckoutController extends Controller {
             $data = [
                 'title'    => 'Checkout',
                 'customer' => $customer,
-                'city'     => City::orderBy('name', 'asc')->get(),
-                'content'  => 'checkout.' . $param
+                'city'     => City::orderBy('name', 'asc')->get()
             ];
 
-            return view('layouts.index', ['data' => $data]);
+            return view('checkout.' . $param, $data);
         }
     }
 

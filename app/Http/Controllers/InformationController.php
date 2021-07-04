@@ -33,7 +33,7 @@ class InformationController extends Controller {
             Mail::send([], [], function($mail) use ($request) {
                 $mail->to('smartmarbleandbath@gmail.com', 'Smart Marble');
                 $mail->subject($request->subject);
-                $mail->from($request->email, $request->name);
+                $mail->from(config('mail.mailers.smtp.username'), 'Smart Marble And Bath');
                 $mail->setBody('
                     <center>
                         <h5>Contact Email By ' . $request->name . '</h5>
@@ -44,7 +44,7 @@ class InformationController extends Controller {
                     <div>Email : ' . $request->email . '</div>
                     <div>Subject : ' . $request->subject . '</div>
                     <div>Message : ' . $request->message . '</div>
-                ');
+                ', 'text/html');
             });
 
             return redirect()->back()->with(['success' => 'Your message has been sent']);

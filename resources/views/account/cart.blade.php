@@ -4,7 +4,7 @@
          @php $str = explode(' ', session('fo_name')); @endphp
          {{ $str[0] }} Cart
       </h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb font-size-12">
          <li class="breadcrumb-item">
             <a href="{{ url('/') }}">Home</a>
          </li>
