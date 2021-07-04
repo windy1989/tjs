@@ -1,6 +1,14 @@
-<section id="page-title">
-   <div class="container">
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
       <h1>Product</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            Product
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">

@@ -1,6 +1,17 @@
-<section id="page-title">
+<section id="page-title" class="page-title-mini">
    <div class="container clearfix">
-      <h1 class="text-center">{{ $product->code() }}</h1>
+      <h1>Product Detail</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="{{ url('product') }}">Product</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            Detail
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">
@@ -24,8 +35,9 @@
                      </div>
                   </div>
                   <div class="col-lg-6 col-md-12 product-desc">
+                     <h2 class="font-weight-bold">{{ $product->code() }}</h2> 
                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="product-price">
+                        <div class="product-price" style="font-size:20px;">
                            Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
                         <div class="d-flex align-items-center justify-content-end">
@@ -223,7 +235,7 @@
             <h5 class="modal-title" id="exampleModalLabel">
                DETAIL STOCK
                <div class="mt-2 text-danger font-italic" style="font-size:11px;">
-                  *) Shading is the depiction of depth perception in a 3D model or an image using various levels of darkness.
+                  *) Shading is very important to determine your tile product purchase to have all the same color.
                </div>
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

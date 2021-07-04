@@ -1,6 +1,17 @@
-<section id="page-title">
-   <div class="container">
-      <h1>Register Customer</h1>
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
+      <h1>Register</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="javascript:void(0);">Account</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            Register
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">

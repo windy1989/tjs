@@ -1,6 +1,17 @@
-<section id="page-title">
-   <div class="container">
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
       <h1>Confirmation Order</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="javascript:void(0);">Checkout</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            Confirmation Order
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">

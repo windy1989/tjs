@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InformationController extends Controller {
     
+    public function howToBuy()
+    {
+        $data = [
+            'title'   => 'How To Buy',
+            'content' => 'information.how_to_buy'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
     public function privacyPolicy()
     {
         $data = [
@@ -16,11 +27,42 @@ class InformationController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
-    public function termsAndConditions()
+    public function contact(Request $request)
+    {
+        if($request->has('_token') && session()->token() == $request->_token) {
+            Mail::send([], [], function($mail) use ($request) {
+                $mail->to('smartmarbleandbath@gmail.com', 'Smart Marble');
+                $mail->subject($request->subject);
+                $mail->from($request->email, $request->name);
+                $mail->setBody('
+                    <center>
+                        <h5>Contact Email By ' . $request->name . '</h5>
+                    </center>
+                    <br><br>
+                    <div>Name : ' . $request->name . '</div>
+                    <div>Phone : ' . $request->name . '</div>
+                    <div>Email : ' . $request->email . '</div>
+                    <div>Subject : ' . $request->subject . '</div>
+                    <div>Message : ' . $request->message . '</div>
+                ');
+            });
+
+            return redirect()->back()->with(['success' => 'Your message has been sent']);
+        }
+
+        $data = [
+            'title'   => 'Contact',
+            'content' => 'information.contact'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function store()
     {
         $data = [
-            'title'   => 'Terms & Conditions',
-            'content' => 'information.terms_and_conditions'
+            'title'   => 'Store',
+            'content' => 'information.store'
         ]; 
 
         return view('layouts.index', ['data' => $data]);
@@ -36,11 +78,11 @@ class InformationController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
-    public function contact()
+    public function termsOfDelivery()
     {
         $data = [
-            'title'   => 'Contact',
-            'content' => 'information.contact'
+            'title'   => 'Terms Of Delivery',
+            'content' => 'information.terms_of_delivery'
         ]; 
 
         return view('layouts.index', ['data' => $data]);

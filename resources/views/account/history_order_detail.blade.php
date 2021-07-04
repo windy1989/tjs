@@ -1,6 +1,20 @@
-<section id="page-title">
-   <div class="container">
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
       <h1>History Order Detail</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="javascript:void(0);">Account</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="{{ url('account/history_order') }}">History Order</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            Detail
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">
@@ -14,13 +28,13 @@
                      &nbsp;Back
                   </a>
                   <span class="float-right text-uppercase">
-                     No. {{ $order->number }}
+                     No. # {{ $order->number }}
                   </span>
                </div>
                @if($order->status == 1)
                   <div class="mb-5">
                      <div class="row justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-center">
                            <div id="simple_timer"></div>
                         </div>
                      </div>

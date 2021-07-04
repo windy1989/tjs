@@ -47,7 +47,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_cheapest as $p)
-               <div class="product col-lg-3 col-6">
+               <div class="product col-lg-3 col-4">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">

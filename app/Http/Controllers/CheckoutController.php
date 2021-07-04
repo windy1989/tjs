@@ -63,7 +63,7 @@ class CheckoutController extends Controller {
             $order          = Order::create([
                 'customer_id' => session('fo_id'),
                 'number'      => Order::generateNumber($param_code),
-                'sales_order' => $param == 'cash' ? Order::generateCode('sales_order') : null,
+                'sales_order' => $param == 'cash' ? Order::generateCode('SO', 'sales_order') : null,
                 'description' => $request->description,
                 'type'        => $param == 'cash' ? 1 : 2,
                 'status'      => 1

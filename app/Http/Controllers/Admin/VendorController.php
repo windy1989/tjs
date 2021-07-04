@@ -13,19 +13,6 @@ class VendorController extends Controller {
     
     public function index()
     {
-        // $faker = Faker::create('id_ID');
-        // for($i = 1; $i <= 3; $i++) {
-        //     Vendor::create([
-        //         'code'    => Vendor::generateCode(),
-        //         'name'    => $faker->name,
-        //         'email'   => $faker->safeEmail,
-        //         'phone'   => $faker->phoneNumber,
-        //         'address' => $faker->address,
-        //         'pic'     => $faker->name,
-        //         'status'  => rand(1, 2)
-        //     ]);
-        // } 
-
         $data = [
             'title'   => 'Delivery Vendor',
             'content' => 'admin.delivery.vendor'

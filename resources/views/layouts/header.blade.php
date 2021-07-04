@@ -47,17 +47,17 @@
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal">
+									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-line-phone"></i> 0812-3005-2352
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;">
+									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-whatsapp"></i> (031) 5477501
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;">
+									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-line2-envelope"></i> smartmarbleandbath@gmail.com
 									</a>
 								</li>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="text-dark" style="text-transform:none;">Open Every Monday - Saturday, 08.30 - 17.00 WIB</a>
+							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="text-dark font-size-11" style="text-transform:none;">Open Every Monday - Saturday, 08.30 - 17.00 WIB</a>
 						</p>
 					</div>
 				</div>
@@ -127,12 +127,12 @@
 							<ul class="menu-container">
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('/') }}">
-										<div>Home</div>
+										<div class="font-size-header-top">Home</div>
 									</a>
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('product') }}">
-										<div>Product</div>
+										<div class="font-size-header-top">Product</div>
 									</a>
 									@php 
 										$category = App\Models\Category::where('parent_id', 0)
@@ -150,14 +150,14 @@
 														->get();
 												@endphp
 												<a class="menu-link" href="{{ $sub_1->count() > 0 ? 'javascript:void(0);' : 'product?category=' . $c->slug }}">
-													<div>{{ $c->name }}</div>
+													<div class="font-size-header-top">{{ $c->name }}</div>
 												</a>
 												@if($sub_1->count() > 0)
 													<ul class="sub-menu-container">
 														@foreach($sub_1 as $s1)
 															<li class="menu-item">
 																<a class="menu-link" href="javascript:void(0);">
-																	<div>{{ $s1->name }}</div>
+																	<div class="font-size-header-top">{{ $s1->name }}</div>
 																</a>
 																@php
 																	$sub_2 = App\Models\Category::where('parent_id', $s1->id)
@@ -170,7 +170,7 @@
 																		@foreach($sub_2 as $s2)
 																			<li class="menu-item">
 																				<a class="menu-link" href="product?category={{ $s2->slug }}">
-																					<div>{{ $s2->name }}</div>
+																					<div class="font-size-header-top">{{ $s2->name }}</div>
 																				</a>
 																			</li>
 																		@endforeach
@@ -186,17 +186,17 @@
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('information/how_to_buy') }}">
-										<div>How To Buy</div>
+										<div class="font-size-header-top">How To Buy</div>
 									</a>
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('information/about_us') }}">
-										<div>About Us</div>
+										<div class="font-size-header-top">About Us</div>
 									</a>
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('information/contact') }}">
-										<div>Contact</div>
+										<div class="font-size-header-top">Contact</div>
 									</a>
 								</li>
 							</ul>

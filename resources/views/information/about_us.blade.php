@@ -1,6 +1,17 @@
-<section id="page-title">
-   <div class="container">
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
       <h1>About Us</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="javascript:void(0);">Information</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            About us
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">

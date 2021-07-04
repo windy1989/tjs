@@ -22,13 +22,13 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">Shopping</h4>
 										<div class="mb-2">
-											<a href="{{ url('information/store') }}" style="font-size:12px;" class="text-white text-uppercase">Store SMB</a>
+											<a href="{{ url('information/store') }}" style="font-size:12px;" class="text-white text-uppercase">Store</a>
 										</div>
 										<div class="mb-2">
 											<a href="{{ url('information/product_catalog') }}" style="font-size:12px;" class="text-white text-uppercase">Product Catalog</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/payment_method') }}" style="font-size:12px;" class="text-white text-uppercase">Payment Method</a>
+											<a href="{{ url('information/pay_in_store') }}" style="font-size:12px;" class="text-white text-uppercase">Pay In Store</a>
 										</div>
 									</div>
 								</div>
@@ -40,6 +40,9 @@
 										</div>
 										<div class="mb-2">
 											<a href="{{ url('news') }}" style="font-size:12px;" class="text-white text-uppercase">News</a>
+										</div>
+										<div class="mb-2">
+											<a href="{{ url('career') }}" style="font-size:12px;" class="text-white text-uppercase">Career</a>
 										</div>
 									</div>
 								</div>

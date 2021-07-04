@@ -37,10 +37,16 @@ Route::prefix('account')->group(function() {
 });
 
 Route::prefix('information')->group(function() {
-    Route::get('privacy_policy', 'InformationController@privacyPolicy');
-    Route::get('terms_and_conditions', 'InformationController@termsAndConditions');
+    Route::get('how_to_buy', 'InformationController@howToBuy');
+    Route::get('faq', 'InformationController@faq');
+    Route::match(['get', 'post'], 'contact', 'InformationController@contact');
+    Route::get('store', 'InformationController@store');
+    Route::get('product_catalog', 'InformationController@productCatalog');
+    Route::get('pay_in_store', 'InformationController@payInStore');
     Route::get('about_us', 'InformationController@aboutUs');
-    Route::get('contact', 'InformationController@contact');
+    Route::get('terms_of_use', 'InformationController@termsOfUse');
+    Route::get('privacy_policy', 'InformationController@privacyPolicy');
+    Route::get('terms_of_delivery', 'InformationController@termsOfDelivery');
 }); 
 
 Route::prefix('checkout')->group(function() {

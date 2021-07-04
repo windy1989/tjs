@@ -1,6 +1,17 @@
-<section id="page-title">
-   <div class="container">
+<section id="page-title" class="page-title-mini">
+   <div class="container clearfix">
       <h1>History Order</h1>
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item">
+            <a href="{{ url('/') }}">Home</a>
+         </li>
+         <li class="breadcrumb-item">
+            <a href="javascript:void(0);">Account</a>
+         </li>
+         <li class="breadcrumb-item active" aria-current="page">
+            History Order
+         </li>
+      </ol>
    </div>
 </section>
 <section id="content">
@@ -10,27 +21,27 @@
             <div class="col-lg-3 col-md-12">
                <div class="list-group">
                   <a href="{{ url('account/history_order') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == null ? 'active' : '' }}">
-                     <div>All</div>
+                     <div class="font-size-13">All</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=1') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 1 ? 'active' : '' }}">
-                     <div>Unpaid</div>
+                     <div class="font-size-13">Unpaid</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 1)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=2') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 2 ? 'active' : '' }}">
-                     <div>Paid</div>
+                     <div class="font-size-13">Paid</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 2)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=3') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 3 ? 'active' : '' }}">
-                     <div>On Delivery</div>
+                     <div class="font-size-13">On Delivery</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 3)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=4') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 4 ? 'active' : '' }}">
-                     <div>Done</div>
+                     <div class="font-size-13">Done</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 4)->count() }}</span>
                   </a>
                   <a href="{{ url('account/history_order?status=5') }}" class="list-group-item list-group-item-action d-flex justify-content-between {{ $status == 5 ? 'active' : '' }}">
-                     <div>Cancel</div>
+                     <div class="font-size-13">Cancel</div>
                      <span class="badge badge-light">{{ App\Models\Order::where('customer_id', session('fo_id'))->where('status', 5)->count() }}</span>
                   </a>
                </div>
@@ -44,7 +55,7 @@
                   <div class="row">
                      <div class="col-lg-2 col-md-12">
                         <div class="form-group">
-                           <select name="type" id="type" class="custom-select">
+                           <select name="type" id="type" class="custom-select font-size-13">
                               <option value="">All</option>
                               <option value="1" {{ $type == 1 ? 'selected' : '' }}>Cash</option>
                               <option value="2" {{ $type == 2 ? 'selected' : '' }}>Cashless</option>
@@ -53,12 +64,12 @@
                      </div>
                      <div class="col-lg-8 col-md-12">
                         <div class="form-group">
-                           <input type="text" name="search" id="search" class="form-control" placeholder="Search number" value="{{ $search }}">
+                           <input type="text" name="search" id="search" class="form-control font-size-13" placeholder="Search number" value="{{ $search }}">
                         </div>
                      </div>
                      <div class="col-lg-2 col-md-12">
                         <div class="form-group">
-                           <button type="submit" class="btn btn-success col-12">
+                           <button type="submit" class="btn btn-success col-12 font-size-13" style="height:33px;">
                               <i class="icon-search"></i> Search
                            </button>
                         </div>
@@ -71,8 +82,8 @@
                         <div class="card bg-light">
                            <div class="card-body">
                               <div class="card-title">
-                                 <span style="font-size:17px; font-weight:500;">NO. {{ $o->number }}</span>
-                                 <div class="float-right d-none d-sm-block">
+                                 <span style="font-size:15px; font-weight:500;"># {{ $o->number }}</span>
+                                 <div class="float-right d-none d-sm-block font-size-13">
                                     {{ date('d M Y', strtotime($o->created_at)) }}
                                  </div>
                               </div>
@@ -94,24 +105,22 @@
                                              </div>
                                           </div>
                                           <div class="col-lg-3 col-md-12">
-                                             <div class="form-group">
+                                             <div class="form-group font-size-13">
                                                 {{ $od->product->code() }}
-                                                <div style="font-size:14px;">
-                                                   <div class="text-muted">
-                                                      {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
-                                                   </div>
-                                                   x{{ $od->qty }}
+                                                <div class="text-muted">
+                                                   {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
                                                 </div>
+                                                x{{ $od->qty }}
                                              </div>
                                           </div>
                                           <div class="col-lg-3 col-md-12">
-                                             <div class="form-group">
+                                             <div class="form-group font-size-13">
                                                 Item Price
                                                 <div>Rp {{ number_format($od->price_list, 0, ',', '.') }}</div>
                                              </div>
                                           </div>
                                           <div class="col-lg-3 col-md-12">
-                                             <div class="form-group">
+                                             <div class="form-group font-size-13">
                                                 Subtotal
                                                 <div>Rp {{ number_format($od->total, 0, ',', '.') }}</div>
                                              </div>
@@ -122,17 +131,23 @@
                               @endforeach
                               <tr class="cart_item">
                                  <td class="mb-0">
-                                    <h5 class="float-left font-weight-medium">
-                                       <div>Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
-                                       <div>Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
-                                       <div>Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
-                                       <div><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
-                                    </h5>
-                                    <div class="text-right">
-                                       @if($o->status == 3) 
-                                          <button type="button" class="button button-red" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
-                                       @endif
-                                       <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-blue">Detail Order</a>
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <h5 class="font-weight-medium">
+                                             <div class="font-size-12">Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
+                                             <div class="font-size-12">Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
+                                             <div class="font-size-12">Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
+                                             <div class="font-size-12 text-uppercase"><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
+                                          </h5>
+                                       </div>
+                                       <div class="col-md-6">
+                                          <div class="text-center">
+                                             @if($o->status == 3) 
+                                                <button type="button" class="button button-red font-size-13" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
+                                             @endif
+                                             <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-blue font-size-13 {{ $o->status != 3 ? 'col-12' : '' }}">Detail Order</a>
+                                          </div>
+                                       </div>
                                     </div>
                                  </td>
                               </tr>

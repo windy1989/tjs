@@ -40,7 +40,7 @@ class Order extends Model {
         return 'SMB' . $param . date('ymdHis');
     }
 
-    public static function generateCode($param, $column)
+    public static function generateCode($str, $column)
     {
         $query = Order::selectRaw("RIGHT($column, 6) as code")
             ->orderBy('id', 'asc')

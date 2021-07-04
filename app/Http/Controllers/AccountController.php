@@ -373,7 +373,7 @@ class AccountController extends Controller {
         }
 
         $data = [
-            'title'   => 'History Order Detail',
+            'title'   => 'Order #' . $order->number,
             'order'   => $order,
             'content' => 'account.history_order_detail'
         ];
