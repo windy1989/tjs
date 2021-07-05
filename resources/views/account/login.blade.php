@@ -51,12 +51,12 @@
                         <div class="row">
                            <div class="col-12 form-group">
                               <label>Email:</label>
-                              <input type="email" name="email" id="email" class="form-control" placeholder="Enter email">
+                              <input type="email" name="email" id="email" class="form-control no-outline" placeholder="Enter email">
                            </div>
                            <div class="col-12 form-group">
                               <label>Password:</label>
                               <div class="input-group" id="show_password">
-                                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+                                 <input type="password" name="password" id="password" class="form-control no-outline" placeholder="Enter password">
                                  <div class="input-group-append">
                                     <span class="input-group-text">
                                        <a href="javascript:void(0);" aria-hidden="true">
@@ -105,9 +105,9 @@
             </div>
             <div class="modal-body">
                <div id="notif_forgot_password"></div>
-               <div class="form-group">
+               <div class="form-group font-size-12">
                   <label>Email :</label>
-                  <input type="text" name="email_forgot_password" id="email_forgot_password" class="form-control" placeholder="Enter email">
+                  <input type="text" name="email_forgot_password" id="email_forgot_password" class="form-control no-outline" placeholder="Enter email">
                </div>
                <div class="form-group"><hr></div>
                <div class="form-group">

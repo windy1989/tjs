@@ -44,12 +44,12 @@
                         <div class="row">
                            <div class="col-12 form-group">
                               <label>New Password:</label>
-                              <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+                              <input type="password" name="password" id="password" class="form-control no-outline" placeholder="Enter password" required>
                               @error('password') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                            <div class="col-12 form-group">
                               <label>Password Confirmation:</label>
-                              <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Enter password confirmation" required>
+                              <input type="password" name="password_confirmation" id="password_confirmation" class="form-control no-outline" placeholder="Enter password confirmation" required>
                               @error('password_confirmation') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                            <div class="col-12 form-group mt-3">

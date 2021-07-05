@@ -37,8 +37,8 @@
                   <div class="col-lg-6 col-md-12 product-desc">
                      <h2 class="font-weight-bold">{{ $product->code() }}</h2> 
                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="product-price" style="font-size:20px;">
-                           Rp <ins>{{ number_format($product->price(), 0, ',', '.') }}</ins>
+                        <div class="product-price text-dark" style="font-size:20px;">
+                           Rp <ins class="text-dark">{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
                         <div class="d-flex align-items-center justify-content-end">
                            Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Carton</strong>
@@ -60,7 +60,7 @@
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-6 text-right">
-                              <button type="submit" class="button button-green m-0">Add to cart</button>
+                              <button type="submit" class="button bg-teal m-0">Add to cart</button>
                            </div>
                         </div>
                      </form>

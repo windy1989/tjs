@@ -55,7 +55,7 @@
                   <div class="row">
                      <div class="col-lg-2 col-md-12">
                         <div class="form-group">
-                           <select name="type" id="type" class="custom-select font-size-13">
+                           <select name="type" id="type" class="custom-select no-outline font-size-13">
                               <option value="">All</option>
                               <option value="1" {{ $type == 1 ? 'selected' : '' }}>Cash</option>
                               <option value="2" {{ $type == 2 ? 'selected' : '' }}>Cashless</option>
@@ -64,7 +64,7 @@
                      </div>
                      <div class="col-lg-8 col-md-12">
                         <div class="form-group">
-                           <input type="text" name="search" id="search" class="form-control font-size-13" placeholder="Search number" value="{{ $search }}">
+                           <input type="text" name="search" id="search" class="form-control no-outline font-size-13" placeholder="Search number" value="{{ $search }}">
                         </div>
                      </div>
                      <div class="col-lg-2 col-md-12">

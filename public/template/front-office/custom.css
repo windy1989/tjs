@@ -1,5 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
+.bg-yellow {
+   background: #ebb11f !important;
+}
+
+.top-links-item {
+   border: 0 !important;
+}
+
+.top-cart-number::before {
+   background: #e93c28 !important;
+}
+
+.top-links-item:hover {
+   background: #51b4ba !important;
+}
+
+.top-links-item > a {
+   line-height: 0 !important;
+}
+
+.btn-teal {
+   color: white;
+   background: #51b4ba !important;
+   border: 1px solid #51b4ba !important;
+}
+
+.btn-teal:focus {
+   outline: none !important;
+   border: none !important;
+}
+
+.btn-teal:hover {
+   color: white;
+   background: #51b4ba !important;
+   border: 1px solid #51b4ba !important;
+   outline: none !important;
+}
+
+.btn-outline-teal {
+   color: #51b4ba !important;
+   background: white !important;
+   border: 1px solid #51b4ba !important;
+}
+
+.btn-outline-teal:focus {
+   outline: none !important;
+}
+
+.btn-outline-teal:hover {
+   color: white !important;
+   background: #51b4ba !important;
+   border: 1px solid #51b4ba !important;
+}
+
+.bg-teal {
+   color: white !important;
+   background: #51b4ba !important;
+}
+
+.pagination > li > a {
+   border: none;
+}
+
+.no-outline {
+   border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.no-outline:focus {
+   border: 1px solid rgba(0, 0, 0, 0.4);
+   box-shadow: none;
+}
+
 .font-size-11 {
    font-size: 11px !important;
 }
@@ -26,20 +98,8 @@
    font-family: 'Montserrat', sans-serif;
 }
 
-.banner-grid {
-   max-height: 584px;
-}
-
 .nowrap {
    white-space: nowrap;
-}
-
-.pagination .page-item > a {
-   border: none;
-}
-
-.pagination .page-item > a:focus {
-   box-shadow: none;
 }
 
 .syotimer-cell_type_day {
@@ -81,7 +141,7 @@
 }
 
 .header-row > #logo > a > img {
-   max-height: 50px;
+   max-height: 35px;
 }
 
 .menu-container #tab-shop {
@@ -110,7 +170,7 @@
 }
 
 .sidebar-filter-product {
-   max-height: 260px !important;
+   max-height: 270px !important;
    overflow-y: auto;
 }
 

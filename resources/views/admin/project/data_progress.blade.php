@@ -15,7 +15,7 @@
 			</div>
          <div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/manage/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/project/data') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -26,7 +26,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
-					<a href="{{ url('admin/manage/project') }}" class="breadcrumb-item">Project</a>
+					<a href="{{ url('admin/project/data') }}" class="breadcrumb-item">Project</a>
 					<span class="breadcrumb-item active">Detail</span>
 				</div>
 			</div>
@@ -131,22 +131,21 @@
                         <table class="table table-bordered table-striped">
                            <thead class="table-secondary">
                               <tr class="text-center">
-                                 <th>Image</th>
                                  <th>Product</th>
-                                 <th>Size</th>
                                  <th>Qty</th>
                                  <th>Unit</th>
                                  <th>Target Price</th>
+                                 <th>Delete</th>
                               </tr>
                            </thead>
                            <tbody>
                               @foreach($project->projectProduct as $pp)
                                  <tr class="text-center">
                                     <td class="align-middle">
-                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail"></a>
+                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                       <div>{{ $pp->product->code() }}</div>
+                                       <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                     </td>
-                                    <td class="align-middle">{{ $pp->product->code() }}</td>   
-                                    <td class="align-middle">{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</td>   
                                     <td class="align-middle">{{ $pp->qty }}</td>   
                                     <td class="align-middle">{{ $pp->unit() }}</td> 
                                     <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
@@ -172,11 +171,10 @@
                               <table class="table table-bordered table-striped">
                                  <thead class="table-secondary">
                                     <tr class="text-center">
-                                       <th>Image</th>
                                        <th>Product</th>
-                                       <th>Size</th>
                                        <th>Qty</th>
                                        <th>Unit</th>
+                                       <th>Target Price</th>
                                        <th>Delete</th>
                                     </tr>
                                  </thead>
@@ -752,7 +750,7 @@
 
       if(id.val()) {
          $.ajax({
-            url: '{{ url("admin/manage/project/get_product") }}',
+            url: '{{ url("admin/project/data/get_product") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {
@@ -771,9 +769,7 @@
                   <tr class="text-center">
                      <input type="hidden" name="product_id[]" value="` + response.id + `">
                      <input type="hidden" name="product_price[]" value="` + response.price + `">
-                     <td class="align-middle">` + response.image + `</td>   
-                     <td class="align-middle">` + response.code + `</td>   
-                     <td class="align-middle">` + response.size + `</td>   
+                     <td class="align-middle">` + response.product + `</td>   
                      <td class="align-middle">
                         <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
                      </td>  
@@ -842,7 +838,7 @@
 
       if(sample_product_id.val() && sample_date.val() && sample_qty.val() && sample_size.val()) {
          $.ajax({
-            url: '{{ url("admin/manage/project/get_product") }}',
+            url: '{{ url("admin/project/data/get_product") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {

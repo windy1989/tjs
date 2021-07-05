@@ -25,21 +25,34 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg row align-items-stretch gutter-30">
-            <div class="col-md-4">
-               <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid">
-               </a>
+            <div class="col-md-12"><hr style="border: 1px solid #51b4ba; height:2px; background:#51b4ba;"></div>
+            <div class="col-md-7">
+               <div class="row gutter-30">
+                  <div class="col-md-4">
+                     <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid">
+                     </a>
+                  </div>
+                  <div class="col-md-4">
+                     <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
+                     </a>
+                  </div>
+                  <div class="col-md-4">
+                     <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
+                     </a>
+                  </div>
+               </div>
             </div>
-            <div class="col-md-4">
-               <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
-               </a>
+            <div class="col-md-5">
+               <div class="text-right">
+                  <h3 class="font-weight-bold mb-0">We Have The Strong Portfolio</h3>
+                  <h3 class="font-weight-bold">From The Greatest Brand</h3>
+                  <a href="{{ url('information/product_catalog') }}" class="button button-aqua">View Catalog</a>
+               </div>
             </div>
-            <div class="col-md-4">
-               <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
-                  <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
-               </a>
-            </div>
+            <div class="col-md-12"><hr style="border: 1px solid #51b4ba; height:2px; background:#51b4ba;"></div>
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
@@ -75,6 +88,11 @@
                   </div>
                </div>
             @endforeach
+            <div class="col-12">
+               <div class="text-center mt-4">
+                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+               </div>
+            </div>
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
@@ -110,6 +128,11 @@
                   </div>
                </div>
             @endforeach
+            <div class="col-12">
+               <div class="text-center mt-4">
+                  <a href="{{ url('product?sort=newest') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+               </div>
+            </div>
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
@@ -145,49 +168,19 @@
                   </div>
                </div>
             @endforeach
+            <div class="col-12">
+               <div class="text-center mt-4">
+                  <a href="{{ url('product?stock=limited') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+               </div>
+            </div>
          </div>
       </div>
    </div>
    <div class="section mt-0 mb-0">
       <div class="container">
-         <div class="row">
-            <div class="col-sm-6 col-lg-6 mb-5">
-               <div class="feature-box fbox-plain fbox-dark fbox-sm">
-                  <div class="fbox-content text-center">
-                     <h1 class="mb-0"><i class="icon-thumbs-up2"></i></h1>
-                     <h3>100% Original</h3>
-                     <p class="mt-0">We guarantee you the sale of Original Brands.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6 col-lg-6 mb-5">
-               <div class="feature-box fbox-plain fbox-dark fbox-sm">
-                  <div class="fbox-content text-center">
-                     <h1 class="mb-0"><i class="icon-credit-cards"></i></h1>
-                     <h3>Payment Options</h3>
-                     <p class="mt-0">We accept Visa, MasterCard, Bank Transfer and eWallet.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6 col-lg-6 mb-5">
-               <div class="feature-box fbox-plain fbox-dark fbox-sm">
-                  <div class="fbox-content text-center">
-                     <h1 class="mb-0"><i class="icon-line2-home"></i></h1>
-                     <h3>Warranty</h3>
-                     <p class="mt-0">3 years for Sanitary ware & 2 years for tiles.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-6 col-lg-6 mb-5">
-               <div class="feature-box fbox-plain fbox-dark fbox-sm">
-                  <div class="fbox-content text-center">
-                     <h1 class="mb-0"><i class="icon-user-tie"></i></h1>
-                     <h3>Pre & Post Sales Services</h3>
-                     <p class="mt-0">Design Consultancy, Installation, Supervision, Maintenance.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
+         <center>
+            <img src="{{ asset('website/banner-bottom.jpg') }}" class="img-fluid img-thumbnail">
+         </center>
       </div>
    </div>
 </section>

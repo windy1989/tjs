@@ -69,11 +69,11 @@
                      <h4 class="text-uppercase">Category</h4>
                      <ul class="iconlist twitter-feed" data-username="envato" data-count="2">
                         <li class="mb-2">
-                           <a href="{{ url('news') }}">All</a>
+                           <a href="{{ url('news') }}" class="font-size-13">All</a>
                         </li>
                         @foreach($category as $c)
                            <li class="mb-2">
-                              <a href="{{ url('news?category=' . $c->slug) }}">{{ $c->name }}</a>
+                              <a href="{{ url('news?category=' . $c->slug) }}" class="font-size-13">{{ $c->name }}</a>
                            </li>
                         @endforeach
                      </ul>

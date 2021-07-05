@@ -84,7 +84,7 @@
 								</div>
 								<p>
 									<div class="form-group">
-										<textarea name="description" id="description" class="form-control font-size-14" placeholder="Enter important note">{{ old('description') }}</textarea>
+										<textarea name="description" id="description" class="form-control no-outline font-size-14" placeholder="Enter important note">{{ old('description') }}</textarea>
 									</div>
 								</p>
 							</div>

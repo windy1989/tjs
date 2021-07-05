@@ -40,24 +40,24 @@
 		</div>
 	</div>
 	<div id="wrapper" class="clearfix">
-		<div id="top-bar" class="d-none d-lg-block p-0 m-0">
+		<div id="top-bar" class="d-none d-lg-block p-0 m-0 bg-teal">
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal font-size-11">
+									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal text-white font-size-11">
 										<i class="icon-line-phone"></i> 0812-3005-2352
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11">
+									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11 text-white">
 										<i class="icon-whatsapp"></i> (031) 5477501
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11">
+									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11 text-white">
 										<i class="icon-line2-envelope"></i> smartmarbleandbath@gmail.com
 									</a>
 								</li>
@@ -66,13 +66,13 @@
 					</div>
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="text-dark font-size-11" style="text-transform:none;">Open Every Monday - Saturday, 08.30 - 17.00 WIB</a>
+							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="font-size-11 text-white" style="text-transform:none;">Open Every Monday - Saturday, 08.30 - 17.00 WIB</a>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<header id="header" class="full-header header-size-md" data-sticky-shrink="false">
+		<header id="header" class="full-header header-size-sm" data-sticky-shrink="false">
 			<div id="header-wrap">
 				<div class="container">
 					<div class="header-row justify-content-lg-between bg-white">
@@ -88,7 +88,7 @@
 							<div id="top-account">
 								@if(session('fo_id'))
 									<a href="javascript:void(0);" class="side-panel-trigger text-dark">
-										<i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
+										<i class="icon-line2-user mr-1 position-relative text-warning" style="top: 1px;"></i>
 										<span class="d-none d-sm-inline-block font-primary font-weight-medium text-dark">
 											@php $str = explode(' ', session('fo_name')); @endphp
 											Hi, {{ $str[0] }}
@@ -96,26 +96,26 @@
 									</a>
 								@else
 									<a href="{{ url('account/login') }}">
-										<i class="icon-line2-user mr-1 position-relative text-dark" style="top: 1px;"></i>
-										<span class="d-none d-sm-inline-block font-primary font-weight-medium text-dark">Login / Sign Up</span>
+										<i class="icon-line2-user mr-1 position-relative text-warning" style="top: 1px;"></i>
+										<span class="d-none d-xl-inline-block font-primary font-weight-medium text-dark">Login / Sign Up</span>
 									</a>
 								@endif
 							</div>
 							<div id="top-search" class="header-misc-icon">
 								<a href="#" id="top-search-trigger">
-									<i class="icon-line-search"></i>
-									<i class="icon-line-cross"></i>
+									<i class="icon-line-search text-warning"></i>
+									<i class="icon-line-cross text-warning"></i>
 								</a>
 							</div>
 							<div id="top-search" class="header-misc-icon d-none d-sm-block">
 								<a href="{{ url('account/wishlist') }}" id="top-search-trigger">
-									<i class="icon-heart21"></i>
+									<i class="icon-heart21 text-warning"></i>
 									<span class="top-cart-number">{{ $total_wishlist }}</span>
 								</a>
 							</div>
 							<div id="top-search" class="header-misc-icon d-none d-sm-block">
 								<a href="{{ url('account/cart') }}" id="top-search-trigger">
-									<i class="icon-line-bag"></i>
+									<i class="icon-line-bag text-warning"></i>
 									<span class="top-cart-number">{{ $total_cart }}</span>
 								</a>
 							</div>
@@ -137,6 +137,7 @@
 									@php 
 										$category = App\Models\Category::where('parent_id', 0)
 											->where('status', 1)
+											->where('type', 1)
 											->oldest('name')
 											->get(); 
 									@endphp
@@ -146,6 +147,7 @@
 												@php
 													$sub_1 = App\Models\Category::where('parent_id', $c->id)
 														->where('status', 1)
+														->where('type', 1)
 														->oldest('name')
 														->get();
 												@endphp
@@ -162,6 +164,7 @@
 																@php
 																	$sub_2 = App\Models\Category::where('parent_id', $s1->id)
 																		->where('status', 1)
+																		->where('type', 1)
 																		->oldest('name')
 																		->get();
 																@endphp

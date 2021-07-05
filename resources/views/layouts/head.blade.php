@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=51b4ba') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">

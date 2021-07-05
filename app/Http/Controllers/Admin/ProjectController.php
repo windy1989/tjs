@@ -219,15 +219,13 @@ class ProjectController extends Controller {
     {
         $data  = Product::find($request->id);
         $price = $data->pricingPolicy;
-        $image = '<a href="' . $data->type->image() . '" data-lightbox="' . $data->code() . '" data-title="' . $data->code() . '"><img src="' . $data->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
+        $image = '<a href="' . $data->type->image() . '" data-lightbox="' . $data->code() . '" data-title="' . $data->code() . '"><img src="' . $data->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>';
 
         return response()->json([
-            'id'     => $data->id,
-            'code'   => $data->code(),
-            'image'  => $image,
-            'size'   => $data->type->length . 'x' . $data->type->width,
-            'price'  => $price ? $price->project_price : 0,
-            'bottom' => $price ? $price->bottom_price : 0
+            'id'      => $data->id,
+            'product' => $image . '<div>' . $data->code() . '</div><div>' . $data->type->length . 'x' . $data->type->width . '</div>',
+            'price'   => $price ? $price->project_price : 0,
+            'bottom'  => $price ? $price->bottom_price : 0
         ]);
     }
 

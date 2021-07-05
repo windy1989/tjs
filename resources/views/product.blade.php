@@ -20,9 +20,9 @@
                   <div class="row mb-3">
                      <div class="col-md-4 d-none d-xl-block">
                         <div class="form-group row no-gutters">
-                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Show</label>
+                           <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Show</label>
                            <div class="col-9">
-                              <select name="show" id="show" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                              <select name="show" id="show" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
                                  <option value="">12</option>
                                  <option value="24" {{ $filter['other']['show'] == 24 ? 'selected' : '' }}>24</option>
                                  <option value="48" {{ $filter['other']['show'] == 48 ? 'selected' : '' }}>48</option>
@@ -33,9 +33,9 @@
                      </div>
                      <div class="col-md-4 d-none d-xl-block">
                         <div class="form-group row no-gutters">
-                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Stock</label>
+                           <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Stock</label>
                            <div class="col-9">
-                              <select name="stock" id="stock" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                              <select name="stock" id="stock" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
                                  <option value="">All</option>
                                  <option value="ready" {{ $filter['other']['stock'] == 'ready' ? 'selected' : '' }}>Ready</option>
                                  <option value="limited" {{ $filter['other']['stock'] == 'limited' ? 'selected' : '' }}>Limited</option>
@@ -45,9 +45,9 @@
                      </div>
                      <div class="col-md-4 d-none d-xl-block">
                         <div class="form-group row no-gutters">
-                           <label class="col-3 col-form-label" style="text-transform: capitalize;">Sort</label>
+                           <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Sort</label>
                            <div class="col-9">
-                              <select name="sort" id="sort" class="custom-select" style="border-radius:0;" onchange="clickFilter(this)">
+                              <select name="sort" id="sort" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
                                  <option value="">Normal</option>
                                  <option value="low_to_high" {{ $filter['other']['sort'] == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
                                  <option value="high_to_low" {{ $filter['other']['sort'] == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
@@ -57,13 +57,13 @@
                         </div>
                      </div>
                      <div class="col-12 d-xl-none">
-                        <button type="button" id="side-panel-filter-trigger" class="button button-light col-12"><i class="icon-list"></i> Filter</button>
+                        <button type="button" id="side-panel-filter-trigger" class="btn btn-teal col-12 font-size-14 mb-2"><i class="icon-list"></i> Filter</button>
                      </div>
                      <div class="col-12 text-center">
                         @if($filter['other']['search'])
                            <div>Search For : <strong>{{ $filter['other']['search'] }}</strong></div>
                         @endif
-                        <div class="badge badge-info">{{ $product->total() }} records found</div>
+                        <div class="badge bg-teal">{{ $product->total() }} records found</div>
                      </div>
                   </div>
                   <div class="form-group"><hr></div>
@@ -114,9 +114,9 @@
                <div class="sidebar col-lg-3 d-none d-xl-block">
                   <div class="sidebar-widgets-wrap">
                      <div class="clearfix">
-                        <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Find ...">
-                        <button type="submit" onclick="clickFilter(this)" class="btn btn-dark btn-sm col-12 mt-2">Search</button>
-                        <a href="{{ url('product') }}" class="btn btn-danger btn-sm col-12 mt-2">Reset</a>
+                        <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Find ...">
+                        <button type="submit" onclick="clickFilter(this)" class="btn btn-teal btn-sm col-12 mt-2 font-size-11">Search</button>
+                        <a href="{{ url('product') }}" class="btn btn-outline-teal btn-sm col-12 mt-2 font-size-11">Reset</a>
                      </div>
                      <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
@@ -142,7 +142,7 @@
                                           <li>
                                              <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s2->slug }}" value="{{ $s2->slug }}" onchange="clickFilter(this)" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                                <label class="form-check-label font-weight-normal" for="{{ $s2->slug }}">{{ $s2->name }}</label>
+                                                <label class="form-check-label font-weight-normal font-size-11" for="{{ $s2->slug }}">{{ $s2->name }}</label>
                                              </div>
                                           </li>
                                        @endforeach
@@ -150,7 +150,7 @@
                                        <li>
                                           <div class="form-check">
                                              <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s1->slug }}" value="{{ $s1->slug }}" onchange="clickFilter(this)" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal" for="{{ $s1->slug }}">{{ $s1->name }}</label>
+                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $s1->slug }}">{{ $s1->name }}</label>
                                           </div>
                                        </li>
                                     @endif
@@ -159,7 +159,7 @@
                                  <li>
                                     <div class="form-check">
                                        <input type="checkbox" class="form-check-input" name="category[]" id="{{ $c->slug }}" value="{{ $c->slug }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal" for="{{ $c->slug }}">{{ $c->name }}</label>
+                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->slug }}">{{ $c->name }}</label>
                                     </div>
                                  </li>
                               @endif
@@ -173,7 +173,7 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $b->code }}">{{ $b->name }}</label>
+                                    <label class="form-check-label font-weight-normal font-size-11" for="{{ $b->code }}">{{ $b->name }}</label>
                                  </div>
                               </li>
                            @endforeach
@@ -186,7 +186,7 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="size[]" id="{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" onchange="clickFilter(this)" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                    <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
                                  </div>
                               </li>
                            @endforeach
@@ -199,7 +199,7 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="color[]" id="{{ $c->code }}" value="{{ $c->code }}" onchange="clickFilter(this)" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $c->code }}">{{ $c->name }}</label>
+                                    <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->code }}">{{ $c->name }}</label>
                                  </div>
                               </li>
                            @endforeach
@@ -212,7 +212,7 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="pattern[]" id="{{ $p->code }}" value="{{ $p->code }}" onchange="clickFilter(this)" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal" for="{{ $p->code }}">{{ $p->name }}</label>
+                                    <label class="form-check-label font-weight-normal font-size-11" for="{{ $p->code }}">{{ $p->name }}</label>
                                  </div>
                               </li>
                            @endforeach
@@ -234,7 +234,7 @@
             <div class="sidebar-widgets-wrap">
                <form method="GET" class="mt-0" action="{{ url('product') }}">
                   <div class="clearfix">
-                     <input type="text" class="form-control" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
+                     <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
                   </div>
                   <div class="form-group"><hr></div>
                   <div class="mb-5 clearfix">
@@ -260,7 +260,7 @@
                                        <li>
                                           <div class="form-check">
                                              <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s2->slug }}" value="{{ $s2->slug }}" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal" style="font-size:10px !important; color:white !important;" for="panel-{{ $s2->slug }}">{{ $s2->name }}</label>
+                                             <label class="form-check-label font-weight-normal font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s2->slug }}">{{ $s2->name }}</label>
                                           </div>
                                        </li>
                                     @endforeach
@@ -268,7 +268,7 @@
                                     <li>
                                        <div class="form-check">
                                           <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s1->slug }}" value="{{ $s1->slug }}" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $s1->slug }}">{{ $s1->name }}</label>
+                                          <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s1->slug }}">{{ $s1->name }}</label>
                                        </div>
                                     </li>
                                  @endif
@@ -277,7 +277,7 @@
                               <li>
                                  <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $c->slug }}" value="{{ $c->slug }}" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->slug }}">{{ $c->name }}</label>
+                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->slug }}">{{ $c->name }}</label>
                                  </div>
                               </li>
                            @endif
@@ -291,7 +291,7 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
                               </div>
                            </li>
                         @endforeach
@@ -304,7 +304,7 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
                               </div>
                            </li>
                         @endforeach
@@ -317,7 +317,7 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
                               </div>
                            </li>
                         @endforeach
@@ -330,15 +330,15 @@
                            <li>
                               <div class="form-check">
                                  <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
+                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
                               </div>
                            </li>
                         @endforeach
                      </ul>
                   </div>
                   <div class="clearfix">
-                     <a href="{{ url('product') }}" class="button button-red text-center col-12">Reset</a>
-                     <button type="submit" class="button button-green text-center col-12">Filter</button>
+                     <button type="submit" class="btn btn-teal col-12 font-size-11 mb-2">Filter</button>
+                     <a href="{{ url('product') }}" class="btn btn-outline-teal col-12 font-size-11">Reset</a>
                   </div>
                </form>
             </div>

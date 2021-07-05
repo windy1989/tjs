@@ -107,25 +107,25 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="font-size-11">Receiver Name :<span class="text-danger">*</span></label>
-														<input type="text" name="receiver_name" id="receiver_name" class="form-control font-size-12" value="{{ old('receiver_name', session('fo_name')) }}" placeholder="Enter receiver name" onkeyup="checkSubmitButton()" required>
+														<input type="text" name="receiver_name" id="receiver_name" class="form-control no-outline font-size-12" value="{{ old('receiver_name', session('fo_name')) }}" placeholder="Enter receiver name" onkeyup="checkSubmitButton()" required>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="font-size-11">Email :<span class="text-danger">*</span></label>
-														<input type="email" name="email" id="email" class="form-control font-size-12" value="{{ old('email', session('fo_email')) }}" placeholder="Enter email" onkeyup="checkSubmitButton()" required>
+														<input type="email" name="email" id="email" class="form-control no-outline font-size-12" value="{{ old('email', session('fo_email')) }}" placeholder="Enter email" onkeyup="checkSubmitButton()" required>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="font-size-11">Phone :<span class="text-danger">*</span></label>
-														<input type="text" name="phone" id="phone" class="form-control font-size-12" value="{{ old('phone', session('fo_phone')) }}" placeholder="Enter phone" onkeyup="checkSubmitButton()" required>
+														<input type="text" name="phone" id="phone" class="form-control no-outline font-size-12" value="{{ old('phone', session('fo_phone')) }}" placeholder="Enter phone" onkeyup="checkSubmitButton()" required>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="font-size-11">City :<span class="text-danger">*</span></label>
-														<select name="city_id" id="city_id" class="form-control font-size-12" onchange="getDelivery()" required>
+														<select name="city_id" id="city_id" class="form-control no-outline font-size-12" onchange="getDelivery()" required>
 															<option value="">-- Choose --</option>
 															@foreach($city as $c)
 																<option value="{{ $c->id }}">{{ $c->name }}</option>
@@ -136,7 +136,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="font-size-11">Address :<span class="text-danger">*</span></label>
-														<textarea name="address" id="address" class="form-control font-size-12" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
+														<textarea name="address" id="address" class="form-control no-outline font-size-12" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
 													</div>
 												</div>
 											</div>
@@ -151,13 +151,13 @@
 										<div class="card-body">
 											<div class="form-group">
 												<label class="font-size-11">Transport :<span class="text-danger">*</span></label>
-												<select name="delivery_id" id="delivery_id" class="form-control font-size-12" onchange="grandtotal()">
+												<select name="delivery_id" id="delivery_id" class="form-control no-outline font-size-12" onchange="grandtotal()">
 													<option value="">-- Choose --</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label class="font-size-11">Important Note :</label>
-												<textarea name="description" id="description" class="form-control font-size-12" placeholder="Enter important note">{{ old('description') }}</textarea>
+												<textarea name="description" id="description" class="form-control no-outline font-size-12" placeholder="Enter important note">{{ old('description') }}</textarea>
 											</div>
 										</div>
 									</div>
