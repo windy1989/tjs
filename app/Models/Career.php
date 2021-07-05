@@ -18,4 +18,15 @@ class Career extends Model {
         'deadline'
     ];
 
+    public function status() 
+    {
+        if(date('Y-m-d') <= date('Y-m-d', strtotime($this->deadline))) {
+            $status = '<span class="text-success font-weight-bold">Open</span>';
+        } else {
+            $status = '<span class="text-danger font-weight-bold">Close</span>';
+        }
+
+        return $status;
+    }
+
 }

@@ -73,7 +73,7 @@
                </div>
                <div class="form-group">
                   <label>Image :</label>
-                  <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                  <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
                   <center class="mt-3">
                      <a href="{{ asset("website/empty.jpg") }}" id="preview_image" data-lightbox="Banner" data-title="Preview Image">
                         <img src="{{ asset("website/empty.jpg") }}" class="img-fluid img-thumbnail w-100" style="max-width:250px;" alt="Banner Image">

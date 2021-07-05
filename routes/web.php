@@ -49,6 +49,15 @@ Route::prefix('information')->group(function() {
     Route::get('terms_of_delivery', 'InformationController@termsOfDelivery');
 }); 
 
+Route::prefix('news')->group(function() {
+    Route::get('/', 'NewsController@index');
+    Route::get('detail/{slug}', 'NewsController@detail');
+});
+
+Route::prefix('career')->group(function() {
+    Route::get('/', 'CareerController@index');
+});
+
 Route::prefix('checkout')->group(function() {
     Route::match(['get', 'post'], '{param}', 'CheckoutController@index');
     Route::get('notif/{param}', 'CheckoutController@notif');
@@ -282,9 +291,8 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('news')->group(function() {
                 Route::get('/', 'NewsController@index');
                 Route::post('datatable', 'NewsController@datatable');
-                Route::post('create', 'NewsController@create');
-                Route::post('show', 'NewsController@show');
-                Route::post('update/{id}', 'NewsController@update');
+                Route::match(['get', 'post'], 'create', 'NewsController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'NewsController@update');
                 Route::post('destroy', 'NewsController@destroy');
                 Route::get('detail/{id}', 'NewsController@detail');
             });
@@ -410,6 +418,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         });
 
         Route::prefix('manage')->group(function() {
+            Route::prefix('career')->group(function() {
+                Route::get('/', 'CareerController@index');
+                Route::post('datatable', 'CareerController@datatable');
+                Route::match(['get', 'post'], 'create', 'CareerController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'CareerController@update');
+                Route::post('destroy', 'CareerController@destroy');
+                Route::get('detail/{id}', 'CareerController@detail');
+            });
+
             Route::prefix('customer')->group(function() {
                 Route::get('/', 'CustomerController@index');
                 Route::post('datatable', 'CustomerController@datatable');

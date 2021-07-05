@@ -82,7 +82,7 @@
                      </a>
                   </center>
                   <label>Photo :</label>
-                  <input type="file" id="photo" name="photo" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
+                  <input type="file" id="photo" name="photo" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
                </div>
                <div class="row">
                   <div class="col-md-6">

@@ -73,7 +73,7 @@
                      @csrf
                      <div class="form-group">
                         <label>Photo :<sup class="text-danger">*</sup></label>
-                        <input type="file" name="photo" id="photo" class="form-control">
+                        <input type="file" name="photo" id="photo" class="form-control h-auto">
                      </div>
                      <div class="form-group">
                         <label>Name :<sup class="text-danger">*</sup></label>

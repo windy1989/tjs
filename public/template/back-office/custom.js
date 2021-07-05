@@ -14,6 +14,10 @@ $(function() {
    $('.form-check-input-styled').uniform();
    $('.select2').select2();
    $('.form-check-input-switch').bootstrapSwitch();
+   
+   $('.select2-tags').select2({
+      tags: true
+   });
 
    setInterval(function() {
       var d = new Date();
@@ -47,6 +51,13 @@ $(function() {
       wrapperClass: 'border-indigo-600 text-indigo-800'
    });
 });
+
+function ckEditor(selector) {
+   CKEDITOR.replace(selector, {
+      height: 400,
+      extraPlugins: 'forms'
+   });
+}
 
 $.dateString = function(param) {
    var date   = new Date(param);

@@ -293,7 +293,7 @@ class TypeController extends Controller {
             'buy_unit_id'      => 'required',
             'stock_unit_id'    => 'required',
             'selling_unit_id'  => 'required',
-            'image'            => 'mimes:jpg,jpeg,png|max:100',
+            'image'            => 'image|mimes:jpg,jpeg,png|max:100',
             'code'             => ['required', Rule::unique('types', 'code')->ignore($id)],
             'material'         => 'required',
             'weight'           => 'required',

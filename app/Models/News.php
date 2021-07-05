@@ -17,6 +17,7 @@ class News extends Model {
         'user_id',
         'image',
         'title',
+        'slug',
         'description',
         'status'
     ];

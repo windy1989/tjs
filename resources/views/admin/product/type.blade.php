@@ -328,7 +328,7 @@
                         <div class="form-group">
                            <div class="input-group">
                               <div class="custom-file">
-                                 <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                                 <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
                               </div>
                            </div>
                         </div>
