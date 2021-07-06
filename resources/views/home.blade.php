@@ -6,7 +6,7 @@
                <div class="jumbotron jumbotron-fluid bg-white">
                   <div class="container">
                      <div class="row banner">
-                        <div class="col-xl-6 col-lg-8 col-md-8">
+                        <div class="col-xl-6 col-md-8">
                            <div class="text-right font-weight-bold" style="font-size:25px; vertical-align:center; color:#000 !important;">
                               <div class="heading-banner">Everyone,</div>
                               <div class="heading-banner">Everytime & Everywhere</div>
