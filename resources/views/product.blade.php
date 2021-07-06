@@ -70,7 +70,7 @@
                   @if($product->count() > 0)
                      <div id="shop" class="shop row grid-container gutter-30">
                         @foreach($product as $p)
-                           <div class="product col-lg-4 col-6 mb-4">
+                           <div class="product col-lg-3 col-md-4 col-6 mb-4">
                               <div class="grid-inner border">
                                  <div class="bg-light">
                                     <div class="p-2 font-weight-bold text-center" style="font-size:13px;">

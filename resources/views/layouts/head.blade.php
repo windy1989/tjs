@@ -32,6 +32,9 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=51b4ba') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
+   <link rel="stylesheet" href="{{ asset('template/front-office/include/rs-plugin/css/settings.css') }}" media="screen">
+	<link rel="stylesheet" href="{{ asset('template/front-office/include/rs-plugin/css/layers.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/include/rs-plugin/css/navigation.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>

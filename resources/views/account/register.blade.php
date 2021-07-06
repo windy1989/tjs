@@ -27,32 +27,32 @@
                      <form id="login-form" name="login-form" class="mb-0" action="{{ url('account/register') }}" method="POST">
                         @csrf
                         <div class="form-group row">
-                           <label class="col-lg-3 text-capitalize col-form-label">Full Name</label>
+                           <label class="col-lg-3 text-capitalize col-form-label font-size-14">Full Name</label>
                            <div class="col-lg-9">
-                              <input type="text" name="name" id="name" class="form-control no-outline" value="{{ old('name') }}" placeholder="Enter full name" required>
+                              <input type="text" name="name" id="name" class="form-control font-size-12 no-outline" value="{{ old('name') }}" placeholder="Enter full name" required>
                               @error('name') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-lg-3 text-capitalize col-form-label">Email</label>
+                           <label class="col-lg-3 text-capitalize col-form-label font-size-14">Email</label>
                            <div class="col-lg-9">
-                              <input type="email" name="email" id="email" class="form-control no-outline" value="{{ old('email') }}" placeholder="Enter email" required>
+                              <input type="email" name="email" id="email" class="form-control font-size-12 no-outline" value="{{ old('email') }}" placeholder="Enter email" required>
                               @error('email') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-lg-3 text-capitalize col-form-label">Phone</label>
+                           <label class="col-lg-3 text-capitalize col-form-label font-size-14">Phone</label>
                            <div class="col-lg-9">
-                              <input type="text" name="phone" id="phone" class="form-control no-outline" value="{{ old('phone') }}" placeholder="Enter phone" required>
+                              <input type="text" name="phone" id="phone" class="form-control font-size-12 no-outline" value="{{ old('phone') }}" placeholder="Enter phone" required>
                               @error('phone') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                         </div>
                         <div class="form-group row">
-                           <label class="col-lg-3 text-capitalize col-form-label">Password:</label>
+                           <label class="col-lg-3 text-capitalize col-form-label font-size-14">Password:</label>
                            <div class="col-lg-9">
                               <div class="input-group" id="show_password">
-                                 <input type="password" name="password" id="password" class="form-control no-outline" placeholder="Enter password" required>
-                                 <div class="input-group-append">
+                                 <input type="password" name="password" id="password" class="form-control font-size-12 no-outline" placeholder="Enter password" required>
+                                 <div class="input-group-append" style="height:32px;">
                                     <span class="input-group-text">
                                        <a href="javascript:void(0);" aria-hidden="true">
                                           <i class="icon-eye-slash"></i>
@@ -71,12 +71,12 @@
                            </p>
                         </div>
                         <div class="form-group mt-3">
-                           <button type="submit" class="button button-3d button-black float-right m-0">Register</button>
+                           <button type="submit" class="button button-3d button-aqua float-right m-0">Register</button>
                         </div>
                      </form>
                   </div>
                   <div class="card-footer">
-                     <a href="{{ url('account/login') }}" class="text-primary">&larr; Login Here</a>
+                     <a href="{{ url('account/login') }}" class="text-primary font-size-13">&larr; Login Here</a>
                   </div>
                </div>
             </div>

@@ -1,4 +1,4 @@
-		<footer id="footer" class="dark">
+		<footer id="footer" class="bg-white">
 			<div class="container">
 				<div class="footer-widgets-wrap mb-0">
 					<div class="row justify-content-center">
@@ -8,13 +8,13 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">Help</h4>
 										<div class="mb-2">
-											<a href="{{ url('information/how_to_buy') }}" style="font-size:12px;" class="text-white text-uppercase">How To Buy</a>
+											<a href="{{ url('information/how_to_buy') }}" style="font-size:12px;" class="text-dark text-uppercase">How To Buy</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/faq') }}" style="font-size:12px;" class="text-white text-uppercase">FAQ</a>
+											<a href="{{ url('information/faq') }}" style="font-size:12px;" class="text-dark text-uppercase">FAQ</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/contact') }}" style="font-size:12px;" class="text-white text-uppercase">Contact</a>
+											<a href="{{ url('information/contact') }}" style="font-size:12px;" class="text-dark text-uppercase">Contact</a>
 										</div>
 									</div>
 								</div>
@@ -22,13 +22,13 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">Shopping</h4>
 										<div class="mb-2">
-											<a href="{{ url('information/store') }}" style="font-size:12px;" class="text-white text-uppercase">Store</a>
+											<a href="{{ url('information/store') }}" style="font-size:12px;" class="text-dark text-uppercase">Store</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/product_catalog') }}" style="font-size:12px;" class="text-white text-uppercase">Product Catalog</a>
+											<a href="{{ url('information/product_catalog') }}" style="font-size:12px;" class="text-dark text-uppercase">Product Catalog</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/pay_in_store') }}" style="font-size:12px;" class="text-white text-uppercase">Pay In Store</a>
+											<a href="{{ url('information/pay_in_store') }}" style="font-size:12px;" class="text-dark text-uppercase">Pay In Store</a>
 										</div>
 									</div>
 								</div>
@@ -36,13 +36,13 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">About Us</h4>
 										<div class="mb-2">
-											<a href="{{ url('information/about_us') }}" style="font-size:12px;" class="text-white text-uppercase">About SMB</a>
+											<a href="{{ url('information/about_us') }}" style="font-size:12px;" class="text-dark text-uppercase">About SMB</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('news') }}" style="font-size:12px;" class="text-white text-uppercase">News</a>
+											<a href="{{ url('news') }}" style="font-size:12px;" class="text-dark text-uppercase">News</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('career') }}" style="font-size:12px;" class="text-white text-uppercase">Career</a>
+											<a href="{{ url('career') }}" style="font-size:12px;" class="text-dark text-uppercase">Career</a>
 										</div>
 									</div>
 								</div>
@@ -50,13 +50,13 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">Our Policy</h4>
 										<div class="mb-2">
-											<a href="{{ url('information/terms_of_use') }}" style="font-size:12px;" class="text-white text-uppercase">Terms of Use</a>
+											<a href="{{ url('information/terms_of_use') }}" style="font-size:12px;" class="text-dark text-uppercase">Terms of Use</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/privacy_policy') }}" style="font-size:12px;" class="text-white text-uppercase">Privacy Policy</a>
+											<a href="{{ url('information/privacy_policy') }}" style="font-size:12px;" class="text-dark text-uppercase">Privacy Policy</a>
 										</div>
 										<div class="mb-2">
-											<a href="{{ url('information/terms_of_delivery') }}" style="font-size:12px;" class="text-white text-uppercase">Terms of Delivery</a>
+											<a href="{{ url('information/terms_of_delivery') }}" style="font-size:12px;" class="text-dark text-uppercase">Terms of Delivery</a>
 										</div>
 									</div>
 								</div>
@@ -64,21 +64,21 @@
 									<div class="widget clearfix">
 										<h4 class="font-weight-bold mb-4">Our Head Office</h4>
 										<div class="mb-2">
-											<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-white text-uppercase">
-												<i class="icon-line-map-pin"></i> 
+											<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark text-uppercase">
+												<i class="icon-line-map-pin "></i> 
 												&nbsp;&nbsp;
 												Surabaya, Baliwerti 119 - 121
 											</a>
 										</div>
 										<div class="mb-2">
-											<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-white">
+											<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
 												<i class="icon-line2-envelope"></i> 
 												&nbsp;&nbsp;
 												smartmarbleandbath@gmail.com
 											</a>
 										</div>
 										<div class="mb-2">
-											<a href="javascript:void(0);" style="font-size:13px;" class="text-white text-uppercase cursor-none">
+											<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
 												<i class="icon-headphones-alt"></i> 
 												&nbsp;&nbsp;
 												0812-3005-2352 / (031) 5477501
@@ -94,7 +94,7 @@
 												<i class="icon-instagram"></i>
 												<i class="icon-instagram"></i>
 											</a>
-											<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-gmail">
+											<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-google">
 												<i class="icon-gmail"></i>
 												<i class="icon-gmail"></i>
 											</a>
@@ -107,7 +107,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div id="copyrights">
+			<div id="copyrights" class="bg-teal">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center">
@@ -120,5 +120,13 @@
 	</div>
 	<script src="{{ asset('template/front-office/js/plugins.min.js') }}"></script>
 	<script src="{{ asset('template/front-office/js/functions.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.video.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.actions.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
+	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 </body>
 </html>

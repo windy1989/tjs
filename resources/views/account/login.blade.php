@@ -57,7 +57,7 @@
                               <label>Password:</label>
                               <div class="input-group" id="show_password">
                                  <input type="password" name="password" id="password" class="form-control no-outline" placeholder="Enter password">
-                                 <div class="input-group-append">
+                                 <div class="input-group-append" style="height:38px;">
                                     <span class="input-group-text">
                                        <a href="javascript:void(0);" aria-hidden="true">
                                           <i class="icon-eye-slash"></i>
@@ -66,9 +66,11 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="col-12 form-group mt-3">
-                              <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary">Forgot Password?</a>
-                              <button type="submit" class="button button-3d button-black float-right m-0">Login</button>
+                           <div class="col-12 form-group">
+                              <button type="submit" class="button button-3d button-aqua float-right m-0 col-12">Login</button>
+                           </div>
+                           <div class="col-12 mt-2 text-center">
+                              <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary font-size-14">Forgot Password?</a>
                            </div>
                         </div>
                      </form>
@@ -86,7 +88,7 @@
                      </form>
                   </div>
                   <div class="card-footer">
-                     <a href="{{ url('account/register') }}" class="text-primary">+ Register here</a>
+                     <a href="{{ url('account/register') }}" class="text-primary font-size-13">+ Register here</a>
                   </div>
                </div>
             </div>

@@ -1,9 +1,37 @@
-<section id="slider" class="slider-element h-auto">
+<section id="slider" class="slider-element h-auto" style="background-color: #222;">
    <div class="slider-inner">
-      <div class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="true" data-loop="true" data-animate-in="fadeIn" data-speed="450" data-animate-out="fadeOut" data-autoplay="5000">
-         @foreach($banner as $key => $b)
-            <img src="{{ $b->image() }}" alt="Slider {{ $key + 1 }}" class="img-fluid">
-         @endforeach
+      <div class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="false" data-loop="false" data-animate-in="fadeIn" data-speed="450" data-animate-out="fadeOut" data-autoplay="5000">
+         <div class="row no-gutters" style="border-bottom:2px solid #51b4ba;">
+            <div class="col-md-6 bg-white d-none d-md-block">
+               <div class="jumbotron jumbotron-fluid bg-white">
+                  <div class="container">
+                     <div class="row banner">
+                        <div class="col-xl-6 col-lg-8 col-md-8">
+                           <div class="text-right font-weight-bold" style="font-size:25px; vertical-align:center; color:#000 !important;">
+                              <div class="heading-banner">Everyone,</div>
+                              <div class="heading-banner">Everytime & Everywhere</div>
+                              <div class="heading-banner">Personalize Your Home</div>
+                              <div class="mt-3">
+                                 <a href="" class="button button-mini button-3d button-circle button-large bg-teal">Shop Now</a>
+                              </div>
+                              <div class="circle-element bg-teal"></div>
+                              <div class="circle-element bg-danger"></div>
+                              <div class="circle-element bg-warning"></div>
+                              <p style="font-size:12px;" class="mt-3 font-weight-normal">
+                                 Dapatkan cashback senilai Rp.500.000,-<br>serta merchandise dari Smart Marble & Bath<br>disetiap pembelian pertamamu disini. (bisa disesuaikan kata"nya)
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <a href="javascript:void(0);" class="cursor-none">
+                  <img src="{{ asset('website/banner-1.png') }}" style="max-height:800px;" alt="Slider">
+               </a>
+            </div>
+         </div>
       </div>
    </div>
 </section>
@@ -47,9 +75,18 @@
             </div>
             <div class="col-md-5">
                <div class="text-right">
-                  <h3 class="font-weight-bold mb-0">We Have The Strong Portfolio</h3>
-                  <h3 class="font-weight-bold">From The Greatest Brand</h3>
-                  <a href="{{ url('information/product_catalog') }}" class="button button-aqua">View Catalog</a>
+                  <h3 class="font-weight-bold mb-0">
+                     <span class="font-weight-normal text-dark">We Have The</span> Strong Portfolio
+                  </h3>
+                  <h3 class="font-weight-bold">
+                     <span class="font-weight-normal text-dark">From The</span> Greatest Brand
+                  </h3>
+                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">View Catalog</a>
+                  <div class="mt-3">
+                     <div class="circle-element bg-teal"></div>
+                     <div class="circle-element bg-danger"></div>
+                     <div class="circle-element bg-warning"></div>
+                  </div>
                </div>
             </div>
             <div class="col-md-12"><hr style="border: 1px solid #51b4ba; height:2px; background:#51b4ba;"></div>
@@ -60,7 +97,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_cheapest as $p)
-               <div class="product col-lg-3 col-6">
+               <div class="product col-lg-2 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -90,7 +127,7 @@
             @endforeach
             <div class="col-12">
                <div class="text-center mt-4">
-                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">More Product</a>
                </div>
             </div>
          </div>
@@ -100,7 +137,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_new as $p)
-               <div class="product col-lg-3 col-6">
+               <div class="product col-lg-2 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -130,7 +167,7 @@
             @endforeach
             <div class="col-12">
                <div class="text-center mt-4">
-                  <a href="{{ url('product?sort=newest') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+                  <a href="{{ url('product?sort=newest') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Discover More</a>
                </div>
             </div>
          </div>
@@ -140,7 +177,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_limited as $p)
-               <div class="product col-lg-3 col-6">
+               <div class="product col-lg-2 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -170,17 +207,54 @@
             @endforeach
             <div class="col-12">
                <div class="text-center mt-4">
-                  <a href="{{ url('product?stock=limited') }}" class="button button-3d button-rounded button-yellow bg-yellow button-large">More Product</a>
+                  <a href="{{ url('product?stock=limited') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Explore More</a>
                </div>
             </div>
          </div>
       </div>
-   </div>
-   <div class="section mt-0 mb-0">
-      <div class="container">
-         <center>
-            <img src="{{ asset('website/banner-bottom.jpg') }}" class="img-fluid img-thumbnail">
-         </center>
+      <div class="section bg-white mt-0 mb-0">
+         <div class="form-group"><hr style="margin-bottom:80px;"></div>
+         <div class="container mb-0">
+            <center>
+               <img src="{{ asset('website/banner-bottom.jpg') }}" class="img-fluid">
+            </center>
+         </div>
+      </div>
+      <div class="section dark bg-light footer-stick mt-0" style="background-color: #444; padding: 35px 0;">
+         <div class="container">
+            <div class="row col-mb-30 justify-content-center text-center">
+               <div class="col-lg-4 col-md-4 col-12">
+                  <div class="text-center">
+                  </div>
+                  <i class="i-large text-center icon-thumbs-up2 text-dark mb-0" style="font-size:30px;"></i>
+                  <div class="clear"></div>
+                  <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
+                     100% Original
+                  </div>
+                  <h5 style="font-size: 9px;" class="text-dark">We guarantee you the sale of Original Brands</h5>
+               </div>
+               <div class="col-lg-4 col-md-4 col-12">
+                  <div class="text-center">
+                  </div>
+                  <i class="i-large text-center icon-line2-home text-dark mb-0" style="font-size:30px;"></i>
+                  <div class="clear"></div>
+                  <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
+                     Warranty
+                  </div>
+                  <h5 style="font-size: 9px;" class="text-dark">3 years for Sanitary ware & 2 years for tiles</h5>
+               </div>
+               <div class="col-lg-4 col-md-4 col-12">
+                  <div class="text-center">
+                  </div>
+                  <i class="i-large text-center icon-user-tie text-dark mb-0" style="font-size:30px;"></i>
+                  <div class="clear"></div>
+                  <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
+                     Pre & Post Sales Services
+                  </div>
+                  <h5 style="font-size: 9px;" class="text-dark">Design Consultancy, Installation, Supervision, Maintenance</h5>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </section>

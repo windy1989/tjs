@@ -17,14 +17,14 @@ class HomeController extends Controller {
             })
             ->leftJoin('pricing_policies', 'products.id', '=', 'pricing_policies.product_id')
             ->orderBy('pricing_policies.price_list', 'asc')
-            ->limit(8)
+            ->limit(12)
             ->get();
 
         $product_new = Product::whereHas('productShading', function($query) {
                 $query->havingRaw('SUM(qty) > ?', [18]);
             })
             ->latest()
-            ->limit(8)
+            ->limit(12)
             ->get();
 
         $product_limited = Product::whereHas('productShading', function($query) {
@@ -32,7 +32,7 @@ class HomeController extends Controller {
                     ->havingRaw('SUM(qty) <= ?', [18]);
             })
             ->latest()
-            ->limit(8)
+            ->limit(12)
             ->get();
 
         $data = [

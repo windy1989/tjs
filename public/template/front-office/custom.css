@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
+.circle-element {
+   display: inline-block;
+   width: 1rem;
+   height: 1rem;
+   vertical-align: text-bottom;
+   border-radius: 50%;
+   border-top-left-radius: 50%;
+   border-top-right-radius: 50%;
+   border-bottom-left-radius: 50%;
+   border-bottom-right-radius: 50%;
+}
+
+.text-teal {
+   color: #51b4ba !important;
+}
+
+.banner {
+   position: relative;
+   bottom: 0;
+   top: 12.5rem;
+}
+
 .bg-yellow {
    background: #ebb11f !important;
 }
@@ -117,7 +139,7 @@
 }
 
 .product-thumbnail {
-   height: 280px !important;
+   height: 220px !important;
 }
 
 .cursor-none {
@@ -210,6 +232,32 @@
    color: #edb31a !important;
 }
 
+@media (max-width: 1366px) {
+   .banner {
+      position: relative;
+      bottom: 0;
+      top: 3rem;
+   }
+
+   .heading-banner {
+      font-size: 20px;
+   }
+}
+
+@media only screen and (max-width: 1024px) {
+   .header-row>#logo>a>img {
+      max-height: 40px !important;
+      margin-top: 15px;
+      margin-bottom: 15px;
+   }
+
+   .banner {
+      position: relative;
+      bottom: 0;
+      top: 1rem;
+   }
+}
+
 @media (max-width: 768px) {
    .menu-container #tab-shop .nav-link {
       padding: 15px;
@@ -225,17 +273,9 @@
    }
 }
 
-@media only screen and (max-width: 1024px) {
-   .header-row > #logo > a > img {
-      max-height: 40px !important;
-      margin-top: 15px;
-      margin-bottom: 15px;
-   }
-}
-
 @media only screen and (max-width: 414px) {
    .product-thumbnail {
-      height: 150px !important;
+      height: 180px !important;
    }
 
    .product .grid-inner .product-image div.sale-flash {
