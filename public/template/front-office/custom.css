@@ -16,12 +16,6 @@
    color: #51b4ba !important;
 }
 
-.banner {
-   position: relative;
-   bottom: 0;
-   top: 12.5rem;
-}
-
 .bg-yellow {
    background: #ebb11f !important;
 }
@@ -248,16 +242,6 @@
 }
 
 @media (max-width: 1366px) {
-   .banner {
-      position: relative;
-      bottom: 0;
-      top: 9rem;
-   }
-
-   .heading-banner {
-      font-size: 20px;
-   }
-
    .product-thumbnail {
       height: 180px !important;
    }
@@ -268,12 +252,6 @@
       max-height: 40px !important;
       margin-top: 15px;
       margin-bottom: 15px;
-   }
-
-   .banner {
-      position: relative;
-      bottom: 0;
-      top: 1rem;
    }
 }
 
@@ -290,31 +268,9 @@
    .active-link-custom {
       padding: 10px !important;
    }
-}
 
-@media only screen and (max-width: 414px) {
    .product-thumbnail {
       height: 180px !important;
-   }
-
-   .banner {
-      position: none;
-      bottom: 0;
-      top: -1rem;
-   }
-
-   .banner .heading-banner {
-      font-size: 10px;
-   }
-
-   .banner p.font-weight-semibold {
-      margin-top: 0;
-      font-size: 8.5px !important;
-   }
-
-   .banner .bg-teal {
-      margin-top: 0;
-      margin-bottom: 0;
    }
 
    .circle-element {

@@ -1,36 +1,39 @@
-<div class="row no-gutters" style="border-bottom:2px solid #51b4ba;">
-   <div class="bg-white col-6">
-      <div class="jumbotron jumbotron-fluid bg-white">
-         <div class="container">
-            <div class="row banner">
-               <div class="col-xl-6 col-md-8">
-                  <div class="text-right font-weight-bold" style="font-size:25px; vertical-align:center; color:#000 !important;">
-                     <div class="heading-banner">Everyone,</div>
-                     <div class="heading-banner">Everytime & Everywhere</div>
-                     <div class="heading-banner">Personalize Your Home</div>
-                     <a href="{{ url('product') }}" class="button button-mini button-3d button-circle bg-teal">Shop Now</a>
-                     <div>
-                        <div class="circle-element bg-teal mt-0"></div>
-                        <div class="circle-element bg-danger mt-0"></div>
-                        <div class="circle-element bg-warning mt-0"></div>
+<section id="slider" class="slider-element h-auto">
+   <div class="row align-items-stretch">
+      <div class="col-12">
+         <div class="fslider" data-arrows="false">
+            <div class="flexslider">
+               <div class="slider-wrap">
+                  @foreach($banner as $key => $b)
+                     <div class="slide shadow-lg">
+                        <a href="javascript:void(0);" class="cursor-none">
+                           <img src="{{ $b->image() }}" alt="{{ $key }}" style="max-height:800px;" class="img-fluid">
+                        </a>
                      </div>
-                     <p style="font-size:12px;" class="mt-3 font-weight-semibold">
-                        Dapatkan cashback senilai Rp.500.000,- serta merchandise dari <br>Smart Marble & Bath
-                     </p>
-                  </div>
+                  @endforeach
                </div>
             </div>
          </div>
       </div>
    </div>
-   <div class="col-6">
-      <a href="javascript:void(0);" class="cursor-none">
-         <img src="{{ asset('website/banner-1.png') }}" class="img-fluid w-100" alt="Slider">
-      </a>
-   </div>
-</div>
+</section>
 <section id="content">
    <div class="content-wrap">
+      <div class="promo promo-full promo-light promo-border p-5 header-stick bottommargin-lg">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-12 col-lg">
+                  <h3>Everyone, Everytime & Everywhere Personalize Your Home</h3>
+                  <small>
+                     <em>Get cashback worth IDR 500,000 and merchandise from Smart Marble & Bath for every first purchase here.</em>
+                  </small>
+               </div>
+               <div class="col-12 col-lg-auto mt-4 mt-lg-0">
+                  <a href="{{ url('product') }}" class="button button-large button-circle bg-teal m-0">Shop Now</a>
+               </div>
+            </div>
+         </div>
+      </div>
       <div class="container clearfix">
          <div class="heading-block center mb-0">
             <h3 class="text-uppercase">Shop By Brand</h3>
@@ -70,12 +73,12 @@
             <div class="col-md-5">
                <div class="text-right">
                   <h3 class="font-weight-bold mb-0">
-                     <span class="font-weight-normal text-dark">We Have The</span> Strong Portfolio
+                     <span class="font-weight-normal text-dark">We Have</span> Strong Portfolios
                   </h3>
                   <h3 class="font-weight-bold">
-                     <span class="font-weight-normal text-dark">From The</span> Greatest Brand
+                     <span class="font-weight-normal text-dark">From</span> Greatest Brands
                   </h3>
-                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">View Catalog</a>
+                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">View Catalogue</a>
                   <div class="mt-3">
                      <div class="circle-element bg-teal"></div>
                      <div class="circle-element bg-danger"></div>
@@ -121,7 +124,7 @@
             @endforeach
             <div class="col-12">
                <div class="text-center mt-4">
-                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">More Product</a>
+                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Discover More</a>
                </div>
             </div>
          </div>
@@ -201,7 +204,7 @@
             @endforeach
             <div class="col-12">
                <div class="text-center mt-4">
-                  <a href="{{ url('product?stock=limited') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Explore More</a>
+                  <a href="{{ url('product?stock=limited') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Discover More</a>
                </div>
             </div>
          </div>

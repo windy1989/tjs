@@ -62,27 +62,68 @@
 								</div>
 								<div class="col-lg-4 col-12">
 									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">Our Head Office</h4>
+										<h4 class="font-weight-bold mb-4">Our Showrooms</h4>
 										<div class="mb-2">
-											<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark text-uppercase">
-												<i class="icon-line-map-pin "></i> 
-												&nbsp;&nbsp;
-												Surabaya, Baliwerti 119 - 121
-											</a>
-										</div>
-										<div class="mb-2">
-											<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
-												<i class="icon-line2-envelope"></i> 
-												&nbsp;&nbsp;
-												smartmarbleandbath@gmail.com
-											</a>
-										</div>
-										<div class="mb-2">
-											<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
-												<i class="icon-headphones-alt"></i> 
-												&nbsp;&nbsp;
-												0812-3005-2352 / (031) 5477501
-											</a>
+											<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+												<li class="nav-item" role="presentation">
+													<a class="nav-link active font-size-12" id="surabaya-tab" data-toggle="tab" href="#surabaya" role="tab" aria-controls="surabaya" aria-selected="true">Surabaya</a>
+												</li>
+												<li class="nav-item" role="presentation">
+													<a class="nav-link font-size-12" id="jakarta-tab" data-toggle="tab" href="#jakarta" role="tab" aria-controls="jakarta" aria-selected="false">Jakarta</a>
+												</li>
+											</ul>
+											<div class="tab-content" id="myTabContent">
+												<div class="tab-pane fade show active" id="surabaya" role="tabpanel" aria-labelledby="surabaya-tab">
+													<p>
+														<div class="mb-2">
+															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
+																<i class="icon-line-map-pin "></i> 
+																&nbsp;&nbsp;
+																Surabaya, Baliwerti 119 - 121
+															</a>
+														</div>
+														<div class="mb-2">
+															<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
+																<i class="icon-line2-envelope"></i> 
+																&nbsp;&nbsp;
+																smartmarbleandbath@gmail.com
+															</a>
+														</div>
+														<div class="mb-2">
+															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
+																<i class="icon-headphones-alt"></i> 
+																&nbsp;&nbsp;
+																0812-3005-2352 / (031) 5477501
+															</a>
+														</div>
+													</p>
+												</div>
+												<div class="tab-pane fade" id="jakarta" role="tabpanel" aria-labelledby="jakarta-tab">
+													<p>
+														<div class="mb-2">
+															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
+																<i class="icon-line-map-pin "></i> 
+																&nbsp;&nbsp;
+																Gedung Jagat, Main Lobby, Jl. Tomang Raya No.28
+															</a>
+														</div>
+														<div class="mb-2">
+															<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
+																<i class="icon-line2-envelope"></i> 
+																&nbsp;&nbsp;
+																smartmarbleandbath@gmail.com
+															</a>
+														</div>
+														<div class="mb-2">
+															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
+																<i class="icon-headphones-alt"></i> 
+																&nbsp;&nbsp;
+																082131972353
+															</a>
+														</div>
+													</p>
+												</div>
+											</div>
 										</div>
 										<div><hr></div>
 										<div class="d-flex">

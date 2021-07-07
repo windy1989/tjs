@@ -17,6 +17,16 @@ class InformationController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
+    public function faq()
+    {
+        $data = [
+            'title'   => 'Faq',
+            'content' => 'information.faq'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
     public function privacyPolicy()
     {
         $data = [
@@ -68,11 +78,31 @@ class InformationController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
+    public function payInStore()
+    {
+        $data = [
+            'title'   => 'Pay In Store',
+            'content' => 'information.pay_in_store'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
     public function aboutUs()
     {
         $data = [
             'title'   => 'About Us',
             'content' => 'information.about_us'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function termsOfUse()
+    {
+        $data = [
+            'title'   => 'Terms Of Use',
+            'content' => 'information.terms_of_use'
         ]; 
 
         return view('layouts.index', ['data' => $data]);
