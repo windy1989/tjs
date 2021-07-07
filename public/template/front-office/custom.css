@@ -264,7 +264,7 @@
 }
 
 @media only screen and (max-width: 1024px) {
-   .header-row>#logo>a>img {
+   .header-row > #logo > a > img {
       max-height: 40px !important;
       margin-top: 15px;
       margin-bottom: 15px;
@@ -295,6 +295,38 @@
 @media only screen and (max-width: 414px) {
    .product-thumbnail {
       height: 180px !important;
+   }
+
+   .banner {
+      position: none;
+      bottom: 0;
+      top: -1rem;
+   }
+
+   .banner .heading-banner {
+      font-size: 10px;
+   }
+
+   .banner p.font-weight-semibold {
+      margin-top: 0;
+      font-size: 8.5px !important;
+   }
+
+   .banner .bg-teal {
+      margin-top: 0;
+      margin-bottom: 0;
+   }
+
+   .circle-element {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      vertical-align: text-bottom;
+      border-radius: 50%;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
    }
 
    .product .grid-inner .product-image div.sale-flash {

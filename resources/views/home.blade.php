@@ -1,40 +1,34 @@
-<section id="slider" class="slider-element h-auto" style="background-color: #222;">
-   <div class="slider-inner">
-      <div class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="false" data-loop="false" data-animate-in="fadeIn" data-speed="450" data-animate-out="fadeOut" data-autoplay="5000">
-         <div class="row no-gutters" style="border-bottom:2px solid #51b4ba;">
-            <div class="col-md-6 bg-white d-none d-md-block">
-               <div class="jumbotron jumbotron-fluid bg-white">
-                  <div class="container">
-                     <div class="row banner">
-                        <div class="col-xl-6 col-md-8">
-                           <div class="text-right font-weight-bold" style="font-size:25px; vertical-align:center; color:#000 !important;">
-                              <div class="heading-banner">Everyone,</div>
-                              <div class="heading-banner">Everytime & Everywhere</div>
-                              <div class="heading-banner">Personalize Your Home</div>
-                              <div class="mt-3">
-                                 <a href="{{ url('product') }}" class="button button-mini button-3d button-circle button-large bg-teal">Shop Now</a>
-                              </div>
-                              <div class="circle-element bg-teal"></div>
-                              <div class="circle-element bg-danger"></div>
-                              <div class="circle-element bg-warning"></div>
-                              <p style="font-size:12px;" class="mt-3 font-weight-normal">
-                                 Dapatkan cashback senilai Rp.500.000,-<br>serta merchandise dari Smart Marble & Bath<br>disetiap pembelian pertamamu disini. (bisa disesuaikan kata"nya)
-                              </p>
-                           </div>
-                        </div>
+<div class="row no-gutters" style="border-bottom:2px solid #51b4ba;">
+   <div class="bg-white col-6">
+      <div class="jumbotron jumbotron-fluid bg-white">
+         <div class="container">
+            <div class="row banner">
+               <div class="col-xl-6 col-md-8">
+                  <div class="text-right font-weight-bold" style="font-size:25px; vertical-align:center; color:#000 !important;">
+                     <div class="heading-banner">Everyone,</div>
+                     <div class="heading-banner">Everytime & Everywhere</div>
+                     <div class="heading-banner">Personalize Your Home</div>
+                     <a href="{{ url('product') }}" class="button button-mini button-3d button-circle bg-teal">Shop Now</a>
+                     <div>
+                        <div class="circle-element bg-teal mt-0"></div>
+                        <div class="circle-element bg-danger mt-0"></div>
+                        <div class="circle-element bg-warning mt-0"></div>
                      </div>
+                     <p style="font-size:12px;" class="mt-3 font-weight-semibold">
+                        Dapatkan cashback senilai Rp.500.000,- serta merchandise dari <br>Smart Marble & Bath
+                     </p>
                   </div>
                </div>
-            </div>
-            <div class="col-md-6">
-               <a href="javascript:void(0);" class="cursor-none">
-                  <img src="{{ asset('website/banner-1.png') }}" style="max-height:800px;" alt="Slider">
-               </a>
             </div>
          </div>
       </div>
    </div>
-</section>
+   <div class="col-6">
+      <a href="javascript:void(0);" class="cursor-none">
+         <img src="{{ asset('website/banner-1.png') }}" class="img-fluid w-100" style="max-height:800px;" alt="Slider">
+      </a>
+   </div>
+</div>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
