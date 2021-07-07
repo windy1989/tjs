@@ -22,6 +22,7 @@ class BrandSeeder extends Seeder
                 'image'      => $b['image'],
                 'code'       => $b['code'],
                 'name'       => $b['name'],
+                'order'      => $b['order'],
                 'status'     => $b['status'],
                 'created_at' => $b['created_at'],
                 'updated_at' => $b['updated_at'],

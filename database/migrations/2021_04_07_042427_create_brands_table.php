@@ -18,6 +18,7 @@ class CreateBrandsTable extends Migration
             $table->string('image')->nullable();
             $table->string('code')->unique();
             $table->string('name');
+            $table->integer('order');
             $table->char('status', 1);
             $table->timestamps();
             $table->softDeletes('deleted_at');

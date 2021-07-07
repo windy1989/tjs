@@ -28,6 +28,7 @@ class BrandController extends Controller {
             'image',
             'code',
             'name',
+            'order',
             'status'
         ];
 
@@ -81,6 +82,7 @@ class BrandController extends Controller {
                     $image,
                     $val->code,
                     $val->name,
+                    $val->order,
                     $val->status(),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
@@ -111,12 +113,15 @@ class BrandController extends Controller {
             'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=320,max_height=240',
             'code'   => 'required|unique:brands,code',
             'name'   => 'required',
+            'order'  => 'required',
             'status' => 'required'
         ], [
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 100KB.',
             'image.dimensions' => 'Image max size 320x240.',
+            'name.required'    => 'Name cannot be empty.',
+            'order.required'   => 'Order cannot be empty.',
             'code.required'    => 'Code cannot be empty.',
             'code.unique'      => 'Code already exists.',
             'status.required'  => 'Please select a status.'
@@ -132,6 +137,7 @@ class BrandController extends Controller {
                 'image'  => $request->has('image') ? $request->file('image')->store('public/brand') : null,
                 'code'   => $request->code,
                 'name'   => $request->name,
+                'order'  => $request->order,
                 'status' => $request->status
             ]);
 
@@ -164,6 +170,7 @@ class BrandController extends Controller {
             'image'  => Storage::exists($data->image) ? asset(Storage::url($data->image)) : asset('website/empty.jpg'),
             'code'   => $data->code,
             'name'   => $data->name,
+            'order'  => $data->order,
             'status' => $data->status
         ]);
     }
@@ -180,6 +187,8 @@ class BrandController extends Controller {
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 100KB.',
             'image.dimensions' => 'Image max size 320x240.',
+            'name.required'    => 'Name cannot be empty.',
+            'order.required'   => 'Order cannot be empty.',
             'code.required'    => 'Code cannot be empty.',
             'code.unique'      => 'Code already exists.',
             'name.required'    => 'Name cannot be empty.',
@@ -208,6 +217,7 @@ class BrandController extends Controller {
                 'image'  => $image,
                 'code'   => $request->code,
                 'name'   => $request->name,
+                'order'  => $request->order,
                 'status' => $request->status
             ]);
 

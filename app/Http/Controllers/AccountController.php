@@ -251,7 +251,7 @@ class AccountController extends Controller {
 
                     session([
                         'fo_id'           => $account->id,
-                        'fo_photo'        => $account->photo,
+                        'fo_photo'        => $account->photo(),
                         'fo_name'         => $account->name,
                         'fo_email'        => $account->email,
                         'fo_verification' => $account->verification
@@ -266,7 +266,7 @@ class AccountController extends Controller {
 
                     session([
                         'fo_id'           => $account->id,
-                        'fo_photo'        => $account->photo,
+                        'fo_photo'        => $account->photo(),
                         'fo_name'         => $account->name,
                         'fo_email'        => $account->email,
                         'fo_verification' => $verification

@@ -18,6 +18,7 @@ class Brand extends Model {
         'image',
         'code',
         'name',
+        'order',
         'status'
     ];
 

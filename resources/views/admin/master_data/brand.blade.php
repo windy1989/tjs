@@ -49,6 +49,7 @@
                         <th>Image</th>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>Order</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -80,6 +81,10 @@
                <div class="form-group">
                   <label>Name :<span class="text-danger">*</span></label>
                   <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
+               </div>
+               <div class="form-group">
+                  <label>Order :<span class="text-danger">*</span></label>
+                  <input type="number" name="order" id="order" class="form-control" placeholder="0">
                </div>
                <div class="form-group">
                   <label>Image :</label>
@@ -189,6 +194,7 @@
             { name: 'image', searchable: false, className: 'text-center align-middle' },
             { name: 'code', className: 'text-center align-middle' },
             { name: 'name', className: 'text-center align-middle' },
+            { name: 'order', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
@@ -264,6 +270,7 @@
             loadingClose('.modal-content');
             $('#code').val(response.code);
             $('#name').val(response.name);
+            $('#order').val(response.order);
             $('#preview_image').attr('href', response.image);
             $('#preview_image img').attr('src', response.image);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);

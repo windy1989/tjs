@@ -76,7 +76,7 @@
                      <span class="font-weight-normal text-dark">We Have</span> Strong Portfolios
                   </h3>
                   <h3 class="font-weight-bold">
-                     <span class="font-weight-normal text-dark">From</span> Greatest Brands
+                     <span class="font-weight-normal text-dark">From The</span> Greatest Brands
                   </h3>
                   <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large button-yellow bg-yellow">View Catalogue</a>
                   <div class="mt-3">

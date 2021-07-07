@@ -41,7 +41,7 @@ class HomeController extends Controller {
             'product_cheapest' => $product_cheapest,
             'product_limited'  => $product_limited,
             'product_new'      => $product_new,
-            'brand'            => Brand::where('status', 1)->whereNotNull('image')->get(),
+            'brand'            => Brand::where('status', 1)->whereNotNull('image')->orderBy('order', 'asc')->get(),
             'content'          => 'home'
         ];
 
