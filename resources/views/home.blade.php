@@ -25,7 +25,7 @@
    </div>
    <div class="col-6">
       <a href="javascript:void(0);" class="cursor-none">
-         <img src="{{ asset('website/banner-1.png') }}" class="img-fluid w-100" style="max-height:800px;" alt="Slider">
+         <img src="{{ asset('website/banner-1.png') }}" class="img-fluid w-100" alt="Slider">
       </a>
    </div>
 </div>
