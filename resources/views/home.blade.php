@@ -90,46 +90,6 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h3 class="text-uppercase">Best Offer</h3>
-         </div>
-         <div id="shop" class="shop row grid-container gutter-30">
-            @foreach($product_cheapest as $p)
-               <div class="product col-lg-2 col-md-4 col-6">
-                  <div class="grid-inner border">
-                     <div class="product-image">
-                        <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
-                        </a>
-                        <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
-                     </div>
-                     <div class="product-desc p-3">
-                        <div class="product-price font-weight-bold">
-                           <ins class="text-dark">
-                              <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
-                           </ins>
-                        </div>
-                        <div class="product-title">
-                           <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
-                           </h4>
-                        </div>
-                        <div class="product-price font-weight-semibold">
-                           <span>
-                              <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
-                           </span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            @endforeach
-            <div class="col-12">
-               <div class="text-center mt-4">
-                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Discover More</a>
-               </div>
-            </div>
-         </div>
-         <div class="clearfix"></div>
-         <div class="topmargin-lg fancy-title title-border title-center">
             <h3 class="text-uppercase">New Arrival</h3>
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
@@ -170,7 +130,47 @@
          </div>
          <div class="clearfix"></div>
          <div class="topmargin-lg fancy-title title-border title-center">
-            <h3 class="text-uppercase">Product Limited</h3>
+            <h3 class="text-uppercase">Best Seller</h3>
+         </div>
+         <div id="shop" class="shop row grid-container gutter-30">
+            @foreach($product_cheapest as $p)
+               <div class="product col-lg-2 col-md-4 col-6">
+                  <div class="grid-inner border">
+                     <div class="product-image">
+                        <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                           <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
+                        </a>
+                        <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
+                     </div>
+                     <div class="product-desc p-3">
+                        <div class="product-price font-weight-bold">
+                           <ins class="text-dark">
+                              <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                           </ins>
+                        </div>
+                        <div class="product-title">
+                           <h4 class="mb-0 font-weight-normal limit-text-list-product">
+                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
+                           </h4>
+                        </div>
+                        <div class="product-price font-weight-semibold">
+                           <span>
+                              <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            @endforeach
+            <div class="col-12">
+               <div class="text-center mt-4">
+                  <a href="{{ url('product?sort=low_to_high') }}" class="button button-3d button-circle button-yellow bg-yellow button-large">Discover More</a>
+               </div>
+            </div>
+         </div>
+         <div class="clearfix"></div>
+         <div class="topmargin-lg fancy-title title-border title-center">
+            <h3 class="text-uppercase">Special Deals</h3>
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_limited as $p)
