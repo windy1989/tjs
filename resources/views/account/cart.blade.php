@@ -90,7 +90,7 @@
             </div>
             <div class="form-group"><hr></div>
             <div class="text-right">
-               <button type="button" onclick="choosePaymentMethod()" class="button button-3d mt-2 mt-sm-0 mr-0 text-right">Checkout Now</button>
+               <button type="button" onclick="choosePaymentMethod()" class="button button-3d button-yellow bg-yellow mt-2 mt-sm-0 mr-0 text-right">Checkout Now</button>
             </div>
          @else
             <div class="alert alert-warning">

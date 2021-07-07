@@ -108,7 +108,7 @@ class BrandController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=750,max_height=750',
+            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=320,max_height=240',
             'code'   => 'required|unique:brands,code',
             'name'   => 'required',
             'status' => 'required'
@@ -116,7 +116,7 @@ class BrandController extends Controller {
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 100KB.',
-            'image.dimensions' => 'Image max size 750x750.',
+            'image.dimensions' => 'Image max size 320x240.',
             'code.required'    => 'Code cannot be empty.',
             'code.unique'      => 'Code already exists.',
             'status.required'  => 'Please select a status.'
@@ -171,7 +171,7 @@ class BrandController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=750,max_height=750',
+            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=320,max_height=240',
             'code'   => ['required', Rule::unique('brands', 'code')->ignore($id)],
             'name'   => 'required',
             'status' => 'required'
@@ -179,7 +179,7 @@ class BrandController extends Controller {
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
             'image.max'        => 'Image max 100KB.',
-            'image.dimensions' => 'Image max size 750x750.',
+            'image.dimensions' => 'Image max size 320x240.',
             'code.required'    => 'Code cannot be empty.',
             'code.unique'      => 'Code already exists.',
             'name.required'    => 'Name cannot be empty.',

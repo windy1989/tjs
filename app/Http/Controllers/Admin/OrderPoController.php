@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\OrderPo;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Models\OrderDelivery;
 use App\Http\Controllers\Controller;
 
 class OrderPoController extends Controller {
@@ -137,6 +138,15 @@ class OrderPoController extends Controller {
             $purchase_order->update([
                 'status' => $request->has('status') ? $request->status : 1
             ]);
+
+            if($request->has('status')) {
+                OrderDelivery::create([
+                    'order_id'       => $purchase_order->order_id,
+                    'delivery_order' => OrderDelivery::generateCode()
+                ]);
+
+                Order::find($purchase_order->order_id)->update(['status' => 3]);
+            }
 
             foreach($request->order_detail_id as $key => $odi) {
                 OrderDetail::find($odi)->update([

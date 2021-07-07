@@ -22,7 +22,7 @@
                         <div class="entry col-12">
                            <div class="grid-inner">
                               <div class="entry-image">
-                                 <a href="{{ url('news/detail/' . $n->slug) }}" data-lightbox="image">
+                                 <a href="{{ $n->image() }}" data-lightbox="image">
                                     <img src="{{ $n->image() }}" style="max-width:1920px; max-height:445px;" alt="{{ $n->title }}">
                                  </a>
                               </div>

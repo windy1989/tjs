@@ -45,7 +45,7 @@
                <div class="table-responsive">
                   <table class="table cart table-bordered">
                      <thead>
-                        <tr>
+                        <tr class="text-center">
                            <th class="cart-product-thumbnail text-center">Image</th>
                            <th class="cart-product-name">Product</th>
                            <th class="cart-product-price">Unit Price</th>
@@ -55,7 +55,7 @@
                      </thead>
                      <tbody>
                         @foreach($order->orderDetail as $od)
-                           <tr class="cart_item">
+                           <tr class="cart_item text-center">
                               <td class="cart-product-quantity">
                                  <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
                                     <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
@@ -95,7 +95,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">{{ $order->customer->name }}</strong>
+                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->name }}</strong>
                                        </span>
                                     </td>
                                  </tr>
@@ -105,7 +105,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">{{ $order->customer->email }}</strong>
+                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->email }}</strong>
                                        </span>
                                     </td>
                                  </tr>
@@ -115,7 +115,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">{{ $order->customer->phone }}</strong>
+                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->phone }}</strong>
                                        </span>
                                     </td>
                                  </tr>
@@ -136,7 +136,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">
+                                          <strong style="font-size:14px;" class="text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set' }}
                                           </strong>
                                        </span>
@@ -148,7 +148,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">
+                                          <strong style="font-size:14px;" class="text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -160,7 +160,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">
+                                          <strong style="font-size:14px;" class="text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -172,7 +172,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">
+                                          <strong style="font-size:14px;" class="text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -184,7 +184,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;">
+                                          <strong style="font-size:14px;" class="text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -213,7 +213,7 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;">
+                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                                 {{ date('d F Y, H:i', strtotime($order->orderPayment->created_at)) }}
                                              </strong>
                                           </span>
@@ -225,7 +225,7 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;">
+                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                                 {{ $order->orderPayment->method }}
                                              </strong>
                                           </span>
@@ -237,7 +237,7 @@
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;">
+                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                                 {{ $order->orderPayment->channel }}
                                              </strong>
                                           </span>
@@ -278,7 +278,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;">
+                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                              Rp {{ number_format($order->subtotal, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -290,7 +290,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;">
+                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                              Rp {{ number_format($order->discount, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -302,7 +302,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;">
+                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
                                              Rp {{ number_format($order->shipping, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -314,7 +314,7 @@
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:20px;">
+                                          <strong id="grandtotal" style="font-size:20px;" class="text-dark font-weight-bold">
                                              Rp {{ number_format($order->grandtotal, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -366,7 +366,7 @@
                @if($order->status == 1 && $order->type == 2)
                   <div class="form-group"><hr></div>
                   <div class="text-right mt-4">
-                     <a href="{{ $order->xendit()->url }}" class="button button-green button-3d">Pay Now</a>
+                     <a href="{{ $order->xendit()->url }}" class="button bg-yellow button-yellow button-3d">Pay Now</a>
                   </div>
                @endif
             </div>

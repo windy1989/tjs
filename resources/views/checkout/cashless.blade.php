@@ -221,7 +221,7 @@
 								<div class="form-group">
 									<div class="row justify-content-center">
 										<div class="col-md-6">
-											<button type="submit" class="btn btn-dark col-12 font-size-14" id="submit_order">Submit Order</button>
+											<button type="submit" class="btn bg-yellow text-white col-12 font-size-14" id="submit_order">Submit Order</button>
 										</div>
 									</div>
 								</div>

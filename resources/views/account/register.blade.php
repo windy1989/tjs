@@ -71,7 +71,7 @@
                            </p>
                         </div>
                         <div class="form-group mt-3">
-                           <button type="submit" class="button button-3d button-aqua float-right m-0">Register</button>
+                           <button type="submit" class="button button-3d button-yellow bg-yellow float-right m-0">Register</button>
                         </div>
                      </form>
                   </div>

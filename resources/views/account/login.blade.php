@@ -67,7 +67,7 @@
                               </div>
                            </div>
                            <div class="col-12 form-group">
-                              <button type="submit" class="button button-3d button-aqua float-right m-0 col-12">Login</button>
+                              <button type="submit" class="button button-3d button-yellow bg-yellow m-0 col-12">Login</button>
                            </div>
                            <div class="col-12 mt-2 text-center">
                               <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary font-size-14">Forgot Password?</a>
@@ -101,20 +101,20 @@
    <div class="modal-dialog">
       <div class="modal-body">
          <div class="modal-content">
-            <div class="modal-header bg-dark">
-               <h4 class="modal-title text-white" id="myModalLabel">Forgot Password</h4>
-               <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-header">
+               <h4 class="modal-title" id="myModalLabel">Forgot Password</h4>
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                <div id="notif_forgot_password"></div>
                <div class="form-group font-size-12">
-                  <label>Email :</label>
-                  <input type="text" name="email_forgot_password" id="email_forgot_password" class="form-control no-outline" placeholder="Enter email">
+                  <label class="font-size-11">Email :</label>
+                  <input type="text" name="email_forgot_password" id="email_forgot_password" class="form-control font-size-12 no-outline" placeholder="Enter email">
                </div>
                <div class="form-group"><hr></div>
                <div class="form-group">
                   <div class="text-right">
-                     <button type="button" onclick="forgotPassword()" class="button button-green button-mini"><i class="icon-line-send"></i> Send</button>
+                     <button type="button" onclick="forgotPassword()" class="button button-yellow bg-yellow button-mini"><i class="icon-line-send"></i> Send</button>
                   </div>
                </div>
             </div>

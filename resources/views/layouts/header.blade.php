@@ -10,10 +10,14 @@
 		</div>
 		<div class="side-panel-wrap">
 			<div class="widget clearfix">
-				<h4 class="mb-4">
+				<center>
+					<img src="{{ session('fo_photo') }}" class="mr-1 position-relative img-circle mb-3" style="max-width:80px;" alt="{{ session('fo_name') }}">
+				</center>
+				<h4 class="mb-4 text-center">
 					@php $str = explode(' ', session('fo_name')); @endphp
 					Hi, {{ $str[0] }}
 				</h4>
+				<div class="form-group"><hr></div>
 				<nav class="nav-tree">
 					<ul>
 						<li>
@@ -88,7 +92,7 @@
 							<div id="top-account">
 								@if(session('fo_id'))
 									<a href="javascript:void(0);" class="side-panel-trigger text-dark">
-										<i class="icon-line2-user mr-1 position-relative text-warning" style="top: 1px;"></i>
+										<img src="{{ session('fo_photo') }}" class="mr-1 position-relative img-circle" style="margin-bottom:1px;" height="20" alt="{{ session('fo_name') }}">
 										<span class="d-none d-sm-inline-block font-primary font-weight-medium text-dark">
 											@php $str = explode(' ', session('fo_name')); @endphp
 											Hi, {{ $str[0] }}

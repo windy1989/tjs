@@ -31,7 +31,7 @@ class AccountController extends Controller {
                     if(Hash::check($request->password, $account->password)) {
                         session([
                             'fo_id'           => $account->id,
-                            'fo_photo'        => $account->photo,
+                            'fo_photo'        => $account->photo(),
                             'fo_name'         => $account->name,
                             'fo_email'        => $account->email,
                             'fo_phone'        => $account->phone,
@@ -441,9 +441,12 @@ class AccountController extends Controller {
                 ]);
 
                 session([
-                    'fo_photo'        => $photo,
-                    'fo_name'         => $request->name,
-                    'fo_email'        => $request->email
+                    'fo_id'           => $profile->id,
+                    'fo_photo'        => $profile->photo(),
+                    'fo_name'         => $profile->name,
+                    'fo_email'        => $profile->email,
+                    'fo_phone'        => $profile->phone,
+                    'fo_verification' => $profile->verification
                 ]);
 
                 return redirect()->back()->with(['success' => 'Profile successfully updated']);

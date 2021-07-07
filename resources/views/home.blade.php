@@ -29,7 +29,7 @@
                   </small>
                </div>
                <div class="col-12 col-lg-auto mt-4 mt-lg-0">
-                  <a href="{{ url('product') }}" class="button button-large button-circle bg-teal m-0">Shop Now</a>
+                  <a href="{{ url('product') }}" class="button button-large button-circle button-yellow bg-yellow m-0">Shop Now</a>
                </div>
             </div>
          </div>
@@ -78,7 +78,7 @@
                   <h3 class="font-weight-bold">
                      <span class="font-weight-normal text-dark">From</span> Greatest Brands
                   </h3>
-                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">View Catalogue</a>
+                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large button-yellow bg-yellow">View Catalogue</a>
                   <div class="mt-3">
                      <div class="circle-element bg-teal"></div>
                      <div class="circle-element bg-danger"></div>

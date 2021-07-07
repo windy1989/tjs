@@ -24,7 +24,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=1">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=1">
                   </a>
                </div>
                <div class="testi-content">
@@ -37,7 +37,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=2">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=2">
                   </a>
                </div>
                <div class="testi-content">
@@ -50,7 +50,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=3">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=3">
                   </a>
                </div>
                <div class="testi-content">
@@ -63,7 +63,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=4">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=4">
                   </a>
                </div>
                <div class="testi-content">
@@ -76,7 +76,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=5">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=5">
                   </a>
                </div>
                <div class="testi-content">
@@ -89,7 +89,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=6">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=6">
                   </a>
                </div>
                <div class="testi-content">
@@ -102,7 +102,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=7">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=7">
                   </a>
                </div>
                <div class="testi-content">
@@ -115,7 +115,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=8">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=8">
                   </a>
                </div>
                <div class="testi-content">
@@ -128,7 +128,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=9">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=9">
                   </a>
                </div>
                <div class="testi-content">
@@ -141,7 +141,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=10">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=10">
                   </a>
                </div>
                <div class="testi-content">
@@ -154,7 +154,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/30302E/FFFFFF/?text=11">
+                     <img src="https://via.placeholder.com/250/ebb11f/FFFFFF/?text=11">
                   </a>
                </div>
                <div class="testi-content">

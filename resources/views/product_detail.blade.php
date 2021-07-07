@@ -60,7 +60,7 @@
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-6 text-right">
-                              <button type="submit" class="button bg-teal m-0">Add to cart</button>
+                              <button type="submit" class="button button-yellow bg-yellow m-0">Add to cart</button>
                            </div>
                         </div>
                      </form>

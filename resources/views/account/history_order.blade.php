@@ -48,119 +48,89 @@
             </div>
             <div class="w-100 line d-block d-lg-none"></div>
             <div class="col-lg-9 col-md-12">
-               <div class="clear"></div>
-               <form action="{{ url('account/history_order') }}" method="GET" class="mb-0">
-                  <input type="hidden" name="status" value="{{ $status }}">
-                  @csrf
-                  <div class="row">
-                     <div class="col-lg-2 col-md-12">
-                        <div class="form-group">
-                           <select name="type" id="type" class="custom-select no-outline font-size-13">
-                              <option value="">All</option>
-                              <option value="1" {{ $type == 1 ? 'selected' : '' }}>Cash</option>
-                              <option value="2" {{ $type == 2 ? 'selected' : '' }}>Cashless</option>
-                           </select>
-                        </div>
-                     </div>
-                     <div class="col-lg-8 col-md-12">
-                        <div class="form-group">
-                           <input type="text" name="search" id="search" class="form-control no-outline font-size-13" placeholder="Search number" value="{{ $search }}">
-                        </div>
-                     </div>
-                     <div class="col-lg-2 col-md-12">
-                        <div class="form-group">
-                           <button type="submit" class="btn btn-success col-12 font-size-13" style="height:33px;">
-                              <i class="icon-search"></i> Search
-                           </button>
-                        </div>
-                     </div>
-                  </div>
-               </form>
-               <div class="mt-3">
-                  @if($order->count() > 0)
-                     @foreach($order as $o)
-                        <div class="card bg-light">
-                           <div class="card-body">
-                              <div class="card-title">
-                                 <span style="font-size:15px; font-weight:500;"># {{ $o->number }}</span>
-                                 <div class="float-right d-none d-sm-block font-size-13">
-                                    {{ date('d M Y', strtotime($o->created_at)) }}
-                                 </div>
+               @if($order->count() > 0)
+                  @foreach($order as $o)
+                     <div class="card bg-light">
+                        <div class="card-body">
+                           <div class="card-title">
+                              <span style="font-size:15px; font-weight:500;"># {{ $o->number }}</span>
+                              <div class="float-right d-none d-sm-block font-size-13">
+                                 {{ date('d M Y', strtotime($o->created_at)) }}
                               </div>
                            </div>
                         </div>
-                        <table class="table cart mb-4 bg-light table-bordered">
-                           <tbody>
-                              @foreach($o->orderDetail as $od)
-                                 <tr class="cart_item">
-                                    <td class="cart-product-name text-center">
-                                       <div class="row">
-                                          <div class="col-lg-3 col-md-12">
-                                             <div class="form-group">
-                                                <center>
-                                                   <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                                      <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
-                                                   </a>
-                                                </center>
-                                             </div>
-                                          </div>
-                                          <div class="col-lg-3 col-md-12">
-                                             <div class="form-group font-size-13">
-                                                {{ $od->product->code() }}
-                                                <div class="text-muted">
-                                                   {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
-                                                </div>
-                                                x{{ $od->qty }}
-                                             </div>
-                                          </div>
-                                          <div class="col-lg-3 col-md-12">
-                                             <div class="form-group font-size-13">
-                                                Item Price
-                                                <div>Rp {{ number_format($od->price_list, 0, ',', '.') }}</div>
-                                             </div>
-                                          </div>
-                                          <div class="col-lg-3 col-md-12">
-                                             <div class="form-group font-size-13">
-                                                Subtotal
-                                                <div>Rp {{ number_format($od->total, 0, ',', '.') }}</div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              @endforeach
+                     </div>
+                     <table class="table cart mb-4 bg-light table-bordered">
+                        <tbody>
+                           @foreach($o->orderDetail as $od)
                               <tr class="cart_item">
-                                 <td class="mb-0">
+                                 <td class="cart-product-name text-center">
                                     <div class="row">
-                                       <div class="col-md-6">
-                                          <h5 class="font-weight-medium">
-                                             <div class="font-size-12">Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
-                                             <div class="font-size-12">Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
-                                             <div class="font-size-12">Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
-                                             <div class="font-size-12 text-uppercase"><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
-                                          </h5>
+                                       <div class="col-lg-3 col-md-12">
+                                          <div class="form-group">
+                                             <center>
+                                                <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
+                                                   <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
+                                                </a>
+                                             </center>
+                                          </div>
                                        </div>
-                                       <div class="col-md-6">
-                                          <div class="text-center">
-                                             @if($o->status == 3) 
-                                                <button type="button" class="button button-red font-size-13" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
-                                             @endif
-                                             <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button button-blue font-size-13 {{ $o->status != 3 ? 'col-12' : '' }}">Detail Order</a>
+                                       <div class="col-lg-3 col-md-12">
+                                          <div class="form-group font-size-13">
+                                             {{ $od->product->code() }}
+                                             <div class="text-muted">
+                                                {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
+                                             </div>
+                                             x{{ $od->qty }}
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-3 col-md-12">
+                                          <div class="form-group font-size-13">
+                                             Item Price
+                                             <div>Rp {{ number_format($od->price_list, 0, ',', '.') }}</div>
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-3 col-md-12">
+                                          <div class="form-group font-size-13">
+                                             Subtotal
+                                             <div>Rp {{ number_format($od->total, 0, ',', '.') }}</div>
                                           </div>
                                        </div>
                                     </div>
                                  </td>
                               </tr>
-                           </tbody>
-                        </table>
-                     @endforeach
-                     {{ $order->withQueryString()->onEachSide(1)->links('pagination') }}
-                  @else
-                     <div class="alert alert-warning">
-                        <div class="text-center">Data not found.</div>
-                     </div>
-                  @endif
-               </div>
+                           @endforeach
+                           <tr class="cart_item">
+                              <td class="mb-0">
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                       <h5 class="font-weight-medium">
+                                          <div class="font-size-12">Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
+                                          <div class="font-size-12">Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
+                                          <div class="font-size-12">Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
+                                          <div class="font-size-12 text-uppercase"><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
+                                       </h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="text-center">
+                                          @if($o->status == 3) 
+                                             <button type="button" class="button button-yellow button-small bg-yellow font-size-13" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
+                                          @endif
+                                          <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button bg-teal button-small font-size-13 {{ $o->status != 3 ? 'col-12' : '' }}">Detail Order</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  @endforeach
+                  {{ $order->withQueryString()->onEachSide(1)->links('pagination') }}
+               @else
+                  <div class="alert alert-warning">
+                     <div class="text-center font-size-13">Transaction not found.</div>
+                  </div>
+               @endif
             </div>
          </div>
       </div>

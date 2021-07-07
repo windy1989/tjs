@@ -44,11 +44,9 @@ class OrderInvoiceController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Order::whereNotNull('invoice')
-            ->where('type', 1)
             ->count();
         
         $query_data = Order::whereNotNull('invoice')
-            ->where('type', 1)
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
@@ -100,7 +98,6 @@ class OrderInvoiceController extends Controller {
             ->get();
 
         $total_filtered = Order::whereNotNull('invoice')
-            ->where('type', 1)
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->whereHas('customer', function($query) use ($search) {
@@ -194,7 +191,7 @@ class OrderInvoiceController extends Controller {
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->payment) {
                 if($order->status == 1 || $order->status == 5) {
-                    $status = 3;
+                    $status = 2;
                     
                     OrderPo::create([
                         'order_id'       => $order->id,
@@ -207,13 +204,8 @@ class OrderInvoiceController extends Controller {
                         'method'   => 'Cash',
                         'channel'  => 'Smart Marble'
                     ]);
-
-                    OrderDelivery::create([
-                        'order_id'       => $order->id,
-                        'delivery_order' => OrderDelivery::generateCode()
-                    ]);
                 } else {
-                    $status = 2;
+                    $status = $order->status;
                 }
             } else {
                 $status = 1;
