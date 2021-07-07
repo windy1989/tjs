@@ -25,7 +25,7 @@
                <div class="col-12 col-lg">
                   <h3>Everyone, Everytime & Everywhere Personalize Your Home</h3>
                   <small>
-                     <em>Get cashback worth IDR 500,000 and merchandise from Smart Marble & Bath for every first purchase here.</em>
+                     <em>Buy products from various brands that you like now.</em>
                   </small>
                </div>
                <div class="col-12 col-lg-auto mt-4 mt-lg-0">
