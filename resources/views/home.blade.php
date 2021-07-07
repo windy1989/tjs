@@ -12,7 +12,7 @@
                               <div class="heading-banner">Everytime & Everywhere</div>
                               <div class="heading-banner">Personalize Your Home</div>
                               <div class="mt-3">
-                                 <a href="" class="button button-mini button-3d button-circle button-large bg-teal">Shop Now</a>
+                                 <a href="{{ url('product') }}" class="button button-mini button-3d button-circle button-large bg-teal">Shop Now</a>
                               </div>
                               <div class="circle-element bg-teal"></div>
                               <div class="circle-element bg-danger"></div>

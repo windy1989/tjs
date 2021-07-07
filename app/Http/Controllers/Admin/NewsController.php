@@ -129,7 +129,7 @@ class NewsController extends Controller {
                 'image.image'          => 'File must be an image.',
                 'image.mimes'          => 'Image must have an extension jpg, jpeg, png.',
                 'image.max'            => 'Image max 100KB.',
-                'image.dimensions'     => 'Image size must be 1920x830.',
+                'image.dimensions'     => 'Image size must be 1920x850.',
                 'category_id.required' => 'Please select a category.',
                 'title.required'       => 'Title cannot be empty.',
                 'description.required' => 'Description cannot be empty.'
