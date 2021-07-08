@@ -539,10 +539,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/price/cogs/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },
@@ -573,13 +570,10 @@
       $('#modal_form').modal('show');
       $.ajax({
          url: '{{ url("admin/price/cogs/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

@@ -73,10 +73,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/news/news/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                status: $('#filter_status').val()
             },

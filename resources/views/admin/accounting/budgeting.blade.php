@@ -173,10 +173,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/accounting/budgeting/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                coa: $('#filter_coa').val(),
                start_date: $('#filter_start_date').val(),
@@ -258,13 +255,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/accounting/budgeting/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

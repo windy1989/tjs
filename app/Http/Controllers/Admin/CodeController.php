@@ -16,7 +16,6 @@ use App\Models\ProductShading;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use League\CommonMark\Inline\Element\Code;
 
 class CodeController extends Controller {
 
@@ -24,13 +23,13 @@ class CodeController extends Controller {
     {
         $data = [
             'title'     => 'Product Code',
-            'company'   => Company::where('status', 1)->get(),
-            'hs_code'   => HsCode::where('status', 1)->get(),
-            'brand'     => Brand::where('status', 1)->get(),
-            'country'   => Country::where('status', 1)->get(),
-            'supplier'  => Supplier::where('status', 1)->get(),
-            'grade'     => Grade::where('status', 1)->get(),
-            'warehouse' => Warehouse::where('status', 1)->get(),
+            'company'   => Company::all(),
+            'hs_code'   => HsCode::all(),
+            'brand'     => Brand::all(),
+            'country'   => Country::all(),
+            'supplier'  => Supplier::all(),
+            'grade'     => Grade::all(),
+            'warehouse' => Warehouse::all(),
             'content'   => 'admin.product.code'
         ];
 
@@ -41,6 +40,7 @@ class CodeController extends Controller {
     {
         $column = [
             'id',
+            'shading',
             'type_id',
             'code',
             'brand_id',
@@ -90,6 +90,28 @@ class CodeController extends Controller {
                     $query->where('brand_id', $request->brand_id);
                 }
 
+                if($request->country_id) {
+                    $query->where('country_id', $request->country_id);
+                }
+
+                if($request->stock) {
+                    $query->whereHas('productShading', function($query) use ($request) {
+                            if($request->stock == 'limited') {
+                                $query->havingRaw('SUM(qty) <= ?', [18]);
+                            } else if($request->stock == 'ready') {
+                                $query->havingRaw('SUM(qty) >= ?', [18]);
+                            }
+                        });
+                }
+
+                if($request->shading) {
+                    if($request->shading == 'has_shading') {
+                        $query->has('productShading');
+                    } else if($request->shading == 'no_shading') {
+                        $query->doesntHave('productShading');
+                    }
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -128,10 +150,32 @@ class CodeController extends Controller {
                                     ->orWhere('name', 'like', "%$search%");
                             });
                     });
-                }      
-                
+                }         
+
                 if($request->brand_id) {
                     $query->where('brand_id', $request->brand_id);
+                }
+
+                if($request->country_id) {
+                    $query->where('country_id', $request->country_id);
+                }
+
+                if($request->stock) {
+                    $query->whereHas('productShading', function($query) use ($request) {
+                            if($request->stock == 'limited') {
+                                $query->havingRaw('SUM(qty) <= ?', [18]);
+                            } else if($request->stock == 'ready') {
+                                $query->havingRaw('SUM(qty) >= ?', [18]);
+                            }
+                        });
+                }
+
+                if($request->shading) {
+                    if($request->shading == 'has_shading') {
+                        $query->has('productShading');
+                    } else if($request->shading == 'no_shading') {
+                        $query->doesntHave('productShading');
+                    }
                 }
 
                 if($request->status) {
@@ -144,12 +188,24 @@ class CodeController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
+                if($val->productShading->count() > 0) {
+                    $shading = '<span class="text-success"><i class="icon-check"></i></span>';
+                } else {
+                    $shading = '<span class="text-danger"><i class="icon-cross3"></i></span>';
+                }
+
+                $availability = '
+                    <div class="mb-0">' . $val->availability()->stock . '</div>
+                    <span class="badge ' . $val->availability()->color . '">' . $val->availability()->status . '</span>
+                ';
+
                 $response['data'][] = [
                     $nomor,
+                    $shading,
                     $val->type->code,
                     $val->code(),
                     $val->brand->name,
-                    $val->availability()->stock,
+                    $availability,
                     $val->country->name,
                     $val->status(),
                     '

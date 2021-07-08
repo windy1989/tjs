@@ -130,10 +130,7 @@
          order: [[5, 'desc']],
          ajax: {
             url: '{{ url("admin/manage/purchase_order/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                status: $('input[name="filter_status"]:checked').val(),
                start_date: $('#filter_start_date').val(),

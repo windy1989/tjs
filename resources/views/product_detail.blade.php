@@ -281,7 +281,7 @@
    function checkStock() {
       $.ajax({
          url: '{{ url("product/check_stock") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             product_id: '{{ base64_encode($product->id) }}',
@@ -291,9 +291,6 @@
             $('#data_shading').html('');
             $('#total_stock').html(0);
             $('#total_request_stock').html(0);
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             $('#total_stock').html(response.total_stock);

@@ -29,22 +29,74 @@
 		</div>
 	</div>
 	<div class="content">
+      <div class="card">
+			<div class="card-body">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>Brand :</label>
+                     <select name="filter_brand_id" id="filter_brand_id" class="select2">
+                     <option value="">All</option>
+                     @foreach($brand as $b)
+                        <option value="{{ $b->id }}">{{ $b->name }}</option>
+                     @endforeach
+                  </select>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>Country :</label>
+                     <select name="filter_country_id" id="filter_country_id" class="select2">
+                     <option value="">All</option>
+                     @foreach($country as $c)
+                        <option value="{{ $c->id }}">{{ $c->name }}</option>
+                     @endforeach
+                  </select>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>Stock :</label>
+                     <select name="filter_stock" id="filter_stock" class="custom-select">
+                     <option value="">All</option>
+                     <option value="indent">Limited</option>
+                     <option value="ready">Ready</option>
+                  </select>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>Shading :</label>
+                     <select name="filter_shading" id="filter_shading" class="custom-select">
+                     <option value="">All</option>
+                     <option value="has_shading">Has Shading</option>
+                     <option value="no_shading">No Shading</option>
+                  </select>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <label>Status :</label>
+                     <select name="filter_status" id="filter_status" class="custom-select">
+                     <option value="">All</option>
+                     <option value="1">Active</option>
+                     <option value="2">Not Active</option>
+                  </select>
+                  </div>
+               </div>
+            </div>
+            <div class="form-group"><hr></div>
+            <div class="form-group mb-0">
+               <div class="text-right">
+                  <button type="button" class="btn bg-danger" onclick="resetFilter()"><i class="icon-cross3"></i> Reset</button>
+                  <button type="button" class="btn bg-teal" onclick="loadDataTable()"><i class="icon-search4"></i> Search</button>
+               </div>
+            </div>
+			</div>
+		</div>
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
 				<h5 class="card-title">List Data Code</h5>
-				<div class="header-elements form-inline">
-               <select name="filter_brand_id" id="filter_brand_id" class="custom-select mr-3" onchange="loadDataTable()">
-						<option value="">All Brand</option>
-                  @foreach($brand as $b)
-                     <option value="{{ $b->id }}">{{ $b->name }}</option>
-                  @endforeach
-					</select>
-					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
-						<option value="">All Status</option>
-						<option value="1">Active</option>
-						<option value="2">Not Active</option>
-					</select>
-				</div>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
@@ -52,6 +104,7 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
+                        <th>Shading</th>
                         <th>Type</th>
                         <th>Code</th>
                         <th>Brand</th>
@@ -345,17 +398,23 @@
       select2ServerSide('#type_id', '{{ url("admin/select2/type") }}');
    });
 
+   function resetFilter() {
+      $('#filter_brand_id').val(null).change();
+      $('#filter_country_id').val(null).change();
+      $('#filter_stock').val(null);
+      $('#filter_shading').val(null);
+      $('#filter_status').val(null);
+      loadDataTable();
+   }
+
    function formula() {
       $.ajax({
          url: '{{ url("admin/product/code/formula") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             type_id: $('#type_id').val(),
             carton_pcs: $('#carton_pcs').val()
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             $('#carton_sqm').val(response.carton_sqm);
@@ -367,16 +426,13 @@
    function generateCode() {
       $.ajax({
          url: '{{ url("admin/product/code/generate_code") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             brand_id: $('#brand_id').val(),
             country_id: $('#country_id').val(),
             type_id: $('#type_id').val(),
             grade_id: $('#grade_id').val()
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             formula();
@@ -478,12 +534,12 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/product/code/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                brand_id: $('#filter_brand_id').val(),
+               country_id: $('#filter_country_id').val(),
+               stock: $('#filter_stock').val(),
+               shading: $('#filter_shading').val(),
                status: $('#filter_status').val()
             },
             beforeSend: function() {
@@ -503,6 +559,7 @@
          },
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
+            { name: 'shading', searchable: false, orderable: false, className: 'text-center align-middle' },
             { name: 'type_id', className: 'text-center align-middle' },
             { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'brand_id', className: 'text-center align-middle' },
@@ -565,13 +622,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/product/code/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             $('#datatable_shading').DataTable().clear().draw();

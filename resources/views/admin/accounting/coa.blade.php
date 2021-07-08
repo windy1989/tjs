@@ -161,10 +161,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/accounting/coa/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                status: $('#filter_status').val()
             },

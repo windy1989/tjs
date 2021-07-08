@@ -122,10 +122,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/delivery/transport/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },
@@ -200,13 +197,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/delivery/transport/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

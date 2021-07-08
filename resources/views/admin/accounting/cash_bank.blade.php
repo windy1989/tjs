@@ -275,13 +275,10 @@
       var content = '';
       $.ajax({
          url: '{{ url("admin/accounting/cash_bank/row_detail") }}',
-         type: 'POST',
+         type: 'GET',
          async: false,
          data: {
             id: $(data[0]).data('id')
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             content += response;
@@ -387,10 +384,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/accounting/cash_bank/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                user_id: $('#filter_user_id').val(),
                start_date: $('#filter_start_date').val(),
@@ -478,13 +472,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/accounting/cash_bank/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

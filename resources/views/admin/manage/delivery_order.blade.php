@@ -197,10 +197,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/manage/delivery_order/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                order_id: $('#filter_order_id').val(),
                start_date: $('#filter_start_date').val(),
@@ -236,13 +233,10 @@
       $('#modal_information').modal('show');
       $.ajax({
          url: '{{ url("admin/manage/delivery_order/information") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

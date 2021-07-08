@@ -262,14 +262,11 @@
 	function getDelivery() {
 		$.ajax({
 			url: '{{ url("checkout/process/get_delivery") }}',
-			type: 'POST',
+			type: 'GET',
          dataType: 'JSON',
          data: {
             city_id: $('#city_id').val(),
 				weight: '{{ $total_weight }}'
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('#content');
@@ -298,15 +295,12 @@
 	function grandtotal() {
 		$.ajax({
 			url: '{{ url("checkout/process/grandtotal") }}',
-			type: 'POST',
+			type: 'GET',
          dataType: 'JSON',
          data: {
             delivery_id: $('#delivery_id').val(),
 				weight: '{{ $total_weight }}',
 				subtotal: '{{ $total_checkout }}'
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('#content');

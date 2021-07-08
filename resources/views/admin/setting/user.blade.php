@@ -187,13 +187,10 @@
 
       $.ajax({
          url: '{{ url("admin/setting/user/row_detail") }}',
-         type: 'POST',
+         type: 'GET',
          async: false,
          data: {
             id: $(data[0]).data('id')
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             content += `
@@ -270,10 +267,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/setting/user/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },
@@ -356,13 +350,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/setting/user/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

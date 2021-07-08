@@ -111,10 +111,7 @@
          order: [[3, 'desc']],
          ajax: {
             url: '{{ url("admin/approval/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                type: $('input[name="filter_type"]:checked').val(),
                start_date: $('#filter_start_date').val(),

@@ -145,10 +145,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/news/category/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                status: $('#filter_status').val()
             },
@@ -227,13 +224,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/news/category/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

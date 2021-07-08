@@ -396,14 +396,11 @@
 	function getDelivery() {
 		$.ajax({
 			url: '{{ url("admin/manage/sales_order/get_delivery") }}',
-			type: 'POST',
+			type: 'GET',
          dataType: 'JSON',
          data: {
             city_id: $('#city_id').val(),
 				weight: '{{ $total_weight }}'
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.content');

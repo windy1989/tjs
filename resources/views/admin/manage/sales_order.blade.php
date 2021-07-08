@@ -129,10 +129,7 @@
          order: [[4, 'desc']],
          ajax: {
             url: '{{ url("admin/manage/sales_order/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                customer_id: $('#filter_customer_id').val(),
                nominal: $('#filter_nominal').val(),

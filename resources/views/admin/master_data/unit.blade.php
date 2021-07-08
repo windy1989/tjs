@@ -150,10 +150,7 @@
          order: [[0, 'asc']],
          ajax: {
             url: '{{ url("admin/master_data/unit/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                status: $('#filter_status').val()
             },
@@ -233,13 +230,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/master_data/unit/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

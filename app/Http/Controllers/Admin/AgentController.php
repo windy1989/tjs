@@ -15,8 +15,8 @@ class AgentController extends Controller {
     {
         $data = [
             'title'    => 'Cogs Agent',
-            'country'  => Country::where('status', 1)->get(),
-            'category' => Category::where('status', 1)->where('parent_id', 0)->oldest('name')->get(),
+            'country'  => Country::all(),
+            'category' => Category::where('parent_id', 0)->oldest('name')->get(),
             'content'  => 'admin.cogs.agent'
         ];
 

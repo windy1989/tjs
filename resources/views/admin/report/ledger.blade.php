@@ -117,15 +117,12 @@
       var content = '';
       $.ajax({
          url: '{{ url("admin/report/ledger/row_detail") }}',
-         type: 'POST',
+         type: 'GET',
          async: false,
          data: {
             id: $(data[0]).data('id'),
             start_date: $('#filter_start_date').val(),
             finish_date: $('#filter_finish_date').val()
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             content += response;
@@ -178,10 +175,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/report/ledger/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             data: {
                coa_id: $('#filter_coa_id').val(),
                start_date: $('#filter_start_date').val(),

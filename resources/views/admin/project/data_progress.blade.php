@@ -751,13 +751,10 @@
       if(id.val()) {
          $.ajax({
             url: '{{ url("admin/project/data/get_product") }}',
-            type: 'POST',
+            type: 'GET',
             dataType: 'JSON',
             data: {
                id: id.val()
-            },
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function() {
                loadingOpen('#step-2');
@@ -839,13 +836,10 @@
       if(sample_product_id.val() && sample_date.val() && sample_qty.val() && sample_size.val()) {
          $.ajax({
             url: '{{ url("admin/project/data/get_product") }}',
-            type: 'POST',
+            type: 'GET',
             dataType: 'JSON',
             data: {
                id: sample_product_id.val()
-            },
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function() {
                loadingOpen('#step-5');

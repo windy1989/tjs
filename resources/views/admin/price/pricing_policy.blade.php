@@ -237,13 +237,10 @@
 
       $.ajax({
          url: '{{ url("admin/price/pricing_policy/row_detail") }}',
-         type: 'POST',
+         type: 'GET',
          async: false,
          data: {
             id: $(data[0]).data('id')
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          success: function(response) {
             $.each(response, function(i, val) {
@@ -310,10 +307,7 @@
          order: [[1, 'asc']],
          ajax: {
             url: '{{ url("admin/price/pricing_policy/datatable") }}',
-            type: 'POST',
-            headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            type: 'GET',
             beforeSend: function() {
                loadingOpen('#datatable_serverside');
             },
@@ -395,13 +389,10 @@
       toShow();
       $.ajax({
          url: '{{ url("admin/price/pricing_policy/show") }}',
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          data: {
             id: id
-         },
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          },
          beforeSend: function() {
             loadingOpen('.modal-content');

@@ -14,7 +14,7 @@ class CoaController extends Controller {
     {
         $data = [
             'title'   => 'Accounting COA',
-            'parent'  => Coa::where('status', 1)->get(),    
+            'parent'  => Coa::all(),    
             'content' => 'admin.accounting.coa'
         ];
 

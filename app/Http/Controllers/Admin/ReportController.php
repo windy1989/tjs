@@ -50,7 +50,7 @@ class ReportController extends Controller {
     {
         $data   = [
             'title'   => 'Report Ledger',
-            'coa'     => Coa::where('status', 1)->get(),
+            'coa'     => Coa::all(),
             'content' => 'admin.report.ledger'
         ];
 
