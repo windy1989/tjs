@@ -85,10 +85,10 @@ class ProjectController extends Controller {
                     $action = '<a href="' . url('admin/project/data/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
 
                     $progress = '
-                        <div class="progress" style="height:25px;">
+                        <div class="progress" style="height:0.875rem;">
                             <div class="progress-bar progress-bar-striped bg-teal" style="width:100%">
                                 <span class="font-weight-bold text-uppercase">
-                                    <span style="font-size:14px;">' . $val->progress . '%</span> Done
+                                    <span style="font-size:13px;">' . $val->progress . '%</span>
                                 </span>
                             </div>
                         </div>
@@ -97,10 +97,10 @@ class ProjectController extends Controller {
                     $action = '<a href="' . url('admin/project/data/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
 
                     $progress = '
-                        <div class="progress" style="height:25px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-indigo" style="width:100%;">
+                        <div class="progress" style="height:0.875rem;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" style="width:100%;">
                                 <span class="font-weight-bold text-uppercase">
-                                    <span style="font-size:14px;">' . $val->progress . '%</span> On Process
+                                    <span style="font-size:13px;">' . $val->progress . '%</span>
                                 </span>
                             </div>
                         </div>
@@ -333,7 +333,7 @@ class ProjectController extends Controller {
             }
 
             if($validation->fails()) {
-                return redirect('admin/project/data/' . $id . '?' . $step . '=1#' . $step)
+                return redirect('admin/project/data/progress/' . $id . '?' . $step . '=1#' . $step)
                     ->withErrors($validation)
                     ->withInput();
             } else {
@@ -459,7 +459,7 @@ class ProjectController extends Controller {
                         break;
                 }
 
-                return redirect('admin/project/data/' . $id . '?' . $step . '=1#' . $step)
+                return redirect('admin/project/data/progress/' . $id . '?' . $step . '=1#' . $step)
                     ->with(['success' => 'Data successfully saved.']);
             }
         } else {

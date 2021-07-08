@@ -135,14 +135,13 @@
                                  <th>Qty</th>
                                  <th>Unit</th>
                                  <th>Target Price</th>
-                                 <th>Delete</th>
                               </tr>
                            </thead>
                            <tbody>
                               @foreach($project->projectProduct as $pp)
                                  <tr class="text-center">
                                     <td class="align-middle">
-                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}'"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
                                        <div>{{ $pp->product->code() }}</div>
                                        <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                     </td>
@@ -338,7 +337,11 @@
                                     @foreach($project->projectProduct as $pp)
                                        <tr class="text-center">
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
-                                          <td class="align-middle">{{ $pp->product->code() }}</td>   
+                                          <td class="align-middle">
+                                             <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $pp->product->code() }}</div>
+                                             <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
+                                          </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>   
                                           <td class="align-middle">Rp {{ number_format($pp->price, 0, ',', '.') }}</td>   
                                           <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
@@ -410,7 +413,11 @@
                                  <tbody>
                                     @foreach($project->projectSample as $ps)
                                        <tr class="text-center">
-                                          <td class="align-middle">{{ $ps->product->code() }}</td>   
+                                          <td class="align-middle">
+                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->code() }}" data-title="{{ $ps->product->code() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $ps->product->code() }}</div>
+                                             <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
+                                          </td>
                                           <td class="align-middle">{{ $ps->date }}</td>   
                                           <td class="align-middle">{{ $ps->qty }}</td>   
                                           <td class="align-middle">{{ $ps->size }}</td>
@@ -522,7 +529,11 @@
                                     @foreach($project->projectProduct as $pp)
                                        <tr class="text-center">
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
-                                          <td class="align-middle">{{ $pp->product->code() }}</td>   
+                                          <td class="align-middle">
+                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->code() }}" data-title="{{ $ps->product->code() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $ps->product->code() }}</div>
+                                             <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
+                                          </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>    
                                           <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
                                           <td class="align-middle">
@@ -853,7 +864,7 @@
                      <input type="hidden" name="sample_qty[]" value="` + sample_qty.val() + `">
                      <input type="hidden" name="sample_size[]" value="` + sample_size.val() + `">
 
-                     <td class="align-middle">` + response.code + `</td>  
+                     <td class="align-middle">` + response.product + `</td>  
                      <td class="align-middle">` + sample_date.val() + `</td>  
                      <td class="align-middle">` + sample_qty.val() + `</td>  
                      <td class="align-middle">` + sample_size.val() + `</td>  

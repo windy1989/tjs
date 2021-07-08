@@ -113,12 +113,9 @@ function select2ServerSide(selector, endpoint) {
       dropdownParent: $('body').parent(),
       ajax: {
          url: endpoint,
-         type: 'POST',
+         type: 'GET',
          dataType: 'JSON',
          delay: 250,
-         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         },
          data: function(params) {
             return {
                search: params.term

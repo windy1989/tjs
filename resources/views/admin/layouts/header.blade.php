@@ -87,6 +87,9 @@
 						<span>{{ session('bo_name') }}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
+						<a href="{{ url('/') }}" class="dropdown-item" target="_blank">
+							<i class="icon-home"></i> Main Page
+						</a>
 						<a href="{{ url('admin/profile') }}" class="dropdown-item">
 							<i class="icon-user-plus"></i> Profile
 						</a>
