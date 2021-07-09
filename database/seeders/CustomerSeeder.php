@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\CustomerPoint;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
@@ -24,9 +25,21 @@ class CustomerSeeder extends Seeder
                 'email'        => $c['email'],
                 'phone'        => $c['phone'],
                 'password'     => $c['password'],
+                'point'        => $c['point'],
                 'verification' => $c['verification'],
                 'created_at'   => $c['created_at'],
                 'updated_at'   => $c['updated_at']
+            ]);
+        }
+
+        foreach($customer_points as $cp) {
+            CustomerPoint::insert([
+                'id'          => $cp['id'],
+                'customer_id' => $cp['customer_id'],
+                'order_id'    => $cp['order_id'],
+                'point'       => $cp['point'],
+                'created_at'  => $cp['created_at'],
+                'updated_at'  => $cp['updated_at']
             ]);
         }
     }

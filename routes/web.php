@@ -432,6 +432,15 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('datatable', 'CustomerController@datatable');
             });
 
+            Route::prefix('voucher')->group(function() {
+                Route::get('/', 'VoucherController@index');
+                Route::get('datatable', 'VoucherController@datatable');
+                Route::match(['get', 'post'], 'create', 'VoucherController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'VoucherController@update');
+                Route::post('destroy', 'VoucherController@destroy');
+                Route::get('detail/{id}', 'VoucherController@detail');
+            });
+
             Route::prefix('order')->group(function() {
                 Route::get('/', 'OrderController@index');
                 Route::get('datatable', 'OrderController@datatable');

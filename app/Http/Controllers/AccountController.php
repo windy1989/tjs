@@ -88,7 +88,8 @@ class AccountController extends Controller {
                     'name'     => $request->name,
                     'email'    => $request->email,
                     'phone'    => $request->phone,
-                    'password' => bcrypt($request->password)
+                    'password' => bcrypt($request->password),
+                    'point'    => 0
                 ]);
 
                 $token = Token::create([
@@ -261,7 +262,8 @@ class AccountController extends Controller {
                         'photo'        => $data->getAvatar(),
                         'name'         => $data->getName(),
                         'email'        => $data->getEmail(),
-                        'verification' => date('Y-m-d H:i:s')
+                        'verification' => date('Y-m-d H:i:s'),
+                        'point'        => 0
                     ]);
 
                     session([

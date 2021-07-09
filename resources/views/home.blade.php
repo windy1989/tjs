@@ -213,7 +213,7 @@
          <div class="form-group"><hr style="margin-bottom:80px;"></div>
          <div class="container mb-0">
             <center>
-               <img src="{{ asset('website/banner-bottom.jpg') }}" class="img-fluid">
+               <img src="{{ asset('website/banner-bottom.png') }}" class="img-fluid">
             </center>
          </div>
       </div>

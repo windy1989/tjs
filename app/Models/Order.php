@@ -13,6 +13,7 @@ class Order extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'customer_id',
+        'voucher_id',
         'xendit',
         'qr_code',
         'number',
@@ -103,6 +104,11 @@ class Order extends Model {
     public function customer()
     {
         return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function voucher()
+    {
+        return $this->belongsTo('App\Models\Voucher');
     }
 
     public function orderDetail()

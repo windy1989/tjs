@@ -191,6 +191,9 @@
                                 <a href="{{ url('admin/manage/customer') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'customer' ? 'active' : '' }}">Customer</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url('admin/manage/voucher') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'voucher' ? 'active' : '' }}">Voucher</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('admin/manage/order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
                             </li>
                             <li class="nav-item">
