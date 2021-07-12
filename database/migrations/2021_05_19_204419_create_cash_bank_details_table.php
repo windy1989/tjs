@@ -15,7 +15,7 @@ class CreateCashBankDetailsTable extends Migration
     {
         Schema::create('cash_bank_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('cash_bank_id');
+            $table->foreignId('cash_bank_id')->constrained('cash_banks');
             $table->bigInteger('debit');
             $table->bigInteger('credit');
             $table->double('nominal');

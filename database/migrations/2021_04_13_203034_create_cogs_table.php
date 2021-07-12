@@ -15,10 +15,10 @@ class CreateCogsTable extends Migration
     {
         Schema::create('cogs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id');
-            $table->bigInteger('currency_id');
-            $table->bigInteger('city_id');
-            $table->bigInteger('import_id');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('currency_id')->constrained('currencies');
+            $table->foreignId('city_id')->constrained('cities');
+            $table->foreignId('import_id')->constrained('imports');
             $table->double('price_profile_custom')->default(0);
             $table->double('agent_fee_usd')->default(0);
             $table->char('shipping', 1);

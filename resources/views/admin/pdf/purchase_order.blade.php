@@ -153,12 +153,6 @@
 								<td width="10%" style="font-size:10px;">Date</td>
 								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($purchase_order->created_at)) }}</td>
 							</tr>
-							@if($purchase_order->order->sales_order)
-								<tr>
-									<td width="10%" style="font-size:10px;">SO</td>
-									<td style="text-align:left; font-size:10px;">: {{ $purchase_order->order->sales_order }}</td>
-								</tr>
-							@endif
 							<tr>
 								<td width="10%" style="font-size:10px;">Invoice</td>
 								<td style="text-align:left; font-size:10px;">: {{ $purchase_order->order->invoice }}</td>

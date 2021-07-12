@@ -28,7 +28,7 @@
 	<div class="content">
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Warehouse</h5>
+				<h5 class="card-title">List Data</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Status</option>

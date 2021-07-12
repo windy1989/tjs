@@ -349,7 +349,7 @@ class CogsController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Create New Price Cogs',
+                'title'    => 'Create New Price',
                 'currency' => Currency::where('status', 1)->get(),
                 'city'     => City::all(),
                 'import'   => Import::all(),

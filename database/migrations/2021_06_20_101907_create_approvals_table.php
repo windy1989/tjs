@@ -15,7 +15,7 @@ class CreateApprovalsTable extends Migration
     {
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->morphs('approvalable');
             $table->bigInteger('reference');
             $table->bigInteger('approved_by')->nullable();

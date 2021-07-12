@@ -15,10 +15,10 @@ class CreateEmklsTable extends Migration
     {
         Schema::create('emkls', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_id');
-            $table->bigInteger('import_id');
-            $table->bigInteger('country_id');
-            $table->bigInteger('city_id');
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('import_id')->constrained('imports');
+            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('city_id')->constrained('cities');
             $table->char('container', 1);
             $table->double('cost');
             $table->timestamps();

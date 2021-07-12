@@ -15,7 +15,7 @@ class CreateBudgetingsTable extends Migration
     {
         Schema::create('budgetings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('coa_id');
+            $table->foreignId('coa_id')->constrained('coas');
             $table->char('month', 7);
             $table->double('nominal');
             $table->timestamps();

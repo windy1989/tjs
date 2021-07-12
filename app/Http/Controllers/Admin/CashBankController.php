@@ -55,7 +55,7 @@ class CashBankController extends Controller {
                             ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
-                            ->orWhereHas('description', 'like', "%$search%");
+                            ->orWhere('description', 'like', "%$search%");
                     });
                 }     
                 
@@ -97,7 +97,7 @@ class CashBankController extends Controller {
                             ->whereHas('user', function($query) use ($search) {
                                 $query->where('name', 'like', "%$search%");
                             })
-                            ->orWhereHas('description', 'like', "%$search%");
+                            ->orWhere('description', 'like', "%$search%");
                     });
                 }     
                 
@@ -138,7 +138,7 @@ class CashBankController extends Controller {
                     $nomor,
                     $val->user->name,
                     $val->code,
-                    number_format($val->cashBankDetail->sum('nominal')),
+                    number_format($val->cashBankDetail->sum('nominal'), 0, ',', '.'),
                     date('d F Y', strtotime($val->date)),
                     $val->description,
                     '
@@ -182,7 +182,7 @@ class CashBankController extends Controller {
                     </div>
                     <div>
                         <b>[NOMINAL]</b>&nbsp;&nbsp;&nbsp;
-                        <span class="text-muted">' . number_format($d->nominal) . '</span>
+                        <span class="text-muted">' . number_format($d->nominal, 0, ',', '.') . '</span>
                     </div>
                 </div>
             ';

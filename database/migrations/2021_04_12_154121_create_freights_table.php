@@ -15,8 +15,8 @@ class CreateFreightsTable extends Migration
     {
         Schema::create('freights', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('country_id');
-            $table->bigInteger('city_id');
+            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('city_id')->constrained('cities');
             $table->char('container', 1);
             $table->char('shipping', 1);
             $table->double('cost')->default(0);

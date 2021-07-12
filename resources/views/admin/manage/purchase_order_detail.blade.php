@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Purchase Order Detail</span>
+					<span class="font-weight-semibold">Detail Purchase Order</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -91,12 +91,6 @@
 								<td width="7%">Date</td>
 								<td>: {{ date('d F Y', strtotime($purchase_order->created_at)) }}</td>
 							</tr>
-							@if($purchase_order->order->sales_order)
-								<tr>
-									<td width="7%">SO</td>
-									<td>: {{ $purchase_order->order->sales_order }}</td>
-								</tr>
-							@endif
 							<tr>
 								<td width="7%">Invoice</td>
 								<td>: {{ $purchase_order->order->invoice }}</td>

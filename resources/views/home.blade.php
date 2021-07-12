@@ -1,25 +1,17 @@
-<section id="slider" class="slider-element h-auto">
-   <div class="row align-items-stretch">
-      <div class="col-12">
-         <div class="fslider" data-arrows="false">
-            <div class="flexslider">
-               <div class="slider-wrap">
-                  @foreach($banner as $key => $b)
-                     <div class="slide shadow-lg">
-                        <a href="javascript:void(0);" class="cursor-none">
-                           <img src="{{ $b->image() }}" alt="{{ $key }}" style="max-height:800px;" class="img-fluid">
-                        </a>
-                     </div>
-                  @endforeach
-               </div>
-            </div>
-         </div>
+<section id="slider" class="slider-element h-auto" style="background-color: #222;">
+   <div class="slider-inner">
+      <div class="owl-carousel carousel-widget shadow-lg" data-margin="0" data-items="1" data-pagi="true" data-loop="true" data-animate-in="fadeIn" data-speed="450" data-animate-out="fadeOut" data-autoplay="5000">
+         @foreach($banner as $key => $b)
+            <a href="javascript:void(0);" class="cursor-none">
+               <img src="{{ $b->image() }}" alt="{{ $key }}" style="max-height:800px;" class="img-fluid">
+            </a>
+         @endforeach
       </div>
    </div>
 </section>
 <section id="content">
    <div class="content-wrap">
-      <div class="promo promo-full promo-light promo-border p-5 header-stick bottommargin-lg">
+      <div class="promo promotion promo-full promo-light promo-border p-5 header-stick bottommargin-lg">
          <div class="container">
             <div class="row align-items-center">
                <div class="col-12 col-lg">

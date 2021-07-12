@@ -29,7 +29,7 @@
 }
 
 .top-links-item:hover {
-   background: #51b4ba !important;
+   background: none !important;
 }
 
 .top-links-item > a {
@@ -256,6 +256,19 @@
 }
 
 @media (max-width: 768px) {
+   .owl-prev {
+      display: none;
+   }
+
+   .owl-next {
+      display: none;
+   }
+
+   .promotion h3 {
+      font-size: 16px !important;
+      margin-bottom: 10px;
+   }
+
    .menu-container #tab-shop .nav-link {
       padding: 15px;
    }

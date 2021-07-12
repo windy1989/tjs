@@ -464,7 +464,7 @@ class ProjectController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Project Data Progress',
+                'title'   => 'Progress Data',
                 'country' => Country::where('status', 1)->get(),
                 'city'    => City::all(),
                 'project' => $query,

@@ -15,7 +15,7 @@ class CreateNewsTagsTable extends Migration
     {
         Schema::create('news_tags', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('news_id');
+            $table->foreignId('news_id')->constrained('news');
             $table->string('tags');
             $table->timestamps();
         });

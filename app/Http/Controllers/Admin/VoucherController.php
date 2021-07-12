@@ -28,6 +28,7 @@ class VoucherController extends Controller {
             'name',
             'code',
             'quota',
+            'percentage',
             'used',
             'type',
             'status'
@@ -68,22 +69,23 @@ class VoucherController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if($val->start_date < date('Y-m-d')) {
+                if(strtotime('now') < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
                         <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                         <a href="' . url('admin/manage/voucher/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
-                } else if($val->start_date >= date('Y-m-d') && $val->finish_date <= date('Y-m-d')) {
+                } else if(strtotime('now') >= strtotime($val->start_date)  && strtotime('now') <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
-                        <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
+                        <a href="' . url('admin/manage/voucher/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 } else {
                     $status = 'Expired';
                     $button = '
-                        <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
+                        <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 }
 
@@ -92,7 +94,8 @@ class VoucherController extends Controller {
                     $val->name,
                     $val->code,
                     $val->quota,
-                    $val->order->count(),
+                    $val->percentage . '%',
+                    $val->order->count() > 0 ? $val->order->count() . 'x' : 0,
                     $val->type(),
                     $status,
                     $button
@@ -124,6 +127,7 @@ class VoucherController extends Controller {
                 'minimum'     => 'required',
                 'maximum'     => 'required',
                 'quota'       => 'required',
+                'percentage'  => 'required',
                 'start_date'  => 'required',
                 'finish_date' => 'required',
                 'terms'       => 'required',
@@ -132,9 +136,11 @@ class VoucherController extends Controller {
                 'code.required'        => 'Code cannot be empty.',
                 'code.min'             => 'Code minimum 7 character.',
                 'code.unique'          => 'Code exists.',
+                'name.required'        => 'Name cannot be empty.',
                 'minimum.required'     => 'Minimum order cannot be empty.',
                 'maximum.required'     => 'Nominal cannot be empty.',
                 'quota.required'       => 'Quota cannot be empty.',
+                'percentage.required'  => 'Percentage cannot be empty.',
                 'start_date.required'  => 'Start date cannot be empty.',
                 'finish_date.required' => 'Finish date cannot be empty.',
                 'terms.required'       => 'Terms & conditions cannot be empty.',
@@ -145,11 +151,12 @@ class VoucherController extends Controller {
                 return redirect()->back()->withErrors($validation)->withInput();
             } else {
                 $query = Voucher::create([
-                    'code'        => $request->code,
+                    'code'        => strtoupper($request->code),
                     'name'        => $request->name,
                     'minimum'     => $request->minimum,
                     'maximum'     => $request->maximum,
                     'quota'       => $request->quota,
+                    'percentage'  => $request->percentage,
                     'start_date'  => $request->start_date,
                     'finish_date' => $request->finish_date,
                     'terms'       => $request->terms,
@@ -189,6 +196,7 @@ class VoucherController extends Controller {
                 'minimum'     => 'required',
                 'maximum'     => 'required',
                 'quota'       => 'required',
+                'percentage'  => 'required',
                 'start_date'  => 'required',
                 'finish_date' => 'required',
                 'terms'       => 'required',
@@ -197,9 +205,11 @@ class VoucherController extends Controller {
                 'code.required'        => 'Code cannot be empty.',
                 'code.min'             => 'Code minimum 7 character.',
                 'code.unique'          => 'Code exists.',
+                'name.required'        => 'Name cannot be empty.',
                 'minimum.required'     => 'Minimum order cannot be empty.',
                 'maximum.required'     => 'Nominal cannot be empty.',
                 'quota.required'       => 'Quota cannot be empty.',
+                'percentage.required'  => 'Percentage cannot be empty.',
                 'start_date.required'  => 'Start date cannot be empty.',
                 'finish_date.required' => 'Finish date cannot be empty.',
                 'terms.required'       => 'Terms & conditions cannot be empty.',
@@ -210,11 +220,12 @@ class VoucherController extends Controller {
                 return redirect()->back()->withErrors($validation)->withInput();
             } else {
                 $query->update([
-                    'code'        => $request->code,
+                    'code'        => strtoupper($request->code),
                     'name'        => $request->name,
                     'minimum'     => $request->minimum,
                     'maximum'     => $request->maximum,
                     'quota'       => $request->quota,
+                    'percentage'  => $request->percentage,
                     'start_date'  => $request->start_date,
                     'finish_date' => $request->finish_date,
                     'terms'       => $request->terms,
@@ -270,7 +281,7 @@ class VoucherController extends Controller {
     {
         $data = [
             'title'   => 'Detail Voucher',
-            'news'    => Voucher::find($id),
+            'voucher' => Voucher::find($id),
             'content' => 'admin.manage.voucher_detail'
         ];
 

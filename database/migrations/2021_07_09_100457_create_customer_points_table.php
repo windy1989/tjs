@@ -15,8 +15,8 @@ class CreateCustomerPointsTable extends Migration
     {
         Schema::create('customer_points', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id');
-            $table->bigInteger('order_id');
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('order_id')->constrained('orders');
             $table->double('point');
             $table->timestamps();
         });

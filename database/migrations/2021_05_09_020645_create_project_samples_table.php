@@ -15,8 +15,8 @@ class CreateProjectSamplesTable extends Migration
     {
         Schema::create('project_samples', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('project_id');
-            $table->bigInteger('product_id');
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('product_id')->constrained('products');
             $table->date('date');
             $table->integer('qty');
             $table->string('size');

@@ -15,8 +15,8 @@ class CreateSupplierCurrenciesTable extends Migration
     {
         Schema::create('supplier_currencies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('supplier_id');
-            $table->bigInteger('currency_id');
+            $table->foreignId('supplier_id')->constrained('suppliers');
+            $table->foreignId('currency_id')->constrained('countries');
             $table->timestamps();
         });
     }

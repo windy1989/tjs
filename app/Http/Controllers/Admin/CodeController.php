@@ -549,7 +549,7 @@ class CodeController extends Controller {
     public function detail($id) 
     {
         $data = [
-            'title'   => 'Detail Product Code',
+            'title'   => 'Detail Code',
             'product' => Product::find($id),
             'content' => 'admin.product.code_detail'
         ];

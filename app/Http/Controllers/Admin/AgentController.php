@@ -81,9 +81,9 @@ class AgentController extends Controller {
                     $nomor,
                     $val->country->code,
                     $val->category->name,
-                    '$' . number_format($val->min_price),
-                    '$' . number_format($val->max_price),
-                    '$' . number_format($val->fee),
+                    '$' . number_format($val->min_price, 0, ',', '.'),
+                    '$' . number_format($val->max_price, 0, ',', '.'),
+                    '$' . number_format($val->fee, 0, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>

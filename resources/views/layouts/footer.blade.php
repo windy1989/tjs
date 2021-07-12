@@ -148,7 +148,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div id="copyrights" class="bg-teal">
+			<div id="copyrights" class="bg-light">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center">
@@ -161,13 +161,5 @@
 	</div>
 	<script src="{{ asset('template/front-office/js/plugins.min.js') }}"></script>
 	<script src="{{ asset('template/front-office/js/functions.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.video.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.actions.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
-	<script src="{{ asset('template/front-office/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 </body>
 </html>

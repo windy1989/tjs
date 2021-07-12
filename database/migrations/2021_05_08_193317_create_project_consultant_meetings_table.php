@@ -15,7 +15,7 @@ class CreateProjectConsultantMeetingsTable extends Migration
     {
         Schema::create('project_consultant_meetings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('project_id');
+            $table->foreignId('project_id')->constrained('projects');
             $table->date('date');
             $table->string('person');
             $table->text('result');

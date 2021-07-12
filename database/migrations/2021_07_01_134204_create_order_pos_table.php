@@ -15,7 +15,7 @@ class CreateOrderPosTable extends Migration
     {
         Schema::create('order_pos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
+            $table->foreignId('order_id')->constrained('orders');
             $table->string('purchase_order')->unique();
             $table->char('status', 1);
             $table->timestamps();

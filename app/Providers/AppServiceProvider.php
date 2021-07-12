@@ -36,8 +36,9 @@ class AppServiceProvider extends ServiceProvider
         Xendit::setApiKey('xnd_development_YgsZZQ4o5XoZBBgF0EROorc0Lodit00TIZflitcCaeiWzwcGaYs1bCjJkEQeJ9');
 
         Relation::morphMap([
-            'orders'     => 'App\Models\Order',
             'projects'   => 'App\Models\Project',
+            'categories' => 'App\Models\Category',
+            'brands'     => 'App\Models\Brand',
             'cash_banks' => 'App\Models\CashBank',
             'customers'  => 'App\Models\Customer',
             'users'      => 'App\Models\User'

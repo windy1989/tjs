@@ -15,8 +15,8 @@ class CreateEmklRatesTable extends Migration
     {
         Schema::create('emkl_rates', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_id');
-            $table->bigInteger('currency_id');
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('currency_id')->constrained('currencies');
             $table->double('conversion');
             $table->timestamps();
             $table->softDeletes('deleted_at');

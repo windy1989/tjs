@@ -91,9 +91,9 @@ class PriceController extends Controller {
                     $val->vendor->name,
                     $val->transport->fleet,
                     $val->destination->name,
-                    number_format($val->capacity) . ' Kg',
-                    number_format($val->price_per_kg),
-                    number_format($val->price_per_meter),
+                    number_format($val->capacity, 0, ',', '.') . ' Kg',
+                    number_format($val->price_per_kg, 0, ',', '.'),
+                    number_format($val->price_per_meter, 0, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>

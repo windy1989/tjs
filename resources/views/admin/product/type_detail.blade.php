@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Detail Product Type</span>
+					<span class="font-weight-semibold">Detail Type</span>
 				</h4>
 			</div>
 			<div class="header-elements">

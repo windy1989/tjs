@@ -220,7 +220,7 @@ class OrderInvoiceController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Invoice Detail',
+            'title'   => 'Detail Invoice',
             'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get(),
             'order'   => $order,
             'content' => 'admin.manage.invoice_detail'

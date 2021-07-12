@@ -99,7 +99,7 @@ class BudgetingController extends Controller {
                     $nomor,
                     '[' . $val->coa->code . '] ' . $val->coa->name,
                     date('F Y', strtotime($val->month)),
-                    number_format($val->nominal),
+                    number_format($val->nominal, 0, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>

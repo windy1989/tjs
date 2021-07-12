@@ -15,9 +15,9 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('vendor_id');
-            $table->bigInteger('transport_id');
-            $table->bigInteger('destination_id');
+            $table->foreignId('vendor_id')->constrained('vendors');
+            $table->foreignId('transport_id')->constrained('transports');
+            $table->foreignId('destination_id')->constrained('cities');
             $table->double('capacity');
             $table->double('price_per_kg');
             $table->double('price_per_meter');

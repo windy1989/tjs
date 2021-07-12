@@ -15,9 +15,9 @@ class CreateOrderShippingsTable extends Migration
     {
         Schema::create('order_shippings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
-            $table->bigInteger('city_id');
-            $table->bigInteger('delivery_id');
+            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('city_id')->constrained('cities');
+            $table->foreignId('delivery_id')->constrained('deliveries');
             $table->string('receiver_name');
             $table->string('email');
             $table->string('phone');

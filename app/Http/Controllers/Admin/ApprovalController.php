@@ -113,7 +113,7 @@ class ApprovalController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->type(),
-                    $val->approvalable_type == 'orders' ? $val->approvalable->sales_order : $val->approvalable->code,
+                    $val->approvalable_type == 'projects' ? $val->approvalable->code : '',
                     date('d F Y', strtotime($val->created_at)),
                     $approved_by,
                     $val->status(),
@@ -140,7 +140,6 @@ class ApprovalController extends Controller {
     public function detail(Request $request, $id) 
     {
         $approval = Approval::find($id);
-        $order    = Order::find($approval->approvalable_id);
         $project  = Project::find($approval->approvalable_id);
         $status   = $request->reject ? 3 : 2;
         $approved = Approval::where('approvalable_type', $approval->approvalable_type)
@@ -149,13 +148,7 @@ class ApprovalController extends Controller {
             ->first();
 
         $approval->update(['seen' => true]);
-        if($approval->approvalable_type == 'orders') {
-            $title       = 'Approval Sales Order';
-            $view        = 'approval_sales_order_detail';
-            $notif_title = 'Approval Sales Order';
-            $description = $approval->approvalable->sales_order;
-            $link        = url('admin/manage/sales_order/detail/' . $approval->approvalable_id);
-        } else if($approval->approvalable_type == 'projects') {
+        if($approval->approvalable_type == 'projects') {
             $title       = 'Approval Project';
             $view        = 'approval_project_detail';
             $notif_title = 'Approval Project';
@@ -165,39 +158,14 @@ class ApprovalController extends Controller {
 
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->reject) {
-                if($approval->approvalable_type == 'orders') {
-                    foreach($order->orderDetail as $od) {
-                        OrderDetail::find($od->id)->update([
-                            'target_price' => $od->total
-                        ]);
-                    }
-
-                    $order->update([
-                        'subtotal'   => $order->orderDetail->sum('total'),
-                        'grandtotal' => $order->orderDetail->sum('total') + $order->shipping
-                    ]);
-                } else {
-
+                if($approval->approvalable_type == 'projects') {
+                    
                 }
 
                 $notif_desc = 'Sorry, your data ' . $description . ' has been rejected';
             } else {
-                if($approval->approvalable_type == 'orders') {
-                    $total_discount = 0;
-                    foreach($order->orderDetail as $od) {
-                        $total_discount += $od->total - $od->target_price;
-                        OrderDetail::find($od->id)->update([
-                            'total' => $od->target_price
-                        ]);
-                    }
-
-                    $order->update([
-                        'subtotal'   => $order->orderDetail->sum('total'),
-                        'discount'   => $total_discount,
-                        'grandtotal' => $order->orderDetail->sum('total') + $order->shipping
-                    ]);
-                } else {
-
+                if($approval->approvalable_type == 'projects') {
+                    
                 }
 
                 $notif_desc = 'Success, your data ' . $description . ' has been approved';
@@ -222,7 +190,6 @@ class ApprovalController extends Controller {
             'title'    => $title,
             'approval' => $approval,
             'approved' => $approved,
-            'order'    => $order,
             'project'  => $project,
             'content'  => 'admin.' . $view
         ];

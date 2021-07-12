@@ -1,6 +1,7 @@
 @php 
 	$total_cart     = App\Models\Cart::where('customer_id', session('fo_id'))->count(); 
 	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
+	$total_point    = App\Models\Customer::find(session('fo_id'));
 @endphp
 <body class="stretched">
 	<div class="body-overlay"></div>
@@ -13,24 +14,34 @@
 				<center>
 					<img src="{{ session('fo_photo') }}" class="mr-1 position-relative img-circle mb-3" style="max-width:80px;" alt="{{ session('fo_name') }}">
 				</center>
-				<h4 class="mb-4 text-center">
+				<h4 class="text-center mb-2">
 					@php $str = explode(' ', session('fo_name')); @endphp
 					Hi, {{ $str[0] }}
 				</h4>
+				<p class="text-center">
+					<small style="font-size-14">
+						<i class="icon-coins text-warning"></i>
+						&nbsp; 
+						{{ $total_point ? number_format($total_point->point) : 0 }}
+					</small>
+				</p>
 				<div class="form-group"><hr></div>
 				<nav class="nav-tree">
 					<ul>
-						<li>
-							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
-						</li>
-						<li>
-							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
-						</li>
 						<li>
 							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-light">{{ $total_cart }}</sup></a>
 						</li>
 						<li>
 							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-light">{{ $total_wishlist }}</sup></a>
+						</li>
+						<li>
+							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
+						</li>
+						<li>
+							<a href="{{ url('account/point') }}"><i class="icon-coins"></i> Point</sup></a>
+						</li>
+						<li>
+							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
 						</li>
 					</ul>
 				</nav>
@@ -44,24 +55,24 @@
 		</div>
 	</div>
 	<div id="wrapper" class="clearfix">
-		<div id="top-bar" class="d-none d-lg-block p-0 m-0 bg-teal">
+		<div id="top-bar" class="d-none d-lg-block p-0 m-0 bg-light shadow-lg">
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-auto">
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal text-white font-size-11">
+									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-line-phone"></i> 0812-3005-2352
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11 text-white">
+									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-whatsapp"></i> (031) 5477501
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11 text-white">
+									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11">
 										<i class="icon-line2-envelope"></i> smartmarbleandbath@gmail.com
 									</a>
 								</li>
@@ -70,7 +81,11 @@
 					</div>
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="font-size-11 text-white" style="text-transform:none;">Open Every Monday - Saturday, 08.30 - 17.00 WIB</a>
+							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="font-size-11 text-dark" style="text-transform:none;">
+								<marquee width="80%" behavior="scroll" direction="left" height="36%">
+									Open Every Monday - Saturday, 08.30 - 17.00 WIB
+								</marquee>
+							</a>
 						</p>
 					</div>
 				</div>

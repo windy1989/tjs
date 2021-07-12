@@ -15,15 +15,15 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id');
-            $table->bigInteger('division_id');
-            $table->bigInteger('surface_id')->nullable();
-            $table->bigInteger('color_id');
-            $table->bigInteger('pattern_id');
-            $table->bigInteger('loading_limit_id');
-            $table->bigInteger('buy_unit_id');
-            $table->bigInteger('stock_unit_id');
-            $table->bigInteger('selling_unit_id');
+            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('division_id')->constrained('divisions');
+            $table->foreignId('surface_id')->nullable()->constrained('surfaces');
+            $table->foreignId('color_id')->constrained('colors');
+            $table->foreignId('pattern_id')->constrained('patterns');
+            $table->foreignId('loading_limit_id')->constrained('loading_limits');
+            $table->foreignId('buy_unit_id')->constrained('units');
+            $table->foreignId('stock_unit_id')->constrained('units');
+            $table->foreignId('selling_unit_id')->constrained('units');
             $table->string('image')->nullable();
             $table->string('code')->unique();
             $table->char('material', 1);

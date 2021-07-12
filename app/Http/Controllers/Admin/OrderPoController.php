@@ -158,7 +158,7 @@ class OrderPoController extends Controller {
         }
 
         $data = [
-            'title'          => 'Purchase Order Detail',
+            'title'          => 'Detail Purchase Order',
             'purchase_order' => $purchase_order,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get(),
             'content'        => 'admin.manage.purchase_order_detail'

@@ -68,7 +68,7 @@
       </div>
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Delivery Order</h5>
+				<h5 class="card-title">List Data</h5>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">

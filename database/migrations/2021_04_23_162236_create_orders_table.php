@@ -15,12 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id');
-            $table->bigInteger('voucher_id')->nullable();
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('voucher_id')->nullable()->constrained('vouchers');
             $table->json('xendit')->nullable();
             $table->string('qr_code')->nullable();
             $table->string('number')->unique();
-            $table->string('sales_order')->nullable();
             $table->string('invoice')->nullable();
             $table->double('discount')->default(0);
             $table->double('subtotal')->default(0);

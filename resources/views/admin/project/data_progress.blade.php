@@ -10,7 +10,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Manage Project Progress</span>
+					<span class="font-weight-semibold">Progress Data</span>
 				</h4>
 			</div>
          <div class="header-elements">

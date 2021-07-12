@@ -154,10 +154,6 @@
 								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($order->created_at)) }}</td>
 							</tr>
 							<tr>
-								<td width="10%" style="font-size:10px;">SO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $order->sales_order }}</td>
-							</tr>
-							<tr>
 								<td width="10%" style="font-size:10px;">Invoice</td>
 								<td style="text-align:left; font-size:10px;">: {{ $order->invoice }}</td>
 							</tr>

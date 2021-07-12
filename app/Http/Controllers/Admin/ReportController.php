@@ -204,10 +204,10 @@ class ReportController extends Controller {
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $val->name,
-                    number_format($beginning_total),
-                    number_format($ending_debit),
-                    number_format($ending_credit),
-                    number_format($beginning_total + $ending_total)
+                    number_format($beginning_total, 0, ',', '.'),
+                    number_format($ending_debit, 0, ',', '.'),
+                    number_format($ending_credit, 0, ',', '.'),
+                    number_format($beginning_total + $ending_total, 0, ',', '.')
                 ];
 
                 $nomor++;
@@ -266,7 +266,7 @@ class ReportController extends Controller {
                     <div class="text-muted">' . date('d-m-Y', strtotime($j->created_at)) . ' | ' . $type . '</div>
                     <div>' . $code . '</div>
                     <div>' . $description . '</div>
-                    <div><span class="font-weight-bold">' . number_format($j->nominal) . '</span></div>
+                    <div><span class="font-weight-bold">' . number_format($j->nominal, 0, ',', '.') . '</span></div>
                 </div>
             ';
         }

@@ -191,13 +191,7 @@
                                 <a href="{{ url('admin/manage/customer') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'customer' ? 'active' : '' }}">Customer</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/manage/voucher') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'voucher' ? 'active' : '' }}">Voucher</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('admin/manage/order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'order' ? 'active' : '' }}">Order</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/manage/sales_order') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'sales_order' ? 'active' : '' }}">Sales Order</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/manage/invoice') }}" class="nav-link {{ Request::segment(2) == 'manage' && Request::segment(3) == 'invoice' ? 'active' : '' }}">Invoice</a>
@@ -229,6 +223,23 @@
                         <ul class="nav nav-group-sub" data-submenu-title="HRD">
                             <li class="nav-item">
                                 <a href="{{ url('admin/hrd/job_desc') }}" class="nav-link {{ Request::segment(2) == 'hrd' && Request::segment(3) == 'job_desc' ? 'active' : '' }}">Job Desc</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'voucher' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-ticket"></i> 
+                            <span>Voucher</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Voucher">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/voucher/brand') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'brand' ? 'active' : '' }}">Brand</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/voucher/category') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'category' ? 'active' : '' }}">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/voucher/other') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'other' ? 'active' : '' }}">Other</a>
                             </li>
                         </ul>
                     </li>

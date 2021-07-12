@@ -14,20 +14,29 @@ class Voucher extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
+        'voucherable_type',
+        'voucherable_id',
         'code',
         'name',
         'minimum',
         'maximum',
         'quota',
+        'points',
+        'percentage',
         'start_date',
         'finish_date',
         'terms',
         'type'
     ];
 
+    public function voucherable()
+    {
+        return $this->morphTo();
+    }
+
     public function order()
     {
-        return $this->hasMany('order')->where('status', '!=', 6);
+        return $this->hasMany('App\Models\Order')->where('status', '!=', 6);
     }
 
     public function type() 
@@ -37,9 +46,6 @@ class Voucher extends Model {
                 $type = 'Discount';
                 break;
             case '2':
-                $type = 'Cashback';
-                break;
-            case '3':
                 $type = 'Shipping';
                 break;
             default:

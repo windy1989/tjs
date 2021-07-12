@@ -432,26 +432,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('datatable', 'CustomerController@datatable');
             });
 
-            Route::prefix('voucher')->group(function() {
-                Route::get('/', 'VoucherController@index');
-                Route::get('datatable', 'VoucherController@datatable');
-                Route::match(['get', 'post'], 'create', 'VoucherController@create');
-                Route::match(['get', 'post'], 'update/{id}', 'VoucherController@update');
-                Route::post('destroy', 'VoucherController@destroy');
-                Route::get('detail/{id}', 'VoucherController@detail');
-            });
-
             Route::prefix('order')->group(function() {
                 Route::get('/', 'OrderController@index');
                 Route::get('datatable', 'OrderController@datatable');
                 Route::match(['get', 'post'], 'detail/{id}', 'OrderController@detail');
-            });
-
-            Route::prefix('sales_order')->group(function() {
-                Route::get('/', 'OrderSoController@index');
-                Route::get('datatable', 'OrderSoController@datatable');
-                Route::get('get_delivery', 'OrderSoController@getDelivery');
-                Route::match(['get', 'post'], 'detail/{id}', 'OrderSoController@detail');
             });
 
             Route::prefix('invoice')->group(function() {
@@ -490,6 +474,17 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('hrd')->group(function() {
             Route::prefix('job_desc')->group(function() {
                 Route::get('/', 'JobDescController@index');
+            });
+        });
+
+        Route::prefix('voucher')->group(function() {
+            Route::prefix('brand')->group(function() {
+                Route::get('/', 'VoucherBrandController@index');
+                Route::get('datatable', 'VoucherBrandController@datatable');
+                Route::match(['get', 'post'], 'create', 'VoucherBrandController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'VoucherBrandController@update');
+                Route::post('destroy', 'VoucherBrandController@destroy');
+                Route::get('detail/{id}', 'VoucherBrandController@detail');
             });
         });
 

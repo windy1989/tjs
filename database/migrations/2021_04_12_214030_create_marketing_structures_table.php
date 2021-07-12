@@ -15,7 +15,7 @@ class CreateMarketingStructuresTable extends Migration
     {
         Schema::create('marketing_structures', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_id');
+            $table->foreignId('company_id')->constrained('companies');
             $table->double('rental_cost')->default(0);
             $table->double('travel_sales_cost')->default(0);
             $table->double('marketing_cost')->default(0);

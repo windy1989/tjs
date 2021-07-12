@@ -15,8 +15,8 @@ class CreateAgentsTable extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('country_id');
-            $table->bigInteger('category_id');
+            $table->foreignId('country_id')->constrained('countries');
+            $table->foreignId('category_id')->constrained('categories');
             $table->double('min_price')->default(0);
             $table->double('max_price')->default(0);
             $table->double('fee')->default(0);

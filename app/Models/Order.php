@@ -126,9 +126,4 @@ class Order extends Model {
         return $this->hasOne('App\Models\OrderPayment');
     }
 
-    public function approval()
-    {
-        return $this->morphOne('App\Models\Approval', 'approvalable');
-    }
-
 }

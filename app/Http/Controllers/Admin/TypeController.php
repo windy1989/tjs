@@ -417,7 +417,7 @@ class TypeController extends Controller {
     public function detail($id) 
     {
         $data = [
-            'title'   => 'Detail Product Type',
+            'title'   => 'Detail Type',
             'type'    => Type::find($id),
             'content' => 'admin.product.type_detail'
         ];

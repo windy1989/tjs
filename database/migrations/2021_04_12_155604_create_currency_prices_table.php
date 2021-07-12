@@ -15,8 +15,8 @@ class CreateCurrencyPricesTable extends Migration
     {
         Schema::create('currency_prices', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id');
-            $table->bigInteger('currency_id');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('currency_id')->constrained('currencies');
             $table->double('price')->default(0);
             $table->timestamps();
             $table->softDeletes('deleted_at');

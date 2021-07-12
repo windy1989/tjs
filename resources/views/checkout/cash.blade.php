@@ -17,25 +17,37 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/magnific-popup.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=30302E') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=51b4ba') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
    <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+   <script src="{{ asset('template/plugins/countdown/source/syotimer.lang.js') }}"></script>
+   <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
+   <script src="{{ asset('template/plugins/side-panel/dist/jquery.slidereveal.min.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <title>Smart Marble & Bath | {{ $title }}</title>
 </head>
 <body class="stretched">
+	<section id="page-title" class="page-title">
+		<div class="container clearfix">
+			<h1>
+				<img src="{{ asset('website/logo-black.png') }}" alt="">
+			</h1>
+			<ol class="breadcrumb text-uppercase font-weight-bold">
+				<li class="breadcrumb-item active" aria-current="page">
+					Checkout
+				</li>
+			</ol>
+		</div>
+	</section>
 	<div id="wrapper" class="clearfix">
 		<section id="content">
 			<div class="content-wrap">
 				<div class="container clearfix">
-					<div class="text-center mb-5">
-						<img src="{{ asset('website/logo-black.png') }}" alt="">
-					</div>
-					<form action="{{ url('checkout/cash') }}" method="POST" id="form_order" class="topmargin-lg mb-0">
+					<form action="{{ url('checkout/cash') }}" method="POST" id="form_order" class="mb-0">
 						@csrf
 						<div class="row">
 							<div class="col-md-8 mb-3">
@@ -87,6 +99,15 @@
 										<textarea name="description" id="description" class="form-control no-outline font-size-14" placeholder="Enter important note">{{ old('description') }}</textarea>
 									</div>
 								</p>
+								<div class="form-group"><hr></div>
+								<p>
+									<div class="input-group mb-3">
+										<input type="text" name="voucher_code" id="voucher_code" class="form-control font-size-12 text-uppercase" placeholder="Enter voucher code">
+										<div class="input-group-append">
+											<button type="button" class="btn bg-teal font-size-12 text-uppercase">Claim</button>
+										</div>
+									</div>
+								</p>
 							</div>
 							<div class="col-md-4">
 								<div class="card border-secondary">
@@ -97,11 +118,31 @@
 												<tbody>
 													<tr class="cart_item">
 														<td class="cart-product-name">
+															<span class="font-size-13 font-weight-normal">Subtotal</span>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount">
+																<span class="font-weight-normal font-size-13" id="subtotal">Rp {{ number_format($total_checkout, 0, ',', '.') }}</span>
+															</span>
+														</td>
+													</tr>
+													<tr class="cart_item">
+														<td class="cart-product-name">
+															<span class="font-size-13 font-weight-normal">Discount</span>
+														</td>
+														<td class="cart-product-name">
+															<span class="amount">
+																<span class="font-weight-normal font-size-13" id="discount">Rp 0</span>
+															</span>
+														</td>
+													</tr>
+													<tr class="cart_item">
+														<td class="cart-product-name">
 															<span class="font-weight-semibold text-uppercase font-size-14">Total</span>
 														</td>
 														<td class="cart-product-name">
 															<span class="amount color lead">
-																<span class="font-weight-semibold font-size-14" id="grandtotal">Rp {{ number_format($total_checkout, 0, ',', '.') }}</span>
+																<span class="font-weight-semibold font-size-14 text-dark" id="grandtotal">Rp {{ number_format($total_checkout, 0, ',', '.') }}</span>
 															</span>
 														</td>
 													</tr>

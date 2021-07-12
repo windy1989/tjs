@@ -96,7 +96,7 @@
 		</div>
 		<div class="card">
 			<div class="card-header header-elements-inline mb-3">
-				<h5 class="card-title">List Data Code</h5>
+				<h5 class="card-title">List Data</h5>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
@@ -124,7 +124,7 @@
    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header bg-light">
-            <h5 class="modal-title" id="exampleModalLabel">Form Product Code</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Form</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>

@@ -15,7 +15,7 @@ class CreateOrderDeliveriesTable extends Migration
     {
         Schema::create('order_deliveries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
+            $table->foreignId('order_id')->constrained('orders');
             $table->string('delivery_order')->unique();
             $table->timestamps();
         });
