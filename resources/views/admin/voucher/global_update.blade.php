@@ -9,7 +9,7 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/voucher/brand') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/voucher/global') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Voucher</a>
-					<a href="{{ url('admin/voucher/brand') }}" class="breadcrumb-item">Brand</a>
+					<a href="{{ url('admin/voucher/global') }}" class="breadcrumb-item">Global</a>
 					<span class="breadcrumb-item active">Update</span>
 				</div>
 			</div>
@@ -65,24 +65,13 @@
                         <input type="text" name="code" id="code" class="form-control text-uppercase" placeholder="Enter code" value="{{ old('code', $voucher->code) }}">
                      </div>
                   </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Brand :<span class="text-danger">*</span></label>
-                        <select name="voucherable_id" id="voucherable_id" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($brand as $b)
-                              <option value="{{ $b->id }}" {{ old('voucherable_id', $voucher->voucherable_id) == $b->id ? 'selected' : '' }}>{{ $b->name }}</option>
-                           @endforeach
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                      <div class="form-group">
                         <label>Minimum Order :<span class="text-danger">*</span></label>
                         <input type="number" name="minimum" id="minimum" class="form-control" placeholder="0" value="{{ old('minimum', $voucher->minimum) }}">
                      </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                      <div class="form-group">
                         <label>Maximum Discount :<span class="text-danger">*</span></label>
                         <input type="number" name="maximum" id="maximum" class="form-control" placeholder="0" value="{{ old('maximum', $voucher->maximum) }}">

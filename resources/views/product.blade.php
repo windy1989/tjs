@@ -57,13 +57,13 @@
                         </div>
                      </div>
                      <div class="col-12 d-xl-none">
-                        <button type="button" id="side-panel-filter-trigger" class="button button-small button-yellow bg-yellow col-12 font-size-14 mb-2"><i class="icon-list"></i> Filter</button>
+                        <button type="button" id="side-panel-filter-trigger" class="button button-small bg-teal col-12 font-size-14 mb-2"><i class="icon-list"></i> Filter</button>
                      </div>
                      <div class="col-12 text-center">
                         @if($filter['other']['search'])
                            <div>Search For : <strong>{{ $filter['other']['search'] }}</strong></div>
                         @endif
-                        <div class="badge bg-teal">{{ $product->total() }} records found</div>
+                        <div class="badge bg-danger text-white font-weight-normal p-1">{{ $product->total() }} records found</div>
                      </div>
                   </div>
                   <div class="form-group"><hr></div>
@@ -116,7 +116,7 @@
                      <div class="clearfix">
                         <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Find ...">
                         <button type="submit" onclick="clickFilter(this)" class="button button-small button-3d bg-teal col-12 mt-2 font-size-11 m-0">Search</button>
-                        <a href="{{ url('product') }}" class="button button-small button-3d button-yellow bg-yellow text-center col-12 mt-2 font-size-11 m-0">Reset</a>
+                        <a href="{{ url('product') }}" class="button button-small button-3d button-red text-center col-12 mt-2 font-size-11 m-0">Reset</a>
                      </div>
                      <div class="form-group"><hr></div>
                      <div class="mb-5 clearfix">
@@ -338,7 +338,7 @@
                   </div>
                   <div class="clearfix">
                      <button type="submit" class="button button-3d button-mini bg-teal col-12 font-size-11">Filter</button>
-                     <a href="{{ url('product') }}" class="button button-3d button-mini button-yellow bg-yellow text-center col-12 font-size-11">Reset</a>
+                     <a href="{{ url('product') }}" class="button button-3d button-mini button-red text-center col-12 font-size-11">Reset</a>
                   </div>
                </form>
             </div>

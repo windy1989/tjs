@@ -9,7 +9,7 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/voucher/brand') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/voucher/global') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Voucher</a>
-					<a href="{{ url('admin/voucher/brand') }}" class="breadcrumb-item">Brand</a>
+					<a href="{{ url('admin/voucher/global') }}" class="breadcrumb-item">Global</a>
 					<span class="breadcrumb-item active">Detail</span>
 				</div>
 			</div>
@@ -41,10 +41,6 @@
                   <tr>
                      <th width="20%" class="align-middle">Code</th>
                      <td class="align-middle">: {{ $voucher->code }}</td>
-                  </tr>
-                  <tr>
-                     <th width="20%" class="align-middle">Brand</th>
-                     <td class="align-middle">: {{ $voucher->voucherable->name }}</td>
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Minimum Order</th>

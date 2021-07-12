@@ -46,7 +46,7 @@
                         <textarea class="sm-form-control no-outline" id="message" name="message" rows="6" cols="30" required></textarea>
                      </div>
                      <div class="col-12 form-group">
-                        <button type="submit" class="button button-3d button-yellow bg-yellow">Send Message</button>
+                        <button type="submit" class="button button-3d bg-teal">Send Message</button>
                      </div>
                   </div>
                </form>

@@ -366,7 +366,7 @@
                @if($order->status == 1 && $order->type == 2)
                   <div class="form-group"><hr></div>
                   <div class="text-right mt-4">
-                     <a href="{{ $order->xendit()->url }}" class="button bg-yellow button-yellow button-3d">Pay Now</a>
+                     <a href="{{ $order->xendit()->url }}" class="button bg-teal button-3d">Pay Now</a>
                   </div>
                @endif
             </div>

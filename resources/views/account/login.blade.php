@@ -67,7 +67,7 @@
                               </div>
                            </div>
                            <div class="col-12 form-group">
-                              <button type="submit" class="button button-3d button-yellow bg-yellow m-0 col-12">Login</button>
+                              <button type="submit" class="button button-3d bg-teal m-0 col-12">Login</button>
                            </div>
                            <div class="col-12 mt-2 text-center">
                               <a href="javascript:void(0);" id="link_forgot_password" data-toggle="modal" data-target=".bs-example-modal-lg" class="text-primary font-size-14">Forgot Password?</a>
@@ -114,7 +114,7 @@
                <div class="form-group"><hr></div>
                <div class="form-group">
                   <div class="text-right">
-                     <button type="button" onclick="forgotPassword()" class="button button-yellow bg-yellow button-mini"><i class="icon-line-send"></i> Send</button>
+                     <button type="button" onclick="forgotPassword()" class="button bg-teal button-mini"><i class="icon-line-send"></i> Send</button>
                   </div>
                </div>
             </div>

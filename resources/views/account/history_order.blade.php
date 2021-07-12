@@ -114,7 +114,7 @@
                                     <div class="col-md-6">
                                        <div class="text-center">
                                           @if($o->status == 3) 
-                                             <button type="button" class="button button-yellow button-small bg-yellow font-size-13" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
+                                             <button type="button" class="button button-small button-red font-size-13" onclick="confirmationDelivery({{ $o->id }})">Arrived</button>
                                           @endif
                                           <a href="{{ url('account/history_order/detail/' . base64_encode($o->id)) }}" class="button bg-teal button-small font-size-13 {{ $o->status != 3 ? 'col-12' : '' }}">Detail Order</a>
                                        </div>

@@ -56,4 +56,21 @@ class Voucher extends Model {
         return $type;
     }
 
+    public function voucherType() 
+    {
+        switch($this->voucherable_type) {
+            case 'brands':
+                $voucher_type = 'Brand';
+                break;
+            case 'categories':
+                $voucher_type = 'Category';
+                break;
+            default:
+                $voucher_type = 'Global';
+                break;
+        }
+
+        return $voucher_type;
+    }
+
 }

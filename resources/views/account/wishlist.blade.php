@@ -67,49 +67,6 @@
             </div>
          @endif
          {{ $wishlist->withQueryString()->onEachSide(1)->links('pagination') }}
-         {{-- @if($wishlist->count() > 0)
-            <div class="table-responsive">
-               <table class="table cart mb-5">
-                  <thead>
-                     <tr>
-                        <th class="cart-product-remove">#</th>
-                        <th class="cart-product-thumbnail">Image</th>
-                        <th class="cart-product-name">Product</th>
-                        <th class="cart-product-price">Unit Price</th>
-                        <th class="cart-product-quantity">Stock</th>
-                        <th class="cart-product-quantity">Move</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     @foreach($wishlist as $w)
-                        <tr class="cart_item">
-                           <td class="cart-product-remove">
-                              <a href="{{ url('product/wishlist_destroy/' . base64_encode($w->id)) }}" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
-                           </td>
-                           <td class="cart-product-thumbnail">
-                              <a href="{{ url('product/detail/' . base64_encode($w->id)) }}">
-                                 <img width="64" height="64" src="{{ $w->product->type->image() }}" class="img-fluid">
-                              </a>
-                           </td>
-                           <td class="cart-product-name">
-                              <a href="{{ url('product/detail/' . base64_encode($w->id)) }}">{{ $w->product->code() }}</a>
-                           </td>
-                           <td class="cart-product-price">
-                              <span class="amount">Rp {{ number_format($w->product->price(), 0, ',', '.') }}</span>
-                           </td>
-                           <td class="cart-product-quantity">
-                              <span class="amount">{{ $w->product->productShading->sum('qty') }}</span>
-                           </td>
-                           <td class="cart-product-subtotal">
-                              <a href="{{ url('product/wishlist_to_cart/' . base64_encode($w->id)) }}" class="remove text-success" title="Move this item">Move Now Your Cart</span></a>
-                           </td>
-                        </tr>
-                     @endforeach
-                  </tbody>
-               </table>
-            </div>
-            {{ $wishlist->withQueryString()->onEachSide(1)->links('pagination') }}
-         @endif --}}
       </div>
    </div>
 </section>

@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Voucher Brand</span>
+					<span class="font-weight-semibold">Voucher Category</span>
 				</h4>
 			</div>
 			<div class="header-elements">
@@ -12,7 +12,7 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<a href="{{ url('admin/voucher/brand/create') }}" class="btn bg-primary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/voucher/category/create') }}" class="btn bg-primary btn-labeled btn-labeled-left">
 						<b><i class="icon-plus3"></i></b> Add Data
 					</a>
 				</div>
@@ -23,7 +23,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Voucher</a>
-					<span class="breadcrumb-item active">Brand</span>
+					<span class="breadcrumb-item active">Category</span>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
-                        <th>Brand</th>
+                        <th>Category</th>
                         <th>Name</th>
                         <th>Code</th>
                         <th>Percentage</th>
@@ -67,7 +67,7 @@
          iDisplayInLength: 10,
          order: [[0, 'asc']],
          ajax: {
-            url: '{{ url("admin/voucher/brand/datatable") }}',
+            url: '{{ url("admin/voucher/category/datatable") }}',
             type: 'GET',
             data: {
                status: $('#filter_status').val()
@@ -115,7 +115,7 @@
             }),
             Noty.button('<i class="icon-trash"></i>', 'btn bg-success ml-1', function() {
                $.ajax({
-                  url: '{{ url("admin/voucher/brand/destroy") }}',
+                  url: '{{ url("admin/voucher/category/destroy") }}',
                   type: 'POST',
                   dataType: 'JSON',
                   data: {

@@ -20,7 +20,8 @@ class Career extends Model {
 
     public function status() 
     {
-        if(strtotime('now') <= strtotime($this->deadline)) {
+        $current_date = strtotime(date('Y-m-d'));
+        if($current_date <= strtotime($this->deadline)) {
             $status = '<span class="text-success font-weight-bold">Open</span>';
         } else {
             $status = '<span class="text-danger font-weight-bold">Close</span>';

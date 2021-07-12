@@ -22,7 +22,7 @@
    <meta name="robots" content="all">
    <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
    <meta name="format-detection" content="telephone=no">
-   <meta name="theme-color" content="#ebb11f">
+   <meta name="theme-color" content="#51b4ba">
    <link rel="manifest" href="{{ asset('manifest.json') }}">
    <link rel="alternate" href="{{ url('/') }}" hreflang="in">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
@@ -51,6 +51,17 @@
    <title>Smart Marble & Bath | {{ $title }}</title>
    <div id="tawk_60881c7062662a09efc29df5"></div>
    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '867667750621417');
+      fbq('track', 'PageView');
+
       var Tawk_API = Tawk_API || {}, Tawk_LoadStart=new Date();
       (function() {
          var s1     = document.createElement('script'),s0=document.getElementsByTagName('script')[0];
@@ -61,19 +72,5 @@
          s0.parentNode.insertBefore(s1, s0);
       })();
    </script>
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '419130419365652');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=419130419365652&ev=PageView&noscript=1"
-/></noscript>
+   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=867667750621417&ev=PageView&noscript=1"></noscript>
 </head>

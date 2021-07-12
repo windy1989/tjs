@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('password')->nullable();
-            $table->double('point');
+            $table->double('points');
             $table->timestamp('verification')->nullable();
             $table->timestamps();
         });

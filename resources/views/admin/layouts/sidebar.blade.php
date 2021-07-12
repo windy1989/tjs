@@ -239,7 +239,7 @@
                                 <a href="{{ url('admin/voucher/category') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'category' ? 'active' : '' }}">Category</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/voucher/other') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'other' ? 'active' : '' }}">Other</a>
+                                <a href="{{ url('admin/voucher/global') }}" class="nav-link {{ Request::segment(2) == 'voucher' && Request::segment(3) == 'global' ? 'active' : '' }}">Global</a>
                             </li>
                         </ul>
                     </li>

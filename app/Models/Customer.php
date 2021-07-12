@@ -18,7 +18,7 @@ class Customer extends Model {
         'email',
         'phone',
         'password',
-        'point',
+        'points',
         'verification'
     ];
 

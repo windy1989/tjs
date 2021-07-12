@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Voucher;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class VoucherController extends Controller {
+class VoucherGlobalController extends Controller {
     
     public function index()
     {
         $data = [
-            'title'   => 'Manage Voucher',
-            'content' => 'admin.manage.voucher'
+            'title'   => 'Voucher Global',
+            'content' => 'admin.voucher.global'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -27,9 +26,7 @@ class VoucherController extends Controller {
             'id',
             'name',
             'code',
-            'quota',
             'percentage',
-            'used',
             'type',
             'status'
         ];
@@ -40,9 +37,13 @@ class VoucherController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Voucher::count();
+        $total_data = Voucher::whereNull('voucherable_type')
+            ->whereNull('voucherable_id')
+            ->count();
         
-        $query_data = Voucher::where(function($query) use ($search, $request) {
+        $query_data = Voucher::whereNull('voucherable_type')
+            ->whereNull('voucherable_id')
+            ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('code', 'like', "%$search%")
@@ -55,10 +56,12 @@ class VoucherController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Voucher::where(function($query) use ($search, $request) {
+        $total_filtered = Voucher::whereNull('voucherable_type')
+            ->whereNull('voucherable_id')
+            ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->where('code', 'like', "%$search%")
+                       $query->where('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     });
                 }       
@@ -69,23 +72,24 @@ class VoucherController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                if(strtotime('now') < strtotime($val->start_date)) {
+                $currenct_date = strtotime(date('Y-m-d'));
+                if($currenct_date < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
-                        <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/manage/voucher/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
-                } else if(strtotime('now') >= strtotime($val->start_date)  && strtotime('now') <= strtotime($val->finish_date)) {
+                } else if($currenct_date >= strtotime($val->start_date) && $currenct_date <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
-                        <a href="' . url('admin/manage/voucher/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
-                        <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 } else {
                     $status = 'Expired';
                     $button = '
-                        <a href="' . url('admin/manage/voucher/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 }
 
@@ -93,9 +97,7 @@ class VoucherController extends Controller {
                     $nomor,
                     $val->name,
                     $val->code,
-                    $val->quota,
                     $val->percentage . '%',
-                    $val->order->count() > 0 ? $val->order->count() . 'x' : 0,
                     $val->type(),
                     $status,
                     $button
@@ -122,11 +124,12 @@ class VoucherController extends Controller {
     {
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
-                'code'        => 'required|min:7|unique:vouchers,code',
+                'code'        => 'required|min:3|unique:vouchers,code',
                 'name'        => 'required',
                 'minimum'     => 'required',
                 'maximum'     => 'required',
                 'quota'       => 'required',
+                'points'      => 'required',
                 'percentage'  => 'required',
                 'start_date'  => 'required',
                 'finish_date' => 'required',
@@ -134,12 +137,13 @@ class VoucherController extends Controller {
                 'type'        => 'required'
             ], [
                 'code.required'        => 'Code cannot be empty.',
-                'code.min'             => 'Code minimum 7 character.',
+                'code.min'             => 'Code minimum 3 character.',
                 'code.unique'          => 'Code exists.',
                 'name.required'        => 'Name cannot be empty.',
                 'minimum.required'     => 'Minimum order cannot be empty.',
-                'maximum.required'     => 'Nominal cannot be empty.',
+                'maximum.required'     => 'Maximum discount cannot be empty.',
                 'quota.required'       => 'Quota cannot be empty.',
+                'points.required'      => 'Points cannot be empty.',
                 'percentage.required'  => 'Percentage cannot be empty.',
                 'start_date.required'  => 'Start date cannot be empty.',
                 'finish_date.required' => 'Finish date cannot be empty.',
@@ -156,6 +160,7 @@ class VoucherController extends Controller {
                     'minimum'     => $request->minimum,
                     'maximum'     => $request->maximum,
                     'quota'       => $request->quota,
+                    'points'      => $request->points,
                     'percentage'  => $request->percentage,
                     'start_date'  => $request->start_date,
                     'finish_date' => $request->finish_date,
@@ -168,7 +173,7 @@ class VoucherController extends Controller {
                         ->performedOn(new Voucher())
                         ->causedBy(session('bo_id'))
                         ->withProperties($query)
-                        ->log('Add manage voucher data');
+                        ->log('Add voucher global data');
 
                     return redirect()->back()->with(['success' => 'Data added successfully.']);
                 } else {
@@ -177,9 +182,8 @@ class VoucherController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Create New Voucher',
-                'category' => Category::where('type', 2)->get(),
-                'content'  => 'admin.manage.voucher_create'
+                'title'   => 'Create New Voucher',
+                'content' => 'admin.voucher.global_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -191,11 +195,12 @@ class VoucherController extends Controller {
         $query = Voucher::find($id);
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
-                'code'        => ['required', 'min:7', Rule::unique('vouchers', 'code')->ignore($id)],
+                'code'        => ['required', 'min:3', Rule::unique('vouchers', 'code')->ignore($id)],
                 'name'        => 'required',
                 'minimum'     => 'required',
                 'maximum'     => 'required',
                 'quota'       => 'required',
+                'points'      => 'required',
                 'percentage'  => 'required',
                 'start_date'  => 'required',
                 'finish_date' => 'required',
@@ -203,12 +208,13 @@ class VoucherController extends Controller {
                 'type'        => 'required'
             ], [
                 'code.required'        => 'Code cannot be empty.',
-                'code.min'             => 'Code minimum 7 character.',
+                'code.min'             => 'Code minimum 3 character.',
                 'code.unique'          => 'Code exists.',
                 'name.required'        => 'Name cannot be empty.',
                 'minimum.required'     => 'Minimum order cannot be empty.',
-                'maximum.required'     => 'Nominal cannot be empty.',
+                'maximum.required'     => 'Maximum discount cannot be empty.',
                 'quota.required'       => 'Quota cannot be empty.',
+                'points.required'      => 'Points cannot be empty.',
                 'percentage.required'  => 'Percentage cannot be empty.',
                 'start_date.required'  => 'Start date cannot be empty.',
                 'finish_date.required' => 'Finish date cannot be empty.',
@@ -225,6 +231,7 @@ class VoucherController extends Controller {
                     'minimum'     => $request->minimum,
                     'maximum'     => $request->maximum,
                     'quota'       => $request->quota,
+                    'points'      => $request->points,
                     'percentage'  => $request->percentage,
                     'start_date'  => $request->start_date,
                     'finish_date' => $request->finish_date,
@@ -236,7 +243,7 @@ class VoucherController extends Controller {
                     activity()
                         ->performedOn(new Voucher())
                         ->causedBy(session('bo_id'))
-                        ->log('Change the manage voucher data');
+                        ->log('Change the voucher global data');
 
                     return redirect()->back()->with(['success' => 'Data updated successfully.']);
                 } else {
@@ -245,9 +252,9 @@ class VoucherController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Update Voucher',
-                'voucher'  => $query,
-                'content'  => 'admin.manage.voucher_update'
+                'title'   => 'Update Voucher',
+                'voucher' => $query,
+                'content' => 'admin.voucher.global_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -261,7 +268,7 @@ class VoucherController extends Controller {
             activity()
                 ->performedOn(new Voucher())
                 ->causedBy(session('bo_id'))
-                ->log('Delete the manage voucher data');
+                ->log('Delete the voucher global data');
 
             $response = [
                 'status'  => 200,
@@ -282,7 +289,7 @@ class VoucherController extends Controller {
         $data = [
             'title'   => 'Detail Voucher',
             'voucher' => Voucher::find($id),
-            'content' => 'admin.manage.voucher_detail'
+            'content' => 'admin.voucher.global_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

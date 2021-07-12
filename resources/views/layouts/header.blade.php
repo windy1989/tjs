@@ -20,9 +20,9 @@
 				</h4>
 				<p class="text-center">
 					<small style="font-size-14">
-						<i class="icon-coins text-warning"></i>
+						<i class="icon-coins text-teal"></i>
 						&nbsp; 
-						{{ $total_point ? number_format($total_point->point) : 0 }}
+						{{ $total_point ? number_format($total_point->points, 0, ',', '.') : 0 }}
 					</small>
 				</p>
 				<div class="form-group"><hr></div>
@@ -115,32 +115,32 @@
 									</a>
 								@else
 									<a href="{{ url('account/login') }}">
-										<i class="icon-line2-user mr-1 position-relative text-warning" style="top: 1px;"></i>
+										<i class="icon-line2-user mr-1 position-relative text-teal" style="top: 1px;"></i>
 										<span class="d-none d-xl-inline-block font-primary font-weight-medium text-dark">Login / Sign Up</span>
 									</a>
 								@endif
 							</div>
 							<div id="top-search" class="header-misc-icon">
 								<a href="#" id="top-search-trigger">
-									<i class="icon-line-search text-warning"></i>
-									<i class="icon-line-cross text-warning"></i>
+									<i class="icon-line-search text-teal"></i>
+									<i class="icon-line-cross text-teal"></i>
 								</a>
 							</div>
 							<div id="top-search" class="header-misc-icon d-none d-sm-block">
 								<a href="{{ url('account/wishlist') }}" id="top-search-trigger">
-									<i class="icon-heart21 text-warning"></i>
+									<i class="icon-heart21 text-teal"></i>
 									<span class="top-cart-number">{{ $total_wishlist }}</span>
 								</a>
 							</div>
 							<div id="top-search" class="header-misc-icon d-none d-sm-block">
 								<a href="{{ url('account/cart') }}" id="top-search-trigger">
-									<i class="icon-line-bag text-warning"></i>
+									<i class="icon-line-bag text-teal"></i>
 									<span class="top-cart-number">{{ $total_cart }}</span>
 								</a>
 							</div>
 						</div>
 						<div id="primary-menu-trigger">
-							<i class="icon-list text-warning"></i>
+							<i class="icon-list text-teal"></i>
 						</div>
 						<nav class="primary-menu with-arrows mr-lg-auto">
 							<ul class="menu-container">

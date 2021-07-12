@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Pattern;
 use App\Models\Product;
+use App\Models\Voucher;
 use App\Models\Category;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -236,6 +237,30 @@ class ProductController extends Controller {
         if(!$product) {
             return redirect('product');
         }
+ 
+        $voucher = Voucher::where(function($query) use ($product) {
+                $query->where(function($query) {
+                        $query->whereDate('start_date', '>=', date('Y-m-d'))
+                            ->whereDate('finish_date', '<=', date('Y-m-d'));
+                    })
+                    ->orWhere(function($query) use ($product) {
+                        $query->where('voucherable_type', 'brands')
+                            ->where('voucherable_id', $product->brand_id);
+                    })
+                    ->orWhere(function($query) use ($product) {
+                        $query->where('voucherable_type', 'categories')
+                            ->where('voucherable_id', $product->type->category_id);
+                    })
+                    ->orWhere(function($query) use ($product) {
+                        $query->whereNull('voucherable_type')
+                            ->whereNull('voucherable_id');
+                    });
+            })
+            ->whereHas('order', function($query) {
+                $query->whereIn('status', [2, 3, 4])
+                    ->havingRaw('COUNT(*) <= quota');
+            })
+            ->get();
 
         $related_product = Product::where('id', '!=', $product_id)
             ->where(function($query) use ($product) {
@@ -257,6 +282,7 @@ class ProductController extends Controller {
         $data = [
             'title'           => $product->code(),
             'product'         => $product,
+            'voucher'         => $voucher,
             'related_product' => $related_product,
             'content'         => 'product_detail'
         ];

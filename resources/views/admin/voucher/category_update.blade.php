@@ -9,7 +9,7 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/voucher/brand') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/voucher/category') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Voucher</a>
-					<a href="{{ url('admin/voucher/brand') }}" class="breadcrumb-item">Brand</a>
+					<a href="{{ url('admin/voucher/category') }}" class="breadcrumb-item">Category</a>
 					<span class="breadcrumb-item active">Update</span>
 				</div>
 			</div>
@@ -67,11 +67,11 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Brand :<span class="text-danger">*</span></label>
+                        <label>Category :<span class="text-danger">*</span></label>
                         <select name="voucherable_id" id="voucherable_id" class="select2">
                            <option value="">-- Choose --</option>
-                           @foreach($brand as $b)
-                              <option value="{{ $b->id }}" {{ old('voucherable_id', $voucher->voucherable_id) == $b->id ? 'selected' : '' }}>{{ $b->name }}</option>
+                           @foreach($category as $c)
+                              <option value="{{ $c->id }}" {{ old('voucherable_id', $voucher->voucherable_id) == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
                            @endforeach
                         </select>
                      </div>

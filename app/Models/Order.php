@@ -62,10 +62,10 @@ class Order extends Model {
     {
         switch($this->type) {
             case '1':
-                $type = 'Cash';
+                $type = 'Pay at Cashier';
                 break;
             case '2':
-                $type = 'Cashless';
+                $type = 'Online';
                 break;
             default:
                 $type = 'Invalid';

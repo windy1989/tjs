@@ -486,6 +486,24 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('destroy', 'VoucherBrandController@destroy');
                 Route::get('detail/{id}', 'VoucherBrandController@detail');
             });
+
+            Route::prefix('category')->group(function() {
+                Route::get('/', 'VoucherCategoryController@index');
+                Route::get('datatable', 'VoucherCategoryController@datatable');
+                Route::match(['get', 'post'], 'create', 'VoucherCategoryController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'VoucherCategoryController@update');
+                Route::post('destroy', 'VoucherCategoryController@destroy');
+                Route::get('detail/{id}', 'VoucherCategoryController@detail');
+            });
+
+            Route::prefix('global')->group(function() {
+                Route::get('/', 'VoucherGlobalController@index');
+                Route::get('datatable', 'VoucherGlobalController@datatable');
+                Route::match(['get', 'post'], 'create', 'VoucherGlobalController@create');
+                Route::match(['get', 'post'], 'update/{id}', 'VoucherGlobalController@update');
+                Route::post('destroy', 'VoucherGlobalController@destroy');
+                Route::get('detail/{id}', 'VoucherGlobalController@detail');
+            });
         });
 
         Route::prefix('accounting')->group(function() {

@@ -89,7 +89,7 @@ class AccountController extends Controller {
                     'email'    => $request->email,
                     'phone'    => $request->phone,
                     'password' => bcrypt($request->password),
-                    'point'    => 0
+                    'points'   => 0
                 ]);
 
                 $token = Token::create([
@@ -263,7 +263,7 @@ class AccountController extends Controller {
                         'name'         => $data->getName(),
                         'email'        => $data->getEmail(),
                         'verification' => date('Y-m-d H:i:s'),
-                        'point'        => 0
+                        'points'       => 0
                     ]);
 
                     session([

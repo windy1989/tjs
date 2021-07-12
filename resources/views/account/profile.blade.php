@@ -73,7 +73,7 @@
                            </div>
                         </div>
                         <div class="form-group mt-3">
-                           <button type="submit" class="button button-3d button-black float-right m-0">Save</button>
+                           <button type="submit" class="button button-3d bg-teal float-right m-0">Save</button>
                         </div>
                      </form>
                   </div>

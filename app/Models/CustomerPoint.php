@@ -14,7 +14,7 @@ class CustomerPoint extends Model {
     protected $fillable   = [
         'customer_id',
         'order_id',
-        'point'
+        'points'
     ];
 
 }

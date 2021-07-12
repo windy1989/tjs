@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Brand;
 use App\Models\Voucher;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class VoucherBrandController extends Controller {
+class VoucherCategoryController extends Controller {
     
     public function index()
     {
         $data = [
-            'title'   => 'Voucher Brand',
-            'content' => 'admin.voucher.brand'
+            'title'   => 'Voucher Category',
+            'content' => 'admin.voucher.category'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -39,16 +39,15 @@ class VoucherBrandController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Voucher::where('voucherable_type', 'brands')
+        $total_data = Voucher::where('voucherable_type', 'categories')
             ->count();
         
-        $query_data = Voucher::where('voucherable_type', 'brands')
+        $query_data = Voucher::where('voucherable_type', 'categories')
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('voucherable', function($query) use ($request) {
-                                $query->where('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             })
                             ->orWhere('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
@@ -60,13 +59,12 @@ class VoucherBrandController extends Controller {
             ->orderBy($order, $dir)
             ->get();
 
-        $total_filtered = Voucher::where('voucherable_type', 'brands')
+        $total_filtered = Voucher::where('voucherable_type', 'categories')
             ->where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('voucherable', function($query) use ($request) {
-                                $query->where('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
+                                $query->where('name', 'like', "%$search%");
                             })
                             ->orWhere('code', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
@@ -83,20 +81,20 @@ class VoucherBrandController extends Controller {
                 if($currenct_date < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
-                        <a href="' . url('admin/voucher/brand/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/voucher/brand/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
                 } else if($currenct_date >= strtotime($val->start_date) && $currenct_date <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
-                        <a href="' . url('admin/voucher/brand/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
-                        <a href="' . url('admin/voucher/brand/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 } else {
                     $status = 'Expired';
                     $button = '
-                        <a href="' . url('admin/voucher/brand/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 }
 
@@ -145,7 +143,7 @@ class VoucherBrandController extends Controller {
                 'terms'          => 'required',
                 'type'           => 'required'
             ], [
-                'voucherable_id.required' => 'Please select a brand.',
+                'voucherable_id.required' => 'Please select a category.',
                 'code.required'           => 'Code cannot be empty.',
                 'code.min'                => 'Code minimum 3 character.',
                 'code.unique'             => 'Code exists.',
@@ -165,7 +163,7 @@ class VoucherBrandController extends Controller {
                 return redirect()->back()->withErrors($validation)->withInput();
             } else {
                 $query = Voucher::create([
-                    'voucherable_type' => 'brands',
+                    'voucherable_type' => 'categories',
                     'voucherable_id'   => $request->voucherable_id,
                     'code'             => strtoupper($request->code),
                     'name'             => $request->name,
@@ -185,7 +183,7 @@ class VoucherBrandController extends Controller {
                         ->performedOn(new Voucher())
                         ->causedBy(session('bo_id'))
                         ->withProperties($query)
-                        ->log('Add voucher brand data');
+                        ->log('Add voucher category data');
 
                     return redirect()->back()->with(['success' => 'Data added successfully.']);
                 } else {
@@ -194,9 +192,9 @@ class VoucherBrandController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Create New Voucher',
-                'brand'   => Brand::all(),
-                'content' => 'admin.voucher.brand_create'
+                'title'    => 'Create New Voucher',
+                'category' => Category::has('type')->get(),
+                'content'  => 'admin.voucher.category_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -221,7 +219,7 @@ class VoucherBrandController extends Controller {
                 'terms'          => 'required',
                 'type'           => 'required'
             ], [
-                'voucherable_id.required' => 'Please select a brand.',
+                'voucherable_id.required' => 'Please select a category.',
                 'code.required'           => 'Code cannot be empty.',
                 'code.min'                => 'Code minimum 3 character.',
                 'code.unique'             => 'Code exists.',
@@ -241,7 +239,7 @@ class VoucherBrandController extends Controller {
                 return redirect()->back()->withErrors($validation)->withInput();
             } else {
                 $query->update([
-                    'voucherable_type' => 'brands',
+                    'voucherable_type' => 'categories',
                     'voucherable_id'   => $request->voucherable_id,
                     'code'             => strtoupper($request->code),
                     'name'             => $request->name,
@@ -260,7 +258,7 @@ class VoucherBrandController extends Controller {
                     activity()
                         ->performedOn(new Voucher())
                         ->causedBy(session('bo_id'))
-                        ->log('Change the voucher brand data');
+                        ->log('Change the voucher category data');
 
                     return redirect()->back()->with(['success' => 'Data updated successfully.']);
                 } else {
@@ -269,10 +267,10 @@ class VoucherBrandController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Update Voucher',
-                'brand'   => Brand::all(),
-                'voucher' => $query,
-                'content' => 'admin.voucher.brand_update'
+                'title'    => 'Update Voucher',
+                'category' => Category::has('type')->get(),
+                'voucher'  => $query,
+                'content'  => 'admin.voucher.category_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -286,7 +284,7 @@ class VoucherBrandController extends Controller {
             activity()
                 ->performedOn(new Voucher())
                 ->causedBy(session('bo_id'))
-                ->log('Delete the voucher brand data');
+                ->log('Delete the voucher category data');
 
             $response = [
                 'status'  => 200,
@@ -307,7 +305,7 @@ class VoucherBrandController extends Controller {
         $data = [
             'title'   => 'Detail Voucher',
             'voucher' => Voucher::find($id),
-            'content' => 'admin.voucher.brand_detail'
+            'content' => 'admin.voucher.category_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

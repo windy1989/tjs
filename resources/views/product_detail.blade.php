@@ -56,11 +56,11 @@
                                  <input type="button" value="+" class="plus">
                               </div>
                               <div class="mb-2 mt-2">
-                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#see_detail" class="text-primary font-italic">See Detail</a>
+                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#see_detail" class="text-primary mt-2 font-size-13">See Detail</a>
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-6 text-right">
-                              <button type="submit" class="button button-yellow bg-yellow m-0">Add to cart</button>
+                              <button type="submit" class="button bg-teal m-0">Add to cart</button>
                            </div>
                         </div>
                      </form>
@@ -132,54 +132,118 @@
                         </li>
                      </ul>
                   </div>
-                  <div class="w-100"></div>
-                  <div class="col-12 mt-5">
-                     <div class="tabs clearfix mb-0" id="tab-1">
-                        <ul class="tab-nav justify-content-center clearfix">
-                           <li>
-                              <a href="#tabs-1">
-                                 <i class="icon-align-justify2"></i> Description
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#tabs-2">
-                                 <i class="icon-settings"></i> Specification
-                              </a>
-                           </li>
-                        </ul>
-                        <div class="tab-container">
-                           <div class="tab-content clearfix" id="tabs-1">
-                              <p>{!! $product->description !!}</p>
+                  @if($voucher->count() > 0)
+                     <div class="w-100"></div>
+                     <div class="col-12 mt-3">
+                        <div class="card">
+                           <div class="card-body">
+                              <h5 class="card-title text-uppercase">Voucher</h5>
+                              <p>
+                                 <div class="owl-carousel image-carousel carousel-widget flip-card-wrapper clearfix" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3" style="overflow: visible;">
+                                    @foreach($voucher as $v)
+                                       <div class="flip-card text-center top-to-bottom">
+                                          <div class="flip-card-front bg-info dark" data-height-xl="200">
+                                             <div class="flip-card-inner">
+                                                <div class="card bg-transparent border-0 text-center">
+                                                   <div class="card-body">
+                                                      @if($v->voucherable_type == 'brands')
+                                                         <i class="icon-tags h1"></i>
+                                                      @elseif($v->voucherable_type == 'categories')
+                                                         <i class="icon-line-bag h1"></i>
+                                                      @else
+                                                         <i class="icon-line2-globe h1"></i>
+                                                      @endif
+                                                      <h4 class="card-title">{{ $v->name }}</h4>
+                                                      <p class="card-text font-weight-normal font-size-12 text-uppercase">
+                                                         {{ $v->voucherType() }} | {{ $v->percentage }}% | {{ $v->type() }}
+                                                      </p>
+                                                      <hr>
+                                                      <p class="card-text font-weight-normal font-size-12 text-uppercase">
+                                                         {{ $v->code }}
+                                                      </p>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="flip-card-back bg-teal" data-height-xl="200">
+                                             <div class="flip-card-inner">
+                                                <p class="mb-2 text-white font-size-13">
+                                                   @if($v->voucherable)
+                                                      Only valid for purchases of the {{ $v->voucherable->name }} {{ strtolower($v->voucherType()) }}, with a {{ $v->percentage }}% discount.
+                                                   @else
+                                                      Valid for all brands and category with a {{ $v->percentage }}% discount.
+                                                   @endif
+                                                   Minimum purchase {{ number_format($v->minimum, 0, ',', '.') }} and maximum discount {{ number_format($v->maximum, 0, ',', '.') }}.<br>
+                                                   Expired On {{ date('d F Y', strtotime($v->finish_date)) }}.
+                                                </p>
+                                                <a href="{{ url('information/voucher/' . base64_encode($v->id)) }}" class="btn btn-outline-light mt-3 btn-sm">Info</a>
+                                                @if($v->voucherable)
+                                                   <a href="{{ url('product?' . strtolower($v->type()) . '=' . ($v->voucherable_type == 'brands' ? $v->voucherable->code : $v->voucherable->slug)) }}" class="btn btn-outline-light mt-3 btn-sm">Use Now</a>
+                                                @else
+                                                   <a href="{{ url('product') }}" class="btn btn-outline-light mt-3 btn-sm">Use Now</a>
+                                                @endif
+                                             </div>
+                                          </div>
+                                       </div>
+                                    @endforeach
+                                 </div>
+                              </p>
                            </div>
-                           <div class="tab-content clearfix" id="tabs-2">
-                              <table class="table table-striped table-bordered">
-                                 <tbody>
-                                    <tr>
-                                       <td>Surface</td>
-                                       <td>{{ $product->type->surface->name }}</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Loading Limit</td>
-                                       <td>{{ $product->type->loadingLimit->name }}</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Weight</td>
-                                       <td>{{ $product->type->weight }} Kg</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Thickness</td>
-                                       <td>{{ $product->type->thickness }} mm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Grade</td>
-                                       <td>{{ $product->grade->name }}</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Country</td>
-                                       <td>{{ $product->country->name }}</td>
-                                    </tr>
-                                 </tbody>
-                              </table>
+                        </div>
+                     </div>
+                  @endif
+                  <div class="w-100"></div>
+                  <div class="col-12 mt-3">
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="tabs clearfix mb-0" id="tab-1">
+                              <ul class="tab-nav justify-content-center clearfix">
+                                 <li>
+                                    <a href="#tabs-1">
+                                       <i class="icon-align-justify2"></i> Description
+                                    </a>
+                                 </li>
+                                 <li>
+                                    <a href="#tabs-2">
+                                       <i class="icon-settings"></i> Specification
+                                    </a>
+                                 </li>
+                              </ul>
+                              <div class="tab-container">
+                                 <div class="tab-content clearfix" id="tabs-1">
+                                    <p>{!! $product->description !!}</p>
+                                 </div>
+                                 <div class="tab-content clearfix" id="tabs-2">
+                                    <table class="table table-striped table-bordered">
+                                       <tbody>
+                                          <tr>
+                                             <td>Surface</td>
+                                             <td>{{ $product->type->surface->name }}</td>
+                                          </tr>
+                                          <tr>
+                                             <td>Loading Limit</td>
+                                             <td>{{ $product->type->loadingLimit->name }}</td>
+                                          </tr>
+                                          <tr>
+                                             <td>Weight</td>
+                                             <td>{{ $product->type->weight }} Kg</td>
+                                          </tr>
+                                          <tr>
+                                             <td>Thickness</td>
+                                             <td>{{ $product->type->thickness }} mm</td>
+                                          </tr>
+                                          <tr>
+                                             <td>Grade</td>
+                                             <td>{{ $product->grade->name }}</td>
+                                          </tr>
+                                          <tr>
+                                             <td>Country</td>
+                                             <td>{{ $product->country->name }}</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>

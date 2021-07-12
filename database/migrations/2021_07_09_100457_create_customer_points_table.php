@@ -17,7 +17,7 @@ class CreateCustomerPointsTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('order_id')->constrained('orders');
-            $table->double('point');
+            $table->double('points');
             $table->timestamps();
         });
     }

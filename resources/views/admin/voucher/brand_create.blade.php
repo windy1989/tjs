@@ -9,7 +9,7 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/manage/voucher') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/voucher/brand') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -19,8 +19,8 @@
 			<div class="d-flex">
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
-					<a href="javascript:void(0);" class="breadcrumb-item">Manage</a>
-					<a href="{{ url('admin/manage/voucher') }}" class="breadcrumb-item">Voucher</a>
+					<a href="javascript:void(0);" class="breadcrumb-item">Voucher</a>
+					<a href="{{ url('admin/voucher/brand') }}" class="breadcrumb-item">Brand</a>
 					<span class="breadcrumb-item active">Create</span>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Maximum Discount:<span class="text-danger">*</span></label>
+                        <label>Maximum Discount :<span class="text-danger">*</span></label>
                         <input type="number" name="maximum" id="maximum" class="form-control" placeholder="0" value="{{ old('maximum') }}">
                      </div>
                   </div>
@@ -105,7 +105,7 @@
                         <select name="type" id="type" class="custom-select">
                            <option value="">-- Choose --</option>
                            <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Discount</option>
-                           <option value="3" {{ old('type') == 2 ? 'selected' : '' }}>Shipping</option>
+                           <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Shipping</option>
                         </select>
                      </div>
                   </div>

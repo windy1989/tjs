@@ -53,7 +53,7 @@
                               @error('password_confirmation') <small class="text-danger font-italic">{{ $message }}</small> @enderror
                            </div>
                            <div class="col-12 form-group mt-3">
-                              <button type="submit" class="button button-3d button-black float-right m-0">Reset Now</button>
+                              <button type="submit" class="button button-3d bg-teal float-right m-0">Reset Now</button>
                            </div>
                         </div>
                      </form>
