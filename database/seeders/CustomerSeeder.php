@@ -25,7 +25,7 @@ class CustomerSeeder extends Seeder
                 'email'        => $c['email'],
                 'phone'        => $c['phone'],
                 'password'     => $c['password'],
-                'point'        => $c['point'],
+                'points'       => $c['points'],
                 'verification' => $c['verification'],
                 'created_at'   => $c['created_at'],
                 'updated_at'   => $c['updated_at']
@@ -37,7 +37,7 @@ class CustomerSeeder extends Seeder
                 'id'          => $cp['id'],
                 'customer_id' => $cp['customer_id'],
                 'order_id'    => $cp['order_id'],
-                'point'       => $cp['point'],
+                'points'      => $cp['points'],
                 'created_at'  => $cp['created_at'],
                 'updated_at'  => $cp['updated_at']
             ]);
