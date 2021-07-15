@@ -170,6 +170,49 @@
 						</div>
 					</div>
 				</div>
+				@if($order->voucher)
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header bg-transparent">
+								<h6 class="card-title font-weight-semibold text-uppercase">Voucher Information</h6>
+							</div>
+							<div class="card-body">
+								<table class="table table-lg">
+									<tbody>
+										<tr>
+											<th width="20%">Voucher</th>
+											<td><b>:</b> {{ $order->voucher->name }}</td>
+										</tr>
+										<tr>
+											<th width="20%">Code</th>
+											<td><b>:</b> {{ $order->voucher->code }}</td>
+										</tr>
+										<tr>
+											<th width="20%">Type</th>
+											<td><b>:</b> {{ $order->voucher->type() }}</td>
+										</tr>
+										<tr>
+											<th width="20%">Discount</th>
+											<td><b>:</b> {{ $order->voucher->percentage }}%</td>
+										</tr>
+										<tr>
+											<th width="20%">Minimum Order</th>
+											<td><b>:</b> Rp {{ number_format($order->voucher->minimum, 0, ',', '.') }}</td>
+										</tr>
+										<tr>
+											<th width="20%">Maximum Order</th>
+											<td><b>:</b> Rp {{ number_format($order->voucher->maximum, 0, ',', '.') }}</td>
+										</tr>
+										<tr>
+											<th width="20%">Cashback</th>
+											<td><b>:</b> {{ number_format($order->voucher->points, 0, ',', '.') }} Points</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				@endif
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header bg-transparent">
@@ -193,8 +236,14 @@
 									</tr>
 									<tr>
 										<th width="20%">Discount</th>
-										<td><b>:</b> Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
+										<td><b>:</b> - Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
 									</tr>
+									@if($order->points)
+										<tr>
+											<th width="20%">Redeem Points</th>
+											<td><b>:</b> - {{ number_format($order->points, 0, ',', '.') }}</td>
+										</tr>
+									@endif
 									<tr>
 										<th width="20%">Shipping</th>
 										<td><b>:</b> Rp {{ number_format($order->shipping, 0, ',', '.') }}</td>

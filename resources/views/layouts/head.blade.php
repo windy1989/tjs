@@ -6,16 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="author" content="Calvin Dito Pratama">
-   <meta name="description" content="Smart Marble & Bath(SMB) The company is a branch of Karya Modern Group. Karya Modern Group has already been in tile and fitting industry for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Jl. Baliwerti Kav 10, Surabaya, East Java">
-   <meta name="keywords" content="marbles,sanitary,smart,bath">
+   <meta name="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
+   <meta name="keywords" content="smb,smartmarble,ceramic,ecommerce,online shop,indonesian tiles,surabaya tiles,ceramic surabaya,tiles ecommerce,jual keramik surabaya,keramik online">
    <meta itemprop="name" content="Smart Marble & Bath">
-   <meta itemprop="description" content="Smart Marble & Bath(SMB) The company is a branch of Karya Modern Group. Karya Modern Group has already been in tile and fitting industry for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Jl. Baliwerti Kav 10, Surabaya, East Java">
+   <meta itemprop="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
    <meta itemprop="image" content="{{ asset('website/logo-black.png') }}">
    <meta property="og:locale" content="id_ID">
-   <meta name="robots" content="INDEX,FOLLOW">
    <meta property="og:site_name" content="Smart Marble & Bath">
-   <meta property="og:title" content="Smart Marble & Bath | SMB">
-   <meta property="og:description" content="Smart Marble & Bath(SMB) The company is a branch of Karya Modern Group. Karya Modern Group has already been in tile and fitting industry for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Jl. Baliwerti Kav 10, Surabaya, East Java">
+   <meta property="og:title" content="Smart Marble & Bath">
+   <meta property="og:description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
    <meta property="og:type" content="website">
    <meta property="og:url" content="{{ url('/') }}">
    <meta property="og:image" content="{{ asset('website/logo-black.png') }}">

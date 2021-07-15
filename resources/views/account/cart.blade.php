@@ -90,7 +90,7 @@
             </div>
             <div class="form-group"><hr></div>
             <div class="text-right">
-               <button type="button" onclick="choosePaymentMethod()" class="button button-3d bg-teal mt-2 mt-sm-0 mr-0 text-right">Checkout Now</button>
+               <a href="{{ url('checkout') }}" class="button button-3d bg-teal mt-2 mt-sm-0 mr-0 text-right">Checkout Now</a>
             </div>
          @else
             <div class="alert alert-warning">
@@ -102,27 +102,6 @@
 </section>
 
 <script>
-   function choosePaymentMethod() {
-      Swal.fire({
-         title: 'Payment Method',
-         text: 'Please select the payment method according to your wishes',
-         icon: 'info',
-         allowOutsideClick: false,
-         showCancelButton: true,
-         showDenyButton: true,
-         confirmButtonText: 'Online',
-         denyButtonText: 'Pay at Cashier',
-         cancelButtonText: 'Cancel',
-         reverseButtons: true
-      }).then((result) => {
-         if(result.isConfirmed) {
-            window.location.href = '{{ url("checkout/cashless") }}';
-         } else if(result.isDenied) {
-            window.location.href = '{{ url("checkout/cash") }}';
-         }
-      });
-   }
-
    function cartQty(id, product_id) {
       $.ajax({
          url: '{{ url("product/cart_qty") }}',

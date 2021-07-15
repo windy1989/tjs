@@ -79,7 +79,7 @@
 															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
 																<i class="icon-line-map-pin "></i> 
 																&nbsp;&nbsp;
-																Surabaya, Baliwerti 119 - 121
+																Jl. Baliwerti No.119-121, Alun-alun Contong, Kec. Bubutan, Kota SBY, Jawa Timur 60161
 															</a>
 														</div>
 														<div class="mb-2">
@@ -93,7 +93,7 @@
 															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
 																<i class="icon-headphones-alt"></i> 
 																&nbsp;&nbsp;
-																0812-3005-2352 / (031) 5477501
+																082131972353 / 031-5477501
 															</a>
 														</div>
 													</p>
@@ -104,7 +104,7 @@
 															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
 																<i class="icon-line-map-pin "></i> 
 																&nbsp;&nbsp;
-																Gedung Jagat, Main Lobby, Jl. Tomang Raya No.28
+																Gedung Jagat, Lobby Utama Jl. Tomang Raya No. 28-30 Jakarta Barat, Indonesia
 															</a>
 														</div>
 														<div class="mb-2">
@@ -118,7 +118,7 @@
 															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
 																<i class="icon-headphones-alt"></i> 
 																&nbsp;&nbsp;
-																082131972353
+																0811257180
 															</a>
 														</div>
 													</p>

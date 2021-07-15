@@ -34,6 +34,8 @@ Route::prefix('account')->group(function() {
     Route::get('history_order/detail/{id}', 'AccountController@historyOrderDetail');
     Route::post('history_order/confirmation_delivery', 'AccountController@confirmationDelivery');
     Route::match(['get', 'post'], 'profile', 'AccountController@profile');
+    Route::get('voucher', 'AccountController@voucher');
+    Route::get('points', 'AccountController@points');
 });
 
 Route::prefix('information')->group(function() {
@@ -59,7 +61,7 @@ Route::prefix('career')->group(function() {
 });
 
 Route::prefix('checkout')->group(function() {
-    Route::match(['get', 'post'], '{param}', 'CheckoutController@index');
+    Route::match(['get', 'post'], '/', 'CheckoutController@index');
     Route::get('notif/{param}', 'CheckoutController@notif');
     
     Route::prefix('process')->group(function() {

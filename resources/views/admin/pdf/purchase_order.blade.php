@@ -255,7 +255,11 @@
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($purchase_order->order->shipping, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($shipping, 0, ',', '.') }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;">DISCOUNT</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($discount, 0, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">TOTAL</th>

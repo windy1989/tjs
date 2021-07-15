@@ -44,26 +44,28 @@
                            Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Carton</strong>
                         </div>
                      </div>
-                     <div class="line"></div>
-                     <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0" method="POST">
-                        @csrf
-                        <div class="row justify-content-center">
-                           <div class="col-lg-6 col-md-6 col-6 mb-1">
-                              <div class="quantity">
-                                 <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
-                                 <input type="button" value="-" class="minus">
-                                 <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" max="{{ $product->availability()->stock }}" title="Quantity" class="qty">
-                                 <input type="button" value="+" class="plus">
+                     @if($product->availability()->stock > 0)
+                        <div class="line"></div>
+                        <form method="POST" action="{{ url('product/add_to_cart') }}" class="cart mb-0" method="POST">
+                           @csrf
+                           <div class="row gutter-30">
+                              <div class="col-6">
+                                 <div class="quantity">
+                                    <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="number" step="1" min="1" name="qty" id="qty" onchange="checkStock()" value="1" max="{{ $product->availability()->stock }}" title="Quantity" class="qty">
+                                    <input type="button" value="+" class="plus">
+                                 </div>
+                                 <div class="mb-2 mt-2">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#see_detail" class="text-primary mt-2 font-size-13"><i class="icon-line-info"></i> See Detail</a>
+                                 </div>
                               </div>
-                              <div class="mb-2 mt-2">
-                                 <a href="javascript:void(0);" data-toggle="modal" data-target="#see_detail" class="text-primary mt-2 font-size-13">See Detail</a>
+                              <div class="col-6 text-right">
+                                 <button type="submit" class="button bg-teal m-0">Add to cart</button>
                               </div>
                            </div>
-                           <div class="col-lg-6 col-md-6 col-6 text-right">
-                              <button type="submit" class="button bg-teal m-0">Add to cart</button>
-                           </div>
-                        </div>
-                     </form>
+                        </form>
+                     @endif
                      <div class="line"></div>
                      <form method="POST" action="{{ url('product/add_to_wishlist') }}" class="cart mb-0 d-flex justify-content-between align-items-center">
                         @csrf
@@ -139,50 +141,22 @@
                            <div class="card-body">
                               <h5 class="card-title text-uppercase">Voucher</h5>
                               <p>
-                                 <div class="owl-carousel image-carousel carousel-widget flip-card-wrapper clearfix" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="1" data-items-md="2" data-items-lg="3" data-items-xl="3" style="overflow: visible;">
+                                 <div class="owl-carousel carousel-widget" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="1" data-items-md="1" data-items-lg="2" data-items-xl="2" style="overflow: visible;">
                                     @foreach($voucher as $v)
-                                       <div class="flip-card text-center top-to-bottom">
-                                          <div class="flip-card-front bg-info dark" data-height-xl="200">
-                                             <div class="flip-card-inner">
-                                                <div class="card bg-transparent border-0 text-center">
-                                                   <div class="card-body">
-                                                      @if($v->voucherable_type == 'brands')
-                                                         <i class="icon-tags h1"></i>
-                                                      @elseif($v->voucherable_type == 'categories')
-                                                         <i class="icon-line-bag h1"></i>
-                                                      @else
-                                                         <i class="icon-line2-globe h1"></i>
-                                                      @endif
-                                                      <h4 class="card-title">{{ $v->name }}</h4>
-                                                      <p class="card-text font-weight-normal font-size-12 text-uppercase">
-                                                         {{ $v->voucherType() }} | {{ $v->percentage }}% | {{ $v->type() }}
-                                                      </p>
-                                                      <hr>
-                                                      <p class="card-text font-weight-normal font-size-12 text-uppercase">
-                                                         {{ $v->code }}
-                                                      </p>
-                                                   </div>
-                                                </div>
+                                       <div class="card shadow">
+                                          <div class="card-body">
+                                             <h6 class="card-title mb-2">{{ $v->name }}</h6>
+                                             <div class="mb-1">
+                                                <span class="font-size-11">
+                                                   Code : {{ $v->code }}
+                                                </span>
                                              </div>
-                                          </div>
-                                          <div class="flip-card-back bg-teal" data-height-xl="200">
-                                             <div class="flip-card-inner">
-                                                <p class="mb-2 text-white font-size-13">
-                                                   @if($v->voucherable)
-                                                      Only valid for purchases of the {{ $v->voucherable->name }} {{ strtolower($v->voucherType()) }}, with a {{ $v->percentage }}% discount.
-                                                   @else
-                                                      Valid for all brands and category with a {{ $v->percentage }}% discount.
-                                                   @endif
-                                                   Minimum purchase {{ number_format($v->minimum, 0, ',', '.') }} and maximum discount {{ number_format($v->maximum, 0, ',', '.') }}.<br>
-                                                   Expired On {{ date('d F Y', strtotime($v->finish_date)) }}.
-                                                </p>
-                                                <a href="{{ url('information/voucher/' . base64_encode($v->id)) }}" class="btn btn-outline-light mt-3 btn-sm">Info</a>
-                                                @if($v->voucherable)
-                                                   <a href="{{ url('product?' . strtolower($v->type()) . '=' . ($v->voucherable_type == 'brands' ? $v->voucherable->code : $v->voucherable->slug)) }}" class="btn btn-outline-light mt-3 btn-sm">Use Now</a>
-                                                @else
-                                                   <a href="{{ url('product') }}" class="btn btn-outline-light mt-3 btn-sm">Use Now</a>
-                                                @endif
+                                             <div class="mb-1">
+                                                <span class="font-size-11 text-uppercase">
+                                                   {{ $v->voucherType() }} | {{ $v->percentage }}%
+                                                </span>
                                              </div>
+                                             <span class="text-teal font-size-12 font-weight-medium">Expired : {{ date('d F Y', strtotime($v->finish_date)) }}</span>
                                           </div>
                                        </div>
                                     @endforeach

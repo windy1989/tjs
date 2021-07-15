@@ -178,12 +178,20 @@
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Shipping</td>
-										<td colspan="2">Rp {{ number_format($purchase_order->order->shipping, 0, ',', '.') }}</td>
+										<td colspan="2">
+											Rp {{ number_format($shipping, 0, ',', '.') }}
+										</td>
+									</tr>
+									<tr>
+										<td colspan="4" class="text-right">Discount</td>
+										<td colspan="2">
+											Rp {{ number_format($discount, 0, ',', '.') }}
+										</td>
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Total</td>
 										<td colspan="2" class="text-danger font-weight-bold">
-											Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $purchase_order->order->shipping, 0, ',', '.') }}
+											Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $shipping, 0, ',', '.') }}
 										</td>
 									</tr>
 								</tfoot>

@@ -105,8 +105,6 @@
                                  <div class="row">
                                     <div class="col-md-6">
                                        <h5 class="font-weight-medium">
-                                          <div class="font-size-12">Subtotal : <span class="text-muted">Rp {{  number_format($o->orderDetail->sum('total'), 0, ',', '.') }}</span></div>
-                                          <div class="font-size-12">Shipping : <span class="text-muted">Rp {{  number_format($o->shipping, 0, ',', '.') }}</span></div>
                                           <div class="font-size-12">Total : <span class="text-muted">Rp {{  number_format($o->grandtotal, 0, ',', '.') }}</span></div>
                                           <div class="font-size-12 text-uppercase"><sub class="text-dark text-left font-weight-bold font-italic">{{ $o->type() }}</sub></div>
                                        </h5>

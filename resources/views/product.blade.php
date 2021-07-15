@@ -49,9 +49,9 @@
                            <div class="col-9">
                               <select name="sort" id="sort" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
                                  <option value="">Normal</option>
+                                 <option value="latest" {{ $filter['other']['sort'] == 'latest' ? 'selected' : '' }}>Latest</option>
                                  <option value="low_to_high" {{ $filter['other']['sort'] == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
                                  <option value="high_to_low" {{ $filter['other']['sort'] == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
-                                 <option value="newest" {{ $filter['other']['sort'] == 'newest' ? 'selected' : '' }}>Newest</option>
                               </select>
                            </div>
                         </div>

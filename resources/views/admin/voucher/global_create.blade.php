@@ -93,8 +93,8 @@
                         <label>Type :<span class="text-danger">*</span></label>
                         <select name="type" id="type" class="custom-select">
                            <option value="">-- Choose --</option>
-                           <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Discount</option>
-                           <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Shipping</option>
+                           <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Discount Purchase</option>
+                           <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Discount Shipping</option>
                         </select>
                      </div>
                   </div>

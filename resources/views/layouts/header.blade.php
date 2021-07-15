@@ -1,7 +1,7 @@
 @php 
 	$total_cart     = App\Models\Cart::where('customer_id', session('fo_id'))->count(); 
 	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
-	$total_point    = App\Models\Customer::find(session('fo_id'));
+	$total_points   = App\Models\Customer::find(session('fo_id'));
 @endphp
 <body class="stretched">
 	<div class="body-overlay"></div>
@@ -20,28 +20,31 @@
 				</h4>
 				<p class="text-center">
 					<small style="font-size-14">
-						<i class="icon-coins text-teal"></i>
+						<i class="icon-coins text-warning"></i>
 						&nbsp; 
-						{{ $total_point ? number_format($total_point->points, 0, ',', '.') : 0 }}
+						{{ $total_points ? number_format($total_points->points, 0, ',', '.') : 0 }}
 					</small>
 				</p>
 				<div class="form-group"><hr></div>
 				<nav class="nav-tree">
 					<ul>
 						<li>
-							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-light">{{ $total_cart }}</sup></a>
+							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
 						</li>
 						<li>
-							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-light">{{ $total_wishlist }}</sup></a>
+							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-danger">{{ $total_cart }}</sup></a>
+						</li>
+						<li>
+							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-danger">{{ $total_wishlist }}</sup></a>
 						</li>
 						<li>
 							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
 						</li>
 						<li>
-							<a href="{{ url('account/point') }}"><i class="icon-coins"></i> Point</sup></a>
+							<a href="{{ url('account/voucher') }}"><i class="icon-ticket"></i> My Voucher</sup></a>
 						</li>
 						<li>
-							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
+							<a href="{{ url('account/points') }}"><i class="icon-coins"></i> Point</sup></a>
 						</li>
 					</ul>
 				</nav>
@@ -62,8 +65,8 @@
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="tel:081230052352" style="text-transform:none;" class="font-weight-normal font-size-11">
-										<i class="icon-line-phone"></i> 0812-3005-2352
+									<a href="tel:082131972353" style="text-transform:none;" class="font-weight-normal font-size-11">
+										<i class="icon-line-phone"></i> 082131972353
 									</a>
 								</li>
 								<li class="top-links-item">

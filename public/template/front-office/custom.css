@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
+input:disabled {
+   opacity: .5;
+}
+
 .circle-element {
    display: inline-block;
    width: 1rem;
@@ -73,6 +77,10 @@
 .bg-teal {
    color: white !important;
    background: #51b4ba !important;
+}
+
+.bg-teal:hover {
+   opacity: .9;
 }
 
 .pagination > li > a {

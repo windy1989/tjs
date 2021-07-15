@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Token;
+use App\Models\Voucher;
 use App\Models\Customer;
 use App\Models\Wishlist;
 use App\Jobs\EmailProcess;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CustomerPoint;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -462,6 +464,82 @@ class AccountController extends Controller {
 
             return view('layouts.index', ['data' => $data]);
         }
+    }
+
+    public function voucher(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        }
+
+        $voucher = Voucher::where(function($query) use ($request) {
+                if($request->type == 'used') {
+                    $query->whereExists(function($query) {
+                            $query->selectRaw(1)
+                                ->from('orders')
+                                ->where('orders.customer_id', session('fo_id'))
+                                ->where('status', '!=', 6)
+                                ->where('customer_id', session('fo_id'))
+                                ->whereColumn('orders.voucher_id', 'vouchers.id');
+                        });
+                } else if($request->type == 'will_be_end') {
+                    $query->whereDate('start_date', '>=', date('Y-m-d'))
+                        ->whereDate('finish_date', '=', date('Y-m-d'));
+
+                    $query->whereHas('order', function($query) {
+                            $query->where('status', '!=', 6)
+                                ->havingRaw('COUNT(*) <= quota');
+                        });
+                } else if($request->type == 'expired') {
+                    $query->whereDate('finish_date', '<', date('Y-m-d'))
+                        ->whereNotExists(function($query) {
+                            $query->selectRaw(1)
+                                ->from('orders')
+                                ->where('orders.customer_id', session('fo_id'))
+                                ->whereColumn('orders.voucher_id', 'vouchers.id');
+                        })
+                        ->whereHas('order', function($query) {
+                            $query->where('status', '!=', 6)
+                                ->havingRaw('COUNT(*) <= quota');
+                        });
+                } else {
+                    $query->whereNotExists(function($query) {
+                            $query->selectRaw(1)
+                                ->from('orders')
+                                ->where('orders.customer_id', session('fo_id'))
+                                ->whereColumn('orders.voucher_id', 'vouchers.id');
+                        })
+                        ->whereHas('order', function($query) {
+                            $query->where('status', '!=', 6)
+                                ->havingRaw('COUNT(*) <= quota');
+                        });
+                }
+            });
+
+        $data = [
+            'title'   => 'Voucher',
+            'voucher' => $voucher->paginate(10),
+            'type'    => $request->type,
+            'content' => 'account.voucher'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function points(Request $request)
+    {
+        if(!session('fo_id')) {
+            return redirect('account/login');
+        }
+
+        $data = [
+            'title'   => 'Points',
+            'points'  => CustomerPoint::where('customer_id', session('fo_id'))->paginate(10),
+            'type'    => $request->type,
+            'content' => 'account.points'
+        ];
+
+        return view('layouts.index', ['data' => $data]);
     }
 
 }

@@ -23,11 +23,11 @@
          <div class="card">
             <div class="card-body">
                <div class="card-title">
-                  <a href="{{ url('account/history_order') }}" class="text-dark text-uppercase">
+                  <a href="{{ url('account/history_order') }}" class="text-dark text-uppercase font-size-13">
                      <i class="icon-chevron-left"></i>
                      &nbsp;Back
                   </a>
-                  <span class="float-right text-uppercase">
+                  <span class="float-right text-uppercase font-size-13">
                      No. # {{ $order->number }}
                   </span>
                </div>
@@ -45,7 +45,7 @@
                <div class="table-responsive">
                   <table class="table cart table-bordered">
                      <thead>
-                        <tr class="text-center">
+                        <tr class="text-center font-size-13">
                            <th class="cart-product-thumbnail text-center">Image</th>
                            <th class="cart-product-name">Product</th>
                            <th class="cart-product-price">Unit Price</th>
@@ -55,14 +55,14 @@
                      </thead>
                      <tbody>
                         @foreach($order->orderDetail as $od)
-                           <tr class="cart_item text-center">
+                           <tr class="cart_item text-center font-size-12">
                               <td class="cart-product-quantity">
                                  <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
                                     <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
                                  </a>
                               </td>
                               <td class="cart-product-name">
-                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">{{ $od->product->code() }}</a>
+                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}" class="font-size-12">{{ $od->product->code() }}</a>
                               </td>
                               <td class="cart-product-quantity">
                                  <span class="amount">Rp {{ number_format($od->price_list, 0, ',', '.') }}</span>
@@ -86,36 +86,36 @@
                   <div class="col-md-12 mt-4 mb-3">
                      <div class="border p-4">
                         <div class="table-responsive">
-                           <h4 class="text-uppercase">Billing Address</h4>
+                           <h5 class="text-uppercase">Billing Address</h5>
                            <table class="table cart">
                               <tbody>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Name</strong>
+                                       <strong class="font-size-12">Name</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->name }}</strong>
+                                          <strong class="font-size-12 text-dark">{{ $order->customer->name }}</strong>
                                        </span>
                                     </td>
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Email</strong>
+                                       <strong class="font-size-12">Email</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->email }}</strong>
+                                          <strong class="font-size-12 text-dark">{{ $order->customer->email }}</strong>
                                        </span>
                                     </td>
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Phone</strong>
+                                       <strong class="font-size-12">Phone</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">{{ $order->customer->phone }}</strong>
+                                          <strong class="font-size-12 text-dark">{{ $order->customer->phone }}</strong>
                                        </span>
                                     </td>
                                  </tr>
@@ -127,16 +127,16 @@
                   <div class="col-md-12 mt-4 mb-3">
                      <div class="border p-4">
                         <div class="table-responsive">
-                           <h4 class="text-uppercase">Shipping Address</h4>
+                           <h5 class="text-uppercase">Shipping Address</h5>
                            <table class="table cart">
                               <tbody>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Name</strong>
+                                       <strong class="font-size-12">Name</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">
+                                          <strong class="font-size-12 text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->receiver_name : 'Delivery not set' }}
                                           </strong>
                                        </span>
@@ -144,11 +144,11 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Email</strong>
+                                       <strong class="font-size-12">Email</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">
+                                          <strong class="font-size-12 text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->email : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -156,11 +156,11 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Phone</strong>
+                                       <strong class="font-size-12">Phone</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">
+                                          <strong class="font-size-12 text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->phone : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -168,11 +168,11 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">City</strong>
+                                       <strong class="font-size-12">City</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">
+                                          <strong class="font-size-12 text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->city->name : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -180,11 +180,11 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Address</strong>
+                                       <strong class="font-size-12">Address</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong style="font-size:14px;" class="text-dark">
+                                          <strong class="font-size-12 text-dark">
                                              {{ $order->orderShipping ? $order->orderShipping->address : 'Delivery not set' }}   
                                           </strong>
                                        </span>
@@ -203,17 +203,17 @@
                   <div class="col-lg-12 mb-5">
                      <div class="border p-4">
                         <div class="table-responsive">
-                           <h4 class="text-uppercase">Payment Information</h4>
+                           <h5 class="text-uppercase">Payment Information</h5>
                            @if($order->orderPayment)
                               <table class="table cart">
                                  <tbody>
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
-                                          <strong style="font-size:13px;" class="text-uppercase">Paid At</strong>
+                                          <strong class="font-size-12">Paid At</strong>
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
                                                 {{ date('d F Y, H:i', strtotime($order->orderPayment->created_at)) }}
                                              </strong>
                                           </span>
@@ -221,11 +221,11 @@
                                     </tr>
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
-                                          <strong style="font-size:13px;" class="text-uppercase">Method</strong>
+                                          <strong class="font-size-12">Method</strong>
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
                                                 {{ $order->orderPayment->method }}
                                              </strong>
                                           </span>
@@ -233,11 +233,11 @@
                                     </tr>
                                     <tr class="cart_item">
                                        <td class="cart-product-name">
-                                          <strong style="font-size:13px;" class="text-uppercase">Channel</strong>
+                                          <strong class="font-size-12">Channel</strong>
                                        </td>
                                        <td class="cart-product-name">
                                           <span class="amount color lead">
-                                             <strong id="grandtotal" style="font-size:14px;" class="text-dark">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
                                                 {{ $order->orderPayment->channel }}
                                              </strong>
                                           </span>
@@ -247,7 +247,7 @@
                               </table>
                            @else
                               <div class="style-msg2" style="background-color: #EEE;">
-                                 <div class="sb-msg">
+                                 <div class="sb-msg font-size-12">
                                     <i class="icon-warning-sign"></i>
                                     <strong>Ooppsss!</strong> 
                                     There is no payment on your order
@@ -257,15 +257,114 @@
                         </div>
                      </div>
                   </div>
+                  @if($order->voucher)
+                     <div class="col-lg-12 mb-5">
+                        <div class="border p-4">
+                           <div class="table-responsive">
+                              <h5 class="text-uppercase">Voucher Information</h5>
+                              <table class="table cart">
+                                 <tbody>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Voucher</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                {{ $order->voucher->name }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Code</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                {{ $order->voucher->code }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Type</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                {{ $order->voucher->type() }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Discount</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                {{ $order->voucher->percentage }}%
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Minimum Order</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                Rp {{ number_format($order->voucher->minimum, 0, ',', '.') }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Maximum Discount</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                Rp {{ number_format($order->voucher->maximum, 0, ',', '.') }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                    @if($order->voucher->points > 0)
+                                       <tr class="cart_item">
+                                          <td class="cart-product-name">
+                                             <strong class="font-size-12">Cashback</strong>
+                                          </td>
+                                          <td class="cart-product-name">
+                                             <span class="amount color lead">
+                                                <strong id="grandtotal" class="font-size-12 text-dark">
+                                                   {{ number_format($order->voucher->points, 0, ',', '.') }} Points
+                                                </strong>
+                                             </span>
+                                          </td>
+                                       </tr>
+                                    @endif
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  @endif
                   <div class="col-lg-12">
                      <div class="border p-4">
                         <div class="table-responsive">
-                           <h4 class="text-uppercase">Summary</h4>
+                           <h5 class="text-uppercase">Summary</h5>
                            <table class="table cart">
                               <tbody>
                                  @if(Storage::exists($order->qr_code))
                                     <tr class="cart_item">
-                                       <td rowspan="6">
+                                       <td rowspan="7">
                                           <center>
                                              <img src="{{ asset(Storage::url($order->qr_code)) }}" class="img-fluid">
                                           </center>
@@ -274,11 +373,11 @@
                                  @endif
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Subtotal</strong>
+                                       <strong class="font-size-12">Subtotal</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
+                                          <strong id="grandtotal" class="font-size-12 text-dark">
                                              Rp {{ number_format($order->subtotal, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -286,23 +385,37 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Discount</strong>
+                                       <strong class="font-size-12">Discount</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
-                                             Rp {{ number_format($order->discount, 0, ',', '.') }}
+                                          <strong id="grandtotal" class="font-size-12 text-dark">
+                                             - Rp {{ number_format($order->discount, 0, ',', '.') }}
                                           </strong>
                                        </span>
                                     </td>
                                  </tr>
+                                 @if($order->points)
+                                    <tr class="cart_item">
+                                       <td class="cart-product-name">
+                                          <strong class="font-size-12">Redeem Points</strong>
+                                       </td>
+                                       <td class="cart-product-name">
+                                          <span class="amount color lead">
+                                             <strong id="grandtotal" class="font-size-12 text-dark">
+                                                - {{ number_format($order->points, 0, ',', '.') }}
+                                             </strong>
+                                          </span>
+                                       </td>
+                                    </tr>
+                                 @endif
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Delivery Cost</strong>
+                                       <strong class="font-size-12">Delivery Cost</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:14px;" class="text-dark">
+                                          <strong id="grandtotal" class="font-size-12 text-dark">
                                              Rp {{ number_format($order->shipping, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -310,11 +423,11 @@
                                  </tr>
                                  <tr class="cart_item">
                                     <td class="cart-product-name">
-                                       <strong style="font-size:13px;" class="text-uppercase">Total</strong>
+                                       <strong class="font-size-14">Total</strong>
                                     </td>
                                     <td class="cart-product-name">
                                        <span class="amount color lead">
-                                          <strong id="grandtotal" style="font-size:20px;" class="text-dark font-weight-bold">
+                                          <strong id="grandtotal" class="font-size-14 text-dark font-weight-bold">
                                              Rp {{ number_format($order->grandtotal, 0, ',', '.') }}
                                           </strong>
                                        </span>
@@ -330,24 +443,24 @@
                <div class="row">
                   <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 successmsg">
-								<div class="msgtitle text-center font-weight-bold text-uppercase">Type Of Transport</div>
-								<div class="sb-msg text-center font-weight-semibold">
+								<div class="msgtitle text-center font-weight-bold text-uppercase font-size-12">Type Of Transport</div>
+								<div class="sb-msg text-center font-weight-semibold font-size-12">
 									{{ $order->orderShipping ? $order->orderShipping->delivery->transport->fleet : 'Delivery not set' }}
 								</div>
 							</div>
                   </div>
                   <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 errormsg">
-								<div class="msgtitle text-center font-weight-bold text-uppercase">Payment Method</div>
-								<div class="sb-msg text-center font-weight-semibold">
+								<div class="msgtitle text-center font-weight-bold text-uppercase font-size-12">Payment Method</div>
+								<div class="sb-msg text-center font-weight-semibold font-size-12">
 									{{ $order->type() }}
 								</div>
 							</div>
                   </div>
                   <div class="col-lg-4 col-md-12">
                      <div class="style-msg2 alertmsg">
-								<div class="msgtitle text-center font-weight-bold text-uppercase">Status</div>
-								<div class="sb-msg text-center font-weight-semibold">
+								<div class="msgtitle text-center font-weight-bold text-uppercase font-size-12">Status</div>
+								<div class="sb-msg text-center font-weight-semibold font-size-12">
 									@if($order->status == 1)
                               Waiting for payment
                            @elseif($order->status == 2)
@@ -366,7 +479,7 @@
                @if($order->status == 1 && $order->type == 2)
                   <div class="form-group"><hr></div>
                   <div class="text-right mt-4">
-                     <a href="{{ $order->xendit()->url }}" class="button bg-teal button-3d">Pay Now</a>
+                     <a href="{{ $order->xendit()->url }}" class="button bg-teal button-3d font-size-12">Pay Now</a>
                   </div>
                @endif
             </div>

@@ -9,6 +9,7 @@ use App\Models\OrderPo;
 use App\Models\Customer;
 use App\Models\OrderPayment;
 use Illuminate\Http\Request;
+use App\Models\CustomerPoint;
 use App\Models\OrderDelivery;
 use App\Http\Controllers\Controller;
 
@@ -193,6 +194,19 @@ class OrderInvoiceController extends Controller {
                 if($order->status == 1 || $order->status == 5) {
                     $status = 2;
                     
+                    if($order->voucher) {
+                        if($order->voucher->points > 0) {
+                            $pointable = $order->customer->points;
+                            $order->customer->update(['points' => $pointable + $order->voucher->points]);
+                            
+                            CustomerPoint::create([
+                                'customer_id' => $order->customer_id,
+                                'order_id'    => $order->id,
+                                'points'      => $order->voucher->points
+                            ]);
+                        }
+                    }
+
                     OrderPo::create([
                         'order_id'       => $order->id,
                         'purchase_order' => OrderPo::generateCode(),

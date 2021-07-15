@@ -17,4 +17,9 @@ class CustomerPoint extends Model {
         'points'
     ];
 
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Order');
+    }
+
 }

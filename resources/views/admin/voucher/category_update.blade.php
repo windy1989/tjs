@@ -67,8 +67,8 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Category :<span class="text-danger">*</span></label>
-                        <select name="voucherable_id" id="voucherable_id" class="select2">
+                        <label>Category :</label>
+                        <select class="custom-select" disabled>
                            <option value="">-- Choose --</option>
                            @foreach($category as $c)
                               <option value="{{ $c->id }}" {{ old('voucherable_id', $voucher->voucherable_id) == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
@@ -78,14 +78,14 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Minimum Order :<span class="text-danger">*</span></label>
-                        <input type="number" name="minimum" id="minimum" class="form-control" placeholder="0" value="{{ old('minimum', $voucher->minimum) }}">
+                        <label>Minimum Order :</label>
+                        <input type="number" class="form-control" value="{{ $voucher->minimum }}" disabled>
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Maximum Discount :<span class="text-danger">*</span></label>
-                        <input type="number" name="maximum" id="maximum" class="form-control" placeholder="0" value="{{ old('maximum', $voucher->maximum) }}">
+                        <label>Maximum Discount :</label>
+                        <input type="number" class="form-control" value="{{ $voucher->maximum }}" disabled>
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -96,30 +96,30 @@
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Percentage(%) :<span class="text-danger">*</span></label>
-                        <input type="number" name="percentage" id="percentage" max="100" class="form-control" placeholder="0" value="{{ old('percentage', $voucher->percentage) }}">
+                        <label>Percentage(%) :</label>
+                        <input type="number" class="form-control" value="{{ $voucher->percentage }}" disabled>
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Type :<span class="text-danger">*</span></label>
-                        <select name="type" id="type" class="custom-select">
+                        <label>Type :</label>
+                        <select class="custom-select" disabled>
                            <option value="">-- Choose --</option>
-                           <option value="1" {{ old('type', $voucher->type) == 1 ? 'selected' : '' }}>Discount</option>
-                           <option value="2" {{ old('type', $voucher->type) == 2 ? 'selected' : '' }}>Shipping</option>
+                           <option value="1" {{ old('type', $voucher->type) == 1 ? 'selected' : '' }}>Discount Purchase</option>
+                           <option value="2" {{ old('type', $voucher->type) == 2 ? 'selected' : '' }}>Discount Shipping</option>
                         </select>
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Points :<span class="text-danger">*</span></label>
-                        <input type="number" name="points" id="points" class="form-control" placeholder="0" value="{{ old('points', $voucher->points) }}">
+                        <label>Points :</label>
+                        <input type="number" class="form-control" value="{{ $voucher->points }}" disabled>
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Start Voucher :<span class="text-danger">*</span></label>
-                        <input type="date" name="start_date" id="start_date" class="form-control" value="{{ old('start_date', $voucher->start_date) }}">
+                        <label>Start Voucher :</label>
+                        <input type="date" class="form-control" value="{{ $voucher->start_date }}" disabled>
                      </div>
                   </div>
                   <div class="col-md-4">

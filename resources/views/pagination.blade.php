@@ -3,7 +3,7 @@
         <ul class="mt-3 mb-0 justify-content-center pagination pagination-rounded pagination-3d">
             @if(!$paginator->onFirstPage())
                 <li class="page-item">
-                    <a class="page-link no-outline" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
+                    <a class="page-link no-outline shadow-lg" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
                         <i class="icon-arrow-left2"></i>
                     </a>
                 </li>
@@ -12,7 +12,7 @@
             @foreach($elements as $element)
                 @if(is_string($element))
                     <li class="page-item disabled" aria-disabled="true">
-                        <a class="page-link no-outline" href="javascript:void(0);">{{ $element }}</a>
+                        <a class="page-link no-outline shadow-lg" href="javascript:void(0);">{{ $element }}</a>
                     </li>
                 @endif
 
@@ -20,11 +20,11 @@
                     @foreach($element as $page => $url)
                         @if($page == $paginator->currentPage())
                             <li class="page-item active" aria-current="page">
-                                <a class="page-link no-outline" syle="border: none !important;" href="javascript:void(0);">{{ $page }}</a>
+                                <a class="page-link no-outline shadow-lg" syle="border: none !important;" href="javascript:void(0);">{{ $page }}</a>
                             </li>
                         @else
                             <li class="page-item">
-                                <a class="page-link no-outline" href="{{ $url }}">{{ $page }}</a>
+                                <a class="page-link no-outline shadow-lg" href="{{ $url }}">{{ $page }}</a>
                             </li>
                         @endif
                     @endforeach
@@ -33,13 +33,7 @@
 
             @if($paginator->hasMorePages())
                 <li class="page-item">
-                    <a class="page-link no-outline" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
-                        <i class="icon-arrow-right2"></i>
-                    </a>
-                </li>
-            @else
-                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <a class="page-link no-outline" href="javascript:void(0);" aria-hidden="true">
+                    <a class="page-link no-outline shadow-lg" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
                         <i class="icon-arrow-right2"></i>
                     </a>
                 </li>

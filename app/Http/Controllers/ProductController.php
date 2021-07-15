@@ -205,7 +205,7 @@ class ProductController extends Controller {
                 });
 
         if($filter['other']['sort']) {
-            if($filter['other']['sort'] == 'newest') {
+            if($filter['other']['sort'] == 'latest') {
                 $product->latest();
             } else {
                 $product->select('products.*', 'pricing_policies.price_list')
@@ -257,7 +257,7 @@ class ProductController extends Controller {
                     });
             })
             ->whereHas('order', function($query) {
-                $query->whereIn('status', [2, 3, 4])
+                $query->where('status', '!=', 6)
                     ->havingRaw('COUNT(*) <= quota');
             })
             ->get();

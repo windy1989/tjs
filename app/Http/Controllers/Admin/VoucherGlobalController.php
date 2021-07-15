@@ -72,15 +72,15 @@ class VoucherGlobalController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                $currenct_date = strtotime(date('Y-m-d'));
-                if($currenct_date < strtotime($val->start_date)) {
+                $current_date = strtotime(date('Y-m-d'));
+                if($current_date < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
                         <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                         <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
-                } else if($currenct_date >= strtotime($val->start_date) && $currenct_date <= strtotime($val->finish_date)) {
+                } else if($current_date >= strtotime($val->start_date) && $current_date <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
                         <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
@@ -197,29 +197,17 @@ class VoucherGlobalController extends Controller {
             $validation = Validator::make($request->all(), [
                 'code'        => ['required', 'min:3', Rule::unique('vouchers', 'code')->ignore($id)],
                 'name'        => 'required',
-                'minimum'     => 'required',
-                'maximum'     => 'required',
                 'quota'       => 'required',
-                'points'      => 'required',
-                'percentage'  => 'required',
-                'start_date'  => 'required',
                 'finish_date' => 'required',
-                'terms'       => 'required',
-                'type'        => 'required'
+                'terms'       => 'required'
             ], [
                 'code.required'        => 'Code cannot be empty.',
                 'code.min'             => 'Code minimum 3 character.',
                 'code.unique'          => 'Code exists.',
                 'name.required'        => 'Name cannot be empty.',
-                'minimum.required'     => 'Minimum order cannot be empty.',
-                'maximum.required'     => 'Maximum discount cannot be empty.',
                 'quota.required'       => 'Quota cannot be empty.',
-                'points.required'      => 'Points cannot be empty.',
-                'percentage.required'  => 'Percentage cannot be empty.',
-                'start_date.required'  => 'Start date cannot be empty.',
                 'finish_date.required' => 'Finish date cannot be empty.',
-                'terms.required'       => 'Terms & conditions cannot be empty.',
-                'type.required'        => 'Please select a type.'
+                'terms.required'       => 'Terms & conditions cannot be empty.'
             ]);
 
             if($validation->fails()) {
@@ -228,15 +216,9 @@ class VoucherGlobalController extends Controller {
                 $query->update([
                     'code'        => strtoupper($request->code),
                     'name'        => $request->name,
-                    'minimum'     => $request->minimum,
-                    'maximum'     => $request->maximum,
                     'quota'       => $request->quota,
-                    'points'      => $request->points,
-                    'percentage'  => $request->percentage,
-                    'start_date'  => $request->start_date,
                     'finish_date' => $request->finish_date,
-                    'terms'       => $request->terms,
-                    'type'        => $request->type
+                    'terms'       => $request->terms
                 ]);
 
                 if($query) {

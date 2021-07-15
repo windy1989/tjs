@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,10 +44,10 @@ class Voucher extends Model {
     {
         switch($this->type) {
             case '1':
-                $type = 'Discount';
+                $type = 'Discount Purchase';
                 break;
             case '2':
-                $type = 'Shipping';
+                $type = 'Discount Shipping';
                 break;
             default:
                 $type = 'Invalid';
@@ -71,6 +72,12 @@ class Voucher extends Model {
         }
 
         return $voucher_type;
+    }
+
+    public function usedVoucher()
+    {
+        $order = Order::where('voucher_id', $this->id)->where('customer_id', session('fo_id'))->first();
+        return $order;
     }
 
 }

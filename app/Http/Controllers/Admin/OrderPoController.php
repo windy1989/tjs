@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use PDF;
 use App\Models\Brand;
+use App\Models\Order;
 use App\Models\OrderPo;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
@@ -134,6 +135,9 @@ class OrderPoController extends Controller {
     public function detail(Request $request, $id) 
     {
         $purchase_order = OrderPo::find($id);
+        $order          = Order::find($purchase_order->order_id);
+        $shipping       = 0;
+
         if($request->has('_token') && session()->token() == $request->_token) {
             $purchase_order->update([
                 'status' => $request->has('status') ? $request->status : 1
@@ -145,7 +149,7 @@ class OrderPoController extends Controller {
                     'delivery_order' => OrderDelivery::generateCode()
                 ]);
 
-                Order::find($purchase_order->order_id)->update(['status' => 3]);
+                $order->update(['status' => 3]);
             }
 
             foreach($request->order_detail_id as $key => $odi) {
@@ -157,9 +161,22 @@ class OrderPoController extends Controller {
             return redirect()->back()->with(['success' => 'Data has been processed!']);
         }
 
+        if($order->voucher) {
+            if($order->voucher->type == 2) {
+                $total_discount = ($voucher->percentage / 100) * $order->shipping;
+                if($total_discount >= $order->shipping || $total_discount < 0 || $total_discount > $order->voucher->maximum) {
+                    $shipping = $order->shipping;
+                } else {
+                    $shipping = $total_discount;
+                }
+            }
+        }
+
         $data = [
             'title'          => 'Detail Purchase Order',
             'purchase_order' => $purchase_order,
+            'shipping'       => $order->shipping - $shipping,
+            'discount'       => $shipping,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get(),
             'content'        => 'admin.manage.purchase_order_detail'
         ];
@@ -170,8 +187,25 @@ class OrderPoController extends Controller {
     public function print($id)
     {
         $purchase_order = OrderPo::find($id);
-        $pdf            = PDF::loadView('admin.pdf.purchase_order', [
+        $order          = Order::find($purchase_order->order_id);
+        $shipping       = 0;
+
+        if($order->voucher) {
+            if($order->voucher->type == 2) {
+                $total_discount = ($voucher->percentage / 100) * $order->shipping;
+                if($total_discount >= $order->shipping || $total_discount < 0 || $total_discount > $order->voucher->maximum) {
+                    $shipping = $order->shipping;
+                } else {
+                    $shipping = $total_discount;
+                }
+            }
+        }
+
+
+        $pdf = PDF::loadView('admin.pdf.purchase_order', [
             'purchase_order' => $purchase_order,
+            'shipping'       => $order->shipping - $shipping,
+            'discount'       => $shipping,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
         ]);
 

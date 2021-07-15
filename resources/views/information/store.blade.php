@@ -28,7 +28,7 @@
                   Modern Ceramics, Jl. Baliwerti No.119-121, Alun-alun Contong, Kec. Bubutan, Kota SBY, Jawa Timur 60161
                </address>
                Open Every Monday - Saturday, 08.30 - 17.00 WIB<br>
-               <abbr title="Phone Number"><strong>Phone:</strong></abbr> (031) 5477501<br>
+               <abbr title="Phone Number"><strong>Phone:</strong></abbr> 082131972353 / 031-5477501<br>
                <abbr title="Email Address"><strong>Email:</strong></abbr> smartmarbleandbath@gmail.com
             </div>
          </div>
@@ -43,10 +43,10 @@
             <div class="col-lg-8 mt-4">
                <address>
                   <strong>Address:</strong><br>
-                  Gedung Jagat, Main Lobby, Jl. Tomang Raya No.28, RT.5/RW.1, Jatipulo, Kec. Palmerah, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11430
+                  Gedung Jagat, Main Lobby, Jl. Tomang Raya No. 28-30 Jakarta Barat, Indonesia
                </address>
                Open Every Monday - Saturday, 08.30 - 17.00 WIB<br>
-               <abbr title="Phone Number"><strong>Phone:</strong></abbr> 082131972353<br>
+               <abbr title="Phone Number"><strong>Phone:</strong></abbr> 0811257180<br>
                <abbr title="Email Address"><strong>Email:</strong></abbr> smartmarbleandbath@gmail.com
             </div>
          </div>

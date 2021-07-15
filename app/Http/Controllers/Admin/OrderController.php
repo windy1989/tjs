@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Order;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\CustomerPoint;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller {
@@ -176,6 +177,13 @@ class OrderController extends Controller {
         $order = Order::find($id);
         if($request->has('_token') && session()->token() == $request->_token) {
             $order->update(['status' => 5]);
+            CustomerPoint::where('customer_id', $order->customer_id)->where('order_id', $order->id)->delete();
+
+            if($order->points > 0) {
+                $restore_points = $order->customer->points + $order->points;
+                $order->customer->update(['points' => $restore_points]);
+            }
+
             return redirect()->back()->with(['success' => 'Order successfully canceled']);
         }
 
