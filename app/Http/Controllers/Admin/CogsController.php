@@ -201,8 +201,8 @@ class CogsController extends Controller {
             ->where('city_id', $request->city_id)
             ->first();
 
-        if($data->currencyPrice) {
-            $pp = $data->currencyPrice->price;
+        if($data->currencyPrice->count() > 0) {
+            $pp = $data->currencyPrice->last()->price;
         } else {
             $pp = 0;
         }
