@@ -193,6 +193,10 @@ class VoucherGlobalController extends Controller {
     public function update(Request $request, $id)
     {
         $query = Voucher::find($id);
+        if(!$query) {
+            abort(404);
+        }
+        
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
                 'code'        => ['required', 'min:3', Rule::unique('vouchers', 'code')->ignore($id)],

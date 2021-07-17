@@ -175,6 +175,10 @@ class OrderController extends Controller {
     public function detail(Request $request, $id) 
     {
         $order = Order::find($id);
+        if(!$order) {
+            abort(404);
+        }
+        
         if($request->has('_token') && session()->token() == $request->_token) {
             $order->update(['status' => 5]);
             CustomerPoint::where('customer_id', $order->customer_id)->where('order_id', $order->id)->delete();

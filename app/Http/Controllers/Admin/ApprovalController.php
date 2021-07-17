@@ -140,6 +140,10 @@ class ApprovalController extends Controller {
     public function detail(Request $request, $id) 
     {
         $approval = Approval::find($id);
+        if(!$approval) {
+            abort(404);
+        }
+
         $project  = Project::find($approval->approvalable_id);
         $status   = $request->reject ? 3 : 2;
         $approved = Approval::where('approvalable_type', $approval->approvalable_type)

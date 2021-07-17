@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Allow: /*
+Disallow: /checkout/
+Disallow: /account/wishlist/
+Disallow: /account/cart/
+Disallow: /account/history_order/
+Disallow: /account/points/
+Disallow: /admin/
+Host: https://smartmarbleandbath.com/

@@ -373,7 +373,7 @@ class AccountController extends Controller {
         if(!session('fo_id')) {
             return redirect('account/login');
         } else if(!$order) {
-            return redirect('account/history_order');
+            abort(404);
         }
 
         $data = [

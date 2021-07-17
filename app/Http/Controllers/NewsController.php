@@ -43,7 +43,7 @@ class NewsController extends Controller {
     {
         $news = News::where('slug', $slug)->first();
         if(!$news) {
-            return redirect('news');
+            abort(404);
         }
 
         $related_news = News::where('slug', '!=', $slug)

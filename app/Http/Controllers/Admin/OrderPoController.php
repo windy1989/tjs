@@ -135,8 +135,12 @@ class OrderPoController extends Controller {
     public function detail(Request $request, $id) 
     {
         $purchase_order = OrderPo::find($id);
-        $order          = Order::find($purchase_order->order_id);
-        $shipping       = 0;
+        if(!$purchase_order) {
+            abort(404);
+        }
+
+        $order    = Order::find($purchase_order->order_id);
+        $shipping = 0;
 
         if($request->has('_token') && session()->token() == $request->_token) {
             $purchase_order->update([

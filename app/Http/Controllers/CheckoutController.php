@@ -332,7 +332,7 @@ class CheckoutController extends Controller {
         if(!session('fo_id')) {
             return redirect('account/login');
         } else if(!$order) {
-            return redirect('/');
+            abort(404);
         }
 
         $data = [

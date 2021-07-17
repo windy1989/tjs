@@ -7,7 +7,7 @@
    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="author" content="Calvin Dito Pratama">
    <meta name="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
-   <meta name="keywords" content="smb,smartmarble,ceramic,ecommerce,online shop,indonesian tiles,surabaya tiles,ceramic surabaya,tiles ecommerce,jual keramik surabaya,keramik online">
+   <meta name="keywords" content="smb, smartmarble, ceramic, ecommerce, online shop, indonesian tiles, surabaya tiles, ceramic surabaya, tiles ecommerce, jual keramik surabaya, keramik online">
    <meta itemprop="name" content="Smart Marble & Bath">
    <meta itemprop="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
    <meta itemprop="image" content="{{ asset('website/logo-black.png') }}">
@@ -18,7 +18,7 @@
    <meta property="og:type" content="website">
    <meta property="og:url" content="{{ url('/') }}">
    <meta property="og:image" content="{{ asset('website/logo-black.png') }}">
-   <meta name="robots" content="all">
+   <meta name="robots" content="INDEX,FOLLOW">
    <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
    <meta name="format-detection" content="telephone=no">
    <meta name="theme-color" content="#51b4ba">

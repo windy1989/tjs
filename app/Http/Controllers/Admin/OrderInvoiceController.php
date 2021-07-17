@@ -189,6 +189,10 @@ class OrderInvoiceController extends Controller {
     public function detail(Request $request, $id) 
     {
         $order = Order::find($id);
+        if(!$order) {
+            abort(404);
+        }
+        
         if($request->has('_token') && session()->token() == $request->_token) {
             if($request->payment) {
                 if($order->status == 1 || $order->status == 5) {

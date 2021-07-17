@@ -40,8 +40,6 @@ class StockCommand extends Command
      */
     public function handle()
     {
-        ini_set('memory_limit', '-1');
-
         foreach(ProductShading::all() as $ps) {
             $stock = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
                 'kode_item' => $ps->stock_code,
@@ -57,5 +55,7 @@ class StockCommand extends Command
                 $ps->delete();
             }
         }
+
+        return true;
     }
 }

@@ -56,5 +56,7 @@ class WarehouseCommand extends Command
                 ]);
             }
         }
+
+        return true;
     }
 }

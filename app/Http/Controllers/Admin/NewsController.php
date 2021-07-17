@@ -183,6 +183,10 @@ class NewsController extends Controller {
     public function update(Request $request, $id)
     {
         $query = News::find($id);
+        if(!$query) {
+            abort(404);
+        }
+        
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
                 'image'       => 'image|mimes:jpg,jpeg,png|max:100|dimensions:width=1920,height=850',

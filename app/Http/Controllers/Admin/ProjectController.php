@@ -233,6 +233,10 @@ class ProjectController extends Controller {
     {
         $query = Project::find($id);
         $step  = $request->submit;
+        
+        if(!$query) {
+            abort(404);
+        }
 
         if($request->has('_token') && session()->token() == $request->_token) {
             switch($step) {

@@ -235,7 +235,7 @@ class ProductController extends Controller {
         $product    = Product::find($product_id);
         
         if(!$product) {
-            return redirect('product');
+            abort(404);
         }
  
         $voucher = Voucher::where(function($query) use ($product) {
@@ -325,20 +325,23 @@ class ProductController extends Controller {
         }
 
         $product_id = base64_decode($request->product_id);
+        $product    = Product::find($product_id);
         $cart       = Cart::where('customer_id', session('fo_id'))
             ->where('product_id', $product_id)
             ->first();
 
-        if($cart) {
-            Cart::where('customer_id', session('fo_id'))
-                ->where('product_id', $product_id)
-                ->update(['qty' => $cart->qty + $request->qty]);
-        } else {
-            Cart::create([
-                'customer_id' => session('fo_id'),
-                'product_id'  => $product_id,
-                'qty'         => $request->qty
-            ]);
+        if($request->qty > 0 && $request->qty <= $product->availability()->stock) {
+            if($cart) {
+                Cart::where('customer_id', session('fo_id'))
+                    ->where('product_id', $product_id)
+                    ->update(['qty' => $cart->qty + $request->qty]);
+            } else {
+                Cart::create([
+                    'customer_id' => session('fo_id'),
+                    'product_id'  => $product_id,
+                    'qty'         => $request->qty
+                ]);
+            }
         }
 
         return redirect()->back();

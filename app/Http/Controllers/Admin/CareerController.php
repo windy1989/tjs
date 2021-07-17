@@ -140,6 +140,10 @@ class CareerController extends Controller {
     public function update(Request $request, $id)
     {
         $query = Career::find($id);
+        if(!$query) {
+            abort(404);
+        }
+        
         if($request->has('_token') && session()->token() == $request->_token) {
             $validation = Validator::make($request->all(), [
                 'title'        => 'required',
