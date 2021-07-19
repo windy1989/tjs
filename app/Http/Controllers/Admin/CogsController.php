@@ -187,12 +187,10 @@ class CogsController extends Controller {
             $container = $emkl->container; 
             $c         = $emkl->container();
             $lcc       = $emkl->cost;
-            $cs        = $emkl->container == 1 ? 20 : 40;
         } else {
             $container = 0;
             $c         = 'Not Set';
             $lcc       = 0;
-            $cs        = 0;
         }
 
         $freight = Freight::where('country_id', $data->country_id)
@@ -221,6 +219,7 @@ class CogsController extends Controller {
             $fcu = 0;
         }
         
+        $cs   = $data->container_stock;
         $aou  = $request->agent_fee_usd ? $request->agent_fee_usd : 0;
         $lcd  = $request->ls_cost_document ? $request->ls_cost_document : 0;
         $nc   = $request->number_container ? $request->number_container : 0;
@@ -258,7 +257,7 @@ class CogsController extends Controller {
             'width'                  => number_format($wd, 0, ',', '.') . ' Cm',
             'pcs_ctn'                => number_format($cp, 0, ',', '.') . ' <sub>/ carton</sub>',
             'thickness'              => number_format($t, 0, ',', '.') . ' mm',
-            'min_total_dos'          => number_format($cs, 0, ',', '.') . ' mm <sub>/ container</sub>',
+            'min_total_dos'          => number_format($cs, 0, ',', '.') . ' <sub>/ container</sub>',
             'container'              => $c,
             'product_price'          => $symbol . (!is_nan($pp) && !is_infinite($pp) ? number_format($pp, 0, ',', '.') : 0),
             'buying_unit'            => $data->type->buyUnit->code,
@@ -383,7 +382,7 @@ class CogsController extends Controller {
             'width'                  => number_format($formula->width, 0, ',', '.') . ' Cm',
             'pcs_ctn'                => number_format($formula->pcs_ctn, 0, ',', '.') . ' <sub>/ carton</sub>',
             'thickness'              => number_format($formula->thickness, 0, ',', '.') . ' mm',
-            'min_total_dos'          => number_format($formula->min_total_dos, 0, ',', '.') . ' mm <sub>/ container</sub>',
+            'min_total_dos'          => number_format($formula->min_total_dos, 0, ',', '.') . ' <sub>/ container</sub>',
             'container'              => $formula->container,
             'product_price'          => $symbol . number_format($formula->product_price, 0, ',', '.'),
             'buying_unit'            => $data->product->type->buyUnit->code,
