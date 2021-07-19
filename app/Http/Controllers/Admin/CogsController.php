@@ -229,7 +229,7 @@ class CogsController extends Controller {
         $sg   = 11776;
         $l    = $data->type->length ? $data->type->length : 0;
         $wd   = $data->type->width ? $data->type->width : 0;
-        $cp   = $data->type->carton_pcs ? $data->type->carton_pcs : 0;
+        $cp   = $data->carton_pcs ? $data->carton_pcs : 0;
         $t    = $data->type->thickness ? $data->type->thickness : 0;
         $wg   = $data->type->weight;
         $cu   = $data->type->conversion;
