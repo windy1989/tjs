@@ -245,7 +245,7 @@ class CogsController extends Controller {
         $lcs  = @($lcd * $ru * $toc / $sd / $nc);
         $id   = ($ppc * 0.05) * $ru;
         $vt   = ((($ppc * 0.05) + $ppc) * 0.1) * $ru;
-        $it   = ((($ppc * 0.05) + $ppc) * 0.075) * $ru;
+        $it   = ((($ppc * 0.05) + $ppc) * 0.75) * $ru;
         $tit  = $vt + $id + $it;
         $ci   = $lpi + $afi + $fc + $tlc + $lcd + $tit + $sc + $sg;
         $cpi  = $ci * 1.1;
