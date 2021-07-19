@@ -84,7 +84,7 @@ class Cogs extends Model {
         $sg   = 11776;
         $l    = $this->product->type->length ? $this->product->type->length : 0;
         $wd   = $this->product->type->width ? $this->product->type->width : 0;
-        $cp   = $this->product->type->carton_pcs ? $this->product->type->carton_pcs : 0;
+        $cp   = $this->product->carton_pcs ? $this->product->carton_pcs : 0;
         $t    = $this->product->type->thickness ? $this->product->type->thickness : 0;
         $wg   = $this->product->type->weight;
         $cu   = $this->product->type->conversion;
