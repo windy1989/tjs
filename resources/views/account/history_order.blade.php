@@ -70,7 +70,7 @@
                                           <div class="form-group">
                                              <center>
                                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                                   <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
+                                                   <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
                                                 </a>
                                              </center>
                                           </div>

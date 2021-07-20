@@ -420,7 +420,7 @@
                                   <td class="attributes_item">
                                     <span class="f-fallback">
                                       <center>
-                                        <img src="{{ $message->embed(asset(Storage::url($order->qr_code))) }}" alt="Qr Code">
+                                        <img src="{{ $message->embed(asset(Storage::url($order->qr_code))) }}">
                                       </center>
                                     </span>
                                   </td>

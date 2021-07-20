@@ -90,7 +90,7 @@
 	</div>
 
 <div class="modal fade" id="modal_information" data-backdrop="static" role="dialog">
-   <div class="modal-dialog modal-xl modal-dialog-scrollable">
+   <div class="modal-dialog modal-xl">
       <div class="modal-content">
          <div class="modal-header bg-light">
             <h5 class="modal-title" id="exampleModalLabel">Information</h5>
@@ -169,7 +169,7 @@
                </table>
             </div>
          </div>
-         <div class="modal-footer">
+         <div class="modal-footer bg-light">
             <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
          </div>
       </div>

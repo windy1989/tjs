@@ -36,7 +36,7 @@
 		<div class="container clearfix">
 			<h1>
 				<a href="{{ url('/') }}">
-					<img src="{{ asset('website/logo-black.png') }}" alt="">
+					<img src="{{ asset('website/logo-black.png') }}" alt="Smart Marble And Bath">
 				</a>
 			</h1>
 			<ol class="breadcrumb text-uppercase font-weight-bold">
@@ -84,7 +84,7 @@
 													<td class="cart-product-name">
 														<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
 															<center>
-																<img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid img-thumbnail">
+																<img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $c->product->code() }}">
 															</center>
 														</a>
 													</td>

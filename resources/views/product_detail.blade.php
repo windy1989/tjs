@@ -26,7 +26,7 @@
                            <div class="flexslider">
                               <div class="slider-wrap" data-lightbox="gallery">
                                  <div class="slide" data-thumb="{{ $product->type->image() }}">
-                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid img-thumbnail"></a>
+                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid img-thumbnail" alt="{{ $product->code() }}"></a>
                                  </div>
                               </div>
                            </div>
@@ -35,12 +35,12 @@
                      </div>
                   </div>
                   <div class="col-lg-6 col-md-12 product-desc">
-                     <h2 class="font-weight-bold">{{ $product->code() }}</h2> 
+                     <h3 class="font-weight-bold">{{ $product->code() }}</h3> 
                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="product-price text-dark" style="font-size:20px;">
-                           Rp <ins class="text-dark">{{ number_format($product->price(), 0, ',', '.') }}</ins>
+                        <div class="product-price text-danger font-weight-bold" style="font-size:15px;">
+                           Rp <ins class="text-danger font-weight-bold">{{ number_format($product->price(), 0, ',', '.') }}</ins>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end">
+                        <div class="d-flex align-items-center justify-content-end font-size-14">
                            Availability&nbsp;&nbsp;<strong>{{ $product->availability()->stock }} Carton</strong>
                         </div>
                      </div>
@@ -61,7 +61,7 @@
                                  </div>
                               </div>
                               <div class="col-6 text-right">
-                                 <button type="submit" class="button bg-teal m-0">Add to cart</button>
+                                 <button type="submit" class="button bg-teal font-size-12 m-0">Add to cart</button>
                               </div>
                            </div>
                         </form>
@@ -71,14 +71,14 @@
                         @csrf
                         <div class="quantity clearfix">
                            <input type="hidden" name="product_id" value="{{ base64_encode($product->id) }}">
-                           <input type="text" value="Add To Wishlist" class="form-control-plaintext" disabled>
+                           <input type="text" value="Add To Wishlist" class="form-control-plaintext font-size-12 font-weight-bold" disabled>
                         </div>
                         @if(count($product->wishlist) > 0)
                            @if(count($product->wishlist->where('customer_id', session('fo_id'))) > 0)
-                              <a href="javascript:void(0);" class="button button-red m-0 cursor-none"><i class="icon-heart21"></i></a>
+                              <a href="javascript:void(0);" class="button button-red m-0 cursor-none font-size-12"><i class="icon-heart21"></i></a>
                            @endif
                         @else
-                           <button type="submit" class="button button-teal m-0"><i class="icon-heart21"></i></button>
+                           <button type="submit" class="button button-small button-teal m-0 font-size-12"><i class="icon-heart21"></i></button>
                         @endif
                      </form>
                      <div class="line"></div>
@@ -86,44 +86,44 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                            @if($product->availability()->status == 'Ready')
                               <div class="style-msg successmsg w-100 text-center">
-                                 <div class="sb-msg">
+                                 <div class="sb-msg font-size-13">
                                     <i class="icon-ok-circle"></i>
                                     <strong>Ready Stock!</strong> Buy now
                                  </div>
                               </div>
                            @elseif($product->availability()->status == 'Limited')
                               <div class="style-msg alertmsg w-100 text-center">
-                                 <div class="sb-msg">
+                                 <div class="sb-msg font-size-13">
                                     <i class="icon-warning-sign"></i>
                                     <strong>Stock Limited!</strong> Buy now before it runs out
                                  </div>
                               </div>
                            @else
                               <div class="style-msg errormsg w-100 text-center">
-                                 <div class="sb-msg">
+                                 <div class="sb-msg font-size-13">
                                     <i class="icon-remove-sign"></i>
                                     <strong>Stock Empty!</strong> Sorry our stock is empty
                                  </div>
                               </div>
                            @endif
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Category:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->category->name }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Color:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->color->name }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Pattern:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->pattern->name }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Brand:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->brand->name }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Size:</span>
                            <span class="text-dark font-weight-semibold">
                               {{ $product->type->length }}x{{ $product->type->width }} Cm
@@ -173,12 +173,12 @@
                            <div class="tabs clearfix mb-0" id="tab-1">
                               <ul class="tab-nav justify-content-center clearfix">
                                  <li>
-                                    <a href="#tabs-1">
+                                    <a href="#tabs-1" class="font-size-13">
                                        <i class="icon-align-justify2"></i> Description
                                     </a>
                                  </li>
                                  <li>
-                                    <a href="#tabs-2">
+                                    <a href="#tabs-2" class="font-size-13">
                                        <i class="icon-settings"></i> Specification
                                     </a>
                                  </li>
@@ -188,7 +188,7 @@
                                     <p>{!! $product->description !!}</p>
                                  </div>
                                  <div class="tab-content clearfix" id="tabs-2">
-                                    <table class="table table-striped table-bordered">
+                                    <table class="table table-striped table-bordered font-size-13">
                                        <tbody>
                                           <tr>
                                              <td>Surface</td>
@@ -230,30 +230,32 @@
             <div class="w-100">
                <h4>Related Product</h4>
                <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="4" data-items-xl="4">
-                  @foreach($related_product as $rp)
+                  @foreach($related_product as $p)
                      <div class="oc-item">
-                        <div class="product border">
-                           <div class="product-image">
-                              <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}">
-                                 <img src="{{ $rp->type->image() }}" alt="{{ $rp->code() }}" class="img-fluid">
-                              </a>
-                              <div class="sale-flash badge {{ $rp->availability()->color }} p-2">{{ $rp->availability()->status }}</div>
-                           </div>
-                           <div class="product-desc p-3">
-                              <div class="product-price font-weight-bold">
-                                 <ins class="text-dark">
-                                    <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($rp->price(), 0, ',', '.') }}</h1>
-                                 </ins>
+                        <div class="product">
+                           <div class="grid-inner border">
+                              <div class="product-image">
+                                 <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                                    <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
+                                 </a>
+                                 <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                               </div>
-                              <div class="product-title">
-                                 <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                    <a href="{{ url('product/detail/' . base64_encode($rp->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $rp->code() }}</a>
-                                 </h4>
-                              </div>
-                              <div class="product-price font-weight-semibold">
-                                 <span>
-                                    <span class="text-warning">{{ $rp->brand->name }}</span> | <span class="text-info">{{ $rp->type->length }}x{{ $rp->type->width }}</span>
-                                 </span>
+                              <div class="product-desc p-3">
+                                 <div class="product-price font-weight-bold">
+                                    <ins class="text-dark">
+                                       <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                                    </ins>
+                                 </div>
+                                 <div class="product-title">
+                                    <h4 class="mb-0 font-weight-normal limit-text-list-product">
+                                       <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
+                                    </h4>
+                                 </div>
+                                 <div class="product-price font-weight-semibold">
+                                    <span>
+                                       <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
+                                    </span>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -282,7 +284,7 @@
          </div>
          <div class="modal-body">
             <div class="table-responsive">
-               <table class="table table-bordered table-hover table-striped">
+               <table class="table table-bordered table-hover table-striped font-size-13">
                   <thead class="alert-info">
                      <tr class="text-center">
                         <th>Shading</th>
@@ -305,7 +307,7 @@
             </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary font-size-13 btn-sm" data-dismiss="modal">Close</button>
          </div>
       </div>
    </div>

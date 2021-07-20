@@ -106,7 +106,7 @@
                      </div>
                   @else
                      <center class="mt-5">
-                        <img src="{{ asset('website/data-empty.png') }}" style="max-width:80%;" class="img-fluid">
+                        <img src="{{ asset('website/data-empty.png') }}" style="max-width:80%;" class="img-fluid" alt="Empty">
                      </center>
                   @endif
                   {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}

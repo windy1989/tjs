@@ -3,7 +3,7 @@
       <div class="owl-carousel carousel-widget shadow-lg" data-margin="0" data-items="1" data-pagi="true" data-loop="true" data-animate-in="fadeIn" data-speed="450" data-animate-out="fadeOut" data-autoplay="5000">
          @foreach($banner as $key => $b)
             <a href="javascript:void(0);" class="cursor-none">
-               <img src="{{ $b->image() }}" alt="{{ $key }}" style="max-height:800px;" class="img-fluid">
+               <img src="{{ $b->image() }}" alt="{{ $key }}" style="max-height:800px;" class="img-fluid" alt="Banner Smart Marble">
             </a>
          @endforeach
       </div>
@@ -35,7 +35,7 @@
             @foreach($brand as $b)
                <div class="oc-item">
                   <a href="{{ url('product?brand=' . $b->code) }}">
-                     <img src="{{ $b->image() }}" class="img-fluid" alt="{{ $b->name }}">
+                     <img src="{{ $b->image() }}" class="img-fluid" alt="{{ $b->name }}" alt="{{ $b->name }}">
                   </a>
                </div>
             @endforeach
@@ -45,19 +45,19 @@
             <div class="col-md-12"><hr style="border: 1px solid #51b4ba; height:2px; background:#51b4ba;"></div>
             <div class="col-md-7">
                <div class="row gutter-30">
-                  <div class="col-md-4">
+                  <div class="col-4">
                      <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid">
+                        <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid" alt="Smart Marble">
                      </a>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-4">
                      <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
+                        <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Treeme Italy">
                      </a>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-4">
                      <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid">
+                        <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Bravat">
                      </a>
                   </div>
                </div>
@@ -205,7 +205,7 @@
          <div class="form-group"><hr style="margin-bottom:80px;"></div>
          <div class="container mb-0">
             <center>
-               <img src="{{ asset('website/banner-bottom.png') }}" class="img-fluid">
+               <img src="{{ asset('website/banner-bottom.png') }}" class="img-fluid" alt="Banner Smart Marble">
             </center>
          </div>
       </div>

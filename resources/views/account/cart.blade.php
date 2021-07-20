@@ -41,7 +41,7 @@
                            </td>
                            <td class="cart-product-thumbnail">
                               <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
-                                 <img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid">
+                                 <img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid" alt="{{ $c->product->code() }}">
                               </a>
                            </td>
                            <td class="cart-product-name">

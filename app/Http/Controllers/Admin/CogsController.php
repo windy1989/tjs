@@ -225,7 +225,7 @@ class CogsController extends Controller {
         $nc   = $request->number_container ? $request->number_container : 0;
         $ppc  = $request->price_profile_custom ? $request->price_profile_custom : 0;
         $sc   = $request->sni_cost ? $request->sni_cost : 0;
-        $sg   = 11776;
+        $sg   = $ppc * $ru * 0.19;
         $l    = $data->type->length ? $data->type->length : 0;
         $wd   = $data->type->width ? $data->type->width : 0;
         $cp   = $data->carton_pcs ? $data->carton_pcs : 0;
@@ -264,10 +264,10 @@ class CogsController extends Controller {
             'selling_unit'           => $data->type->sellingUnit->code,
             'conversion_unit'        => $symbol . (!is_nan($cu) && !is_infinite($cu) ? number_format($cu, 0, ',', '.') : 0),
             'rate_unit'              => $symbol . (!is_nan($ru) && !is_infinite($ru) ? number_format($ru, 0, ',', '.') : 0),
-            'local_price_idr'        => 'Rp ' . (!is_nan($lpi) && !is_infinite($lpi) ? number_format($lpi, 0, ',', '.') : 0),
+            'local_price_idr'        => 'Rp' . (!is_nan($lpi) && !is_infinite($lpi) ? number_format($lpi, 0, ',', '.') : 0),
             'total_sqm_load'         => (!is_nan($tsl) && !is_infinite($tsl) ? number_format(round($tsl), 0, ',', '.') : 0) . ' <sub>/ container</sub>',
             'agent_fee_usd_sqm'      => '$' . (!is_nan($afus) && !is_infinite($afus) ? number_format($afus, 3, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'agent_fee_idr'          => 'Rp ' . (!is_nan($afi) && !is_infinite($afi) ? number_format($afi, 0, ',', '.') : 0),
+            'agent_fee_idr'          => 'Rp' . (!is_nan($afi) && !is_infinite($afi) ? number_format($afi, 0, ',', '.') : 0),
             'freight_cost_usd'       => '$' . (!is_nan($fcu) && !is_infinite($fcu) ? number_format($fcu, 0, ',', '.') : 0) . ' <sub>/ container</sub>',
             'cbm_container'          => (!is_nan($cc) && !is_infinite($cc) ? number_format(round($cc), 0, ',', '.') : 0) . ' <sub>/ container</sub>',
             'kg_dos'                 => number_format($wg, 0, ',', '.') . ' Kg',
@@ -284,9 +284,9 @@ class CogsController extends Controller {
             'income_tax'             => $symbol . (!is_nan($it) && !is_infinite($it) ? number_format(round($it), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
             'total_import_tax'       => $symbol . (!is_nan($tit) && !is_infinite($tit) ? number_format(round($tit), 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
             'safe_guard'             => $symbol . (!is_nan($sg) && !is_infinite($sg) ? number_format($sg, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_idr'               => 'Rp ' . (!is_nan($ci) && !is_infinite($ci) ? number_format($ci, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_pta_idr'           => 'Rp ' . (!is_nan($cpi) && !is_infinite($cpi) ? number_format($cpi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
-            'cogs_smb_idr'           => 'Rp ' . (!is_nan($csi) && !is_infinite($csi) ? number_format($csi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>'
+            'cogs_idr'               => 'Rp' . (!is_nan($ci) && !is_infinite($ci) ? number_format($ci, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_pta_idr'           => 'Rp' . (!is_nan($cpi) && !is_infinite($cpi) ? number_format($cpi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>',
+            'cogs_smb_idr'           => 'Rp' . (!is_nan($csi) && !is_infinite($csi) ? number_format($csi, 0, ',', '.') : 0) . ' <sub>/ SQM</sub>'
         ]);
     }
 
@@ -389,10 +389,10 @@ class CogsController extends Controller {
             'selling_unit'           => $data->product->type->sellingUnit->code,
             'conversion_unit'        => $symbol . number_format($formula->conversion_unit, 0, ',', '.'),
             'rate_unit'              => $symbol . number_format($formula->rate_unit, 0, ',', '.'),
-            'local_price_idr'        => 'Rp ' . number_format($formula->local_price_idr, 0, ',', '.'),
+            'local_price_idr'        => 'Rp' . number_format($formula->local_price_idr, 0, ',', '.'),
             'total_sqm_load'         => number_format($formula->total_sqm_load, 0, ',', '.') . ' <sub>/ container</sub>',
             'agent_fee_usd_sqm'      => '$' . number_format($formula->agent_fee_usd_sqm, 3, ',', '.') . ' <sub>/ SQM</sub>',
-            'agent_fee_idr'          => 'Rp ' . number_format($formula->agent_fee_idr, 0, ',', '.'),
+            'agent_fee_idr'          => 'Rp' . number_format($formula->agent_fee_idr, 0, ',', '.'),
             'freight_cost_usd'       => '$' . number_format($formula->freight_cost_usd, 0, ',', '.') . ' <sub>/ container</sub>',
             'cbm_container'          => number_format($formula->cbm_container, 0, ',', '.') . ' <sub>/ container</sub>',
             'kg_dos'                 => number_format($formula->kg_dos, 0, ',', '.') . ' Kg',
@@ -409,9 +409,9 @@ class CogsController extends Controller {
             'income_tax'             => $symbol . number_format($formula->income_tax, 0, ',', '.') . ' <sub>/ SQM</sub>',
             'total_import_tax'       => $symbol . number_format($formula->total_import_tax, 0, ',', '.') . ' <sub>/ SQM</sub>',
             'safe_guard'             => $symbol . number_format($formula->safe_guard, 0, ',', '.') . ' <sub>/ SQM</sub>',
-            'cogs_idr'               => 'Rp ' . number_format($formula->cogs_idr, 0, ',', '.') . ' <sub>/ SQM</sub>',
-            'cogs_pta_idr'           => 'Rp ' . number_format($formula->cogs_pta_idr, 0, ',', '.')  . ' <sub>/ SQM</sub>',
-            'cogs_smb_idr'           => 'Rp ' . number_format($formula->cogs_smb_idr, 0, ',', '.') . ' <sub>/ SQM</sub>'
+            'cogs_idr'               => 'Rp' . number_format($formula->cogs_idr, 0, ',', '.') . ' <sub>/ SQM</sub>',
+            'cogs_pta_idr'           => 'Rp' . number_format($formula->cogs_pta_idr, 0, ',', '.')  . ' <sub>/ SQM</sub>',
+            'cogs_smb_idr'           => 'Rp' . number_format($formula->cogs_smb_idr, 0, ',', '.') . ' <sub>/ SQM</sub>'
         ]);
     }
 

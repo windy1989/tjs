@@ -19,7 +19,7 @@
       <div class="container clearfix">
          <div class="row clearfix">
             <div class="col-md-12">
-               <img src="{{ $profile->photo() }}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar" style="max-width: 84px;">
+               <img src="{{ $profile->photo() }}" class="alignleft img-circle img-thumbnail my-0" alt="{{ $profile->name }}" style="max-width: 84px;">
                <div class="heading-block border-0">
                   <h3>{{ $profile->name }}</h3>
                   <span>Your Profile Bio</span>

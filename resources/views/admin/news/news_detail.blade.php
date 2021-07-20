@@ -34,7 +34,7 @@
                   <div class="mb-4">
                      <div class="mb-3 text-center">
                         <div class="d-inline-block">
-                           <img src="{{ $news->image() }}" class="img-fluid" alt="{{ $news->title }}">
+                           <img src="{{ $news->image() }}" class="img-fluid">
                         </div>
                      </div>
                      <h4 class="font-weight-semibold mb-1">

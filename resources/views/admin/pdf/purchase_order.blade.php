@@ -123,7 +123,7 @@
 								@foreach($brand as $b)
 									<td>
 										<center>
-											<img src="{{ asset(Storage::url($b->image)) }}" alt="{{ $b->name }}">
+											<img src="{{ asset(Storage::url($b->image)) }}">
 										</center>
 									</td>
 								@endforeach
@@ -220,7 +220,7 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									<img src="{{ $od->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+									<img src="{{ $od->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail">
 								</center>
 							</td>
 							<td style="vertical-align:center;">

@@ -83,7 +83,7 @@
 				</li>
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="{{ session('bo_photo') }}" class="rounded-circle mr-2" height="34" alt="">
+						<img src="{{ session('bo_photo') }}" class="rounded-circle mr-2" height="34" alt="{{ session('fo_name') }}">
 						<span>{{ session('bo_name') }}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">

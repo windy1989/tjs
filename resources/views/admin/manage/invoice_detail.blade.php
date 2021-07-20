@@ -146,7 +146,7 @@
 									<tr class="text-center">
 										<td class="align-middle">{{ $key + 1 }}</td>
 										<td class="align-middle">
-											<img src="{{ $od->product->type->image() }}" style="max-width:80px;" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+											<img src="{{ $od->product->type->image() }}" style="max-width:80px;" class="img-fluid img-thumbnail">
 										</td>
 										<td class="align-middle">
 											<b>{{ $od->product->code() }}</b>

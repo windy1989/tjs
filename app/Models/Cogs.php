@@ -81,7 +81,7 @@ class Cogs extends Model {
         $nc   = $this->number_container;
         $ppc  = $this->price_profile_custom;
         $sc   = $this->sni_cost;
-        $sg   = 11776;
+        $sg   = $ppc * $ru * 0.19;
         $l    = $this->product->type->length ? $this->product->type->length : 0;
         $wd   = $this->product->type->width ? $this->product->type->width : 0;
         $cp   = $this->product->carton_pcs ? $this->product->carton_pcs : 0;
@@ -101,7 +101,7 @@ class Cogs extends Model {
         $lcs  = @($lcd * $ru * $toc / $sd / $nc);
         $id   = ($ppc * 0.05) * $ru;
         $vt   = ((($ppc * 0.05) + $ppc) * 0.1) * $ru;
-        $it   = ((($ppc * 0.05) + $ppc) * 0.075) * $ru;
+        $it   = ((($ppc * 0.05) + $ppc) * 0.75) * $ru;
         $tit  = $vt + $id + $it;
         $ci   = $lpi + $afi + $fc + $tlc + $lcd + $tit + $sc + $sg;
         $cpi  = $ci * 1.1;
