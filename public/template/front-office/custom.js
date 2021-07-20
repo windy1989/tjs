@@ -1,4 +1,21 @@
 $(function() {
+   setInterval(function() {
+      if(navigator.onLine) {
+         $('.jquery-notify-bar').fadeOut(500);
+      } else {
+         if(!$('.jquery-notify-bar').is(':visible')) {
+            $.notifyBar({
+               html: 'No internet connection',
+               cssClass: 'warning',
+               delay: 86400000,
+               closeOnClick: false,
+               closeOnOver: false,
+               waitingForClose: false
+            });
+         }
+      }
+   }, 1000);
+
    $('#show_password a').click(function() {
       if($('#show_password input').attr('type') == 'text') {
          $('#show_password input').attr('type', 'password');

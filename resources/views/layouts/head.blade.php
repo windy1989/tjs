@@ -38,6 +38,7 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/colors.php?color=51b4ba') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
+   <link rel="stylesheet" href="{{ asset('template/plugins/notification/css/jquery.notifyBar.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
@@ -45,6 +46,7 @@
    <script src="{{ asset('template/plugins/countdown/source/syotimer.lang.js') }}"></script>
    <script src="{{ asset('template/plugins/countdown/source/jquery.syotimer.js') }}"></script>
    <script src="{{ asset('template/plugins/side-panel/dist/jquery.slidereveal.min.js') }}"></script>
+   <script src="{{ asset('template/plugins/notification/jquery.notifyBar.js') }}"></script>
    <script src="{{ asset('template/front-office/custom.js') }}"></script>
    <script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1a7fe1284feaa"></script>
    <title>Smart Marble & Bath | {{ $title }}</title>
