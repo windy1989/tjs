@@ -95,13 +95,21 @@ class CodeController extends Controller {
                 }
 
                 if($request->stock) {
-                    $query->whereHas('productShading', function($query) use ($request) {
-                            if($request->stock == 'limited') {
-                                $query->havingRaw('SUM(qty) <= ?', [18]);
-                            } else if($request->stock == 'ready') {
-                                $query->havingRaw('SUM(qty) >= ?', [18]);
-                            }
-                        });
+                    if($request->stock == 'not_available') {
+                        $query->doesnthave('productShading')
+                            ->orWhereHas('productShading', function($query) use ($request) {
+                                    $query->havingRaw('SUM(qty) <= ?', [0]);
+                                });
+                    } else {
+                        $query->whereHas('productShading', function($query) use ($request) {
+                                if($request->stock == 'limited') {
+                                    $query->havingRaw('SUM(qty) > ?', [0])
+                                        ->havingRaw('SUM(qty) <= ?', [18]);
+                                } else if($request->stock == 'ready') {
+                                    $query->havingRaw('SUM(qty) > ?', [18]);
+                                }
+                            });
+                    }
                 }
 
                 if($request->shading) {
@@ -161,13 +169,21 @@ class CodeController extends Controller {
                 }
 
                 if($request->stock) {
-                    $query->whereHas('productShading', function($query) use ($request) {
-                            if($request->stock == 'limited') {
-                                $query->havingRaw('SUM(qty) <= ?', [18]);
-                            } else if($request->stock == 'ready') {
-                                $query->havingRaw('SUM(qty) >= ?', [18]);
-                            }
-                        });
+                    if($request->stock == 'not_available') {
+                        $query->doesnthave('productShading')
+                            ->orWhereHas('productShading', function($query) use ($request) {
+                                    $query->havingRaw('SUM(qty) <= ?', [0]);
+                                });
+                    } else {
+                        $query->whereHas('productShading', function($query) use ($request) {
+                                if($request->stock == 'limited') {
+                                    $query->havingRaw('SUM(qty) > ?', [0])
+                                        ->havingRaw('SUM(qty) <= ?', [18]);
+                                } else if($request->stock == 'ready') {
+                                    $query->havingRaw('SUM(qty) > ?', [18]);
+                                }
+                            });
+                    }
                 }
 
                 if($request->shading) {

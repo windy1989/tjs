@@ -59,7 +59,8 @@
                      <label>Stock :</label>
                      <select name="filter_stock" id="filter_stock" class="custom-select">
                      <option value="">All</option>
-                     <option value="indent">Limited</option>
+                     <option value="not_available">Not Available</option>
+                     <option value="limited">Limited</option>
                      <option value="ready">Ready</option>
                   </select>
                   </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class InformationController extends Controller {
@@ -73,6 +74,16 @@ class InformationController extends Controller {
         $data = [
             'title'   => 'Store',
             'content' => 'information.store'
+        ]; 
+
+        return view('layouts.index', ['data' => $data]);
+    }
+
+    public function productCatalog(Request $request)
+    {
+        $data = [
+            'title'   => 'Product Catalog',
+            'content' => 'information.product_catalog'
         ]; 
 
         return view('layouts.index', ['data' => $data]);

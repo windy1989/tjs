@@ -139,7 +139,7 @@
                      <div class="col-12 mt-3">
                         <div class="card">
                            <div class="card-body">
-                              <h5 class="card-title text-uppercase">Voucher</h5>
+                              <h4 class="card-title text-uppercase">Voucher</h4>
                               <p>
                                  <div class="owl-carousel carousel-widget" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="1" data-items-md="1" data-items-lg="2" data-items-xl="2" style="overflow: visible;">
                                     @foreach($voucher as $v)
@@ -229,9 +229,9 @@
             <div class="line"></div>
             <div class="w-100">
                <h4>Related Product</h4>
-               <div class="owl-carousel product-carousel carousel-widget" data-margin="30" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-md="2" data-items-lg="4" data-items-xl="4">
+               <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-nav="true" data-loop="true" data-pagi="true" data-autoplay="5000" data-items-xs="2" data-items-md="3" data-items-lg="5" data-items-xl="5">
                   @foreach($related_product as $p)
-                     <div class="oc-item">
+                     <div class="oc-item p-2">
                         <div class="product">
                            <div class="grid-inner border">
                               <div class="product-image">

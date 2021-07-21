@@ -263,16 +263,20 @@ class ProductController extends Controller {
             ->get();
 
         $related_product = Product::where('id', '!=', $product_id)
-            ->where(function($query) use ($product) {
-                    $query->where('type_id', $product->type_id)
-                        ->whereHas('productShading', function($query) {
-                                $query->havingRaw('SUM(qty) > ?', [0]);
-                            });
+            ->where(function($query) {
+                    $query->whereHas('productShading', function($query) {
+                            $query->havingRaw('SUM(qty) > ?', [0]);
+                        });
                 })
             ->where(function($query) use ($product) {
                 $query->where('brand_id', $product->brand_id)
-                    ->whereHas('type', function($query) use ($product) {
-                            $query->where('category_id', $product->type->category_id);
+                    ->orWhereHas('type', function($query) use ($product) {
+                            $query->where('type_id', $product->type->category_id)
+                                ->orWhere('category_id', $product->type->category_id)
+                                ->orWhere(function($query) use ($product) {
+                                        $query->where('length', $product->type->length)
+                                            ->where('width', $product->type->width);
+                                    });
                         });
             })
             ->limit(9)
