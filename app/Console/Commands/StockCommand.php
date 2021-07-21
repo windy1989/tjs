@@ -40,21 +40,23 @@ class StockCommand extends Command
      */
     public function handle()
     {
-        foreach(ProductShading::all() as $ps) {
-            $stock = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
-                'kode_item' => $ps->stock_code,
-                'gudang'    => $ps->warehouse_code,
-                'per_page'  => 1000
-            ]));
+        $data = ProductShading::chunk(100, function($query) {
+                foreach($query as $q) {
+                    $stock = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                        'kode_item' => $q->stock_code,
+                        'gudang'    => $q->warehouse_code,
+                        'per_page'  => 1000
+                    ]));
 
-            if($stock->result->total_data > 0) {
-                foreach($stock->result->data as $s) {
-                    $ps->update(['qty' => $s->stok]);
+                    if($stock->result->total_data > 0) {
+                        foreach($stock->result->data as $s) {
+                            $q->update(['qty' => $s->stok]);
+                        }
+                    } else {
+                        $q->delete();
+                    }
                 }
-            } else {
-                $ps->delete();
-            }
-        }
+            });
 
         return true;
     }

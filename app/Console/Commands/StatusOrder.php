@@ -39,23 +39,24 @@ class StatusOrder extends Command
      */
     public function handle()
     {
-        $data = Order::where('status', 1)->get();
-        foreach($data as $d) {
-            $current_date = strtotime(date('Y-m-d H:i:s'));
-            $created_at   = date('Y-m-d H:i:s', strtotime('+1 days', strtotime($d->created_at)));
-            $deadline     = strtotime($created_at);
+        $data = Order::where('status', 1)->chunk(100, function($query) {
+                foreach($query as $q) {
+                    $current_date = strtotime(date('Y-m-d H:i:s'));
+                    $created_at   = date('Y-m-d H:i:s', strtotime('+1 days', strtotime($q->created_at)));
+                    $deadline     = strtotime($created_at);
 
-            if($current_date > $deadline) {
-                Order::find($d->id)->update(['status' => 5]);
-                CustomerPoint::where('customer_id', $d->customer_id)->where('order_id', $d->id)->delete();
+                    if($current_date > $deadline) {
+                        Order::find($q->id)->update(['status' => 5]);
+                        CustomerPoint::where('customer_id', $q->customer_id)->where('order_id', $q->id)->delete();
 
-                if($order->points > 0) {
-                    $pointable      = $d->customer->points;
-                    $restore_points = $pointable + $d->points;
-                    $order->customer->update(['points' => $restore_points]);
+                        if($order->points > 0) {
+                            $pointable      = $q->customer->points;
+                            $restore_points = $pointable + $q->points;
+                            $order->customer->update(['points' => $restore_points]);
+                        }
+                    }
                 }
-            }
-        }
+            });
 
         return true;
     }

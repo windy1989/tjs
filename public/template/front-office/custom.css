@@ -1,5 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
+.tabable .nav-tabs {
+   overflow-x: auto;
+   overflow-y: hidden;
+   flex-wrap: nowrap;
+   border: 0;
+}
+
+.tabable .nav-tabs .nav-link {
+   border-radius: 0;
+   color: black;
+   white-space: nowrap;
+}
+
+.tabable .nav-tabs .nav-link:hover {
+   border: 0;
+}
+
+.tabable .nav-tabs .nav-link.active {
+   background: #e93c28;
+   color: white;
+   border: 0;
+}
+
+.tabable .nav-tabs::-webkit-scrollbar {
+   height: 5px;
+}
+
+.tabable .nav-tabs::-webkit-scrollbar-track {
+   background: lightgray;
+   border: 3px solid lightgray;
+}
+
+.tabable .nav-tabs::-webkit-scrollbar-thumb {
+   background-color: gray;
+   border: 3px solid gray;
+}
+
 input:disabled {
    opacity: .5;
 }

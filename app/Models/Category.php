@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,6 +65,21 @@ class Category extends Model {
     public function type()
     {
         return $this->hasMany('App\Models\Type');
+    }
+
+    public function product() 
+    {
+        $data = Product::whereHas('type', function($query) {
+                $query->where('category_id', $this->id);
+            })
+            ->whereHas('productShading', function($query) {
+                $query->havingRaw('SUM(qty) > ?', [0]);
+            })
+            ->where('status', 1)
+            ->limit(12)
+            ->get();
+
+        return $data;
     }
 
 }

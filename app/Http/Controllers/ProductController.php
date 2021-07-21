@@ -279,6 +279,7 @@ class ProductController extends Controller {
                                     });
                         });
             })
+            ->where('status', 1)
             ->limit(9)
             ->inRandomOrder()
             ->get();
