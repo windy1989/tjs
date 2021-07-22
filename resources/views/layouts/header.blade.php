@@ -15,7 +15,7 @@
 			<a href="{{ url('account/cart') }}" class="nav-link {{ Request::segment(2) == 'cart' ? 'active' : '' }}">
 				<i class="icon-line-bag"></i>
 				<sup class="sup-top">
-					<span class="badge badge-warning">{{ $total_cart }}</span>
+					<span class="badge badge-custom badge-warning">{{ $total_cart }}</span>
 				</sup>
 				<span class="small d-block">Cart</span>
 			</a>
@@ -24,7 +24,7 @@
 			<a href="{{ url('account/wishlist') }}" class="nav-link {{ Request::segment(2) == 'wishlist' ? 'active' : '' }}">
 				<i class="icon-line-heart"></i>
 				<sup class="sup-top">
-					<span class="badge badge-warning">{{ $total_wishlist }}</span>
+					<span class="badge badge-custom badge-warning">{{ $total_wishlist }}</span>
 				</sup>
 				<span class="small d-block">Wishlist</span>
 			</a>
