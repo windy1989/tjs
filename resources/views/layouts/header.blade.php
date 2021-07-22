@@ -94,10 +94,10 @@
 		</div>
 	</div>
 	<div id="wrapper" class="clearfix">
-		<div id="top-bar" class="d-none d-lg-block p-0 m-0 bg-light shadow-lg">
+		<div id="top-bar" class="p-0 m-0 bg-light shadow-lg">
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
-					<div class="col-12 col-md-auto">
+					<div class="col-12 col-md-auto d-none d-lg-block">
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
