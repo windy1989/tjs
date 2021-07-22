@@ -1,3 +1,53 @@
+.sup-top {
+   top: -7px;
+   position: relative;
+   font-size: 13px;
+   left: 15px;
+   line-height: 0;
+   vertical-align: baseline;
+}
+
+.sup-top span {
+   background: #ebb11f;
+   font-size: 9.5px;
+   font-weight: bold;
+}
+
+.navigation-menu {
+   background: #51b4ba;
+}
+
+.navigation-menu .nav-item .nav-link {
+   padding-bottom: 0 !important;
+   color: white !important;
+   text-transform: uppercase;
+   font-weight: 500;
+   font-size: 12px;
+}
+
+.navigation-menu .nav-item .nav-link.active {
+   border: 3px solid #e93c28;
+   background: #e93c28 !important;
+}
+
+.badge {
+   position: absolute;
+   top: 0;
+   right: 0;
+   display: inline-block;
+   min-width: 10px;
+   padding: 3px 7px;
+   font-size: 12px;
+   font-weight: 700;
+   line-height: 1;
+   color: #fff;
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: baseline;
+   background-color: #777;
+   border-radius: 10px;
+}
+
 .tabable .nav-tabs {
    overflow-x: auto;
    overflow-y: hidden;

@@ -3,6 +3,48 @@
 	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
 	$total_points   = App\Models\Customer::find(session('fo_id'));
 @endphp
+<nav class="p-0 navbar fixed-bottom navbar-dark navbar-expand navigation-menu d-md-block d-lg-none d-xl-none">
+	<ul class="navbar-nav nav-justified w-100">
+		<li class="nav-item">
+			<a href="{{ url('/') }}" class="nav-link {{ !Request::segment(2) ? 'active' : '' }}">
+				<i class="icon-home"></i>
+				<span class="small d-block">Home</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a href="{{ url('account/cart') }}" class="nav-link {{ Request::segment(2) == 'cart' ? 'active' : '' }}">
+				<i class="icon-line-bag"></i>
+				<sup class="sup-top">
+					<span class="badge badge-warning">{{ $total_cart }}</span>
+				</sup>
+				<span class="small d-block">Cart</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a href="{{ url('account/wishlist') }}" class="nav-link {{ Request::segment(2) == 'wishlist' ? 'active' : '' }}">
+				<i class="icon-line-heart"></i>
+				<sup class="sup-top">
+					<span class="badge badge-warning">{{ $total_wishlist }}</span>
+				</sup>
+				<span class="small d-block">Wishlist</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a href="#" class="nav-link side-panel-trigger">
+				@if(session('fo_id'))
+					<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="20" alt="{{ session('fo_name') }}">
+					<span class="small d-block">
+						@php $str = explode(' ', session('fo_name')); @endphp
+						Hi, {{ $str[0] }}
+					</span>
+				@else
+					<i class="icon-user21"></i>
+					<span class="small d-block">Account</span>
+				@endif
+			</a>
+		</li>
+	</ul>
+</nav>
 <body class="stretched">
 	<div class="body-overlay"></div>
 	<div id="side-panel" class="dark">
@@ -30,12 +72,6 @@
 					<ul>
 						<li>
 							<a href="{{ url('account/profile') }}"><i class="icon-user-circle1"></i> Edit Profile</a>
-						</li>
-						<li>
-							<a href="{{ url('account/cart') }}"><i class="icon-line-shopping-cart"></i> Cart <sup class="badge badge-danger">{{ $total_cart }}</sup></a>
-						</li>
-						<li>
-							<a href="{{ url('account/wishlist') }}"><i class="icon-line-heart"></i> Wishlist <sup class="badge badge-danger">{{ $total_wishlist }}</sup></a>
 						</li>
 						<li>
 							<a href="{{ url('account/history_order') }}"><i class="icon-line2-notebook"></i> History Order</a>
@@ -107,7 +143,7 @@
 							</a>
 						</div>
 						<div class="header-misc">
-							<div id="top-account">
+							<div id="top-account" class="d-none d-xl-block">
 								@if(session('fo_id'))
 									<a href="javascript:void(0);" class="side-panel-trigger text-dark">
 										<img src="{{ session('fo_photo') }}" class="mr-1 position-relative img-circle" style="margin-bottom:1px;" height="20" alt="{{ session('fo_name') }}">
@@ -129,13 +165,13 @@
 									<i class="icon-line-cross text-teal"></i>
 								</a>
 							</div>
-							<div id="top-search" class="header-misc-icon d-none d-sm-block">
+							<div id="top-search" class="header-misc-icon d-none d-xl-block">
 								<a href="{{ url('account/wishlist') }}" id="top-search-trigger">
 									<i class="icon-heart21 text-teal"></i>
 									<span class="top-cart-number">{{ $total_wishlist }}</span>
 								</a>
 							</div>
-							<div id="top-search" class="header-misc-icon d-none d-sm-block">
+							<div id="top-search" class="header-misc-icon d-none d-xl-block">
 								<a href="{{ url('account/cart') }}" id="top-search-trigger">
 									<i class="icon-line-bag text-teal"></i>
 									<span class="top-cart-number">{{ $total_cart }}</span>
