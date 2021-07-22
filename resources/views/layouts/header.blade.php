@@ -221,7 +221,7 @@
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('information/contact') }}">
-										<div class="font-size-header-top">Contact</div>
+										<div class="font-size-header-top">Contact Us</div>
 									</a>
 								</li>
 							</ul>

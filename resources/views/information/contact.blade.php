@@ -1,6 +1,6 @@
 <section id="page-title">
    <div class="container clearfix">
-      <h1>Contact</h1>
+      <h1>Contact Us</h1>
       <ol class="breadcrumb font-size-12">
          <li class="breadcrumb-item">
             <a href="{{ url('/') }}">Home</a>
@@ -9,7 +9,7 @@
             <a href="javascript:void(0);">Information</a>
          </li>
          <li class="breadcrumb-item active" aria-current="page">
-            Contact
+            Contact Us
          </li>
       </ol>
    </div>

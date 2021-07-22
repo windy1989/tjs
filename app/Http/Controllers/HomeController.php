@@ -19,7 +19,7 @@ class HomeController extends Controller {
             ->where('products.status', 1)
             ->leftJoin('pricing_policies', 'products.id', '=', 'pricing_policies.product_id')
             ->orderBy('pricing_policies.price_list', 'asc')
-            ->limit(18)
+            ->limit(12)
             ->get();
 
         $product_new = Product::whereHas('productShading', function($query) {
@@ -27,7 +27,7 @@ class HomeController extends Controller {
             })
             ->where('status', 1)
             ->latest()
-            ->limit(18)
+            ->limit(12)
             ->get();
 
         $product_limited = Product::whereHas('productShading', function($query) {
@@ -36,7 +36,7 @@ class HomeController extends Controller {
             })
             ->where('status', 1)
             ->latest()
-            ->limit(18)
+            ->limit(12)
             ->get();
 
         $category = Category::where('status', 1)

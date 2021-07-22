@@ -86,7 +86,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_new as $p)
-               <div class="product col-lg-2 col-md-4 col-6">
+               <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -136,7 +136,7 @@
                <div class="tab-content" id="nav-tabContent">
                   @foreach($category as $key => $c)
                      <div class="tab-pane fade {{ $key == 0 ? 'show active' : '' }}" id="nav-category_{{ $key }}" role="tabpanel" aria-labelledby="nav-category_{{ $key }}-tab">
-                        <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-margin="0" data-nav="true" data-pagi="true" data-items-xs="2" data-items-sm="2" data-items-md="3" data-items-lg="6" data-items-xl="6">
+                        <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-margin="0" data-nav="true" data-pagi="true" data-items-xs="2" data-items-sm="2" data-items-md="3" data-items-lg="4" data-items-xl="4">
                            @foreach($c->product() as $p)
                               <div class="oc-item p-2">
                                  <div class="product">
@@ -172,46 +172,6 @@
                      </div>
                   @endforeach
                </div>
-               {{--
-               <div class="tab-content" id="nav-tabContent">
-                  @foreach($category as $key => $c)
-                     <div class="tab-content mb-0 p-3 fade {{ $key == 0 ? 'show active' : '' }}" id="category_{{ $key }}" role="tabpanel" aria-labelledby="nav-category_{{ $key }}">
-                        <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-margin="0" data-nav="true" data-pagi="true" data-items-xs="2" data-items-sm="2" data-items-md="3" data-items-lg="6" data-items-xl="6">
-                           @foreach($c->product() as $p)
-                              <div class="oc-item p-2">
-                                 <div class="product">
-                                    <div class="grid-inner border">
-                                       <div class="product-image">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                                             <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
-                                          </a>
-                                          <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
-                                       </div>
-                                       <div class="product-desc bg-light p-3">
-                                          <div class="product-price font-weight-bold">
-                                             <ins class="text-dark">
-                                                <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
-                                             </ins>
-                                          </div>
-                                          <div class="product-title">
-                                             <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                                <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
-                                             </h4>
-                                          </div>
-                                          <div class="product-price font-weight-semibold">
-                                             <span>
-                                                <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
-                                             </span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           @endforeach
-                        </div>
-                     </div>
-                  @endforeach
-               </div> --}}
             </div>
          </div>
          <div class="clearfix"></div>
@@ -220,7 +180,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_cheapest as $p)
-               <div class="product col-lg-2 col-md-4 col-6">
+               <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
@@ -260,7 +220,7 @@
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_limited as $p)
-               <div class="product col-lg-2 col-md-4 col-6">
+               <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
                         <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">

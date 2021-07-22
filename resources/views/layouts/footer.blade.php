@@ -152,7 +152,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center">
-							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved.
+							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved. Made by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
 						</div>
 					</div>
 				</div>
