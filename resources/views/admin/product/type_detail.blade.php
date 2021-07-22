@@ -78,7 +78,7 @@
                            </tr>
                            <tr>
                               <th width="20%" class="align-middle">Status</th>
-                              <td class="align-middle">: {!! $type->status !!}</td>
+                              <td class="align-middle">: {!! $type->status() !!}</td>
                            </tr>
                         </tbody>
                      </table>

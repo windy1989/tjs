@@ -22,6 +22,7 @@
    <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
    <meta name="format-detection" content="telephone=no">
    <meta name="theme-color" content="#51b4ba">
+   <meta name="facebook-domain-verification" content="o69n9mkoeazt1eylzyflu2wrtisnc7">
    <link rel="manifest" href="{{ asset('manifest.json') }}">
    <link rel="alternate" href="{{ url('/') }}" hreflang="in">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
@@ -30,7 +31,6 @@
 	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/dark.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/swiper.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/css/fonts.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/font-icons.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/animate.css') }}">

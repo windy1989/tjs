@@ -62,6 +62,12 @@ class Category extends Model {
         return $query;
     }
 
+    public function sub()
+    {
+        $query = Category::where('parent_id', $this->id)->get();
+        return $query;
+    }
+
     public function type()
     {
         return $this->hasMany('App\Models\Type');
@@ -76,6 +82,7 @@ class Category extends Model {
                 $query->havingRaw('SUM(qty) > ?', [0]);
             })
             ->where('status', 1)
+            ->groupBy('id')
             ->limit(12)
             ->get();
 

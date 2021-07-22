@@ -229,7 +229,7 @@
             <div class="line"></div>
             <div class="w-100">
                <h4>Related Product</h4>
-               <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-nav="true" data-loop="true" data-pagi="true" data-autoplay="5000" data-items-xs="2" data-items-md="3" data-items-lg="5" data-items-xl="5">
+               <div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-nav="true" data-loop="true" data-pagi="true" data-autoplay="5000" data-items-xs="2" data-items-md="3" data-items-lg="4" data-items-xl="4">
                   @foreach($related_product as $p)
                      <div class="oc-item p-2">
                         <div class="product">

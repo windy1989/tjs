@@ -23,8 +23,7 @@
                            <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Show</label>
                            <div class="col-9">
                               <select name="show" id="show" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
-                                 <option value="">12</option>
-                                 <option value="24" {{ $filter['other']['show'] == 24 ? 'selected' : '' }}>24</option>
+                                 <option value="">24</option>
                                  <option value="48" {{ $filter['other']['show'] == 48 ? 'selected' : '' }}>48</option>
                                  <option value="60" {{ $filter['other']['show'] == 60 ? 'selected' : '' }}>60</option>
                                  <option value="90" {{ $filter['other']['show'] == 90 ? 'selected' : '' }}>90</option>
@@ -120,7 +119,7 @@
                         <a href="{{ url('product') }}" class="button button-small button-3d button-red text-center col-12 mt-2 font-size-11 m-0">Reset</a>
                      </div>
                      <div class="form-group"><hr></div>
-                     <div class="clearfix">
+                     @foreach($category as $c)
                         <div class="accordion accordion-border" data-collapsible="true">
                            <div class="accordion-header">
                               <div class="accordion-icon">
@@ -128,49 +127,26 @@
                                  <i class="accordion-open icon-line-minus"></i>
                               </div>
                               <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:15px;">Category</h4>
+                                 <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
                               </div>
                            </div>
                            <div class="accordion-content">
                               <ul class="sidebar-filter-product mb-0">
-                                 @foreach($category as $c)
-                                    @php
-                                       $sub_1 = App\Models\Category::where('parent_id', $c->id)
-                                          ->where('status', 1)
-                                          ->oldest('name')
-                                          ->get();
-                                    @endphp
-                                    @if($sub_1->count() > 0)
-                                       @foreach($sub_1 as $s1)
-                                          @php
-                                             $sub_2 = App\Models\Category::where('parent_id', $s1->id)
-                                                ->where('status', 1)
-                                                ->oldest('name')
-                                                ->get();
-                                          @endphp
-                                          @if($sub_2->count() > 0)
-                                             @foreach($sub_2 as $s2)
-                                                <li>
-                                                   <div class="form-check">
-                                                      <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s2->slug }}" value="{{ $s2->slug }}" onchange="clickFilter(this)" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                                      <label class="form-check-label font-weight-normal font-size-11" for="{{ $s2->slug }}">{{ $s2->name }}</label>
-                                                   </div>
-                                                </li>
-                                             @endforeach
-                                          @else
-                                             <li>
-                                                <div class="form-check">
-                                                   <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s1->slug }}" value="{{ $s1->slug }}" onchange="clickFilter(this)" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                                   <label class="form-check-label font-weight-normal font-size-11" for="{{ $s1->slug }}">{{ $s1->name }}</label>
-                                                </div>
-                                             </li>
-                                          @endif
+                                 @foreach($c->sub() as $s)
+                                    @if($s->sub()->count() > 0)
+                                       @foreach($s->sub() as $val)
+                                          <li>
+                                             <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="category[]" id="{{ $val->slug }}" value="{{ $val->slug }}" onchange="clickFilter(this)" {{ in_array($val->slug, $filter['category']) ? 'checked' : '' }}>
+                                                <label class="form-check-label font-weight-normal font-size-11" for="{{ $val->slug }}">{{ $val->name }}</label>
+                                             </div>
+                                          </li>
                                        @endforeach
                                     @else
                                        <li>
                                           <div class="form-check">
-                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $c->slug }}" value="{{ $c->slug }}" onchange="clickFilter(this)" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->slug }}">{{ $c->name }}</label>
+                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s->slug }}" value="{{ $s->slug }}" onchange="clickFilter(this)" {{ in_array($s->slug, $filter['category']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->slug }}">{{ $s->name }}</label>
                                           </div>
                                        </li>
                                     @endif
@@ -178,105 +154,97 @@
                               </ul>
                            </div>
                         </div>
-                     </div>
-                     <div class="clearfix">
-                        <div class="accordion accordion-border" data-collapsible="true">
-                           <div class="accordion-header">
-                              <div class="accordion-icon">
-                                 <i class="accordion-closed icon-line-plus"></i>
-                                 <i class="accordion-open icon-line-minus"></i>
-                              </div>
-                              <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:15px;">Brand</h4>
-                              </div>
+                     @endforeach
+                     <div class="accordion accordion-border" data-collapsible="true">
+                        <div class="accordion-header">
+                           <div class="accordion-icon">
+                              <i class="accordion-closed icon-line-plus"></i>
+                              <i class="accordion-open icon-line-minus"></i>
                            </div>
-                           <div class="accordion-content">
-                              <ul class="sidebar-filter-product mb-0">
-                                 @foreach($brand as $b)
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $b->code }}">{{ $b->name }}</label>
-                                       </div>
-                                    </li>
-                                 @endforeach
-                              </ul>
+                           <div class="accordion-title">
+                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
                            </div>
                         </div>
-                     </div>
-                     <div class="clearfix">
-                        <div class="accordion accordion-border" data-collapsible="true">
-                           <div class="accordion-header">
-                              <div class="accordion-icon">
-                                 <i class="accordion-closed icon-line-plus"></i>
-                                 <i class="accordion-open icon-line-minus"></i>
-                              </div>
-                              <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:15px;">Size</h4>
-                              </div>
-                           </div>
-                           <div class="accordion-content">
-                              <ul class="sidebar-filter-product mb-0">
-                                 @foreach($size as $s)
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="size[]" id="{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" onchange="clickFilter(this)" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
-                                       </div>
-                                    </li>
-                                 @endforeach
-                              </ul>
-                           </div>
+                        <div class="accordion-content">
+                           <ul class="sidebar-filter-product mb-0">
+                              @foreach($brand as $b)
+                                 <li>
+                                    <div class="form-check">
+                                       <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
+                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $b->code }}">{{ $b->name }}</label>
+                                    </div>
+                                 </li>
+                              @endforeach
+                           </ul>
                         </div>
                      </div>
-                     <div class="clearfix">
-                        <div class="accordion accordion-border" data-collapsible="true">
-                           <div class="accordion-header">
-                              <div class="accordion-icon">
-                                 <i class="accordion-closed icon-line-plus"></i>
-                                 <i class="accordion-open icon-line-minus"></i>
-                              </div>
-                              <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:15px;">Color</h4>
-                              </div>
+                     <div class="accordion accordion-border" data-collapsible="true">
+                        <div class="accordion-header">
+                           <div class="accordion-icon">
+                              <i class="accordion-closed icon-line-plus"></i>
+                              <i class="accordion-open icon-line-minus"></i>
                            </div>
-                           <div class="accordion-content">
-                              <ul class="sidebar-filter-product mb-0">
-                                 @foreach($color as $c)
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="color[]" id="{{ $c->code }}" value="{{ $c->code }}" onchange="clickFilter(this)" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->code }}">{{ $c->name }}</label>
-                                       </div>
-                                    </li>
-                                 @endforeach
-                              </ul>
+                           <div class="accordion-title">
+                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
                            </div>
                         </div>
+                        <div class="accordion-content">
+                           <ul class="sidebar-filter-product mb-0">
+                              @foreach($size as $s)
+                                 <li>
+                                    <div class="form-check">
+                                       <input type="checkbox" class="form-check-input" name="size[]" id="{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" onchange="clickFilter(this)" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
+                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                    </div>
+                                 </li>
+                              @endforeach
+                           </ul>
+                        </div>
                      </div>
-                     <div class="clearfix">
-                        <div class="accordion accordion-border" data-collapsible="true">
-                           <div class="accordion-header">
-                              <div class="accordion-icon">
-                                 <i class="accordion-closed icon-line-plus"></i>
-                                 <i class="accordion-open icon-line-minus"></i>
-                              </div>
-                              <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:15px;">Pattern</h4>
-                              </div>
+                     <div class="accordion accordion-border" data-collapsible="true">
+                        <div class="accordion-header">
+                           <div class="accordion-icon">
+                              <i class="accordion-closed icon-line-plus"></i>
+                              <i class="accordion-open icon-line-minus"></i>
                            </div>
-                           <div class="accordion-content">
-                              <ul class="sidebar-filter-product mb-0">
-                                 @foreach($pattern as $p)
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="pattern[]" id="{{ $p->code }}" value="{{ $p->code }}" onchange="clickFilter(this)" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $p->code }}">{{ $p->name }}</label>
-                                       </div>
-                                    </li>
-                                 @endforeach
-                              </ul>
+                           <div class="accordion-title">
+                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
                            </div>
+                        </div>
+                        <div class="accordion-content">
+                           <ul class="sidebar-filter-product mb-0">
+                              @foreach($color as $c)
+                                 <li>
+                                    <div class="form-check">
+                                       <input type="checkbox" class="form-check-input" name="color[]" id="{{ $c->code }}" value="{{ $c->code }}" onchange="clickFilter(this)" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
+                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->code }}">{{ $c->name }}</label>
+                                    </div>
+                                 </li>
+                              @endforeach
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="accordion accordion-border" data-collapsible="true">
+                        <div class="accordion-header">
+                           <div class="accordion-icon">
+                              <i class="accordion-closed icon-line-plus"></i>
+                              <i class="accordion-open icon-line-minus"></i>
+                           </div>
+                           <div class="accordion-title">
+                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
+                           </div>
+                        </div>
+                        <div class="accordion-content">
+                           <ul class="sidebar-filter-product mb-0">
+                              @foreach($pattern as $p)
+                                 <li>
+                                    <div class="form-check">
+                                       <input type="checkbox" class="form-check-input" name="pattern[]" id="{{ $p->code }}" value="{{ $p->code }}" onchange="clickFilter(this)" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
+                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $p->code }}">{{ $p->name }}</label>
+                                    </div>
+                                 </li>
+                              @endforeach
+                           </ul>
                         </div>
                      </div>
                   </div>
@@ -298,106 +266,135 @@
                      <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
                   </div>
                   <div class="form-group"><hr></div>
-                  <div class="mb-5 clearfix">
-                     <h4 class="mb-3 text-uppercase" style="font-size:15px;">Category</h4>
-                     <ul class="sidebar-filter-product">
-                        @foreach($category as $c)
-                           @php
-                              $sub_1 = App\Models\Category::where('parent_id', $c->id)
-                                 ->where('status', 1)
-                                 ->oldest('name')
-                                 ->get();
-                           @endphp
-                           @if($sub_1->count() > 0)
-                              @foreach($sub_1 as $s1)
-                                 @php
-                                    $sub_2 = App\Models\Category::where('parent_id', $s1->id)
-                                       ->where('status', 1)
-                                       ->oldest('name')
-                                       ->get();
-                                 @endphp
-                                 @if($sub_2->count() > 0)
-                                    @foreach($sub_2 as $s2)
+                  @foreach($category as $c)
+                     <div class="accordion accordion-border" data-collapsible="true">
+                        <div class="accordion-header">
+                           <div class="accordion-icon">
+                              <i class="accordion-closed icon-line-plus"></i>
+                              <i class="accordion-open icon-line-minus"></i>
+                           </div>
+                           <div class="accordion-title">
+                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
+                           </div>
+                        </div>
+                        <div class="accordion-content">
+                           <ul class="sidebar-filter-product mb-0">
+                              @foreach($c->sub() as $s)
+                                 @if($s->sub()->count() > 0)
+                                    @foreach($s->sub() as $val)
                                        <li>
                                           <div class="form-check">
-                                             <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s2->slug }}" value="{{ $s2->slug }}" {{ in_array($s2->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s2->slug }}">{{ $s2->name }}</label>
+                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $val->slug }}" value="{{ $val->slug }}" onchange="clickFilter(this)" {{ in_array($val->slug, $filter['category']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $val->slug }}">{{ $val->name }}</label>
                                           </div>
                                        </li>
                                     @endforeach
                                  @else
                                     <li>
                                        <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $s1->slug }}" value="{{ $s1->slug }}" {{ in_array($s1->slug, $filter['category']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s1->slug }}">{{ $s1->name }}</label>
+                                          <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s->slug }}" value="{{ $s->slug }}" onchange="clickFilter(this)" {{ in_array($s->slug, $filter['category']) ? 'checked' : '' }}>
+                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->slug }}">{{ $s->name }}</label>
                                        </div>
                                     </li>
                                  @endif
                               @endforeach
-                           @else
+                           </ul>
+                        </div>
+                     </div>
+                  @endforeach
+                  <div class="accordion accordion-border" data-collapsible="true">
+                     <div class="accordion-header">
+                        <div class="accordion-icon">
+                           <i class="accordion-closed icon-line-plus"></i>
+                           <i class="accordion-open icon-line-minus"></i>
+                        </div>
+                        <div class="accordion-title">
+                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
+                        </div>
+                     </div>
+                     <div class="accordion-content">
+                        <ul class="sidebar-filter-product mb-0">
+                           @foreach($brand as $b)
                               <li>
                                  <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="category[]" id="panel-{{ $c->slug }}" value="{{ $c->slug }}" {{ in_array($c->slug, $filter['category']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->slug }}">{{ $c->name }}</label>
+                                    <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
                                  </div>
                               </li>
-                           @endif
-                        @endforeach
-                     </ul>
+                           @endforeach
+                        </ul>
+                     </div>
                   </div>
-                  <div class="mb-5 clearfix">
-                     <h4 class="mb-3 text-uppercase" style="font-size:15px;">Brand</h4>
-                     <ul class="sidebar-filter-product">
-                        @foreach($brand as $b)
-                           <li>
-                              <div class="form-check">
-                                 <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
-                              </div>
-                           </li>
-                        @endforeach
-                     </ul>
+                  <div class="accordion accordion-border" data-collapsible="true">
+                     <div class="accordion-header">
+                        <div class="accordion-icon">
+                           <i class="accordion-closed icon-line-plus"></i>
+                           <i class="accordion-open icon-line-minus"></i>
+                        </div>
+                        <div class="accordion-title">
+                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
+                        </div>
+                     </div>
+                     <div class="accordion-content">
+                        <ul class="sidebar-filter-product mb-0">
+                           @foreach($size as $s)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                 </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
                   </div>
-                  <div class="mb-5 clearfix">
-                     <h4 class="mb-3 text-uppercase" style="font-size:15px;">Size</h4>
-                     <ul class="sidebar-filter-product">
-                        @foreach($size as $s)
-                           <li>
-                              <div class="form-check">
-                                 <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
-                              </div>
-                           </li>
-                        @endforeach
-                     </ul>
+                  <div class="accordion accordion-border" data-collapsible="true">
+                     <div class="accordion-header">
+                        <div class="accordion-icon">
+                           <i class="accordion-closed icon-line-plus"></i>
+                           <i class="accordion-open icon-line-minus"></i>
+                        </div>
+                        <div class="accordion-title">
+                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
+                        </div>
+                     </div>
+                     <div class="accordion-content">
+                        <ul class="sidebar-filter-product mb-0">
+                           @foreach($color as $c)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
+                                 </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
                   </div>
-                  <div class="mb-5 clearfix">
-                     <h4 class="mb-3 text-uppercase" style="font-size:15px;">Color</h4>
-                     <ul class="sidebar-filter-product">
-                        @foreach($color as $c)
-                           <li>
-                              <div class="form-check">
-                                 <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
-                              </div>
-                           </li>
-                        @endforeach
-                     </ul>
+                  <div class="accordion accordion-border" data-collapsible="true">
+                     <div class="accordion-header">
+                        <div class="accordion-icon">
+                           <i class="accordion-closed icon-line-plus"></i>
+                           <i class="accordion-open icon-line-minus"></i>
+                        </div>
+                        <div class="accordion-title">
+                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
+                        </div>
+                     </div>
+                     <div class="accordion-content">
+                        <ul class="sidebar-filter-product mb-0">
+                           @foreach($pattern as $p)
+                              <li>
+                                 <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
+                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
+                                 </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
                   </div>
-                  <div class="mb-5 clearfix">
-                     <h4 class="mb-3 text-uppercase" style="font-size:15px;">Pattern</h4>
-                     <ul class="sidebar-filter-product">
-                        @foreach($pattern as $p)
-                           <li>
-                              <div class="form-check">
-                                 <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                 <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
-                              </div>
-                           </li>
-                        @endforeach
-                     </ul>
-                  </div>
-                  <div class="clearfix">
+                  <div class="form-group">
                      <button type="submit" class="button button-3d button-mini bg-teal col-12 font-size-11">Filter</button>
                      <a href="{{ url('product') }}" class="button button-3d button-mini button-red text-center col-12 font-size-11">Reset</a>
                   </div>

@@ -274,7 +274,7 @@
                   <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
                      100% Original
                   </div>
-                  <h5 style="font-size: 9px;" class="text-dark">We guarantee you the sale of Original Brands</h5>
+                  <h5 style="font-size:10px;" class="text-dark">We guarantee you the sale of Original Brands</h5>
                </div>
                <div class="col-lg-4 col-md-4 col-12">
                   <div class="text-center">
@@ -284,7 +284,7 @@
                   <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
                      Warranty
                   </div>
-                  <h5 style="font-size: 9px;" class="text-dark">3 years for Sanitary ware & 2 years for tiles</h5>
+                  <h5 style="font-size:10px;" class="text-dark">3 years for Sanitary ware & 2 years for tiles</h5>
                </div>
                <div class="col-lg-4 col-md-4 col-12">
                   <div class="text-center">
@@ -294,7 +294,7 @@
                   <div class="counter counter-small text-dark mb-2" style="font-family:'Lato', sans-serif; font-size: 18px;">
                      Pre & Post Sales Services
                   </div>
-                  <h5 style="font-size: 9px;" class="text-dark">Design Consultancy, Installation, Supervision, Maintenance</h5>
+                  <h5 style="font-size:10px;" class="text-dark">Design Consultancy, Installation, Supervision, Maintenance</h5>
                </div>
             </div>
          </div>

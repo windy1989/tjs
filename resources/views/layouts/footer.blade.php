@@ -1,144 +1,99 @@
-		<footer id="footer" class="bg-white">
+		<footer id="footer">
 			<div class="container">
 				<div class="footer-widgets-wrap mb-0">
-					<div class="row justify-content-center">
-						<div class="col-lg-12">
-							<div class="row gutter-30">
-								<div class="col-lg-2 col-6">
-									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">Help</h4>
-										<div class="mb-2">
-											<a href="{{ url('information/how_to_buy') }}" style="font-size:12px;" class="text-dark text-uppercase">How To Buy</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/faq') }}" style="font-size:12px;" class="text-dark text-uppercase">FAQ</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/contact') }}" style="font-size:12px;" class="text-dark text-uppercase">Contact</a>
-										</div>
+					<div class="row gutter-30">
+						<div class="col-md-8">
+							<div class="widget clearfix">
+								<p class="mb-0 font-size-14">
+									Smart Marble & Bath(SMB) is a subsidiary company of Karya Modern Group. Karya Modern Group has been in tile and sanitary business for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Surabaya, East Java
+								</p><hr class="mt-4 mb-4">
+								<div class="row gutter-30">
+									<div class="col-6 col-lg-3 widget_links">
+										<ul>
+											<li>
+												<a href="{{ url('information/how_to_buy') }}" class="text-dark">How To Buy</a>
+											</li>
+											<li>
+												<a href="{{ url('information/faq') }}" class="text-dark">FAQ</a>
+											</li>
+											<li>
+												<a href="{{ url('information/contact') }}" class="text-dark">Contact Us</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 col-lg-3 widget_links">
+										<ul>
+											<li>
+												<a href="{{ url('information/store') }}" class="text-dark">Store</a>
+											</li>
+											<li>
+												<a href="{{ url('information/product_catalog') }}" class="text-dark">Product Catalog</a>
+											</li>
+											<li>
+												<a href="{{ url('information/pay_in_store') }}" class="text-dark">Pay In Store</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 col-lg-3 widget_links">
+										<ul>
+											<li>
+												<a href="{{ url('information/about_us') }}" class="text-dark">About Us</a>
+											</li>
+											<li>
+												<a href="{{ url('news') }}" class="text-dark">News</a>
+											</li>
+											<li>
+												<a href="{{ url('career') }}" class="text-dark">Career</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-6 col-lg-3 widget_links">
+										<ul>
+											<li>
+												<a href="{{ url('information/terms_of_use') }}" class="text-dark">Terms of Use</a>
+											</li>
+											<li>
+												<a href="{{ url('information/privacy_policy') }}" class="text-dark">Privacy Policy</a>
+											</li>
+											<li>
+												<a href="{{ url('information/terms_of_delivery') }}" class="text-dark">Terms of Delivery</a>
+											</li>
+										</ul>
 									</div>
 								</div>
-								<div class="col-lg-2 col-6">
-									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">Shopping</h4>
-										<div class="mb-2">
-											<a href="{{ url('information/store') }}" style="font-size:12px;" class="text-dark text-uppercase">Store</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/product_catalog') }}" style="font-size:12px;" class="text-dark text-uppercase">Product Catalog</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/pay_in_store') }}" style="font-size:12px;" class="text-dark text-uppercase">Pay In Store</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2 col-6">
-									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">About Us</h4>
-										<div class="mb-2">
-											<a href="{{ url('information/about_us') }}" style="font-size:12px;" class="text-dark text-uppercase">About SMB</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('news') }}" style="font-size:12px;" class="text-dark text-uppercase">News</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('career') }}" style="font-size:12px;" class="text-dark text-uppercase">Career</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2 col-6">
-									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">Our Policy</h4>
-										<div class="mb-2">
-											<a href="{{ url('information/terms_of_use') }}" style="font-size:12px;" class="text-dark text-uppercase">Terms of Use</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/privacy_policy') }}" style="font-size:12px;" class="text-dark text-uppercase">Privacy Policy</a>
-										</div>
-										<div class="mb-2">
-											<a href="{{ url('information/terms_of_delivery') }}" style="font-size:12px;" class="text-dark text-uppercase">Terms of Delivery</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-12">
-									<div class="widget clearfix">
-										<h4 class="font-weight-bold mb-4">Our Showrooms</h4>
-										<div class="mb-2">
-											<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-												<li class="nav-item" role="presentation">
-													<a class="nav-link active font-size-12" id="surabaya-tab" data-toggle="tab" href="#surabaya" role="tab" aria-controls="surabaya" aria-selected="true">Surabaya</a>
-												</li>
-												<li class="nav-item" role="presentation">
-													<a class="nav-link font-size-12" id="jakarta-tab" data-toggle="tab" href="#jakarta" role="tab" aria-controls="jakarta" aria-selected="false">Jakarta</a>
-												</li>
-											</ul>
-											<div class="tab-content" id="myTabContent">
-												<div class="tab-pane fade show active" id="surabaya" role="tabpanel" aria-labelledby="surabaya-tab">
-													<p>
-														<div class="mb-2">
-															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
-																<i class="icon-line-map-pin "></i> 
-																&nbsp;&nbsp;
-																Jl. Baliwerti No.119-121, Alun-alun Contong, Kec. Bubutan, Kota SBY, Jawa Timur 60161
-															</a>
-														</div>
-														<div class="mb-2">
-															<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
-																<i class="icon-line2-envelope"></i> 
-																&nbsp;&nbsp;
-																smartmarbleandbath@gmail.com
-															</a>
-														</div>
-														<div class="mb-2">
-															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
-																<i class="icon-headphones-alt"></i> 
-																&nbsp;&nbsp;
-																082131972353 / 031-5477501
-															</a>
-														</div>
-													</p>
-												</div>
-												<div class="tab-pane fade" id="jakarta" role="tabpanel" aria-labelledby="jakarta-tab">
-													<p>
-														<div class="mb-2">
-															<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" class="text-dark">
-																<i class="icon-line-map-pin "></i> 
-																&nbsp;&nbsp;
-																Gedung Jagat, Lobby Utama Jl. Tomang Raya No. 28-30 Jakarta Barat, Indonesia
-															</a>
-														</div>
-														<div class="mb-2">
-															<a href="mailto:smartmarbleandbath@gmail.com" style="font-size:13px;" class="text-dark">
-																<i class="icon-line2-envelope"></i> 
-																&nbsp;&nbsp;
-																smartmarbleandbath@gmail.com
-															</a>
-														</div>
-														<div class="mb-2">
-															<a href="javascript:void(0);" style="font-size:13px;" class="text-dark text-uppercase cursor-none">
-																<i class="icon-headphones-alt"></i> 
-																&nbsp;&nbsp;
-																0811257180
-															</a>
-														</div>
-													</p>
-												</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="widget subscribe-widget">
+								<div class="card bg-light">
+									<div class="card-body">
+										<h5 class="card-title mb-4 text-center font-weight-semibold text-uppercase">Our Showrooms</h5>
+										<ul class="nav nav-tabs nav-justified mb-0 clearfix" id="myTab" role="tablist">
+											<li class="nav-item" role="presentation">
+												<a class="nav-link active font-size-12" id="surabaya-tab" data-toggle="tab" href="#surabaya" role="tab" aria-controls="surabaya" aria-selected="true">Surabaya</a>
+											</li>
+											<li class="nav-item" role="presentation">
+												<a class="nav-link font-size-12" id="jakarta-tab" data-toggle="tab" href="#jakarta" role="tab" aria-controls="jakarta" aria-selected="false">Jakarta</a>
+											</li>
+										</ul>
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade show active" id="surabaya" role="tabpanel" aria-labelledby="surabaya-tab">
+												<p class="mt-3 text-center">
+													<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" target="_blank" class="text-muted">
+														Jl. Baliwerti No.119-121, Alun-alun Contong, Kec. Bubutan, Kota SBY, Jawa Timur 60161
+													</a>
+												</p>
+											</div>
+											<div class="tab-pane fade" id="jakarta" role="tabpanel" aria-labelledby="jakarta-tab">
+												<p class="mt-3 text-center">
+													<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2778031,112.7271303,15z/data=!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" style="font-size:13px;" target="_blank" class="text-muted">
+														Gedung Jagat, Lobby Utama Jl. Tomang Raya No. 28-30 Jakarta Barat, Indonesia
+													</a>
+												</p>
 											</div>
 										</div>
-										<div><hr></div>
-										<div class="d-flex">
-											<a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="social-icon si-small si-borderless si-facebook">
-												<i class="icon-facebook"></i>
-												<i class="icon-facebook"></i>
-											</a>
-											<a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="social-icon si-small si-borderless si-instagram">
-												<i class="icon-instagram"></i>
-												<i class="icon-instagram"></i>
-											</a>
-											<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-google">
-												<i class="icon-gmail"></i>
-												<i class="icon-gmail"></i>
-											</a>
+										<div class="text-center">
+											<a href="{{ url('information/store') }}" class="text-primary font-size-12">View Detail</a>
 										</div>
 									</div>
 								</div>
@@ -147,12 +102,25 @@
 					</div>
 				</div>
 			</div>
-			<div class="clearfix"></div>
-			<div id="copyrights" class="bg-light">
+			<div id="copyrights">
 				<div class="container">
-					<div class="row">
-						<div class="col-md-12 text-center">
+					<div class="row justify-content-between col-mb-30">
+						<div class="col-12 col-lg-auto text-center text-lg-left">
 							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved. Made by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
+						</div>
+						<div class="col-12 col-lg-auto text-center text-lg-right">
+							<a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="social-icon si-small si-borderless si-facebook mb-0 inline-block">
+								<i class="icon-facebook"></i>
+								<i class="icon-facebook"></i>
+							</a>
+							<a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="social-icon si-small si-borderless si-instagram mb-0 inline-block">
+								<i class="icon-instagram"></i>
+								<i class="icon-instagram"></i>
+							</a>
+							<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-google mb-0 inline-block">
+								<i class="icon-gmail"></i>
+								<i class="icon-gmail"></i>
+							</a>
 						</div>
 					</div>
 				</div>

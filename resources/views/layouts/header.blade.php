@@ -156,58 +156,6 @@
 									<a class="menu-link" href="{{ url('product') }}">
 										<div class="font-size-header-top">Product</div>
 									</a>
-									@php 
-										$category = App\Models\Category::where('parent_id', 0)
-											->where('status', 1)
-											->where('type', 1)
-											->oldest('name')
-											->get(); 
-									@endphp
-									<ul class="sub-menu-container">
-										@foreach($category as $c)
-											<li class="menu-item">
-												@php
-													$sub_1 = App\Models\Category::where('parent_id', $c->id)
-														->where('status', 1)
-														->where('type', 1)
-														->oldest('name')
-														->get();
-												@endphp
-												<a class="menu-link" href="{{ $sub_1->count() > 0 ? 'javascript:void(0);' : 'product?category=' . $c->slug }}">
-													<div class="font-size-header-top">{{ $c->name }}</div>
-												</a>
-												@if($sub_1->count() > 0)
-													<ul class="sub-menu-container">
-														@foreach($sub_1 as $s1)
-															<li class="menu-item">
-																<a class="menu-link" href="javascript:void(0);">
-																	<div class="font-size-header-top">{{ $s1->name }}</div>
-																</a>
-																@php
-																	$sub_2 = App\Models\Category::where('parent_id', $s1->id)
-																		->where('status', 1)
-																		->where('type', 1)
-																		->oldest('name')
-																		->get();
-																@endphp
-																@if($sub_2->count() > 0)
-																	<ul class="sub-menu-container" style="max-height:300px; overflow-y:auto;">
-																		@foreach($sub_2 as $s2)
-																			<li class="menu-item">
-																				<a class="menu-link" href="product?category={{ $s2->slug }}">
-																					<div class="font-size-header-top">{{ $s2->name }}</div>
-																				</a>
-																			</li>
-																		@endforeach
-																	</ul>
-																@endif
-															</li>
-														@endforeach
-													</ul>
-												@endif
-											</li>
-										@endforeach
-									</ul>
 								</li>
 								<li class="menu-item">
 									<a class="menu-link" href="{{ url('information/how_to_buy') }}">
