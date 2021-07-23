@@ -37,7 +37,7 @@
             </div>
          </div>
          <div class="fancy-title title-center title-border topmargin-lg">
-            <h4 class="text-uppercase">Certifications</h4>
+            <h4 class="text-uppercase">Certification</h4>
          </div>
          <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-pagi="false" data-items-xs="2" data-items-sm="2" data-items-md="5" data-items-lg="5">
             <div class="portfolio-item">
@@ -120,48 +120,48 @@
             </div>
          </div>
          <div class="fancy-title title-center title-border topmargin-lg">
-            <h4 class="text-uppercase">My Project</h4>
+            <h4 class="text-uppercase">Project</h4>
          </div>
-         <div class="masonry-thumbs grid-container grid-5" data-big="1" data-lightbox="gallery">
-            <a class="grid-item" href="{{ asset('website/project-1.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-1.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-2.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-2.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-3.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-3.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-4.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-4.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-5.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-5.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-6.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-6.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-7.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-7.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-8.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-8.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-9.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-9.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-10.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-10.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-11.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-11.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-12.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-12.jpg') }}" class="img-fluid">
-            </a>
-            <a class="grid-item" href="{{ asset('website/project-13.jpg') }}" data-lightbox="gallery-item">
-               <img src="{{ asset('website/project-13.jpg') }}" class="img-fluid">
-            </a>
+         <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-loop="true" data-pagi="false" data-items-xs="2" data-items-sm="2" data-items-md="5" data-items-lg="5">
+            <div class="portfolio-item">
+               <div class="portfolio-image">
+                  <a href="javascript:void(0);">
+                     <img src="{{ asset('website/project-1.jpeg') }}" alt="Project 1" class="img-fluid">
+                  </a>
+                  <div class="bg-overlay">
+                     <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+                        <a href="{{ asset('website/project-1.jpeg') }}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-eye"></i></a>
+                     </div>
+                     <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="portfolio-item">
+               <div class="portfolio-image">
+                  <a href="javascript:void(0);">
+                     <img src="{{ asset('website/project-2.jpeg') }}" alt="Project 2" class="img-fluid">
+                  </a>
+                  <div class="bg-overlay">
+                     <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+                        <a href="{{ asset('website/project-2.jpeg') }}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-eye"></i></a>
+                     </div>
+                     <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="portfolio-item">
+               <div class="portfolio-image">
+                  <a href="javascript:void(0);">
+                     <img src="{{ asset('website/project-3.jpeg') }}" alt="Project 3" class="img-fluid">
+                  </a>
+                  <div class="bg-overlay">
+                     <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+                        <a href="{{ asset('website/project-3.jpeg') }}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-eye"></i></a>
+                     </div>
+                     <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+                  </div>
+               </div>
+            </div>
          </div>
          <div class="fancy-title title-center title-border topmargin-lg">
             <h4 class="text-uppercase">Our Clients</h4>
