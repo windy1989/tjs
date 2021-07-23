@@ -264,7 +264,7 @@
          </div>
       </div>
       <div class="section dark bg-light footer-stick mt-0" style="background-color: #444; padding: 35px 0;">
-         <div class="container mb-5 mb-lg-0">
+         <div class="container">
             <div class="row col-mb-30 justify-content-center text-center">
                <div class="col-lg-4 col-md-4 col-12">
                   <div class="text-center">

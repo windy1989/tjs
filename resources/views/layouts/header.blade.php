@@ -32,7 +32,7 @@
 		<li class="nav-item">
 			@if(session('fo_id'))
 				<a href="javascript:void(0);" class="nav-link side-panel-trigger">
-					<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="20" alt="{{ session('fo_name') }}">
+					<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="18" alt="{{ session('fo_name') }}">
 					<span class="small d-block">
 						@php $str = explode(' ', session('fo_name')); @endphp
 						Hi, {{ $str[0] }}

@@ -1,4 +1,4 @@
-		<footer id="footer" class="d-none d-xl-block">
+		<footer id="footer" class="mb-4 mb-lg-0">
 			<div class="container">
 				<div class="footer-widgets-wrap mb-0">
 					<div class="row gutter-30">
