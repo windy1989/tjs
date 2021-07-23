@@ -30,18 +30,20 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="#" class="nav-link side-panel-trigger">
-				@if(session('fo_id'))
+			@if(session('fo_id'))
+				<a href="javascript:void(0);" class="nav-link side-panel-trigger">
 					<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="20" alt="{{ session('fo_name') }}">
 					<span class="small d-block">
 						@php $str = explode(' ', session('fo_name')); @endphp
 						Hi, {{ $str[0] }}
 					</span>
-				@else
+				</a>
+			@else
+				<a href="{{ url('account/login') }}" class="nav-link">
 					<i class="icon-user21"></i>
 					<span class="small d-block">Account</span>
-				@endif
-			</a>
+				</a>
+			@endif
 		</li>
 	</ul>
 </nav>
