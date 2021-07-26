@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>Contact Us</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Contact Us
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container">
@@ -24,26 +8,26 @@
                   @csrf
                   <div class="row">
                      <div class="col-md-4 form-group">
-                        <label>Name <small>*</small></label>
-                        <input type="text" id="name" name="name" class="sm-form-control no-outline" required>
+                        <label class="font-size-13">Name <small>*</small></label>
+                        <input type="text" id="name" name="name" class="sm-form-control font-size-13 no-outline" required>
                      </div>
                      <div class="col-md-4 form-group">
-                        <label>Email <small>*</small></label>
-                        <input type="email" id="email" name="email" class="sm-form-control no-outline" required>
+                        <label class="font-size-13">Email <small>*</small></label>
+                        <input type="email" id="email" name="email" class="sm-form-control font-size-13 no-outline" required>
                      </div>
                      <div class="col-md-4 form-group">
-                        <label>Phone <small>*</small></label>
-                        <input type="text" id="phone" name="phone" class="sm-form-control no-outline" required>
+                        <label class="font-size-13">Phone <small>*</small></label>
+                        <input type="text" id="phone" name="phone" class="sm-form-control font-size-13 no-outline" required>
                      </div>
                      <div class="w-100"></div>
                      <div class="col-md-12 form-group">
-                        <label>Subject <small>*</small></label>
-                        <input type="text" id="subject" name="subject" class="sm-form-control no-outline" required>
+                        <label class="font-size-13">Subject <small>*</small></label>
+                        <input type="text" id="subject" name="subject" class="sm-form-control font-size-13 no-outline" required>
                      </div>
                      <div class="w-100"></div>
                      <div class="col-12 form-group">
-                        <label>Message <small>*</small></label>
-                        <textarea class="sm-form-control no-outline" id="message" name="message" rows="6" cols="30" required></textarea>
+                        <label class="font-size-13">Message <small>*</small></label>
+                        <textarea class="sm-form-control font-size-13 no-outline" id="message" name="message" rows="6" cols="30" required></textarea>
                      </div>
                      <div class="col-12 form-group">
                         <button type="submit" class="button button-3d bg-teal">Send Message</button>

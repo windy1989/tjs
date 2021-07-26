@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>Faq</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Faq
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">

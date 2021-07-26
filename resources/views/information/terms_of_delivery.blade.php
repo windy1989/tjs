@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>Terms Of Delivery</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Terms Of Delivery
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="container mt-5 mb-5">
       <h5 class="font-weight-bold text-uppercase">Delivery Method</h5>

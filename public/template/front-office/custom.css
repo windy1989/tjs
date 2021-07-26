@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
+body {
+   font-family: 'Nunito Sans', sans-serif !important;
+}
+
 .sup-top {
    top: -7px;
    position: relative;
@@ -14,7 +20,7 @@
 }
 
 .navigation-menu {
-   background: #51b4ba;
+   background: #222222;
 }
 
 .navigation-menu .nav-item .nav-link {
@@ -23,7 +29,7 @@
    text-transform: uppercase;
    font-weight: 500;
    font-size: 12px;
-   border: 1px solid #51b4ba;
+   border: 1px solid #222222;
 }
 
 .navigation-menu .nav-item .nav-link.active {

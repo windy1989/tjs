@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>Privacy Policy</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Privacy Policy
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="container mt-5 mb-5">
       <h5 class="font-weight-bold text-uppercase">Public Policy</h5>

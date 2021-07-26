@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>Terms Of Use</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Terms Of Use
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="container mt-5 mb-5">
       <p>Welcome to the e-commerce site www.smartmarbleandbath.com. This e-commerce providing services for users to find and buy various products from Smart Marble and Bath through website, mobile web, mobile applications, and other related applications. We present this website to you in accordance with terms and conditions, which are effective until terminated by Smart Marble and Bath based on certain considerations.

@@ -6,7 +6,7 @@
 <nav class="p-0 navbar fixed-bottom navbar-dark navbar-expand navigation-menu d-md-block d-lg-none d-xl-none">
 	<ul class="navbar-nav nav-justified w-100">
 		<li class="nav-item">
-			<a href="{{ url('/') }}" class="nav-link {{ !Request::segment(2) ? 'active' : '' }}">
+			<a href="{{ url('/') }}" class="nav-link {{ !Request::segment(1) ? 'active' : '' }}">
 				<i class="icon-home"></i>
 				<span class="small d-block">Home</span>
 			</a>

@@ -1,19 +1,3 @@
-<section id="page-title" class="page-title-mini">
-   <div class="container clearfix">
-      <h1>About Us</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            About us
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
@@ -126,11 +110,11 @@
             <div class="portfolio-item">
                <div class="portfolio-image">
                   <a href="javascript:void(0);">
-                     <img src="{{ asset('website/project-1.jpeg') }}" alt="Project 1" class="img-fluid">
+                     <img src="{{ asset('website/project-1.png') }}" alt="Project 1" class="img-fluid">
                   </a>
                   <div class="bg-overlay">
                      <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-                        <a href="{{ asset('website/project-1.jpeg') }}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-eye"></i></a>
+                        <a href="{{ asset('website/project-1.png') }}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-eye"></i></a>
                      </div>
                      <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
                   </div>

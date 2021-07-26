@@ -1,19 +1,3 @@
-<section id="page-title">
-   <div class="container clearfix">
-      <h1>How To Buy</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Information</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            How To Buy
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="container mt-5 mb-5">
       <p>Finding your favorite or currently needed product is made easier with the presence of various features such as through the Search and Category & Brand selection feature at smartmarbleandbath.com. Choose your favorite brand. Click on the product to go to the product detail page. Click the "Add to cart" button, go to the shopping cart page, click "Checkout", then select a payment method if you want to complete the transaction. Or want to find other products if you still want to shop or add products to your shopping cart.</p>

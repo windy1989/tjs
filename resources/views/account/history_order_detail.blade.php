@@ -1,22 +1,3 @@
-<section id="page-title" class="page-title-mini">
-   <div class="container clearfix">
-      <h1>History Order Detail</h1>
-      <ol class="breadcrumb font-size-12">
-         <li class="breadcrumb-item">
-            <a href="{{ url('/') }}">Home</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="javascript:void(0);">Account</a>
-         </li>
-         <li class="breadcrumb-item">
-            <a href="{{ url('account/history_order') }}">History Order</a>
-         </li>
-         <li class="breadcrumb-item active" aria-current="page">
-            Detail
-         </li>
-      </ol>
-   </div>
-</section>
 <section id="content">
    <div class="content-wrap">
       <div class="container">
