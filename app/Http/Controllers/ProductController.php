@@ -285,11 +285,18 @@ class ProductController extends Controller {
             ->get();
         
         $data = [
-            'title'           => $product->code(),
-            'product'         => $product,
-            'voucher'         => $voucher,
-            'related_product' => $related_product,
-            'content'         => 'product_detail'
+            'title'            => $product->code(),
+            'product'          => $product,
+            'voucher'          => $voucher,
+            'related_product'  => $related_product,
+            'meta_title'       => $product->code(),
+            'meta_description' => $product->description,
+            'meta_image'       => $product->type->image(),
+            'meta_brand'       => $product->brand->name,
+            'meta_stock'       => $product->availability()->stock > 0 ? 'in stock' : 'out of stock',
+            'meta_price'       => $product->price(),
+            'meta_id'          => $id,
+            'content'          => 'product_detail'
         ];
 
         return view('layouts.index', ['data' => $data]);

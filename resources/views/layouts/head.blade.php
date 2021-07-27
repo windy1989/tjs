@@ -12,13 +12,17 @@
    <meta itemprop="name" content="Smart Marble & Bath">
    <meta itemprop="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
    <meta itemprop="image" content="{{ asset('website/logo-black.png') }}">
+   <meta property="og:title" content="{{ isset($meta_title) ? $meta_title : 'Smart Marble & Bath | ' . $title }}">
+   <meta property="og:description" content="{{ isset($meta_description) ? $meta_description : 'Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.' }}">
+   <meta property="og:url" content="{{ url()->current() }}">
+   <meta property="og:image" content="{{ isset($meta_image) ? $meta_image : asset('website/logo-black.png') }}">
    <meta property="og:locale" content="id_ID">
-   <meta property="og:site_name" content="Smart Marble & Bath">
-   <meta property="og:title" content="Smart Marble & Bath">
-   <meta property="og:description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
-   <meta property="og:type" content="website">
-   <meta property="og:url" content="{{ url('/') }}">
-   <meta property="og:image" content="{{ asset('website/logo-black.png') }}">
+   <meta property="product:brand" content="{{ isset($meta_brand) ? $meta_brand : '' }}">
+   <meta property="product:availability" content="{{ isset($meta_stock) ? $meta_stock : '' }}">
+   <meta property="product:condition" content="new">
+   <meta property="product:price:amount" content="{{ isset($meta_price) ? $meta_price : '' }}">
+   <meta property="product:price:currency" content="IDR">
+   <meta property="product:retailer_item_id" content="{{ isset($meta_id) ? $meta_id : '' }}">
    <meta name="robots" content="INDEX,FOLLOW">
    <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
    <meta name="format-detection" content="telephone=no">
