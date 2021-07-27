@@ -18,6 +18,7 @@
    <meta property="og:image" content="{{ isset($meta_image) ? $meta_image : asset('website/logo-black.png') }}">
    <meta property="og:locale" content="id_ID">
    <meta property="product:brand" content="{{ isset($meta_brand) ? $meta_brand : '' }}">
+   <meta property="product:category" content="{{ isset($meta_category) ? $meta_category : '' }}">
    <meta property="product:availability" content="{{ isset($meta_stock) ? $meta_stock : '' }}">
    <meta property="product:condition" content="new">
    <meta property="product:price:amount" content="{{ isset($meta_price) ? $meta_price : '' }}">
