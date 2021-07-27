@@ -1,3 +1,22 @@
+<div itemscope itemtype="http://schema.org/Product">
+   <meta itemprop="brand" content="{{ $product->brand->name }}">
+   <meta itemprop="name" content="{{ $product->code() }}">
+   <meta itemprop="description" content="{!! $product->description !!}">
+   <meta itemprop="productID" content="{{ base64_encode($product->id) }}">
+   <meta itemprop="url" content="{{ url()->current() }}">
+   <meta itemprop="image" content="{{ $product->type->image() }}">
+   <div itemprop="value" itemscope itemtype="http://schema.org/PropertyValue">
+      <span itemprop="propertyID" content="{{ $product->type->category->id }}"></span>
+      <meta itemprop="value" content="{{ $product->type->category->name }}">
+   </div>
+   <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <link itemprop="availability" href="{{ url()->current() }}">
+      <link itemprop="itemCondition" href="{{ url()->current() }}">
+      <meta itemprop="price" content="{{ $product->price() }}">
+      <meta itemprop="priceCurrency" content="IDR">
+   </div>
+</div>
+
 <section id="content">
    <div class="content-wrap">
       <div class="container clearfix">
