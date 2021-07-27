@@ -66,7 +66,7 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '867667750621417');
-      fbq('track', 'PageView');
+      fbq('track', 'Smart Marble');
 
       var Tawk_API = Tawk_API || {}, Tawk_LoadStart=new Date();
       (function() {
