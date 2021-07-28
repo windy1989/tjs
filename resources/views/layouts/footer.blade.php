@@ -93,7 +93,7 @@
 											</div>
 										</div>
 										<div class="text-center">
-											<a href="{{ url('information/store') }}" class="text-primary font-size-12">View Detail</a>
+											<a href="{{ url('information/store') }}" class="text-primary font-size-12">View All Store</a>
 										</div>
 									</div>
 								</div>

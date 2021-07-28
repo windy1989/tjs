@@ -70,7 +70,7 @@
                   <h3 class="font-weight-bold">
                      <span class="font-weight-normal text-dark">From The</span> Greatest Brands
                   </h3>
-                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">View Catalogue</a>
+                  <a href="{{ url('information/product_catalog') }}" class="button button-mini button-3d button-circle button-large bg-teal">More Catalogue</a>
                   <div class="mt-3">
                      <div class="circle-element bg-teal"></div>
                      <div class="circle-element bg-danger"></div>
@@ -81,8 +81,12 @@
             <div class="col-md-12"><hr style="border: 1px solid #51b4ba; height:2px; background:#51b4ba;"></div>
          </div>
          <div class="clearfix"></div>
-         <div class="topmargin-lg fancy-title title-border title-center">
-            <h4 class="text-uppercase">New Arrival</h4>
+         <div class="topmargin-lg mb-4">
+            <div class="card bg-light">
+               <div class="card-body">
+                  <h4 class="text-uppercase mb-0">New Arrival</h4>
+               </div>
+            </div>
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_new as $p)
@@ -175,8 +179,12 @@
             </div>
          </div>
          <div class="clearfix"></div>
-         <div class="topmargin-lg fancy-title title-border title-center">
-            <h4 class="text-uppercase">Best Seller</h4>
+         <div class="topmargin-lg mb-4">
+            <div class="card bg-light">
+               <div class="card-body">
+                  <h4 class="text-uppercase mb-0">Best Seller</h4>
+               </div>
+            </div>
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_cheapest as $p)
@@ -215,8 +223,12 @@
             </div>
          </div>
          <div class="clearfix"></div>
-         <div class="topmargin-lg fancy-title title-border title-center">
-            <h4 class="text-uppercase">Special Deals</h4>
+         <div class="topmargin-lg mb-4">
+            <div class="card bg-light">
+               <div class="card-body">
+                  <h4 class="text-uppercase mb-0">Specials Deals</h4>
+               </div>
+            </div>
          </div>
          <div id="shop" class="shop row grid-container gutter-30">
             @foreach($product_limited as $p)
