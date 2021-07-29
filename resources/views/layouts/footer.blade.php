@@ -93,6 +93,22 @@
 											</div>
 										</div>
 										<div class="text-center">
+											<div class="row justify-content-center mt-0 col-mb-30">
+												<div class="col-12 col-lg-auto text-center text-lg-right">
+													<a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="social-icon si-small si-borderless si-facebook mb-0 inline-block">
+														<i class="icon-facebook"></i>
+														<i class="icon-facebook"></i>
+													</a>
+													<a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="social-icon si-small si-borderless si-instagram mb-0 inline-block">
+														<i class="icon-instagram"></i>
+														<i class="icon-instagram"></i>
+													</a>
+													<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-google mb-0 inline-block">
+														<i class="icon-gmail"></i>
+														<i class="icon-gmail"></i>
+													</a>
+												</div>
+											</div>
 											<a href="{{ url('information/store') }}" class="text-primary font-size-12">View All Store</a>
 										</div>
 									</div>
@@ -105,22 +121,13 @@
 			<div id="copyrights">
 				<div class="container">
 					<div class="row justify-content-between col-mb-30">
-						<div class="col-12 col-lg-auto text-center text-lg-left">
-							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved. Made by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
+						<div class="col-12 text-center">
+							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved. Powered by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
 						</div>
-						<div class="col-12 col-lg-auto text-center text-lg-right">
-							<a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="social-icon si-small si-borderless si-facebook mb-0 inline-block">
-								<i class="icon-facebook"></i>
-								<i class="icon-facebook"></i>
-							</a>
-							<a href="https://instagram.com/smartmarble_bath?igshid=49qciyirowph" target="_blank" class="social-icon si-small si-borderless si-instagram mb-0 inline-block">
-								<i class="icon-instagram"></i>
-								<i class="icon-instagram"></i>
-							</a>
-							<a href="mailto:info@smartmarbleandbath.com" class="social-icon si-small si-borderless si-google mb-0 inline-block">
-								<i class="icon-gmail"></i>
-								<i class="icon-gmail"></i>
-							</a>
+						<div class="col-12">
+							<center>
+								<img src="{{ asset('website/payment_method.png') }}" width="550" alt="SMB Payment Method">
+							</center>
 						</div>
 					</div>
 				</div>

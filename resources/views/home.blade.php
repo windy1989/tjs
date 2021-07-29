@@ -267,15 +267,7 @@
             </div>
          </div>
       </div>
-      <div class="section bg-white mt-0 mb-0">
-         <div class="form-group"><hr style="margin-bottom:80px;"></div>
-         <div class="container mb-0">
-            <center>
-               <img src="{{ asset('website/banner-bottom.png') }}" class="img-fluid" alt="Banner Smart Marble">
-            </center>
-         </div>
-      </div>
-      <div class="section dark bg-light footer-stick mt-0" style="background-color: #444; padding: 35px 0;">
+      <div class="section dark bg-light footer-stick" style="background-color: #444; padding: 35px 0;">
          <div class="container">
             <div class="row col-mb-30 justify-content-center text-center">
                <div class="col-lg-4 col-md-4 col-12">
