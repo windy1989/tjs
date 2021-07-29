@@ -32,12 +32,12 @@ class Product extends Model {
 
     public function code()
     {
-        $company_code = $this->type->division->code;
-        $brand_code   = $this->brand->code;
-        $country_code = $this->country->code;
-        $type_code    = $this->type->code;
+        $division_code = $this->type->division->code;
+        $brand_code    = $this->brand->code;
+        $country_code  = $this->country->code;
+        $type_code     = $this->type->code;
 
-        return $company_code . $brand_code . $country_code . $type_code;
+        return $division_code . $brand_code . $country_code . $type_code;
     }
 
     public function status() 
