@@ -44,28 +44,19 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhereHas('division', function($query) use ($search) {
-                                                $query->whereRaw('INSTR(?, code)', [$search])
-                                                    ->orWhere('code', 'like', "%$search%")
-                                                    ->orWhere('name', 'like', "%$search%");
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                             });
+                                })
+                                ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     })
-                                    ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -84,28 +75,19 @@ class CurrencyPriceController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhereHas('division', function($query) use ($search) {
-                                                $query->whereRaw('INSTR(?, code)', [$search])
-                                                    ->orWhere('code', 'like', "%$search%")
-                                                    ->orWhere('name', 'like', "%$search%");
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                             });
+                                })
+                                ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     })
-                                    ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     });
                             })
                             ->orWhereHas('currency', function($query) use ($search) {
@@ -123,7 +105,7 @@ class CurrencyPriceController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     date('d F Y, H:i', strtotime($val->created_at)),
-                    $val->product->code(),
+                    $val->product->name(),
                     $val->currency->code,
                     number_format($val->price, 0, ',', '.'),
                     '
@@ -200,7 +182,7 @@ class CurrencyPriceController extends Controller {
         $data = CurrencyPrice::find($request->id);
         return response()->json([
             'product_id'   => $data->product_id,
-            'product_code' => $data->product->code(),
+            'product_code' => $data->product->name(),
             'currency_id'  => $data->currency_id,
             'price'        => $data->price
         ]);

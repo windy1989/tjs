@@ -22,11 +22,11 @@
                            </td>
                            <td class="cart-product-thumbnail">
                               <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
-                                 <img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid" alt="{{ $c->product->code() }}">
+                                 <img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid" alt="{{ $c->product->name() }}">
                               </a>
                            </td>
                            <td class="cart-product-name">
-                              <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">{{ $c->product->code() }}</a>
+                              <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">{{ $c->product->name() }}</a>
                            </td>
                            <td class="cart-product-quantity">
                               <span class="amount">Rp {{ number_format($c->product->price(), 0, ',', '.') }}</span>

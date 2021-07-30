@@ -120,35 +120,22 @@ class ProductController extends Controller {
 
         $product = Product::where(function($query) use ($filter) {
                 if($filter['other']['search']) {
-                    $query->whereHas('type', function($query) use ($filter) {
-                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%')
-                                ->orWhereHas('division', function($query) use ($filter) {
-                                    $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                        ->orWhere('code', '%' . $filter['other']['search'] . '%')
-                                        ->orWhere('name', '%' . $filter['other']['search'] . '%');
-                                });
+                    $search = $filter['other']['search'];
+                    $query->whereHas('type', function($query) use ($search) {
+                            $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                ->orWhereHas('category', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                    })
+                                ->orWhereHas('color', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                    });
                         })
-                        ->orWhereHas('company', function($query) use ($filter) {
-                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
-                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
-                        })
-                        ->orWhereHas('country', function($query) use ($filter) {
-                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
-                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
-                        })
-                        ->orWhereHas('brand', function($query) use ($filter) {
-                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
-                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
-                        })
-                        ->orWhereHas('grade', function($query) use ($filter) {
-                            $query->whereRaw('INSTR(?, code)', [$filter['other']['search']])
-                                ->orWhere('name', 'like', '%' . $filter['other']['search'] . '%')
-                                ->orWhere('code', 'like', '%' . $filter['other']['search'] . '%');
-                        });
+                        ->orWhereHas('brand', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                            })
+                        ->orWhereHas('country', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                            });
                 }
 
                 if($filter['other']['stock']) {
@@ -285,11 +272,11 @@ class ProductController extends Controller {
             ->get();
         
         $data = [
-            'title'            => $product->code(),
+            'title'            => $product->name(),
             'product'          => $product,
             'voucher'          => $voucher,
             'related_product'  => $related_product,
-            'meta_title'       => $product->code(),
+            'meta_title'       => $product->name(),
             'meta_description' => $product->description,
             'meta_image'       => $product->type->image(),
             'meta_brand'       => $product->brand->name,

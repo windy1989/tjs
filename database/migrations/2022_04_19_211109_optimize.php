@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class Optimize extends Migration
 {
@@ -13,6 +14,12 @@ class Optimize extends Migration
      */
     public function up()
     {
+        DB::statement("ALTER TABLE brands ADD FULLTEXT brands_name_fulltext(name)");
+        DB::statement("ALTER TABLE categories ADD FULLTEXT categories_name_fulltext(name)");
+        DB::statement("ALTER TABLE countries ADD FULLTEXT countries_name_fulltext(name)");
+        DB::statement("ALTER TABLE colors ADD FULLTEXT colors_name_fulltext(name)");
+        DB::statement("ALTER TABLE types ADD FULLTEXT types_code_fulltext(code)");
+
         Schema::table('agents', function (Blueprint $table) {
             $table->index('country_id'); 
             $table->index('category_id'); 

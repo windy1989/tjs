@@ -1,6 +1,6 @@
 <div itemscope itemtype="http://schema.org/Product">
    <meta itemprop="brand" content="{{ $product->brand->name }}">
-   <meta itemprop="name" content="{{ $product->code() }}">
+   <meta itemprop="name" content="{{ $product->name() }}">
    <meta itemprop="description" content="{!! $product->description !!}">
    <meta itemprop="productID" content="{{ base64_encode($product->id) }}">
    <meta itemprop="url" content="{{ url()->current() }}">
@@ -29,7 +29,7 @@
                            <div class="flexslider">
                               <div class="slider-wrap" data-lightbox="gallery">
                                  <div class="slide" data-thumb="{{ $product->type->image() }}">
-                                    <a href="{{ $product->type->image() }}" title="{{ $product->code() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->code() }}" class="img-fluid img-thumbnail" alt="{{ $product->code() }}"></a>
+                                    <a href="{{ $product->type->image() }}" title="{{ $product->name() }}" data-lightbox="gallery-item"><img src="{{ $product->type->image() }}" alt="{{ $product->name() }}" class="img-fluid img-thumbnail" alt="{{ $product->name() }}"></a>
                                  </div>
                               </div>
                            </div>
@@ -38,7 +38,7 @@
                      </div>
                   </div>
                   <div class="col-lg-6 col-md-12 product-desc">
-                     <h3 class="font-weight-bold">{{ $product->code() }}</h3> 
+                     <h3 class="font-weight-bold">{{ $product->name() }}</h3> 
                      <div class="d-flex align-items-center justify-content-between">
                         <div class="product-price text-danger font-weight-bold" style="font-size:15px;">
                            Rp <ins class="text-danger font-weight-bold">{{ number_format($product->price(), 0, ',', '.') }}</ins>
@@ -194,6 +194,10 @@
                                     <table class="table table-striped table-bordered font-size-13">
                                        <tbody>
                                           <tr>
+                                             <td>Code</td>
+                                             <td>{{ $product->code() }}</td>
+                                          </tr>
+                                          <tr>
                                              <td>Surface</td>
                                              <td>{{ $product->type->surface->name }}</td>
                                           </tr>
@@ -239,7 +243,7 @@
                            <div class="grid-inner border">
                               <div class="product-image">
                                  <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
-                                    <img src="{{ $p->type->image() }}" alt="{{ $p->code() }}" class="img-fluid product-thumbnail">
+                                    <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                                  </a>
                                  <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                               </div>
@@ -251,7 +255,7 @@
                                  </div>
                                  <div class="product-title">
                                     <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                       <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->code() }}</a>
+                                       <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->name() }}</a>
                                     </h4>
                                  </div>
                                  <div class="product-price font-weight-semibold">

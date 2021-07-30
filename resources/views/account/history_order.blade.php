@@ -54,16 +54,16 @@
                                           <div class="form-group">
                                              <center>
                                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
-                                                   <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $od->product->code() }}">
+                                                   <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $od->product->name() }}">
                                                 </a>
                                              </center>
                                           </div>
                                        </div>
                                        <div class="col-lg-3 col-md-12">
                                           <div class="form-group font-size-13">
-                                             {{ $od->product->code() }}
+                                             {{ $od->product->name() }}
                                              <div class="text-muted">
-                                                {{ $od->product->type->weight }} Kg, {{ $od->product->type->color->name }}
+                                                {{ $od->product->type->weight }} Kg
                                              </div>
                                              x{{ $od->qty }}
                                           </div>

@@ -56,7 +56,7 @@
                   <select name="product_id" onchange="getCompleteData()" id="product_id">
                      @if(old('product_id'))
                         @php $product = App\Models\Product::find(old('product_id')); @endphp
-                        <option value="{{ $product->id }}" selected>{{ $product->code() }}</option>
+                        <option value="{{ $product->id }}" selected>{{ $product->name() }}</option>
                      @endif
                   </select>
                </div>

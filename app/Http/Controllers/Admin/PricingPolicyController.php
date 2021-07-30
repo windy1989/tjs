@@ -46,28 +46,19 @@ class PricingPolicyController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhereHas('division', function($query) use ($search) {
-                                                $query->whereRaw('INSTR(?, code)', [$search])
-                                                    ->orWhere('code', 'like', "%$search%")
-                                                    ->orWhere('name', 'like', "%$search%");
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                             });
+                                })
+                                ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     })
-                                    ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     });
                             });
                     });
@@ -83,28 +74,19 @@ class PricingPolicyController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('product', function($query) use ($search) {
                                 $query->whereHas('type', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhereHas('division', function($query) use ($search) {
-                                                $query->whereRaw('INSTR(?, code)', [$search])
-                                                    ->orWhere('code', 'like', "%$search%")
-                                                    ->orWhere('name', 'like', "%$search%");
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                             });
+                                })
+                                ->orWhereHas('brand', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     })
-                                    ->orWhereHas('brand', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('country', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    })
-                                    ->orWhereHas('grade', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
+                                ->orWhereHas('country', function($query) use ($search) {
+                                        $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                                     });
                             });
                     });
@@ -116,13 +98,13 @@ class PricingPolicyController extends Controller {
         if($query_data <> FALSE) {
             $nomor = $start + 1;
             foreach($query_data as $val) {
-                $image = '<a href="' . $val->product->type->image() . '" data-lightbox="' . $val->product->code() . '" data-title="' . $val->product->code() . '"><img src="' . $val->product->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
+                $image = '<a href="' . $val->product->type->image() . '" data-lightbox="' . $val->product->name() . '" data-title="' . $val->product->name() . '"><img src="' . $val->product->type->image() . '" style="max-width:70px;" class="img-fluid img-thumbnail"></a>';
 
                 $response['data'][] = [
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $image,
-                    $val->product->code(),
+                    $val->product->name(),
                     $val->product->type->length . 'x' . $val->product->type->width,
                     number_format($val->showroom_cost, 0, ',', '.'),
                     number_format($val->fixed_cost, 0, ',', '.'),
@@ -279,7 +261,7 @@ class PricingPolicyController extends Controller {
         $data = PricingPolicy::find($request->id);
         return response()->json([
             'product_id'               => $data->product_id,
-            'product_code'             => $data->product->code(),
+            'product_code'             => $data->product->name(),
             'showroom_cost'            => $data->showroom_cost,
             'sales_travel_cost'        => $data->sales_travel_cost,
             'marketing_cost'           => $data->marketing_cost,

@@ -49,6 +49,10 @@
                      <table cellpadding="10" cellspacing="0" width="100%">
                         <tbody>
                            <tr>
+                              <th width="20%" class="align-middle">Name</th>
+                              <td class="align-middle">: {{ $product->name() }}</td>
+                           </tr>
+                           <tr>
                               <th width="20%" class="align-middle">Code</th>
                               <td class="align-middle">: {{ $product->code() }}</td>
                            </tr>

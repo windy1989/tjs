@@ -141,8 +141,8 @@
                               @foreach($project->projectProduct as $pp)
                                  <tr class="text-center">
                                     <td class="align-middle">
-                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                       <div>{{ $pp->product->code() }}</div>
+                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->name() }}" data-title="{{ $pp->product->name() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                       <div>{{ $pp->product->name() }}</div>
                                        <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                     </td>
                                     <td class="align-middle">{{ $pp->qty }}</td>   
@@ -338,8 +338,8 @@
                                        <tr class="text-center">
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
                                           <td class="align-middle">
-                                             <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->code() }}" data-title="{{ $pp->product->code() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                             <div>{{ $pp->product->code() }}</div>
+                                             <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->name() }}" data-title="{{ $pp->product->name() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $pp->product->name() }}</div>
                                              <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>   
@@ -414,8 +414,8 @@
                                     @foreach($project->projectSample as $ps)
                                        <tr class="text-center">
                                           <td class="align-middle">
-                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->code() }}" data-title="{{ $ps->product->code() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                             <div>{{ $ps->product->code() }}</div>
+                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->name() }}" data-title="{{ $ps->product->name() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $ps->product->name() }}</div>
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $ps->date }}</td>   
@@ -530,8 +530,8 @@
                                        <tr class="text-center">
                                           <input type="hidden" name="project_product_id[]" value="{{ $pp->id }}">
                                           <td class="align-middle">
-                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->code() }}" data-title="{{ $ps->product->code() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                             <div>{{ $ps->product->code() }}</div>
+                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->name() }}" data-title="{{ $ps->product->name() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+                                             <div>{{ $ps->product->name() }}</div>
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>    

@@ -13,7 +13,7 @@
                         </div>
                         <div class="product-image">
                            <a href="{{ url('product/detail/' . base64_encode($w->product->id)) }}">
-                              <img src="{{ $w->product->type->image() }}" alt="{{ $w->product->code() }}" class="img-fluid product-thumbnail">
+                              <img src="{{ $w->product->type->image() }}" alt="{{ $w->product->name() }}" class="img-fluid product-thumbnail">
                            </a>
                            <div class="sale-flash badge {{ $w->product->availability()->color }} p-2">{{ $w->product->availability()->status }}</div>
                         </div>
@@ -25,7 +25,7 @@
                            </div>
                            <div class="product-title">
                               <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                 <a href="{{ url('product/detail/' . base64_encode($w->product->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $w->product->code() }}</a>
+                                 <a href="{{ url('product/detail/' . base64_encode($w->product->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $w->product->name() }}</a>
                               </h4>
                            </div>
                            <div class="product-price font-weight-semibold mt-3">

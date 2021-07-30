@@ -89,7 +89,7 @@
             <div class="form-group"><hr></div>
             <div class="form-group mb-0">
                <div class="text-right">
-                  <button type="button" class="btn bg-danger" onclick="resetFilter()"><i class="icon-cross3"></i> Reset</button>
+                  <button type="button" class="btn bg-danger mr-2" onclick="resetFilter()"><i class="icon-cross3"></i> Reset</button>
                   <button type="button" class="btn bg-teal" onclick="loadDataTable()"><i class="icon-search4"></i> Search</button>
                </div>
             </div>
@@ -106,11 +106,8 @@
                      <tr class="text-center">
                         <th>No</th>
                         <th>Shading</th>
-                        <th>Type</th>
-                        <th>Code</th>
-                        <th>Brand</th>
+                        <th>Name</th>
                         <th>Stock</th>
-                        <th>Country</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -561,11 +558,8 @@
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'shading', searchable: false, orderable: false, className: 'text-center align-middle' },
-            { name: 'type_id', className: 'text-center align-middle' },
-            { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'brand_id', className: 'text-center align-middle' },
+            { name: 'name', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'country_id', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]

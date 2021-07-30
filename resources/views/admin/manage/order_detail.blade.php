@@ -68,7 +68,7 @@
 												<td class="align-middle text-center">
 													<img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
 												</td>
-												<td class="align-middle">{{ $od->product->code() }}</td>
+												<td class="align-middle">{{ $od->product->name() }}</td>
 												<td class="align-middle text-center">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
 												<td class="align-middle text-center">x{{ $od->qty }}</td>
 												<td class="align-middle text-center">Rp {{ number_format($od->total, 0, ',', '.') }}</td>

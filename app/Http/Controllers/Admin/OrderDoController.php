@@ -131,7 +131,7 @@ class OrderDoController extends Controller {
         foreach($order_delivery->order->orderDetail as $od) {
             $order_detail[] = [
                 'image'   => $od->product->type->image(),
-                'product' => $od->product->code(),
+                'product' => $od->product->name(),
                 'qty'     => $od->qty
             ];
         }

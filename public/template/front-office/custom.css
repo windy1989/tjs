@@ -324,8 +324,9 @@ input:disabled {
 
 .limit-text-list-product {
    font-size: 15px;
-   max-height: 20px;
+   max-height: 50px;
    overflow: hidden;
+   text-overflow: ellipsis;
 }
 
 #side-panel > .side-panel-wrap > .widget > nav > ul > li > a {

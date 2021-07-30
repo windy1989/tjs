@@ -41,10 +41,8 @@ class CodeController extends Controller {
         $column = [
             'id',
             'shading',
-            'type_id',
-            'code',
-            'brand_id',
-            'country_id',
+            'name',
+            'stock',
             'status'
         ];
 
@@ -60,30 +58,21 @@ class CodeController extends Controller {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->whereHas('type', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhereHas('division', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    });
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            });
+                                });
+                        })
+                        ->orWhereHas('brand', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             })
-                            ->orWhereHas('brand', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
-                            })
-                            ->orWhereHas('country', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
-                            })
-                            ->orWhereHas('grade', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
+                        ->orWhereHas('country', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                    });
                 }         
 
                 if($request->brand_id) {
@@ -133,31 +122,22 @@ class CodeController extends Controller {
         $total_filtered = Product::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
-                        $query->whereHas('type', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhereHas('division', function($query) use ($search) {
-                                        $query->whereRaw('INSTR(?, code)', [$search])
-                                            ->orWhere('code', 'like', "%$search%")
-                                            ->orWhere('name', 'like', "%$search%");
-                                    });
+                            $query->whereHas('type', function($query) use ($search) {
+                                    $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                                        ->orWhereHas('category', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            })
+                                        ->orWhereHas('color', function($query) use ($search) {
+                                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                                            });
+                                });
+                        })
+                        ->orWhereHas('brand', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             })
-                            ->orWhereHas('brand', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
-                            })
-                            ->orWhereHas('country', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
-                            })
-                            ->orWhereHas('grade', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
+                        ->orWhereHas('country', function($query) use ($search) {
+                                $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                    });
                 }         
 
                 if($request->brand_id) {
@@ -218,11 +198,8 @@ class CodeController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $shading,
-                    $val->type->code,
-                    $val->code(),
-                    $val->brand->name,
+                    $val->name(),
                     $availability,
-                    $val->country->name,
                     $val->status(),
                     '
                         <a href="' . url('admin/product/code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
@@ -250,35 +227,35 @@ class CodeController extends Controller {
 
     public function generateCode(Request $request)
     {
-        $name     = '';
-        $brand    = Brand::find($request->brand_id);
-        $country  = Country::find($request->country_id);
-        $type     = Type::find($request->type_id);
-        $grade    = Grade::find($request->grade_id);
+        $code    = '';
+        $brand   = Brand::find($request->brand_id);
+        $country = Country::find($request->country_id);
+        $type    = Type::find($request->type_id);
+        $grade   = Grade::find($request->grade_id);
 
         if($type) {
             if($type->division) {
-                $name .= $type->division->code;
+                $code .= $type->division->code;
             }
         }
      
         if($brand) {
-            $name .= $brand->code;
+            $code .= $brand->code;
         }
 
         if($country) {
-            $name .= $country->code;
+            $code .= $country->code;
         }
 
         if($type) {
-            $name .= $type->code;
+            $code .= $type->code;
         }
 
         if($grade) {
-            $name .= $grade->code;
+            $code .= $grade->code;
         }
 
-        return response()->json($name);
+        return response()->json($code);
     }
 
     public function formula(Request $request)
@@ -419,7 +396,7 @@ class CodeController extends Controller {
         }
 
         return response()->json([
-            'code'                => $data->code(),
+            'code'                => $data->name(),
             'type_id'             => $data->type_id,
             'type_code'           => $data->type->code,
             'company_id'          => $data->company_id,

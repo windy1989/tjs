@@ -31,38 +31,27 @@ class Select2Controller extends Controller {
     {
         $response = [];
         $search   = $request->search;
-        $data     = Product::where(function($query) use ($search) {
-                $query->whereHas('type', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search])
-                            ->orWhere('code', 'like', "%$search%")
-                            ->orWhereHas('division', function($query) use ($search) {
-                                $query->whereRaw('INSTR(?, code)', [$search])
-                                    ->orWhere('code', 'like', "%$search%")
-                                    ->orWhere('name', 'like', "%$search%");
-                            });
-                    })
-                    ->orWhereHas('brand', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search])
-                            ->orWhere('code', 'like', "%$search%")
-                            ->orWhere('name', 'like', "%$search%");
-                    })
-                    ->orWhereHas('country', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search])
-                            ->orWhere('code', 'like', "%$search%")
-                            ->orWhere('name', 'like', "%$search%");
-                    })
-                    ->orWhereHas('grade', function($query) use ($search) {
-                        $query->whereRaw('INSTR(?, code)', [$search])
-                            ->orWhere('code', 'like', "%$search%")
-                            ->orWhere('name', 'like', "%$search%");
-                    });
+        $data     = Product::whereHas('type', function($query) use ($search) {
+                $query->whereRaw("MATCH(code) AGAINST('$search' IN BOOLEAN MODE)")
+                    ->orWhereHas('category', function($query) use ($search) {
+                            $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                        })
+                    ->orWhereHas('color', function($query) use ($search) {
+                            $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                        });
             })
+            ->orWhereHas('brand', function($query) use ($search) {
+                    $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                })
+            ->orWhereHas('country', function($query) use ($search) {
+                    $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
+                })
             ->get();
 
         foreach($data as $d) {
             $response[] = [
                 'id'   => $d->id,
-                'text' => $d->code()
+                'text' => $d->name()
             ];
         }
 

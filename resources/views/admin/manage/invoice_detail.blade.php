@@ -149,7 +149,7 @@
 											<img src="{{ $od->product->type->image() }}" style="max-width:80px;" class="img-fluid img-thumbnail">
 										</td>
 										<td class="align-middle">
-											<b>{{ $od->product->code() }}</b>
+											<b>{{ $od->product->name() }}</b>
 											<div class="text-muted">
 												{{ $od->product->type->length }}x{{ $od->product->type->width }}
 											</div>

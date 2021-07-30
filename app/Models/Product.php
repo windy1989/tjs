@@ -40,6 +40,23 @@ class Product extends Model {
         return $division_code . $brand_code . $country_code . $type_code;
     }
 
+    public function name()
+    {
+        if($this->type->width > 0 && $this->type->height > 0) {
+            $width_height = $this->type->width . 'x' . $this->type->height . ' ';
+        } else {
+            $width_height = null;
+        }
+
+        $type_code     = $this->type->code;
+        $category_name = ucwords(strtolower($this->type->category->name));
+        $brand_name    = ucwords(strtolower($this->brand->name));
+        $country_name  = ucwords(strtolower($this->country->name));
+        $color         = ucwords(strtolower($this->type->color->name));
+
+        return $type_code . ' ' . $brand_name . ' ' . $category_name . ' ' . $country_name . ' ' . $width_height . $color;
+    }
+
     public function status() 
     {
         switch($this->status) {
