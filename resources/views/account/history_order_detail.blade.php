@@ -38,12 +38,12 @@
                         @foreach($order->orderDetail as $od)
                            <tr class="cart_item text-center font-size-12">
                               <td class="cart-product-quantity">
-                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
+                                 <a href="{{ url('product/detail/' . Str::slug($od->name()) . '?q=' . base64_encode($od->id)) }}">
                                     <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $od->product->name() }}">
                                  </a>
                               </td>
                               <td class="cart-product-name">
-                                 <a href="{{ url('product/detail/' . base64_encode($od->id)) }}" class="font-size-12">{{ $od->product->name() }}</a>
+                                 <a href="{{ url('product/detail/' . Str::slug($od->name()) . '?q=' . base64_encode($od->id)) }}" class="font-size-12">{{ $od->product->name() }}</a>
                               </td>
                               <td class="cart-product-quantity">
                                  <span class="amount">Rp {{ number_format($od->price_list, 0, ',', '.') }}</span>

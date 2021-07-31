@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Voucher;
 use App\Models\Category;
 use App\Models\Wishlist;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ProductShading;
 
@@ -216,12 +217,15 @@ class ProductController extends Controller {
         return view('layouts.index', ['data' => $data]);
     }
 
-    public function detail(Request $request, $id)
+    public function detail(Request $request, $param)
     {
-        $product_id = base64_decode($id);
+        $product_id = base64_decode($request->q);
         $product    = Product::find($product_id);
-        
+        $slug       = Str::slug($product->name());
+
         if(!$product) {
+            abort(404);
+        } else if($param != $slug) {
             abort(404);
         }
  
@@ -283,7 +287,7 @@ class ProductController extends Controller {
             'meta_category'    => $product->type->category->name,
             'meta_stock'       => $product->availability()->stock > 0 ? 'in stock' : 'out of stock',
             'meta_price'       => $product->price(),
-            'meta_id'          => $id,
+            'meta_id'          => $request->q,
             'content'          => 'product_detail'
         ];
 

@@ -35,10 +35,10 @@
                            <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Sort</label>
                            <div class="col-9">
                               <select name="sort" id="sort" class="custom-select no-outline font-size-13" style="border-radius:0;" onchange="clickFilter(this)">
-                                 <option value="">Normal</option>
+                                 <option value="">Alphabet (A-Z)</option>
                                  <option value="latest" {{ $filter['other']['sort'] == 'latest' ? 'selected' : '' }}>Latest</option>
-                                 <option value="low_to_high" {{ $filter['other']['sort'] == 'low_to_high' ? 'selected' : '' }}>Low To High</option>
-                                 <option value="high_to_low" {{ $filter['other']['sort'] == 'high_to_low' ? 'selected' : '' }}>High To Low</option>
+                                 <option value="low_to_high" {{ $filter['other']['sort'] == 'low_to_high' ? 'selected' : '' }}>Lowest Price</option>
+                                 <option value="high_to_low" {{ $filter['other']['sort'] == 'high_to_low' ? 'selected' : '' }}>Highest Price</option>
                               </select>
                            </div>
                         </div>
@@ -48,9 +48,8 @@
                      </div>
                      <div class="col-12 text-center">
                         @if($filter['other']['search'])
-                           <div>Search For : <strong>{{ $filter['other']['search'] }}</strong></div>
+                           <div class="font-size-12 mb-1 mt-2">Search For : <strong class="font-italic">{{ $filter['other']['search'] }}</strong></div>
                         @endif
-                        <div class="badge bg-danger text-white font-weight-normal p-1">{{ $product->total() }} records found</div>
                      </div>
                   </div>
                   <div class="form-group"><hr></div>
@@ -60,7 +59,7 @@
                            <div class="product col-lg-4 col-md-4 col-6 mb-4">
                               <div class="grid-inner border">
                                  <div class="product-image">
-                                    <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                                    <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                                        <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                                     </a>
                                     <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
@@ -68,7 +67,7 @@
                                  <div class="product-desc p-3">
                                     <div class="product-title">
                                        <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                                          <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                                        </h4>
                                     </div>
                                     <div class="product-price font-weight-bold">

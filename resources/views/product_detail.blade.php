@@ -111,16 +111,16 @@
                            @endif
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
+                           <span class="text-muted">Code:</span>
+                           <span class="text-dark font-weight-semibold">{{ $product->code() }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Category:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->category->name }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Color:</span>
                            <span class="text-dark font-weight-semibold">{{ $product->type->color->name }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
-                           <span class="text-muted">Pattern:</span>
-                           <span class="text-dark font-weight-semibold">{{ $product->type->pattern->name }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center px-0 font-size-13">
                            <span class="text-muted">Brand:</span>
@@ -194,8 +194,8 @@
                                     <table class="table table-striped table-bordered font-size-13">
                                        <tbody>
                                           <tr>
-                                             <td>Code</td>
-                                             <td>{{ $product->code() }}</td>
+                                             <td>Pattern</td>
+                                             <td>{{ $product->type->pattern->name }}</td>
                                           </tr>
                                           <tr>
                                              <td>Surface</td>
@@ -242,26 +242,21 @@
                         <div class="product">
                            <div class="grid-inner border">
                               <div class="product-image">
-                                 <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                                 <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                                     <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                                  </a>
                                  <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                               </div>
                               <div class="product-desc p-3">
-                                 <div class="product-price font-weight-bold">
-                                    <ins class="text-dark">
-                                       <h1 style="font-size:17px;" class="mb-0 font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
-                                    </ins>
-                                 </div>
                                  <div class="product-title">
-                                    <h4 class="mb-0 font-weight-normal limit-text-list-product">
-                                       <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-danger" style="font-size:13.5px;">{{ $p->name() }}</a>
+                                    <h4 class="mb-3 font-weight-normal limit-text-list-product">
+                                       <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                                     </h4>
                                  </div>
-                                 <div class="product-price font-weight-semibold">
-                                    <span>
-                                       <span class="text-warning">{{ $p->brand->name }}</span> | <span class="text-info">{{ $p->type->length }}x{{ $p->type->width }}</span>
-                                    </span>
+                                 <div class="product-price font-weight-bold">
+                                    <ins>
+                                       <h1 style="font-size:17px;" class="mb-0 text-danger font-weight-bold">Rp {{ number_format($p->price(), 0, ',', '.') }}</h1>
+                                    </ins>
                                  </div>
                               </div>
                            </div>

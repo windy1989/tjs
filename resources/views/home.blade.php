@@ -93,15 +93,15 @@
                <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
-                        <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                        <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                            <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
                      <div class="product-desc p-3">
                         <div class="product-title">
-                           <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                           <h4 class="mb-3 font-weight-normal limit-text-list-product">
+                              <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                            </h4>
                         </div>
                         <div class="product-price font-weight-bold">
@@ -141,15 +141,15 @@
                                  <div class="product">
                                     <div class="grid-inner border">
                                        <div class="product-image">
-                                          <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                                          <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                                              <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                                           </a>
                                           <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                        </div>
                                        <div class="product-desc bg-light p-3">
                                           <div class="product-title">
-                                             <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                                                <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                                             <h4 class="mb-3 font-weight-normal limit-text-list-product">
+                                                <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                                              </h4>
                                           </div>
                                           <div class="product-price font-weight-bold">
@@ -181,15 +181,15 @@
                <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
-                        <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                        <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                            <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
                      <div class="product-desc p-3">
                         <div class="product-title">
-                           <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                           <h4 class="mb-3 font-weight-normal limit-text-list-product">
+                              <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                            </h4>
                         </div>
                         <div class="product-price font-weight-bold">
@@ -220,15 +220,15 @@
                <div class="product col-lg-3 col-md-4 col-6">
                   <div class="grid-inner border">
                      <div class="product-image">
-                        <a href="{{ url('product/detail/' . base64_encode($p->id)) }}">
+                        <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
                            <img src="{{ $p->type->image() }}" alt="{{ $p->name() }}" class="img-fluid product-thumbnail">
                         </a>
                         <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                      </div>
                      <div class="product-desc p-3">
                         <div class="product-title">
-                           <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                              <a href="{{ url('product/detail/' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                           <h4 class="mb-3 font-weight-normal limit-text-list-product">
+                              <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
                            </h4>
                         </div>
                         <div class="product-price font-weight-bold">

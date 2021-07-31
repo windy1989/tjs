@@ -21,12 +21,12 @@
                               <a href="{{ url('product/cart_destroy/' . base64_encode($c->id)) }}" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
                            </td>
                            <td class="cart-product-thumbnail">
-                              <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
+                              <a href="{{ url('product/detail/' . Str::slug($c->product->name()) . '?q=' . base64_encode($c->product->id)) }}">
                                  <img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid" alt="{{ $c->product->name() }}">
                               </a>
                            </td>
                            <td class="cart-product-name">
-                              <a href="{{ url('product/detail/' . base64_encode($c->id)) }}">{{ $c->product->name() }}</a>
+                              <a href="{{ url('product/detail/' . Str::slug($c->product->name()) . '?q=' . base64_encode($c->product->id)) }}">{{ $c->product->name() }}</a>
                            </td>
                            <td class="cart-product-quantity">
                               <span class="amount">Rp {{ number_format($c->product->price(), 0, ',', '.') }}</span>

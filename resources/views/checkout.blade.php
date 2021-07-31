@@ -82,14 +82,14 @@
 												@endphp
 												<tr class="cart_item text-center">
 													<td class="cart-product-name">
-														<a href="{{ url('product/detail/' . base64_encode($c->id)) }}">
+														<a href="{{ url('product/detail/' . Str::slug($c->product->name()) . '?q=' . base64_encode($c->product->id)) }}">
 															<center>
 																<img width="64" height="64" src="{{ $c->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $c->product->name() }}">
 															</center>
 														</a>
 													</td>
 													<td class="cart-product-name">
-														<a href="{{ url('product/detail/' . base64_encode($c->id)) }}" class="font-size-13 font-weight-normal">{{ $c->product->name() }}</a>
+														<a href="{{ url('product/detail/' . Str::slug($c->product->name()) . '?q=' . base64_encode($c->product->id)) }}" class="font-size-13 font-weight-normal">{{ $c->product->name() }}</a>
 													</td>
 													<td class="cart-product-quantity">
 														<span class="amount font-size-13">Rp {{ number_format($c->product->price(), 0, ',', '.') }}</span>

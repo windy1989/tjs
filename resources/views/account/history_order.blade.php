@@ -53,7 +53,7 @@
                                        <div class="col-lg-3 col-md-12">
                                           <div class="form-group">
                                              <center>
-                                                <a href="{{ url('product/detail/' . base64_encode($od->id)) }}">
+                                                <a href="{{ url('product/detail/' . Str::slug($od->product->name()) . '?q=' . base64_encode($od->product->id)) }}">
                                                    <img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail" alt="{{ $od->product->name() }}">
                                                 </a>
                                              </center>
