@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="id-ID">
 <head>
-   <meta name="facebook-domain-verification" content="c8lao94nm9tbwmurdibceh4txasni3">
+   <meta http-equiv="cache-control" content="no-cache">
+   <meta http-equiv="expires" content="0">
+   <meta http-equiv="pragma" content="no-cache">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <meta name="facebook-domain-verification" content="c8lao94nm9tbwmurdibceh4txasni3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="author" content="Calvin Dito Pratama">
@@ -28,9 +31,9 @@
    <meta name="google-site-verification" content="-PVsEPUU7R41vERWZ6fLe04fbAUA8mlyRjNHM2AkCDg">
    <meta name="format-detection" content="telephone=no">
    <meta name="theme-color" content="#51b4ba">
+   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
    <link rel="manifest" href="{{ asset('manifest.json') }}">
    <link rel="alternate" href="{{ url('/') }}" hreflang="in">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet">
    <link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
