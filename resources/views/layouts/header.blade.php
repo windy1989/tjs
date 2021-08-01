@@ -3,57 +3,57 @@
 	$total_wishlist = App\Models\Wishlist::where('customer_id', session('fo_id'))->count(); 
 	$total_points   = App\Models\Customer::find(session('fo_id'));
 @endphp
-<nav class="p-0 navbar fixed-bottom navbar-dark navbar-expand navigation-menu d-md-block d-lg-none d-xl-none">
-	<ul class="navbar-nav nav-justified w-100">
-		<li class="nav-item">
-			<a href="{{ url('/') }}" class="nav-link {{ !Request::segment(1) ? 'active' : '' }}">
-				<i class="icon-home"></i>
-				<span class="small d-block">Home</span>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a href="{{ url('account/cart') }}" class="nav-link {{ Request::segment(2) == 'cart' ? 'active' : '' }}">
-				<i class="icon-line-bag"></i>
-				<sup class="sup-top">
-					<span class="badge badge-custom badge-warning">{{ $total_cart }}</span>
-				</sup>
-				<span class="small d-block">Cart</span>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a href="https://tawk.to/chat/60881c7062662a09efc29df5/1f49s1kk2" class="nav-link" target="_blank">
-				<i class="icon-headphones-alt"></i>
-				<span class="small d-block">Live Chat</span>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a href="{{ url('account/wishlist') }}" class="nav-link {{ Request::segment(2) == 'wishlist' ? 'active' : '' }}">
-				<i class="icon-line-heart"></i>
-				<sup class="sup-top">
-					<span class="badge badge-custom badge-warning">{{ $total_wishlist }}</span>
-				</sup>
-				<span class="small d-block">Wishlist</span>
-			</a>
-		</li>
-		<li class="nav-item">
-			@if(session('fo_id'))
-				<a href="javascript:void(0);" class="nav-link side-panel-trigger">
-					<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="16" alt="{{ session('fo_name') }}">
-					<span class="small d-block">
-						@php $str = explode(' ', session('fo_name')); @endphp
-						Hi, {{ $str[0] }}
-					</span>
-				</a>
-			@else
-				<a href="{{ url('account/login') }}" class="nav-link">
-					<i class="icon-user21"></i>
-					<span class="small d-block">Account</span>
-				</a>
-			@endif
-		</li>
-	</ul>
-</nav>
 <body class="stretched">
+	<nav class="p-0 navbar fixed-bottom navbar-dark navbar-expand navigation-menu d-md-block d-lg-none d-xl-none">
+		<ul class="navbar-nav nav-justified w-100">
+			<li class="nav-item">
+				<a href="{{ url('/') }}" class="nav-link {{ !Request::segment(1) ? 'active' : '' }}">
+					<i class="icon-home"></i>
+					<span class="small d-block">Home</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="{{ url('account/cart') }}" class="nav-link {{ Request::segment(2) == 'cart' ? 'active' : '' }}">
+					<i class="icon-line-bag"></i>
+					<sup class="sup-top">
+						<span class="badge badge-custom badge-warning">{{ $total_cart }}</span>
+					</sup>
+					<span class="small d-block">Cart</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="https://tawk.to/chat/60881c7062662a09efc29df5/1f49s1kk2" class="nav-link" target="_blank">
+					<i class="icon-headphones-alt"></i>
+					<span class="small d-block">Live Chat</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="{{ url('account/wishlist') }}" class="nav-link {{ Request::segment(2) == 'wishlist' ? 'active' : '' }}">
+					<i class="icon-line-heart"></i>
+					<sup class="sup-top">
+						<span class="badge badge-custom badge-warning">{{ $total_wishlist }}</span>
+					</sup>
+					<span class="small d-block">Wishlist</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				@if(session('fo_id'))
+					<a href="javascript:void(0);" class="nav-link side-panel-trigger">
+						<img src="{{ session('fo_photo') }}" class="img-circle" style="margin-bottom:1px;" height="16" alt="{{ session('fo_name') }}">
+						<span class="small d-block">
+							@php $str = explode(' ', session('fo_name')); @endphp
+							Hi, {{ $str[0] }}
+						</span>
+					</a>
+				@else
+					<a href="{{ url('account/login') }}" class="nav-link">
+						<i class="icon-user21"></i>
+						<span class="small d-block">Account</span>
+					</a>
+				@endif
+			</li>
+		</ul>
+	</nav>
 	<div class="body-overlay"></div>
 	<div id="side-panel" class="dark">
 		<div id="side-panel-trigger-close" class="side-panel-trigger">
