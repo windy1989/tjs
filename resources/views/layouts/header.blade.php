@@ -21,6 +21,12 @@
 			</a>
 		</li>
 		<li class="nav-item">
+			<a href="https://tawk.to/smartmarbleandbath" class="nav-link" target="_blank">
+				<i class="icon-headphones-alt"></i>
+				<span class="small d-block">Hotline</span>
+			</a>
+		</li>
+		<li class="nav-item">
 			<a href="{{ url('account/wishlist') }}" class="nav-link {{ Request::segment(2) == 'wishlist' ? 'active' : '' }}">
 				<i class="icon-line-heart"></i>
 				<sup class="sup-top">
