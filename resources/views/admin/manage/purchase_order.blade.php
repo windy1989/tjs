@@ -76,7 +76,7 @@
                <div class="col-md-12">
                   <div class="form-group">
                      <div class="text-right">
-                        <button type="button" onclick="resetFilter()" class="btn bg-danger"><i class="icon-cross2"></i> Reset</button>
+                        <button type="button" onclick="resetFilter()" class="btn bg-danger mr-2"><i class="icon-cross2"></i> Reset</button>
                         <button type="button" onclick="loadDataTable()" class="btn bg-teal"><i class="icon-filter4"></i> Search</button>
                      </div>
                   </div>

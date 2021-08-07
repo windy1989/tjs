@@ -50,7 +50,7 @@
                </div>
             </div>
             <div class="form-group text-right">
-               <button type="button" onclick="filter('reset')" class="btn bg-danger"><i class="icon-sync"></i> Reset</button>
+               <button type="button" onclick="filter('reset')" class="btn bg-danger mr-2"><i class="icon-sync"></i> Reset</button>
                <button type="button" onclick="filter()" class="btn bg-purple"><i class="icon-filter4"></i> Search</button>
             </div>
          </div>
