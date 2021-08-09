@@ -27,7 +27,7 @@
 												<a href="{{ url('information/store') }}" class="text-dark">Store</a>
 											</li>
 											<li>
-												<a href="{{ url('information/product_catalog') }}" class="text-dark">Product Catalog</a>
+												<a href="{{ url('information/product_catalog') }}" class="text-dark">Product Catalogue</a>
 											</li>
 											<li>
 												<a href="{{ url('information/pay_in_store') }}" class="text-dark">Pay In Store</a>
