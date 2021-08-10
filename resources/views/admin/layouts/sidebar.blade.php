@@ -106,6 +106,9 @@
                                         <a href="{{ url('admin/master_data/cogs_master/qc_fee') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'cogs_master' && Request::segment(4) == 'qc_fee' ? 'active' : '' }}">QC Fee</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="{{ url('admin/master_data/cogs_master/freight') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'cogs_master' && Request::segment(4) == 'freight' ? 'active' : '' }}">Freight</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="{{ url('admin/master_data/cogs_master/import_system') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'cogs_master' && Request::segment(4) == 'import_system' ? 'active' : '' }}">Import System</a>
                                     </li>
                                     <li class="nav-item">
@@ -186,6 +189,34 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'data' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-cart5"></i> 
+                            <span>Data</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Data">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/data/project') }}" class="nav-link {{ Request::segment(2) == 'data' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/data/retail') }}" class="nav-link {{ Request::segment(2) == 'data' && Request::segment(3) == 'retail' ? 'active' : '' }}">Retail</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'invoice' ? 'nav-item-expanded nav-item-open' : '' }}">
+                        <a href="#" class="nav-link">
+                            <i class="icon-file-text"></i> 
+                            <span>Invoice</span>
+                        </a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Invoice">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/invoice/project') }}" class="nav-link {{ Request::segment(2) == 'invoice' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/invoice/retail') }}" class="nav-link {{ Request::segment(2) == 'invoice' && Request::segment(3) == 'retail' ? 'active' : '' }}">Retail</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'purchase_order' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-coins"></i> 
@@ -197,20 +228,6 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/purchase_order/retail') }}" class="nav-link {{ Request::segment(2) == 'purchase_order' && Request::segment(3) == 'retail' ? 'active' : '' }}">Retail</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'sales_order' ? 'nav-item-expanded nav-item-open' : '' }}">
-                        <a href="#" class="nav-link">
-                            <i class="icon-cart5"></i> 
-                            <span>Sales Order</span>
-                        </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Sales Order">
-                            <li class="nav-item">
-                                <a href="{{ url('admin/sales_order/project') }}" class="nav-link {{ Request::segment(2) == 'sales_order' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/sales_order/retail') }}" class="nav-link {{ Request::segment(2) == 'sales_order' && Request::segment(3) == 'retail' ? 'active' : '' }}">Retail</a>
                             </li>
                         </ul>
                     </li>
@@ -267,17 +284,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'report' && Request::segment(3) == 'sales_order' ? 'nav-item-expanded nav-item-open' : '' }}">
-                                <a href="#" class="nav-link">Sales Order</a>
-                                <ul class="nav nav-group-sub">
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/report/sales_order/project') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'sales_order' && Request::segment(4) == 'project' ? 'active' : '' }}">Project</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/report/sales_order/retail') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'sales_order' && Request::segment(4) == 'retail' ? 'active' : '' }}">Retail</a>
-                                    </li>
-                                </ul>
-                            </li>
                             <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'report' && Request::segment(3) == 'delivery_order' ? 'nav-item-expanded nav-item-open' : '' }}">
                                 <a href="#" class="nav-link">Delivery Order</a>
                                 <ul class="nav nav-group-sub">
@@ -304,7 +310,7 @@
                                 <a href="#" class="nav-link">Accounting</a>
                                 <ul class="nav nav-group-sub">
                                     <li class="nav-item">
-                                        <a href="{{ url('admin/report/accounting/accounts_receivable') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'balance_sheet' ? 'active' : '' }}">Balance Sheet</a>
+                                        <a href="{{ url('admin/report/accounting/balance_sheet') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'balance_sheet' ? 'active' : '' }}">Balance Sheet</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ url('admin/report/accounting/profit_loss') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'profit_loss' ? 'active' : '' }}">Profit & Loss</a>
@@ -313,9 +319,6 @@
                                         <a href="{{ url('admin/report/accounting/ledger') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'ledger' ? 'active' : '' }}">Ledger</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin/report/hrd') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'hrd' ? 'active' : '' }}">HRD</a>
                             </li>
                         </ul>
                     </li>
@@ -336,6 +339,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('admin/hrd/commission') }}" class="nav-link {{ Request::segment(2) == 'hrd' && Request::segment(3) == 'commission' ? 'active' : '' }}">Commission</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/hrd/job_desc') }}" class="nav-link {{ Request::segment(2) == 'hrd' && Request::segment(3) == 'job_desc' ? 'active' : '' }}">Job Desc</a>
                             </li>
                         </ul>
                     </li>

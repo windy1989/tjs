@@ -14,7 +14,7 @@ class NewsCategoryController extends Controller {
     {
         $data = [
             'title'   => 'News Category',
-            'content' => 'admin.news.category'
+            'content' => 'admin.master_data.digital.news_category'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -13,9 +13,9 @@ class CategoryController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Master Category',
+            'title'    => 'Category',
             'category' => Category::where('type', 1)->get(),
-            'content'  => 'admin.master_data.category'
+            'content'  => 'admin.master_data.product.category'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

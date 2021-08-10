@@ -14,10 +14,10 @@ class ReportController extends Controller {
     {
         $filter = $request->filter ? $request->filter : date('Y-m');
         $data   = [
-            'title'         => 'Report Balance Sheet',
+            'title'         => 'Balance Sheet',
             'balance_sheet' => SMB::reportBalanceSheet($filter),
             'filter'        => $filter,
-            'content'       => 'admin.report.balance_sheet'
+            'content'       => 'admin.report.accounting.balance_sheet'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -36,11 +36,11 @@ class ReportController extends Controller {
         ];
 
         $data   = [
-            'title'       => 'Report Profit & Loss',
+            'title'       => 'Profit & Loss',
             'profit_loss' => SMB::reportProfitLoss($filter),
             'filter'      => $filter,
             'total'       => $total,
-            'content'     => 'admin.report.profit_loss'
+            'content'     => 'admin.report.accounting.profit_loss'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -49,9 +49,9 @@ class ReportController extends Controller {
     public function ledger() 
     {
         $data   = [
-            'title'   => 'Report Ledger',
+            'title'   => 'Ledger',
             'coa'     => Coa::all(),
-            'content' => 'admin.report.ledger'
+            'content' => 'admin.report.accounting.ledger'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -13,8 +13,8 @@ class LoadingLimitController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Loading Limit',
-            'content' => 'admin.master_data.loading_limit'
+            'title'   => 'Loading Limit',
+            'content' => 'admin.master_data.product.loading_limit'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

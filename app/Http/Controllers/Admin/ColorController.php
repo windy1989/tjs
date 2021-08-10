@@ -13,8 +13,8 @@ class ColorController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Color',
-            'content' => 'admin.master_data.color'
+            'title'   => 'Color',
+            'content' => 'admin.master_data.product.color'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

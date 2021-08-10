@@ -16,12 +16,12 @@ class EmklController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Cogs Emkl',
+            'title'   => 'Import Estimation Rate',
             'company' => Company::where('status', 1)->get(),
             'import'  => Import::all(),
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
-            'content' => 'admin.cogs.emkl'
+            'content' => 'admin.master_data.cogs_master.import_estimation_rate'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

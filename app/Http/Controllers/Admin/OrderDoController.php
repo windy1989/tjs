@@ -15,9 +15,9 @@ class OrderDoController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Manage Delivery Order',
+            'title'   => 'DO Retail',
             'order'   => Order::whereIn('status', [2, 3, 4])->get(),
-            'content' => 'admin.manage.delivery_order'
+            'content' => 'admin.delivery_order.retail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -101,7 +101,7 @@ class OrderDoController extends Controller {
                     $val->order->status(),
                     date('d F Y', strtotime($val->created_at)),
                     '
-                        <a href="' . url('admin/manage/delivery_order/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer2"></i></a>
+                        <a href="' . url('admin/delivery_order/retail/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer2"></i></a>
                         <button type="button" class="btn bg-info btn-sm" data-popup="tooltip" title="Information" onclick="information(' . $val->id . ')"><i class="icon-info22"></i></button>
                     '
                 ];

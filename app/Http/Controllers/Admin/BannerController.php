@@ -13,8 +13,8 @@ class BannerController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Banner',
-            'content' => 'admin.master_data.banner'
+            'title'   => 'Banner',
+            'content' => 'admin.master_data.digital.banner'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

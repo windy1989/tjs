@@ -13,7 +13,7 @@ class BudgetingController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Accounting Budgeting',
+            'title'   => 'Budgeting',
             'coa'     => Coa::oldest('code')->get(),    
             'content' => 'admin.accounting.budgeting'
         ];

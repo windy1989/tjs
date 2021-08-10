@@ -19,8 +19,8 @@ class CogsController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Price Cogs',
-            'content' => 'admin.price.cogs'
+            'title'   => 'COGS Sales',
+            'content' => 'admin.master_data.cogs_master.cogs_sales'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -330,11 +330,11 @@ class CogsController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Create New Price',
+                'title'    => 'Create New COGS Sales',
                 'currency' => Currency::where('status', 1)->get(),
                 'city'     => City::all(),
                 'import'   => Import::all(),
-                'content'  => 'admin.price.cogs_create'
+                'content'  => 'admin.master_data.cogs_master.cogs_sales_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);

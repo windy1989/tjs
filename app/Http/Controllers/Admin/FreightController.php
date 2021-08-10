@@ -14,10 +14,10 @@ class FreightController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Cogs Freight',
+            'title'   => 'Freight',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
-            'content' => 'admin.cogs.freight'
+            'content' => 'admin.master_data.cogs_master.freight'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

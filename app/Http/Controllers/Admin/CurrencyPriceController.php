@@ -13,9 +13,9 @@ class CurrencyPriceController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Cogs Price',
+            'title'    => 'Purchase Price',
             'currency' => Currency::where('status', 1)->get(),
-            'content'  => 'admin.cogs.price'
+            'content'  => 'admin.master_data.cogs_master.purchase_price'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

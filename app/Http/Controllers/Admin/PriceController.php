@@ -15,11 +15,11 @@ class PriceController extends Controller {
     public function index()
     {
         $data = [
-            'title'     => 'Delivery Price',
+            'title'     => 'Delivery Cost',
             'vendor'    => Vendor::where('status', 1)->get(),
             'transport' => Transport::all(),
             'city'      => City::all(),
-            'content'   => 'admin.delivery.price'
+            'content'   => 'admin.master_data.delivery.delivery_cost'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

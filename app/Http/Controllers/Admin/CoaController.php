@@ -13,9 +13,9 @@ class CoaController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Accounting COA',
+            'title'   => 'COA',
             'parent'  => Coa::all(),    
-            'content' => 'admin.accounting.coa'
+            'content' => 'admin.master_data.finance_accounting.coa'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

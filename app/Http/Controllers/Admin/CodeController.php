@@ -30,7 +30,7 @@ class CodeController extends Controller {
             'supplier'  => Supplier::all(),
             'grade'     => Grade::all(),
             'warehouse' => Warehouse::all(),
-            'content'   => 'admin.product.code'
+            'content'   => 'admin.master_data.product.product_code'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -202,7 +202,7 @@ class CodeController extends Controller {
                     $availability,
                     $val->status(),
                     '
-                        <a href="' . url('admin/product/code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/product/product_code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
@@ -542,9 +542,9 @@ class CodeController extends Controller {
     public function detail($id) 
     {
         $data = [
-            'title'   => 'Detail Code',
+            'title'   => 'Detail Product Code',
             'product' => Product::find($id),
-            'content' => 'admin.product.code_detail'
+            'content' => 'admin.master_data.product.product_code_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

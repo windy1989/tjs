@@ -12,8 +12,8 @@ class TransportController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Delivery Transport',
-            'content' => 'admin.delivery.transport'
+            'title'   => 'Mode Of Transport',
+            'content' => 'admin.master_data.delivery.mode_of_transport'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

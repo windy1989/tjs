@@ -16,10 +16,10 @@ class SupplierController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Master Supplier',
+            'title'    => 'Supplier',
             'country'  => Country::where('status', 1)->get(),
             'currency' => Currency::where('status', 1)->get(),
-            'content'  => 'admin.master_data.supplier'
+            'content'  => 'admin.master_data.product.supplier'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

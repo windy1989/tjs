@@ -13,8 +13,8 @@ class CountryController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Country',
-            'content' => 'admin.master_data.country'
+            'title'   => 'Country',
+            'content' => 'admin.master_data.product.country'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

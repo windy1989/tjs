@@ -14,7 +14,7 @@ class VoucherGlobalController extends Controller {
     {
         $data = [
             'title'   => 'Voucher Global',
-            'content' => 'admin.voucher.global'
+            'content' => 'admin.master_data.voucher.global'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -76,20 +76,20 @@ class VoucherGlobalController extends Controller {
                 if($current_date < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
-                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
                 } else if($current_date >= strtotime($val->start_date) && $current_date <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
-                        <a href="' . url('admin/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
-                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/global/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 } else {
                     $status = 'Expired';
                     $button = '
-                        <a href="' . url('admin/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/global/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 }
 
@@ -182,8 +182,8 @@ class VoucherGlobalController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Create New Voucher',
-                'content' => 'admin.voucher.global_create'
+                'title'   => 'Create New Voucher Global',
+                'content' => 'admin.master_data.voucher.global_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -238,9 +238,9 @@ class VoucherGlobalController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Update Voucher',
+                'title'   => 'Update Voucher Global',
                 'voucher' => $query,
-                'content' => 'admin.voucher.global_update'
+                'content' => 'admin.master_data.voucher.global_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -273,9 +273,9 @@ class VoucherGlobalController extends Controller {
     public function detail($id)
     {
         $data = [
-            'title'   => 'Detail Voucher',
+            'title'   => 'Detail Voucher Global',
             'voucher' => Voucher::find($id),
-            'content' => 'admin.voucher.global_detail'
+            'content' => 'admin.master_data.voucher.global_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

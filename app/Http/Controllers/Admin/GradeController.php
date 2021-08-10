@@ -13,8 +13,8 @@ class GradeController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Grade',
-            'content' => 'admin.master_data.grade'
+            'title'   => 'Grade',
+            'content' => 'admin.master_data.product.grade'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

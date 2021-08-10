@@ -13,8 +13,8 @@ class CompanyController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Company',
-            'content' => 'admin.master_data.company'
+            'title'   => 'Company',
+            'content' => 'admin.master_data.product.company'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -14,8 +14,8 @@ class VendorController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Delivery Vendor',
-            'content' => 'admin.delivery.vendor'
+            'title'   => 'Delivery Company',
+            'content' => 'admin.master_data.delivery.delivery_company'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

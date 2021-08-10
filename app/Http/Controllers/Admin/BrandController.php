@@ -14,8 +14,8 @@ class BrandController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Brand',
-            'content' => 'admin.master_data.brand'
+            'title'   => 'Brand',
+            'content' => 'admin.master_data.product.brand'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

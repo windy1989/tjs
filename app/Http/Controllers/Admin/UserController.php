@@ -18,7 +18,7 @@ class UserController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Setting User',
+            'title'   => 'User',
             'content' => 'admin.setting.user'
         ];
 

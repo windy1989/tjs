@@ -12,8 +12,8 @@ class PricingPolicyController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Price Pricing Policy',
-            'content' => 'admin.price.pricing_policy'
+            'title'   => 'Pricing Sales',
+            'content' => 'admin.master_data.cogs_master.pricing_sales'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

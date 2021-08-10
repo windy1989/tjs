@@ -18,9 +18,9 @@ class OrderInvoiceController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Manage Invoice',
+            'title'    => 'Invoice Retail',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.manage.invoice'
+            'content'  => 'admin.invoice.retail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -152,10 +152,10 @@ class OrderInvoiceController extends Controller {
             foreach($query_data as $val) {
                 if($val->payment == 0 || $val->payment == null) {
                     $status = 'Unpaid';
-                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
+                    $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 } else {
                     $status = 'Full Payment';
-                    $btn    = '<a href="' . url('admin/manage/invoice/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
+                    $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 }
 
                 $response['data'][] = [
@@ -238,10 +238,10 @@ class OrderInvoiceController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Detail Invoice',
+            'title'   => 'Detail Invoice Retail',
             'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get(),
             'order'   => $order,
-            'content' => 'admin.manage.invoice_detail'
+            'content' => 'admin.invoice.retail_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

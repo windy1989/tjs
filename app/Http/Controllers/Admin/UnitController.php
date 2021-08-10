@@ -13,8 +13,8 @@ class UnitController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Unit',
-            'content' => 'admin.master_data.unit'
+            'title'   => 'Unit',
+            'content' => 'admin.master_data.product.unit'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

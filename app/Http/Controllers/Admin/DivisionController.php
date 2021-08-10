@@ -13,8 +13,8 @@ class DivisionController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Division',
-            'content' => 'admin.master_data.division'
+            'title'   => 'Division',
+            'content' => 'admin.master_data.product.division'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

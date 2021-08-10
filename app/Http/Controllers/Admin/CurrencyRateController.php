@@ -14,10 +14,10 @@ class CurrencyRateController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Cogs Rate',
+            'title'    => 'Buy Exchange Rate',
             'currency' => Currency::where('status', 1)->get(),
             'company'  => Company::where('status', 1)->get(),
-            'content'  => 'admin.cogs.rate'
+            'content'  => 'admin.master_data.cogs_master.buy_exchange_rate'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

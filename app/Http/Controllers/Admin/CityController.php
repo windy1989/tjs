@@ -12,8 +12,8 @@ class CityController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master City',
-            'content' => 'admin.master_data.city'
+            'title'   => 'City',
+            'content' => 'admin.master_data.product.city'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

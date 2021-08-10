@@ -11,8 +11,8 @@ class WarehouseController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Warehouse',
-            'content' => 'admin.master_data.warehouse'
+            'title'   => 'Warehouse',
+            'content' => 'admin.master_data.product.warehouse'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

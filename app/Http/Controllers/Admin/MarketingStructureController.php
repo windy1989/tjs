@@ -13,9 +13,9 @@ class MarketingStructureController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Cogs Marketing Structure',
+            'title'   => 'Marketing Cost',
             'company' => Company::where('status', 1)->get(),
-            'content' => 'admin.cogs.marketing_structure'
+            'content' => 'admin.master_data.cogs_master.marketing_cost'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -14,10 +14,10 @@ class AgentController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Cogs Agent',
+            'title'    => 'QC Fee',
             'country'  => Country::all(),
             'category' => Category::where('parent_id', 0)->oldest('name')->get(),
-            'content'  => 'admin.cogs.agent'
+            'content'  => 'admin.master_data.cogs_master.qc_fee'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -19,10 +19,10 @@ class CashBankController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Acounting Cash & Bank',
+            'title'   => 'Cash & Bank',
             'user'    => User::all(),
             'coa'     => Coa::where('status', 1)->oldest('code')->get(),
-            'content' => 'admin.accounting.cash_bank'
+            'content' => 'admin.finance.cash_bank'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

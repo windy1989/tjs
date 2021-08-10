@@ -13,8 +13,8 @@ class PatternController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Pattern',
-            'content' => 'admin.master_data.pattern'
+            'title'   => 'Pattern',
+            'content' => 'admin.master_data.product.pattern'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

@@ -14,10 +14,10 @@ class EmklRateController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Cogs Emkl Rate',
+            'title'    => 'Import Custom Rate',
             'company'  => Company::where('status', 1)->get(),
             'currency' => Currency::where('status', 1)->get(),
-            'content'  => 'admin.cogs.emkl_rate'
+            'content'  => 'admin.master_data.cogs_master.import_custom_rate'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

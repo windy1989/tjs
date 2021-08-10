@@ -13,9 +13,9 @@ class OrderController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Manage Order',
+            'title'    => 'Data Retail',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.manage.order'
+            'content'  => 'admin.data.retail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -151,7 +151,7 @@ class OrderController extends Controller {
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('admin/manage/order/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
+                        <a href="' . url('admin/data/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
                     '
                 ];
 
@@ -192,9 +192,9 @@ class OrderController extends Controller {
         }
 
         $data  = [
-            'title'   => 'Detail Order',
+            'title'   => 'Detail Data Retail',
             'order'   => $order,
-            'content' => 'admin.manage.order_detail'
+            'content' => 'admin.data.retail_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

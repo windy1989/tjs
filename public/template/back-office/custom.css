@@ -1,3 +1,7 @@
+.btn {
+   margin-left: 5px;
+}
+
 .modal .modal-dialog {
    width: 100vw;
    height: 100vh;

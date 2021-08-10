@@ -13,8 +13,8 @@ class CurrencyController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Currency',
-            'content' => 'admin.master_data.currency'
+            'title'   => 'Currency',
+            'content' => 'admin.master_data.product.currency'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

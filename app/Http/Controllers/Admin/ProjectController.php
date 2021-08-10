@@ -19,10 +19,10 @@ class ProjectController extends Controller {
     public function index() 
     {
         $data = [
-            'title'   => 'Project Data',
+            'title'   => 'Data Project',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
-            'content' => 'admin.project.data'
+            'content' => 'admin.data.project'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -82,7 +82,7 @@ class ProjectController extends Controller {
             $nomor = $start + 1;
             foreach($query_data as $val) {
                 if($val->progress == 100) {
-                    $action = '<a href="' . url('admin/project/data/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
+                    $action = '<a href="' . url('admin/data/project/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:0.875rem;">
@@ -94,7 +94,7 @@ class ProjectController extends Controller {
                         </div>
                     ';
                 } else {
-                    $action = '<a href="' . url('admin/project/data/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
+                    $action = '<a href="' . url('admin/data/project/progress/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Progress"><i class="icon-hammer-wrench"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:0.875rem;">
@@ -468,11 +468,11 @@ class ProjectController extends Controller {
             }
         } else {
             $data = [
-                'title'   => 'Progress Data',
+                'title'   => 'Progress Data Project',
                 'country' => Country::where('status', 1)->get(),
                 'city'    => City::all(),
                 'project' => $query,
-                'content' => 'admin.project.data_progress'
+                'content' => 'admin.data.project_progress'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);

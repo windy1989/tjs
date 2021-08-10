@@ -13,8 +13,8 @@ class SurfaceController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master Surface',
-            'content' => 'admin.master_data.surface'
+            'title'   => 'Surface',
+            'content' => 'admin.master_data.product.surface'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

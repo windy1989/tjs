@@ -16,8 +16,8 @@ class OrderPoController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Manage Purchase Order',
-            'content' => 'admin.manage.purchase_order'
+            'title'   => 'PO Retail',
+            'content' => 'admin.purchase_order.retail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -99,9 +99,9 @@ class OrderPoController extends Controller {
                 $grandtotal   = $bottom_price + $val->order->shipping;
 
                 if($val->status == 1) {
-                    $btn = '<a href="' . url('admin/manage/purchase_order/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
+                    $btn = '<a href="' . url('admin/purchase_order/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
                 } else {
-                    $btn = '<a href="' .url('admin/manage/purchase_order/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
+                    $btn = '<a href="' .url('admin/purchase_order/retail/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 }
 
                 $response['data'][] = [
@@ -177,12 +177,12 @@ class OrderPoController extends Controller {
         }
 
         $data = [
-            'title'          => 'Detail Purchase Order',
+            'title'          => 'Detail PO Retail',
             'purchase_order' => $purchase_order,
             'shipping'       => $order->shipping - $shipping,
             'discount'       => $shipping,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get(),
-            'content'        => 'admin.manage.purchase_order_detail'
+            'content'        => 'admin.purchase_order.retail_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

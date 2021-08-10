@@ -12,8 +12,8 @@ class CareerController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Manage Career',
-            'content' => 'admin.manage.career'
+            'title'   => 'Career',
+            'content' => 'admin.master_data.digital.career'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -67,8 +67,8 @@ class CareerController extends Controller {
                     date('d F Y', strtotime($val->deadline)),
                     $val->status(),
                     '
-                        <a href="' . url('admin/manage/career/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/manage/career/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/digital/career/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/digital/career/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
@@ -130,7 +130,7 @@ class CareerController extends Controller {
         } else {
             $data = [
                 'title'   => 'Create New Career',
-                'content' => 'admin.manage.career_create'
+                'content' => 'admin.master_data.digital.career_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -182,7 +182,7 @@ class CareerController extends Controller {
             $data = [
                 'title'   => 'Update Career',
                 'career'  => $query,
-                'content' => 'admin.manage.career_update'
+                'content' => 'admin.master_data.digital.career_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -217,7 +217,7 @@ class CareerController extends Controller {
         $data = [
             'title'   => 'Detail Career',
             'career'  => Career::find($id),
-            'content' => 'admin.manage.career_detail'
+            'content' => 'admin.master_data.digital.career_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

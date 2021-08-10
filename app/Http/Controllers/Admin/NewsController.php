@@ -17,7 +17,7 @@ class NewsController extends Controller {
     {
         $data = [
             'title'   => 'News',
-            'content' => 'admin.news.news'
+            'content' => 'admin.master_data.digital.news'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -93,8 +93,8 @@ class NewsController extends Controller {
                     $val->title,
                     $val->status(),
                     '
-                        <a href="' . url('admin/news/news/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/news/news/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/digital/news/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/digital/news/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
                 ];
@@ -173,7 +173,7 @@ class NewsController extends Controller {
             $data = [
                 'title'    => 'Create New News',
                 'category' => Category::where('type', 2)->get(),
-                'content'  => 'admin.news.news_create'
+                'content'  => 'admin.master_data.digital.news_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -252,7 +252,7 @@ class NewsController extends Controller {
                 'title'    => 'Update News',
                 'news'     => $query,
                 'category' => Category::where('type', 2)->get(),
-                'content'  => 'admin.news.news_update'
+                'content'  => 'admin.master_data.digital.news_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -287,7 +287,7 @@ class NewsController extends Controller {
         $data = [
             'title'   => 'Detail News',
             'news'    => News::find($id),
-            'content' => 'admin.news.news_detail'
+            'content' => 'admin.master_data.digital.news_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

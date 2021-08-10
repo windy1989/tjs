@@ -13,8 +13,8 @@ class ImportController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Cogs Import',
-            'content' => 'admin.cogs.import'
+            'title'   => 'Import',
+            'content' => 'admin.master_data.cogs_master.import_system'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

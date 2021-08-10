@@ -1,6 +1,6 @@
 <section id="content">
    <div class="container mt-5 mb-5">
-      <p>Finding your favorite or currently needed product is made easier with the presence of various features such as through the Search and Category & Brand selection feature at smartmarbleandbath.com. Choose your favorite brand. Click on the product to go to the product detail page. Click the "Add to cart" button, go to the shopping cart page, click "Checkout", then select a payment method if you want to complete the transaction. Or want to find other products if you still want to shop or add products to your shopping cart.</p>
+      <p>Finding your favorite or currently needed product is made easier with the presence of various features such as through the Search ( magnifier icon on the top right homepage ) and Category & Brand selection feature at <a href="{{ url('/') }}" class="text-primary">smartmarbleandbath.com</a>.<br><br>Choose your favorite brand. Click on the product to go to the product detail page. Click the "Add to cart" button, go to the shopping cart page, click "Checkout", then select a payment method if you want to complete the transaction. Or want to find other products if you still want to shop or add products to your shopping cart.</p>
       <div class="divider"><i class="icon-circle"></i></div>
       <h4 class="font-weight-bold text-uppercase text-center">step-by-step details</h4>
       <ul class="testimonials-grid grid-1 grid-md-1 grid-lg-1">
@@ -12,8 +12,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">Login into your Smart Marble account. Haven't had an account? Please register in Register Here and complete your personal data.</div>
-                  <p style="font-size:14px;" class="text-muted">Login ke dalam akun Smart Marble anda. Apabila belum memiliki akun, silahkan register terlebih dahulu dan melengkapi data diri anda.</p>
+                  <div class="font-weight-bold"><a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> into your Smart Marble account. Haven't had an account? Please register in Register <a href="https://smartmarbleandbath.com/account/register" class="text-primary">Here</a> and complete your personal data.</div>
+                  <p style="font-size:14px;" class="text-muted"><a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> ke dalam akun Smart Marble anda. Apabila belum memiliki akun, silahkan register terlebih dahulu di register <a href="https://smartmarbleandbath.com/account/register" class="text-primary">here</a> dan melengkapi data diri anda.</p>
                </div>
             </div>
          </li>
@@ -38,8 +38,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">After verification, Login into your new Smart Marble Account with registed-email and password.</div>
-                  <p style="font-size:14px;" class="text-muted">Setelah verifikasi, silahkan masuk ke dalam akun Smart Marble anda dengan email dan kata sandi yang terdaftar.</p>
+                  <div class="font-weight-bold">After verification, <a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> into your new Smart Marble Account with registed-email and password.</div>
+                  <p style="font-size:14px;" class="text-muted">Setelah verifikasi, silahkan <a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> ke dalam akun Smart Marble anda dengan email dan kata sandi yang terdaftar.</p>
                </div>
             </div>
          </li>
@@ -51,8 +51,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, and pattern.</div>
-                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, dan motif.</p>
+                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, pattern, and else <a href="https://smartmarbleandbath.com/account/register" class="text-primary">here</a>.</div>
+                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, motif, dan lainnya <a href="https://smartmarbleandbath.com/account/register" class="text-primary">disini</a>.</p>
                </div>
             </div>
          </li>
@@ -64,8 +64,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, and pattern.</div>
-                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, dan motif.</p>
+                  <div class="font-weight-bold">Click the <a href="https://smartmarbleandbath.com/account/cart" class="text-primary">basket</a> in the top right corner to checkout all your product.</div>
+                  <p style="font-size:14px;" class="text-muted">Klik keranjang <a href="https://smartmarbleandbath.com/account/cart" class="text-primary">keranjang</a> di pojok kanan atas untuk membeli produk pilihan anda.</p>
                </div>
             </div>
          </li>
@@ -74,19 +74,6 @@
                <div class="testi-image">
                   <a href="javascript:void(0)">
                      <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=6">
-                  </a>
-               </div>
-               <div class="testi-content">
-                  <div class="font-weight-bold">Click the basket in the top right corner to checkout all your product.</div>
-                  <p style="font-size:14px;" class="text-muted">Klik keranjang di pojok kanan atas untuk membeli produk pilihan anda.</p>
-               </div>
-            </div>
-         </li>
-         <li class="grid-item">
-            <div class="testimonial">
-               <div class="testi-image">
-                  <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=7">
                   </a>
                </div>
                <div class="testi-content">
@@ -99,7 +86,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=8">
+                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=7">
                   </a>
                </div>
                <div class="testi-content">
@@ -112,7 +99,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=9">
+                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=8">
                   </a>
                </div>
                <div class="testi-content">
@@ -125,7 +112,7 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=10">
+                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=9">
                   </a>
                </div>
                <div class="testi-content">
@@ -138,12 +125,12 @@
             <div class="testimonial">
                <div class="testi-image">
                   <a href="javascript:void(0)">
-                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=11">
+                     <img src="https://via.placeholder.com/250/51b4ba/FFFFFF/?text=10">
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">If you need any further information, contact us on live chat. We will answer you as soon as possible.</div>
-                  <p style="font-size:14px;" class="text-muted">Jika Anda membutuhkan informasi tambahan, anda dapat menghubungi kami via live chat. Kami akan menjawab Anda secepat mungkin.</p>
+                  <div class="font-weight-bold">If you need any further information, contact us in online chat at the bottom right of page. We will answer you as soon as possible.</div>
+                  <p style="font-size:14px;" class="text-muted">Jika Anda membutuhkan informasi tambahan, anda dapat menghubungi kami via online chat di bagian kanan bawah halaman. Kami akan menjawab Anda secepat mungkin.</p>
                </div>
             </div>
          </li>

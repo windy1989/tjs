@@ -13,8 +13,8 @@ class HsCodeController extends Controller {
     public function index()
     {
         $data = [
-            'title'   => 'Master HsCode',
-            'content' => 'admin.master_data.hs_code'
+            'title'   => 'Hs Code',
+            'content' => 'admin.master_data.product.hs_code'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

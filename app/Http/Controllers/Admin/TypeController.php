@@ -29,7 +29,7 @@ class TypeController extends Controller {
             'pattern'       => Pattern::where('status', 1)->get(),
             'loading_limit' => LoadingLimit::where('status', 1)->get(),
             'unit'          => Unit::where('status', 1)->get(),
-            'content'       => 'admin.product.type'
+            'content'       => 'admin.master_data.product.product_type'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -127,7 +127,7 @@ class TypeController extends Controller {
                     $val->pattern->name,
                     $val->status(),
                     '
-                        <a href="' . url('admin/product/type/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/product/product_type/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
@@ -417,9 +417,9 @@ class TypeController extends Controller {
     public function detail($id) 
     {
         $data = [
-            'title'   => 'Detail Type',
+            'title'   => 'Detail Product Type',
             'type'    => Type::find($id),
-            'content' => 'admin.product.type_detail'
+            'content' => 'admin.master_data.product.product_type_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

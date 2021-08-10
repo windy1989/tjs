@@ -15,7 +15,7 @@ class VoucherCategoryController extends Controller {
     {
         $data = [
             'title'   => 'Voucher Category',
-            'content' => 'admin.voucher.category'
+            'content' => 'admin.master_data.voucher.category'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -81,20 +81,20 @@ class VoucherCategoryController extends Controller {
                 if($current_date < strtotime($val->start_date)) {
                     $status = 'Not Active';
                     $button = '
-                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
-                        <a href="' . url('admin/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     ';
                 } else if($current_date >= strtotime($val->start_date) && $current_date <= strtotime($val->finish_date)) {
                     $status = 'Running';
                     $button = '
-                        <a href="' . url('admin/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
-                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/category/update/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit"><i class="icon-pencil7"></i></a>
+                        <a href="' . url('admin/master_data/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 } else {
                     $status = 'Expired';
                     $button = '
-                        <a href="' . url('admin/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
+                        <a href="' . url('admin/master_data/voucher/category/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
                     ';
                 }
 
@@ -192,9 +192,9 @@ class VoucherCategoryController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Create New Voucher',
+                'title'    => 'Create New Voucher Category',
                 'category' => Category::has('type')->get(),
-                'content'  => 'admin.voucher.category_create'
+                'content'  => 'admin.master_data.voucher.category_create'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -249,10 +249,10 @@ class VoucherCategoryController extends Controller {
             }
         } else {
             $data = [
-                'title'    => 'Update Voucher',
+                'title'    => 'Update Voucher Category',
                 'category' => Category::has('type')->get(),
                 'voucher'  => $query,
-                'content'  => 'admin.voucher.category_update'
+                'content'  => 'admin.master_data.voucher.category_update'
             ];
 
             return view('admin.layouts.index', ['data' => $data]);
@@ -285,9 +285,9 @@ class VoucherCategoryController extends Controller {
     public function detail($id)
     {
         $data = [
-            'title'   => 'Detail Voucher',
+            'title'   => 'Detail Voucher Category',
             'voucher' => Voucher::find($id),
-            'content' => 'admin.voucher.category_detail'
+            'content' => 'admin.master_data.voucher.category_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
