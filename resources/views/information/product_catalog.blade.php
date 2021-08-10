@@ -9,7 +9,7 @@
                <div class="col-lg-12">
                   <div class="text-center">
                      <img src="{{ asset('website/c_company_profie.jpg') }}" style="max-width:80px;" class="img-fluid"><br>
-                     <a href="https://drive.google.com/file/d/1e6y6A_-OSRT4MfD1cnS51KlCF5jjvBI8/view?usp=sharing" target="_blank" class="btn bg-teal btn-sm">View</a>
+                     <a href="https://drive.google.com/file/d/1e6y6A_-OSRT4MfD1cnS51KlCF5jjvBI8/view?usp=sharing" target="_blank" class="btn bg-teal btn-sm mt-3">View</a>
                   </div>
                </div>
             </div>
