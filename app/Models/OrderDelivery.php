@@ -19,7 +19,7 @@ class OrderDelivery extends Model {
     public static function generateCode()
     {
         $query = OrderDelivery::selectRaw("RIGHT(delivery_order, 6) as code")
-            ->orderBy('id', 'asc')
+            ->orderByRaw('RIGHT(delivery_order, 6) DESC')
             ->limit(1)
             ->get();
 

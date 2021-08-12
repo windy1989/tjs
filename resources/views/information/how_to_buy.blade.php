@@ -51,8 +51,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, pattern, and else <a href="https://smartmarbleandbath.com/account/register" class="text-primary">here</a>.</div>
-                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, motif, dan lainnya <a href="https://smartmarbleandbath.com/account/register" class="text-primary">disini</a>.</p>
+                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, pattern, and else <a href="https://smartmarbleandbath.com/account/product" class="text-primary">here</a>.</div>
+                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, motif, dan lainnya <a href="https://smartmarbleandbath.com/account/product" class="text-primary">disini</a>.</p>
                </div>
             </div>
          </li>
@@ -77,8 +77,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">Select the payment method. You can pay at cashier or by online.</div>
-                  <p style="font-size:14px;" class="text-muted">Pilih metode pembayaran. Anda bisa membayar melalui kasir atau secara online.</p>
+                  <div class="font-weight-bold">Select the payment method. You can pay at cashier or by online by tap the optional payment at the end of payment form.</div>
+                  <p style="font-size:14px;" class="text-muted">Pilih metode pembayaran. Anda dapat membayar di kasir atau secara online dengan mengetuk pembayaran opsional di akhir formulir pembayaran.</p>
                </div>
             </div>
          </li>

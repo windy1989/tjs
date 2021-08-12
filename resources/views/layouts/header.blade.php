@@ -119,7 +119,7 @@
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-11">
+									<a href="mailto:smartmarbleandbath@gmail.com" style="text-transform:none;" class="font-weight-normal font-size-13">
 										<i class="icon-line2-envelope"></i> smartmarbleandbath@gmail.com
 									</a>
 								</li>

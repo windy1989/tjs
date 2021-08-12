@@ -46,18 +46,18 @@
             <div class="col-md-7">
                <div class="row gutter-30">
                   <div class="col-4">
-                     <a href="{{ url('product?brand=SM') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-smartmarble.jpg') }}" class="banner-grid img-fluid" alt="Smart Marble">
+                     <a href="https://drive.google.com/file/d/16bV5arT67mpgIwzyKjA2QnnLe2J_lCOW/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/c_smartmarble.jpg') }}" class="banner-grid img-fluid" alt="Smart Marble">
                      </a>
                   </div>
                   <div class="col-4">
-                     <a href="{{ url('product?brand=KH') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-treeme.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Treeme Italy">
+                     <a href="https://drive.google.com/file/d/14oM27LfTnXDhhAYOPGAgnapO2jzQ2c2d/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/c_treeme_1.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Treeme Italy">
                      </a>
                   </div>
                   <div class="col-4">
-                     <a href="{{ url('product?brand=BV') }}" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/home-top-bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Bravat">
+                     <a href="https://drive.google.com/file/d/1yuwi8KoH9NsNwgnZMv-jSN3jGFX1ZtP6/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
+                        <img src="{{ asset('website/c_bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Bravat">
                      </a>
                   </div>
                </div>
@@ -84,7 +84,7 @@
          <div class="topmargin-lg mb-4">
             <div class="card bg-light">
                <div class="card-body">
-                  <h4 class="text-uppercase mb-0">New Arrival</h4>
+                  <h4 class="text-uppercase mb-0 text-center">New Arrival</h4>
                </div>
             </div>
          </div>
@@ -172,7 +172,7 @@
          <div class="topmargin-lg mb-4">
             <div class="card bg-light">
                <div class="card-body">
-                  <h4 class="text-uppercase mb-0">Best Seller</h4>
+                  <h4 class="text-uppercase mb-0 text-center">Best Seller</h4>
                </div>
             </div>
          </div>
@@ -211,7 +211,7 @@
          <div class="topmargin-lg mb-4">
             <div class="card bg-light">
                <div class="card-body">
-                  <h4 class="text-uppercase mb-0">Specials Deals</h4>
+                  <h4 class="text-uppercase mb-0 text-center">Specials Deals</h4>
                </div>
             </div>
          </div>

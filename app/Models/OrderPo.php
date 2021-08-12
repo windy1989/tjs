@@ -20,7 +20,7 @@ class OrderPo extends Model {
     public static function generateCode()
     {
         $query = OrderPo::selectRaw("RIGHT(purchase_order, 6) as code")
-            ->orderBy('id', 'asc')
+            ->orderByRaw('RIGHT(purchase_order, 6) DESC')
             ->limit(1)
             ->get();
 

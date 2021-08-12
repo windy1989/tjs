@@ -636,7 +636,7 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              PO Project
+                              SO Project
                            </a>
                         </li>
                         <li class="nav-item">

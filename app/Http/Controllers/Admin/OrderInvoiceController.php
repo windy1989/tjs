@@ -153,8 +153,11 @@ class OrderInvoiceController extends Controller {
                 if($val->payment == 0 || $val->payment == null) {
                     $status = 'Unpaid';
                     $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Process</a>';
-                } else {
+                } else if($val->payment >= $val->grandtotal) {
                     $status = 'Full Payment';
+                    $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
+                } else {
+                    $status = 'Down Payment';
                     $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 }
 

@@ -269,7 +269,7 @@
 									<button type="button" class="cash btn btn-danger text-white col-12 font-size-14 submit_order" onclick="submitOrder('cash')" disabled>Pay At Cashier</button>
 								</div>
 								<div class="col-md-2">
-									<button type="button" class="cashless btn bg-teal text-white col-12 font-size-14 submit_order" onclick="submitOrder('cashless')" disabled>Pay Online</button>
+									<button type="button" class="cashless btn btn-success text-white col-12 font-size-14 submit_order" onclick="submitOrder('cashless')" disabled>Pay Online</button>
 								</div>
 							</div>
 						</div>

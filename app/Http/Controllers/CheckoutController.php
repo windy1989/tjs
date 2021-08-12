@@ -225,7 +225,6 @@ class CheckoutController extends Controller {
         $delivery = Delivery::where('destination_id', $city_id)
             ->where('capacity', '>=', $weight)
             ->orderBy('capacity', 'asc')
-            ->orderBy('price_per_kg', 'asc')
             ->groupBy('transport_id')
             ->get();
 

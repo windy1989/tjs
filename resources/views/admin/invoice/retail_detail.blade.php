@@ -185,10 +185,10 @@
 									<td colspan="2">
 										@if($order->payment == 0 || $order->payment == null)
 											Unpaid
-										@elseif($order->payment < $order->grandtotal)
-											Down Payment
-										@else
+										@elseif($order->payment >= $order->grandtotal)
 											Full Payment
+										@else
+											Down Payment
 										@endif
 									</td>
 								</tr>

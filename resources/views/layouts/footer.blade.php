@@ -5,7 +5,7 @@
 						<div class="col-lg-8 col-md-12">
 							<div class="widget clearfix">
 								<p class="mb-0 font-size-14">
-									Smart Marble & Bath(SMB) is a subsidiary company of Karya Modern Group. Karya Modern Group has been in tile and sanitary business for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Surabaya, East Java
+									Smart Marble & Bath (SMB) is a subsidiary company of Karya Modern Group. Karya Modern Group has been in tile and sanitary business for more than 42 Years. Karya Modern Group started as a building material store back in 1976. Our main office is located in Surabaya, East Java
 								</p><hr class="mt-4 mb-4">
 								<div class="row gutter-30">
 									<div class="col-6 col-lg-3 widget_links">
@@ -122,7 +122,7 @@
 				<div class="container">
 					<div class="row justify-content-between col-mb-30">
 						<div class="col-12 text-center">
-							Copyrights &copy; SmartMarble {{ date('Y') }} All Rights Reserved. Powered by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
+							&copy; SmartMarble {{ date('Y') }} All Rights Reserved. Powered by <a href="https://hirosolution.com" target="_blank" class="text-dark">Hirosolution.com</a>
 						</div>
 						<div class="col-12">
 							<center>
