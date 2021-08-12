@@ -3,9 +3,9 @@
       <div class="container clearfix">
          <form method="GET" class="mt-0" action="{{ url('product') }}">
             <div class="row gutter-50 justify-content-center col-mb-80">
-               <div class="postcontent col-lg-9 order-lg-last">
+               <div class="postcontent col-lg-12 order-lg-last">
                   <div class="row mb-3">
-                     <div class="col-md-4 d-none d-xl-block">
+                     <div class="col-md-3 d-none d-xl-block">
                         <div class="form-group row no-gutters">
                            <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Show</label>
                            <div class="col-9">
@@ -18,7 +18,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-4 d-none d-xl-block">
+                     <div class="col-md-3 d-none d-xl-block">
                         <div class="form-group row no-gutters">
                            <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Stock</label>
                            <div class="col-9">
@@ -30,7 +30,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-4 d-none d-xl-block">
+                     <div class="col-md-3 d-none d-xl-block">
                         <div class="form-group row no-gutters">
                            <label class="col-3 col-form-label font-size-13" style="text-transform: capitalize;">Sort</label>
                            <div class="col-9">
@@ -43,8 +43,12 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-12 d-xl-none">
-                        <button type="button" id="side-panel-filter-trigger" class="button button-small bg-teal col-12 font-size-14 mb-2"><i class="icon-list"></i> Filter</button>
+                     <div class="col-md-3 col-12">
+                        <div class="form-group row no-gutters">
+                           <div class="col-12">
+                              <button type="button" id="side-panel-filter-trigger" style="height:33px; border-radius:0;" class="btn bg-teal col-12 font-size-13"><i class="icon-list"></i> Filter</button>
+                           </div>
+                        </div>
                      </div>
                      <div class="col-12 text-center">
                         @if($filter['other']['search'])
@@ -56,7 +60,7 @@
                   @if($product->count() > 0)
                      <div id="shop" class="shop row grid-container gutter-30">
                         @foreach($product as $p)
-                           <div class="product col-lg-4 col-md-4 col-6 mb-4">
+                           <div class="product col-lg-3 col-md-3 col-6 mb-4">
                               <div class="grid-inner border">
                                  <div class="product-image">
                                     <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}">
@@ -87,144 +91,6 @@
                   @endif
                   {{ $product->withQueryString()->onEachSide(1)->links('pagination') }}
                </div>
-               <div class="sidebar col-lg-3 d-none d-xl-block">
-                  <div class="sidebar-widgets-wrap">
-                     <div class="clearfix">
-                        <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Find ...">
-                        <button type="submit" onclick="clickFilter(this)" class="button button-small button-3d bg-teal col-12 mt-2 font-size-11 m-0">Search</button>
-                        <a href="{{ url('product') }}" class="button button-small button-3d button-red text-center col-12 mt-2 font-size-11 m-0">Reset</a>
-                     </div>
-                     <div class="form-group"><hr></div>
-                     <div class="accordion accordion-border" data-collapsible="true">
-                        <div class="accordion-header">
-                           <div class="accordion-icon">
-                              <i class="accordion-closed icon-line-plus"></i>
-                              <i class="accordion-open icon-line-minus"></i>
-                           </div>
-                           <div class="accordion-title">
-                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
-                           </div>
-                        </div>
-                        <div class="accordion-content">
-                           <ul class="sidebar-filter-product mb-0">
-                              @foreach($brand as $b)
-                                 <li>
-                                    <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="brand[]" id="{{ $b->code }}" value="{{ $b->code }}" onchange="clickFilter(this)" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $b->code }}">{{ $b->name }}</label>
-                                    </div>
-                                 </li>
-                              @endforeach
-                           </ul>
-                        </div>
-                     </div>
-                     @foreach($category as $c)
-                        <div class="accordion accordion-border" data-collapsible="true">
-                           <div class="accordion-header">
-                              <div class="accordion-icon">
-                                 <i class="accordion-closed icon-line-plus"></i>
-                                 <i class="accordion-open icon-line-minus"></i>
-                              </div>
-                              <div class="accordion-title">
-                                 <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
-                              </div>
-                           </div>
-                           <div class="accordion-content">
-                              <ul class="sidebar-filter-product mb-0">
-                                 @foreach($c->sub() as $s)
-                                    @if($s->sub()->count() > 0)
-                                       @foreach($s->sub() as $val)
-                                          <li>
-                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" name="category[]" id="{{ $val->slug }}" value="{{ $val->slug }}" onchange="clickFilter(this)" {{ in_array($val->slug, $filter['category']) ? 'checked' : '' }}>
-                                                <label class="form-check-label font-weight-normal font-size-11" for="{{ $val->slug }}">{{ $val->name }}</label>
-                                             </div>
-                                          </li>
-                                       @endforeach
-                                    @else
-                                       <li>
-                                          <div class="form-check">
-                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s->slug }}" value="{{ $s->slug }}" onchange="clickFilter(this)" {{ in_array($s->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->slug }}">{{ $s->name }}</label>
-                                          </div>
-                                       </li>
-                                    @endif
-                                 @endforeach
-                              </ul>
-                           </div>
-                        </div>
-                     @endforeach
-                     <div class="accordion accordion-border" data-collapsible="true">
-                        <div class="accordion-header">
-                           <div class="accordion-icon">
-                              <i class="accordion-closed icon-line-plus"></i>
-                              <i class="accordion-open icon-line-minus"></i>
-                           </div>
-                           <div class="accordion-title">
-                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
-                           </div>
-                        </div>
-                        <div class="accordion-content">
-                           <ul class="sidebar-filter-product mb-0">
-                              @foreach($size as $s)
-                                 <li>
-                                    <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="size[]" id="{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" onchange="clickFilter(this)" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
-                                    </div>
-                                 </li>
-                              @endforeach
-                           </ul>
-                        </div>
-                     </div>
-                     <div class="accordion accordion-border" data-collapsible="true">
-                        <div class="accordion-header">
-                           <div class="accordion-icon">
-                              <i class="accordion-closed icon-line-plus"></i>
-                              <i class="accordion-open icon-line-minus"></i>
-                           </div>
-                           <div class="accordion-title">
-                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
-                           </div>
-                        </div>
-                        <div class="accordion-content">
-                           <ul class="sidebar-filter-product mb-0">
-                              @foreach($color as $c)
-                                 <li>
-                                    <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="color[]" id="{{ $c->code }}" value="{{ $c->code }}" onchange="clickFilter(this)" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $c->code }}">{{ $c->name }}</label>
-                                    </div>
-                                 </li>
-                              @endforeach
-                           </ul>
-                        </div>
-                     </div>
-                     <div class="accordion accordion-border" data-collapsible="true">
-                        <div class="accordion-header">
-                           <div class="accordion-icon">
-                              <i class="accordion-closed icon-line-plus"></i>
-                              <i class="accordion-open icon-line-minus"></i>
-                           </div>
-                           <div class="accordion-title">
-                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
-                           </div>
-                        </div>
-                        <div class="accordion-content">
-                           <ul class="sidebar-filter-product mb-0">
-                              @foreach($pattern as $p)
-                                 <li>
-                                    <div class="form-check">
-                                       <input type="checkbox" class="form-check-input" name="pattern[]" id="{{ $p->code }}" value="{{ $p->code }}" onchange="clickFilter(this)" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                       <label class="form-check-label font-weight-normal font-size-11" for="{{ $p->code }}">{{ $p->name }}</label>
-                                    </div>
-                                 </li>
-                              @endforeach
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
             </div>
          </form>
       </div>
@@ -242,17 +108,17 @@
                      <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
                   </div>
                   <div class="form-group"><hr></div>
-                  <div class="accordion accordion-border" data-collapsible="true">
-                     <div class="accordion-header">
-                        <div class="accordion-icon">
-                           <i class="accordion-closed icon-line-plus"></i>
-                           <i class="accordion-open icon-line-minus"></i>
+                  <div class="toggle toggle-border">
+                     <div class="toggle-header">
+                        <div class="toggle-icon">
+                           <i class="toggle-closed icon-line-plus"></i>
+                           <i class="toggle-open icon-line-minus"></i>
                         </div>
-                        <div class="accordion-title">
+                        <div class="toggle-title">
                            <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
                         </div>
                      </div>
-                     <div class="accordion-content">
+                     <div class="toggle-content">
                         <ul class="sidebar-filter-product mb-0">
                            @foreach($brand as $b)
                               <li>
@@ -266,17 +132,17 @@
                      </div>
                   </div>
                   @foreach($category as $c)
-                     <div class="accordion accordion-border" data-collapsible="true">
-                        <div class="accordion-header">
-                           <div class="accordion-icon">
-                              <i class="accordion-closed icon-line-plus"></i>
-                              <i class="accordion-open icon-line-minus"></i>
+                     <div class="toggle toggle-border">
+                        <div class="toggle-header">
+                           <div class="toggle-icon">
+                              <i class="toggle-closed icon-line-plus"></i>
+                              <i class="toggle-open icon-line-minus"></i>
                            </div>
-                           <div class="accordion-title">
+                           <div class="toggle-title">
                               <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
                            </div>
                         </div>
-                        <div class="accordion-content">
+                        <div class="toggle-content">
                            <ul class="sidebar-filter-product mb-0">
                               @foreach($c->sub() as $s)
                                  @if($s->sub()->count() > 0)
@@ -301,17 +167,17 @@
                         </div>
                      </div>
                   @endforeach
-                  <div class="accordion accordion-border" data-collapsible="true">
-                     <div class="accordion-header">
-                        <div class="accordion-icon">
-                           <i class="accordion-closed icon-line-plus"></i>
-                           <i class="accordion-open icon-line-minus"></i>
+                  <div class="toggle toggle-border">
+                     <div class="toggle-header">
+                        <div class="toggle-icon">
+                           <i class="toggle-closed icon-line-plus"></i>
+                           <i class="toggle-open icon-line-minus"></i>
                         </div>
-                        <div class="accordion-title">
+                        <div class="toggle-title">
                            <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
                         </div>
                      </div>
-                     <div class="accordion-content">
+                     <div class="toggle-content">
                         <ul class="sidebar-filter-product mb-0">
                            @foreach($size as $s)
                               <li>
@@ -324,17 +190,17 @@
                         </ul>
                      </div>
                   </div>
-                  <div class="accordion accordion-border" data-collapsible="true">
-                     <div class="accordion-header">
-                        <div class="accordion-icon">
-                           <i class="accordion-closed icon-line-plus"></i>
-                           <i class="accordion-open icon-line-minus"></i>
+                  <div class="toggle toggle-border">
+                     <div class="toggle-header">
+                        <div class="toggle-icon">
+                           <i class="toggle-closed icon-line-plus"></i>
+                           <i class="toggle-open icon-line-minus"></i>
                         </div>
-                        <div class="accordion-title">
+                        <div class="toggle-title">
                            <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
                         </div>
                      </div>
-                     <div class="accordion-content">
+                     <div class="toggle-content">
                         <ul class="sidebar-filter-product mb-0">
                            @foreach($color as $c)
                               <li>
@@ -347,17 +213,17 @@
                         </ul>
                      </div>
                   </div>
-                  <div class="accordion accordion-border" data-collapsible="true">
-                     <div class="accordion-header">
-                        <div class="accordion-icon">
-                           <i class="accordion-closed icon-line-plus"></i>
-                           <i class="accordion-open icon-line-minus"></i>
+                  <div class="toggle toggle-border">
+                     <div class="toggle-header">
+                        <div class="toggle-icon">
+                           <i class="toggle-closed icon-line-plus"></i>
+                           <i class="toggle-open icon-line-minus"></i>
                         </div>
-                        <div class="accordion-title">
+                        <div class="toggle-title">
                            <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
                         </div>
                      </div>
-                     <div class="accordion-content">
+                     <div class="toggle-content">
                         <ul class="sidebar-filter-product mb-0">
                            @foreach($pattern as $p)
                               <li>
