@@ -32,8 +32,8 @@ class AppServiceProvider extends ServiceProvider
         date_default_timezone_set('Asia/Jakarta');
         config(['app.locale' => 'id']);
         Paginator::useBootstrap();
-        // Xendit::setApiKey('xnd_production_H9vYVjHQg6nzYYCtY47tU3SAvoayRoTKQw5NnKNnXk0h2hzQXcaqL66Sd8D8y');
-        Xendit::setApiKey('xnd_development_YgsZZQ4o5XoZBBgF0EROorc0Lodit00TIZflitcCaeiWzwcGaYs1bCjJkEQeJ9');
+        Xendit::setApiKey('xnd_production_H9vYVjHQg6nzYYCtY47tU3SAvoayRoTKQw5NnKNnXk0h2hzQXcaqL66Sd8D8y');
+        // Xendit::setApiKey('xnd_development_YgsZZQ4o5XoZBBgF0EROorc0Lodit00TIZflitcCaeiWzwcGaYs1bCjJkEQeJ9');
 
         Relation::morphMap([
             'projects'   => 'App\Models\Project',
