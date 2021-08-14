@@ -34,6 +34,7 @@ class OrderInvoiceController extends Controller {
             'invoice',
             'payment',
             'grandtotal',
+            'change',
             'status',
             'created_at'
         ];
@@ -161,12 +162,19 @@ class OrderInvoiceController extends Controller {
                     $btn    = '<a href="' . url('admin/invoice/retail/detail/' . $val->id) . '" class="btn bg-success btn-sm"><i class="icon-check"></i> View</a>';
                 }
 
+                if($val->payment > $val->grandtotal) {
+                    $change = $val->payment - $val->grandtotal;
+                } else {
+                    $change = 0;
+                }
+
                 $response['data'][] = [
                     $nomor,
                     $val->customer->name,
                     $val->invoice,
                     'Rp ' . number_format($val->payment, 0, ',', '.'),
                     'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
+                    'Rp ' . number_format($val->change, 0, ',', '.'),
                     $status,
                     date('d F Y', strtotime($val->created_at)),
                     $btn

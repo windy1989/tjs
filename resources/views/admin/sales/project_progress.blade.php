@@ -15,7 +15,7 @@
 			</div>
          <div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/data/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/sales/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -26,7 +26,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Data</a>
-					<a href="{{ url('admin/data/project') }}" class="breadcrumb-item">Project</a>
+					<a href="{{ url('admin/sales/project') }}" class="breadcrumb-item">Project</a>
 					<span class="breadcrumb-item active">Detail</span>
 				</div>
 			</div>
@@ -656,7 +656,7 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Performance Invoice
+                              Proforma Invoice
                            </a>
                         </li>
                         <li class="nav-item">
@@ -761,7 +761,7 @@
 
       if(id.val()) {
          $.ajax({
-            url: '{{ url("admin/data/project/get_product") }}',
+            url: '{{ url("admin/sales/project/get_product") }}',
             type: 'GET',
             dataType: 'JSON',
             data: {
@@ -846,7 +846,7 @@
 
       if(sample_product_id.val() && sample_date.val() && sample_qty.val() && sample_size.val()) {
          $.ajax({
-            url: '{{ url("admin/data/project/get_product") }}',
+            url: '{{ url("admin/sales/project/get_product") }}',
             type: 'GET',
             dataType: 'JSON',
             data: {

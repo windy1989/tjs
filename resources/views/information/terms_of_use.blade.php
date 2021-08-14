@@ -13,10 +13,10 @@
       <br><br>
       User has the right to get the appropriate goods/products and has been fully paid for by the user, and cannot be returned or canceled by the user if it's not in accordance with the terms. 
       <br><br>
-      User agrees that if there is an error in the promo information on this site, then Smartmarbleandbath.com has absolute right to cancel the purchase of goods by the User, or continue to follow up on the process of buying goods made by the User, by making adjustments/ necessary corrections due to errors in the promo information.</p>
+      User agrees that if there is an error in the promo information on this site, then Smartmarbleandbath.com has absolute right to cancel the purchase of goods by the User, or continue to follow up on the process of buying goods made by the User, by making adjustments / necessary corrections due to errors in the promo information.</p>
       <div class="divider"><i class="icon-circle"></i></div>
       <h5 class="font-weight-bold text-uppercase">Registered User</h5>
-      <p>This site are open for public, but certain components, content, sections and features are only available to individuals who officially registed on this website and create User Accounts. 
+      <p>This site are open for public, but certain components, content, sections and features are only available to individuals who officially register on this website and create User Accounts. 
       <br><br>
       "Registered User" is an individual who provides "Personal Information" to the Smartmarbleandbath.com through registration process, and given the authority to carry out purchasing activities. 
       <br><br>

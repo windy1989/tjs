@@ -471,7 +471,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
-        Route::prefix('data')->group(function() {
+        Route::prefix('sales')->group(function() {
             Route::prefix('project')->group(function() {
                 Route::get('/', 'ProjectController@index');
                 Route::get('datatable', 'ProjectController@datatable');

@@ -34,7 +34,7 @@
             @else
                <div class="entry col-12">
                   <div class="text-center">
-                     <div class="alert alert-warning">Career not found</div>
+                     <div class="alert alert-warning">No Career Available</div>
                   </div>
                </div>
             @endif

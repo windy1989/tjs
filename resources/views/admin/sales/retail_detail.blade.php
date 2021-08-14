@@ -9,7 +9,7 @@
 			</div>
 			<div class="header-elements">
 				<div class="d-flex justify-content-center">
-					<a href="{{ url('admin/data/retail') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
+					<a href="{{ url('admin/sales/retail') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
 					</a>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="breadcrumb">
 					<a href="{{ url('admin/dashboard') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Dashboard</a>
 					<a href="javascript:void(0);" class="breadcrumb-item">Data</a>
-					<a href="{{ url('admin/data/retail') }}" class="breadcrumb-item">Retail</a>
+					<a href="{{ url('admin/sales/retail') }}" class="breadcrumb-item">Retail</a>
 					<span class="breadcrumb-item active">Detail</span>
 				</div>
 			</div>

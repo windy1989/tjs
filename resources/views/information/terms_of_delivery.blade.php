@@ -10,6 +10,6 @@
       <p>You can find out the delivery status from order column, The order status will be change into "order in delivery", if it has been processed.</p>
       <div class="divider"><i class="icon-circle"></i></div>
       <h5 class="font-weight-bold text-uppercase">Receipt of Goods</h5>
-      <p>What if the goods arrive when no one is there? You will be contacted by the logistics service, and the logistics service will do re-delivery process. if the order is wrong or broken, please contact our hotline in contact us.</p>
+      <p>What if the goods arrive when no one is there? You will be contacted by the logistics service, and the logistics service will do re-delivery process. If the order is wrong or broken, please contact our hotline in contact us.</p>
    </div>
 </section>

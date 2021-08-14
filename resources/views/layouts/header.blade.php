@@ -109,13 +109,13 @@
 						<div class="top-links on-click">
 							<ul class="top-links-container">
 								<li class="top-links-item">
-									<a href="tel:082131972353" style="text-transform:none;" class="font-weight-normal font-size-11">
-										<i class="icon-line-phone"></i> 082131972353
+									<a href="tel:0315477501" style="text-transform:none;" class="font-weight-normal font-size-12">
+										<i class="icon-line-phone"></i> Hotline (031) 5477501
 									</a>
 								</li>
 								<li class="top-links-item">
-									<a href="https://wa.me/0315477501" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-11">
-										<i class="icon-whatsapp"></i> (031) 5477501
+									<a href="https://wa.me/082131972353" target="_blank" style="text-transform:none;" class="font-weight-normal font-size-12">
+										<i class="icon-whatsapp"></i> 082131972353
 									</a>
 								</li>
 								<li class="top-links-item">
@@ -128,7 +128,7 @@
 					</div>
 					<div class="col-12 col-md-auto">
 						<p class="mb-0 py-2 text-center text-md-left">
-							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="font-size-11 text-dark" style="text-transform:none;">
+							<a href="https://www.google.co.id/maps/place/smartmarbleandbath/@-7.2518882,112.7338775,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd7f9699d672725:0x38ff0a5b6a1722a4!8m2!3d-7.2518978!4d112.736106" target="_blank" class="font-size-13 text-dark" style="text-transform:none;">
 								<marquee width="80%" behavior="scroll" direction="left" height="36%">
 									Open Every Monday - Saturday, 08.30 - 17.00 WIB
 								</marquee>

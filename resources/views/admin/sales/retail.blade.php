@@ -148,7 +148,7 @@
          iDisplayInLength: 10,
          order: [[4, 'desc']],
          ajax: {
-            url: '{{ url("admin/data/retail/datatable") }}',
+            url: '{{ url("admin/sales/retail/datatable") }}',
             type: 'GET',
             data: {
                customer_id: $('#filter_customer_id').val(),

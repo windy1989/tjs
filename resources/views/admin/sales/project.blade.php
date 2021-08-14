@@ -199,7 +199,7 @@
          iDisplayInLength: 10,
          order: [[0, 'asc']],
          ajax: {
-            url: '{{ url("admin/data/project/datatable") }}',
+            url: '{{ url("admin/sales/project/datatable") }}',
             type: 'GET',
             data: {
                status: $('#filter_status').val()
@@ -232,7 +232,7 @@
 
    function create() {
       $.ajax({
-         url: '{{ url("admin/data/project/create") }}',
+         url: '{{ url("admin/sales/project/create") }}',
          type: 'POST',
          dataType: 'JSON',
          data: $('#form_data').serialize(),

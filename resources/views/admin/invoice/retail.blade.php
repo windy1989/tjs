@@ -108,6 +108,7 @@
                         <th>Code</th>
                         <th>Payment</th>
                         <th>Grandtotal</th>
+                        <th>Change</th>
                         <th>Status</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -171,6 +172,7 @@
             { name: 'invoice', className: 'text-center nowrap align-middle' },
             { name: 'payment', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'grandtotal', searchable: false, className: 'text-center nowrap align-middle' },
+            { name: 'change', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'status', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'created_at', searchable: false, className: 'text-center nowrap align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }

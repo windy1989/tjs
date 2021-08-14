@@ -47,17 +47,17 @@
                <div class="row gutter-30">
                   <div class="col-4">
                      <a href="https://drive.google.com/file/d/16bV5arT67mpgIwzyKjA2QnnLe2J_lCOW/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/c_smartmarble.jpg') }}" class="banner-grid img-fluid" alt="Smart Marble">
+                        <img src="{{ asset('website/c_smartmarble.jpg') }}" style="max-width:200px;" class="banner-grid img-fluid" alt="Smart Marble">
                      </a>
                   </div>
                   <div class="col-4">
                      <a href="https://drive.google.com/file/d/14oM27LfTnXDhhAYOPGAgnapO2jzQ2c2d/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/c_treeme_1.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Treeme Italy">
+                        <img src="{{ asset('website/c_treeme_1.jpg') }}" style="background-position:center top; max-width:200px;" class="banner-grid img-fluid" alt="Treeme Italy">
                      </a>
                   </div>
                   <div class="col-4">
                      <a href="https://drive.google.com/file/d/1yuwi8KoH9NsNwgnZMv-jSN3jGFX1ZtP6/view?usp=sharing" target="_blank" class="grid-inner d-block text-center">
-                        <img src="{{ asset('website/c_bravat.jpg') }}" style="background-position: center top;" class="banner-grid img-fluid" alt="Bravat">
+                        <img src="{{ asset('website/c_bravat.jpg') }}" style="background-position:center top; max-width:200px;" class="banner-grid img-fluid" alt="Bravat">
                      </a>
                   </div>
                </div>

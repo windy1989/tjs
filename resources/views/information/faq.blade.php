@@ -32,14 +32,14 @@
                   <h3 id="faq-2"><strong>Q.</strong> What's the difference between "Pay on Cashier" and "Pay Online"?</h3>
                   <p>If you choose to "pay at the cashier", you can pay for your order in cash at our first showroom on Baliwerti St. No. 119-121, Alun-Alun Contong, Bubutan, Surabaya or our second showroom on Tomang Raya St. No. 28-30, Grogol Petamburan, DKI Jakarta, by showing the barcode given after checking out the product.
                   <br><br>
-                  If you choose to "pay by online", you can pay by bank transfer, retail outlets (alfamart and indomart), and e-wallet (OVO, Dana, Shopee Pay)
+                  If you choose to "pay by online", you can pay by bank transfer, barcode scan (QRIS), and e-wallet (OVO, Dana, Shopee Pay)
                   </p>
                   <div class="divider divider-right"><a href="#" data-scrollto="#faqs-list"><i class="icon-chevron-up"></i></a></div>
                   <h3 id="faq-3"><strong>Q.</strong> How to check the availability of product?</h3>
-                  <p>You can see product stock in the product detail, or click "see detail" to consider the shade and availability of your product.</p>
+                  <p>You can see product stock in the product detail, or click "see detail" under "quantity button" to consider the shade and availability of your product.</p>
                   <div class="divider divider-right"><a href="#" data-scrollto="#faqs-list"><i class="icon-chevron-up"></i></a></div>
                   <h3 id="faq-4"><strong>Q.</strong> How if we want to buy in large quantities through website?</h3>
-                  <p>You can contact our customer service to get special deals by entering the room chat on the bottom right of our website.</p>
+                  <p>You can contact our customer service to get special deals by entering the online chat on the bottom right of our website.</p>
                </div>
             </div>
          </div>

@@ -12,8 +12,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold"><a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> into your Smart Marble account. Haven't had an account? Please register in Register <a href="https://smartmarbleandbath.com/account/register" class="text-primary">Here</a> and complete your personal data.</div>
-                  <p style="font-size:14px;" class="text-muted"><a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> ke dalam akun Smart Marble anda. Apabila belum memiliki akun, silahkan register terlebih dahulu di register <a href="https://smartmarbleandbath.com/account/register" class="text-primary">here</a> dan melengkapi data diri anda.</p>
+                  <div class="font-weight-bold"><a href="{{ url('account/login') }}" class="text-primary">Login</a> into your Smart Marble account. Haven't had an account? Please register in Register <a href="{{ url('account/register') }}" class="text-primary">Here</a> and complete your personal data.</div>
+                  <p style="font-size:14px;" class="text-muted"><a href="{{ url('account/login') }}" class="text-primary">Login</a> ke dalam akun Smart Marble anda. Apabila belum memiliki akun, silahkan register terlebih dahulu di register <a href="{{ url('account/register') }}" class="text-primary">here</a> dan melengkapi data diri anda.</p>
                </div>
             </div>
          </li>
@@ -38,8 +38,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">After verification, <a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> into your new Smart Marble Account with registed-email and password.</div>
-                  <p style="font-size:14px;" class="text-muted">Setelah verifikasi, silahkan <a href="https://smartmarbleandbath.com/account/login" class="text-primary">Login</a> ke dalam akun Smart Marble anda dengan email dan kata sandi yang terdaftar.</p>
+                  <div class="font-weight-bold">After verification, <a href="{{ url('account/login') }}" class="text-primary">Login</a> into your new Smart Marble Account with registed-email and password.</div>
+                  <p style="font-size:14px;" class="text-muted">Setelah verifikasi, silahkan <a href="{{ url('account/login') }}" class="text-primary">Login</a> ke dalam akun Smart Marble anda dengan email dan kata sandi yang terdaftar.</p>
                </div>
             </div>
          </li>
@@ -51,8 +51,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, pattern, and else <a href="https://smartmarbleandbath.com/account/product" class="text-primary">here</a>.</div>
-                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, motif, dan lainnya <a href="https://smartmarbleandbath.com/account/product" class="text-primary">disini</a>.</p>
+                  <div class="font-weight-bold">You can find the product you want by category, brand, size, color, pattern, and else <a href="{{ url('product') }}" class="text-primary">here</a>.</div>
+                  <p style="font-size:14px;" class="text-muted">Anda dapat mencari produk berdasarkan kategori, merk, ukuran, warna, motif, dan lainnya <a href="{{ url('product') }}" class="text-primary">disini</a>.</p>
                </div>
             </div>
          </li>
@@ -64,8 +64,8 @@
                   </a>
                </div>
                <div class="testi-content">
-                  <div class="font-weight-bold">Click the <a href="https://smartmarbleandbath.com/account/cart" class="text-primary">basket</a> in the top right corner to checkout all your product.</div>
-                  <p style="font-size:14px;" class="text-muted">Klik keranjang <a href="https://smartmarbleandbath.com/account/cart" class="text-primary">keranjang</a> di pojok kanan atas untuk membeli produk pilihan anda.</p>
+                  <div class="font-weight-bold">Click the <a href="{{ url('account/cart') }}" class="text-primary">basket</a> in the top right corner to checkout all your product.</div>
+                  <p style="font-size:14px;" class="text-muted">Klik keranjang <a href="{{ url('account/cart') }}" class="text-primary">keranjang</a> di pojok kanan atas untuk membeli produk pilihan anda.</p>
                </div>
             </div>
          </li>

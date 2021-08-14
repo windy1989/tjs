@@ -15,7 +15,7 @@ class OrderController extends Controller {
         $data = [
             'title'    => 'Data Retail',
             'customer' => Customer::whereNotNull('verification')->get(),
-            'content'  => 'admin.data.retail'
+            'content'  => 'admin.sales.retail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
@@ -151,7 +151,7 @@ class OrderController extends Controller {
                     $val->type(),
                     $val->status(),
                     '
-                        <a href="' . url('admin/data/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
+                        <a href="' . url('admin/sales/retail/detail/' . $val->id) . '" class="btn bg-info btn-sm"><i class="icon-info22"></i> Detail</a>
                     '
                 ];
 
@@ -194,7 +194,7 @@ class OrderController extends Controller {
         $data  = [
             'title'   => 'Detail Data Retail',
             'order'   => $order,
-            'content' => 'admin.data.retail_detail'
+            'content' => 'admin.sales.retail_detail'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);

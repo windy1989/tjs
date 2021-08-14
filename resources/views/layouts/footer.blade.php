@@ -96,7 +96,7 @@
 											<a href="{{ url('information/store') }}" class="text-primary font-size-12">View All Store</a>
 											<div class="row justify-content-center mt-3 col-mb-30">
 												<div class="col-12 text-center">
-													<a href="https://www.facebook.com/SmartMarble-and-Bath-102164961856844/" target="_blank" class="social-icon si-small si-borderless si-facebook mb-0 inline-block">
+													<a href="https://www.facebook.com/smartmarbleandbath" target="_blank" class="social-icon si-small si-borderless si-facebook mb-0 inline-block">
 														<i class="icon-facebook"></i>
 														<i class="icon-facebook"></i>
 													</a>
