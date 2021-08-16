@@ -41,7 +41,7 @@
                            <div class="col-lg-9">
                               <div class="input-group" id="show_password">
                                  <input type="password" name="password" id="password" class="form-control font-size-13 no-outline" placeholder="Enter password" required>
-                                 <div class="input-group-append" style="height:32px;">
+                                 <div class="input-group-append" style="height:33px;">
                                     <span class="input-group-text">
                                        <a href="javascript:void(0);" aria-hidden="true">
                                           <i class="icon-eye-slash"></i>

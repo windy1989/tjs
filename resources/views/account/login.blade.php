@@ -49,7 +49,7 @@
                               <label class="font-size-13">Password :</label>
                               <div class="input-group" id="show_password">
                                  <input type="password" name="password" id="password" class="form-control font-size-13 no-outline" placeholder="Enter password">
-                                 <div class="input-group-append" style="height:38px;">
+                                 <div class="input-group-append" style="height:33px;">
                                     <span class="input-group-text">
                                        <a href="javascript:void(0);" aria-hidden="true">
                                           <i class="icon-eye-slash"></i>
