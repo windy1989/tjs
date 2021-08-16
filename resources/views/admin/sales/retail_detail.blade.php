@@ -69,9 +69,9 @@
 													<img width="64" height="64" src="{{ $od->product->type->image() }}" class="img-fluid img-thumbnail">
 												</td>
 												<td class="align-middle">{{ $od->product->name() }}</td>
-												<td class="align-middle text-center">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
+												<td class="align-middle text-center">Rp {{ number_format($od->price_list, 2, ',', '.') }}</td>
 												<td class="align-middle text-center">x{{ $od->qty }}</td>
-												<td class="align-middle text-center">Rp {{ number_format($od->total, 0, ',', '.') }}</td>
+												<td class="align-middle text-center">Rp {{ number_format($od->total, 2, ',', '.') }}</td>
 											</tr>
 										@endforeach
 									</tbody>
@@ -197,15 +197,15 @@
 										</tr>
 										<tr>
 											<th width="20%">Minimum Order</th>
-											<td><b>:</b> Rp {{ number_format($order->voucher->minimum, 0, ',', '.') }}</td>
+											<td><b>:</b> Rp {{ number_format($order->voucher->minimum, 2, ',', '.') }}</td>
 										</tr>
 										<tr>
 											<th width="20%">Maximum Order</th>
-											<td><b>:</b> Rp {{ number_format($order->voucher->maximum, 0, ',', '.') }}</td>
+											<td><b>:</b> Rp {{ number_format($order->voucher->maximum, 2, ',', '.') }}</td>
 										</tr>
 										<tr>
 											<th width="20%">Cashback</th>
-											<td><b>:</b> {{ number_format($order->voucher->points, 0, ',', '.') }} Points</td>
+											<td><b>:</b> {{ number_format($order->voucher->points, 2, ',', '.') }} Points</td>
 										</tr>
 									</tbody>
 								</table>
@@ -232,25 +232,25 @@
 									@endif
 									<tr>
 										<th width="20%">Subtotal</th>
-										<td><b>:</b>  Rp {{ number_format($order->subtotal, 0, ',', '.') }}</td>
+										<td><b>:</b>  Rp {{ number_format($order->subtotal, 2, ',', '.') }}</td>
 									</tr>
 									<tr>
 										<th width="20%">Discount</th>
-										<td><b>:</b> - Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
+										<td><b>:</b> - Rp {{ number_format($order->discount, 2, ',', '.') }}</td>
 									</tr>
 									@if($order->points)
 										<tr>
 											<th width="20%">Redeem Points</th>
-											<td><b>:</b> - {{ number_format($order->points, 0, ',', '.') }}</td>
+											<td><b>:</b> - {{ number_format($order->points, 2, ',', '.') }}</td>
 										</tr>
 									@endif
 									<tr>
 										<th width="20%">Shipping</th>
-										<td><b>:</b> Rp {{ number_format($order->shipping, 0, ',', '.') }}</td>
+										<td><b>:</b> Rp {{ number_format($order->shipping, 2, ',', '.') }}</td>
 									</tr>
 									<tr>
 										<th width="20%">Total</th>
-										<td style="font-size:20px;"><b>:</b> Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</td>
+										<td style="font-size:20px;"><b>:</b> Rp {{ number_format($order->grandtotal, 2, ',', '.') }}</td>
 									</tr>
 								</tbody>
 							</table>

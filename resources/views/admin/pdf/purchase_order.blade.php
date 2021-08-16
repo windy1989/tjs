@@ -237,12 +237,12 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($od->bottom_price, 0, ',', '.') }}
+									Rp {{ number_format($od->bottom_price, 2, ',', '.') }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($od->bottom_price * $od->qty, 0, ',', '.') }}
+									Rp {{ number_format($od->bottom_price * $od->qty, 2, ',', '.') }}
 								</center>
 							</td>
 						</tr>
@@ -251,20 +251,20 @@
 				<tfoot>
 					<tr>
 						<th colspan="4" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty'), 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty'), 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($shipping, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($shipping, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">DISCOUNT</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($discount, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($discount, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">TOTAL</th>
 						<th colspan="2" style="text-align:left;">
-							Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $purchase_order->order->shipping, 0, ',', '.') }}
+							Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $purchase_order->order->shipping, 2, ',', '.') }}
 						</th>
 					</tr>
 				</tfoot>

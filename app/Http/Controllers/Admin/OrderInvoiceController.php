@@ -172,9 +172,9 @@ class OrderInvoiceController extends Controller {
                     $nomor,
                     $val->customer->name,
                     $val->invoice,
-                    'Rp ' . number_format($val->payment, 0, ',', '.'),
-                    'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
-                    'Rp ' . number_format($val->change, 0, ',', '.'),
+                    'Rp ' . number_format($val->payment, 2, ',', '.'),
+                    'Rp ' . number_format($val->grandtotal, 2, ',', '.'),
+                    'Rp ' . number_format($val->change, 2, ',', '.'),
                     $status,
                     date('d F Y', strtotime($val->created_at)),
                     $btn

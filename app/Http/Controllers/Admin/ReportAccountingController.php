@@ -204,10 +204,10 @@ class ReportAccountingController extends Controller {
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $val->name,
-                    number_format($beginning_total, 0, ',', '.'),
-                    number_format($ending_debit, 0, ',', '.'),
-                    number_format($ending_credit, 0, ',', '.'),
-                    number_format($beginning_total + $ending_total, 0, ',', '.')
+                    number_format($beginning_total, 2, ',', '.'),
+                    number_format($ending_debit, 2, ',', '.'),
+                    number_format($ending_credit, 2, ',', '.'),
+                    number_format($beginning_total + $ending_total, 2, ',', '.')
                 ];
 
                 $nomor++;
@@ -266,7 +266,7 @@ class ReportAccountingController extends Controller {
                     <div class="text-muted">' . date('d-m-Y', strtotime($j->created_at)) . ' | ' . $type . '</div>
                     <div>' . $code . '</div>
                     <div>' . $description . '</div>
-                    <div><span class="font-weight-bold">' . number_format($j->nominal, 0, ',', '.') . '</span></div>
+                    <div><span class="font-weight-bold">' . number_format($j->nominal, 2, ',', '.') . '</span></div>
                 </div>
             ';
         }
@@ -311,14 +311,6 @@ class ReportAccountingController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Coa::where('status', 1)
-            ->whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->where(function($query) use ($request) {
-                        $query->whereColumn('journals.debit', 'coas.id')
-                            ->orWhereColumn('journals.credit', 'coas.id');
-                    });
-            })
             ->count();
         
         $query_data = Coa::where(function($query) use ($search, $request) {
@@ -327,21 +319,6 @@ class ReportAccountingController extends Controller {
                         $query->where('name', 'like', "%$search%");
                     });
                 }     
-            })
-            ->whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->where(function($query) use ($request) {
-                        $query->where(function($query) {
-                                $query->whereColumn('journals.debit', 'coas.id')
-                                    ->orWhereColumn('journals.credit', 'coas.id');
-                            });
-
-                        $query->where(function($query) use ($request) {
-                                $query->whereYear('journals.created_at', date('Y', strtotime($request->date)))
-                                    ->whereMonth('journals.created_at', date('m', strtotime($request->date)));
-                            });
-                    });
             })
             ->where('status', 1)
             ->offset($start)
@@ -355,21 +332,6 @@ class ReportAccountingController extends Controller {
                         $query->where('name', 'like', "%$search%");
                     });
                 }     
-            })
-            ->whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->where(function($query) use ($request) {
-                        $query->where(function($query) {
-                                $query->whereColumn('journals.debit', 'coas.id')
-                                    ->orWhereColumn('journals.credit', 'coas.id');
-                            });
-
-                        $query->where(function($query) use ($request) {
-                                $query->whereYear('journals.created_at', date('Y', strtotime($request->date)))
-                                    ->whereMonth('journals.created_at', date('m', strtotime($request->date)));
-                            });
-                    });
             })
             ->where('status', 1)
             ->count();
@@ -401,12 +363,12 @@ class ReportAccountingController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $val->name,
-                    number_format($balance_debit, 0, ',', '.'),
-                    number_format($balance_credit, 0, ',', '.'),
-                    number_format($change_debit, 0, ',', '.'),
-                    number_format($change_credit, 0, ',', '.'),
-                    number_format($balance_debit + $change_debit, 0, ',', '.'),
-                    number_format($balance_credit + $change_credit, 0, ',', '.')
+                    number_format($balance_debit, 2, ',', '.'),
+                    number_format($balance_credit, 2, ',', '.'),
+                    number_format($change_debit, 2, ',', '.'),
+                    number_format($change_credit, 2, ',', '.'),
+                    number_format($balance_debit + $change_debit, 2, ',', '.'),
+                    number_format($balance_credit + $change_credit, 2, ',', '.')
                 ];
 
                 $nomor++;

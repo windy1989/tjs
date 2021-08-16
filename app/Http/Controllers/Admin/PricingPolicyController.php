@@ -106,10 +106,10 @@ class PricingPolicyController extends Controller {
                     $image,
                     $val->product->name(),
                     $val->product->type->length . 'x' . $val->product->type->width,
-                    number_format($val->showroom_cost, 0, ',', '.'),
-                    number_format($val->fixed_cost, 0, ',', '.'),
-                    number_format($val->marketing_cost, 0, ',', '.'),
-                    number_format($val->price_list, 0, ',', '.'),
+                    number_format($val->showroom_cost, 2, ',', '.'),
+                    number_format($val->fixed_cost, 2, ',', '.'),
+                    number_format($val->marketing_cost, 2, ',', '.'),
+                    number_format($val->price_list, 2, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
@@ -137,25 +137,25 @@ class PricingPolicyController extends Controller {
     {
         $data = PricingPolicy::find($request->id);
         return response()->json([
-            'Showroom Cost'            => number_format($data->showroom_cost, 0, ',', '.'),
-            'Sales Travel Cost'        => number_format($data->sales_travel_cost, 0, ',', '.'),
-            'Marketing Cost'           => number_format($data->marketing_cost, 0, ',', '.'),
-            'Interest'                 => number_format($data->interest, 0, ',', '.'),
-            'Sales Commission'         => number_format($data->sales_commission, 0, ',', '.'),
-            'Fixed Cost'               => number_format($data->fixed_cost, 0, ',', '.'),
-            'Nett Profit'              => number_format($data->nett_profit, 0, ',', '.'),
-            'Saving'                   => number_format($data->saving, 0, ',', '.'),
-            'Middlemant'               => number_format($data->middlemant, 0, ',', '.'),
-            'Project'                  => number_format($data->project, 0, ',', '.'),
-            'On Site Cost'             => number_format($data->on_site_cost, 0, ',', '.'),
-            'Storage Cost'             => number_format($data->storage_cost, 0, ',', '.'),
-            'Bottom Price'             => number_format($data->bottom_price, 0, ',', '.'),
-            'Project Price'            => number_format($data->project_price, 0, ',', '.'),
-            'Price List'               => number_format($data->price_list, 0, ',', '.'),
-            'Store Price List'         => number_format($data->store_price_list, 0, ',', '.'),
-            'Discount Retail Sales'    => number_format($data->discount_retail_sales, 0, ',', '.'),
-            'Discount Retail Manager'  => number_format($data->discount_retail_manager, 0, ',', '.'),
-            'Discount Retail Director' => number_format($data->discount_retail_director, 0, ',', '.')
+            'Showroom Cost'            => number_format($data->showroom_cost, 2, ',', '.'),
+            'Sales Travel Cost'        => number_format($data->sales_travel_cost, 2, ',', '.'),
+            'Marketing Cost'           => number_format($data->marketing_cost, 2, ',', '.'),
+            'Interest'                 => number_format($data->interest, 2, ',', '.'),
+            'Sales Commission'         => number_format($data->sales_commission, 2, ',', '.'),
+            'Fixed Cost'               => number_format($data->fixed_cost, 2, ',', '.'),
+            'Nett Profit'              => number_format($data->nett_profit, 2, ',', '.'),
+            'Saving'                   => number_format($data->saving, 2, ',', '.'),
+            'Middlemant'               => number_format($data->middlemant, 2, ',', '.'),
+            'Project'                  => number_format($data->project, 2, ',', '.'),
+            'On Site Cost'             => number_format($data->on_site_cost, 2, ',', '.'),
+            'Storage Cost'             => number_format($data->storage_cost, 2, ',', '.'),
+            'Bottom Price'             => number_format($data->bottom_price, 2, ',', '.'),
+            'Project Price'            => number_format($data->project_price, 2, ',', '.'),
+            'Price List'               => number_format($data->price_list, 2, ',', '.'),
+            'Store Price List'         => number_format($data->store_price_list, 2, ',', '.'),
+            'Discount Retail Sales'    => number_format($data->discount_retail_sales, 2, ',', '.'),
+            'Discount Retail Manager'  => number_format($data->discount_retail_manager, 2, ',', '.'),
+            'Discount Retail Director' => number_format($data->discount_retail_director, 2, ',', '.')
         ]);
     }
 

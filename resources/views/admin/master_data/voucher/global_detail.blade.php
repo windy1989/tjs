@@ -45,11 +45,11 @@
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Minimum Order</th>
-                     <td class="align-middle">: {{ number_format($voucher->minimum, 0, ',', '.') }}</td>
+                     <td class="align-middle">: {{ number_format($voucher->minimum, 2, ',', '.') }}</td>
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Maximum Discount</th>
-                     <td class="align-middle">: {{ number_format($voucher->maximum, 0, ',', '.') }}</td>
+                     <td class="align-middle">: {{ number_format($voucher->maximum, 2, ',', '.') }}</td>
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Quota</th>
@@ -57,7 +57,7 @@
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Points</th>
-                     <td class="align-middle">: {{ number_format($voucher->points, 0, ',', '.') }}</td>
+                     <td class="align-middle">: {{ number_format($voucher->points, 2, ',', '.') }}</td>
                   </tr>
                   <tr>
                      <th width="20%" class="align-middle">Percentage</th>

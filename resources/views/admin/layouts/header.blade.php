@@ -40,7 +40,7 @@
 							->where('seen', 0)
 							->whereDate('created_at', date('Y-m-d')); 
 					@endphp
-					<a href="#" class="navbar-nav-link navbar-nav-link-toggler" data-toggle="dropdown">
+					<a href="#" class="navbar-nav-link navbar-nav-link-toggler" data-toggle="dropdown" data-popup="tooltip" title="Notification">
 						<i class="icon-bell2"></i>
 						<span class="d-lg-none ml-3">Notification</span>
 						<span class="badge badge-warning badge-pill ml-auto ml-lg-0">{{ $notify->count() }}</span>
@@ -80,6 +80,12 @@
 							<a href="{{ url('admin/notification') }}" class="btn btn-light text-primary font-weight-bold btn-block border-0 rounded-top-0">View All</a>
 						</div>
 					</div>
+				</li>
+				<li class="nav-item">
+					<a href="https://apps.smartmarbleandbath.com/quickcount.apk" target="_blank" class="navbar-nav-link navbar-nav-link-toggler" data-popup="tooltip" title="Calculator">
+						<i class="icon-calculator"></i>
+						<span class="d-lg-none ml-3">Calculator</span>
+					</a>
 				</li>
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">

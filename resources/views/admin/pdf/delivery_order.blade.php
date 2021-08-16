@@ -238,7 +238,7 @@
 				<tfoot>
 					<tr>
 						<th colspan="3" style="text-align:right;">TOTAL QTY</th>
-						<th style="text-align:left;">{{ number_format($delivery_order->order->orderDetail->sum('qty'), 0, ',', '.') }}</th>
+						<th style="text-align:left;">{{ number_format($delivery_order->order->orderDetail->sum('qty'), 2, ',', '.') }}</th>
 					</tr>
 				</tfoot>
 			</table><br><br><br><br>

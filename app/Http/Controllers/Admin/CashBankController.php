@@ -138,7 +138,7 @@ class CashBankController extends Controller {
                     $nomor,
                     $val->user->name,
                     $val->code,
-                    number_format($val->cashBankDetail->sum('nominal'), 0, ',', '.'),
+                    number_format($val->cashBankDetail->sum('nominal'), 2, ',', '.'),
                     date('d F Y', strtotime($val->date)),
                     $val->description,
                     '
@@ -196,7 +196,7 @@ class CashBankController extends Controller {
                     </div>
                     <div>
                         <b>[NOMINAL]</b>&nbsp;&nbsp;&nbsp;
-                        <span class="text-muted">' . number_format($d->nominal, 0, ',', '.') . '</span>
+                        <span class="text-muted">' . number_format($d->nominal, 2, ',', '.') . '</span>
                     </div>
                 </div>
             ';

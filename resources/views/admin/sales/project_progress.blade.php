@@ -147,7 +147,7 @@
                                     </td>
                                     <td class="align-middle">{{ $pp->qty }}</td>   
                                     <td class="align-middle">{{ $pp->unit() }}</td> 
-                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
+                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
                                  </tr>
                               @endforeach
                            </tbody>
@@ -343,13 +343,13 @@
                                              <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>   
-                                          <td class="align-middle">Rp {{ number_format($pp->price, 0, ',', '.') }}</td>   
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->price, 2, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
                                           <td class="align-middle">
                                              @if($pp->recommended_price < 1)
                                                 <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="0" required>
                                              @else
-                                                Rp {{ number_format($pp->recommended_price, 0, ',', '.') }}
+                                                Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
                                              @endif   
                                           </td>   
                                           <td class="align-middle">{{ $pp->unit() }}</td> 
@@ -535,9 +535,9 @@
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>    
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 0, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
                                           <td class="align-middle">
-                                             Rp {{ number_format($pp->recommended_price, 0, ',', '.') }}
+                                             Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
                                           </td>   
                                           <td class="align-middle">
                                              @if($project->progress >= 35)

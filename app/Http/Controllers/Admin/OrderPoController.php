@@ -109,7 +109,7 @@ class OrderPoController extends Controller {
                     $val->order->number,
                     'Karya Modern',
                     $val->purchase_order,
-                    'Rp ' . number_format($grandtotal, 0, ',', '.'),
+                    'Rp ' . number_format($grandtotal, 2, ',', '.'),
                     $val->status(),
                     date('d F Y', strtotime($val->created_at)),
                     $btn

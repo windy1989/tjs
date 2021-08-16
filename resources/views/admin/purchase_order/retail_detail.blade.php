@@ -158,14 +158,14 @@
 										<td class="align-middle">{{ $od->qty }}</td>
 										<td class="align-middle" width="{{ $purchase_order->status == 1 ? '20%' : '' }}">
 											@if($purchase_order->status == 2)
-												Rp {{ number_format($od->bottom_price, 0, ',', '.') }}
+												Rp {{ number_format($od->bottom_price, 2, ',', '.') }}
 											@else
 												<input type="hidden" name="order_detail_id[]" value="{{ $od->id }}">
 												<input type="text" name="order_detail_bottom_price[]" class="form-control" value="{{ $od->bottom_price }}" placeholder="0" required>
 											@endif
 										</td>
 										@if($purchase_order->status == 2)
-											<td class="align-middle">Rp {{ number_format($od->bottom_price * $od->qty, 0, ',', '.') }}</td>
+											<td class="align-middle">Rp {{ number_format($od->bottom_price * $od->qty, 2, ',', '.') }}</td>
 										@endif
 									</tr>
 								@endforeach
@@ -174,24 +174,24 @@
 								<tfoot>
 									<tr>
 										<td colspan="4" class="text-right">Subtotal</td>
-										<td colspan="2">Rp {{ number_format($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty'), 0, ',', '.') }}</td>
+										<td colspan="2">Rp {{ number_format($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty'), 2, ',', '.') }}</td>
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Shipping</td>
 										<td colspan="2">
-											Rp {{ number_format($shipping, 0, ',', '.') }}
+											Rp {{ number_format($shipping, 2, ',', '.') }}
 										</td>
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Discount</td>
 										<td colspan="2">
-											Rp {{ number_format($discount, 0, ',', '.') }}
+											Rp {{ number_format($discount, 2, ',', '.') }}
 										</td>
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Total</td>
 										<td colspan="2" class="text-danger font-weight-bold">
-											Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $shipping, 0, ',', '.') }}
+											Rp {{ number_format(($purchase_order->order->orderDetail->sum('bottom_price') * $purchase_order->order->orderDetail->sum('qty')) + $shipping, 2, ',', '.') }}
 										</td>
 									</tr>
 								</tfoot>

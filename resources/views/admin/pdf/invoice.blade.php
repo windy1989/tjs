@@ -232,12 +232,12 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($od->price_list, 0, ',', '.') }}
+									Rp {{ number_format($od->price_list, 2, ',', '.') }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($od->total, 0, ',', '.') }}
+									Rp {{ number_format($od->total, 2, ',', '.') }}
 								</center>
 							</td>
 						</tr>
@@ -246,19 +246,19 @@
 				<tfoot>
 					<tr>
 						<th colspan="4" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->subtotal, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->shipping, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->shipping, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">DISCOUNT</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->discount, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->discount, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format($order->grandtotal, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="4" style="text-align:right;">STATUS</th>

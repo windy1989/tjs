@@ -107,7 +107,7 @@ class CurrencyPriceController extends Controller {
                     date('d F Y, H:i', strtotime($val->created_at)),
                     $val->product->name(),
                     $val->currency->code,
-                    number_format($val->price, 0, ',', '.'),
+                    number_format($val->price, 2, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>

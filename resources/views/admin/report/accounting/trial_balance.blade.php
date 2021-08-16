@@ -23,7 +23,7 @@
 		<div class="card">
 			<div class="card-body">
             <div class="row justify-content-center">
-               <div class="col-md-4">
+               <div class="col-md-3">
                   <div class="text-center mb-2 text-uppercase font-weight-bold">Periode :</div>
                   <input type="month" name="filter_date" id="filter_date" max="{{ date('Y-m') }}" value="{{ date('Y-m') }}" onchange="loadDataTable()" class="form-control">
                </div>

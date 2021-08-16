@@ -146,7 +146,7 @@ class OrderController extends Controller {
                     $nomor,
                     $val->customer->name,
                     $val->number,
-                    'Rp ' . number_format($val->grandtotal, 0, ',', '.'),
+                    'Rp ' . number_format($val->grandtotal, 2, ',', '.'),
                     date('d F Y', strtotime($val->created_at)),
                     $val->type(),
                     $val->status(),

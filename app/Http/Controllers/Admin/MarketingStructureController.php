@@ -73,9 +73,9 @@ class MarketingStructureController extends Controller {
                     '<span class="pointer-element badge badge-success" data-id="' . $val->id . '"><i class="icon-plus3"></i></span>',
                     $nomor,
                     $val->company->code,
-                    number_format($val->fixed_cost, 0, ',', '.'),
-                    number_format($val->nett_profit, 0, ',', '.'),
-                    number_format($val->marketing_cost, 0, ',', '.'),
+                    number_format($val->fixed_cost, 2, ',', '.'),
+                    number_format($val->nett_profit, 2, ',', '.'),
+                    number_format($val->marketing_cost, 2, ',', '.'),
                     '
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
@@ -103,18 +103,18 @@ class MarketingStructureController extends Controller {
     {
         $data = MarketingStructure::find($request->id);
         return response()->json([
-            'Rental Cost'           => number_format($data->rental_cost, 0, ',', '.'),
-            'Travel Sales Cost'     => number_format($data->travel_sales_cost, 0, ',', '.'),
-            'Marketing Cost'        => number_format($data->marketing_cost, 0, ',', '.'),
-            'On Site Cost'          => number_format($data->on_site_cost, 0, ',', '.'),
-            'Storage Cost'          => number_format($data->storage_cost, 0, ',', '.'),
-            'Fixed Cost'            => number_format($data->fixed_cost, 0, ',', '.'),
-            'Interest In Payment'   => number_format($data->interest_in_payment, 0, ',', '.'),
-            'Nett Profit'           => number_format($data->nett_profit, 0, ',', '.'),
-            'Saving'                => number_format($data->saving, 0, ',', '.'),
-            'Sales Commission'      => number_format($data->sales_commission, 0, ',', '.'),
-            'Middlemant Commission' => number_format($data->middlemant_commission, 0, ',', '.'),
-            'Project Commission'    => number_format($data->project_commission, 0, ',', '.')
+            'Rental Cost'           => number_format($data->rental_cost, 2, ',', '.'),
+            'Travel Sales Cost'     => number_format($data->travel_sales_cost, 2, ',', '.'),
+            'Marketing Cost'        => number_format($data->marketing_cost, 2, ',', '.'),
+            'On Site Cost'          => number_format($data->on_site_cost, 2, ',', '.'),
+            'Storage Cost'          => number_format($data->storage_cost, 2, ',', '.'),
+            'Fixed Cost'            => number_format($data->fixed_cost, 2, ',', '.'),
+            'Interest In Payment'   => number_format($data->interest_in_payment, 2, ',', '.'),
+            'Nett Profit'           => number_format($data->nett_profit, 2, ',', '.'),
+            'Saving'                => number_format($data->saving, 2, ',', '.'),
+            'Sales Commission'      => number_format($data->sales_commission, 2, ',', '.'),
+            'Middlemant Commission' => number_format($data->middlemant_commission, 2, ',', '.'),
+            'Project Commission'    => number_format($data->project_commission, 2, ',', '.')
         ]);
     }
 

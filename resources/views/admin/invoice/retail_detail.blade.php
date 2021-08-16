@@ -158,27 +158,27 @@
 											</div>
 										</td>
 										<td class="align-middle">{{ $od->qty }}</td>
-										<td class="align-middle">Rp {{ number_format($od->price_list, 0, ',', '.') }}</td>
-										<td class="align-middle">Rp {{ number_format($od->total, 0, ',', '.') }}</td>
+										<td class="align-middle">Rp {{ number_format($od->price_list, 2, ',', '.') }}</td>
+										<td class="align-middle">Rp {{ number_format($od->total, 2, ',', '.') }}</td>
 									</tr>
 								@endforeach
 							</tbody>
 							<tfoot>
 								<tr>
 									<td colspan="4" class="text-right">Subtotal</td>
-									<td colspan="2">Rp {{ number_format($order->subtotal, 0, ',', '.') }}</td>
+									<td colspan="2">Rp {{ number_format($order->subtotal, 2, ',', '.') }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Shipping</td>
-									<td colspan="2">Rp {{ number_format($order->shipping, 0, ',', '.') }}</td>
+									<td colspan="2">Rp {{ number_format($order->shipping, 2, ',', '.') }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Discount</td>
-									<td colspan="2">Rp {{ number_format($order->discount, 0, ',', '.') }}</td>
+									<td colspan="2">Rp {{ number_format($order->discount, 2, ',', '.') }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Total</td>
-									<td colspan="2" class="text-danger font-weight-bold">Rp {{ number_format($order->grandtotal, 0, ',', '.') }}</td>
+									<td colspan="2" class="text-danger font-weight-bold">Rp {{ number_format($order->grandtotal, 2, ',', '.') }}</td>
 								</tr>
 								<tr>
 									<td colspan="4" class="text-right">Status</td>
@@ -198,7 +198,7 @@
 										@if($order->payment < $order->grandtotal)
 											<input type="number" name="payment" id="payment" class="form-control form-control-sm" value="{{ $order->payment }}" placeholder="0">
 										@else
-											<span class="text-success font-weight-bold">Rp {{ number_format($order->payment, 0, ',', '.') }}</span>
+											<span class="text-success font-weight-bold">Rp {{ number_format($order->payment, 2, ',', '.') }}</span>
 										@endif
 									</td>
 								</tr>
