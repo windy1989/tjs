@@ -164,6 +164,20 @@ class CashBankController extends Controller {
         return response()->json($response);
     }
 
+    public function suggestCode(Request $request)
+    {
+        $response = [];
+        $data     = CashBank::where('code', 'like', "%$request->search%")
+            ->limit(15)
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = $d->code;
+        }
+
+        return response()->json($response);
+    }
+
     public function rowDetail(Request $request)
     {
         $data   = CashBankDetail::where('cash_bank_id', $request->id)->get();

@@ -518,6 +518,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('finance')->group(function() {
             Route::prefix('cash_bank')->group(function() {
                 Route::get('/', 'CashBankController@index');
+                Route::get('suggest_code', 'CashBankController@suggestCode');
                 Route::get('row_detail', 'CashBankController@rowDetail');
                 Route::get('datatable', 'CashBankController@datatable');
                 Route::post('create', 'CashBankController@create');
@@ -541,17 +542,22 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('report')->group(function() {
             Route::prefix('accounting')->group(function() {
                 Route::prefix('balance_sheet')->group(function() {
-                    Route::get('/', 'ReportController@balanceSheet');
+                    Route::get('/', 'ReportAccountingController@balanceSheet');
                 });
 
                 Route::prefix('profit_loss')->group(function() {
-                    Route::get('/', 'ReportController@profitLoss');
+                    Route::get('/', 'ReportAccountingController@profitLoss');
                 });
 
                 Route::prefix('ledger')->group(function() {
-                    Route::get('/', 'ReportController@ledger');
-                    Route::get('datatable', 'ReportController@ledgerDatatable');
-                    Route::get('row_detail', 'ReportController@ledgerRowDetail');
+                    Route::get('/', 'ReportAccountingController@ledger');
+                    Route::get('datatable', 'ReportAccountingController@ledgerDatatable');
+                    Route::get('row_detail', 'ReportAccountingController@ledgerRowDetail');
+                });
+
+                Route::prefix('trial_balance')->group(function() {
+                    Route::get('/', 'ReportAccountingController@trialBalance');
+                    Route::get('datatable', 'ReportAccountingController@trialBalanceDatatable');
                 });
             });
         });

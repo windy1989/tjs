@@ -15,6 +15,8 @@
 	<link href="{{ asset('template/back-office/assets/css/colors.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/lightbox/dist/css/lightbox.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('template/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('template/plugins/jquery-ui/jquery-ui.theme.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/back-office/custom.css') }}" rel="stylesheet">
 	<script src="{{ asset('template/back-office/global_assets/js/main/jquery.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
@@ -33,6 +35,7 @@
 	<script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/lightbox/dist/js/lightbox.min.js') }}"></script>
 	<script src="{{ asset('template/plugins/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('template/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
 	<script src="{{ asset('template/back-office/custom.js') }}"></script>
 	<title>SMB Admin - {{ $title }}</title>

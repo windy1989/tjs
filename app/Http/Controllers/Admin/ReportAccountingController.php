@@ -8,7 +8,7 @@ use App\Models\Journal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ReportController extends Controller {
+class ReportAccountingController extends Controller {
 
     public function balanceSheet(Request $request) 
     {
@@ -48,7 +48,7 @@ class ReportController extends Controller {
 
     public function ledger() 
     {
-        $data   = [
+        $data = [
             'title'   => 'Ledger',
             'coa'     => Coa::all(),
             'content' => 'admin.report.accounting.ledger'
@@ -278,6 +278,152 @@ class ReportController extends Controller {
         } else {
             return response()->json('<p class="font-weight-bold font-italic mt-2">Order Not Found</p>');
         }
+    }
+
+    public function trialBalance() 
+    {
+        $data = [
+            'title'   => 'Trial Balance',
+            'coa'     => Coa::all(),
+            'content' => 'admin.report.accounting.trial_balance'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function trialBalanceDatatable(Request $request)
+    {
+        $column = [
+            'id',
+            'coa_id',
+            'balance_debit',
+            'balance_credit',
+            'change_debit',
+            'change_credit',
+            'end_debit',
+            'end_credit'
+        ];
+
+        $start  = $request->start;
+        $length = $request->length;
+        $order  = $column[$request->input('order.0.column')];
+        $dir    = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+
+        $total_data = Coa::where('status', 1)
+            ->whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->where(function($query) use ($request) {
+                        $query->whereColumn('journals.debit', 'coas.id')
+                            ->orWhereColumn('journals.credit', 'coas.id');
+                    });
+            })
+            ->count();
+        
+        $query_data = Coa::where(function($query) use ($search, $request) {
+                if($search) {
+                    $query->where(function($query) use ($search) {
+                        $query->where('name', 'like', "%$search%");
+                    });
+                }     
+            })
+            ->whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->where(function($query) use ($request) {
+                        $query->where(function($query) {
+                                $query->whereColumn('journals.debit', 'coas.id')
+                                    ->orWhereColumn('journals.credit', 'coas.id');
+                            });
+
+                        $query->where(function($query) use ($request) {
+                                $query->whereYear('journals.created_at', date('Y', strtotime($request->date)))
+                                    ->whereMonth('journals.created_at', date('m', strtotime($request->date)));
+                            });
+                    });
+            })
+            ->where('status', 1)
+            ->offset($start)
+            ->limit($length)
+            ->orderBy($order, $dir)
+            ->get();
+
+        $total_filtered = Coa::where(function($query) use ($search, $request) {
+                if($search) {
+                    $query->where(function($query) use ($search) {
+                        $query->where('name', 'like', "%$search%");
+                    });
+                }     
+            })
+            ->whereExists(function($query) use ($request) {
+                $query->selectRaw(1)
+                    ->from('journals')
+                    ->where(function($query) use ($request) {
+                        $query->where(function($query) {
+                                $query->whereColumn('journals.debit', 'coas.id')
+                                    ->orWhereColumn('journals.credit', 'coas.id');
+                            });
+
+                        $query->where(function($query) use ($request) {
+                                $query->whereYear('journals.created_at', date('Y', strtotime($request->date)))
+                                    ->whereMonth('journals.created_at', date('m', strtotime($request->date)));
+                            });
+                    });
+            })
+            ->where('status', 1)
+            ->count();
+
+        $response['data'] = [];
+        if($query_data <> FALSE) {
+            $nomor = $start + 1;
+            foreach($query_data as $val) {
+                $balance_debit = $val->journalDebit()
+                    ->whereYear('created_at', date('Y', strtotime($request->date)))
+                    ->whereMonth('created_at', '<', date('m', strtotime($request->date)))
+                    ->sum('nominal');
+
+                $balance_credit = $val->journalCredit()
+                    ->whereYear('created_at', date('Y', strtotime($request->date)))
+                    ->whereMonth('created_at', '<', date('m', strtotime($request->date)))
+                    ->sum('nominal');
+
+                $change_debit = $val->journalDebit()
+                    ->whereYear('created_at', date('Y', strtotime($request->date)))
+                    ->whereMonth('created_at', date('m', strtotime($request->date)))
+                    ->sum('nominal');
+
+                $change_credit = $val->journalCredit()
+                    ->whereYear('created_at', date('Y', strtotime($request->date)))
+                    ->whereMonth('created_at', date('m', strtotime($request->date)))
+                    ->sum('nominal');
+
+                $response['data'][] = [
+                    $nomor,
+                    $val->name,
+                    number_format($balance_debit, 0, ',', '.'),
+                    number_format($balance_credit, 0, ',', '.'),
+                    number_format($change_debit, 0, ',', '.'),
+                    number_format($change_credit, 0, ',', '.'),
+                    number_format($balance_debit + $change_debit, 0, ',', '.'),
+                    number_format($balance_credit + $change_credit, 0, ',', '.')
+                ];
+
+                $nomor++;
+            }
+        }
+
+        $response['recordsTotal'] = 0;
+        if($total_data <> FALSE) {
+            $response['recordsTotal'] = $total_data;
+        }
+
+        $response['recordsFiltered'] = 0;
+        if($total_filtered <> FALSE) {
+            $response['recordsFiltered'] = $total_filtered;
+        }
+
+        return response()->json($response);
     }
     
 }

@@ -233,7 +233,7 @@
             <button type="button" class="btn bg-secondary" data-dismiss="modal"><i class="icon-switch2"></i> Close</button>
             <button type="button" class="btn bg-danger" id="btn_cancel" onclick="cancel()" style="display:none;"><i class="icon-cross3"></i> Cancel</button>
             <button type="button" class="btn bg-warning" id="btn_update" onclick="update()" style="display:none;"><i class="icon-pencil7"></i> Save</button>
-            <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Add</button>
+            <button type="button" class="btn bg-primary" id="btn_create" onclick="create()"><i class="icon-plus3"></i> Save</button>
          </div>
       </div>
    </div>
@@ -242,6 +242,18 @@
 <script>
    $(function() {
       filter();
+
+      $('#code').autocomplete({
+         appendTo: '#modal_form',
+         autoFocus: true,
+         source: function(request, response) {
+            $.get('{{ url("admin/finance/cash_bank/suggest_code") }}', { 
+               search: request.term
+            }, function(data) {
+               response(data);
+            });
+         }
+      });
 
       $('#datatable_serverside tbody').on('click', 'td.details-control', function() {
          var tr    = $(this).closest('tr');

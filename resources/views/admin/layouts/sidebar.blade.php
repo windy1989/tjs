@@ -252,7 +252,7 @@
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Finance">
                             <li class="nav-item">
-                                <a href="{{ url('admin/finance/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'finance' && Request::segment(3) == 'project' ? 'active' : '' }}">Cash & Bank</a>
+                                <a href="{{ url('admin/finance/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'finance' && Request::segment(3) == 'cash_bank' ? 'active' : '' }}">Cash & Bank</a>
                             </li>
                         </ul>
                     </li>
@@ -263,7 +263,7 @@
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Accounting">
                             <li class="nav-item">
-                                <a href="{{ url('admin/accounting/budgeting') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'project' ? 'active' : '' }}">Budgeting</a>
+                                <a href="{{ url('admin/accounting/budgeting') }}" class="nav-link {{ Request::segment(2) == 'accounting' && Request::segment(3) == 'budgeting' ? 'active' : '' }}">Budgeting</a>
                             </li>
                         </ul>
                     </li>
