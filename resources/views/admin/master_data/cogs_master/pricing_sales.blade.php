@@ -78,6 +78,12 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
+                        <label>COGS :<span class="text-danger">*</span></label>
+                        <input type="number" name="cogs" id="cogs" class="form-control" placeholder="0">
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
                         <label>Showroom Cost :<span class="text-danger">*</span></label>
                         <input type="number" name="showroom_cost" id="showroom_cost" class="form-control" placeholder="0">
                      </div>
