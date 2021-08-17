@@ -33,7 +33,7 @@ class Project extends Model {
     public static function generateCode()
     {
         $query = Project::selectRaw("RIGHT(code, 6) as code")
-            ->orderBy('id', 'asc')
+            ->orderByRaw('RIGHT(code, 6) DESC')
             ->limit(1)
             ->get();
 
@@ -44,7 +44,7 @@ class Project extends Model {
         }
 
         $code = str_pad($number, 6, 0, STR_PAD_LEFT);
-        return 'PT/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+        return 'PJ/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
     }
 
     public function paymentMethod() 
@@ -129,6 +129,26 @@ class Project extends Model {
     public function projectSample()
     {
         return $this->hasMany('App\Models\ProjectSample');
+    }
+
+    public function projectPayment()
+    {
+        return $this->hasMany('App\Models\ProjectPayment');
+    }
+
+    public function projectProduction()
+    {
+        return $this->hasOne('App\Models\ProjectProduction');
+    }
+
+    public function projectShipment()
+    {
+        return $this->hasOne('App\Models\ProjectShipment');
+    }
+
+    public function projectDelivery()
+    {
+        return $this->hasOne('App\Models\ProjectDelivery');
     }
 
 }

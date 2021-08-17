@@ -58,6 +58,7 @@ class ProductSeeder extends Seeder
             PricingPolicy::insert([
                 'id'                       => $pp['id'],
                 'product_id'               => $pp['product_id'],
+                'cogs'                     => $pp['cogs'],
                 'showroom_cost'            => $pp['showroom_cost'],
                 'sales_travel_cost'        => $pp['sales_travel_cost'],
                 'marketing_cost'           => $pp['marketing_cost'],

@@ -15,6 +15,7 @@ class PricingPolicy extends Model {
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
         'product_id',
+        'cogs',
         'showroom_cost',
         'sales_travel_cost',
         'marketing_cost',

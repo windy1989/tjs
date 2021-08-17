@@ -138,6 +138,7 @@ class PricingPolicyController extends Controller {
         $data = PricingPolicy::find($request->id);
         return response()->json([
             'Showroom Cost'            => number_format($data->showroom_cost, 2, ',', '.'),
+            'COGS'                     => number_format($data->cogs, 2, ',', '.'),
             'Sales Travel Cost'        => number_format($data->sales_travel_cost, 2, ',', '.'),
             'Marketing Cost'           => number_format($data->marketing_cost, 2, ',', '.'),
             'Interest'                 => number_format($data->interest, 2, ',', '.'),
@@ -163,6 +164,7 @@ class PricingPolicyController extends Controller {
     {
         $validation = Validator::make($request->all(), [
             'product_id'               => 'required',
+            'cogs'                     => 'required',
             'showroom_cost'            => 'required',
             'sales_travel_cost'        => 'required',
             'marketing_cost'           => 'required',
@@ -184,6 +186,7 @@ class PricingPolicyController extends Controller {
             'discount_retail_director' => 'required'
         ], [
             'product_id.required'               => 'Please select a product.',
+            'cogs.required'                     => 'COGS cannot be empty.',
             'showroom_cost.required'            => 'Showroom cost cannot be empty.',
             'sales_travel_cost.required'        => 'Sales travel cost cannot be empty.',
             'marketing_cost.required'           => 'Marketing cost cannot be empty.',
@@ -213,6 +216,7 @@ class PricingPolicyController extends Controller {
         } else {
             $query = PricingPolicy::create([
                 'product_id'               => $request->product_id,
+                'cogs'                     => $request->cogs,
                 'showroom_cost'            => $request->showroom_cost,
                 'sales_travel_cost'        => $request->sales_travel_cost,
                 'marketing_cost'           => $request->marketing_cost,
@@ -262,6 +266,7 @@ class PricingPolicyController extends Controller {
         return response()->json([
             'product_id'               => $data->product_id,
             'product_code'             => $data->product->name(),
+            'cogs'                     => $data->cogs,
             'showroom_cost'            => $data->showroom_cost,
             'sales_travel_cost'        => $data->sales_travel_cost,
             'marketing_cost'           => $data->marketing_cost,
@@ -288,6 +293,7 @@ class PricingPolicyController extends Controller {
     {
         $validation = Validator::make($request->all(), [
             'product_id'               => 'required',
+            'cogs'                     => 'required',
             'showroom_cost'            => 'required',
             'sales_travel_cost'        => 'required',
             'marketing_cost'           => 'required',
@@ -309,6 +315,7 @@ class PricingPolicyController extends Controller {
             'discount_retail_director' => 'required'
         ], [
             'product_id.required'               => 'Please select a product.',
+            'cogs.required'                     => 'COGS cannot be empty.',
             'showroom_cost.required'            => 'Showroom cost cannot be empty.',
             'sales_travel_cost.required'        => 'Sales travel cost cannot be empty.',
             'marketing_cost.required'           => 'Marketing cost cannot be empty.',
@@ -338,6 +345,7 @@ class PricingPolicyController extends Controller {
         } else {
             $query = PricingPolicy::where('id', $id)->update([
                 'product_id'               => $request->product_id,
+                'cogs'                     => $request->cogs,
                 'showroom_cost'            => $request->showroom_cost,
                 'sales_travel_cost'        => $request->sales_travel_cost,
                 'marketing_cost'           => $request->marketing_cost,

@@ -407,6 +407,7 @@
          success: function(response) {
             loadingClose('.modal-content');
             $('#product_id').html(`<option value="` + response.product_id + `">` + response.product_code + `</option>`);
+            $('#cogs').val(response.cogs);
             $('#showroom_cost').val(response.showroom_cost);
             $('#sales_travel_cost').val(response.sales_travel_cost);
             $('#marketing_cost').val(response.marketing_cost);

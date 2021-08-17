@@ -564,6 +564,678 @@
                   </form>
                </div>
             @endif
+            @if($project->progress >= 35)
+               <div class="card" id="step-7">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">SO Project</h5>
+                        <div class="form-group"><hr></div>
+                        <div class="text-center">
+                           <span class="font-weight-semibold">Click the link below to view the sales order</span>
+                           <div class="form-group">
+                              <a href="{{ url('admin/sales/project/sales_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
+                           </div>
+                        </div>
+                        @if($project->progress < 40)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-7" class="btn bg-purple"><i class="icon-floppy-disk"></i> Next Step</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 40)
+               <div class="card" id="step-8">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">PO Project</h5>
+                        <div class="form-group"><hr></div>
+                        <div class="text-center">
+                           <span class="font-weight-semibold">Click the link below to view the purchase order</span>
+                           <div class="form-group">
+                              <a href="{{ url('admin/sales/project/purchase_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
+                           </div>
+                        </div>
+                        @if($project->progress < 43)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-8" class="btn bg-purple"><i class="icon-floppy-disk"></i> Next Step</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 43)
+               <div class="card" id="step-9">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Proforma Invoice</h5>
+                        <div class="form-group"><hr></div>
+                        @php $proforma_invoice = $project->projectPayment()->where('status', 1)->first(); @endphp
+                        @if($proforma_invoice)
+                           <div class="row justify-content-center">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Date :</label>
+										      <div class="form-control-plaintext">{{ $proforma_invoice->date }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Bank :</label>
+										      <div class="form-control-plaintext">{{ $proforma_invoice->bank() }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Nominal :</label>
+										      <div class="form-control-plaintext">
+                                       {{ number_format($proforma_invoice->nominal, 2, ',', '.') }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset(Storage::url($proforma_invoice->image)) }}" data-lightbox="Image" data-title="Proforma Invoice">
+                                          <img src="{{ asset(Storage::url($proforma_invoice->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @else
+                           @if(isset($_GET['step-9']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Bank :<sup class="text-danger">*</sup></label>
+                                    <select name="bank" id="bank" class="custom-select">
+                                       <option value="">-- Choose --</option>
+                                       <option value="1" {{ old('bank') == 1 ? 'selected' : '' }}>BCA</option>
+                                       <option value="2" {{ old('bank') == 2 ? 'selected' : '' }}>Mandiri</option>
+                                       <option value="3" {{ old('bank') == 3 ? 'selected' : '' }}>OCBC</option>
+                                       <option value="4" {{ old('bank') == 4 ? 'selected' : '' }}>BRI</option>
+                                       <option value="5" {{ old('bank') == 5 ? 'selected' : '' }}>Danamon</option>
+                                       <option value="6" {{ old('bank') == 6 ? 'selected' : '' }}>Bukopin</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Nominal :<sup class="text-danger">*</sup></label>
+                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                       <div class="custom-file">
+                                          <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                                          <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                       <p class="text-danger font-italic mt-3">
+                                          The only files supported are <b>jpeg, jpg, png</b>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 45)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-9" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 45)
+               <div class="card" id="step-10">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Production</h5>
+                        <div class="form-group"><hr></div>
+                        @if($project->projectProduction)
+                           <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="font-weight-semibold text-center">Start Date :</div>
+										      <div class="form-control-plaintext text-center">{{ $project->projectProduction->start_date }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="font-weight-semibold text-center">Finish Date :</div>
+										      <div class="form-control-plaintext text-center">{{ $project->projectProduction->finish_date }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <div class="font-weight-semibold text-center">Note :</div>
+										      <div class="form-control-plaintext text-center">
+                                       {{ $project->projectProduction->note }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset(Storage::url($project->projectProduction->image)) }}" data-lightbox="Image" data-title="Production">
+                                          <img src="{{ asset(Storage::url($project->projectProduction->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @else
+                           @if(isset($_GET['step-10']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Start Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="start_date" id="start_date" class="form-control" value="{{ old('start_date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Finish Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="finish_date" id="finish_date" class="form-control" value="{{ old('finish_date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label>Note :<sup class="text-danger">*</sup></label>
+                                    <textarea name="note" id="note" class="form-control" placeholder="Enter note">{{ old('note') }}</textarea>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                       <div class="custom-file">
+                                          <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                                          <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                       <p class="text-danger font-italic mt-3">
+                                          The only files supported are <b>jpeg, jpg, png</b>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 50)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-10" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 50)
+               <div class="card" id="step-11">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Pay Full Purchase</h5>
+                        <div class="form-group"><hr></div>
+                        @php $pay_full_purchase = $project->projectPayment()->where('status', 2)->first(); @endphp
+                        @if($pay_full_purchase)
+                           <div class="row justify-content-center">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Date :</label>
+										      <div class="form-control-plaintext">{{ $pay_full_purchase->date }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Bank :</label>
+										      <div class="form-control-plaintext">{{ $pay_full_purchase->bank() }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Nominal :</label>
+										      <div class="form-control-plaintext">
+                                       {{ number_format($pay_full_purchase->nominal, 2, ',', '.') }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset(Storage::url($pay_full_purchase->image)) }}" data-lightbox="Image" data-title="Proforma Invoice">
+                                          <img src="{{ asset(Storage::url($pay_full_purchase->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @else
+                           @if(isset($_GET['step-11']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Bank :<sup class="text-danger">*</sup></label>
+                                    <select name="bank" id="bank" class="custom-select">
+                                       <option value="">-- Choose --</option>
+                                       <option value="1" {{ old('bank') == 1 ? 'selected' : '' }}>BCA</option>
+                                       <option value="2" {{ old('bank') == 2 ? 'selected' : '' }}>Mandiri</option>
+                                       <option value="3" {{ old('bank') == 3 ? 'selected' : '' }}>OCBC</option>
+                                       <option value="4" {{ old('bank') == 4 ? 'selected' : '' }}>BRI</option>
+                                       <option value="5" {{ old('bank') == 5 ? 'selected' : '' }}>Danamon</option>
+                                       <option value="6" {{ old('bank') == 6 ? 'selected' : '' }}>Bukopin</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Nominal :<sup class="text-danger">*</sup></label>
+                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                       <div class="custom-file">
+                                          <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                                          <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                       <p class="text-danger font-italic mt-3">
+                                          The only files supported are <b>jpeg, jpg, png</b>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 55)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-11" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 55)
+               <div class="card" id="step-12">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Shipment</h5>
+                        <div class="form-group"><hr></div>
+                        @if($project->projectShipment)
+                           <table cellpadding="10" cellspacing="0" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Loading Date</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->loading_date }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Departure Date</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->departure_date }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">From Port</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->from_port }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">To Port</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->to_port }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">ETA</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->eta }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Note</th>
+                                    <td class="align-middle">: {{ $project->projectShipment->note ? $project->projectShipment->note : '-' }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        @else
+                           @if(isset($_GET['step-12']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Loading Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="loading_date" id="loading_date" class="form-control" value="{{ old('loading_date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Departure Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="departure_date" id="departure_date" class="form-control" value="{{ old('departure_date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>From Port :<sup class="text-danger">*</sup></label>
+                                    <input type="text" name="from_port" id="from_port" class="form-control" placeholder="Enter from port" value="{{ old('from_port') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>To Port :<sup class="text-danger">*</sup></label>
+                                    <input type="text" name="to_port" id="to_port" class="form-control" placeholder="Enter to port" value="{{ old('to_port') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>ETA :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="eta" id="eta" class="form-control" value="{{ old('eta') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label>Note :</label>
+                                    <textarea name="note" id="note" class="form-control" placeholder="Enter note">{{ old('note') }}</textarea>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 60)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-12" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 60)
+               <div class="card" id="step-13">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Delivery To Project</h5>
+                        <div class="form-group"><hr></div>
+                        @if($project->projectDelivery)
+                           <table cellpadding="10" cellspacing="0" width="100%">
+                              <tbody>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Receiver Name</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->receiver_name }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Delivery Date</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->delivery_date }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Email</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->email }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Phone</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->phone }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">City</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->city->name }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Address</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->address }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Type Of Transport</th>
+                                    <td class="align-middle">: {{ $project->projectDelivery->delivery->transport->fleet }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th width="20%" class="align-middle">Delivery Cost</th>
+                                    <td class="align-middle">: {{ number_format($project->projectDelivery->price, 2, ',', '.') }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        @else
+                           @if(isset($_GET['step-13']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Receiver Name :<span class="text-danger">*</span></label>
+                                    <input type="text" name="receiver_name" id="receiver_name" class="form-control" value="{{ old('receiver_name') }}" placeholder="Enter receiver name" onkeyup="checkSubmitButton()" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Delivery Date :<span class="text-danger">*</span></label>
+                                    <input type="date" name="delivery_date" id="delivery_date" class="form-control" value="{{ old('delivery_date') }}" onchange="checkSubmitButton()" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Email :<span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $project->email) }}" placeholder="Enter email" onkeyup="checkSubmitButton()" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Phone :<span class="text-danger">*</span></label>
+                                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $project->phone) }}" placeholder="Enter phone" onkeyup="checkSubmitButton()" required>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>City :<span class="text-danger">*</span></label>
+                                    <select name="city_id" id="city_id" class="select2" style="width:100%;" onchange="getDelivery()" required>
+                                       <option value="">-- Choose --</option>
+                                       @foreach($city as $c)
+                                          <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                       @endforeach
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Transport :<span class="text-danger">*</span></label>
+                                    <select name="delivery_id" id="delivery_id" class="form-control">
+                                       <option value="">-- Choose --</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label>Address :<span class="text-danger">*</span></label>
+                                    <textarea name="address" id="address" class="form-control" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="text-center">
+                                    <h5 class="font-weight-bold text-danger">Total Price Delivery : <span id="shipping_fee">0</span></h5>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 70)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-13" class="btn bg-purple submit_delivery" disabled><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
          </div>
          <div class="sidebar-sticky order-1 order-md-2">
             <div class="sidebar sidebar-light sidebar-component sidebar-component-right sidebar-expand-md">
@@ -646,7 +1318,7 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Data Vendor & PO
+                              PO Project
                            </a>
                         </li>
                         <li class="nav-item">
@@ -706,7 +1378,7 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Proses Payment
+                              Process Payment
                            </a>
                         </li>
                         <li class="nav-item">
@@ -755,6 +1427,54 @@
          $(this).closest('tr').remove();
       });
    });
+
+   function checkSubmitButton() {
+		var receiver_name = $('#receiver_name').val();
+		var email         = $('#email').val();
+		var phone         = $('#phone').val();
+		var city_id       = $('#city_id').val();
+		var address       = $('#address').val();
+		var delivery_id   = $('#delivery_id').val();
+		var delivery_date = $('#delivery_date').val();
+
+		if(receiver_name && email && phone && city_id && address && delivery_id && delivery_date) {
+			$('.submit_delivery').attr('disabled', false);
+		} else {
+			$('.submit_delivery').attr('disabled', true);
+		}
+	}
+
+   function getDelivery() {
+		$.ajax({
+			url: '{{ url("admin/sales/project/get_delivery") }}',
+			type: 'GET',
+         dataType: 'JSON',
+         data: {
+            city_id: $('#city_id').val(),
+				id: '{{ $project->id }}'
+         },
+         beforeSend: function() {
+            loadingOpen('#step-13');
+				$('#delivery_id').html('<option value="">-- Choose --</option>');
+         },
+         success: function(response) {
+            loadingClose('#step-13');
+				if($('#city_id').val()) {
+					if(response.length > 0) {
+						$.each(response, function(i, val) {
+							$('#delivery_id').append(`
+								<option value="` + val.id + `">(` + val.transport_name + `) &nbsp;&nbsp; ` + val.price + `</option>
+							`);
+						});
+					}
+				}
+         },
+         error: function() {
+            loadingClose('#step-13');
+				swalInit.fire('Server Error!', 'Please contact developer', 'error');
+         }
+		});
+	}
    
    function addProduct() {
       var id = $('#product_id');

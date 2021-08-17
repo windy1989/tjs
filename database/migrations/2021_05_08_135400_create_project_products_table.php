@@ -18,11 +18,13 @@ class CreateProjectProductsTable extends Migration
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('product_id')->constrained('products');
             $table->integer('qty');
+            $table->double('cogs')->default(0);
             $table->double('price');
             $table->double('target_price');
             $table->double('recommended_price')->default(0);
             $table->double('discount')->nullable();
             $table->char('unit', 1);
+            $table->date('delivery')->nullable();
             $table->timestamps();
         });
     }

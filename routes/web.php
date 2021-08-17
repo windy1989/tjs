@@ -477,6 +477,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('datatable', 'ProjectController@datatable');
                 Route::post('create', 'ProjectController@create');
                 Route::get('get_product', 'ProjectController@getProduct');
+                Route::get('get_delivery', 'ProjectController@getDelivery');
                 Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
                 Route::get('detail/{id}', 'ProjectController@detail');
             });

@@ -16,6 +16,7 @@ class CreatePricingPoliciesTable extends Migration
         Schema::create('pricing_policies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
+            $table->double('cogs')->default(0);
             $table->double('showroom_cost')->default(0);
             $table->double('sales_travel_cost')->default(0);
             $table->double('marketing_cost')->default(0);

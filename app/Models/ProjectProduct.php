@@ -15,6 +15,7 @@ class ProjectProduct extends Model {
         'project_id',
         'product_id',
         'qty',
+        'cogs',
         'price',
         'target_price',
         'recommended_price',

@@ -189,6 +189,24 @@ class Optimize extends Migration
             $table->index('product_id'); 
         });
 
+        Schema::table('project_payments', function (Blueprint $table) {
+            $table->index('project_id'); 
+        });
+
+        Schema::table('project_productions', function (Blueprint $table) {
+            $table->index('project_id'); 
+        });
+
+        Schema::table('project_shipments', function (Blueprint $table) {
+            $table->index('project_id'); 
+        });
+
+        Schema::table('project_delivery', function (Blueprint $table) {
+            $table->index('project_id'); 
+            $table->index('city_id'); 
+            $table->index('delivery_id'); 
+        });
+
         Schema::table('suppliers', function (Blueprint $table) {
             $table->index('country_id'); 
         });
