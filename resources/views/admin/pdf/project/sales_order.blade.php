@@ -209,7 +209,7 @@
 					@endphp
 					@foreach($project->projectProduct as $key => $pp)
 						@php
-							$total     = $pp->price * $pp->qty;
+							$total     = $pp->recommended_price * $pp->qty;
 							$subtotal += ((100 - $pp->discount) / 100) * $total;
 							$discount += ($pp->discount / 100) * $total;
 						@endphp

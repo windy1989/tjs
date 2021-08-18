@@ -518,7 +518,7 @@
                                        <th>Product</th>
                                        <th>Qty</th>
                                        <th>Target Price</th>
-                                       <th>Recommended Price</th>
+                                       <th>Project Price</th>
                                        <th>Discount(%)</th>
                                     </tr>
                                  </thead>
