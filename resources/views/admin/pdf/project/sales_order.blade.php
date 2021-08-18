@@ -179,13 +179,13 @@
 								<td><div style="font-size:10px;"><b>SHIP TO :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery->receiver_name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery->phone }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery->email }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery->city->name }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery->address }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->receiver_name : 'Not set' }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->phone : 'Not set' }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->email : 'Not set' }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->city->name : 'Not set' }}</div>
+						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->address : 'Not set' }}</div>
 						<div style="font-weight:500; font-size:10px;">
-							Fleet : {{ $project->projectDelivery->delivery->transport->fleet }}	
+							Fleet : {{ $project->projectDelivery ? $project->projectDelivery->delivery->transport->fleet : 'Not set' }}	
 						</div>
 					</td>
 				</tr>
@@ -255,6 +255,7 @@
 					@endforeach
 				</tbody>
 				<tfoot>
+					@php $shipping_fee = $project->projectDelivery ? $project->projectDelivery->price : 0;  @endphp
 					<tr>
 						<th colspan="5" style="text-align:right;">SUBTOTAL</th>
 						<th colspan="2" style="text-align:left;">{{ number_format($subtotal, 2, ',', '.') }}</th>
