@@ -243,7 +243,7 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($pp->price, 2, ',', '.') }}
+									Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
