@@ -262,7 +262,7 @@
 					</tr>
 					<tr>
 						<th colspan="5" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($project->projectDelivery->price, 2, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">{{ number_format($shipping_fee, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
 						<th colspan="5" style="text-align:right;">DISCOUNT</th>
@@ -279,7 +279,7 @@
 					@endif
 					<tr>
 						<th colspan="5" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format(($subtotal - $discount) + ($project->projectDelivery->price + $tax), 2, ',', '.') }}</th>
+						<th colspan="2" style="text-align:left;">Rp {{ number_format(($subtotal - $discount) + ($shipping_fee + $tax), 2, ',', '.') }}</th>
 					</tr>
 				</tfoot>
 			</table><br>
