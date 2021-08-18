@@ -13,7 +13,7 @@
                                  <option value="">24</option>
                                  <option value="48" {{ $filter['other']['show'] == 48 ? 'selected' : '' }}>48</option>
                                  <option value="60" {{ $filter['other']['show'] == 60 ? 'selected' : '' }}>60</option>
-                                 <option value="90" {{ $filter['other']['show'] == 90 ? 'selected' : '' }}>90</option>
+                                 <option value="90" {{ $filter['other']['show'] == 100 ? 'selected' : '' }}>100</option>
                               </select>
                            </div>
                         </div>
