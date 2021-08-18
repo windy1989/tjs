@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\City;
+use App\Models\Brand;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Delivery;
+use App\Models\ProjectPay;
 use Illuminate\Http\Request;
 use App\Models\ProjectSample;
 use App\Models\ProjectPayment;
@@ -24,7 +27,7 @@ class ProjectController extends Controller {
     public function index() 
     {
         $data = [
-            'title'   => 'Data Project',
+            'title'   => 'Sales Project',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
             'content' => 'admin.sales.project'
@@ -56,10 +59,7 @@ class ProjectController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%")
                             ->orWhere('code', 'like', "%$search%")
-                            ->orWhereHas('user', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('email', 'like', "%$search%");
-                                });
+                            ->orWhere('email', 'like', "%$search%");
                     });
                 }  
             })
@@ -73,10 +73,7 @@ class ProjectController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%")
                             ->orWhere('code', 'like', "%$search%")
-                            ->orWhereHas('user', function($query) use ($search) {
-                                    $query->where('name', 'like', "%$search%")
-                                        ->orWhere('email', 'like', "%$search%");
-                                });
+                            ->orWhere('email', 'like', "%$search%");
                     });
                 }      
             })
@@ -87,7 +84,7 @@ class ProjectController extends Controller {
             $nomor = $start + 1;
             foreach($query_data as $val) {
                 if($val->progress == 100) {
-                    $action = '<a href="' . url('admin/sales/project/detail/' . $val->id) . '" class="btn bg-warning btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
+                    $action = '<a href="' . url('admin/sales/project/progress/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>';
 
                     $progress = '
                         <div class="progress" style="height:0.875rem;">
@@ -470,6 +467,31 @@ class ProjectController extends Controller {
                         'delivery_id.required'   => 'Please select a transport.'
                     ]);
                     break;
+                
+                case 'step-14':
+                    $validation = Validator::make($request->all(), [
+                        'image'          => 'required|mimes:jpg,jpeg,png',
+                        'date'           => 'required',
+                        'payment'        => 'required',
+                        'payment_method' => 'required',
+                        'nominal'        => 'required'
+                    ], [
+                        'image.required'          => 'Image cannot empty.',
+                        'image.image'             => 'File must be an image.',
+                        'image.mimes'             => 'Image must have an extension jpg, jpeg, png.',
+                        'payment.required'        => 'Please select a payment.',
+                        'payment_method.required' => 'Please select a payment method.',
+                        'nominal.required'        => 'Nominal cannot empty.'
+                    ]);
+                    break;
+
+                case 'step-15':
+                    $validation = Validator::make($request->all(), [
+                        'submit' => 'required'
+                    ], [
+                        'submit.required' => 'Step cannot empty.'
+                    ]);
+                    break;
             }
 
             if($validation->fails()) {
@@ -738,6 +760,37 @@ class ProjectController extends Controller {
                             ->causedBy(session('bo_id'))
                             ->log('Change data project ' . $query->name . ' (Step 13)');
                         break;
+
+                    case 'step-14':
+                        $query->update([
+                            'progress' => $query->progress < 90 ? 90 : $query->progress
+                        ]);
+
+                        ProjectPay::create([
+                            'project_id'     => $query->id,
+                            'image'          => $request->file('image')->store('public/project'),
+                            'date'           => $request->date,
+                            'nominal'        => $request->nominal,
+                            'payment'        => $request->payment,
+                            'payment_method' => $request->payment_method
+                        ]);
+
+                        activity()
+                            ->performedOn(new Project())
+                            ->causedBy(session('bo_id'))
+                            ->log('Change data project ' . $query->name . ' (Step 14)');
+                        break;
+
+                    case 'step-15':
+                        $query->update([
+                            'progress' => $query->progress < 100 ? 100 : $query->progress
+                        ]);
+
+                        activity()
+                            ->performedOn(new Project())
+                            ->causedBy(session('bo_id'))
+                            ->log('Change data project ' . $query->name . ' (Step 15)');
+                        break;
                 }
 
                 return redirect('admin/sales/project/progress/' . $id . '?' . $step . '=1#' . $step)
@@ -754,6 +807,23 @@ class ProjectController extends Controller {
 
             return view('admin.layouts.index', ['data' => $data]);
         }
+    }
+
+    public function print($param, $id)
+    {
+        $project_id = base64_decode($id);
+        $project    = Project::find($project_id);
+
+        if(!$project) {
+            abort(404);
+        }
+
+        $pdf = PDF::loadView('admin.pdf.project.' . $param, [
+            'project' => $project,
+            'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+        ]);
+
+        return $pdf->stream('Invoice Project ' . str_replace('/', '-', $project->code) . '.pdf');
     }
 
 }

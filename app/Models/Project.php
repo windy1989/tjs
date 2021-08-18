@@ -151,4 +151,9 @@ class Project extends Model {
         return $this->hasOne('App\Models\ProjectDelivery');
     }
 
+    public function projectPay()
+    {
+        return $this->hasOne('App\Models\ProjectPay');
+    }
+
 }

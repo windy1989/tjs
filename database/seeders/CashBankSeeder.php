@@ -38,6 +38,7 @@ class CashBankSeeder extends Seeder
                 'debit'        => $cbd['debit'],
                 'credit'       => $cbd['credit'],
                 'nominal'      => $cbd['nominal'],
+                'note'         => $cbd['note'],
                 'created_at'   => $cbd['created_at'],
                 'updated_at'   => $cbd['updated_at']
             ]);

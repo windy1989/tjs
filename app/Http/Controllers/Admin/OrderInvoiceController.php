@@ -261,12 +261,12 @@ class OrderInvoiceController extends Controller {
     public function print($id)
     {
         $order = Order::find($id);
-        $pdf   = PDF::loadView('admin.pdf.invoice', [
+        $pdf   = PDF::loadView('admin.pdf.retail.invoice', [
             'order' => $order,
             'brand' => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
         ]);
 
-        return $pdf->stream('Invoice ' . str_replace('/', '-', $order->invoice) . '.pdf');
+        return $pdf->stream('Invoice Retail ' . str_replace('/', '-', $order->invoice) . '.pdf');
     }
 
 }

@@ -154,12 +154,12 @@ class OrderDoController extends Controller {
     public function print($id)
     {
         $delivery_order = OrderDelivery::find($id);
-        $pdf            = PDF::loadView('admin.pdf.delivery_order', [
+        $pdf            = PDF::loadView('admin.pdf.retail.delivery_order', [
             'delivery_order' => $delivery_order,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
         ]);
 
-        return $pdf->stream('Delivery Order ' . str_replace('/', '-', $delivery_order->delivery_order) . '.pdf');
+        return $pdf->stream('Delivery Order Retail ' . str_replace('/', '-', $delivery_order->delivery_order) . '.pdf');
     }
 
 }

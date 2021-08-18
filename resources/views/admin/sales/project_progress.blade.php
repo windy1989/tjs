@@ -10,7 +10,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Progress Data Project</span>
+					<span class="font-weight-semibold">Progress Sales Project</span>
 				</h4>
 			</div>
          <div class="header-elements">
@@ -35,71 +35,68 @@
 	<div class="content">
 		<div class="d-block d-flex align-items-start flex-column flex-md-row">
          <div class="order-2 order-md-1 w-100">
-            <form action="{{ url()->full() }}" method="POST">
-               @csrf
-               <div class="card" id="step-1">
-                  <div class="card-body">
-                     <h5 class="card-title" id="scrollspy">Project Information</h5>
-                     <div class="form-group"><hr></div>
-                     <table cellpadding="10" cellspacing="0" width="100%">
-                        <tbody>
-                           <tr>
-                              <th width="20%" class="align-middle">Project Name</th>
-                              <td class="align-middle">: {{ $project->name }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Phone</th>
-                              <td class="align-middle">: {{ $project->phone }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Email</th>
-                              <td class="align-middle">: {{ $project->email }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Constructor Name</th>
-                              <td class="align-middle">: {{ $project->constructor }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Country</th>
-                              <td class="align-middle">: {{ $project->country->name }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">City</th>
-                              <td class="align-middle">: {{ $project->city->name }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Timeline</th>
-                              <td class="align-middle">: {{ date('d F Y', strtotime($project->timeline)) }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Project Manager</th>
-                              <td class="align-middle">: {{ $project->manager }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Consultant Name</th>
-                              <td class="align-middle">: {{ $project->consultant }}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Owner</th>
-                              <td class="align-middle">: {!! $project->owner !!}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Payment Method</th>
-                              <td class="align-middle">: {!! $project->paymentMethod() !!}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">Supply Method</th>
-                              <td class="align-middle">: {!! $project->supplyMethod() !!}</td>
-                           </tr>
-                           <tr>
-                              <th width="20%" class="align-middle">PPN</th>
-                              <td class="align-middle">: {!! $project->ppn() !!}</td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </div>
+            <div class="card" id="step-1">
+               <div class="card-body">
+                  <h5 class="card-title" id="scrollspy">Project Information</h5>
+                  <div class="form-group"><hr></div>
+                  <table cellpadding="10" cellspacing="0" width="100%">
+                     <tbody>
+                        <tr>
+                           <th width="20%" class="align-middle">Project Name</th>
+                           <td class="align-middle">: {{ $project->name }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Phone</th>
+                           <td class="align-middle">: {{ $project->phone }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Email</th>
+                           <td class="align-middle">: {{ $project->email }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Constructor Name</th>
+                           <td class="align-middle">: {{ $project->constructor }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Country</th>
+                           <td class="align-middle">: {{ $project->country->name }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">City</th>
+                           <td class="align-middle">: {{ $project->city->name }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Timeline</th>
+                           <td class="align-middle">: {{ date('d F Y', strtotime($project->timeline)) }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Project Manager</th>
+                           <td class="align-middle">: {{ $project->manager }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Consultant Name</th>
+                           <td class="align-middle">: {{ $project->consultant }}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Owner</th>
+                           <td class="align-middle">: {!! $project->owner !!}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Payment Method</th>
+                           <td class="align-middle">: {!! $project->paymentMethod() !!}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">Supply Method</th>
+                           <td class="align-middle">: {!! $project->supplyMethod() !!}</td>
+                        </tr>
+                        <tr>
+                           <th width="20%" class="align-middle">PPN</th>
+                           <td class="align-middle">: {!! $project->ppn() !!}</td>
+                        </tr>
+                     </tbody>
+                  </table>
                </div>
-            </form>
+            </div>
             <div class="card" id="step-2">
                <form action="{{ url()->full() }}" method="POST">
                   @csrf
@@ -574,7 +571,7 @@
                         <div class="text-center">
                            <span class="font-weight-semibold">Click the link below to view the sales order</span>
                            <div class="form-group">
-                              <a href="{{ url('admin/sales/project/sales_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
+                              <a href="{{ url('admin/sales/project/print/sales_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
                            </div>
                         </div>
                         @if($project->progress < 40)
@@ -599,7 +596,7 @@
                         <div class="text-center">
                            <span class="font-weight-semibold">Click the link below to view the purchase order</span>
                            <div class="form-group">
-                              <a href="{{ url('admin/sales/project/purchase_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
+                              <a href="{{ url('admin/sales/project/print/purchase_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
                            </div>
                         </div>
                         @if($project->progress < 43)
@@ -1214,14 +1211,6 @@
                                     <textarea name="address" id="address" class="form-control" placeholder="Enter address" onkeyup="checkSubmitButton()" required>{{ old('address') }}</textarea>
                                  </div>
                               </div>
-                              <div class="col-md-12">
-                                 <div class="form-group"><hr class="mt-0"></div>
-                              </div>
-                              <div class="col-md-12">
-                                 <div class="text-center">
-                                    <h5 class="font-weight-bold text-danger">Total Price Delivery : <span id="shipping_fee">0</span></h5>
-                                 </div>
-                              </div>
                            </div>
                         @endif
                         @if($project->progress < 70)
@@ -1229,6 +1218,198 @@
                            <div class="form-group">
                               <div class="text-right">
                                  <button type="submit" name="submit" value="step-13" class="btn bg-purple submit_delivery" disabled><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 70)
+               <div class="card" id="step-14">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Process Payment</h5>
+                        <div class="form-group"><hr></div>
+                        @if($project->projectPay)
+                           <div class="row justify-content-center">
+                              <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Date :</label>
+										      <div class="form-control-plaintext">{{ $project->projectPay->date }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Nominal :</label>
+										      <div class="form-control-plaintext">
+                                       {{ number_format($project->projectPay->nominal, 2, ',', '.') }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Payment :</label>
+                                    <div class="form-control-plaintext">{{ $project->projectPay->payment() }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label class="font-weight-semibold">Payment Method :</label>
+                                    <div class="form-control-plaintext">{{ $project->projectPay->paymentMethod() }}</div>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset(Storage::url($project->projectPay->image)) }}" data-lightbox="Image" data-title="Proforma Invoice">
+                                          <img src="{{ asset(Storage::url($project->projectPay->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @else
+                           @if(isset($_GET['step-14']))
+                              @if($errors->any())
+                                 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    <ul>
+                                       @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              @elseif(session('success'))
+                                 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                       <span>&times;</span>
+                                    </button>
+                                    {{ session('success') }}
+                                 </div>
+                              @endif
+                           @endif
+                           <div class="row justify-content-center">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Date :<sup class="text-danger">*</sup></label>
+                                    <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Nominal :<sup class="text-danger">*</sup></label>
+                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Payment :<sup class="text-danger">*</sup></label>
+                                    <select name="payment" id="payment" class="custom-select">
+                                       <option value="">-- Choose --</option>
+                                       <option value="1" {{ old('payment') == 1 ? 'selected' : '' }}>Cash</option>
+                                       <option value="2" {{ old('payment') == 2 ? 'selected' : '' }}>Credit</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Payment Method :<sup class="text-danger">*</sup></label>
+                                    <select name="payment_method" id="payment_method" class="custom-select">
+                                       <option value="">-- Choose --</option>
+                                       <option value="1" {{ old('payment_method') == 1 ? 'selected' : '' }}>DP</option>
+                                       <option value="2" {{ old('payment_method') == 2 ? 'selected' : '' }}>Non DP</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                 <div class="form-group"><hr class="mt-0"></div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                       <div class="custom-file">
+                                          <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <div class="text-center">
+                                       <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+                                          <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+                                       </a>
+                                       <p class="text-danger font-italic mt-3">
+                                          The only files supported are <b>jpeg, jpg, png</b>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        @endif
+                        @if($project->progress < 90)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-14" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                              </div>
+                           </div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+            @if($project->progress >= 90)
+               <div class="card" id="step-14">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Done</h5>
+                        <div class="form-group"><hr></div>
+                        @if(isset($_GET['step-14']))
+                           @if($errors->any())
+                              <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                 <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                 </button>
+                                 <ul>
+                                    @foreach ($errors->all() as $error)
+                                       <li>{{ $error }}</li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           @elseif(session('success'))
+                              <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                 <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                 </button>
+                                 {{ session('success') }}
+                              </div>
+                           @endif
+                        @endif
+                        <div class="text-center">
+                           @if($project->progress >= 100)
+                              <div class="text-center">
+                                 <i class="icon-checkmark-circle text-success font-weight-bold" style="font-size:50px;"></i>
+                                 <div class="font-weight-bold mt-2">
+                                    <h5 class="text-uppercase font-weight-bold">Progress Complete</h5>
+                                 </div>
+                                 <p class="text-muted">Project progress has been completed up to 100%</p>
+                              </div>
+                           @else
+                              <h6 class="font-italic text-danger font-weight-bold">*) Please press the button below if you want to complete the project</h6>
+                           @endif
+                        </div>
+                        @if($project->progress < 100)
+                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+                              <div class="text-right">
+                                 <button type="submit" name="submit" value="step-15" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save & Finish</button>
                               </div>
                            </div>
                         @endif

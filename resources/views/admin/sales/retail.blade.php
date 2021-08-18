@@ -4,7 +4,7 @@
 			<div class="page-title d-flex">
 				<h4>
 					<i class="icon-arrow-left52 mr-2"></i> 
-					<span class="font-weight-semibold">Data Retail</span>
+					<span class="font-weight-semibold">Sales Retail</span>
 				</h4>
 			</div>
 			<div class="header-elements">

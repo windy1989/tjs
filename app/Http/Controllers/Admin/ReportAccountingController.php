@@ -323,7 +323,7 @@ class ReportAccountingController extends Controller {
             ->where('status', 1)
             ->offset($start)
             ->limit($length)
-            ->orderBy($order, $dir)
+            ->orderBy('code', 'asc')
             ->get();
 
         $total_filtered = Coa::where(function($query) use ($search, $request) {

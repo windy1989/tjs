@@ -158,7 +158,7 @@
                </div>
                <div class="form-group"><hr></div>
                <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                      <div class="form-group">
                         <label>Debit :<sup class="text-danger">*</sup></label>
                         <select name="debit_detail" id="debit_detail" class="select2">
@@ -169,7 +169,7 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                      <div class="form-group">
                         <label>Credit :</label>
                         <select name="credit_detail" id="credit_detail" class="select2">
@@ -180,15 +180,20 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                      <div class="form-group">
                         <label>Nominal :</label>
                         <input type="text" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0">
                      </div>
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-md-6">
                      <div class="form-group">
-                        <label class="text-white">.</label>
+                        <label>Note :</label>
+                        <input type="text" name="note_detail" id="note_detail" class="form-control" placeholder="Enter note">
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="form-group">
                         <button type="button" class="btn bg-success col-12" onclick="addContent()"><i class="icon-plus22"></i></button>
                      </div>
                   </div>
@@ -200,6 +205,7 @@
                            <th>Debit</th>
                            <th>Credit</th>
                            <th>Nominal</th>
+                           <th>Note</th>
                            <th>Delete</th>
                         </tr>
                      </thead>
@@ -311,12 +317,15 @@
       let debit_detail   = $('#debit_detail option:selected');
       let credit_detail  = $('#credit_detail option:selected');
       let nominal_detail = $('#nominal_detail');
+      let note_detail    = $('#note_detail');
 
-      if(debit_detail.val() && credit_detail.val() && nominal_detail.val()) {
+      if(debit_detail.val() && credit_detail.val() && nominal_detail.val() && note_detail.val()) {
          $('#data_content').append(`
             <tr class="text-center">
                <input type="hidden" name="debit_detail[]" value="` + debit_detail.val() + `">
                <input type="hidden" name="credit_detail[]" value="` + credit_detail.val() + `">
+               <input type="hidden" name="note_detail[]" value="` + note_detail.val() + `">
+
                <td class="align-middle">` + debit_detail.text() + `</td>   
                <td class="align-middle">` + credit_detail.text() + `</td>   
                <td class="align-middle">
@@ -324,6 +333,7 @@
                      <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `">
                   </div>
                </td>   
+               <td class="align-middle">` + note_detail.text() + `</td>   
                <td class="align-middle">
                   <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                </td>
@@ -504,6 +514,8 @@
                   <tr class="text-center">
                      <input type="hidden" name="debit_detail[]" value="` + val.debit_id + `">
                      <input type="hidden" name="credit_detail[]" value="` + val.credit_id + `">
+                     <input type="hidden" name="note_detail[]" value="` + val.note + `">
+
                      <td class="align-middle">` + val.debit_name + `</td>   
                      <td class="align-middle">` + val.credit_name + `</td>   
                      <td class="align-middle">
@@ -511,6 +523,7 @@
                            <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `">
                         </div>
                      </td>   
+                     <td class="align-middle">` + val.note + `</td>   
                      <td class="align-middle">
                         <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                      </td>

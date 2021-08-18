@@ -206,14 +206,14 @@ class OrderPoController extends Controller {
         }
 
 
-        $pdf = PDF::loadView('admin.pdf.purchase_order', [
+        $pdf = PDF::loadView('admin.pdf.retail.purchase_order', [
             'purchase_order' => $purchase_order,
             'shipping'       => $order->shipping - $shipping,
             'discount'       => $shipping,
             'brand'          => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
         ]);
 
-        return $pdf->stream('Purchase Order ' . str_replace('/', '-', $purchase_order->purchase_order) . '.pdf');
+        return $pdf->stream('Purchase Order Retail ' . str_replace('/', '-', $purchase_order->purchase_order) . '.pdf');
     }
 
 }

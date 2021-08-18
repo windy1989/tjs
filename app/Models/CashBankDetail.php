@@ -15,7 +15,8 @@ class CashBankDetail extends Model {
         'cash_bank_id',
         'debit',
         'credit',
-        'nominal'
+        'nominal',
+        'note'
     ];
 
     public function coaDebit()

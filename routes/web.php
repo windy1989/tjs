@@ -478,6 +478,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('create', 'ProjectController@create');
                 Route::get('get_product', 'ProjectController@getProduct');
                 Route::get('get_delivery', 'ProjectController@getDelivery');
+                Route::get('print/{param}/{id}', 'ProjectController@print');
                 Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
                 Route::get('detail/{id}', 'ProjectController@detail');
             });

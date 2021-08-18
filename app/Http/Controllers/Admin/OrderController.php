@@ -13,7 +13,7 @@ class OrderController extends Controller {
     public function index()
     {
         $data = [
-            'title'    => 'Data Retail',
+            'title'    => 'Sales Retail',
             'customer' => Customer::whereNotNull('verification')->get(),
             'content'  => 'admin.sales.retail'
         ];

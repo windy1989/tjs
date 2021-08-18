@@ -19,6 +19,7 @@ class CreateCashBankDetailsTable extends Migration
             $table->bigInteger('debit');
             $table->bigInteger('credit');
             $table->double('nominal');
+            $table->text('note');
             $table->timestamps();
         });
     }

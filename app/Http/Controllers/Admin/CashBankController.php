@@ -248,7 +248,8 @@ class CashBankController extends Controller {
                         'cash_bank_id' => $query->id,
                         'debit'        => $dd,
                         'credit'       => $request->credit_detail[$key],
-                        'nominal'      => $request->nominal_detail[$key]
+                        'nominal'      => $request->nominal_detail[$key],
+                        'note'         => $request->note_detail[$key]
                     ]);
 
                     Journal::insert([
@@ -294,7 +295,8 @@ class CashBankController extends Controller {
                 'debit_name'  => '[' . $cbd->coaDebit->code . '] ' . $cbd->coaDebit->name,
                 'credit_id'   => $cbd->credit,
                 'credit_name' => '[' . $cbd->coaCredit->code . '] ' . $cbd->coaCredit->name,
-                'nominal'     => $cbd->nominal
+                'nominal'     => $cbd->nominal,
+                'note'        => $cbd->note
             ];
         }
 
@@ -355,7 +357,8 @@ class CashBankController extends Controller {
                         'cash_bank_id' => $query->id,
                         'debit'        => $dd,
                         'credit'       => $request->credit_detail[$key],
-                        'nominal'      => $request->nominal_detail[$key]
+                        'nominal'      => $request->nominal_detail[$key],
+                        'note'         => $request->note_detail[$key]
                     ]);
 
                     Journal::insert([
