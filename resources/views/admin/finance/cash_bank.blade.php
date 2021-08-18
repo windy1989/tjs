@@ -333,7 +333,7 @@
                      <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `">
                   </div>
                </td>   
-               <td class="align-middle">` + note_detail.text() + `</td>   
+               <td class="align-middle">` + note_detail.val() + `</td>   
                <td class="align-middle">
                   <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                </td>
