@@ -343,6 +343,7 @@
          $('#debit_detail').val(null).change();
          $('#credit_detail').val(null).change();
          nominal_detail.val(null);
+         note_detail.val(null);
       } else {
          swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
       }
