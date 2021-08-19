@@ -69,9 +69,15 @@
                                     <div class="sale-flash badge {{ $p->availability()->color }} p-2">{{ $p->availability()->status }}</div>
                                  </div>
                                  <div class="product-desc p-3">
+                                    <div class="product-title mb-0">
+                                       <h4 class="limit-text-list-product-1 mb-0">
+                                          <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->code() }}</a>
+                                       </h4>
+                                    </div>
+                                    <hr class="mb-2 mt-2">
                                     <div class="product-title">
-                                       <h4 class="mb-2 font-weight-normal limit-text-list-product">
-                                          <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-wight-semibold text-dark" style="font-size:13.5px;">{{ $p->name() }}</a>
+                                       <h4 class="mb-3 limit-text-list-product-2">
+                                          <a href="{{ url('product/detail/' . Str::slug($p->name()) . '?q=' . base64_encode($p->id)) }}" class="font-weight-normal text-muted" style="font-size:12px;">{{ $p->name() }}</a>
                                        </h4>
                                     </div>
                                     <div class="product-price font-weight-bold">

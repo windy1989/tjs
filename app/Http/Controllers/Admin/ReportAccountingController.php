@@ -359,6 +359,9 @@ class ReportAccountingController extends Controller {
                     ->whereMonth('created_at', date('m', strtotime($request->date)))
                     ->sum('nominal');
 
+                $end_balance_debit  = $balance_debit + $change_debit - $change_credit;
+                $end_balance_credit = $balance_credit - $change_debit + $change_credit;
+
                 $response['data'][] = [
                     $nomor,
                     $val->name,
@@ -366,8 +369,8 @@ class ReportAccountingController extends Controller {
                     number_format($balance_credit, 2, ',', '.'),
                     number_format($change_debit, 2, ',', '.'),
                     number_format($change_credit, 2, ',', '.'),
-                    number_format($balance_debit + $change_debit, 2, ',', '.'),
-                    number_format($balance_credit + $change_credit, 2, ',', '.')
+                    number_format($end_balance_debit > 0 ? $end_balance_debit : 0, 2, ',', '.'),
+                    number_format($end_balance_credit > 0 ? $end_balance_credit : 0, 2, ',', '.')
                 ];
 
                 $nomor++;

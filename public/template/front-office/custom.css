@@ -322,9 +322,13 @@ input:disabled {
    color: #30302E;
 }
 
-.limit-text-list-product {
-   font-size: 15px;
-   height: 41px;
+.limit-text-list-product-1 {
+   height: 25px;
+   overflow: hidden;
+}
+
+.limit-text-list-product-2 {
+   height: 25px;
    overflow: hidden;
 }
 
