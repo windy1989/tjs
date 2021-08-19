@@ -198,6 +198,10 @@ class CashBankController extends Controller {
                         <b>[NOMINAL]</b>&nbsp;&nbsp;&nbsp;
                         <span class="text-muted">' . number_format($d->nominal, 2, ',', '.') . '</span>
                     </div>
+                    <div>
+                        <b>[NOTE]</b>&nbsp;&nbsp;&nbsp;
+                        <span class="text-muted">' . $d->note . '</span>
+                    </div>
                 </div>
             ';
         }

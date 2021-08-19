@@ -257,18 +257,17 @@ class ReportAccountingController extends Controller {
             }
 
             if($j->journalable_type == 'cash_banks') {
-                $code        = 'Code : ' . '<span class="font-italic">' . $j->journalable->code . '</span>';
-                $description = $j->journalable->description;
+                foreach($j->journalable->cashBankDetail as $cbd) {
+                    $string .= '
+                        <div class="list-feed-item">
+                            <div class="text-muted">' . date('d-m-Y', strtotime($cbd->created_at)) . ' | ' . $type . '</div>
+                            <div>' . $j->journalable->code . '</div>
+                            <div>' . $cbd->note . '</div>
+                            <div><span class="font-weight-bold">' . number_format($cbd->nominal, 2, ',', '.') . '</span></div>
+                        </div>
+                    ';
+                }
             }
-
-            $string .= '
-                <div class="list-feed-item">
-                    <div class="text-muted">' . date('d-m-Y', strtotime($j->created_at)) . ' | ' . $type . '</div>
-                    <div>' . $code . '</div>
-                    <div>' . $description . '</div>
-                    <div><span class="font-weight-bold">' . number_format($j->nominal, 2, ',', '.') . '</span></div>
-                </div>
-            ';
         }
 
         $string .= '</div>';
