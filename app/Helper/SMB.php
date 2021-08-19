@@ -133,7 +133,7 @@ class SMB {
       $owner_ledger_debit     = Journal::where('debit', $owner_ledger->id)->whereRaw($where_raw)->sum('nominal');
       $owner_ledger_credit    = Journal::where('credit', $owner_ledger->id)->whereRaw($where_raw)->sum('nominal');
       $total_owner_ledger     = $owner_ledger_debit - $owner_ledger_credit;
-      $grandtotal_receivable += $total_advance_purchase;
+      $grandtotal_receivable += $total_owner_ledger;
 
       $employee_ledger        = Coa::where('code', '1.100.05')->first();
       $employee_ledger_debit  = Journal::where('debit', $employee_ledger->id)->whereRaw($where_raw)->sum('nominal');
