@@ -327,7 +327,7 @@ class ReportAccountingController extends Controller {
 
                 $response['data'][] = [
                     $nomor,
-                    $explode_code[0],
+                    $val->name,
                     number_format($balance_debit, 2, ',', '.'),
                     number_format($balance_credit, 2, ',', '.'),
                     number_format($change_debit, 2, ',', '.'),
