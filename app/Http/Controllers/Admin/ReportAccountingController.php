@@ -76,13 +76,7 @@ class ReportAccountingController extends Controller {
         $dir    = $request->input('order.0.dir');
         $search = $request->input('search.value');
 
-        $total_data = Coa::whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->whereColumn('journals.debit', 'coas.id')
-                    ->orWhereColumn('journals.credit', 'coas.id');
-            })
-            ->where('status', 1)
+        $total_data = Coa::where('status', 1)
             ->count();
         
         $query_data = Coa::where(function($query) use ($search, $request) {
@@ -96,29 +90,10 @@ class ReportAccountingController extends Controller {
                     $query->where('id', $request->coa_id);
                 }
             })
-            ->whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->where(function($query) use ($request) {
-                        $query->whereColumn('journals.debit', 'coas.id')
-                            ->orWhereColumn('journals.credit', 'coas.id');
-
-                        if($request->start_date && $request->finsih_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        } else if($request->start_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
-                        } else if($request->finish_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->finish_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        }
-                    });
-            })
             ->where('status', 1)
             ->offset($start)
             ->limit($length)
-            ->orderBy($order, $dir)
+            ->orderBy('code', 'asc')
             ->get();
 
         $total_filtered = Coa::where(function($query) use ($search, $request) {
@@ -131,25 +106,6 @@ class ReportAccountingController extends Controller {
                 if($request->coa_id) {
                     $query->where('id', $request->coa_id);
                 }
-            })
-            ->whereExists(function($query) use ($request) {
-                $query->selectRaw(1)
-                    ->from('journals')
-                    ->where(function($query) use ($request) {
-                        $query->whereColumn('journals.debit', 'coas.id')
-                            ->orWhereColumn('journals.credit', 'coas.id');
-
-                        if($request->start_date && $request->finsih_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        } else if($request->start_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->start_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
-                        } else if($request->finish_date) {
-                            $query->whereDate('journals.created_at', '>=', date('Y-m-1', strtotime($request->finish_date)))
-                                ->whereDate('journals.created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
-                        }
-                    });
             })
             ->where('status', 1)
             ->count();
@@ -275,7 +231,7 @@ class ReportAccountingController extends Controller {
         if($journal->count() > 0) {
             return response()->json($string);
         } else {
-            return response()->json('<p class="font-weight-bold font-italic mt-2">Order Not Found</p>');
+            return response()->json('<p class="font-weight-bold font-italic mt-2">Transaction Not Found</p>');
         }
     }
 
@@ -299,8 +255,7 @@ class ReportAccountingController extends Controller {
             'balance_credit',
             'change_debit',
             'change_credit',
-            'end_debit',
-            'end_credit'
+            'balance'
         ];
 
         $start  = $request->start;
@@ -359,8 +314,8 @@ class ReportAccountingController extends Controller {
                     ->whereMonth('created_at', date('m', strtotime($request->date)))
                     ->sum('nominal');
 
-                $end_balance_debit  = $balance_debit + $change_debit - $change_credit;
-                $end_balance_credit = $balance_credit - $change_debit + $change_credit;
+                $total_balance = ($balance_debit + $change_debit) - ($balance_credit + $change_credit);
+                $color_balance = $total_balance >= 0 ? 'text-success' : 'text-danger';
 
                 $response['data'][] = [
                     $nomor,
@@ -369,8 +324,7 @@ class ReportAccountingController extends Controller {
                     number_format($balance_credit, 2, ',', '.'),
                     number_format($change_debit, 2, ',', '.'),
                     number_format($change_credit, 2, ',', '.'),
-                    number_format($end_balance_debit > 0 ? $end_balance_debit : 0, 2, ',', '.'),
-                    number_format($end_balance_credit > 0 ? $end_balance_credit : 0, 2, ',', '.')
+                    '<span class="font-weight-bold ' . $color_balance . '">' . number_format($total_balance, 2, ',', '.') . '</span>'
                 ];
 
                 $nomor++;
