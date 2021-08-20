@@ -39,7 +39,8 @@
                         <th>Balance Credit</th>
                         <th>Change Debit</th>
                         <th>Change Credit</th>
-                        <th>Balance</th>
+                        <th>End Balance Debit</th>
+                        <th>End Balance Credit</th>
                      </tr>
                   </thead>
                </table>
@@ -88,7 +89,8 @@
             { name: 'balance_credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'change_debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
             { name: 'change_credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
-            { name: 'balance', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
+            { name: 'end_balance_debit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' },
+            { name: 'end_balance_credit', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
       }); 
    }

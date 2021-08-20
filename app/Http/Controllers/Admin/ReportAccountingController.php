@@ -255,7 +255,8 @@ class ReportAccountingController extends Controller {
             'balance_credit',
             'change_debit',
             'change_credit',
-            'balance'
+            'end_balance_debit',
+            'end_balance_credit'
         ];
 
         $start  = $request->start;
@@ -314,17 +315,25 @@ class ReportAccountingController extends Controller {
                     ->whereMonth('created_at', date('m', strtotime($request->date)))
                     ->sum('nominal');
 
-                $total_balance = ($balance_debit + $change_debit) - ($balance_credit + $change_credit);
-                $color_balance = $total_balance >= 0 ? 'text-success' : 'text-danger';
+
+                $explode_code = explode('.', $val->code);
+                if($explode_code[0] == 1 || $explode_code[0] == 5 || $explode_code[0] == 6 || $explode_code[0] == 7) {
+                    $end_balance_debit  = $balance_debit + $change_debit - $change_credit;
+                    $end_balance_credit = 0;
+                } else {
+                    $end_balance_debit  = 0;
+                    $end_balance_credit = $balance_credit + $change_credit - $change_debit;
+                }
 
                 $response['data'][] = [
                     $nomor,
-                    $val->name,
+                    $explode_code[0],
                     number_format($balance_debit, 2, ',', '.'),
                     number_format($balance_credit, 2, ',', '.'),
                     number_format($change_debit, 2, ',', '.'),
                     number_format($change_credit, 2, ',', '.'),
-                    '<span class="font-weight-bold ' . $color_balance . '">' . number_format($total_balance, 2, ',', '.') . '</span>'
+                    number_format($end_balance_debit, 2, ',', '.'),
+                    number_format($end_balance_credit, 2, ',', '.')
                 ];
 
                 $nomor++;
