@@ -2,6 +2,153 @@
    <div class="content-wrap p-0 mt-4">
       <div class="container clearfix">
          <form method="GET" class="mt-0" action="{{ url('product') }}">
+            <div id="side-panel" class="dark side-panel-filter d-xl-none d-xl-block">
+               <div class="side-panel-wrap">
+                  <div class="widget clearfix">
+                     <h4 class="mb-4">Filter</h4>
+                     <div class="sidebar">
+                        <div class="sidebar-widgets-wrap">
+                           <div class="clearfix">
+                              <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
+                           </div>
+                           <div class="form-group"><hr></div>
+                           <div class="toggle toggle-border">
+                              <div class="toggle-header">
+                                 <div class="toggle-icon">
+                                    <i class="toggle-closed icon-line-plus"></i>
+                                    <i class="toggle-open icon-line-minus"></i>
+                                 </div>
+                                 <div class="toggle-title">
+                                    <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
+                                 </div>
+                              </div>
+                              <div class="toggle-content">
+                                 <ul class="sidebar-filter-product mb-0">
+                                    @foreach($brand as $b)
+                                       <li>
+                                          <div class="form-check">
+                                             <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
+                                          </div>
+                                       </li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           </div>
+                           @foreach($category as $c)
+                              <div class="toggle toggle-border">
+                                 <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                       <i class="toggle-closed icon-line-plus"></i>
+                                       <i class="toggle-open icon-line-minus"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                       <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="toggle-content">
+                                    <ul class="sidebar-filter-product mb-0">
+                                       @foreach($c->sub() as $s)
+                                          @if($s->sub()->count() > 0)
+                                             @foreach($s->sub() as $val)
+                                                <li>
+                                                   <div class="form-check">
+                                                      <input type="checkbox" class="form-check-input" name="category[]" id="{{ $val->slug }}" value="{{ $val->slug }}" onchange="clickFilter(this)" {{ in_array($val->slug, $filter['category']) ? 'checked' : '' }}>
+                                                      <label class="form-check-label font-weight-normal font-size-11" for="{{ $val->slug }}">{{ $val->name }}</label>
+                                                   </div>
+                                                </li>
+                                             @endforeach
+                                          @else
+                                             <li>
+                                                <div class="form-check">
+                                                   <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s->slug }}" value="{{ $s->slug }}" onchange="clickFilter(this)" {{ in_array($s->slug, $filter['category']) ? 'checked' : '' }}>
+                                                   <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->slug }}">{{ $s->name }}</label>
+                                                </div>
+                                             </li>
+                                          @endif
+                                       @endforeach
+                                    </ul>
+                                 </div>
+                              </div>
+                           @endforeach
+                           <div class="toggle toggle-border">
+                              <div class="toggle-header">
+                                 <div class="toggle-icon">
+                                    <i class="toggle-closed icon-line-plus"></i>
+                                    <i class="toggle-open icon-line-minus"></i>
+                                 </div>
+                                 <div class="toggle-title">
+                                    <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
+                                 </div>
+                              </div>
+                              <div class="toggle-content">
+                                 <ul class="sidebar-filter-product mb-0">
+                                    @foreach($size as $s)
+                                       <li>
+                                          <div class="form-check">
+                                             <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
+                                          </div>
+                                       </li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="toggle toggle-border">
+                              <div class="toggle-header">
+                                 <div class="toggle-icon">
+                                    <i class="toggle-closed icon-line-plus"></i>
+                                    <i class="toggle-open icon-line-minus"></i>
+                                 </div>
+                                 <div class="toggle-title">
+                                    <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
+                                 </div>
+                              </div>
+                              <div class="toggle-content">
+                                 <ul class="sidebar-filter-product mb-0">
+                                    @foreach($color as $c)
+                                       <li>
+                                          <div class="form-check">
+                                             <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
+                                          </div>
+                                       </li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="toggle toggle-border">
+                              <div class="toggle-header">
+                                 <div class="toggle-icon">
+                                    <i class="toggle-closed icon-line-plus"></i>
+                                    <i class="toggle-open icon-line-minus"></i>
+                                 </div>
+                                 <div class="toggle-title">
+                                    <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
+                                 </div>
+                              </div>
+                              <div class="toggle-content">
+                                 <ul class="sidebar-filter-product mb-0">
+                                    @foreach($pattern as $p)
+                                       <li>
+                                          <div class="form-check">
+                                             <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
+                                             <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
+                                          </div>
+                                       </li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <button type="submit" class="button button-3d button-mini bg-teal col-12 font-size-11">Filter</button>
+                              <a href="{{ url('product') }}" class="button button-3d button-mini button-red text-center col-12 font-size-11">Reset</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <div class="row gutter-50 justify-content-center col-mb-80">
                <div class="postcontent col-lg-12 order-lg-last">
                   <div class="row mb-3">
@@ -102,156 +249,6 @@
       </div>
    </div>
 </section>
-
-<div id="side-panel" class="dark side-panel-filter d-xl-none d-xl-block">
-   <div class="side-panel-wrap">
-      <div class="widget clearfix">
-         <h4 class="mb-4">Filter</h4>
-         <div class="sidebar">
-            <div class="sidebar-widgets-wrap">
-               <form method="GET" class="mt-0" action="{{ url('product') }}">
-                  <div class="clearfix">
-                     <input type="text" class="form-control no-outline font-size-12" name="search" id="search" value="{{ $filter['other']['search'] ? $filter['other']['search'] : '' }}" placeholder="Search ...">
-                  </div>
-                  <div class="form-group"><hr></div>
-                  <div class="toggle toggle-border">
-                     <div class="toggle-header">
-                        <div class="toggle-icon">
-                           <i class="toggle-closed icon-line-plus"></i>
-                           <i class="toggle-open icon-line-minus"></i>
-                        </div>
-                        <div class="toggle-title">
-                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Brand</h4>
-                        </div>
-                     </div>
-                     <div class="toggle-content">
-                        <ul class="sidebar-filter-product mb-0">
-                           @foreach($brand as $b)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="brand[]" id="panel-{{ $b->code }}" value="{{ $b->code }}" {{ in_array($b->code, $filter['brand']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $b->code }}">{{ $b->name }}</label>
-                                 </div>
-                              </li>
-                           @endforeach
-                        </ul>
-                     </div>
-                  </div>
-                  @foreach($category as $c)
-                     <div class="toggle toggle-border">
-                        <div class="toggle-header">
-                           <div class="toggle-icon">
-                              <i class="toggle-closed icon-line-plus"></i>
-                              <i class="toggle-open icon-line-minus"></i>
-                           </div>
-                           <div class="toggle-title">
-                              <h4 class="mb-0 text-uppercase" style="font-size:13px;">{{ $c->name }}</h4>
-                           </div>
-                        </div>
-                        <div class="toggle-content">
-                           <ul class="sidebar-filter-product mb-0">
-                              @foreach($c->sub() as $s)
-                                 @if($s->sub()->count() > 0)
-                                    @foreach($s->sub() as $val)
-                                       <li>
-                                          <div class="form-check">
-                                             <input type="checkbox" class="form-check-input" name="category[]" id="{{ $val->slug }}" value="{{ $val->slug }}" onchange="clickFilter(this)" {{ in_array($val->slug, $filter['category']) ? 'checked' : '' }}>
-                                             <label class="form-check-label font-weight-normal font-size-11" for="{{ $val->slug }}">{{ $val->name }}</label>
-                                          </div>
-                                       </li>
-                                    @endforeach
-                                 @else
-                                    <li>
-                                       <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="category[]" id="{{ $s->slug }}" value="{{ $s->slug }}" onchange="clickFilter(this)" {{ in_array($s->slug, $filter['category']) ? 'checked' : '' }}>
-                                          <label class="form-check-label font-weight-normal font-size-11" for="{{ $s->slug }}">{{ $s->name }}</label>
-                                       </div>
-                                    </li>
-                                 @endif
-                              @endforeach
-                           </ul>
-                        </div>
-                     </div>
-                  @endforeach
-                  <div class="toggle toggle-border">
-                     <div class="toggle-header">
-                        <div class="toggle-icon">
-                           <i class="toggle-closed icon-line-plus"></i>
-                           <i class="toggle-open icon-line-minus"></i>
-                        </div>
-                        <div class="toggle-title">
-                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Size</h4>
-                        </div>
-                     </div>
-                     <div class="toggle-content">
-                        <ul class="sidebar-filter-product mb-0">
-                           @foreach($size as $s)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="size[]" id="panel-{{ $s->length }}x{{ $s->width }}" value="{{ $s->length }}x{{ $s->width }}" {{ in_array($s->length . 'x' . $s->width, $filter['size']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $s->length }}x{{ $s->width }}">{{ $s->length }}x{{ $s->width }}</label>
-                                 </div>
-                              </li>
-                           @endforeach
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="toggle toggle-border">
-                     <div class="toggle-header">
-                        <div class="toggle-icon">
-                           <i class="toggle-closed icon-line-plus"></i>
-                           <i class="toggle-open icon-line-minus"></i>
-                        </div>
-                        <div class="toggle-title">
-                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Color</h4>
-                        </div>
-                     </div>
-                     <div class="toggle-content">
-                        <ul class="sidebar-filter-product mb-0">
-                           @foreach($color as $c)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="color[]" id="panel-{{ $c->code }}" value="{{ $c->code }}" {{ in_array($c->code, $filter['color']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $c->code }}">{{ $c->name }}</label>
-                                 </div>
-                              </li>
-                           @endforeach
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="toggle toggle-border">
-                     <div class="toggle-header">
-                        <div class="toggle-icon">
-                           <i class="toggle-closed icon-line-plus"></i>
-                           <i class="toggle-open icon-line-minus"></i>
-                        </div>
-                        <div class="toggle-title">
-                           <h4 class="mb-0 text-uppercase" style="font-size:13px;">Pattern</h4>
-                        </div>
-                     </div>
-                     <div class="toggle-content">
-                        <ul class="sidebar-filter-product mb-0">
-                           @foreach($pattern as $p)
-                              <li>
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="pattern[]" id="panel-{{ $p->code }}" value="{{ $p->code }}" {{ in_array($p->code, $filter['pattern']) ? 'checked' : '' }}>
-                                    <label class="form-check-label font-weight-normal text-white font-size-11" style="font-size:10px !important; color:white !important;" for="panel-{{ $p->code }}">{{ $p->name }}</label>
-                                 </div>
-                              </li>
-                           @endforeach
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="form-group">
-                     <button type="submit" class="button button-3d button-mini bg-teal col-12 font-size-11">Filter</button>
-                     <a href="{{ url('product') }}" class="button button-3d button-mini button-red text-center col-12 font-size-11">Reset</a>
-                  </div>
-               </form>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
 
 <script>
    $(function() {
