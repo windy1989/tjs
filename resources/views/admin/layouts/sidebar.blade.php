@@ -17,10 +17,10 @@
                         <div class="text-uppercase mb-0 font-weight-bold text-center">
                             <span style="font-size:35px;" id="header-clock-realtime">{{ date('H:i:s') }}</span>
                             <h5>{{ date('D, d M Y') }}</h5>
-                        </div> 
+                        </div>
                     </li>
                     <li class="nav-item-header">
-                        <div class="text-uppercase font-size-xs line-height-xs">Main Navigation</div> 
+                        <div class="text-uppercase font-size-xs line-height-xs">Main Navigation</div>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/dashboard') }}" class="nav-link {{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
@@ -30,7 +30,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'master_data' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-archive"></i> 
+                            <i class="icon-archive"></i>
                             <span>Master Data</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Master Data">
@@ -84,6 +84,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ url('admin/master_data/product/warehouse') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'product' && Request::segment(4) == 'warehouse' ? 'active' : '' }}">Warehouse</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('admin/master_data/product/stock') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'product' && Request::segment(4) == 'stock' ? 'active' : '' }}">Stock</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ url('admin/master_data/product/product_type') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'product' && Request::segment(4) == 'product_type' ? 'active' : '' }}">Product Type</a>
@@ -191,7 +194,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'sales' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-cart5"></i> 
+                            <i class="icon-cart5"></i>
                             <span>Sales</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Sales">
@@ -205,7 +208,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'invoice' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-file-text"></i> 
+                            <i class="icon-file-text"></i>
                             <span>Invoice</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Invoice">
@@ -219,7 +222,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'purchase_order' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-coins"></i> 
+                            <i class="icon-coins"></i>
                             <span>Purchase Order</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Purchase Order">
@@ -233,7 +236,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'delivery_order' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-truck"></i> 
+                            <i class="icon-truck"></i>
                             <span>Delivery Order</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Delivery Order">
@@ -247,7 +250,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'finance' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-book3"></i> 
+                            <i class="icon-book3"></i>
                             <span>Finance</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Finance">
@@ -258,7 +261,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'accounting' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-books"></i> 
+                            <i class="icon-books"></i>
                             <span>Accounting</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Accounting">
@@ -269,7 +272,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'report' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-file-text3"></i> 
+                            <i class="icon-file-text3"></i>
                             <span>Report</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Report">
@@ -333,7 +336,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'hrd' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-folder-open2"></i> 
+                            <i class="icon-folder-open2"></i>
                             <span>HRD</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="HRD">
@@ -356,7 +359,7 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'settings' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
-                            <i class="icon-gear"></i> 
+                            <i class="icon-gear"></i>
                             <span>Settings</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Settings">

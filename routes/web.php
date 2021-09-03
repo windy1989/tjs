@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::prefix('webhook')->group(function() {
     Route::post('xendit', 'WebHookController@xendit');
-}); 
+});
 
 Route::prefix('product')->group(function() {
     Route::get('/', 'ProductController@index');
@@ -49,7 +49,7 @@ Route::prefix('information')->group(function() {
     Route::get('terms_of_use', 'InformationController@termsOfUse');
     Route::get('privacy_policy', 'InformationController@privacyPolicy');
     Route::get('terms_of_delivery', 'InformationController@termsOfDelivery');
-}); 
+});
 
 Route::prefix('news')->group(function() {
     Route::get('/', 'NewsController@index');
@@ -63,19 +63,19 @@ Route::prefix('career')->group(function() {
 Route::prefix('checkout')->group(function() {
     Route::match(['get', 'post'], '/', 'CheckoutController@index');
     Route::get('notif/{param}', 'CheckoutController@notif');
-    
+
     Route::prefix('process')->group(function() {
         Route::get('get_delivery', 'CheckoutController@getDelivery');
         Route::get('grandtotal', 'CheckoutController@grandtotal');
     });
-}); 
+});
 
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::match(['get', 'post'], 'login', 'AuthController@login');
     Route::get('verification', 'AuthController@verification');
     Route::post('forgot_password', 'AuthController@forgotPassword');
     Route::match(['get', 'post'], 'reset_password', 'AuthController@resetPassword');
-    
+
     Route::middleware('admin.login')->group(function() {
         Route::match(['get', 'post'], 'profile', 'AuthController@profile');
         Route::match(['get', 'post'], 'my_activity', 'AuthController@myActivity');
@@ -84,7 +84,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('dashboard')->group(function() {
             Route::get('/', 'DashboardController@index');
         });
-        
+
         Route::prefix('notification')->group(function() {
             Route::get('/', 'NotificationController@index');
         });
@@ -240,6 +240,11 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::prefix('warehouse')->group(function() {
                     Route::get('/', 'WarehouseController@index');
                     Route::get('datatable', 'WarehouseController@datatable');
+                });
+
+                Route::prefix('stock')->group(function() {
+                    Route::get('/', 'StockController@index');
+                    Route::get('datatable', 'StockController@datatable');
                 });
 
                 Route::prefix('product_type')->group(function() {
