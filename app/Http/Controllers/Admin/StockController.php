@@ -14,7 +14,7 @@ class StockController extends Controller {
 
         $per_page = 10;
         $page     = $request->has('page') ? $request->page: 1;
-        $stock    = json_decode(Http::retry(3, 100)->post('http://192.168.1.211:8080/ventura/item/stock', [
+        $stock    = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
             'tipe_item' => $request->search,
             'page'      => $page,
             'per_page'  => 10
