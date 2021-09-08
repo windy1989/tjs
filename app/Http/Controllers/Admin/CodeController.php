@@ -336,7 +336,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://192.168.1.211:8080/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000
@@ -474,7 +474,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://192.168.1.211:8080/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000

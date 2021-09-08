@@ -42,7 +42,7 @@ class StockCommand extends Command
     {
         $data = ProductShading::chunk(100, function($query) {
                 foreach($query as $q) {
-                    $stock = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                    $stock = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
                         'kode_item' => $q->stock_code,
                         'gudang'    => $q->warehouse_code,
                         'per_page'  => 1000
