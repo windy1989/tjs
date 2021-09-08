@@ -36,7 +36,7 @@ class CodeController extends Controller {
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function datatable(Request $request) 
+    public function datatable(Request $request)
     {
         $column = [
             'id',
@@ -53,7 +53,7 @@ class CodeController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Product::count();
-        
+
         $query_data = Product::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
@@ -73,7 +73,7 @@ class CodeController extends Controller {
                         ->orWhereHas('country', function($query) use ($search) {
                                 $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                }         
+                }
 
                 if($request->brand_id) {
                     $query->where('brand_id', $request->brand_id);
@@ -138,7 +138,7 @@ class CodeController extends Controller {
                         ->orWhereHas('country', function($query) use ($search) {
                                 $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                }         
+                }
 
                 if($request->brand_id) {
                     $query->where('brand_id', $request->brand_id);
@@ -238,7 +238,7 @@ class CodeController extends Controller {
                 $code .= $type->division->code;
             }
         }
-     
+
         if($brand) {
             $code .= $brand->code;
         }
@@ -336,7 +336,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://192.168.1.211:8080/ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000
@@ -474,7 +474,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://192.168.1.211:8080/ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000
@@ -516,7 +516,7 @@ class CodeController extends Controller {
         return response()->json($response);
     }
 
-    public function destroy(Request $request) 
+    public function destroy(Request $request)
     {
         $query = Product::where('id', $request->id)->delete();
         if($query) {
@@ -539,7 +539,7 @@ class CodeController extends Controller {
         return response()->json($response);
     }
 
-    public function detail($id) 
+    public function detail($id)
     {
         $data = [
             'title'   => 'Detail Product Code',
