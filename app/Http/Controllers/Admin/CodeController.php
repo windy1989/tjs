@@ -41,7 +41,9 @@ class CodeController extends Controller {
         $column = [
             'id',
             'shading',
+            'code',
             'name',
+            'check',
             'stock',
             'status'
         ];
@@ -109,6 +111,10 @@ class CodeController extends Controller {
                     }
                 }
 
+                if($request->check) {
+                    $query->where('check', $request->check);
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -174,6 +180,10 @@ class CodeController extends Controller {
                     }
                 }
 
+                if($request->check) {
+                    $query->where('check', $request->check);
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -198,8 +208,10 @@ class CodeController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $shading,
+                    $val->code(),
                     $val->name(),
                     $availability,
+                    $val->check(),
                     $val->status(),
                     '
                         <a href="' . url('admin/master_data/product/product_code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
@@ -329,6 +341,7 @@ class CodeController extends Controller {
                 'container_stock'     => $request->container_stock,
                 'container_max_stock' => $request->container_max_stock,
                 'description'         => $request->description,
+                'check'               => true,
                 'status'              => $request->status
             ]);
 
@@ -466,6 +479,7 @@ class CodeController extends Controller {
                 'container_stock'     => $request->container_stock,
                 'container_max_stock' => $request->container_max_stock,
                 'description'         => $request->description,
+                'check'               => $request->check,
                 'status'              => $request->status
             ]);
 

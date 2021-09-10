@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->double('container_stock');
             $table->double('container_max_stock');
             $table->text('description');
+            $table->boolean('check');
             $table->char('status', 1);
             $table->timestamps();
             $table->softDeletes('deleted_at');

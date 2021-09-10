@@ -27,6 +27,7 @@ class Product extends Model {
         'container_stock',
         'container_max_stock',
         'description',
+        'check',
         'status'
     ];
 
@@ -49,7 +50,24 @@ class Product extends Model {
         return $type_code . ' ' . $brand_name . ' ' . $category_name;
     }
 
-    public function status() 
+    public function check()
+    {
+        switch($this->check) {
+            case true:
+                $check = 'Already Checked';
+                break;
+            case false:
+                $check = 'Not Checked';
+                break;
+            default:
+                $check = 'Invalid';
+                break;
+        }
+
+        return $check;
+    }
+
+    public function status()
     {
         switch($this->status) {
             case '1':
@@ -66,7 +84,7 @@ class Product extends Model {
         return $status;
     }
 
-    public function containerStandart() 
+    public function containerStandart()
     {
         switch($this->container_standart) {
             case '1':
