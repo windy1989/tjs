@@ -424,6 +424,7 @@ class CodeController extends Controller {
             'container_stock'     => $data->container_stock,
             'container_max_stock' => $data->container_max_stock,
             'description'         => $data->description,
+            'check'               => $data->check,
             'status'              => $data->status,
             'shading'             => $shading
         ]);
