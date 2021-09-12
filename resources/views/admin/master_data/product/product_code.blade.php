@@ -91,8 +91,8 @@
                      <label>Check :</label>
                      <select name="filter_check" id="filter_check" class="custom-select">
                      <option value="">All</option>
-                     <option value="1">Already Checked</option>
-                     <option value="0">Not Checked</option>
+                     <option value="1">Not Checked</option>
+                     <option value="2">Already Checked</option>
                   </select>
                   </div>
                </div>
@@ -243,8 +243,8 @@
                               <div class="form-group">
                                  <label>Check :<span class="text-danger">*</span></label>
                                  <select name="check" id="check" class="custom-select">
-                                    <option value="1">Already Checked</option>
-                                    <option value="0">Not Checked</option>
+                                    <option value="1">Not Checked</option>
+                                    <option value="2">Already Checked</option>
                                  </select>
                               </div>
                            </div>
@@ -585,7 +585,7 @@
             { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'name', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'check', orderable: false, searchable: false, className: 'text-center align-middle' },
+            { name: 'check', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]

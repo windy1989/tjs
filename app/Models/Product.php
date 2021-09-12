@@ -53,11 +53,11 @@ class Product extends Model {
     public function check()
     {
         switch($this->check) {
-            case true:
-                $check = 'Already Checked';
-                break;
-            case false:
+            case '1':
                 $check = 'Not Checked';
+                break;
+            case '2':
+                $check = 'Already Checked';
                 break;
             default:
                 $check = 'Invalid';
