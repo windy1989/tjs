@@ -3,7 +3,7 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i> 
+					<i class="icon-arrow-left52 mr-2"></i>
 					<span class="font-weight-semibold">Buy Exchange Rate</span>
 				</h4>
 			</div>
@@ -173,7 +173,7 @@
             { name: 'conversion', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
-      }); 
+      });
    }
 
    function create() {
@@ -199,7 +199,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
@@ -277,7 +277,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
