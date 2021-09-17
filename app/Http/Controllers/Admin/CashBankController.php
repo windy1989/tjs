@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CashBankController extends Controller {
-    
+
     public function index()
     {
         $data = [
@@ -28,7 +28,7 @@ class CashBankController extends Controller {
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function datatable(Request $request) 
+    public function datatable(Request $request)
     {
         $column = [
             'detail',
@@ -47,7 +47,7 @@ class CashBankController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = CashBank::count();
-        
+
         $query_data = CashBank::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
@@ -57,8 +57,8 @@ class CashBankController extends Controller {
                             })
                             ->orWhere('description', 'like', "%$search%");
                     });
-                }     
-                
+                }
+
                 if($request->user_id) {
                     $query->where('user_id', $request->user_id);
                 }
@@ -99,8 +99,8 @@ class CashBankController extends Controller {
                             })
                             ->orWhere('description', 'like', "%$search%");
                     });
-                }     
-                
+                }
+
                 if($request->user_id) {
                     $query->where('user_id', $request->user_id);
                 }
@@ -142,6 +142,7 @@ class CashBankController extends Controller {
                     date('d F Y', strtotime($val->date)),
                     $val->description,
                     '
+                        <a href="' . url('admin/finance/cash_bank/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer"></i></a>
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
@@ -396,7 +397,18 @@ class CashBankController extends Controller {
         return response()->json($response);
     }
 
-    public function destroy(Request $request) 
+    public function print($id)
+    {
+        $data = [
+            'title'     => 'Cash & Bank Print',
+            'cash_bank' => CashBank::find($id),
+            'content'   => 'admin.finance.cash_bank_print'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function destroy(Request $request)
     {
         $query = CashBank::find($request->id);
         if($query->delete()) {
@@ -404,7 +416,7 @@ class CashBankController extends Controller {
                 ->where('journalable_type', 'cash_banks')
                 ->where('journalable_id', $query->id)
                 ->delete();
-                    
+
             activity()
                 ->performedOn(new CashBank())
                 ->causedBy(session('bo_id'))

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper;
 
@@ -8,7 +8,42 @@ use App\Models\Budgeting;
 
 class SMB {
 
-   public static function diffTime($start_date, $finish_date) 
+    public static function say($param)
+    {
+        $score    = trim(abs((int)$param));
+		$alphabet = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
+		$value    = '';
+
+		if($score < 12) {
+			$value = ' ' . $alphabet[$score];
+		} else if($score < 20) {
+			$value = SMB::say($score - 10) . ' Belas';
+		} else if($score < 100) {
+			$value = SMB::say($score / 10) . ' Puluh' . SMB::say($score % 10);
+		} else if($score < 200) {
+			$value = ' Seratur' . SMB::say($score - 100);
+		} else if($score < 1000) {
+			$value = SMB::say($score/100) . ' Ratus' . SMB::say($score % 100);
+		} else if($score < 2000) {
+			$value = ' Seribu' . SMB::say($score - 1000);
+		} else if($score < 1000000) {
+			$value = SMB::say($score / 1000) . ' Ribu' . SMB::say($score % 1000);
+		} else if($score < 1000000000) {
+			$value = SMB::say($score / 1000000) . ' Juta' . SMB::say($score % 1000000);
+		} else if($score < 1000000000000) {
+			$value = SMB::say($score / 1000000000) . ' Milyar' . SMB::say(fmod($score, 1000000000));
+		} else if($score < 1000000000000000) {
+			$value = SMB::say($score / 1000000000000) . ' Triliyun' . SMB::say(fmod($score, 1000000000000));
+		}
+
+        if($param < 0) {
+            return 'Minus ' . $value;
+        } else {
+            return $value;
+        }
+    }
+
+   public static function diffTime($start_date, $finish_date)
    {
       $start  = date_create($start_date);
       $finish = date_create($finish_date);
@@ -146,7 +181,7 @@ class SMB {
       $holding_company_ledger_credit = Journal::where('credit', $holding_company_ledger->id)->whereRaw($where_raw)->sum('nominal');
       $total_holding_company_ledger  = $holding_company_ledger_debit - $holding_company_ledger_credit;
       $grandtotal_receivable        += $total_holding_company_ledger;
-      
+
       $supply_item_sby        = Coa::where('code', '1.200.01')->first();
       $supply_item_sby_sub    = Coa::where('parent_id', $supply_item_sby->id)->get();
       $supply_item_sby_result = [];
@@ -616,7 +651,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -660,7 +695,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -704,7 +739,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -744,7 +779,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -760,7 +795,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -806,7 +841,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -822,7 +857,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -868,7 +903,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -884,7 +919,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -930,7 +965,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -946,7 +981,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -990,7 +1025,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1006,7 +1041,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1065,7 +1100,7 @@ class SMB {
             'name' => $income_outside->name,
             'actual' => [
                'nominal' => [
-                  'current' => $total_income_outside_current, 
+                  'current' => $total_income_outside_current,
                   'last'    => $total_income_outside_last
                ],
                'percent' => [
@@ -1079,7 +1114,7 @@ class SMB {
             ],
             'variance' => [
                'nominal' => [
-                  'current' => $income_outside_variance_current, 
+                  'current' => $income_outside_variance_current,
                   'last'    => $income_outside_variance_last
                ],
                'percent' => [
@@ -1092,7 +1127,7 @@ class SMB {
             'name' => $fee_outside->name,
             'actual' => [
                'nominal' => [
-                  'current' => $total_fee_outside_current, 
+                  'current' => $total_fee_outside_current,
                   'last'    => $total_fee_outside_last
                ],
                'percent' => [
@@ -1106,7 +1141,7 @@ class SMB {
             ],
             'variance' => [
                'nominal' => [
-                  'current' => $fee_outside_variance_current, 
+                  'current' => $fee_outside_variance_current,
                   'last'    => $fee_outside_variance_last
                ],
                'percent' => [
@@ -1145,7 +1180,7 @@ class SMB {
       $gross_variance_nominal_last    = $gross_actual_nominal_current - $gross_actual_nominal_last;
       $gross_variance_percent_current = 0;
       $gross_variance_percent_last    = 0;
-      
+
       if($income_actual_current > 0) {
          $gross_actual_percent_current = round(($gross_actual_nominal_current / $income_actual_current) * 100);
       }
@@ -1249,7 +1284,7 @@ class SMB {
                   'percent' => $nett_variance_percent_last
                ]
             ],
-         ] 
+         ]
       ];
 
       return [
@@ -1327,7 +1362,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -1368,7 +1403,7 @@ class SMB {
             'budget'   => $budget_nominal,
             'variance' => [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1411,7 +1446,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -1451,7 +1486,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1467,7 +1502,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1513,7 +1548,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1529,7 +1564,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1575,7 +1610,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1591,7 +1626,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1637,7 +1672,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1653,7 +1688,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1746,7 +1781,7 @@ class SMB {
                   'percent' => $nett_variance_percent_last
                ]
             ],
-         ] 
+         ]
       ];
 
       return [
@@ -1822,7 +1857,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -1863,7 +1898,7 @@ class SMB {
             'budget'   => $budget_nominal,
             'variance' => [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -1906,7 +1941,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -1946,7 +1981,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -1962,7 +1997,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -2008,7 +2043,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -2024,7 +2059,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -2070,7 +2105,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -2086,7 +2121,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -2132,7 +2167,7 @@ class SMB {
 
             $actual = [
                'nominal' => [
-                  'current' => $total_balance_current, 
+                  'current' => $total_balance_current,
                   'last'    => $total_balance_last
                ],
                'percent' => [
@@ -2148,7 +2183,7 @@ class SMB {
 
             $variance = [
                'nominal' => [
-                  'current' => $variance_current, 
+                  'current' => $variance_current,
                   'last'    => $variance_last
                ],
                'percent' => [
@@ -2241,7 +2276,7 @@ class SMB {
                   'percent' => $nett_variance_percent_last
                ]
             ],
-         ] 
+         ]
       ];
 
       return [
@@ -2314,7 +2349,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -2358,7 +2393,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [
@@ -2402,7 +2437,7 @@ class SMB {
                'budget'   => $budget_nominal,
                'variance' => [
                   'nominal' => [
-                     'current' => $variance_current, 
+                     'current' => $variance_current,
                      'last'    => $variance_last
                   ],
                   'percent' => [

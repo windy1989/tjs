@@ -180,7 +180,7 @@
                                             </th>
                                         </tr>
                                         <tr class="font-weight-bold">
-                                            <th colspan="12">Sale Service</th>
+                                            <th colspan="12">Omset</th>
                                         </tr>
                                         @php
                                             $total_sale_service_actual_current   = 0;
@@ -230,7 +230,7 @@
                                             </tr>
                                         @endforeach
                                         <tr class="table-secondary font-italic">
-                                            <th class="text-right font-weight-bold">Total Sale Service</th>
+                                            <th class="text-right font-weight-bold">Total Income</th>
                                             <th class="text-right font-weight-bold">{{ number_format($total_sale_service_budget) }}</th>
                                             <th class="text-center font-weight-bold">
                                                 @if($total_sale_service_budget > 0 | $profit_loss['summary']['total']['income']['budget'] > 0)
@@ -275,7 +275,7 @@
                                                 @endif
                                             </th>
                                         </tr>
-                                        <tr class="bg-primary-300 text-uppercase">
+                                        <tr class="bg-info-300 text-uppercase">
                                             <th class="text-left font-weight-bold">Total Income</th>
                                             <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['total']['income']['budget']) }}</th>
                                             <th class="text-center font-weight-bold">{{ $total['income_budget_percent'] }}%</th>
@@ -350,7 +350,7 @@
                                                 <td class="text-center">{{ number_format($c['variance']['percent']['last']) }}%</td>
                                             </tr>
                                         @endforeach
-                                        <tr class="bg-primary-300 text-uppercase">
+                                        <tr class="bg-info-300 text-uppercase">
                                             <th class="text-left font-weight-bold">Total Cogs</th>
                                             <th class="text-right font-weight-bold">{{ number_format($total_cogs_budget) }}</th>
                                             <th class="text-center font-weight-bold">
@@ -394,7 +394,7 @@
                                             </th>
                                         </tr>
                                         <tr class="font-weight-bold">
-                                            <th colspan="12">FEE</th>
+                                            <th colspan="12">FIXED COST</th>
                                         </tr>
                                         <tr class="font-weight-bold">
                                             <th colspan="12">Salary & Wages</th>
@@ -478,7 +478,7 @@
                                             </th>
                                         </tr>
                                         <tr class="font-weight-bold">
-                                            <th colspan="12">Fee Marketing</th>
+                                            <th colspan="12">Fee Sales & Marketing</th>
                                         </tr>
                                         @php
                                             $total_fee_marketing_actual_current   = 0;
@@ -510,7 +510,7 @@
                                             </tr>
                                         @endforeach
                                         <tr class="table-secondary font-italic">
-                                            <th class="text-right font-weight-bold">Total Fee Marketing</th>
+                                            <th class="text-right font-weight-bold">Total Fee Sales & Marketing</th>
                                             <th class="text-right font-weight-bold">{{ number_format($total_fee_marketing_budget) }}</th>
                                             <th class="text-center font-weight-bold">
                                                 @if($profit_loss['summary']['total']['income']['budget'] > 0)
@@ -720,8 +720,8 @@
                                                 @endif
                                             </th>
                                         </tr>
-                                        <tr class="bg-primary-300 text-uppercase">
-                                            <th class="text-left font-weight-bold">Total Expenses</th>
+                                        <tr class="bg-info-300 text-uppercase">
+                                            <th class="text-left font-weight-bold">Total Variable Cost</th>
                                             <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['total']['fee']['budget']) }}</th>
                                             <th class="text-center font-weight-bold">{{ $total['fee_budget_percent'] }}%</th>
                                             <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['total']['fee']['actual']['current']) }}</th>
@@ -746,7 +746,7 @@
                                             </th>
                                         </tr>
                                         <tr><td colspan="12"></td></tr>
-                                        <tr class="bg-teal-300 text-uppercase">
+                                        <tr class="bg-success-300 text-uppercase">
                                             <th class="text-left font-weight-bold">Gross Profit (Loss)</th>
                                             <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['grandtotal']['gross']['budget']['nominal']) }}</th>
                                             <th class="text-center font-weight-bold">{{ $profit_loss['summary']['grandtotal']['gross']['budget']['percent'] }}%</th>
@@ -761,7 +761,7 @@
                                         </tr>
                                         <tr><td colspan="12"></td></tr>
                                         <tr class="font-weight-bold">
-                                            <th colspan="12">Depreciation</th>
+                                            <th colspan="12">Depreciation & Armor</th>
                                         </tr>
                                         @php
                                             $total_fee_shrinkage_actual_current   = 0;
@@ -793,7 +793,7 @@
                                             </tr>
                                         @endforeach
                                         <tr class="table-secondary font-italic">
-                                            <th class="text-right font-weight-bold">Total Depreciation</th>
+                                            <th class="text-right font-weight-bold">Total Depreciation & Armor</th>
                                             <th class="text-right font-weight-bold">{{ number_format($total_fee_shrinkage_budget) }}</th>
                                             <th class="text-center font-weight-bold">
                                                 @if($profit_loss['summary']['total']['income']['budget'] > 0)
@@ -878,7 +878,7 @@
                                             </tr>
                                         @endforeach
                                         <tr class="table-secondary font-italic">
-                                            <th class="text-right font-weight-bold">Total Expenses & Income Outside the Business</th>
+                                            <th class="text-right font-weight-bold">Total Variable Cost & Income Outside the Business</th>
                                             <th class="text-right font-weight-bold">{{ number_format($total_fee_income_outside_budget) }}</th>
                                             <th class="text-center font-weight-bold">
                                                 @if($profit_loss['summary']['total']['income']['budget'] > 0)
@@ -921,7 +921,7 @@
                                             </th>
                                         </tr>
                                         <tr><td colspan="12"></td></tr>
-                                        <tr class="bg-teal-300 text-uppercase">
+                                        <tr class="bg-success-300 text-uppercase">
                                             <th class="text-left font-weight-bold">Nett Profit (Loss)</th>
                                             <th class="text-right font-weight-bold">{{ number_format($profit_loss['summary']['grandtotal']['nett']['budget']['nominal']) }}</th>
                                             <th class="text-center font-weight-bold">{{ $profit_loss['summary']['grandtotal']['nett']['budget']['percent'] }}%</th>
@@ -1071,7 +1071,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">Sale Service</th>
+                                        <th colspan="12">Omset</th>
                                     </tr>
                                     @php
                                         $total_sale_service_actual_current   = 0;
@@ -1121,7 +1121,7 @@
                                         </tr>
                                     @endforeach
                                     <tr class="table-secondary font-italic">
-                                        <th class="text-right font-weight-bold">Total Sale Service</th>
+                                        <th class="text-right font-weight-bold">Total Omset</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_sale_service_budget) }}</th>
                                         <th class="text-center font-weight-bold">
                                             @if($total_sale_service_budget > 0 | $profit_loss['surabaya']['total']['income']['budget'] > 0)
@@ -1166,7 +1166,7 @@
                                             @endif
                                         </th>
                                     </tr>
-                                    <tr class="bg-primary-300 text-uppercase">
+                                    <tr class="bg-info-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Total Income</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['surabaya']['total']['income']['budget']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $total['income_budget_percent'] }}%</th>
@@ -1241,7 +1241,7 @@
                                             <td class="text-center">{{ number_format($c['variance']['percent']['last']) }}%</td>
                                         </tr>
                                     @endforeach
-                                    <tr class="bg-primary-300 text-uppercase">
+                                    <tr class="bg-info-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Total Cogs</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_cogs_budget) }}</th>
                                         <th class="text-center font-weight-bold">
@@ -1285,7 +1285,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">FEE</th>
+                                        <th colspan="12">FIXED COST</th>
                                     </tr>
                                     <tr class="font-weight-bold">
                                         <th colspan="12">Salary & Wages</th>
@@ -1369,7 +1369,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">Fee Marketing</th>
+                                        <th colspan="12">Fee Sales & Marketing</th>
                                     </tr>
                                     @php
                                         $total_fee_marketing_actual_current   = 0;
@@ -1401,7 +1401,7 @@
                                         </tr>
                                     @endforeach
                                     <tr class="table-secondary font-italic">
-                                        <th class="text-right font-weight-bold">Total Fee Marketing</th>
+                                        <th class="text-right font-weight-bold">Total Fee Sales & Marketing</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_fee_marketing_budget) }}</th>
                                         <th class="text-center font-weight-bold">
                                             @if($profit_loss['surabaya']['total']['income']['budget'] > 0)
@@ -1611,8 +1611,8 @@
                                             @endif
                                         </th>
                                     </tr>
-                                    <tr class="bg-primary-300 text-uppercase">
-                                        <th class="text-left font-weight-bold">Total Expenses</th>
+                                    <tr class="bg-info-300 text-uppercase">
+                                        <th class="text-left font-weight-bold">Total Variable Cost</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['surabaya']['total']['fee']['budget']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $total['fee_budget_percent'] }}%</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['surabaya']['total']['fee']['actual']['current']) }}</th>
@@ -1637,7 +1637,7 @@
                                         </th>
                                     </tr>
                                     <tr><td colspan="12"></td></tr>
-                                    <tr class="bg-teal-300 text-uppercase">
+                                    <tr class="bg-success-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Nett Profit (Loss)</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['surabaya']['grandtotal']['nett']['budget']['nominal']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $profit_loss['surabaya']['grandtotal']['nett']['budget']['percent'] }}%</th>
@@ -1787,7 +1787,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">Sale Service</th>
+                                        <th colspan="12">Omset</th>
                                     </tr>
                                     @php
                                         $total_sale_service_actual_current   = 0;
@@ -1837,7 +1837,7 @@
                                         </tr>
                                     @endforeach
                                     <tr class="table-secondary font-italic">
-                                        <th class="text-right font-weight-bold">Total Sale Service</th>
+                                        <th class="text-right font-weight-bold">Total Omset</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_sale_service_budget) }}</th>
                                         <th class="text-center font-weight-bold">
                                             @if($profit_loss['jakarta']['total']['income']['budget'] > 0)
@@ -1882,7 +1882,7 @@
                                             @endif
                                         </th>
                                     </tr>
-                                    <tr class="bg-primary-300 text-uppercase">
+                                    <tr class="bg-info-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Total Income</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['jakarta']['total']['income']['budget']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $total['income_budget_percent'] }}%</th>
@@ -1957,7 +1957,7 @@
                                             <td class="text-center">{{ number_format($c['variance']['percent']['last']) }}%</td>
                                         </tr>
                                     @endforeach
-                                    <tr class="bg-primary-300 text-uppercase">
+                                    <tr class="bg-info-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Total Cogs</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_cogs_budget) }}</th>
                                         <th class="text-center font-weight-bold">
@@ -2001,7 +2001,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">FEE</th>
+                                        <th colspan="12">FIXED COST</th>
                                     </tr>
                                     <tr class="font-weight-bold">
                                         <th colspan="12">Salary & Wages</th>
@@ -2085,7 +2085,7 @@
                                         </th>
                                     </tr>
                                     <tr class="font-weight-bold">
-                                        <th colspan="12">Fee Marketing</th>
+                                        <th colspan="12">Fee Sales & Marketing</th>
                                     </tr>
                                     @php
                                         $total_fee_marketing_actual_current   = 0;
@@ -2117,7 +2117,7 @@
                                         </tr>
                                     @endforeach
                                     <tr class="table-secondary font-italic">
-                                        <th class="text-right font-weight-bold">Total Fee Marketing</th>
+                                        <th class="text-right font-weight-bold">Total Fee Sales & Marketing</th>
                                         <th class="text-right font-weight-bold">{{ number_format($total_fee_marketing_budget) }}</th>
                                         <th class="text-center font-weight-bold">
                                             @if($profit_loss['jakarta']['total']['income']['budget'] > 0)
@@ -2327,8 +2327,8 @@
                                             @endif
                                         </th>
                                     </tr>
-                                    <tr class="bg-primary-300 text-uppercase">
-                                        <th class="text-left font-weight-bold">Total Expenses</th>
+                                    <tr class="bg-info-300 text-uppercase">
+                                        <th class="text-left font-weight-bold">Total Variable Cost</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['jakarta']['total']['fee']['budget']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $total['fee_budget_percent'] }}%</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['jakarta']['total']['fee']['actual']['current']) }}</th>
@@ -2353,7 +2353,7 @@
                                         </th>
                                     </tr>
                                     <tr><td colspan="12"></td></tr>
-                                    <tr class="bg-teal-300 text-uppercase">
+                                    <tr class="bg-success-300 text-uppercase">
                                         <th class="text-left font-weight-bold">Nett Profit (Loss)</th>
                                         <th class="text-right font-weight-bold">{{ number_format($profit_loss['jakarta']['grandtotal']['nett']['budget']['nominal']) }}</th>
                                         <th class="text-center font-weight-bold">{{ $profit_loss['jakarta']['grandtotal']['nett']['budget']['percent'] }}%</th>
@@ -2404,7 +2404,7 @@
                             </thead>
                             <tbody>
                                 <tr class="font-weight-bold">
-                                    <th colspan="12">Depreciation</th>
+                                    <th colspan="12">Depreciation & Armor</th>
                                 </tr>
                                 @php
                                     $total_depreciation_actual_current   = 0;
@@ -2454,7 +2454,7 @@
                                     </tr>
                                 @endforeach
                                 <tr class="table-secondary font-italic">
-                                    <th class="text-right font-weight-bold">Total Depreciation</th>
+                                    <th class="text-right font-weight-bold">Total Depreciation & Armor</th>
                                     <th class="text-right font-weight-bold">{{ number_format($total_depreciation_budget) }}</th>
                                     <th class="text-center font-weight-bold">
                                         @if($profit_loss['non_operation']['total']['non_operation']['budget'] > 0)
@@ -2686,7 +2686,7 @@
                                     </th>
                                 </tr>
                                 <tr><td colspan="12"></td></tr>
-                                <tr class="bg-primary-300 text-uppercase">
+                                <tr class="bg-info-300 text-uppercase">
                                     <th class="text-left font-weight-bold">Total Income & Deduction</th>
                                     <th class="text-right font-weight-bold">{{ number_format($profit_loss['non_operation']['total']['income_deduction']['budget']) }}</th>
                                     <th class="text-center font-weight-bold">
@@ -2733,7 +2733,7 @@
                                     </th>
                                 </tr>
                                 <tr><td colspan="12"></td></tr>
-                                <tr class="bg-teal-300 text-uppercase">
+                                <tr class="bg-success-300 text-uppercase">
                                     <th class="text-left font-weight-bold">Total Non Operation</th>
                                     <th class="text-right font-weight-bold">{{ number_format($profit_loss['non_operation']['total']['non_operation']['budget']) }}</th>
                                     <th class="text-center font-weight-bold">

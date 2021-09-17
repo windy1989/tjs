@@ -531,6 +531,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('create', 'CashBankController@create');
                 Route::get('show', 'CashBankController@show');
                 Route::post('update/{id}', 'CashBankController@update');
+                Route::get('print/{id}', 'CashBankController@print');
                 Route::post('destroy', 'CashBankController@destroy');
             });
         });
@@ -539,6 +540,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('budgeting')->group(function() {
                 Route::get('/', 'BudgetingController@index');
                 Route::get('datatable', 'BudgetingController@datatable');
+                Route::match(['get', 'post'], 'yearly', 'BudgetingController@yearly');
                 Route::post('create', 'BudgetingController@create');
                 Route::get('show', 'BudgetingController@show');
                 Route::post('update/{id}', 'BudgetingController@update');

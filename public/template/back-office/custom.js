@@ -10,11 +10,11 @@ lightbox.option({
 });
 
 $(function() {
-   $('html').tooltip({selector: '[data-popup="tooltip"]'});
+   $('body').tooltip({selector: '[data-popup="tooltip"]'});
    $('.form-check-input-styled').uniform();
    $('.select2').select2();
    $('.form-check-input-switch').bootstrapSwitch();
-   
+
    $('.select2-tags').select2({
       tags: true
    });
@@ -70,12 +70,12 @@ $.dateString = function(param) {
 function previewImage(event, selector) {
    if(event.files && event.files[0]) {
       var reader = new FileReader();
-      
+
       reader.onload = function(e) {
          $(selector).attr('href', e.target.result);
          $(selector + ' img').attr('src', e.target.result);
       }
-      
+
       reader.readAsDataURL(event.files[0]);
    }
 }

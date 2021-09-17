@@ -3,7 +3,7 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i> 
+					<i class="icon-arrow-left52 mr-2"></i>
 					<span class="font-weight-semibold">Budgeting</span>
 				</h4>
 			</div>
@@ -12,9 +12,15 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
-						<b><i class="icon-plus3"></i></b> Add Data
-					</button>
+               <div class="btn-group">
+                  <button type="button" class="btn bg-primary btn-labeled btn-labeled-left dropdown-toggle" data-toggle="dropdown">
+                     <b><i class="icon-plus3"></i></b> Add Data
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                     <a href="javascript:void(0);" class="dropdown-item" onclick="cancel()" data-toggle="modal" data-target="#modal_form">Single Month</a>
+                     <a href="{{ url('admin/accounting/budgeting/yearly') }}" class="dropdown-item">Yearly</a>
+                  </div>
+               </div>
 				</div>
 			</div>
 		</div>
@@ -170,7 +176,7 @@
          deferRender: true,
          destroy: true,
          iDisplayInLength: 10,
-         order: [[1, 'asc']],
+         order: [[2, 'asc']],
          ajax: {
             url: '{{ url("admin/accounting/budgeting/datatable") }}',
             type: 'GET',
@@ -201,7 +207,7 @@
             { name: 'nominal', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
-      }); 
+      });
    }
 
    function create() {
@@ -227,7 +233,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
@@ -305,7 +311,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`

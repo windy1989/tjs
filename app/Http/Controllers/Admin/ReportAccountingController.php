@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ReportAccountingController extends Controller {
 
-    public function balanceSheet(Request $request) 
+    public function balanceSheet(Request $request)
     {
         $filter = $request->filter ? $request->filter : date('Y-m');
         $data   = [
@@ -23,7 +23,7 @@ class ReportAccountingController extends Controller {
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function profitLoss(Request $request) 
+    public function profitLoss(Request $request)
     {
         $filter = $request->filter ? $request->filter : date('Y-m');
         $total  = [
@@ -46,7 +46,7 @@ class ReportAccountingController extends Controller {
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function ledger() 
+    public function ledger()
     {
         $data = [
             'title'   => 'Ledger',
@@ -78,13 +78,13 @@ class ReportAccountingController extends Controller {
 
         $total_data = Coa::where('status', 1)
             ->count();
-        
+
         $query_data = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
                     });
-                }     
+                }
 
                 if($request->coa_id) {
                     $query->where('id', $request->coa_id);
@@ -101,7 +101,7 @@ class ReportAccountingController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
                     });
-                }     
+                }
 
                 if($request->coa_id) {
                     $query->where('id', $request->coa_id);
@@ -185,9 +185,11 @@ class ReportAccountingController extends Controller {
 
     public function ledgerRowDetail(Request $request)
     {
-        $string  = '<div class="list-feed">';
-        $journal = Journal::where(function($query) use ($request) {
-                $query->where('debit', $request->id)->orWhere('credit', $request->id);
+        $string   = '<div class = "list-feed">';
+        $arr_data = [];
+
+        $debit = Journal::where(function($query) use ($request) {
+                $query->where('debit', $request->id);
             })
             ->where(function($query) use ($request) {
                 if($request->start_date && $request->finish_date) {
@@ -204,38 +206,93 @@ class ReportAccountingController extends Controller {
             ->oldest('created_at')
             ->get();
 
-        foreach($journal as $j) {
-            $check_position = Journal::where('id', $j->id);
-            if($request->id == $j->debit) {
-                $type = '<span class="text-dark font-weight-bold">Debit</span>';
+        $credit = Journal::where(function($query) use ($request) {
+                $query->where('credit', $request->id);
+            })
+            ->where(function($query) use ($request) {
+                if($request->start_date && $request->finish_date) {
+                    $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                        ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                } else if($request->start_date) {
+                    $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->start_date)))
+                        ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->start_date)));
+                } else if($request->finish_date) {
+                    $query->whereDate('created_at', '>=', date('Y-m-01', strtotime($request->finish_date)))
+                        ->whereDate('created_at', '<=', date('Y-m-t', strtotime($request->finish_date)));
+                }
+            })
+            ->groupBy('id')
+            ->oldest('created_at')
+            ->get();
+
+        foreach($debit as $d) {
+            $check_position = Journal::where('id', $d->id);
+            if($request->id == $d->debit) {
+                $type = 'Debit';
             } else {
-                $type = '<span class="text-dark font-weight-bold">Credit</span>';
+                $type = 'Credit';
             }
 
-            if($j->journalable_type == 'cash_banks') {
-                foreach($j->journalable->cashBankDetail as $cbd) {
-                    $string .= '
-                        <div class="list-feed-item">
-                            <div class="text-muted">' . date('d-m-Y', strtotime($cbd->created_at)) . ' | ' . $type . '</div>
-                            <div>' . $j->journalable->code . '</div>
-                            <div>' . $cbd->note . '</div>
-                            <div><span class="font-weight-bold">' . number_format($cbd->nominal, 2, ',', '.') . '</span></div>
-                        </div>
-                    ';
+            if($d->journalable_type == 'cash_banks') {
+                foreach($d->journalable->cashBankDetail as $cbd) {
+                    $arr_data[] = [
+                        'id'          => $cbd->id,
+                        'type'        => $type,
+                        'date'        => $cbd->created_at,
+                        'date_type'   => date('d-m-Y', strtotime($cbd->created_at)) . ' | ' . $type,
+                        'code'        => $d->journalable->code,
+                        'description' => $cbd->note,
+                        'nominal'     => number_format($cbd->nominal, 2, ',', '.')
+                    ];
                 }
             }
         }
 
+        foreach($credit as $c) {
+            $check_position = Journal::where('id', $c->id);
+            if($request->id == $c->debit) {
+                $type = 'Debit';
+            } else {
+                $type = 'Credit';
+            }
+
+            if($c->journalable_type == 'cash_banks') {
+                foreach($c->journalable->cashBankDetail as $cbd) {
+                    $arr_data[] = [
+                        'id'          => $cbd->id,
+                        'type'        => $type,
+                        'date'        => $cbd->created_at,
+                        'date_type'   => date('d-m-Y', strtotime($cbd->created_at)) . ' | ' . $type,
+                        'code'        => $c->journalable->code,
+                        'description' => $cbd->note,
+                        'nominal'     => number_format($cbd->nominal, 2, ',', '.')
+                    ];
+                }
+            }
+        }
+
+        $collect = collect($arr_data)->unique('id')->sortBy('date')->values()->all();
+        foreach($collect as $c) {
+            $string .= '
+                <div class="list-feed-item">
+                    <div class="text-muted">' . $c['date_type'] . '</div>
+                    <div>' . $c['code'] . '</div>
+                    <div>' . $c['description'] . '</div>
+                    <div><span class="font-weight-bold">' . $c['nominal'] . '</span></div>
+                </div>
+            ';
+        }
+
         $string .= '</div>';
 
-        if($journal->count() > 0) {
+        if(count($collect) > 0) {
             return response()->json($string);
         } else {
             return response()->json('<p class="font-weight-bold font-italic mt-2">Transaction Not Found</p>');
         }
     }
 
-    public function trialBalance() 
+    public function trialBalance()
     {
         $data = [
             'title'   => 'Trial Balance',
@@ -267,13 +324,13 @@ class ReportAccountingController extends Controller {
 
         $total_data = Coa::where('status', 1)
             ->count();
-        
+
         $query_data = Coa::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
                     });
-                }     
+                }
             })
             ->where('status', 1)
             ->offset($start)
@@ -286,7 +343,7 @@ class ReportAccountingController extends Controller {
                     $query->where(function($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
                     });
-                }     
+                }
             })
             ->where('status', 1)
             ->count();
@@ -352,5 +409,5 @@ class ReportAccountingController extends Controller {
 
         return response()->json($response);
     }
-    
+
 }

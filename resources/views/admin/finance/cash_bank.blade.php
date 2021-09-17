@@ -3,7 +3,7 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i> 
+					<i class="icon-arrow-left52 mr-2"></i>
 					<span class="font-weight-semibold">Cash & Bank</span>
 				</h4>
 			</div>
@@ -77,13 +77,13 @@
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
                      <input type="radio" name="filter_type" value="1" class="form-check-input">
-                     Cash
+                     Cash / Bank In
                   </label>
                </div>
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
                      <input type="radio" name="filter_type" value="2" class="form-check-input">
-                     Bank
+                     Cash / Bank Out
                   </label>
                </div>
                <div class="form-check form-check-inline">
@@ -217,13 +217,13 @@
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="type" value="1" checked>
-                        Cash
+                        Cash / Bank In
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="type" value="2">
-                        Bank
+                        Cash / Bank Out
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
@@ -253,7 +253,7 @@
          appendTo: '#modal_form',
          autoFocus: true,
          source: function(request, response) {
-            $.get('{{ url("admin/finance/cash_bank/suggest_code") }}', { 
+            $.get('{{ url("admin/finance/cash_bank/suggest_code") }}', {
                search: request.term
             }, function(data) {
                response(data);
@@ -283,7 +283,7 @@
             icon.first().addClass('icon-minus3');
          }
       });
-      
+
       $('#data_content').on('click', '#delete_data_content', function() {
          $(this).closest('tr').remove();
       });
@@ -326,16 +326,16 @@
                <input type="hidden" name="credit_detail[]" value="` + credit_detail.val() + `">
                <input type="hidden" name="note_detail[]" value="` + note_detail.val() + `">
 
-               <td class="align-middle">` + debit_detail.text() + `</td>   
-               <td class="align-middle">` + credit_detail.text() + `</td>   
+               <td class="align-middle">` + debit_detail.text() + `</td>
+               <td class="align-middle">` + credit_detail.text() + `</td>
                <td class="align-middle">
                   <div class="form-group">
                      <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `">
                   </div>
-               </td>   
-               <td class="align-middle">` + note_detail.val() + `</td>   
+               </td>
+               <td class="align-middle">` + note_detail.val() + `</td>
                <td class="align-middle">
-                  <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                  <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
                </td>
             </tr>
          `);
@@ -441,7 +441,7 @@
             { name: 'description', className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
-      }); 
+      });
    }
 
    function create() {
@@ -467,7 +467,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
@@ -517,16 +517,16 @@
                      <input type="hidden" name="credit_detail[]" value="` + val.credit_id + `">
                      <input type="hidden" name="note_detail[]" value="` + val.note + `">
 
-                     <td class="align-middle">` + val.debit_name + `</td>   
-                     <td class="align-middle">` + val.credit_name + `</td>   
+                     <td class="align-middle">` + val.debit_name + `</td>
+                     <td class="align-middle">` + val.credit_name + `</td>
                      <td class="align-middle">
                         <div class="form-group">
                            <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `">
                         </div>
-                     </td>   
-                     <td class="align-middle">` + val.note + `</td>   
+                     </td>
+                     <td class="align-middle">` + val.note + `</td>
                      <td class="align-middle">
-                        <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                        <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
                      </td>
                   </tr>
                `);
@@ -569,7 +569,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-               
+
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
