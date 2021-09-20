@@ -6,6 +6,7 @@ use App\Helper\SMB;
 use App\Models\Coa;
 use App\Models\Journal;
 use Illuminate\Http\Request;
+use App\Models\CashBankDetail;
 use App\Http\Controllers\Controller;
 
 class ReportAccountingController extends Controller {
@@ -408,6 +409,125 @@ class ReportAccountingController extends Controller {
         }
 
         return response()->json($response);
+    }
+
+    public function cashBank(Request $request)
+    {
+        $result   = [];
+        $month    = $request->filter_month ? $request->filter_month : date('Y-m');
+        $coa_id   = $request->filter_coa_id ? $request->filter_coa_id : '';
+        $code     = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 215];
+        $list_coa = Coa::where(function($query) use ($coa_id, $code, $request) {
+                if($coa_id) {
+                    $query->where('id', $coa_id);
+                } else {
+                    $query->whereIn('id', $code);
+                }
+            })
+            ->get();
+
+        foreach($list_coa as $lc) {
+            $balance_debit  = Journal::where('debit', $lc->id)
+                ->where(function($query) use ($request) {
+                    if($request->has('_token') && session()->token() == $request->_token) {
+                        if($request->filter_month) {
+                            $query->whereYear('created_at', date('Y', strtotime($request->filter_month)))
+                                ->whereMonth('created_at', '<=', date('m', strtotime($request->filter_month)));
+                        }
+                    }
+                })
+                ->sum('nominal');
+
+            $balance_credit = Journal::where('credit', $lc->id)
+                ->where(function($query) use ($request) {
+                    if($request->has('_token') && session()->token() == $request->_token) {
+                        if($request->filter_month) {
+                            $query->whereYear('created_at', date('Y', strtotime($request->filter_month)))
+                                ->whereMonth('created_at', '<=', date('m', strtotime($request->filter_month)));
+                        }
+                    }
+                })
+                ->sum('nominal');
+
+            $result[] = [
+                'id'      => $lc->id,
+                'no'      => $lc->code,
+                'name'    => $lc->name,
+                'debit'   => $balance_debit,
+                'credit'  => $balance_credit,
+                'balance' => $balance_debit - $balance_credit,
+            ];
+        }
+
+        $data = [
+            'title'   => 'Cash & Bank',
+            'month'   => $month,
+            'coa_id'  => $coa_id,
+            'coa'     => Coa::all(),
+            'result'  => $result,
+            'content' => 'admin.report.accounting.cash_bank'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
+    }
+
+    public function cashBankDetail(Request $request)
+    {
+        $result  = [];
+        $coa     = Coa::find($request->id);
+        $journal = Journal::where(function($query) use ($request) {
+                $query->whereYear('created_at', date('Y', strtotime($request->month)))
+                    ->whereMonth('created_at', '<=', date('m', strtotime($request->month)));
+            })
+            ->where(function($query) use ($request) {
+                $query->where('debit', $request->id)
+                    ->orWhere('credit', $request->id);
+            })
+            ->groupBy('id')
+            ->get();
+
+        foreach($journal as $j) {
+            foreach($j->journalable->cashBankDetail as $cbd) {
+                $income = CashBankDetail::where(function($query) use ($request, $cbd) {
+                        $query->whereDate('created_at', '<=', $cbd->created_at->format('Y-m-d'));
+                    })
+                    ->where('debit', $request->id)
+                    ->sum('nominal');
+
+                $expense = CashBankDetail::where(function($query) use ($request, $cbd) {
+                        $query->whereDate('created_at', '<=', $cbd->created_at->format('Y-m-d'));
+                    })
+                    ->where('credit', $request->id)
+                    ->sum('nominal');
+
+                if($cbd->debit == $request->id) {
+                    $debit  = $cbd->nominal;
+                    $credit = 0;
+                } else {
+                    $debit  = 0;
+                    $credit = $cbd->nominal;
+                }
+
+                $result[] = [
+                    'date'        => $cbd->created_at->format('d F Y'),
+                    'code'        => $j->journalable->code,
+                    'description' => $cbd->note,
+                    'income'      => number_format($debit, 2, ',', '.'),
+                    'expense'     => number_format($credit, 2, ',', '.'),
+                    'balance'     => number_format($income - $expense, 2, ',', '.')
+                ];
+            }
+        }
+
+        return response()->json([
+            'year'              => date('Y', strtotime($request->month)),
+            'month'             => date('F', strtotime($request->month)),
+            'name'              => $coa->name,
+            'code'              => $coa->code,
+            'total_transaction' => $journal->count(),
+            'balance'           => number_format($request->balance, 2, ',', '.'),
+            'result'            => $result
+        ]);
     }
 
 }

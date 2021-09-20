@@ -325,6 +325,9 @@
                                         <a href="{{ url('admin/report/accounting/trial_balance') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'trial_balance' ? 'active' : '' }}">Trial Balance</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="{{ url('admin/report/accounting/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'cash_bank' ? 'active' : '' }}">Cash & Bank</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="{{ url('admin/report/accounting/aging_receivable') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'aging_receivable' ? 'active' : '' }}">Aging Receivable</a>
                                     </li>
                                     <li class="nav-item">

@@ -9,11 +9,11 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i> 
+					<i class="icon-arrow-left52 mr-2"></i>
 					<span class="font-weight-semibold">Progress Sales Project</span>
 				</h4>
 			</div>
-         <div class="header-elements">
+            <div class="header-elements">
 				<div class="d-flex justify-content-center">
 					<a href="{{ url('admin/sales/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
@@ -142,9 +142,9 @@
                                        <div>{{ $pp->product->name() }}</div>
                                        <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                     </td>
-                                    <td class="align-middle">{{ $pp->qty }}</td>   
-                                    <td class="align-middle">{{ $pp->unit() }}</td> 
-                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
+                                    <td class="align-middle">{{ $pp->qty }}</td>
+                                    <td class="align-middle">{{ $pp->unit() }}</td>
+                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
                                  </tr>
                               @endforeach
                            </tbody>
@@ -229,8 +229,8 @@
                                  <tbody>
                                     @foreach($project->projectConsultantMeeting as $pcm)
                                        <tr class="text-center">
-                                          <td class="align-middle">{{ $pcm->date }}</td>   
-                                          <td class="align-middle">{{ $pcm->person }}</td>   
+                                          <td class="align-middle">{{ $pcm->date }}</td>
+                                          <td class="align-middle">{{ $pcm->person }}</td>
                                           <td class="align-middle">{{ $pcm->result }}</td>
                                        </tr>
                                     @endforeach
@@ -339,17 +339,17 @@
                                              <div>{{ $pp->product->name() }}</div>
                                              <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                           </td>
-                                          <td class="align-middle">{{ $pp->qty }}</td>   
-                                          <td class="align-middle">Rp {{ number_format($pp->price, 2, ',', '.') }}</td>   
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
+                                          <td class="align-middle">{{ $pp->qty }}</td>
+                                          <td class="align-middle">Rp {{ number_format($pp->price, 2, ',', '.') }}</td>
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
                                           <td class="align-middle">
                                              @if($pp->recommended_price < 1)
                                                 <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="0" required>
                                              @else
                                                 Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
-                                             @endif   
-                                          </td>   
-                                          <td class="align-middle">{{ $pp->unit() }}</td> 
+                                             @endif
+                                          </td>
+                                          <td class="align-middle">{{ $pp->unit() }}</td>
                                        </tr>
                                     @endforeach
                                  </tbody>
@@ -415,8 +415,8 @@
                                              <div>{{ $ps->product->name() }}</div>
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
-                                          <td class="align-middle">{{ $ps->date }}</td>   
-                                          <td class="align-middle">{{ $ps->qty }}</td>   
+                                          <td class="align-middle">{{ $ps->date }}</td>
+                                          <td class="align-middle">{{ $ps->qty }}</td>
                                           <td class="align-middle">{{ $ps->size }}</td>
                                        </tr>
                                     @endforeach
@@ -531,18 +531,18 @@
                                              <div>{{ $ps->product->name() }}</div>
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
-                                          <td class="align-middle">{{ $pp->qty }}</td>    
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
+                                          <td class="align-middle">{{ $pp->qty }}</td>
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
                                           <td class="align-middle">
                                              Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
-                                          </td>   
+                                          </td>
                                           <td class="align-middle">
                                              @if($project->progress >= 35)
                                                 {{ $pp->discount }}%
                                              @else
                                                 <input type="number" name="product_discount[]" class="form-control" value="0" placeholder="0" required>
-                                             @endif      
-                                          </td> 
+                                             @endif
+                                          </td>
                                        </tr>
                                     @endforeach
                                  </tbody>
@@ -1585,7 +1585,7 @@
       $('.sidebar-main-toggle').click();
       select2ServerSide('#product_id', '{{ url("admin/select2/product") }}');
       select2ServerSide('#sample_product_id', '{{ url("admin/select2/product") }}');
-      
+
       $('.sidebar-sticky .sidebar').stick_in_parent({
          offset_top: 20,
          parent: '.content',
@@ -1656,7 +1656,7 @@
          }
 		});
 	}
-   
+
    function addProduct() {
       var id = $('#product_id');
 
@@ -1672,30 +1672,30 @@
                loadingOpen('#step-2');
             },
             success: function(response) {
-               loadingClose('#step-2'); 
+               loadingClose('#step-2');
                id.val(null).trigger('change');
                $('#data_product').append(`
                   <tr class="text-center">
                      <input type="hidden" name="product_id[]" value="` + response.id + `">
                      <input type="hidden" name="product_price[]" value="` + response.price + `">
-                     <td class="align-middle">` + response.product + `</td>   
+                     <td class="align-middle">` + response.product + `</td>
                      <td class="align-middle">
                         <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
-                     </td>  
+                     </td>
                      <td class="align-middle">
                         <select name="product_unit[]" class="custom-select" required>
-                           <option value="1">Pcs</option>   
-                           <option value="2">Box</option>   
-                           <option value="3">Meter</option>   
+                           <option value="1">Pcs</option>
+                           <option value="2">Box</option>
+                           <option value="3">Meter</option>
                         </select>
-                     </td>   
+                     </td>
                      <td class="align-middle">
                         <div class="input-group">
                            <input type="number" name="product_target_price[]" class="form-control" placeholder="0" required>
                         </div>
-                     </td>  
+                     </td>
                      <td class="align-middle">
-                        <button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                        <button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
                      </td>
                   </tr>
                `);
@@ -1722,11 +1722,11 @@
                <input type="hidden" name="consultant_person[]" value="` + consultant_person.val() + `">
                <input type="hidden" name="consultant_result[]" value="` + consultant_result.val() + `">
 
-               <td class="align-middle">` + consultant_date.val() + `</td>   
-               <td class="align-middle">` + consultant_person.val() + `</td>   
-               <td class="align-middle">` + consultant_result.val() + `</td>   
+               <td class="align-middle">` + consultant_date.val() + `</td>
+               <td class="align-middle">` + consultant_person.val() + `</td>
+               <td class="align-middle">` + consultant_result.val() + `</td>
                <td class="align-middle">
-                  <button type="button" id="delete_data_consultant" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                  <button type="button" id="delete_data_consultant" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
                </td>
             </tr>
          `);
@@ -1765,12 +1765,12 @@
                      <input type="hidden" name="sample_qty[]" value="` + sample_qty.val() + `">
                      <input type="hidden" name="sample_size[]" value="` + sample_size.val() + `">
 
-                     <td class="align-middle">` + response.product + `</td>  
-                     <td class="align-middle">` + sample_date.val() + `</td>  
-                     <td class="align-middle">` + sample_qty.val() + `</td>  
-                     <td class="align-middle">` + sample_size.val() + `</td>  
+                     <td class="align-middle">` + response.product + `</td>
+                     <td class="align-middle">` + sample_date.val() + `</td>
+                     <td class="align-middle">` + sample_qty.val() + `</td>
+                     <td class="align-middle">` + sample_size.val() + `</td>
                      <td class="align-middle">
-                        <button type="button" id="delete_data_sample" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+                        <button type="button" id="delete_data_sample" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
                      </td>
                   </tr>
                `);

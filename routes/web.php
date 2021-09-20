@@ -568,6 +568,11 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                     Route::get('/', 'ReportAccountingController@trialBalance');
                     Route::get('datatable', 'ReportAccountingController@trialBalanceDatatable');
                 });
+
+                Route::prefix('cash_bank')->group(function() {
+                    Route::get('/', 'ReportAccountingController@cashBank');
+                    Route::post('detail', 'ReportAccountingController@cashBankDetail');
+                });
             });
         });
 
