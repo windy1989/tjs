@@ -90,40 +90,91 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <div class="alert bg-teal">
-                    <table class="table w-100">
-                        <tbody>
-                            <tr class="text-white">
-                                <td class="align-middle text-left" width="25%">
-                                    <div>Year : <span id="data_detail_year"></span></div>
-                                    <div>Month : <span id="data_detail_month"></span></div>
-                                </td>
-                                <td class="align-middle text-center" width="50%">
-                                    <h4 class="text-uppercase" id="data_detail_account_name"></h4>
-                                    <h6 class="text-uppercase" id="data_detail_account_no"></h6>
-                                </td>
-                                <td class="align-middle text-right" width="25%">
-                                    <div>Total Transaction : <span id="data_detail_total_transaction"></span></div>
-                                    <div>Balance : <span id="data_detail_balance"></span></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
-                        <thead class="table-secondary">
-                            <tr class="text-center">
-                                <th>Date</th>
-                                <th>Code</th>
-                                <th>Description</th>
-                                <th>Income</th>
-                                <th>Expense</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody id="data_detail"></tbody>
-                    </table>
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a href="#transaction" class="nav-link active" data-toggle="tab"><i class="icon-cart5 mr-2"></i> Transaction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#checking_account" class="nav-link" data-toggle="tab"><i class="icon-newspaper mr-2"></i> Checking Account</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="transaction">
+                        <div class="alert bg-teal">
+                            <table class="table w-100">
+                                <tbody>
+                                    <tr class="text-white">
+                                        <td class="align-middle text-left" width="25%">
+                                            <div>Year : <span id="data_detail_year"></span></div>
+                                            <div>Month : <span id="data_detail_month"></span></div>
+                                        </td>
+                                        <td class="align-middle text-center" width="50%">
+                                            <h4 class="text-uppercase" id="data_detail_account_name"></h4>
+                                            <h6 class="text-uppercase" id="data_detail_account_no"></h6>
+                                        </td>
+                                        <td class="align-middle text-right" width="25%">
+                                            <div>Total Transaction : <span id="data_detail_total_transaction"></span></div>
+                                            <div>Balance : <span id="data_detail_balance"></span></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead class="table-secondary">
+                                    <tr class="text-center">
+                                        <th>Date</th>
+                                        <th>Code</th>
+                                        <th>Description</th>
+                                        <th>Income</th>
+                                        <th>Expense</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data_detail"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="checking_account">
+                        <form id="form_data">
+                            <input type="hidden" name="coa_id" id="coa_id_upload">
+                            <input type="hidden" name="balance" id="balance_upload">
+                            <input type="hidden" name="month" id="month_upload">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <button type="button" class="btn btn-success col-12" id="btn_upload" onclick="uploadFile()" style="height:42px;">Upload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="alert alert-warning text-center font-weight-bold" id="image_not_upload">Image not uploaded</div>
+                                <div id="image_uploaded">
+                                    <div class="form-group">
+                                        <div class="text-center">
+                                            <a href="" id="preview_image" data-lightbox="Image" data-title="">
+                                                <img src="" class="img-fluid img-thumbnail" style="max-width:500px;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer bg-light">
@@ -155,6 +206,7 @@
                 beforeSend: function() {
                     loadingOpen('.modal-content');
                     $('#data_detail').html('');
+                    $('#form_data').trigger('reset');
                 },
                 success: function(response) {
                     loadingClose('.modal-content');
@@ -164,19 +216,71 @@
                     $('#data_detail_account_no').text(response.code);
                     $('#data_detail_total_transaction').text(response.total_transaction);
                     $('#data_detail_balance').text(response.balance);
+                    $('#coa_id_upload').val(id);
+                    $('#balance_upload').val(balance);
+                    $('#month_upload').val($('#filter_month').val());
+
+                    if(response.image) {
+                        $('#image_not_upload').hide();
+                        $('#preview_image').attr('href', response.image);
+                        $('#preview_image').data('title', response.name);
+                        $('#preview_image img').attr('src', response.image);
+                        $('#image_uploaded').show();
+                    } else {
+                        $('#image_not_upload').show();
+                        $('#image_uploaded').hide();
+                    }
 
                     $.each(response.result, function(i, val) {
                         $('#data_detail').append(`
-                        <tr>
-                            <td class="align-middle text-center">` + val.date + `</td>
-                            <td class="align-middle text-center">` + val.code + `</td>
-                            <td class="align-middle text-center">` + val.description+ `</td>
-                            <td class="align-middle text-right">` + val.income + `</td>
-                            <td class="align-middle text-right">` + val.expense + `</td>
-                            <td class="align-middle text-right">` + val.balance + `</td>
-                        </tr>
+                            <tr>
+                                <td class="align-middle text-center">` + val.date + `</td>
+                                <td class="align-middle text-center">` + val.code + `</td>
+                                <td class="align-middle text-center">` + val.description+ `</td>
+                                <td class="align-middle text-right">` + val.income + `</td>
+                                <td class="align-middle text-right">` + val.expense + `</td>
+                                <td class="align-middle text-right">` + val.balance + `</td>
+                            </tr>
                         `);
                     });
+                },
+                error: function() {
+                    loadingClose('.modal-content');
+                    swalInit.fire({
+                        title: 'Server Error',
+                        text: 'Please contact developer',
+                        type: 'error'
+                    });
+                }
+            });
+        }
+
+        function uploadFile() {
+            $.ajax({
+                url: '{{ url("admin/report/accounting/cash_bank/upload_file") }}',
+                type: 'POST',
+                dataType: 'JSON',
+                data: new FormData($('#form_data')[0]),
+                contentType: false,
+                processData: false,
+                cache: true,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    loadingOpen('.modal-content');
+                },
+                success: function(response) {
+                    loadingClose('.modal-content');
+                    if(response.status == 200) {
+                        showDetail($('#coa_id_upload').val(), $('#balance_upload').val());
+                    } else {
+                        swalInit.fire({
+                            title: 'Failed Upload',
+                            text: 'Please contact developer',
+                            type: 'error'
+                        });
+                    }
                 },
                 error: function() {
                     loadingClose('.modal-content');

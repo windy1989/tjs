@@ -42,9 +42,9 @@
                             <div class="card-body">
                                 <h3 class="card-title text-center font-weight-bold text-uppercase mb-0">
                                     @if($cash_bank->type == 1)
-                                        Other Payment
-                                    @elseif($cash_bank->type == 2)
                                         Other Deposit
+                                    @elseif($cash_bank->type == 2)
+                                        Other Payment
                                     @else
                                         Journal Voucher
                                     @endif
@@ -62,10 +62,10 @@
                         <div class="col-md-12">
                             <div class="card shadow-0">
                                 <div class="card-body">
-                                    <h6 class="card-title font-weight-bold">Paid From :</h6>
+                                    <h6 class="card-title font-weight-bold">Deposit To :</h6>
                                     <p class="mb-0">
                                         @foreach($cash_bank->cashBankDetail as $cbd)
-                                            <div class="badge badge-light badge-striped badge-striped-left border-left-danger mb-1 mr-1 text-uppercase">[{{ $cbd->coaCredit->code }}] {{ $cbd->coaCredit->name }}</div>
+                                            <div class="badge badge-light badge-striped badge-striped-left border-left-danger mb-1 mr-1 text-uppercase">[{{ $cbd->coaDebit->code }}] {{ $cbd->coaDebit->name }}</div>
                                         @endforeach
                                     </p>
                                 </div>
@@ -75,10 +75,10 @@
                         <div class="col-md-12">
                             <div class="card shadow-0">
                                 <div class="card-body">
-                                    <h6 class="card-title font-weight-bold">Deposit To :</h6>
+                                    <h6 class="card-title font-weight-bold">Paid From :</h6>
                                     <p class="mb-0">
                                         @foreach($cash_bank->cashBankDetail as $cbd)
-                                            <div class="badge badge-light badge-striped badge-striped-left border-left-success mb-1 mr-1 text-uppercase">[{{ $cbd->coaDebit->code }}] {{ $cbd->coaDebit->name }}</div>
+                                            <div class="badge badge-light badge-striped badge-striped-left border-left-success mb-1 mr-1 text-uppercase">[{{ $cbd->coaCredit->code }}] {{ $cbd->coaCredit->name }}</div>
                                         @endforeach
                                     </p>
                                 </div>
@@ -103,16 +103,16 @@
                                 @php $total += $cbd->nominal; @endphp
                                 @if($cash_bank->type == 1)
                                     <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaDebit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaDebit->name }}</td>
+                                        <td class="align-middle">{{ $cbd->coaCredit->code }}</td>
+                                        <td class="align-middle">{{ $cbd->coaCredit->name }}</td>
                                         <td class="align-middle">0</td>
                                         <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
                                         <td class="align-middle">{{ $cbd->note }}</td>
                                     </tr>
                                 @elseif($cash_bank->type == 2)
                                     <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaCredit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaCredit->name }}</td>
+                                        <td class="align-middle">{{ $cbd->coaDebit->code }}</td>
+                                        <td class="align-middle">{{ $cbd->coaDebit->name }}</td>
                                         <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
                                         <td class="align-middle">0</td>
                                         <td class="align-middle">{{ $cbd->note }}</td>
@@ -143,9 +143,9 @@
                                     </td>
                                     <td class="align-middle font-weight-bold text-uppercase">
                                         @if($cash_bank->type == 1)
-                                            Total Payment : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
-                                        @else
                                             Total Deposit : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
+                                        @else
+                                            Total Payment : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -173,9 +173,9 @@
                     <div class="card-body">
                         <h6 class="card-title font-weight-bold text-uppercase">
                             @if($cash_bank->type == 1 || $cash_bank->type == 2)
-                                Memo
-                            @else
                                 Description
+                            @else
+                                Memo
                             @endif
                         </h6>
                         <p>{{ $cash_bank->description }}</p>
@@ -192,7 +192,7 @@
                             <div class="text-center">(........................................)</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="mb-5 text-center">Paid By</div>
+                            <div class="mb-5 text-center">Deposit By</div>
                             <div class="text-center">(........................................)</div>
                         </div>
                         <div class="col-md-3">
@@ -209,7 +209,7 @@
                             <div class="text-center">(........................................)</div>
                         </div>
                         <div class="col-md-3">
-                            <div class="mb-5 text-center">Deposit By</div>
+                            <div class="mb-5 text-center">Paid By</div>
                             <div class="text-center">(........................................)</div>
                         </div>
                         <div class="col-md-3">

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\SMB;
 use App\Models\Coa;
+use App\Models\Paper;
 use App\Models\Journal;
 use Illuminate\Http\Request;
 use App\Models\CashBankDetail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ReportAccountingController extends Controller {
 
@@ -519,15 +521,67 @@ class ReportAccountingController extends Controller {
             }
         }
 
+        $checking_account = Paper::where('coa_id', $request->id)
+            ->whereYear('created_at', date('Y', strtotime($request->month)))
+            ->whereMonth('created_at', date('m', strtotime($request->month)))
+            ->first();
+
+        if($checking_account) {
+            $image = asset(Storage::url($checking_account->image));
+        } else {
+            $image = null;
+        }
+
         return response()->json([
             'year'              => date('Y', strtotime($request->month)),
             'month'             => date('F', strtotime($request->month)),
             'name'              => $coa->name,
             'code'              => $coa->code,
+            'image'             => $image,
             'total_transaction' => $journal->count(),
             'balance'           => number_format($request->balance, 2, ',', '.'),
             'result'            => $result
         ]);
+    }
+
+    public function cashBankUploadFile(Request $request)
+    {
+        $checking_account = Paper::where('coa_id', $request->coa_id)
+            ->whereYear('created_at', date('Y', strtotime($request->month)))
+            ->whereMonth('created_at', date('m', strtotime($request->month)))
+            ->first();
+
+        if($checking_account) {
+            if(Storage::exists($checking_account->image)) {
+                Storage::delete($checking_account->image);
+            }
+
+            $query = Paper::where('coa_id', $request->coa_id)
+                ->whereYear('created_at', date('Y', strtotime($request->month)))
+                ->whereMonth('created_at', '<=', date('m', strtotime($request->month)))
+                ->update([
+                    'image' => $request->file('image')->store('public/paper')
+                ]);
+        } else {
+            $query = Paper::create([
+                'coa_id' => $request->coa_id,
+                'image'  => $request->file('image')->store('public/paper')
+            ]);
+        }
+
+        if($query) {
+            $response = [
+                'status'  => 200,
+                'message' => 'Bank statement uploaded successfully.'
+            ];
+        } else {
+            $response = [
+                'status'  => 500,
+                'message' => 'Bank statement failed to upload.'
+            ];
+        }
+
+        return response()->json($response);
     }
 
 }
