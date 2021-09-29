@@ -363,14 +363,14 @@
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'settings' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-gear"></i>
-                            <span>Settings</span>
+                            <span>Setting</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Settings">
+                        <ul class="nav nav-group-sub" data-submenu-title="Setting">
                             <li class="nav-item">
-                                <a href="{{ url('admin/settings/user') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
+                                <a href="{{ url('admin/setting/user') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/settings/2fa') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
+                                <a href="{{ url('admin/setting/2fa') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
                             </li>
                         </ul>
                     </li>
