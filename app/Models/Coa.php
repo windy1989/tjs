@@ -42,6 +42,12 @@ class Coa extends Model {
         $query = Coa::find($this->parent_id);
         return $query;
     }
+	
+	public function child()
+    {
+        $query = Coa::where('parent_id',$this->id)->get();
+        return $query;
+    }
 
     public function journalDebit()
     {

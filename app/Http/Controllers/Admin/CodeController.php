@@ -36,14 +36,12 @@ class CodeController extends Controller {
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function datatable(Request $request)
+    public function datatable(Request $request) 
     {
         $column = [
             'id',
             'shading',
-            'code',
             'name',
-            'check',
             'stock',
             'status'
         ];
@@ -55,7 +53,7 @@ class CodeController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Product::count();
-
+        
         $query_data = Product::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
@@ -75,7 +73,7 @@ class CodeController extends Controller {
                         ->orWhereHas('country', function($query) use ($search) {
                                 $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                }
+                }         
 
                 if($request->brand_id) {
                     $query->where('brand_id', $request->brand_id);
@@ -109,10 +107,6 @@ class CodeController extends Controller {
                     } else if($request->shading == 'no_shading') {
                         $query->doesntHave('productShading');
                     }
-                }
-
-                if($request->check) {
-                    $query->where('check', $request->check);
                 }
 
                 if($request->status) {
@@ -144,7 +138,7 @@ class CodeController extends Controller {
                         ->orWhereHas('country', function($query) use ($search) {
                                 $query->whereRaw("MATCH(name) AGAINST('$search' IN BOOLEAN MODE)");
                             });
-                }
+                }         
 
                 if($request->brand_id) {
                     $query->where('brand_id', $request->brand_id);
@@ -180,10 +174,6 @@ class CodeController extends Controller {
                     }
                 }
 
-                if($request->check) {
-                    $query->where('check', $request->check);
-                }
-
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -208,10 +198,8 @@ class CodeController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $shading,
-                    $val->code(),
                     $val->name(),
                     $availability,
-                    $val->check(),
                     $val->status(),
                     '
                         <a href="' . url('admin/master_data/product/product_code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
@@ -250,7 +238,7 @@ class CodeController extends Controller {
                 $code .= $type->division->code;
             }
         }
-
+     
         if($brand) {
             $code .= $brand->code;
         }
@@ -341,7 +329,6 @@ class CodeController extends Controller {
                 'container_stock'     => $request->container_stock,
                 'container_max_stock' => $request->container_max_stock,
                 'description'         => $request->description,
-                'check'               => true,
                 'status'              => $request->status
             ]);
 
@@ -349,7 +336,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000
@@ -424,7 +411,6 @@ class CodeController extends Controller {
             'container_stock'     => $data->container_stock,
             'container_max_stock' => $data->container_max_stock,
             'description'         => $data->description,
-            'check'               => $data->check,
             'status'              => $data->status,
             'shading'             => $shading
         ]);
@@ -480,7 +466,6 @@ class CodeController extends Controller {
                 'container_stock'     => $request->container_stock,
                 'container_max_stock' => $request->container_max_stock,
                 'description'         => $request->description,
-                'check'               => $request->check,
                 'status'              => $request->status
             ]);
 
@@ -489,7 +474,7 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
                             'per_page'  => 1000
@@ -531,7 +516,7 @@ class CodeController extends Controller {
         return response()->json($response);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request) 
     {
         $query = Product::where('id', $request->id)->delete();
         if($query) {
@@ -554,7 +539,7 @@ class CodeController extends Controller {
         return response()->json($response);
     }
 
-    public function detail($id)
+    public function detail($id) 
     {
         $data = [
             'title'   => 'Detail Product Code',

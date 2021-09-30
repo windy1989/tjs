@@ -162,7 +162,7 @@ class CoaController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'code'      => ['required', Rule::unique('brands', 'code')->ignore($id)],
+            'code'      => ['required', Rule::unique('coas', 'code')->ignore($id)],
             'name'      => 'required',
             'parent_id' => 'required',
             'status'    => 'required'

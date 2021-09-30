@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use PDF;
 use App\Models\City;
+use App\Models\Coa;
 use App\Models\Brand;
 use App\Models\Country;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Delivery;
@@ -17,6 +19,9 @@ use App\Models\ProjectProduct;
 use App\Models\ProjectDelivery;
 use App\Models\ProjectShipment;
 use App\Models\ProjectProduction;
+use App\Models\ProjectWarehouse;
+use App\Models\ProjectQuotation;
+use App\Models\ProjectQuotationProduct;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ProjectConsultantMeeting;
@@ -30,6 +35,8 @@ class ProjectController extends Controller {
             'title'   => 'Sales Project',
             'country' => Country::where('status', 1)->get(),
             'city'    => City::all(),
+			'bank' => Coa::where('parent_id', 8)->where('status', 1)->get(),
+            'customer' => Customer::where('type', 2)->get(),
             'content' => 'admin.sales.project'
         ];
 
@@ -141,13 +148,12 @@ class ProjectController extends Controller {
             'country_id'     => 'required',
             'city_id'        => 'required',
             'name'           => 'required',
-            'email'          => 'required|email',
-            'phone'          => 'required|min:9|numeric',
+            'customer_id'    => 'required',
             'timeline'       => 'required',
-            'constructor'    => 'required',
             'manager'        => 'required',
             'consultant'     => 'required',
             'owner'          => 'required',
+			'bank_id'    	 => 'required',
             'payment_method' => 'required',
             'supply_method'  => 'required',
             'ppn'            => 'required'
@@ -155,16 +161,13 @@ class ProjectController extends Controller {
             'country_id.required'     => 'Please select a country.',
             'city_id.required'        => 'Please select a city.',
             'name.required'           => 'Name cannot be empty.',
-            'email.required'          => 'Email cannot be empty.',
-            'email.email'             => 'Email not valid.',
-            'phone.required'          => 'Phone cannot be empty',
-            'phone.min'               => 'Phone must be at least 9 characters long',
-            'phone.numeric'           => 'Phone must be number',
+            'customer_id.required'    => 'Customer cannot be empty.',
             'timeline.required'       => 'Timeline cannot be empty',
             'constructor.required'    => 'Constructor name cannot be empty',
             'manager.required'        => 'Project manager cannot be empty',
             'consultant.required'     => 'Consultant name cannot be empty',
             'owner.required'          => 'Owner cannot be empty',
+			'bank_id.required' 		  => 'Please select a bank destination.',
             'payment_method.required' => 'Please select a payment method.',
             'supply_method.required'  => 'Please select a supply method.',
             'ppn.required'            => 'Please select a PPN.'
@@ -182,13 +185,12 @@ class ProjectController extends Controller {
                 'city_id'        => $request->city_id,
                 'code'           => Project::generateCode(),
                 'name'           => $request->name,
-                'email'          => $request->email,
-                'phone'          => $request->phone,
+                'customer_id'    => $request->customer_id,
                 'timeline'       => $request->timeline,
-                'constructor'    => $request->constructor,
                 'manager'        => $request->manager,
                 'consultant'     => $request->consultant,
                 'owner'          => $request->owner,
+				'coa_id' 		 => $request->bank_id,
                 'payment_method' => $request->payment_method,
                 'supply_method'  => $request->supply_method,
                 'ppn'            => $request->ppn,
@@ -227,7 +229,9 @@ class ProjectController extends Controller {
             'id'      => $data->id,
             'product' => $image . '<div>' . $data->name() . '</div><div>' . $data->type->length . 'x' . $data->type->width . '</div>',
             'price'   => $price ? $price->project_price : 0,
-            'bottom'  => $price ? $price->bottom_price : 0
+            'bottom'  => $price ? $price->bottom_price : 0,
+			'carton_pcs' => $data->carton_pcs,
+			'carton_sqm' => (($data->type->length * $data->type->width) / 10000) * $data->carton_pcs.' M<sup>2</sup>'
         ]);
     }
     
@@ -275,13 +279,12 @@ class ProjectController extends Controller {
                         'country_id'     => 'required',
                         'city_id'        => 'required',
                         'name'           => 'required',
-                        'email'          => 'required|email',
-                        'phone'          => 'required|min:9|numeric',
+                        'customer_id'    => 'required',
                         'timeline'       => 'required',
-                        'constructor'    => 'required',
                         'manager'        => 'required',
                         'consultant'     => 'required',
                         'owner'          => 'required',
+						'bank_id'    	 => 'required',
                         'payment_method' => 'required',
                         'supply_method'  => 'required',
                         'ppn'            => 'required'
@@ -289,16 +292,12 @@ class ProjectController extends Controller {
                         'country_id.required'     => 'Please select a country.',
                         'city_id.required'        => 'Please select a city.',
                         'name.required'           => 'Name cannot be empty.',
-                        'email.required'          => 'Email cannot be empty.',
-                        'email.email'             => 'Email not valid.',
-                        'phone.required'          => 'Phone cannot be empty',
-                        'phone.min'               => 'Phone must be at least 9 characters long',
-                        'phone.numeric'           => 'Phone must be number',
+                        'customer_id.required'    => 'Customer cannot be empty.',
                         'timeline.required'       => 'Timeline cannot be empty',
-                        'constructor.required'    => 'Constructor name cannot be empty',
                         'manager.required'        => 'Project manager cannot be empty',
                         'consultant.required'     => 'Consultant name cannot be empty',
                         'owner.required'          => 'Owner cannot be empty',
+						'bank_id.required' 		  => 'Please select a bank destination.',
                         'payment_method.required' => 'Please select a payment method.',
                         'supply_method.required'  => 'Please select a supply method.',
                         'ppn.required'            => 'Please select a PPN.'
@@ -307,8 +306,14 @@ class ProjectController extends Controller {
 
                 case 'step-2':
                     $validation = Validator::make($request->all(), [
+						'delivery_cost' => 'required',
+						'cutting_cost' => 'required',
+						'misc_cost' => 'required',
                         'product_id' => 'required|array'
                     ], [
+						'delivery_cost'       => 'Delivery cost cannot be empty',
+						'cutting_cost'        => 'Cutting cost manager cannot be empty',
+						'misc_cost'        	  => 'Miscellaneous cost cannot be empty',
                         'product_id.required' => 'Please add min 1 product.',
                         'product_id.array'    => 'product_id must be array.'
                     ]);
@@ -331,10 +336,16 @@ class ProjectController extends Controller {
 
                 case 'step-4':
                     $validation = Validator::make($request->all(), [
-                        'product_recommended_price' => 'required|array'
+                        'product_recommended_price' => 'required|array',
+						'product_best_price' => 'required|array',
+                        'product_discount' => 'required|array'
                     ], [
                         'product_recommended_price.required' => 'Recommended price cannot empty.',
-                        'product_recommended_price.array'    => 'Recommended price must be array.'
+                        'product_recommended_price.array'    => 'Recommended price must be array.',
+						'product_best_price.required' => 'Best Price cannot empty.',
+                        'product_best_price.array'    => 'Best Price must be array.',
+                        'product_discount.required' => 'Discount cannot empty.',
+                        'product_discount.array'    => 'Discount must be array.'
                     ]);
                     break;
 
@@ -343,6 +354,7 @@ class ProjectController extends Controller {
                         'sample_product_id' => 'required|array',
                         'sample_date'       => 'required|array',
                         'sample_qty'        => 'required|array',
+						'sample_unit'       => 'required|array',
                         'sample_size'       => 'required|array'
                     ], [
                         'sample_product_id.required' => 'Please select a product.',
@@ -351,6 +363,8 @@ class ProjectController extends Controller {
                         'sample_date.array'          => 'Date must be array.',
                         'sample_qty.required'        => 'Qty cannot empty.',
                         'sample_qty.array'           => 'Qty must be array.',
+						'sample_unit.required'       => 'Unit cannot empty.',
+                        'sample_unit.array'          => 'Unit must be array.',
                         'sample_size.required'       => 'Size cannot empty.',
                         'sample_size.array'          => 'Size must be array.'
                     ]);
@@ -358,17 +372,19 @@ class ProjectController extends Controller {
 
                 case 'step-6':
                     $validation = Validator::make($request->all(), [
-                        'product_discount' => 'required|array'
+						
                     ], [
-                        'product_discount.required' => 'Discount cannot empty.',
-                        'product_discount.array'    => 'Discount must be array.'
+						
                     ]);
                     break;
 
                 case 'step-7':
                     $validation = Validator::make($request->all(), [
+						'file'   => 'required|mimes:jpg,jpeg,png,pdf',
                         'submit' => 'required'
                     ], [
+						'file.required'   => 'File cannot empty.',
+                        'file.mimes'      => 'File must have an extension jpg, jpeg, png, pdf.',
                         'submit.required' => 'Step cannot empty.'
                     ]);
                     break;
@@ -402,14 +418,16 @@ class ProjectController extends Controller {
                         'image'       => 'required|mimes:jpg,jpeg,png',
                         'start_date'  => 'required',
                         'finish_date' => 'required',
-                        'note'        => 'required'
+                        'note'        => 'required',
+						'progress_production'  => 'required'
                     ], [
                         'image.required'       => 'Image cannot empty.',
                         'image.image'          => 'File must be an image.',
                         'image.mimes'          => 'Image must have an extension jpg, jpeg, png.',
                         'start_date.required'  => 'Start date cannot empty.',
                         'finish_date.required' => 'Finish date cannot empty.',
-                        'note.required'        => 'Note cannot empty.'
+                        'note.required'        => 'Note cannot empty.',
+						'progress_production.required'   => 'Progress production cannot empty.'
                     ]);
                     break;
 
@@ -444,8 +462,26 @@ class ProjectController extends Controller {
                         'eta.required'            => 'ETA cannot empty.'
                     ]);
                     break;
-
-                case 'step-13':
+				case 'step-13':
+					$validation = Validator::make($request->all(), [
+                        'person'   			=> 'required',
+                        'date_receive' 		=> 'required',
+                        'warehouse_id'      => 'required',
+                        'image'   			=> 'required|mimes:jpg,jpeg,png',
+                    ], [
+                        'person.required'   	=> 'Person who is responsible cannot empty.',
+                        'date_receive.required' => 'Date received cannot empty.',
+                        'warehouse_id.required' => 'Warehouse cannot empty.',
+                        'image.required'   		=> 'Image cannot empty.',
+                        'image.image'      		=> 'File must be an image.',
+                        'image.mimes'      		=> 'Image must have an extension jpg, jpeg, png.',
+                    ]);
+					
+					break;
+				case 'step-14':
+					
+					break;
+                case 'step-15':
                     $validation = Validator::make($request->all(), [
                         'receiver_name' => 'required',
                         'delivery_date' => 'required',
@@ -468,7 +504,11 @@ class ProjectController extends Controller {
                     ]);
                     break;
                 
-                case 'step-14':
+				case 'step-16':
+					
+					break;
+				
+                case 'step-17':
                     $validation = Validator::make($request->all(), [
                         'image'          => 'required|mimes:jpg,jpeg,png',
                         'date'           => 'required',
@@ -485,7 +525,7 @@ class ProjectController extends Controller {
                     ]);
                     break;
 
-                case 'step-15':
+                case 'step-18':
                     $validation = Validator::make($request->all(), [
                         'submit' => 'required'
                     ], [
@@ -505,13 +545,13 @@ class ProjectController extends Controller {
                             'country_id'     => $request->country_id,
                             'city_id'        => $request->city_id,
                             'name'           => $request->name,
-                            'email'          => $request->email,
-                            'phone'          => $request->phone,
+                            'customer_id'    => $request->customer_id,
                             'timeline'       => $request->timeline,
                             'constructor'    => $request->constructor,
                             'manager'        => $request->manager,
                             'consultant'     => $request->consultant,
                             'owner'          => $request->owner,
+							'coa_id' 		 => $request->bank_id,
                             'payment_method' => $request->payment_method,
                             'supply_method'  => $request->supply_method,
                             'ppn'            => $request->ppn
@@ -527,7 +567,15 @@ class ProjectController extends Controller {
                         $query->update([
                             'progress' => $query->progress < 15 ? 15 : $query->progress
                         ]);
-
+						
+						Project::find($query->id)->update([
+							'delivery_cost'	=> str_replace(',','.',str_replace('.','',$request->delivery_cost)),
+							'cutting_cost'	=> str_replace(',','.',str_replace('.','',$request->cutting_cost)),
+							'misc_cost'	=> str_replace(',','.',str_replace('.','',$request->misc_cost))
+						]);
+						
+						ProjectProduct::where('project_id',$query->id)->whereNotIn('product_id',$request->product_id)->delete();
+						
                         foreach($request->product_id as $key => $pi) {
                             $product = Product::find($pi);
                             $cogs    = 0;
@@ -535,16 +583,31 @@ class ProjectController extends Controller {
                             if($product->pricingPolicy) {
                                 $cogs = $product->pricingPolicy->cogs;    
                             }
-
-                            ProjectProduct::create([
-                                'project_id'   => $query->id,
-                                'product_id'   => $pi,
-                                'qty'          => $request->product_qty[$key],
-                                'cogs'         => $cogs,
-                                'price'        => $request->product_price[$key],
-                                'target_price' => $request->product_target_price[$key],
-                                'unit'         => $request->product_unit[$key]
-                            ]);
+							
+							$count = ProjectProduct::where('project_id',$query->id)->where('product_id',$pi)->count();
+							
+							if($count > 0){
+								ProjectProduct::where(['project_id' => $query->id, 'product_id' => $pi])->update([
+									'area'         => $request->product_area[$key],
+									'qty'          => $request->product_qty[$key],
+									'cogs'         => $cogs,
+									'price'        => $request->product_price[$key],
+									'target_price' => str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_target_price[$key]))),
+									'unit'         => $request->product_unit[$key]
+								]);
+							}else{
+								ProjectProduct::create([
+									'project_id'   => $query->id,
+									'product_id'   => $pi,
+									'area'   	   => $request->product_area[$key],
+									'qty'          => $request->product_qty[$key],
+									'cogs'         => $cogs,
+									'price'        => $request->product_price[$key],
+									'target_price' => str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_target_price[$key]))),
+									'unit'         => $request->product_unit[$key]
+								]);
+							}
+                            
                         }
 
                         activity()
@@ -557,14 +620,20 @@ class ProjectController extends Controller {
                         $query->update([
                             'progress' => $query->progress < 20 ? 20 : $query->progress
                         ]);
-
+						
+						ProjectConsultantMeeting::whereNotIn('id',$request->consultant_id)->delete();
+						
                         foreach($request->consultant_date as $key => $cd) {
-                            ProjectConsultantMeeting::create([
-                                'project_id' => $query->id,
-                                'date'       => $cd,
-                                'person'     => $request->consultant_person[$key],
-                                'result'     => $request->consultant_result[$key]
-                            ]);
+							if($request->consultant_id[$key] !== '0'){
+								
+							}else{
+								ProjectConsultantMeeting::create([
+									'project_id' => $query->id,
+									'date'       => $cd,
+									'person'     => $request->consultant_person[$key],
+									'result'     => $request->consultant_result[$key]
+								]);
+							}
                         }
 
                         activity()
@@ -577,11 +646,31 @@ class ProjectController extends Controller {
                         $query->update([
                             'progress' => $query->progress < 25 ? 25 : $query->progress
                         ]);
+						
+						$revision = ProjectQuotation::where('project_id', $query->id)->max('revision');
+						$revision++;
+
+						$projectQuotation = ProjectQuotation::create([
+							'project_id'     => $query->id,
+							'revision'  	 => $revision,
+							'approved_by_1'  => 0,
+							'approved_by_1'  => 0
+						]);
 
                         foreach($request->project_product_id as $key => $ppi) {
                             ProjectProduct::find($ppi)->update([
-                                'recommended_price' => $request->product_recommended_price[$key]
+                                'recommended_price' => str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_recommended_price[$key]))),
+								'best_price' => str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_best_price[$key]))),
+                                'discount' => str_replace(',','.',str_replace('.','',$request->product_discount[$key]))
                             ]);
+							
+							ProjectQuotationProduct::create([
+								'project_quotation_id'     	=> $projectQuotation->id,
+								'product_id'  	 			=> $ppi,
+								'recommended_price'  		=> str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_recommended_price[$key]))),
+								'best_price' 				=> str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_best_price[$key]))),
+								'discount'					=> str_replace(',','.',str_replace('.','',$request->product_discount[$key]))
+							]);
                         }
 
                         activity()
@@ -594,15 +683,22 @@ class ProjectController extends Controller {
                         $query->update([
                             'progress' => $query->progress < 30 ? 30 : $query->progress
                         ]);
-
+						
+						ProjectSample::where('project_id',$query->id)->whereNotIn('product_id',$request->sample_product_id)->delete();
+						
                         foreach($request->sample_product_id as $key => $spi) {
-                            ProjectSample::create([
-                                'project_id' => $query->id,
-                                'product_id' => $spi,
-                                'date'       => $request->sample_date[$key],
-                                'qty'        => $request->sample_qty[$key],
-                                'size'       => $request->sample_size[$key]
-                            ]);
+							if($request->sample_id[$key] !== '0'){
+							
+							}else{
+								ProjectSample::create([
+									'project_id' => $query->id,
+									'product_id' => $spi,
+									'date'       => $request->sample_date[$key],
+									'qty'        => $request->sample_qty[$key],
+									'unit'       => $request->sample_unit[$key],
+									'size'       => $request->sample_size[$key]
+								]);
+							}
                         }
 
                         activity()
@@ -616,11 +712,12 @@ class ProjectController extends Controller {
                             'progress' => $query->progress < 35 ? 35 : $query->progress
                         ]);
 
-                        foreach($request->project_product_id as $key => $ppi) {
+                        /* foreach($request->project_product_id as $key => $ppi) {
                             ProjectProduct::find($ppi)->update([
-                                'discount' => $request->product_discount[$key]
+								'best_price' => str_replace(',','.',str_replace('.','',str_replace('IDR ','',$request->product_best_price[$key]))),
+                                'discount' => str_replace(',','.',str_replace('.','',$request->product_discount[$key]))
                             ]);
-                        }
+                        } */
 
                         activity()
                             ->performedOn(new Project())
@@ -632,6 +729,16 @@ class ProjectController extends Controller {
                         $query->update([
                             'progress' => $query->progress < 40 ? 40 : $query->progress
                         ]);
+						
+						$rowcek = Project::find($query->id);
+						
+						if($rowcek->so_file){
+							Storage::delete($rowcek->so_file);
+						}
+						
+						Project::find($query->id)->update([
+							'so_file'	=> $request->file('file')->store('public/project')
+						]);
 
                         activity()
                             ->performedOn(new Project())
@@ -659,7 +766,7 @@ class ProjectController extends Controller {
                             'project_id' => $query->id,
                             'image'      => $request->file('image')->store('public/project'),
                             'date'       => $request->date,
-                            'nominal'    => $request->nominal,
+                            'nominal'    => str_replace(',','.',str_replace('.','',$request->nominal)),
                             'bank'       => $request->bank,
                             'status'     => 1
                         ]);
@@ -680,7 +787,8 @@ class ProjectController extends Controller {
                             'image'       => $request->file('image')->store('public/project'),
                             'start_date'  => $request->start_date,
                             'finish_date' => $request->finish_date,
-                            'note'        => $request->note
+                            'note'        => $request->note,
+							'progress'	  => $request->progress_production
                         ]);
 
                         activity()
@@ -698,7 +806,7 @@ class ProjectController extends Controller {
                             'project_id' => $query->id,
                             'image'      => $request->file('image')->store('public/project'),
                             'date'       => $request->date,
-                            'nominal'    => $request->nominal,
+                            'nominal'    => str_replace(',','.',str_replace('.','',$request->nominal)),
                             'bank'       => $request->bank,
                             'status'     => 2
                         ]);
@@ -729,10 +837,35 @@ class ProjectController extends Controller {
                             ->causedBy(session('bo_id'))
                             ->log('Change data project ' . $query->name . ' (Step 12)');
                         break;
+					
+					case 'step-13':
+					
+						$query->update([
+                            'progress' => $query->progress < 65 ? 65 : $query->progress
+                        ]);
 
-                    case 'step-13':
+                        ProjectWarehouse::create([
+                            'project_id'     => $query->id,
+                            'image'      	 => $request->file('image')->store('public/project'),
+                            'date_receive' 	 => $request->date_receive,
+                            'warehouse_id'   => $request->warehouse_id,
+                            'person'         => $request->person
+                        ]);
+
+                        activity()
+                            ->performedOn(new Project())
+                            ->causedBy(session('bo_id'))
+                            ->log('Change data project ' . $query->name . ' (Step 13)');
+						break;
+						
+					case 'step-14':
+						
+					
+						break;
+					
+                    case 'step-15':
                         $query->update([
-                            'progress' => $query->progress < 70 ? 70 : $query->progress
+                            'progress' => $query->progress < 75 ? 75 : $query->progress
                         ]);
 
                         $total_weight = 0;
@@ -758,10 +891,15 @@ class ProjectController extends Controller {
                         activity()
                             ->performedOn(new Project())
                             ->causedBy(session('bo_id'))
-                            ->log('Change data project ' . $query->name . ' (Step 13)');
+                            ->log('Change data project ' . $query->name . ' (Step 15)');
                         break;
-
-                    case 'step-14':
+					
+					case 'step-16':
+						
+					
+						break;
+					
+                    case 'step-17':
                         $query->update([
                             'progress' => $query->progress < 90 ? 90 : $query->progress
                         ]);
@@ -770,7 +908,7 @@ class ProjectController extends Controller {
                             'project_id'     => $query->id,
                             'image'          => $request->file('image')->store('public/project'),
                             'date'           => $request->date,
-                            'nominal'        => $request->nominal,
+                            'nominal'        => str_replace(',','.',str_replace('.','',$request->nominal)),
                             'payment'        => $request->payment,
                             'payment_method' => $request->payment_method
                         ]);
@@ -778,10 +916,10 @@ class ProjectController extends Controller {
                         activity()
                             ->performedOn(new Project())
                             ->causedBy(session('bo_id'))
-                            ->log('Change data project ' . $query->name . ' (Step 14)');
+                            ->log('Change data project ' . $query->name . ' (Step 17)');
                         break;
 
-                    case 'step-15':
+                    case 'step-18':
                         $query->update([
                             'progress' => $query->progress < 100 ? 100 : $query->progress
                         ]);
@@ -789,7 +927,7 @@ class ProjectController extends Controller {
                         activity()
                             ->performedOn(new Project())
                             ->causedBy(session('bo_id'))
-                            ->log('Change data project ' . $query->name . ' (Step 15)');
+                            ->log('Change data project ' . $query->name . ' (Step 18)');
                         break;
                 }
 
@@ -818,10 +956,45 @@ class ProjectController extends Controller {
             abort(404);
         }
 
-        $pdf = PDF::loadView('admin.pdf.project.' . $param, [
-            'project' => $project,
-            'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
-        ]);
+        if($param == 'quotation_order'){
+			$pdf = PDF::loadView('admin.pdf.project.' . $param, [
+					'project' => $project,
+					'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+				],
+				[],
+				[ 
+				  'format' => 'A4-P',
+				  'orientation' => 'P'
+				]
+			);
+		}else if($param == 'negotiation_order'){
+			$pdf = PDF::loadView('admin.pdf.project.' . $param, [
+					'project' => $project,
+					'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+				],
+				[],
+				[ 
+				  'format' => 'A3-L',
+				  'orientation' => 'L'
+				]
+			);
+		}else if($param == 'sample_order' || $param == 'purchase_order'){
+			$pdf = PDF::loadView('admin.pdf.project.' . $param, [
+					'project' => $project,
+					'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+				],
+				[],
+				[ 
+				  'format' => 'A4-L',
+				  'orientation' => 'L'
+				]
+			);
+		}else{
+			$pdf = PDF::loadView('admin.pdf.project.' . $param, [
+				'project' => $project,
+				'brand'   => Brand::whereIn('code', ['TR', 'FI', 'SM', 'BT'])->get()
+			]);
+		}
 
         return $pdf->stream('Invoice Project ' . str_replace('/', '-', $project->code) . '.pdf');
     }

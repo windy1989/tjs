@@ -19,10 +19,10 @@ class CreateProjectProductsTable extends Migration
             $table->foreignId('product_id')->constrained('products');
             $table->integer('qty');
             $table->double('cogs')->default(0);
-            $table->double('price');
-            $table->double('target_price');
-            $table->double('recommended_price')->default(0);
-            $table->double('discount')->nullable();
+            $table->double('price',20,2);
+            $table->double('target_price',20,2);
+            $table->double('recommended_price',20,2)->default(0);
+            $table->double('discount',20,2)->nullable();
             $table->char('unit', 1);
             $table->date('delivery')->nullable();
             $table->timestamps();

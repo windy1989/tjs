@@ -21,6 +21,7 @@ class User extends Authenticatable {
         'password',
         'branch',
         'verification',
+        'token_device',
         'status'
     ];
 

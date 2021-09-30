@@ -14,14 +14,14 @@ class BudgetingController extends Controller {
     {
         $data = [
             'title'   => 'Budgeting',
-            'coa'     => Coa::oldest('code')->get(),
+            'coa'     => Coa::oldest('code')->get(),    
             'content' => 'admin.accounting.budgeting'
         ];
 
         return view('admin.layouts.index', ['data' => $data]);
     }
 
-    public function datatable(Request $request)
+    public function datatable(Request $request) 
     {
         $column = [
             'id',
@@ -37,7 +37,7 @@ class BudgetingController extends Controller {
         $search = $request->input('search.value');
 
         $total_data = Budgeting::count();
-
+        
         $query_data = Budgeting::where(function($query) use ($search, $request) {
                 if($search) {
                     $query->where(function($query) use ($search) {
@@ -46,12 +46,12 @@ class BudgetingController extends Controller {
                                     ->orWhere('name', 'like', "%$search%");
                             });
                     });
-                }
-
+                }  
+                
                 if($request->coa) {
                     $query->where('coa_id', $request->coa);
                 }
-
+                
                 if($request->start_date && $request->finish_date) {
                     $query->where('month', '>=', $request->start_date)
                         ->where('month', '<=', $request->finish_date);
@@ -74,12 +74,12 @@ class BudgetingController extends Controller {
                                     ->orWhere('name', 'like', "%$search%");
                             });
                     });
-                }
+                }         
 
                 if($request->coa) {
                     $query->where('coa_id', $request->coa);
                 }
-
+                
                 if($request->start_date && $request->finish_date) {
                     $query->where('month', '>=', $request->start_date)
                         ->where('month', '<=', $request->finish_date);
@@ -121,51 +121,6 @@ class BudgetingController extends Controller {
         }
 
         return response()->json($response);
-    }
-
-    public function yearly(Request $request)
-    {
-        if($request->has('_token') && session()->token() == $request->_token) {
-            $validation = Validator::make($request->all(), [
-                'year'      => 'required',
-                'coa_id'    => 'required',
-                'month.*'   => 'required',
-                'nominal.*' => 'required'
-            ], [
-                'year.required'      => 'Year cannot be empty.',
-                'coa_id.required'    => 'Please select a coa.',
-                'month.*.required'   => 'Month must be filled all.',
-                'nominal.*.required' => 'Nominal must be filled all.'
-            ]);
-
-            if($validation->fails()) {
-                return redirect()->back()->withErrors($validation)->withInput();
-            } else {
-                foreach($request->month as $key => $m) {
-                    $query = Budgeting::create([
-                        'coa_id'  => $request->coa_id,
-                        'month'   => date('Y-m', strtotime($request->year . '-' . $m)),
-                        'nominal' => $request->nominal[$key]
-                    ]);
-
-                    activity()
-                        ->performedOn(new Budgeting())
-                        ->causedBy(session('bo_id'))
-                        ->withProperties($query)
-                        ->log('Add yearly accounting budgeting data');
-                }
-
-                return redirect()->back()->with(['success' => 'Data added successfully.']);
-            }
-        } else {
-            $data = [
-                'title'   => 'Create New Budgeting',
-                'coa'     => Coa::oldest('code')->get(),
-                'content' => 'admin.accounting.budgeting_yearly'
-            ];
-
-            return view('admin.layouts.index', ['data' => $data]);
-        }
     }
 
     public function create(Request $request)
@@ -265,7 +220,7 @@ class BudgetingController extends Controller {
         return response()->json($response);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request) 
     {
         $query = Budgeting::where('id', $request->id)->delete();
         if($query) {
@@ -287,5 +242,5 @@ class BudgetingController extends Controller {
 
         return response()->json($response);
     }
-
+    
 }

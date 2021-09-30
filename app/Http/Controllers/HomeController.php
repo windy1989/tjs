@@ -9,7 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
-
+    
     public function index()
     {
         $product_cheapest = Product::select('products.*', 'pricing_policies.price_list')

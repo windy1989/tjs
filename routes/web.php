@@ -80,7 +80,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::match(['get', 'post'], 'profile', 'AuthController@profile');
         Route::match(['get', 'post'], 'my_activity', 'AuthController@myActivity');
         Route::get('logout', 'AuthController@logout');
-
+        
         Route::prefix('dashboard')->group(function() {
             Route::get('/', 'DashboardController@index');
         });
@@ -98,6 +98,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('select2')->group(function() {
             Route::get('type', 'Select2Controller@type');
             Route::get('product', 'Select2Controller@product');
+			Route::get('warehouse', 'Select2Controller@warehouse');
         });
 
         Route::prefix('master_data')->group(function() {
@@ -397,9 +398,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                     Route::get('/', 'CoaController@index');
                     Route::get('datatable', 'CoaController@datatable');
                     Route::post('create', 'CoaController@create');
-                    Route::get('show', 'CoaController@show');
+                    Route::post('show', 'CoaController@show');
                     Route::post('update/{id}', 'CoaController@update');
                     Route::post('destroy', 'CoaController@destroy');
+                });
+
+                Route::prefix('list_of_bank')->group(function() {
+                    Route::get('/', 'BankController@index');
+                    Route::get('datatable', 'BankController@datatable');
+                    Route::post('create', 'BankController@create');
+                    Route::post('show', 'BankController@show');
+                    Route::post('update/{id}', 'BankController@update');
+                    Route::post('destroy', 'BankController@destroy');
                 });
             });
 
@@ -473,6 +483,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('customer')->group(function() {
                 Route::get('/', 'CustomerController@index');
                 Route::get('datatable', 'CustomerController@datatable');
+                Route::post('create', 'CustomerController@create');
+                Route::post('show', 'CustomerController@show');
+                Route::post('update/{id}', 'CustomerController@update');
+                Route::post('destroy', 'CustomerController@destroy');
             });
         });
 
@@ -531,7 +545,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::post('create', 'CashBankController@create');
                 Route::get('show', 'CashBankController@show');
                 Route::post('update/{id}', 'CashBankController@update');
-                Route::get('print/{id}', 'CashBankController@print');
                 Route::post('destroy', 'CashBankController@destroy');
             });
         });
@@ -540,7 +553,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             Route::prefix('budgeting')->group(function() {
                 Route::get('/', 'BudgetingController@index');
                 Route::get('datatable', 'BudgetingController@datatable');
-                Route::match(['get', 'post'], 'yearly', 'BudgetingController@yearly');
                 Route::post('create', 'BudgetingController@create');
                 Route::get('show', 'BudgetingController@show');
                 Route::post('update/{id}', 'BudgetingController@update');
@@ -567,12 +579,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::prefix('trial_balance')->group(function() {
                     Route::get('/', 'ReportAccountingController@trialBalance');
                     Route::get('datatable', 'ReportAccountingController@trialBalanceDatatable');
-                });
-
-                Route::prefix('cash_bank')->group(function() {
-                    Route::get('/', 'ReportAccountingController@cashBank');
-                    Route::post('detail', 'ReportAccountingController@cashBankDetail');
-                    Route::post('upload_file', 'ReportAccountingController@cashBankUploadFile');
                 });
             });
         });

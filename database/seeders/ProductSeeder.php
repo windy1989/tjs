@@ -34,7 +34,6 @@ class ProductSeeder extends Seeder
                 'container_stock'     => $p['container_stock'],
                 'container_max_stock' => $p['container_max_stock'],
                 'description'         => $p['description'],
-                'check'               => $p['check'],
                 'status'              => $p['status'],
                 'created_at'          => $p['created_at'],
                 'updated_at'          => $p['updated_at'],

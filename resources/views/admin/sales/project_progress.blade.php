@@ -2,6 +2,10 @@
    html {
       scroll-behavior: smooth;
    }
+   
+	*:focus{
+		outline:3px solid black !important;
+	}
 </style>
 
 <div class="content-wrapper">
@@ -9,11 +13,11 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i>
+					<i class="icon-arrow-left52 mr-2"></i> 
 					<span class="font-weight-semibold">Progress Sales Project</span>
 				</h4>
 			</div>
-            <div class="header-elements">
+         <div class="header-elements">
 				<div class="d-flex justify-content-center">
 					<a href="{{ url('admin/sales/project') }}" class="btn bg-secondary btn-labeled btn-labeled-left">
 						<b><i class="icon-arrow-left7"></i></b> Back To List
@@ -47,15 +51,15 @@
                         </tr>
                         <tr>
                            <th width="20%" class="align-middle">Phone</th>
-                           <td class="align-middle">: {{ $project->phone }}</td>
+                           <td class="align-middle">: {{ $project->customer->phone }}</td>
                         </tr>
                         <tr>
                            <th width="20%" class="align-middle">Email</th>
-                           <td class="align-middle">: {{ $project->email }}</td>
+                           <td class="align-middle">: {{ $project->customer->email }}</td>
                         </tr>
                         <tr>
                            <th width="20%" class="align-middle">Constructor Name</th>
-                           <td class="align-middle">: {{ $project->constructor }}</td>
+                           <td class="align-middle">: {{ $project->customer->constructor }}</td>
                         </tr>
                         <tr>
                            <th width="20%" class="align-middle">Country</th>
@@ -80,6 +84,10 @@
                         <tr>
                            <th width="20%" class="align-middle">Owner</th>
                            <td class="align-middle">: {!! $project->owner !!}</td>
+                        </tr>
+						<tr>
+                           <th width="20%" class="align-middle">Bank Destination</th>
+                           <td class="align-middle">: {!! $project->coa->name !!}</td>
                         </tr>
                         <tr>
                            <th width="20%" class="align-middle">Payment Method</th>
@@ -124,67 +132,110 @@
                            </div>
                         @endif
                      @endif
-                     @if($project->projectProduct->count() > 0)
-                        <table class="table table-bordered table-striped">
-                           <thead class="table-secondary">
-                              <tr class="text-center">
-                                 <th>Product</th>
-                                 <th>Qty</th>
-                                 <th>Unit</th>
-                                 <th>Target Price</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              @foreach($project->projectProduct as $pp)
-                                 <tr class="text-center">
-                                    <td class="align-middle">
-                                       <a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->name() }}" data-title="{{ $pp->product->name() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                       <div>{{ $pp->product->name() }}</div>
-                                       <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
-                                    </td>
-                                    <td class="align-middle">{{ $pp->qty }}</td>
-                                    <td class="align-middle">{{ $pp->unit() }}</td>
-                                    <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
-                                 </tr>
-                              @endforeach
-                           </tbody>
-                        </table>
-                     @else
-                        <div class="row">
-                           <div class="col-md-10">
-                              <div class="form-group">
-                                 <select name="product_id" id="product_id"></select>
-                              </div>
-                           </div>
-                           <div class="col-md-2">
-                              <div class="form-group">
-                                 <button type="button" onclick="addProduct()" class="btn bg-success col-12"><i class="icon-plus2"></i> Add</button>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="table-responsive">
-                              <table class="table table-bordered table-striped">
-                                 <thead class="table-secondary">
-                                    <tr class="text-center">
-                                       <th>Product</th>
-                                       <th>Qty</th>
-                                       <th>Unit</th>
-                                       <th>Target Price</th>
-                                       <th>Delete</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody id="data_product"></tbody>
-                              </table>
-                           </div>
-                        </div>
-                        <div class="form-group"><hr></div>
-                        <div class="form-group">
-                           <div class="text-right">
-                              <button type="submit" name="submit" value="step-2" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
-                           </div>
-                        </div>
-                     @endif
+                     
+					<div class="row">
+					   <div class="col-md-4">
+						  <div class="form-group">
+							<label>Delivery Cost :<sup class="text-danger">*</sup></label>
+							<input type="text" name="delivery_cost" id="delivery_cost" class="form-control" placeholder="0" value="{{ number_format($project->delivery_cost,2,',','.') }}" onkeyup="formatRupiah(this)">
+						  </div>
+					   </div>
+					   <div class="col-md-4">
+						  <div class="form-group">
+							<label>Cutting Cost :<sup class="text-danger">*</sup></label>
+							<input type="text" name="cutting_cost" id="cutting_cost" class="form-control" placeholder="0" value="{{ number_format($project->cutting_cost,2,',','.') }}" onkeyup="formatRupiah(this)">
+						  </div>
+					   </div>
+					   <div class="col-md-4">
+						  <div class="form-group">
+							<label>Miscellaneous Cost :<sup class="text-danger">*</sup></label>
+							<input type="text" name="misc_cost" id="misc_cost" class="form-control" placeholder="0" value="{{ number_format($project->misc_cost,2,',','.') }}" onkeyup="formatRupiah(this)">
+						  </div>
+					   </div>
+					   <div class="col-md-10">
+						  <div class="form-group">
+							 <select name="product_id" id="product_id"></select>
+						  </div>
+					   </div>
+					   <div class="col-md-2">
+						  <div class="form-group">
+							 <button type="button" onclick="addProduct()" class="btn bg-success col-12"><i class="icon-plus2"></i> Add</button>
+						  </div>
+					   </div>
+					</div>
+					<div class="form-group">
+					   <div class="table-responsive">
+							<table class="table table-bordered table-striped">
+							   <thead class="table-secondary">
+								  <tr class="text-center">
+									<th>No.</th>
+									<th width="20%">Product</th>
+									<th width="15%">Area</th>
+									<th width="15%">Qty</th>
+									<th>Unit</th>
+									<th>Target Price (Rp)</th>
+									<th>Delete</th>
+								  </tr>
+							   </thead>
+							   <tbody id="data_product">
+								  @foreach($project->projectProduct as $no => $pp)
+									<tr class="text-center rowproduct">
+										 <input type="hidden" name="product_id[]" value="{{ $pp->product_id }}">
+										 <input type="hidden" name="product_price[]" value="{{ $pp->price }}">
+										 <td>{{ $no+1 }}</td>
+										 <td class="align-middle">
+											<a href="{{ $pp->product->type->image() }}" data-lightbox="{{ $pp->product->name() }}" data-title="{{ $pp->product->name() }}"><img src="{{ $pp->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+										   <div>{{ $pp->product->name() }}</div>
+										   <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
+										 </td>
+										 <td class="align-middle">
+											<input type="text" name="product_area[]" class="form-control" placeholder="Type area" required value="{{ $pp->area }}">
+										 </td>
+										 <td class="align-middle">
+											<input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required value="{{ $pp->qty }}">
+										 </td>  
+										 <td class="align-middle">
+											<select name="product_unit[]" class="custom-select" required>
+											   <option value="1" {{ $pp->unit == 1 ? 'selected' : '' }}>Pcs</option>   
+											   <option value="2" {{ $pp->unit == 2 ? 'selected' : '' }}>Box</option>   
+											   <option value="3" {{ $pp->unit == 3 ? 'selected' : '' }}>Meter</option>   
+											</select>
+										 </td>   
+										 <td class="align-middle">
+											<div class="input-group">
+											   <input type="text" name="product_target_price[]" class="form-control" placeholder="0" required onkeyup="formatRupiah(this);" value="{{ number_format($pp->target_price, 2, ',', '.') }}">
+											   <a class="btn btn-primary btn-sm" href="#collapse-icon{{ $pp->product_id }}" data-toggle="collapse"><i class="icon-info3"></i></a>
+											</div>
+											<div class="collapse" id="collapse-icon{{ $pp->product_id }}">
+												<div class="mt-3">
+												{{ $pp->product->carton_pcs }} PCS/CTN,
+												{{ ($pp->product->type->length * $pp->product->type->width)/10000 * $pp->product->carton_pcs }} M<sup>2</sup>
+												</div>
+											</div>
+										 </td>  
+										 <td class="align-middle">
+											<button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+										 </td>
+									</tr>
+								  @endforeach
+							   </tbody>
+							</table>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="alert bg-warning text-white alert-styled-left alert-dismissible mt-2 warning-product" style="display:none;">
+							 <button type="button" class="close" data-dismiss="alert">
+								<span>&times;</span>
+							 </button>
+							 You have changed the data of table, if you want to save changes please press Save & Next Button.
+						</div>
+						<hr>
+					</div>
+					<div class="form-group">
+					   <div class="text-right">
+						  <button type="submit" name="submit" value="step-2" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+					   </div>
+					</div>
                   </div>
                </form>
             </div>
@@ -216,29 +267,7 @@
                               </div>
                            @endif
                         @endif
-                        @if($project->projectConsultantMeeting->count() > 0)
-                           <div class="table-responsive">
-                              <table class="table table-bordered table-striped">
-                                 <thead class="table-secondary">
-                                    <tr class="text-center">
-                                       <th>Date</th>
-                                       <th>Person</th>
-                                       <th>Result</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    @foreach($project->projectConsultantMeeting as $pcm)
-                                       <tr class="text-center">
-                                          <td class="align-middle">{{ $pcm->date }}</td>
-                                          <td class="align-middle">{{ $pcm->person }}</td>
-                                          <td class="align-middle">{{ $pcm->result }}</td>
-                                       </tr>
-                                    @endforeach
-                                 </tbody>
-                              </table>
-                           </div>
-                        @else
-                           <div class="row">
+							<div class="row">
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Date :<sup class="text-danger">*</sup></label>
@@ -274,17 +303,40 @@
                                           <th>Delete</th>
                                        </tr>
                                     </thead>
-                                    <tbody id="data_consultant"></tbody>
+                                    <tbody id="data_consultant">
+										@foreach($project->projectConsultantMeeting as $pcm)
+											<tr class="text-center">
+											   <input type="hidden" name="consultant_id[]" value="{{ $pcm->id }}">
+											   <input type="hidden" name="consultant_date[]" value="{{ $pcm->date }}">
+											   <input type="hidden" name="consultant_person[]" value="{{ $pcm->person }}">
+											   <input type="hidden" name="consultant_result[]" value="{{ $pcm->result }}">
+
+											   <td class="align-middle">{{ $pcm->date }}</td>   
+											   <td class="align-middle">{{ $pcm->person }}</td>   
+											   <td class="align-middle">{{ $pcm->result }}</td>   
+											   <td class="align-middle">
+												  <button type="button" id="delete_data_consultant" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+											   </td>
+											</tr>
+										@endforeach
+									</tbody>
                                  </table>
                               </div>
                            </div>
-                           <div class="form-group"><hr></div>
+                           <div class="form-group">
+								<div class="alert bg-warning text-white alert-styled-left alert-dismissible mt-2 warning-consultant" style="display:none;">
+									 <button type="button" class="close" data-dismiss="alert">
+										<span>&times;</span>
+									 </button>
+									 You have changed the data of table, if you want to save changes please press Save & Next Button.
+								</div>
+							<hr>
+							</div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-3" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-3" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
-                        @endif
                      </div>
                   </form>
                </div>
@@ -294,7 +346,7 @@
                   <form action="{{ url()->full() }}" method="POST">
                      @csrf
                      <div class="card-body">
-                        <h5 class="card-title" id="scrollspy">Pre Quotation</h5>
+                        <h5 class="card-title" id="scrollspy">Quotation</h5>
                         <div class="form-group"><hr></div>
                         @if(isset($_GET['step-4']))
                            @if($errors->any())
@@ -326,8 +378,9 @@
                                        <th>Qty</th>
                                        <th>Price</th>
                                        <th>Target Price</th>
-                                       <th>Recommended Price</th>
-                                       <th>Unit</th>
+                                       <th>Project Price</th>
+									   <th width="15%">Disc(%)</th>
+									   <th>Best Price</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -339,31 +392,58 @@
                                              <div>{{ $pp->product->name() }}</div>
                                              <div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
                                           </td>
-                                          <td class="align-middle">{{ $pp->qty }}</td>
-                                          <td class="align-middle">Rp {{ number_format($pp->price, 2, ',', '.') }}</td>
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
+                                          <td class="align-middle">{{ $pp->qty.' '.$pp->unit() }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->price, 2, ',', '.') }}</td>   
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
                                           <td class="align-middle">
-                                             @if($pp->recommended_price < 1)
-                                                <input type="number" name="product_recommended_price[]" class="form-control" value="{{ $pp->bottom }}" placeholder="0" required>
-                                             @else
-                                                Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
-                                             @endif
+											   <input type="text" name="product_recommended_price[]" class="form-control" value="{{ number_format($pp->recommended_price, 2, ',', '.') }}" required onkeyup="formatRupiah(this);" id="project-price{{ $pp->id }}">
                                           </td>
-                                          <td class="align-middle">{{ $pp->unit() }}</td>
+										  <td class="align-middle">
+                                                <input type="text" name="product_discount[]" class="form-control" value="{{ number_format($pp->discount, 2, ',', '.') }}" placeholder="0" required onkeyup="countBestPrice(this,{{ $pp->id }})">
+                                          </td> 
+										  <td class="align-middle">
+												<input type="text" name="product_best_price[]" class="form-control" value="{{ number_format($pp->best_price, 2, ',', '.') }}" placeholder="0" required onkeyup="formatRupiah(this)" id="best-price{{ $pp->id }}">
+                                          </td>
                                        </tr>
                                     @endforeach
                                  </tbody>
                               </table>
                            </div>
                         </div>
-                        @if($project->progress < 25)
-                           <div class="form-group"><hr></div>
-                           <div class="form-group">
-                              <div class="text-right">
-                                 <button type="submit" name="submit" value="step-4" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
-                              </div>
+					   <div class="form-group"><hr></div>
+					   <div class="form-group">
+							<h5>List</h5>
+                           <div class="table-responsive">
+                              <table class="table table-bordered table-striped">
+                                 <thead class="table-secondary">
+                                    <tr class="text-center">
+                                       <th>Revision</th>
+                                       <th>Date</th>
+                                       <th>Approved By(1)</th>
+                                       <th>Approved By(2)</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    @foreach($project->projectQuotation as $pq)
+                                       <tr class="text-center">
+                                          <td class="align-middle">{{ $pq->revision() }}</td>   
+                                          <td class="align-middle">{{ date('Y-m-d',strtotime($pq->created_at)) }}</td>   
+                                          <td class="align-middle"></td>   
+                                          <td class="align-middle"></td>
+                                       </tr>
+                                    @endforeach
+                                 </tbody>
+                              </table>
                            </div>
-                        @endif
+                        </div>
+					   <div class="form-group"><hr></div>
+					   <div class="form-group">
+						  <div class="text-right">
+							<a href="{{ url('admin/sales/project/print/quotation_order/' . base64_encode($project->id)) }}" class="btn bg-info" target="_blank">Preview & Download <i class="icon-file-pdf"></i></a>
+							&nbsp;
+							<button type="submit" name="submit" value="step-4" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+						  </div>
+					   </div>
                      </div>
                   </form>
                </div>
@@ -396,35 +476,7 @@
                               </div>
                            @endif
                         @endif
-                        @if($project->projectSample->count() > 0)
-                           <div class="table-responsive">
-                              <table class="table table-bordered table-striped">
-                                 <thead class="table-secondary">
-                                    <tr class="text-center">
-                                       <th>Product</th>
-                                       <th>Date</th>
-                                       <th>Qty</th>
-                                       <th>Size</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    @foreach($project->projectSample as $ps)
-                                       <tr class="text-center">
-                                          <td class="align-middle">
-                                             <a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->name() }}" data-title="{{ $ps->product->name() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
-                                             <div>{{ $ps->product->name() }}</div>
-                                             <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
-                                          </td>
-                                          <td class="align-middle">{{ $ps->date }}</td>
-                                          <td class="align-middle">{{ $ps->qty }}</td>
-                                          <td class="align-middle">{{ $ps->size }}</td>
-                                       </tr>
-                                    @endforeach
-                                 </tbody>
-                              </table>
-                           </div>
-                        @else
-                           <div class="row">
+							<div class="row">
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Product :<sup class="text-danger">*</sup></label>
@@ -437,13 +489,23 @@
                                     <input type="date" name="sample_date" id="sample_date" class="form-control">
                                  </div>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Qty :<sup class="text-danger">*</sup></label>
                                     <input type="number" name="sample_qty" id="sample_qty" class="form-control" placeholder="0">
                                  </div>
                               </div>
-                              <div class="col-md-6">
+							  <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Unit :<sup class="text-danger">*</sup></label>
+									<select name="sample_unit" id="sample_unit" class="custom-select" required>
+									   <option value="1">Pcs</option>   
+									   <option value="2">Box</option>   
+									   <option value="3">Meter</option>   
+									</select>
+								</div>
+							  </div>
+                              <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Size :<sup class="text-danger">*</sup></label>
                                     <input type="text" name="sample_size" id="sample_size" class="form-control" placeholder="Enter size">
@@ -455,29 +517,61 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="form-group">
-                              <div class="table-responsive">
-                                 <table class="table table-bordered table-striped">
-                                    <thead class="table-secondary">
-                                       <tr class="text-center">
-                                          <th>Product</th>
-                                          <th>Date</th>
-                                          <th>Qty</th>
-                                          <th>Size</th>
-                                          <th>Delete</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody id="data_sample"></tbody>
-                                 </table>
-                              </div>
+                           <div class="table-responsive">
+                              <table class="table table-bordered table-striped">
+                                 <thead class="table-secondary">
+                                    <tr class="text-center">
+                                       <th>Product</th>
+                                       <th>Date</th>
+                                       <th>Qty</th>
+									   <th>Unit</th>
+                                       <th>Size</th>
+									   <th>Delete</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody id="data_sample">
+                                    @foreach($project->projectSample as $ps)
+										<tr class="text-center">
+											 <input type="hidden" name="sample_id[]" value="{{ $ps->id }}">
+											 <input type="hidden" name="sample_product_id[]" value="{{ $ps->product_id }}">
+											 <input type="hidden" name="sample_date[]" value="{{ $ps->date }}">
+											 <input type="hidden" name="sample_qty[]" value="{{ $ps->qty }}">
+											 <input type="hidden" name="sample_unit[]" value="{{ $ps->unit }}">
+											 <input type="hidden" name="sample_size[]" value="{{ $ps->size }}">
+
+											 <td class="align-middle">
+												<a href="{{ $ps->product->type->image() }}" data-lightbox="{{ $ps->product->name() }}" data-title="{{ $ps->product->name() }}"><img src="{{ $ps->product->type->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+												 <div>{{ $ps->product->name() }}</div>
+												 <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
+											 </td>  
+											 <td class="align-middle">{{ $ps->date }}</td>  
+											 <td class="align-middle">{{ $ps->qty }}</td>
+											 <td class="align-middle">{{ $ps->unit() }}</td>
+											 <td class="align-middle">{{ $ps->size }}</td>  
+											 <td class="align-middle">
+												<button type="button" id="delete_data_sample" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+											 </td>
+										</tr>
+                                    @endforeach
+                                 </tbody>
+                              </table>
                            </div>
-                           <div class="form-group"><hr></div>
+						   <div class="form-group">
+								<div class="alert bg-warning text-white alert-styled-left alert-dismissible mt-2 warning-sample" style="display:none;">
+									 <button type="button" class="close" data-dismiss="alert">
+										<span>&times;</span>
+									 </button>
+									 You have changed the data of table, if you want to save changes please press Save & Next Button.
+								</div>
+								<hr>
+							</div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-5" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+								<a href="{{ url('admin/sales/project/print/sample_order/' . base64_encode($project->id)) }}" class="btn bg-info" target="_blank">Preview & Download <i class="icon-file-pdf"></i></a>
+								&nbsp;
+                                 <button type="submit" name="submit" value="step-5" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
-                        @endif
                      </div>
                   </form>
                </div>
@@ -517,9 +611,11 @@
                                     <tr class="text-center">
                                        <th>Product</th>
                                        <th>Qty</th>
+									   <th>Unit</th>
                                        <th>Target Price</th>
                                        <th>Project Price</th>
-                                       <th>Discount(%)</th>
+									   <th width="15%">Disc(%)</th>
+									   <th>Best Price</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -532,16 +628,16 @@
                                              <div>{{ $ps->product->type->length }}x{{ $ps->product->type->width }}</div>
                                           </td>
                                           <td class="align-middle">{{ $pp->qty }}</td>
-                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>
+										  <td class="align-middle">{{ $pp->unit() }}</td>
+                                          <td class="align-middle">Rp {{ number_format($pp->target_price, 2, ',', '.') }}</td>   
                                           <td class="align-middle">
                                              Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
                                           </td>
                                           <td class="align-middle">
-                                             @if($project->progress >= 35)
-                                                {{ $pp->discount }}%
-                                             @else
-                                                <input type="number" name="product_discount[]" class="form-control" value="0" placeholder="0" required>
-                                             @endif
+                                                <input type="text" name="product_discount[]" class="form-control" value="{{ number_format($pp->discount, 2, ',', '.') }}" placeholder="0" required onkeyup="countBestPrice('{{ $pp->recommended_price }}',this,{{ $pp->id }})">
+                                          </td> 
+										  <td class="align-middle">
+												<input type="text" name="product_best_price[]" class="form-control" value="{{ number_format($pp->best_price, 2, ',', '.') }}" placeholder="0" required onkeyup="formatRupiah(this)" id="best-price{{ $pp->id }}">
                                           </td>
                                        </tr>
                                     @endforeach
@@ -549,24 +645,67 @@
                               </table>
                            </div>
                         </div>
-                        @if($project->progress < 35)
-                           <div class="form-group"><hr></div>
-                           <div class="form-group">
-                              <div class="text-right">
-                                 <button type="submit" name="submit" value="step-6" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
-                              </div>
-                           </div>
-                        @endif
+						<div class="form-group"><hr></div>
+						<div class="form-group">
+						  <div class="text-right">
+							<a href="{{ url('admin/sales/project/print/negotiation_order/' . base64_encode($project->id)) }}" class="btn bg-info" target="_blank">Preview & Download <i class="icon-file-pdf"></i></a>
+								&nbsp;
+							 <button type="submit" name="submit" value="step-6" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+						  </div>
+						</div>
                      </div>
                   </form>
                </div>
             @endif
             @if($project->progress >= 35)
                <div class="card" id="step-7">
-                  <form action="{{ url()->full() }}" method="POST">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
                      @csrf
                      <div class="card-body">
                         <h5 class="card-title" id="scrollspy">SO Project</h5>
+						<div class="form-group"><hr></div>
+                        @if(isset($_GET['step-7']))
+                           @if($errors->any())
+                              <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+                                 <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                 </button>
+                                 <ul>
+                                    @foreach ($errors->all() as $error)
+                                       <li>{{ $error }}</li>
+                                    @endforeach
+                                 </ul>
+                              </div>
+                           @elseif(session('success'))
+                              <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+                                 <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                 </button>
+                                 {{ session('success') }}
+                              </div>
+                           @endif
+                        @endif
+						<div class="row justify-content-center">
+							<div class="col-md-5">
+                                 <div class="form-group text-center">
+									<label>Upload/renew your customer PO</label>
+                                    <div class="input-group">
+                                       <div class="custom-file">
+                                          <input type="file" id="file" name="file" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg,application/pdf">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-group text-center">
+                                    @if($project->so_file)
+										<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
+											<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+											<span class="font-weight-semibold">Well done!</span> You successfully uploaded a proof <a href="{{ asset(Storage::url($project->so_file)) }}" class="alert-link">file</a> here. <br>
+											You may upload again to renew the proof file.
+										</div>
+									@endif
+                                 </div>
+                            </div>
+						</div>
                         <div class="form-group"><hr></div>
                         <div class="text-center">
                            <span class="font-weight-semibold">Click the link below to view the sales order</span>
@@ -574,14 +713,12 @@
                               <a href="{{ url('admin/sales/project/print/sales_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
                            </div>
                         </div>
-                        @if($project->progress < 40)
-                           <div class="form-group"><hr></div>
-                           <div class="form-group">
-                              <div class="text-right">
-                                 <button type="submit" name="submit" value="step-7" class="btn bg-purple"><i class="icon-floppy-disk"></i> Next Step</button>
-                              </div>
-                           </div>
-                        @endif
+						<div class="form-group"><hr></div>
+						<div class="form-group">
+						  <div class="text-right">
+							 <button type="submit" name="submit" value="step-7" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+						  </div>
+						</div>
                      </div>
                   </form>
                </div>
@@ -591,7 +728,7 @@
                   <form action="{{ url()->full() }}" method="POST">
                      @csrf
                      <div class="card-body">
-                        <h5 class="card-title" id="scrollspy">PO Project</h5>
+                        <h5 class="card-title" id="scrollspy">PO Supplier</h5>
                         <div class="form-group"><hr></div>
                         <div class="text-center">
                            <span class="font-weight-semibold">Click the link below to view the purchase order</span>
@@ -599,14 +736,12 @@
                               <a href="{{ url('admin/sales/project/print/purchase_order/' . base64_encode($project->id)) }}" class="text-primary font-italic">Here</a>
                            </div>
                         </div>
-                        @if($project->progress < 43)
-                           <div class="form-group"><hr></div>
-                           <div class="form-group">
-                              <div class="text-right">
-                                 <button type="submit" name="submit" value="step-8" class="btn bg-purple"><i class="icon-floppy-disk"></i> Next Step</button>
-                              </div>
-                           </div>
-                        @endif
+					   <div class="form-group"><hr></div>
+					   <div class="form-group">
+						  <div class="text-right">
+							 <button type="submit" name="submit" value="step-8" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+						  </div>
+					   </div>
                      </div>
                   </form>
                </div>
@@ -616,7 +751,7 @@
                   <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
                      @csrf
                      <div class="card-body">
-                        <h5 class="card-title" id="scrollspy">Proforma Invoice</h5>
+                        <h5 class="card-title" id="scrollspy">Proof of Proforma Invoice</h5>
                         <div class="form-group"><hr></div>
                         @php $proforma_invoice = $project->projectPayment()->where('status', 1)->first(); @endphp
                         @if($proforma_invoice)
@@ -637,7 +772,7 @@
                                  <div class="form-group">
                                     <label class="font-weight-semibold">Nominal :</label>
 										      <div class="form-control-plaintext">
-                                       {{ number_format($proforma_invoice->nominal, 2, ',', '.') }}
+                                       IDR {{ number_format($proforma_invoice->nominal, 2, ',', '.') }}
                                     </div>
                                  </div>
                               </div>
@@ -677,6 +812,25 @@
                               @endif
                            @endif
                            <div class="row justify-content-center">
+							  <div class="col-md-12 text-center">
+								@php
+									$total = 0;
+									$tax = 0;
+									$shipping_fee = 0;
+									foreach($project->projectProduct as $pp){
+										$total += $pp->best_price * $pp->qty;
+									}
+									
+									$shipping_fee = $project->projectDelivery ? $project->projectDelivery->price : 0;
+									
+									if($project->ppn){
+										$tax = (10 / 100) * $total;
+									}
+									
+									$gt = $total + ($shipping_fee + $tax);
+								@endphp
+								<button type="button" class="btn btn-primary mb-2"><i class="icon-cash4 mr-2"></i> IDR {{ number_format($gt, 2, ',', '.') }}</button>
+							  </div>
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Date :<sup class="text-danger">*</sup></label>
@@ -697,10 +851,16 @@
                                     </select>
                                  </div>
                               </div>
-                              <div class="col-md-4">
+							  <div class="col-md-2">
+                                 <div class="form-group">
+                                    <label>Percentage :</label>
+                                    <input type="text" name="percentage" id="percentage" class="form-control" placeholder="0" value="50" onkeyup="convertToNominal('{{ $gt }}',this,'.nominal-proforma')">
+                                 </div>
+                              </div>
+                              <div class="col-md-2">
                                  <div class="form-group">
                                     <label>Nominal :<sup class="text-danger">*</sup></label>
-                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                    <input type="text" name="nominal" id="nominal" class="form-control nominal-proforma" placeholder="0" value="{{ number_format($gt*0.5,2,',','.') }}" onkeyup="formatRupiah(this)">
                                  </div>
                               </div>
                               <div class="col-md-12">
@@ -731,7 +891,7 @@
                            <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-9" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-9" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
                         @endif
@@ -744,44 +904,8 @@
                   <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
                      @csrf
                      <div class="card-body">
-                        <h5 class="card-title" id="scrollspy">Production</h5>
+                        <h5 class="card-title" id="scrollspy">Progress Production</h5>
                         <div class="form-group"><hr></div>
-                        @if($project->projectProduction)
-                           <div class="row justify-content-center">
-                              <div class="col-md-6">
-                                 <div class="form-group">
-                                    <div class="font-weight-semibold text-center">Start Date :</div>
-										      <div class="form-control-plaintext text-center">{{ $project->projectProduction->start_date }}</div>
-                                 </div>
-                              </div>
-                              <div class="col-md-6">
-                                 <div class="form-group">
-                                    <div class="font-weight-semibold text-center">Finish Date :</div>
-										      <div class="form-control-plaintext text-center">{{ $project->projectProduction->finish_date }}</div>
-                                 </div>
-                              </div>
-                              <div class="col-md-12">
-                                 <div class="form-group">
-                                    <div class="font-weight-semibold text-center">Note :</div>
-										      <div class="form-control-plaintext text-center">
-                                       {{ $project->projectProduction->note }}
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-12">
-                                 <div class="form-group"><hr class="mt-0"></div>
-                              </div>
-                              <div class="col-md-6">
-                                 <div class="form-group">
-                                    <div class="text-center">
-                                       <a href="{{ asset(Storage::url($project->projectProduction->image)) }}" data-lightbox="Image" data-title="Production">
-                                          <img src="{{ asset(Storage::url($project->projectProduction->image)) }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        @else
                            @if(isset($_GET['step-10']))
                               @if($errors->any())
                                  <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
@@ -804,16 +928,22 @@
                               @endif
                            @endif
                            <div class="row justify-content-center">
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Start Date :<sup class="text-danger">*</sup></label>
                                     <input type="date" name="start_date" id="start_date" class="form-control" value="{{ old('start_date') }}">
                                  </div>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Finish Date :<sup class="text-danger">*</sup></label>
                                     <input type="date" name="finish_date" id="finish_date" class="form-control" value="{{ old('finish_date') }}">
+                                 </div>
+                              </div>
+							  <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Progress(%) :<sup class="text-danger">*</sup></label>
+                                    <input type="number" name="progress_production" id="progress_production" placeholder="0" class="form-control" value="{{ old('progress_production') }}">
                                  </div>
                               </div>
                               <div class="col-md-12">
@@ -845,14 +975,55 @@
                                  </div>
                               </div>
                            </div>
-                        @endif
-                        @if($project->progress < 50)
-                           <div class="form-group"><hr></div>
+						   <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-10" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-10" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
+						@if($project->projectProduction)
+							<div class="form-group">
+							   <div class="table-responsive">
+								  <table class="table table-bordered table-striped">
+									 <thead class="table-secondary">
+										<tr class="text-center">
+										   <th>Start</th>
+										   <th>Finish</th>
+										   <th>Note</th>
+										   <th>Progress</th>
+										   <th>Proofs</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										@php
+											$progressProductionTotal = 0;
+										@endphp
+										@foreach($project->projectProduction as $pp)
+											@php
+												$progressProductionTotal += $pp->progress;
+											@endphp
+										   <tr class="text-center">
+										      <td class="align-middle">
+												{{ $pp->start_date }}
+											  </div>
+											  <td class="align-middle">
+												{{ $pp->finish_date }}
+											  </div>
+											  <td class="align-middle">
+												{{ $pp->note }}
+											  </div>
+											  <td class="align-middle">
+												{{ $progressProductionTotal }}%
+											  </div>
+											  <td class="align-middle">
+												 <a href="{{ $pp->image() }}" data-lightbox="{{ $pp->note }}" data-title="{{ $pp->note }}"><img src="{{ $pp->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+											  </td>
+										   </tr>
+										@endforeach
+									 </tbody>
+								  </table>
+							   </div>
+							</div>
                         @endif
                      </div>
                   </form>
@@ -884,7 +1055,7 @@
                                  <div class="form-group">
                                     <label class="font-weight-semibold">Nominal :</label>
 										      <div class="form-control-plaintext">
-                                       {{ number_format($pay_full_purchase->nominal, 2, ',', '.') }}
+                                       IDR {{ number_format($pay_full_purchase->nominal, 2, ',', '.') }}
                                     </div>
                                  </div>
                               </div>
@@ -947,7 +1118,7 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Nominal :<sup class="text-danger">*</sup></label>
-                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                    <input type="text" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}" onkeyup="formatRupiah(this)">
                                  </div>
                               </div>
                               <div class="col-md-12">
@@ -978,10 +1149,18 @@
                            <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-11" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-11" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
                         @endif
+						@if($progressProductionTotal < 100)
+							<div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert">
+								   <span>&times;</span>
+								</button>
+								The progress production has not reached 100%. Kindly check the <a href="#step-10">progress production</a> again.
+							 </div>
+						@endif
                      </div>
                   </form>
                </div>
@@ -1087,7 +1266,7 @@
                            <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-12" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-12" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
                         @endif
@@ -1095,8 +1274,138 @@
                   </form>
                </div>
             @endif
-            @if($project->progress >= 60)
+						
+			@if($project->progress >= 60)
                <div class="card" id="step-13">
+                  <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Warehouse Receive</h5>
+                        <div class="form-group"><hr></div>
+						
+						@if(isset($_GET['step-13']))
+						  @if($errors->any())
+							 <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert">
+								   <span>&times;</span>
+								</button>
+								<ul>
+								   @foreach ($errors->all() as $error)
+									  <li>{{ $error }}</li>
+								   @endforeach
+								</ul>
+							 </div>
+						  @elseif(session('success'))
+							 <div class="alert bg-teal text-white alert-styled-left alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert">
+								   <span>&times;</span>
+								</button>
+								{{ session('success') }}
+							 </div>
+						  @endif
+					   @endif
+					   <div class="row justify-content-center">
+						  <div class="col-md-4">
+							 <div class="form-group">
+								<label>Person :<sup class="text-danger">*</sup></label>
+								<input type="text" name="person" id="person" class="form-control" value="{{ old('person') }}">
+							 </div>
+						  </div>
+						  <div class="col-md-4">
+							 <div class="form-group">
+								<label>Date & time received :<sup class="text-danger">*</sup></label>
+								<input class="form-control" type="datetime-local" name="date_receive" id="date_receive" value="{{ old('date_receive') }}">
+							 </div>
+						  </div>
+						  <div class="col-md-4">
+							 <div class="form-group">
+								<label>Warehouse :<sup class="text-danger">*</sup></label>
+								<select name="warehouse_id" id="warehouse_id"></select>
+							 </div>
+						  </div>
+						  <div class="col-md-12">
+							 <div class="form-group"><hr class="mt-0"></div>
+						  </div>
+						  <div class="col-md-6">
+							 <div class="form-group">
+								<div class="input-group">
+								   <div class="custom-file">
+									  <input type="file" id="image" name="image" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_image')">
+								   </div>
+								</div>
+							 </div>
+							 <div class="form-group">
+								<div class="text-center">
+								   <a href="{{ asset('website/empty.jpg') }}" id="preview_image" data-lightbox="Image" data-title="Preview Image">
+									  <img src="{{ asset('website/empty.jpg') }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
+								   </a>
+								   <p class="text-danger font-italic mt-3">
+									  The only files supported are <b>jpeg, jpg, png</b>
+								   </p>
+								</div>
+							 </div>
+						  </div>
+					   </div>
+						<div class="form-group"><hr></div>
+						<div class="form-group">
+						  <div class="text-right">
+							 <button type="submit" name="submit" value="step-13" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
+						  </div>
+					   </div>
+					   @if($project->projectWarehouse)
+							<div class="form-group">
+							   <div class="table-responsive">
+								  <table class="table table-bordered table-striped">
+									 <thead class="table-secondary">
+										<tr class="text-center">
+										   <th>Warehouse</th>
+										   <th>Person</th>
+										   <th>Date & Time Received</th>
+										   <th>Proofs</th>
+										</tr>
+									 </thead>
+									 <tbody>
+										@foreach($project->projectWarehouse as $pw)
+										   <tr class="text-center">
+										      <td class="align-middle">
+												{{ $pw->warehouse->code.' - '.$pw->warehouse->name }}
+											  </div>
+											  <td class="align-middle">
+												{{ $pw->person }}
+											  </div>
+											  <td class="align-middle">
+												{{ date("Y-m-d H:i",strtotime($pw->date_receive)) }}
+											  </div>
+											  <td class="align-middle">
+												 <a href="{{ $pw->image() }}" data-lightbox="{{ $pw->warehouse->code.' - '.$pw->warehouse->name }}" data-title="{{ $pw->warehouse->code.' - '.$pw->warehouse->name }}"><img src="{{ $pw->image() }}" style="max-width:70px;" class="img-fluid img-thumbnail mb-2"></a>
+											  </td>
+										   </tr>
+										@endforeach
+									 </tbody>
+								  </table>
+							   </div>
+							</div>
+                        @endif
+                     </div>
+                  </form>
+               </div>
+            @endif
+			
+			@if($project->progress >= 65)
+               <div class="card" id="step-14">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Purchase Return</h5>
+                        <div class="form-group"><hr></div>
+                        
+                     </div>
+                  </form>
+               </div>
+            @endif
+
+            @if($project->progress >= 65)
+               <div class="card" id="step-15">
                   <form action="{{ url()->full() }}" method="POST">
                      @csrf
                      <div class="card-body">
@@ -1135,7 +1444,7 @@
                                  </tr>
                                  <tr>
                                     <th width="20%" class="align-middle">Delivery Cost</th>
-                                    <td class="align-middle">: {{ number_format($project->projectDelivery->price, 2, ',', '.') }}</td>
+                                    <td class="align-middle">: IDR {{ number_format($project->projectDelivery->price, 2, ',', '.') }}</td>
                                  </tr>
                               </tbody>
                            </table>
@@ -1213,20 +1522,38 @@
                               </div>
                            </div>
                         @endif
-                        @if($project->progress < 70)
-                           <div class="form-group"><hr></div>
-                           <div class="form-group">
-                              <div class="text-right">
-                                 <button type="submit" name="submit" value="step-13" class="btn bg-purple submit_delivery" disabled><i class="icon-floppy-disk"></i> Save</button>
-                              </div>
-                           </div>
-                        @endif
+                        
+					   <div class="form-group"><hr></div>
+					   <div class="form-group">
+						  <div class="text-right">
+							@if($project->progress < 70)
+							&nbsp;
+								<button type="submit" name="submit" value="step-15" class="btn bg-purple submit_delivery" disabled>Save & Next <i class="icon-square-right"></i></button>
+							@else
+								<a href="{{ url('admin/sales/project/print/delivery_order/' . base64_encode($project->id)) }}" class="btn bg-info" target="_blank">Preview & Download <i class="icon-file-pdf"></i></a>
+							 @endif
+						  </div>
+					   </div>
                      </div>
                   </form>
                </div>
             @endif
-            @if($project->progress >= 70)
-               <div class="card" id="step-14">
+			
+			@if($project->progress >= 75)
+               <div class="card" id="step-16">
+                  <form action="{{ url()->full() }}" method="POST">
+                     @csrf
+                     <div class="card-body">
+                        <h5 class="card-title" id="scrollspy">Sales Return</h5>
+                        <div class="form-group"><hr></div>
+                        
+                     </div>
+                  </form>
+               </div>
+            @endif
+			
+            @if($project->progress >= 75)
+               <div class="card" id="step-17">
                   <form action="{{ url()->full() }}" method="POST" enctype="multipart/form-data">
                      @csrf
                      <div class="card-body">
@@ -1244,7 +1571,7 @@
                                  <div class="form-group">
                                     <label class="font-weight-semibold">Nominal :</label>
 										      <div class="form-control-plaintext">
-                                       {{ number_format($project->projectPay->nominal, 2, ',', '.') }}
+                                       IDR {{ number_format($project->projectPay->nominal, 2, ',', '.') }}
                                     </div>
                                  </div>
                               </div>
@@ -1305,7 +1632,7 @@
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Nominal :<sup class="text-danger">*</sup></label>
-                                    <input type="number" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}">
+                                    <input type="text" name="nominal" id="nominal" class="form-control" placeholder="0" value="{{ old('nominal') }}" onkeyup="formatRupiah(this)">
                                  </div>
                               </div>
                               <div class="col-md-6">
@@ -1352,20 +1679,20 @@
                               </div>
                            </div>
                         @endif
-                        @if($project->progress < 90)
+						@if($project->progress < 90)
                            <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-14" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save</button>
+                                 <button type="submit" name="submit" value="step-17" class="btn bg-purple">Save & Next <i class="icon-square-right"></i></button>
                               </div>
                            </div>
-                        @endif
+						@endif
                      </div>
                   </form>
                </div>
             @endif
             @if($project->progress >= 90)
-               <div class="card" id="step-14">
+               <div class="card" id="step-18">
                   <form action="{{ url()->full() }}" method="POST">
                      @csrf
                      <div class="card-body">
@@ -1409,10 +1736,15 @@
                            <div class="form-group"><hr></div>
                            <div class="form-group">
                               <div class="text-right">
-                                 <button type="submit" name="submit" value="step-15" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save & Finish</button>
+                                 <button type="submit" name="submit" value="step-18" class="btn bg-purple"><i class="icon-floppy-disk"></i> Save & Finish</button>
                               </div>
                            </div>
                         @endif
+						<div class="form-group">
+						  <div class="text-right">
+							<a class="btn bg-success" href="https://wa.me/?text=Halo%20Pak%2FBu%2C%20mohon%20dicek%20project%20dengan%20kode%20{{ $project->code }}">Whatsapp <i class="icon-share3"></i></a>
+						  </div>
+						</div>
                      </div>
                   </form>
                </div>
@@ -1430,6 +1762,7 @@
                            <a href="#step-1" class="nav-link">
                               <i class="icon-check text-success"></i>
                               Project Information
+							  <span class="badge bg-info badge-pill ml-auto">10%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1440,6 +1773,7 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Spec Project + Target Price
+							  <span class="badge bg-info badge-pill ml-auto">15%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1450,6 +1784,7 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Consultant Meeting
+							  <span class="badge bg-info badge-pill ml-auto">20%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1459,7 +1794,8 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Pre Quotation
+                              Quotation
+							  <span class="badge bg-info badge-pill ml-auto">25%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1470,6 +1806,7 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Form Sample
+							  <span class="badge bg-info badge-pill ml-auto">30%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1480,6 +1817,7 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Negotiation
+							  <span class="badge bg-info badge-pill ml-auto">35%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1490,9 +1828,11 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               SO Project
+							  <span class="badge bg-info badge-pill ml-auto">40%</span>
                            </a>
                         </li>
                         <li class="nav-item">
+						   <hr style="width: 70%;border-top: 1px solid black;">
                            <a href="#step-8" class="nav-link {{ $project->progress >= 40 ? '' : 'disabled' }}">
                               @if($project->progress >= 43)
                                  <i class="icon-check text-success"></i>
@@ -1500,6 +1840,7 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               PO Project
+							  <span class="badge bg-info badge-pill ml-auto">43%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1509,7 +1850,8 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Proforma Invoice
+                              Proof of Proforma Inv
+							  <span class="badge bg-info badge-pill ml-auto">45%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1519,7 +1861,8 @@
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
-                              Production
+                              Progress Production
+							  <span class="badge bg-info badge-pill ml-auto">50%</span>
                            </a>
                         </li>
                         <li class="nav-item">
@@ -1530,9 +1873,11 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Pay Full Purchase
+							  <span class="badge bg-info badge-pill ml-auto">55%</span>
                            </a>
                         </li>
                         <li class="nav-item">
+							<hr style="width: 70%;border-top: 1px solid black;">
                            <a href="#step-12" class="nav-link {{ $project->progress >= 55 ? '' : 'disabled' }}">
                               @if($project->progress >= 60)
                                  <i class="icon-check text-success"></i>
@@ -1540,36 +1885,73 @@
                                  <i class="icon-spinner10"></i>
                               @endif
                               Shipment
+							  <span class="badge bg-info badge-pill ml-auto">60%</span>
+                           </a>
+                        </li>
+						<li class="nav-item">
+                           <a href="#step-13" class="nav-link {{ $project->progress >= 60 ? '' : 'disabled' }}">
+								@if($project->progress >= 65)
+								 <i class="icon-check text-success"></i>
+								  @else
+									 <i class="icon-spinner10"></i>
+								  @endif
+								Warehouse Receive
+								<span class="badge bg-info badge-pill ml-auto">65%</span>
+                           </a>
+                        </li>
+						<li class="nav-item">
+                           <a href="#step-14" class="nav-link {{ $project->progress >= 65 ? '' : 'disabled' }}">
+                                @if($project->progress >= 70)
+                                 <i class="icon-check text-success"></i>
+                              @else
+                                 <i class="icon-spinner10"></i>
+                              @endif
+								Purchase Return
+								<span class="badge bg-info badge-pill ml-auto">70%</span>
                            </a>
                         </li>
                         <li class="nav-item">
-                           <a href="#step-13" class="nav-link {{ $project->progress >= 60 ? '' : 'disabled' }}">
-                              @if($project->progress >= 70)
+                           <a href="#step-15" class="nav-link {{ $project->progress >= 70 ? '' : 'disabled' }}">
+                              @if($project->progress >= 75)
                                  <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
                               Delivery To Project
+							  <span class="badge bg-info badge-pill ml-auto">75%</span>
+                           </a>
+                        </li>
+						<li class="nav-item">
+                           <a href="#step-16" class="nav-link {{ $project->progress >= 75 ? '' : 'disabled' }}">
+                                @if($project->progress >= 80)
+                                 <i class="icon-check text-success"></i>
+                              @else
+                                 <i class="icon-spinner10"></i>
+                              @endif
+								Sales Return
+								<span class="badge bg-info badge-pill ml-auto">80%</span>
                            </a>
                         </li>
                         <li class="nav-item">
-                           <a href="#step-14" class="nav-link {{ $project->progress >= 70 ? '' : 'disabled' }}">
+                           <a href="#step-17" class="nav-link {{ $project->progress >= 80 ? '' : 'disabled' }}">
                               @if($project->progress >= 90)
                                  <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
                               Process Payment
+							  <span class="badge bg-info badge-pill ml-auto">90%</span>
                            </a>
                         </li>
                         <li class="nav-item">
-                           <a href="#step-15" class="nav-link {{ $project->progress >= 90 ? '' : 'disabled' }}">
+                           <a href="#step-18" class="nav-link {{ $project->progress >= 90 ? '' : 'disabled' }}">
                               @if($project->progress >= 100)
                                  <i class="icon-check text-success"></i>
                               @else
                                  <i class="icon-spinner10"></i>
                               @endif
                               Done
+							  <span class="badge bg-info badge-pill ml-auto">100%</span>
                            </a>
                         </li>
                      </ul>
@@ -1582,10 +1964,13 @@
 
 <script>
    $(function() {
+      var no = 0;
+
       $('.sidebar-main-toggle').click();
       select2ServerSide('#product_id', '{{ url("admin/select2/product") }}');
+	  select2ServerSide('#warehouse_id', '{{ url("admin/select2/warehouse") }}');
       select2ServerSide('#sample_product_id', '{{ url("admin/select2/product") }}');
-
+      
       $('.sidebar-sticky .sidebar').stick_in_parent({
          offset_top: 20,
          parent: '.content',
@@ -1598,14 +1983,17 @@
 
       $('#data_product').on('click', '#delete_data_product', function() {
          $(this).closest('tr').remove();
+		 $('.warning-product').fadeIn(500);
       });
 
       $('#data_consultant').on('click', '#delete_data_consultant', function() {
          $(this).closest('tr').remove();
+		 $('.warning-consultant').fadeIn(500);
       });
 
       $('#data_sample').on('click', '#delete_data_sample', function() {
          $(this).closest('tr').remove();
+		 $('.warning-sample').fadeIn(500);
       });
    });
 
@@ -1656,11 +2044,13 @@
          }
 		});
 	}
-
+   
    function addProduct() {
       var id = $('#product_id');
 
       if(id.val()) {
+		  
+		  
          $.ajax({
             url: '{{ url("admin/sales/project/get_product") }}',
             type: 'GET',
@@ -1672,33 +2062,63 @@
                loadingOpen('#step-2');
             },
             success: function(response) {
-               loadingClose('#step-2');
-               id.val(null).trigger('change');
-               $('#data_product').append(`
-                  <tr class="text-center">
-                     <input type="hidden" name="product_id[]" value="` + response.id + `">
-                     <input type="hidden" name="product_price[]" value="` + response.price + `">
-                     <td class="align-middle">` + response.product + `</td>
-                     <td class="align-middle">
-                        <input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
-                     </td>
-                     <td class="align-middle">
-                        <select name="product_unit[]" class="custom-select" required>
-                           <option value="1">Pcs</option>
-                           <option value="2">Box</option>
-                           <option value="3">Meter</option>
-                        </select>
-                     </td>
-                     <td class="align-middle">
-                        <div class="input-group">
-                           <input type="number" name="product_target_price[]" class="form-control" placeholder="0" required>
-                        </div>
-                     </td>
-                     <td class="align-middle">
-                        <button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
-                     </td>
-                  </tr>
-               `);
+			    var same = false;
+				
+				$('input[name^="product_id"]').each(function() {
+					if($(this).val() == response.id){
+						same = true;
+					}
+				});
+				
+				if(same == false){
+				   id.val(null).trigger('change');
+				   
+				   if($('.rowproduct').length == 0){
+					  no = 1;
+				   }else{
+					  no = $('.rowproduct').length + 1;
+				   }
+
+				   $('#data_product').append(`
+					  <tr class="text-center rowproduct">
+						 <input type="hidden" name="product_id[]" value="` + response.id + `">
+						 <input type="hidden" name="product_price[]" value="` + response.price + `">
+						 <td>` + no + `</td>
+						 <td class="align-middle">` + response.product + `</td>
+						 <td class="align-middle">
+							<input type="text" name="product_area[]" class="form-control" placeholder="Type area" required>
+						 </td>
+						 <td class="align-middle">
+							<input type="number" name="product_qty[]" class="form-control" min="1" placeholder="0" required>
+						 </td>  
+						 <td class="align-middle">
+							<select name="product_unit[]" class="custom-select" required>
+							   <option value="1">Pcs</option>   
+							   <option value="2">Box</option>   
+							   <option value="3">Meter</option>   
+							</select>
+						 </td>   
+						 <td class="align-middle">
+							<div class="input-group">
+							   <input type="text" name="product_target_price[]" class="form-control" placeholder="0" required onkeyup="formatRupiah(this);">
+							   <a class="btn btn-primary btn-sm" href="#collapse-icon` + response.id + `" data-toggle="collapse"><i class="icon-info3"></i></a>
+							</div>
+							<div class="collapse" id="collapse-icon` + response.id + `">
+								<div class="mt-3">
+									` + response.carton_pcs + ` pcs / carton, ` + response.carton_sqm + `
+								</div>
+							</div>
+						 </td>  
+						 <td class="align-middle">
+							<button type="button" id="delete_data_product" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+						 </td>
+					  </tr>
+				   `);
+				}else{
+					swalInit.fire('Ooppsss!', 'Product was already added.', 'info');
+				}
+				
+				loadingClose('#step-2');
             },
             error: function() {
                loadingClose('#step-2');
@@ -1718,15 +2138,16 @@
       if(consultant_date.val() && consultant_person.val() && consultant_result.val()) {
          $('#data_consultant').append(`
             <tr class="text-center">
+			   <input type="hidden" name="consultant_id[]" value="0">
                <input type="hidden" name="consultant_date[]" value="` + consultant_date.val() + `">
                <input type="hidden" name="consultant_person[]" value="` + consultant_person.val() + `">
                <input type="hidden" name="consultant_result[]" value="` + consultant_result.val() + `">
 
-               <td class="align-middle">` + consultant_date.val() + `</td>
-               <td class="align-middle">` + consultant_person.val() + `</td>
-               <td class="align-middle">` + consultant_result.val() + `</td>
+               <td class="align-middle">` + consultant_date.val() + `</td>   
+               <td class="align-middle">` + consultant_person.val() + `</td>   
+               <td class="align-middle">` + consultant_result.val() + `</td>   
                <td class="align-middle">
-                  <button type="button" id="delete_data_consultant" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
+                  <button type="button" id="delete_data_consultant" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
                </td>
             </tr>
          `);
@@ -1743,6 +2164,7 @@
       var sample_product_id = $('#sample_product_id');
       var sample_date       = $('#sample_date');
       var sample_qty        = $('#sample_qty');
+	  var sample_unit       = $('#sample_unit');
       var sample_size       = $('#sample_size');
 
       if(sample_product_id.val() && sample_date.val() && sample_qty.val() && sample_size.val()) {
@@ -1758,27 +2180,48 @@
             },
             success: function(response) {
                loadingClose('#step-5');
-               $('#data_sample').append(`
-                  <tr class="text-center">
-                     <input type="hidden" name="sample_product_id[]" value="` + sample_product_id.val() + `">
-                     <input type="hidden" name="sample_date[]" value="` + sample_date.val() + `">
-                     <input type="hidden" name="sample_qty[]" value="` + sample_qty.val() + `">
-                     <input type="hidden" name="sample_size[]" value="` + sample_size.val() + `">
+			   
+				var same = false;
+				
+				$('input[name^="sample_product_id"]').each(function() {
+					if($(this).val() == response.id){
+						same = true;
+					}
+				});
+				
+				if(same == false){
+					
+					$('#data_sample').append(`
+					  <tr class="text-center">
+						 <input type="hidden" name="sample_id[]" value="0">
+						 <input type="hidden" name="sample_product_id[]" value="` + sample_product_id.val() + `">
+						 <input type="hidden" name="sample_date[]" value="` + sample_date.val() + `">
+						 <input type="hidden" name="sample_qty[]" value="` + sample_qty.val() + `">
+						 <input type="hidden" name="sample_unit[]" value="` + sample_unit.val() + `">
+						 <input type="hidden" name="sample_size[]" value="` + sample_size.val() + `">
 
-                     <td class="align-middle">` + response.product + `</td>
-                     <td class="align-middle">` + sample_date.val() + `</td>
-                     <td class="align-middle">` + sample_qty.val() + `</td>
-                     <td class="align-middle">` + sample_size.val() + `</td>
-                     <td class="align-middle">
-                        <button type="button" id="delete_data_sample" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>
-                     </td>
-                  </tr>
-               `);
+						 <td class="align-middle">` + response.product + `</td>  
+						 <td class="align-middle">` + sample_date.val() + `</td>  
+						 <td class="align-middle">` + sample_qty.val() + `</td>
+						 <td class="align-middle">` + $("#sample_unit option:selected").text() + `</td>
+						 <td class="align-middle">` + sample_size.val() + `</td>  
+						 <td class="align-middle">
+							<button type="button" id="delete_data_sample" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+						 </td>
+					  </tr>
+				   `);
 
-               sample_product_id.val(null).trigger('change');
-               sample_date.val(null);
-               sample_qty.val(null);
-               sample_size.val(null);
+				   sample_product_id.val(null).trigger('change');
+				   sample_date.val(null);
+				   sample_qty.val(null);
+				   sample_unit.find('option:eq(0)').prop('selected', true);
+				   sample_size.val(null);
+				
+				}else{
+					swalInit.fire('Ooppsss!', 'Product was already added.', 'info');
+				}
+			   
+               
             },
             error: function() {
                loadingClose('#step-5');
@@ -1789,4 +2232,58 @@
          swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
       }
    }
+   
+   function countBestPrice(percent,id){
+	    var projectPrice = $('#project-price' + id).val().replace('.','').replace(',','.');
+	   
+		var result = parseFloat(projectPrice) - (parseFloat((parseFloat(projectPrice) * parseFloat(percent.value)) / 100));
+	   
+		var number_string = result.toString(),
+		split   		= number_string.split('.'),
+		sisa     		= split[0].length % 3,
+		rupiah     		= split[0].substr(0, sisa),
+		ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+		if(ribuan){
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+
+		if(split[1]){
+			split[1] = toFixed(parseFloat("0." + split[1]),2);
+			split[1] = split[1].toString().split('.')[1];
+		}
+		
+		rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	   
+		$('#best-price'+id).val(rupiah);
+   }
+   
+   function convertToNominal(price,ini,element){
+		var result = parseFloat((parseFloat(price) * parseFloat(ini.value)) / 100);
+	   
+		var number_string = result.toString(),
+		split   		= number_string.split('.'),
+		sisa     		= split[0].length % 3,
+		rupiah     		= split[0].substr(0, sisa),
+		ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+		if(ribuan){
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+		
+		if(split[1]){
+			split[1] = toFixed(parseFloat("0." + split[1]),2);
+			split[1] = split[1].toString().split('.')[1];
+		}
+		
+		rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	   
+		$(element).val(rupiah);
+   }
+   
+	function toFixed( num, precision ) {
+		return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
+	}
 </script>

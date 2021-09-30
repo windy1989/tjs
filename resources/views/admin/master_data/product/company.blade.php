@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
 	<div class="page-header page-header-light">
 		<div class="page-header-content header-elements-md-inline">
@@ -43,7 +44,7 @@
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
-               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+               <table id="datatable_serverside" class="table table-bordered table-striped w-100 responsive">
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
@@ -176,6 +177,10 @@
             { name: 'name', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
+         ],
+         dom: 'Blfrtip',
+         buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print',
          ]
       }); 
    }

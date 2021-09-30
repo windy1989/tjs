@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectProduction extends Model {
 
@@ -16,7 +17,19 @@ class ProjectProduction extends Model {
         'image',
         'start_date',
         'finish_date',
-        'note'
+        'note',
+		'progress'
     ];
+	
+	public function image() 
+    {
+        if(Storage::exists($this->image)) {
+            $image = asset(Storage::url($this->image));
+        } else {
+            $image = asset('website/empty.jpg');
+        }
+
+        return $image;
+    }
 
 }

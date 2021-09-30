@@ -27,14 +27,4 @@ class Journal extends Model {
         return $this->morphTo();
     }
 
-    public function coaDebit()
-    {
-        return $this->belongsTo('App\Models\Coa', 'debit', 'id');
-    }
-
-    public function coaCredit()
-    {
-        return $this->belongsTo('App\Models\Coa', 'credit', 'id');
-    }
-
 }

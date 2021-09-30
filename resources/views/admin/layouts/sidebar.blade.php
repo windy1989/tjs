@@ -325,9 +325,6 @@
                                         <a href="{{ url('admin/report/accounting/trial_balance') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'trial_balance' ? 'active' : '' }}">Trial Balance</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('admin/report/accounting/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'cash_bank' ? 'active' : '' }}">Cash & Bank</a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="{{ url('admin/report/accounting/aging_receivable') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'aging_receivable' ? 'active' : '' }}">Aging Receivable</a>
                                     </li>
                                     <li class="nav-item">
@@ -363,14 +360,14 @@
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'settings' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-gear"></i>
-                            <span>Setting</span>
+                            <span>Settings</span>
                         </a>
-                        <ul class="nav nav-group-sub" data-submenu-title="Setting">
+                        <ul class="nav nav-group-sub" data-submenu-title="Settings">
                             <li class="nav-item">
-                                <a href="{{ url('admin/setting/user') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
+                                <a href="{{ url('admin/settings/user') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/setting/2fa') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
+                                <a href="{{ url('admin/settings/2fa') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
                             </li>
                         </ul>
                     </li>

@@ -24,22 +24,22 @@ class CashBank extends Model {
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User'); 
     }
 
     public function cashBankDetail()
     {
-        return $this->hasMany('App\Models\CashBankDetail');
+        return $this->hasMany('App\Models\CashBankDetail'); 
     }
 
-    public function type()
+    public function type() 
     {
         switch($this->type) {
             case '1':
-                $type = 'Cash / Bank In';
+                $type = 'Cash';
                 break;
             case '2':
-                $type = 'Cash / Bank Out';
+                $type = 'Bank';
                 break;
             case '3':
                 $type = 'Journal';

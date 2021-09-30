@@ -138,7 +138,7 @@
 						<table>
 							<tr>
 								<td style="text-align:center;">
-									<h2><b>SALES ORDER</b></h2>
+									<h4><b>SALES ORDER</b></h4>
 								</td>
 							</tr>
 						</table>
@@ -199,6 +199,7 @@
 						<th style="color:white;"><center>Qty</center></th>
 						<th style="color:white;"><center>Discount</center></th>
 						<th style="color:white;"><center>Unit Price</center></th>
+						<th style="color:white;"><center>Best Price</center></th>
 						<th style="color:white;"><center>Total</center></th>
 					</tr>
 				</thead>
@@ -209,8 +210,8 @@
 					@endphp
 					@foreach($project->projectProduct as $key => $pp)
 						@php
-							$total     = $pp->recommended_price * $pp->qty;
-							$subtotal += ((100 - $pp->discount) / 100) * $total;
+							$total     = $pp->best_price * $pp->qty;
+							$subtotal += $pp->best_price * $pp->qty;
 							$discount += ($pp->discount / 100) * $total;
 						@endphp
 						<tr>
@@ -233,7 +234,7 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $pp->qty }}
+									{{ $pp->qty.' '.$pp->unit() }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
@@ -241,12 +242,17 @@
 									{{ $pp->discount }}%
 								</center>
 							</td>
-							<td style="vertical-align:center;">
+							<td style="vertical-align:center;text-align:right;">
 								<center>
 									Rp {{ number_format($pp->recommended_price, 2, ',', '.') }}
 								</center>
 							</td>
-							<td style="vertical-align:center;">
+							<td style="vertical-align:center;text-align:right;">
+								<center>
+									Rp {{ number_format($pp->best_price, 2, ',', '.') }}
+								</center>
+							</td>
+							<td style="vertical-align:center;text-align:right;">
 								<center>
 									Rp {{ number_format($total, 2, ',', '.') }}
 								</center>
@@ -257,29 +263,25 @@
 				<tfoot>
 					@php $shipping_fee = $project->projectDelivery ? $project->projectDelivery->price : 0;  @endphp
 					<tr>
-						<th colspan="5" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($subtotal, 2, ',', '.') }}</th>
+						<th colspan="6" style="text-align:right;">SUBTOTAL</th>
+						<th colspan="2" style="text-align:right;">IDR {{ number_format($subtotal, 2, ',', '.') }}</th>
 					</tr>
 					<tr>
-						<th colspan="5" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($shipping_fee, 2, ',', '.') }}</th>
-					</tr>
-					<tr>
-						<th colspan="5" style="text-align:right;">DISCOUNT</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($discount, 2, ',', '.') }}</th>
+						<th colspan="6" style="text-align:right;">SHIPPING</th>
+						<th colspan="2" style="text-align:right;">IDR {{ number_format($shipping_fee, 2, ',', '.') }}</th>
 					</tr>
 					@if($project->ppn)
 						@php $tax = (10 / 100) * $subtotal; @endphp
 						<tr>
-							<th colspan="5" style="text-align:right;">TAX (10%)</th>
-							<th colspan="2" style="text-align:left;">{{ number_format($tax, 2, ',', '.') }}</th>
+							<th colspan="6" style="text-align:right;">TAX (10%)</th>
+							<th colspan="2" style="text-align:right;">IDR {{ number_format($tax, 2, ',', '.') }}</th>
 						</tr>
 					@else
 						@php $tax = 0; @endphp
 					@endif
 					<tr>
-						<th colspan="5" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format(($subtotal - $discount) + ($shipping_fee + $tax), 2, ',', '.') }}</th>
+						<th colspan="6" style="text-align:right;">TOTAL</th>
+						<th colspan="2" style="text-align:right;">IDR {{ number_format($subtotal + ($shipping_fee + $tax), 2, ',', '.') }}</th>
 					</tr>
 				</tfoot>
 			</table><br>

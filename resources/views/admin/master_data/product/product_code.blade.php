@@ -3,7 +3,7 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i>
+					<i class="icon-arrow-left52 mr-2"></i> 
 					<span class="font-weight-semibold">Product Code</span>
 				</h4>
 			</div>
@@ -55,7 +55,7 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4">
                   <div class="form-group">
                      <label>Stock :</label>
                      <select name="filter_stock" id="filter_stock" class="custom-select">
@@ -66,7 +66,7 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4">
                   <div class="form-group">
                      <label>Shading :</label>
                      <select name="filter_shading" id="filter_shading" class="custom-select">
@@ -76,23 +76,13 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4">
                   <div class="form-group">
                      <label>Status :</label>
                      <select name="filter_status" id="filter_status" class="custom-select">
                      <option value="">All</option>
                      <option value="1">Active</option>
                      <option value="2">Not Active</option>
-                  </select>
-                  </div>
-               </div>
-               <div class="col-md-3">
-                  <div class="form-group">
-                     <label>Check :</label>
-                     <select name="filter_check" id="filter_check" class="custom-select">
-                     <option value="">All</option>
-                     <option value="1">Not Checked</option>
-                     <option value="2">Already Checked</option>
                   </select>
                   </div>
                </div>
@@ -117,10 +107,8 @@
                      <tr class="text-center">
                         <th>No</th>
                         <th>Shading</th>
-                        <th>Code</th>
                         <th>Name</th>
                         <th>Stock</th>
-                        <th>Check</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -217,7 +205,7 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-4">
+                           <div class="col-md-6">
                               <div class="form-group">
                                  <label>Supplier :<span class="text-danger">*</span></label>
                                  <select name="supplier_id" id="supplier_id" class="select2">
@@ -228,7 +216,7 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-4">
+                           <div class="col-md-6">
                               <div class="form-group">
                                  <label>Grade :<span class="text-danger">*</span></label>
                                  <select name="grade_id" id="grade_id" class="select2" onchange="generateCode()">
@@ -236,15 +224,6 @@
                                     @foreach($grade as $g)
                                        <option value="{{ $g->id }}">{{ $g->name }}</option>
                                     @endforeach
-                                 </select>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="form-group">
-                                 <label>Check :<span class="text-danger">*</span></label>
-                                 <select name="check" id="check" class="custom-select">
-                                    <option value="1">Not Checked</option>
-                                    <option value="2">Already Checked</option>
                                  </select>
                               </div>
                            </div>
@@ -424,7 +403,6 @@
       $('#filter_stock').val(null);
       $('#filter_shading').val(null);
       $('#filter_status').val(null);
-      $('#filter_check').val(null);
       loadDataTable();
    }
 
@@ -560,7 +538,6 @@
                brand_id: $('#filter_brand_id').val(),
                country_id: $('#filter_country_id').val(),
                stock: $('#filter_stock').val(),
-               check: $('#filter_check').val(),
                shading: $('#filter_shading').val(),
                status: $('#filter_status').val()
             },
@@ -582,14 +559,12 @@
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'shading', searchable: false, orderable: false, className: 'text-center align-middle' },
-            { name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'name', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'check', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
-      });
+      }); 
    }
 
    function create() {
@@ -615,7 +590,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-
+               
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`
@@ -667,7 +642,6 @@
             $('#container_stock').val(response.container_stock);
             $('#container_max_stock').val(response.container_max_stock);
             $('#description').val(response.description);
-            $('#check').val(response.check);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
 
             $.each(response.shading, function(i, val) {
@@ -721,7 +695,7 @@
                $('#validation_alert').show();
                $('.modal-body').scrollTop(0);
                notif('warning', 'bg-warning', 'Validation');
-
+               
                $.each(response.error, function(i, val) {
                   $.each(val, function(i, val) {
                      $('#validation_content').append(`

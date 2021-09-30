@@ -25,6 +25,7 @@ class CustomerSeeder extends Seeder
                 'email'        => $c['email'],
                 'phone'        => $c['phone'],
                 'password'     => $c['password'],
+                'type'         => 1,
                 'points'       => $c['points'],
                 'verification' => $c['verification'],
                 'created_at'   => $c['created_at'],

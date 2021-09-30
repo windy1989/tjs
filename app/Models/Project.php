@@ -17,17 +17,20 @@ class Project extends Model {
         'city_id',
         'code',
         'name',
-        'email',
-        'phone',
+        'customer_id',
         'timeline',
-        'constructor',
         'manager',
         'consultant',
         'owner',
+		'coa_id',
         'payment_method',
         'supply_method',
         'ppn',
-        'progress'
+        'progress',
+		'so_file',
+		'delivery_cost',
+		'cutting_cost',
+		'misc_cost'
     ];
 
     public static function generateCode()
@@ -51,13 +54,10 @@ class Project extends Model {
     {
         switch($this->payment_method) {
             case '1':
-                $payment_method = 'Giro';
+                $payment_method = 'Cash';
                 break;
             case '2':
-                $payment_method = 'SKBDN';
-                break;
-            case '3':
-                $payment_method = 'DP';
+                $payment_method = 'Credit';
                 break;
             default:
                 $payment_method = 'Invalid';
@@ -111,6 +111,16 @@ class Project extends Model {
         return $this->belongsTo('App\Models\City');
     }
 
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
+	
+	public function coa()
+    {
+        return $this->belongsTo('App\Models\Coa');
+    }
+
     public function country()
     {
         return $this->belongsTo('App\Models\Country');
@@ -138,7 +148,7 @@ class Project extends Model {
 
     public function projectProduction()
     {
-        return $this->hasOne('App\Models\ProjectProduction');
+        return $this->hasMany('App\Models\ProjectProduction');
     }
 
     public function projectShipment()
@@ -155,5 +165,14 @@ class Project extends Model {
     {
         return $this->hasOne('App\Models\ProjectPay');
     }
-
+	
+	public function projectWarehouse()
+    {
+        return $this->hasMany('App\Models\ProjectWarehouse');
+    }
+	
+	public function projectQuotation()
+    {
+        return $this->hasMany('App\Models\ProjectQuotation');
+    }
 }

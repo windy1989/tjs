@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
 use App\Models\Product;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +22,24 @@ class Select2Controller extends Controller {
             $response[] = [
                 'id'   => $d->id,
                 'text' => $d->code
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function warehouse(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = Warehouse::select('id', 'name')
+            ->where('name', 'like', "%$search%")
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
             ];
         }
 

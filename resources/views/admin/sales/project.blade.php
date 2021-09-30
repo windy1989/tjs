@@ -70,20 +70,13 @@
                <div class="row">
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Constructor Name :<sup class="text-danger">*</sup></label>
-                        <input type="text" name="constructor" id="constructor" class="form-control" placeholder="Enter constructor name">
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Phone :<sup class="text-danger">*</sup></label>
-                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter phone">
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Email :<sup class="text-danger">*</sup></label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter email">
+                        <label>Customer :<sup class="text-danger">*</sup></label>
+                        <select name="customer_id" id="customer_id" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($customer as $c)
+                              <option value="{{ $c->id }}">{{ $c->name.' - '.$c->email }}</option>
+                           @endforeach
+                        </select>
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -132,14 +125,28 @@
                         <input type="text" name="owner" id="owner" class="form-control" placeholder="Enter owner">
                      </div>
                   </div>
+				  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Bank Destination :<sup class="text-danger">*</sup></label>
+                        <select name="bank_id" id="bank_id" class="select2">
+                           <option value="">-- Choose --</option>
+                           @foreach($bank as $b)
+                              <optgroup label="{{ $b->name }}">
+								  @foreach($b->child() as $bc)
+									<option value="{{ $bc->id }}">{{ $bc->name }}</option>
+								  @endforeach
+							  </optgroup>
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Payment Method :<sup class="text-danger">*</sup></label>
                         <select name="payment_method" id="payment_method" class="custom-select">
                            <option value="">-- Choose --</option>
-                           <option value="1">Giro</option>
-                           <option value="2">SKBDN</option>
-                           <option value="3">DP</option>
+                           <option value="1">Cash</option>
+                           <option value="2">Credit</option>
                         </select>
                      </div>
                   </div>

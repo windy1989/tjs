@@ -37,6 +37,16 @@
 	<script src="{{ asset('template/plugins/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ asset('template/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
-	<script src="{{ asset('template/back-office/custom.js') }}"></script>
+	<script src="{{ asset('template/back-office/custom.js?v=3') }}"></script>
+	<link href="{{ asset('template/back-office/assets/css/buttons.dataTables.min.css') }}" rel="stylesheet">
+	<script src="{{ asset('template/back-office/assets/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/buttons.colVis.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/buttons.flash.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/jszip.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/pdfmake.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/vfs_fonts.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/buttons.html5.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/back-office/assets/js/buttons.print.min.js') }}" type="text/javascript"></script>
 	<title>SMB Admin - {{ $title }}</title>
 </head>

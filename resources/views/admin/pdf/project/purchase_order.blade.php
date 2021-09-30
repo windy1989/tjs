@@ -123,7 +123,7 @@
 								@foreach($brand as $b)
 									<td>
 										<center>
-											<img src="{{ asset(Storage::url($b->image)) }}">
+											<img src="{{ asset(Storage::url($b->image)) }}" width="200px">
 										</center>
 									</td>
 								@endforeach
@@ -138,7 +138,7 @@
 						<table>
 							<tr>
 								<td style="text-align:center;">
-									<h2><b>PURCHASE ORDER</b></h2>
+									<h4><b>PURCHASE ORDER</b></h4>
 								</td>
 							</tr>
 						</table>
@@ -150,7 +150,7 @@
 					<td colspan="2">
 						<table>
 							<tr style="line-height:0 !important;">
-								<td width="10%" style="font-size:10px;">Date</td>
+								<td width="10%" style="font-size:10px;">Date of PO</td>
 								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($project->created_at)) }}</td>
 							</tr>
 							<tr>
@@ -180,39 +180,33 @@
 								<td><div style="font-size:10px;"><b>SHIP TO :</b></div></td>
 							</tr>
 						</table>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->receiver_name : 'Not set' }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->phone : 'Not set' }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->email : 'Not set' }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->city->name : 'Not set' }}</div>
-						<div style="font-weight:500; font-size:10px;">{{ $project->projectDelivery ? $project->projectDelivery->address : 'Not set' }}</div>
-						<div style="font-weight:500; font-size:10px;">
-							Fleet : {{ $project->projectDelivery ? $project->projectDelivery->delivery->transport->fleet : 'Not set' }}	
-						</div>
+						
 					</td>
 				</tr>
 			</table><br>
 			<table border="1" cellpadding="5" cellspacing="0" style="width:100%; font-size:10px;">
 				<thead>
-					<tr style="background:#1a73e8;">
-						<th style="color:white;"><center>No</center></th>
-						<th style="color:white;"><center>Picture</center></th>
-						<th style="color:white;"><center>Item Name</center></th>
-						<th style="color:white;"><center>Qty</center></th>
-						<th style="color:white;"><center>Unit Price</center></th>
-						<th style="color:white;"><center>Total</center></th>
+					<tr style="background:#1a73e8;text-align:center;">
+						<th style="color:white;" rowspan="2"><center>NO</center></th>
+						<th style="color:white;" rowspan="2"><center>CODE</center></th>
+						<th style="color:white;" rowspan="2"><center>NAME</center></th>
+						<th style="color:white;" rowspan="2"><center>PICTURE</center></th>
+						<th style="color:white;" rowspan="2"><center>BRAND</center></th>
+						<th style="color:white;" rowspan="2"><center>SIZE(cm)</center></th>
+						<th style="color:white;" rowspan="2"><center>CATEGORY</center></th>
+						<th style="color:white;" rowspan="2"><center>COLOR</center></th>
+						<th style="color:white;" colspan="2"><center>VOL/CTN</center></th>
+						<th style="color:white;" rowspan="2"><center>QTY</center></th>
+						<th style="color:white;" rowspan="2"><center>UNIT</center></th>
+						<th style="color:white;" rowspan="2"><center>TOTAL(sqm)</center></th>
 					</tr>
+					<tr style="background:#1a73e8;text-align:center;">
+						<th style="color:white;">(M<sup>2</sup>)</th>
+						<th style="color:white;">(Pcs)</th>
+					</th>
 				</thead>
 				<tbody>
-					@php 
-						$subtotal = 0;
-						$discount = 0;
-					@endphp
-					@foreach($project->projectProduct as $key => $pp)
-						@php
-							$total     = $pp->cogs * $pp->qty;
-							$subtotal += ((100 - $pp->discount) / 100) * $total;
-							$discount += ($pp->discount / 100) * $total;
-						@endphp
+					@foreach($project->projectProduct as $key => $ps)
 						<tr>
 							<td style="vertical-align:center;">
 								<center>
@@ -221,84 +215,104 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									<img src="{{ $pp->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail">
+									{{ $ps->product->type->code }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $pp->product->name() }}
-									<div>{{ $pp->product->type->length }}x{{ $pp->product->type->width }}</div>
-									<div>{{ $pp->product->type->category->name }}</div>
+									{{ $ps->product->name() }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $pp->qty }}
+									<img src="{{ $ps->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail">
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $pp->discount }}%
+									{{ $ps->product->brand->name }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($pp->cogs, 2, ',', '.') }}
+									{{ $ps->product->type->length }}x{{ $ps->product->type->width }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									Rp {{ number_format($total, 2, ',', '.') }}
+									{{ $ps->product->type->category->name }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $ps->product->type->color->name }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ (($ps->product->type->length/100) * ($ps->product->type->width / 100)) * $ps->product->carton_pcs }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $ps->product->carton_pcs }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $ps->qty }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $ps->unit() }}
+								</center>
+							</td>
+							<td style="vertical-align:center;">
+								<center>
+									{{ $ps->qty * ((($ps->product->type->length/100) * ($ps->product->type->width / 100)) * $ps->product->carton_pcs) }}
 								</center>
 							</td>
 						</tr>
 					@endforeach
 				</tbody>
-				<tfoot>
-					@php $shipping_fee = $project->projectDelivery ? $project->projectDelivery->price : 0;  @endphp
-					<tr>
-						<th colspan="5" style="text-align:right;">SUBTOTAL</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($subtotal, 2, ',', '.') }}</th>
-					</tr>
-					<tr>
-						<th colspan="5" style="text-align:right;">SHIPPING</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($shipping_fee, 2, ',', '.') }}</th>
-					</tr>
-					<tr>
-						<th colspan="5" style="text-align:right;">DISCOUNT</th>
-						<th colspan="2" style="text-align:left;">{{ number_format($discount, 2, ',', '.') }}</th>
-					</tr>
-					@if($project->ppn)
-						@php $tax = (10 / 100) * $subtotal; @endphp
-						<tr>
-							<th colspan="5" style="text-align:right;">TAX (10%)</th>
-							<th colspan="2" style="text-align:left;">{{ number_format($tax, 2, ',', '.') }}</th>
-						</tr>
-					@else
-						@php $tax = 0; @endphp
-					@endif
-					<tr>
-						<th colspan="5" style="text-align:right;">TOTAL</th>
-						<th colspan="2" style="text-align:left;">Rp {{ number_format(($subtotal - $discount) + ($shipping_fee + $tax), 2, ',', '.') }}</th>
-					</tr>
-				</tfoot>
 			</table><br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<h6 style="font-size:10px; text-align:center;">Comments or Special Instructions :</h6>
+						<h6 style="font-size:10px; text-align:center;">Notes :</h6>
 						<div></div>
-						<div style="font-size:10px; text-align:left;">1. Down Payment is 50% from the total</div>
-						<div style="font-size:10px; text-align:left;">2. The goods must be shipped to Jakarta before May 19th, 2021. If the goods are not in stock, please send the Concealed Body Art. HT5716ZZ11 first.</div>
+						<div style="font-size:10px; text-align:left;">
+							PACKING : GOODS ARE PACKED IN CARTON THAN PUT IN IRON A FRAME AND WRAPPING BY STRETCH FILM
+						</div>
 					</td>
 				</tr>
 			</table><br><br><br><br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<td style="text-align:center;">
-						<div style="font-size:10px;">Created By</div>
+						<div style="font-size:10px;">PO released by</div>
+						<div style="font-size:10px;">PT. Perwira Tamaraya Abadi</div>
 						<br><br><br>
-						<div style="font-size:10px;">{{ $project->user->name }}</div>
+						<div style="font-size:10px;font-weight:700;">{{ $project->user->name }}</div>
+					</td>
+					<td style="text-align:center;">
+						<div style="font-size:10px;">PO accepted by</div>
+						<div style="font-size:10px;">Supplier</div>
+						<br><br><br>
+						<div style="font-size:10px;font-weight:700;">(........................)</div>
+					</td>
+					<td style="text-align:center;">
+						<div style="font-size:10px;">Checked by</div>
+						<div style="font-size:10px;">PT. Perwira Tamaraya Abadi</div>
+						<br><br><br>
+						<div style="font-size:10px;font-weight:700;">(........................)</div>
+					</td>
+					<td style="text-align:center;">
+						<div style="font-size:10px;">Approved By</div>
+						<div style="font-size:10px;">Director</div>
+						<br><br><br>
+						<div style="font-size:10px;font-weight:700;">(Prawiro Tedjo Tjandra)</div>
 					</td>
 				</tr>
 			</table>

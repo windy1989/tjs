@@ -14,11 +14,13 @@ class ProjectProduct extends Model {
     protected $fillable   = [
         'project_id',
         'product_id',
+		'area',
         'qty',
         'cogs',
         'price',
         'target_price',
         'recommended_price',
+		'best_price',
         'discount',
         'unit'
     ];

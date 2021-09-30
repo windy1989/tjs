@@ -3,7 +3,7 @@
 		<div class="page-header-content header-elements-md-inline">
 			<div class="page-title d-flex">
 				<h4>
-					<i class="icon-arrow-left52 mr-2"></i>
+					<i class="icon-arrow-left52 mr-2"></i> 
 					<span class="font-weight-semibold">Create New COGS Sales</span>
 				</h4>
 			</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Cookie;
 use App\Models\User;
 use App\Models\Token;
 use App\Jobs\EmailProcess;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller {
-    
+
     public function login(Request $request)
     {
         if(session('bo_id')) {
@@ -25,28 +26,51 @@ class AuthController extends Controller {
         if($request->has('_token') && session()->token() == $request->_token) {
             $user = User::where('email', $request->email)->first();
             if($user) {
-                if($user->verification) {
-                    if(Hash::check($request->password, $user->password)) {
-                        $role = [];
-                        foreach($user->userRole as $ur) {
-                            $role[] = $ur->role;
+
+                $passToken = false;
+                
+                if(Cookie::get('temp') == null){
+                    if($user->token_device == ''){
+						$token = Str::random(20);
+						Cookie::queue('temp', $token, 2147483647);
+						
+                        $userupdate = User::where('email', $request->email)->first();
+						$userupdate->token_device = $token;
+                        $userupdate->save();
+                        $passToken = true;
+					}
+                }else{
+                    if(Cookie::get('temp') == $user->token_device){
+						$passToken = true;
+					}
+                }
+
+                if($passToken == true){
+                    if($user->verification) {
+                        if(Hash::check($request->password, $user->password)) {
+                            $role = [];
+                            foreach($user->userRole as $ur) {
+                                $role[] = $ur->role;
+                            }
+
+                            session([
+                                'bo_id'     => $user->id,
+                                'bo_photo'  => $user->photo ? asset(Storage::url($user->photo)) : asset('website/user.png'),
+                                'bo_name'   => $user->name,
+                                'bo_email'  => $user->email,
+                                'bo_branch' => $user->branch,
+                                'bo_role'   => $role
+                            ]);
+
+                            return redirect('admin/dashboard');
+                        } else {
+                            return redirect()->back()->with(['failed' => 'Account not found']);
                         }
-
-                        session([
-                            'bo_id'     => $user->id,
-                            'bo_photo'  => $user->photo ? asset(Storage::url($user->photo)) : asset('website/user.png'),
-                            'bo_name'   => $user->name,
-                            'bo_email'  => $user->email,
-                            'bo_branch' => $user->branch,
-                            'bo_role'   => $role
-                        ]);
-
-                        return redirect('admin/dashboard');
                     } else {
-                        return redirect()->back()->with(['failed' => 'Account not found']);
+                        return redirect()->back()->with(['info' => 'Account not verified']);
                     }
                 } else {
-                    return redirect()->back()->with(['info' => 'Account not verified']);
+                    return redirect()->back()->with(['info' => 'Multiple device login detected']);
                 }
             } else {
                 return redirect()->back()->with(['failed' => 'Account not found']);

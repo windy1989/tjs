@@ -20,31 +20,14 @@ class ProjectPay extends Model {
         'payment_method'
     ];
 
-    public function payment() 
-    {
-        switch($this->payment) {
-            case '1':
-                $payment = 'DP';
-                break;
-            case '2':
-                $payment = 'Non DP';
-                break;
-            default:
-                $payment = 'Invalid';
-                break;
-        }
-
-        return $payment;
-    }
-
     public function paymentMethod() 
     {
         switch($this->payment_method) {
             case '1':
-                $payment_method = 'Cash';
+                $payment_method = 'DP';
                 break;
             case '2':
-                $payment_method = 'Credit';
+                $payment_method = 'Non DP';
                 break;
             default:
                 $payment_method = 'Invalid';
@@ -52,6 +35,23 @@ class ProjectPay extends Model {
         }
 
         return $payment_method;
+    }
+
+    public function payment() 
+    {
+        switch($this->payment) {
+            case '1':
+                $payment = 'Cash';
+                break;
+            case '2':
+                $payment = 'Credit';
+                break;
+            default:
+                $payment = 'Invalid';
+                break;
+        }
+
+        return $payment;
     }
 
 }
