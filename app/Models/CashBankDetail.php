@@ -13,20 +13,31 @@ class CashBankDetail extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'cash_bank_id',
-        'debit',
-        'credit',
+        'coa_id',
+        'type',
         'nominal',
         'note'
     ];
 
-    public function coaDebit()
+    public function coa()
     {
-        return $this->belongsTo('App\Models\Coa', 'debit', 'id');
+        return $this->belongsTo('App\Models\Coa');
     }
-
-    public function coaCredit()
+	
+	public function type() 
     {
-        return $this->belongsTo('App\Models\Coa', 'credit', 'id');
-    }
+        switch($this->type) {
+            case '1':
+                $type = 'Debit';
+                break;
+            case '2':
+                $type = 'Credit';
+                break;
+            default:
+                $type = 'Invalid';
+                break;
+        }
 
+        return $type;
+    }
 }

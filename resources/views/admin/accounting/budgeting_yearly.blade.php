@@ -1,3 +1,8 @@
+<style>
+	.table td, .table th {
+		padding: 0.40rem 0.75rem;
+	}
+</style>
 <div class="content-wrapper">
 	<div class="page-header page-header-light">
 		<div class="page-header-content header-elements-md-inline">
@@ -53,36 +58,54 @@
                @csrf
                <div class="row justify-content-center">
                   <div class="col-md-4">
-                     <div class="form-group mb-0">
-                        <select name="coa_id" id="coa_id" class="select2">
-                           <option value="">-- Choose Coa --</option>
-                           @foreach($coa as $key => $c)
-                              <option value="{{ $c->id }}" {{ old('coa_id') == $c->id ? 'selected' : '' }}>[{{ $c->code }}] {{ $c->name }}</option>
-                           @endforeach
+                     <div class="form-group mb-0 text-center">
+						<label>Year Budgeting</label>
+                        <select name="year" id="year" class="form-control">
+							@php
+								$yearStart = date('Y') - 5;
+								$yearEnd = date('Y') + 5;
+								for($i = $yearStart;$i<=$yearEnd;$i++){
+									$status = '';
+									if($i == date('Y')){
+										$status = 'selected';
+									}
+									echo '<option value="'.$i.'" '.$status.'>'.$i.'</option>';
+								} 
+							@endphp
                         </select>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group mb-0">
-                        <input type="number" name="year" id="year" class="form-control" placeholder="Enter year" value="{{ old('year') }}">
                      </div>
                   </div>
                </div>
                <div class="form-group"><hr></div>
-               @for($i = 1; $i <= 12; $i++)
-                  <div class="row justify-content-center">
-                     <div class="col-md-8">
-                        <div class="form-group row">
-                           <label class="col-form-label col-lg-2">{{ date('F', strtotime(date('Y') . '-' . $i)) }}</label>
-                           <div class="col-lg-10">
-                              <input type="hidden" name="month[]" id="month" value="{{ $i }}">
-                              @php $nominal = old('nominal') ? old('nominal')[$i - 1] : null; @endphp
-                              <input type="number" name="nominal[]" id="nominal" class="form-control" placeholder="Enter nominal" value="{{ $nominal }}">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               @endfor
+			   <div class="table-responsive">
+					<table class="table table-bordered table-striped table-scrollable">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Coa Name</th>
+								@for($i = date('n'); $i <= 12; $i++)
+									<th style="width:150px;">{{ date('F', strtotime(date('Y') . '-' . $i)) }}</th>
+								@endfor
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($coa as $key => $c)
+								@if(explode('.',$c->code)[0] >= 4 && isset(explode('.',$c->code)[4]))
+							<tr>
+								<td>{{ $c->code }}</td>
+								<td>{{ $c->name }}</td>
+								@for($i = date('n'); $i <= 12; $i++)
+									<input type="hidden" name="month[]" id="month" value="{{ $i }}">
+									<input type="hidden" name="coa_id[]" id="coa_id" value="{{ $c->id }}">
+									@php $nominal = old('nominal') ? old('nominal')[$i - 1] : 0; @endphp
+									<td><input type="text" name="nominal[]" id="nominal" class="form-control form-control-sm" style="width:150px;" placeholder="Enter nominal" value="{{ $nominal }}" onkeyup="formatRupiah(this)"></td>
+								@endfor
+							</tr>
+								@endif
+							@endforeach
+						</tbody>
+					</table>
+				</div>
                <div class="form-group"><hr></div>
                <div class="form-group text-right">
                   <button type="reset" id="btn_reset" class="btn bg-danger btn-labeled btn-labeled-left">
@@ -98,12 +121,14 @@
 	</div>
 
 <script>
+	
    $(function() {
-      $('#btn_submit').click(function() {
-         $('#btn_reset').attr('disabled', true);
-         $('#btn_submit').attr('disabled', true);
-         $('#btn_submit').html('<b><i class="icon-spinner4 spinner"></i></b> Processed ...');
-         $('#form_data').submit();
-      });
+		$('.sidebar-main-toggle').click();
+		$('#btn_submit').click(function() {
+			 $('#btn_reset').attr('disabled', true);
+			 $('#btn_submit').attr('disabled', true);
+			 $('#btn_submit').html('<b><i class="icon-spinner4 spinner"></i></b> Processed ...');
+			 $('#form_data').submit();
+		});
    });
 </script>

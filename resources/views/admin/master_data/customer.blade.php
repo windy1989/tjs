@@ -12,7 +12,13 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
-               <button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
+					<button class="btn bg-indigo-400 btn-labeled mr-2 btn-labeled-left" onclick="exportData()">
+						<b><i class="icon-file-excel"></i></b> Export Data
+					</button>
+					<button class="btn bg-pink-400 btn-labeled mr-2 btn-labeled-left" onclick="printData()">
+						<b><i class="icon-printer2"></i></b> Print Data
+					</button>
+					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
 						<b><i class="icon-plus3"></i></b> Add Data
 					</button>
 				</div>
@@ -30,13 +36,14 @@
 	</div>
 	<div class="content">
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
             <div class="header-elements">
 					<select name="filter_type" id="filter_type" class="custom-select" onchange="loadDataTable()">
 						<option value="">All Type</option>
 						<option value="1">Online</option>
 						<option value="2">Offline</option>
+						<option value="3">Hybrid</option>
 					</select>
 				</div>
 			</div>
@@ -362,6 +369,22 @@
             });
          }
       });
+   }
+   
+   function exportData(){
+		var table = $('#datatable_serverside').DataTable();
+		var info = table.page.info();
+		var search = table.search(), numrow = info.length, start = info.start, type = $('#filter_type').val();
+		
+		window.location = "{{ url('admin/master_data/customer/export') }}?search=" + search + "&numrow=" + numrow + "&start=" + start + "&type=" + type;
+   }
+   
+   function printData(){
+		var table = $('#datatable_serverside').DataTable();
+		var info = table.page.info();
+		var search = table.search(), numrow = info.length, start = info.start, type = $('#filter_type').val();
+		
+		window.open("{{ url('admin/master_data/customer/print') }}?search=" + search + "&numrow=" + numrow + "&start=" + start + "&type=" + type, "_blank");
    }
 
    function destroy(id) {

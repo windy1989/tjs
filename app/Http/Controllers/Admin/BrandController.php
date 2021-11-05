@@ -110,7 +110,7 @@ class BrandController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=320,max_height=240',
+            'image'  => 'image|mimes:jpg,jpeg,png|max:150|dimensions:max_width=320,max_height=320',
             'code'   => 'required|unique:brands,code',
             'name'   => 'required',
             'order'  => 'required',
@@ -118,8 +118,8 @@ class BrandController extends Controller {
         ], [
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
-            'image.max'        => 'Image max 100KB.',
-            'image.dimensions' => 'Image max size 320x240.',
+            'image.max'        => 'Image max 150KB.',
+            'image.dimensions' => 'Image max size 320x320.',
             'name.required'    => 'Name cannot be empty.',
             'order.required'   => 'Order cannot be empty.',
             'code.required'    => 'Code cannot be empty.',
@@ -178,15 +178,15 @@ class BrandController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'image'  => 'image|mimes:jpg,jpeg,png|max:100|dimensions:max_width=320,max_height=240',
+            'image'  => 'image|mimes:jpg,jpeg,png|max:150|dimensions:max_width=320,max_height=320',
             'code'   => ['required', Rule::unique('brands', 'code')->ignore($id)],
             'name'   => 'required',
             'status' => 'required'
         ], [
             'image.image'      => 'File must be an image.',
             'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
-            'image.max'        => 'Image max 100KB.',
-            'image.dimensions' => 'Image max size 320x240.',
+            'image.max'        => 'Image max 150KB.',
+            'image.dimensions' => 'Image max size 320x320.',
             'name.required'    => 'Name cannot be empty.',
             'order.required'   => 'Order cannot be empty.',
             'code.required'    => 'Code cannot be empty.',

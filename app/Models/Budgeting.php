@@ -14,10 +14,16 @@ class Budgeting extends Model {
     protected $primaryKey = 'id';
     protected $dates      = ['deleted_at'];
     protected $fillable   = [
+		'project_id',
         'coa_id',
         'month',
         'nominal'
     ];
+
+	public function project()
+    {
+        return $this->belongsTo('App\Models\Project'); 
+    }
 
     public function coa()
     {

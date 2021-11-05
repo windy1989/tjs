@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Coa;
 use App\Models\User;
 use App\Models\Journal;
+use App\Models\Project;
+use App\Models\ProjectSale;
+use App\Models\ProjectPurchase;
 use App\Models\CashBank;
 use Illuminate\Http\Request;
 use App\Models\CashBankDetail;
@@ -20,6 +23,7 @@ class CashBankController extends Controller {
     {
         $data = [
             'title'   => 'Cash & Bank',
+			'project' => Project::all(),
             'user'    => User::all(),
             'coa'     => Coa::where('status', 1)->oldest('code')->get(),
             'content' => 'admin.finance.cash_bank'
@@ -72,15 +76,6 @@ class CashBankController extends Controller {
                     $query->whereDate('date', $request->finish_date);
                 }
 
-                if($request->start_nominal && $request->finish_nominal) {
-                    $query->whereDate('nominal', '>=', $request->start_nominal)
-                        ->whereDate('nominal', '<=', $request->finish_nominal);
-                } else if($request->start_nominal) {
-                    $query->whereDate('nominal', $request->start_nominal);
-                } else if($request->finish_nominal) {
-                    $query->whereDate('nominal', $request->finish_nominal);
-                }
-
                 if($request->type) {
                     $query->where('type', $request->type);
                 }
@@ -114,15 +109,6 @@ class CashBankController extends Controller {
                     $query->whereDate('date', $request->finish_date);
                 }
 
-                if($request->start_nominal && $request->finish_nominal) {
-                    $query->whereDate('nominal', '>=', $request->start_nominal)
-                        ->whereDate('nominal', '<=', $request->finish_nominal);
-                } else if($request->start_nominal) {
-                    $query->whereDate('nominal', $request->start_nominal);
-                } else if($request->finish_nominal) {
-                    $query->whereDate('nominal', $request->finish_nominal);
-                }
-
                 if($request->type) {
                     $query->where('type', $request->type);
                 }
@@ -138,10 +124,11 @@ class CashBankController extends Controller {
                     $nomor,
                     $val->user->name,
                     $val->code,
-                    number_format($val->cashBankDetail->sum('nominal'), 2, ',', '.'),
+                    number_format($val->cashBankDetail->where('type','1')->sum('nominal'), 2, ',', '.'),
                     date('d F Y', strtotime($val->date)),
                     $val->description,
                     '
+						<a href="' . url('admin/finance/cash_bank/print/' . $val->id) . '" class="btn bg-success btn-sm" data-popup="tooltip" title="Print"><i class="icon-printer"></i></a>
                         <button type="button" class="btn bg-warning btn-sm" data-popup="tooltip" title="Edit" onclick="show(' . $val->id . ')"><i class="icon-pencil7"></i></button>
                         <button type="button" class="btn bg-danger btn-sm" data-popup="tooltip" title="Delete" onclick="destroy(' . $val->id . ')"><i class="icon-trash-alt"></i></button>
                     '
@@ -180,34 +167,42 @@ class CashBankController extends Controller {
 
     public function rowDetail(Request $request)
     {
-        $data   = CashBankDetail::where('cash_bank_id', $request->id)->get();
-        $string = '<div class="list-feed">';
+        $data   = CashBankDetail::where('cash_bank_id', $request->id)->orderBy('type')->get();
+        $string = '<table class="table table-bordered">
+					<thead class="table-secondary">
+						<tr class="text-center">
+							<th>Coa</th>
+							<th>Debit</th>
+							<th>Kredit</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>';
 
         foreach($data as $d) {
-            $string .= '
-                <div class="list-feed-item">
-                    <div>
-                        <b>[DEBIT]</b>&nbsp;&nbsp;&nbsp;
-                        ' . $d->coaDebit->name . '
-                    </div>
-                    <div>
-                        <b>[CREDIT]</b>&nbsp;&nbsp;&nbsp;
-                        ' . $d->coaCredit->name . '
-                    </div>
-                    <div>
-                        <b>[NOMINAL]</b>&nbsp;&nbsp;&nbsp;
-                        <span class="text-muted">' . number_format($d->nominal, 2, ',', '.') . '</span>
-                    </div>
-                    <div>
-                        <b>[NOTE]</b>&nbsp;&nbsp;&nbsp;
-                        <span class="text-muted">' . $d->note . '</span>
-                    </div>
-                </div>
-            ';
+			if($d->type == '1'){
+				$string .= '
+					<tr>
+						<td>'.$d->coa->name.'</td>
+						<td class="text-center">'.number_format($d->nominal,2,',','.').'</td>
+						<td class="text-center">-</td>
+						<td>'.$d->note.'</td>
+					</tr>
+				';
+			}elseif($d->type == '2'){
+				$string .= '
+					<tr>
+						<td>'.$d->coa->name.'</td>
+						<td class="text-center">-</td>
+						<td class="text-center">'.number_format($d->nominal,2,',','.').'</td>
+						<td>'.$d->note.'</td>
+					</tr>
+				';
+			}
         }
 
-        $string .= '</div>';
-
+        $string .= '</tbody></table>';
+		
         return response()->json($string);
     }
 
@@ -215,8 +210,8 @@ class CashBankController extends Controller {
     {
         $validation = Validator::make($request->all(), [
             'code'           => 'required|unique:cash_banks,code',
-            'debit_detail'   => 'required',
-            'credit_detail'  => 'required',
+            'coa_detail'	 => 'required',
+            'type_detail' 	 => 'required',
             'nominal_detail' => 'required',
             'date'           => 'required',
             'type'           => 'required',
@@ -224,8 +219,8 @@ class CashBankController extends Controller {
         ], [
             'code.required'           => 'Code cannot be a empty.',
             'code.unique'             => 'Code already exists.',
-            'debit_detail.required'   => 'Detail transaction cannot be a empty.',
-            'credit_detail.required'  => 'Detail transaction cannot be a empty.',
+            'coa_detail.required'     => 'Coa transaction cannot be a empty.',
+            'type_detail.required' 	  => 'Type transaction cannot be a empty.',
             'nominal_detail.required' => 'Detail transaction cannot be a empty.',
             'date.required'           => 'Date cannot be empty.',
             'type.required'           => 'Please select a type.',
@@ -239,29 +234,32 @@ class CashBankController extends Controller {
             ];
         } else {
             $query = CashBank::create([
-                'user_id'     => session('bo_id'),
-                'code'        => $request->code,
-                'date'        => $request->date,
-                'type'        => $request->type,
-                'description' => $request->description
+                'user_id'     		=> session('bo_id'),
+				'project_id'  		=> $request->project_id,
+				'project_detail_id'	=> $request->project_detail,
+				'reference'			=> $request->reference,
+                'code'        		=> $request->code,
+                'date'        		=> $request->date,
+                'type'        		=> $request->type,
+                'description' 		=> $request->description
             ]);
 
             if($query) {
-                foreach($request->debit_detail as $key => $dd) {
+                foreach($request->coa_detail as $key => $dd) {
                     CashBankDetail::create([
-                        'cash_bank_id' => $query->id,
-                        'debit'        => $dd,
-                        'credit'       => $request->credit_detail[$key],
-                        'nominal'      => $request->nominal_detail[$key],
-                        'note'         => $request->note_detail[$key]
+                        'cash_bank_id' 	=> $query->id,
+                        'coa_id'       	=> $dd,
+                        'type'       	=> $request->type_detail[$key],
+                        'nominal'      	=> str_replace(',','.',str_replace('.','',$request->nominal_detail[$key])),
+                        'note'         	=> $request->note_detail[$key]
                     ]);
 
                     Journal::insert([
                         'journalable_type' => 'cash_banks',
                         'journalable_id'   => $query->id,
-                        'debit'            => $dd,
-                        'credit'           => $request->credit_detail[$key],
-                        'nominal'          => $request->nominal_detail[$key],
+                        'coa_id'           => $dd,
+                        'type'	           => $request->type_detail[$key],
+                        'nominal'          => str_replace(',','.',str_replace('.','',$request->nominal_detail[$key])),
                         'created_at'       => date('Y-m-d', strtotime($query->date)) . ' ' . date('H:i:s'),
                         'updated_at'       => date('Y-m-d H:i:s')
                     ]);
@@ -295,16 +293,20 @@ class CashBankController extends Controller {
 
         foreach($data->cashBankDetail as $cbd) {
             $cash_bank_detail[] = [
-                'debit_id'    => $cbd->debit,
-                'debit_name'  => '[' . $cbd->coaDebit->code . '] ' . $cbd->coaDebit->name,
-                'credit_id'   => $cbd->credit,
-                'credit_name' => '[' . $cbd->coaCredit->code . '] ' . $cbd->coaCredit->name,
-                'nominal'     => $cbd->nominal,
-                'note'        => $cbd->note
+                'coa_id'    	=> $cbd->coa_id,
+                'coa_info'  	=> '[' . $cbd->coa->code . '] ' . $cbd->coa->name,
+                'type'   		=> $cbd->type,
+                'nominal'     	=> number_format($cbd->nominal,2,',','.'),
+                'note'       	=> $cbd->note
             ];
         }
 
         return response()->json([
+			'project_id'	   => $data->project_id,
+			'reference'		   => $data->reference,
+			'reference_id'	   => $data->project_detail_id,
+			'reference_code'   => $data->reference == '1' ? $data->projectSale->code : ($data->reference == '2' ? $data->projectPurchase->code : ''),
+			'reference_total'  => $data->reference == '1' ? $data->projectSale->getTotal() : ($data->reference == '2' ? $data->projectPurchase->getTotal() : ''),
             'code'             => $data->code,
             'date'             => $data->date,
             'type'             => $data->type,
@@ -316,10 +318,10 @@ class CashBankController extends Controller {
     public function update(Request $request, $id)
     {
         $query      = CashBank::find($id);
-        $validation = Validator::make($request->all(), [
+		$validation = Validator::make($request->all(), [
             'code'           => ['required', Rule::unique('cash_banks', 'code')->ignore($id)],
-            'debit_detail'   => 'required',
-            'credit_detail'  => 'required',
+            'coa_detail'	 => 'required',
+            'type_detail' 	 => 'required',
             'nominal_detail' => 'required',
             'date'           => 'required',
             'type'           => 'required',
@@ -327,8 +329,8 @@ class CashBankController extends Controller {
         ], [
             'code.required'           => 'Code cannot be a empty.',
             'code.unique'             => 'Code already exists.',
-            'debit_detail.required'   => 'Detail transaction cannot be a empty.',
-            'credit_detail.required'  => 'Detail transaction cannot be a empty.',
+            'coa_detail.required'     => 'Coa transaction cannot be a empty.',
+            'type_detail.required' 	  => 'Type transaction cannot be a empty.',
             'nominal_detail.required' => 'Detail transaction cannot be a empty.',
             'date.required'           => 'Date cannot be empty.',
             'type.required'           => 'Please select a type.',
@@ -342,11 +344,14 @@ class CashBankController extends Controller {
             ];
         } else {
             $query->update([
-                'user_id'     => session('bo_id'),
-                'code'        => $request->code,
-                'date'        => $request->date,
-                'type'        => $request->type,
-                'description' => $request->description
+                'user_id'     		=> session('bo_id'),
+				'project_id'  		=> $request->project_id,
+				'project_detail_id'	=> $request->project_detail,
+				'reference'			=> $request->reference,
+                'code'        		=> $request->code,
+                'date'        		=> $request->date,
+                'type'       		=> $request->type,
+                'description' 		=> $request->description
             ]);
 
             if($query) {
@@ -356,21 +361,21 @@ class CashBankController extends Controller {
                     ->where('journalable_id', $query->id)
                     ->delete();
 
-                foreach($request->debit_detail as $key => $dd) {
+                foreach($request->coa_detail as $key => $dd) {
                     CashBankDetail::create([
-                        'cash_bank_id' => $query->id,
-                        'debit'        => $dd,
-                        'credit'       => $request->credit_detail[$key],
-                        'nominal'      => $request->nominal_detail[$key],
-                        'note'         => $request->note_detail[$key]
+                        'cash_bank_id' 	=> $query->id,
+                        'coa_id'       	=> $dd,
+                        'type'       	=> $request->type_detail[$key],
+                        'nominal'      	=> str_replace(',','.',str_replace('.','',$request->nominal_detail[$key])),
+                        'note'         	=> $request->note_detail[$key]
                     ]);
 
                     Journal::insert([
                         'journalable_type' => 'cash_banks',
                         'journalable_id'   => $query->id,
-                        'debit'            => $dd,
-                        'credit'           => $request->credit_detail[$key],
-                        'nominal'          => $request->nominal_detail[$key],
+                        'coa_id'           => $dd,
+                        'type'	           => $request->type_detail[$key],
+                        'nominal'          => str_replace(',','.',str_replace('.','',$request->nominal_detail[$key])),
                         'created_at'       => date('Y-m-d', strtotime($query->date)) . ' ' . date('H:i:s'),
                         'updated_at'       => date('Y-m-d H:i:s')
                     ]);
@@ -394,6 +399,17 @@ class CashBankController extends Controller {
         }
 
         return response()->json($response);
+    }
+	
+	public function print($id)
+    {
+        $data = [
+            'title'     => 'Cash & Bank Print',
+            'cash_bank' => CashBank::find($id),
+            'content'   => 'admin.finance.cash_bank_print'
+        ];
+
+        return view('admin.layouts.index', ['data' => $data]);
     }
 
     public function destroy(Request $request) 
@@ -423,5 +439,26 @@ class CashBankController extends Controller {
 
         return response()->json($response);
     }
-
+	
+	public function getProject(Request $request){
+		$reference = $request->reference;
+		
+		if($reference == '1'){
+			$data = ProjectSale::where('project_id',$request->id)->get();
+		}elseif($reference == '2'){
+			$data = ProjectPurchase::where('project_id',$request->id)->get();
+		}
+		
+		$result = [];
+		
+		foreach($data as $row){
+			$result[] = [
+				'id'	=> $row->id,
+				'code' 	=> $row->code,
+				'total'	=> $row->getTotal()
+			];
+		}
+		
+		return response()->json($result);
+	}
 }

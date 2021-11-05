@@ -41,7 +41,9 @@ class CodeController extends Controller {
         $column = [
             'id',
             'shading',
+			'code',
             'name',
+			'check',
             'stock',
             'status'
         ];
@@ -109,6 +111,10 @@ class CodeController extends Controller {
                     }
                 }
 
+				if($request->check) {
+                    $query->where('check', $request->check);
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -174,6 +180,10 @@ class CodeController extends Controller {
                     }
                 }
 
+				if($request->check) {
+                    $query->where('check', $request->check);
+                }
+
                 if($request->status) {
                     $query->where('status', $request->status);
                 }
@@ -198,8 +208,10 @@ class CodeController extends Controller {
                 $response['data'][] = [
                     $nomor,
                     $shading,
+					$val->code(),
                     $val->name(),
                     $availability,
+					$val->check(),
                     $val->status(),
                     '
                         <a href="' . url('admin/master_data/product/product_code/detail/' . $val->id) . '" class="btn bg-info btn-sm" data-popup="tooltip" title="Detail"><i class="icon-info22"></i></a>
@@ -336,15 +348,18 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
-                            'per_page'  => 1000
+							'per_page'	=> 1000
                         ]));
 
                         if($stock->result->total_data > 0) {
                             foreach($stock->result->data as $s) {
-                                $total_stock += $s->stok;
+								$kodeitem = trim($s->kode_item);
+								if($kodeitem == $request->shading_stock_code[$key] && $s->kode_gudang == $swc){
+									$total_stock += $s->stok;
+								}
                             }
 
                             ProductShading::create([
@@ -411,6 +426,7 @@ class CodeController extends Controller {
             'container_stock'     => $data->container_stock,
             'container_max_stock' => $data->container_max_stock,
             'description'         => $data->description,
+			'check'               => $data->check,
             'status'              => $data->status,
             'shading'             => $shading
         ]);
@@ -466,6 +482,7 @@ class CodeController extends Controller {
                 'container_stock'     => $request->container_stock,
                 'container_max_stock' => $request->container_max_stock,
                 'description'         => $request->description,
+				'check'               => $request->check,
                 'status'              => $request->status
             ]);
 
@@ -474,15 +491,18 @@ class CodeController extends Controller {
                 if($request->shading_warehouse_code) {
                     foreach($request->shading_warehouse_code as $key => $swc) {
                         $total_stock = 0;
-                        $stock       = json_decode(Http::retry(3, 100)->post('http://203.161.31.109/ventura/item/stock', [
+                        $stock       = json_decode(Http::retry(3, 100)->post(env('VENTURA') . 'ventura/item/stock', [
                             'kode_item' => $request->shading_stock_code[$key],
                             'gudang'    => $swc,
-                            'per_page'  => 1000
+                            'per_page'  => 4000
                         ]));
 
                         if($stock->result->total_data > 0) {
                             foreach($stock->result->data as $s) {
-                                $total_stock += $s->stok;
+								$kodeitem = trim($s->kode_item);
+								if($kodeitem == $request->shading_stock_code[$key] && $s->kode_gudang == $swc){
+									$total_stock += $s->stok;
+								}
                             }
 
                             ProductShading::create([

@@ -13,36 +13,67 @@ class ProjectSample extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'project_id',
-        'product_id',
-        'date',
-        'qty',
-		'unit',
-        'size'
+        'code',
+		'sent_date',
+		'return_date',
+		'note',
+		'status',
+        'approved_by_1',
+        'approved_by_2',
+		'returned_at'
     ];
 
-	public function unit()
+	public function approved_1()
     {
-        switch($this->unit) {
+        return $this->belongsTo('App\Models\User', 'approved_by_1', 'id');
+    }
+	
+	public function approved_2()
+    {
+        return $this->belongsTo('App\Models\User', 'approved_by_2', 'id');
+    }
+	
+    public function projectSampleProduct()
+    {
+        return $this->hasMany('App\Models\ProjectSampleProduct');
+    }
+	
+	public function project()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id', 'id');
+    }
+	
+	public function status()
+    {
+        switch($this->status) {
             case '1':
-                $unit = 'Pcs';
+                $check = 'On Customer';
                 break;
             case '2':
-                $unit = 'Box';
-                break;
-            case '3':
-                $unit = 'Meter';
+                $check = 'Returned';
                 break;
             default:
-                $unit = 'Invalid';
+                $check = 'Invalid';
                 break;
         }
 
-        return $unit;
+        return $check;
     }
 	
-    public function product()
+	public static function generateCode()
     {
-        return $this->belongsTo('App\Models\Product');
-    }
+        $query = ProjectSample::selectRaw("RIGHT(code, 6) as code")
+            ->orderByRaw('RIGHT(code, 6) DESC')
+            ->limit(1)
+            ->get();
 
+        if($query->count() > 0) {
+            $number = (int)$query[0]->code + 1;
+        } else {
+            $number = '0001';
+        }
+
+        $code = str_pad($number, 6, 0, STR_PAD_LEFT);
+        return 'SPO/' . date('y') . '/' . date('m') . '/' . date('d') . '/' . $code;
+    }
 }

@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+		Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

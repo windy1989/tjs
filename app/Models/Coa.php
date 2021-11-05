@@ -51,12 +51,12 @@ class Coa extends Model {
 
     public function journalDebit()
     {
-        return $this->hasMany('App\Models\Journal', 'debit', 'id');
+        return $this->hasMany('App\Models\Journal');
     }
 
     public function journalCredit()
     {
-        return $this->hasMany('App\Models\Journal', 'credit', 'id');
+        return $this->hasMany('App\Models\Journal');
     }
 
     public function budgeting()
@@ -64,4 +64,14 @@ class Coa extends Model {
         return $this->hasMany('App\Models\Budgeting');
     }
 
+	public function checkBudget($month)
+	{
+		$query = Budgeting::where('coa_id',$this->id)->where('month',$month)->first();
+		
+		if($query){
+			return number_format($query->nominal,2,',','.');
+		}else{
+			return 0;
+		}
+	}
 }

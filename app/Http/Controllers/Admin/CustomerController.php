@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Exports\CustomersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -287,5 +290,44 @@ class CustomerController extends Controller {
         }
 
         return response()->json($response);
+    }
+	
+	public function export(Request $request){
+		$search = $request->search ? $request->search : '';
+		$numrow = $request->numrow;
+		$start = $request->start;
+		$type = $request->type ? $request->type : '';
+		
+		return Excel::download(new CustomersExport($search, $numrow, $start, $type), 'customers.xlsx');
+	}
+	
+	public function print(Request $request)
+    {
+		$search = $request->search ? $request->search : '';
+		$numrow = $request->numrow;
+		$start = $request->start;
+		$type = $request->type ? $request->type : '';
+		
+		$customer = Customer::where('name','like','%'.$search.'%')
+				->where('type','like','%'.$type.'%')
+				->offset($start)
+				->limit($numrow)
+				->get();
+
+		if(!$customer) {
+			abort(404);
+		}
+		
+		$pdf = PDF::loadView('admin.pdf.master_data.customer', [
+				'customer' => $customer
+			],
+			[],
+			[ 
+			  'format' => 'A4-P',
+			  'orientation' => 'P'
+			]
+		);
+
+        return $pdf->stream('customer_report.pdf');
     }
 }

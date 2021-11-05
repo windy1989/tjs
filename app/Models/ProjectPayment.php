@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectPayment extends Model {
 
@@ -13,6 +14,7 @@ class ProjectPayment extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'project_id',
+		'project_purchase_id',
         'image',
         'date',
         'nominal',
@@ -20,35 +22,16 @@ class ProjectPayment extends Model {
         'status'
     ];
 
-    public function bank() 
+	public function projectPurchase()
     {
-        switch($this->bank) {
-            case '1':
-                $bank = 'BCA';
-                break;
-            case '2':
-                $bank = 'Mandiri';
-                break;
-            case '3':
-                $bank = 'OCBC';
-                break;
-            case '4':
-                $bank = 'BRI';
-                break;
-            case '5':
-                $bank = 'Danamon';
-                break;
-            case '6':
-                $bank = 'Bukopin';
-                break;
-            default:
-                $bank = 'Invalid';
-                break;
-        }
-
-        return $bank;
+        return $this->belongsTo('App\Models\ProjectPurchase', 'project_purchase_id', 'id');
     }
-
+	
+	public function coa()
+    {
+        return $this->belongsTo('App\Models\Coa','bank','id');
+    }
+	
     public function status() 
     {
         switch($this->status) {
@@ -59,11 +42,21 @@ class ProjectPayment extends Model {
                 $status = 'Full Payment';
                 break;
             default:
-                $status = 'Invalid';
+                $status = 'Other';
                 break;
         }
 
         return $status;
     }
+	
+	public function attachment() 
+    {
+        if(Storage::exists($this->image)) {
+            $attachment = asset(Storage::url($this->image));
+        } else {
+            $attachment = asset('website/empty.jpg');
+        }
 
+        return $attachment;
+    }
 }

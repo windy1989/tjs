@@ -70,6 +70,13 @@ Route::prefix('checkout')->group(function() {
     });
 });
 
+Route::prefix('project')->namespace('Admin')->group(function() {
+    Route::prefix('tracking')->group(function() {
+		Route::get('shipment/{id}/{code}', 'ProjectController@trackingShipment');
+		Route::get('delivery/{id}/{code}', 'ProjectController@trackingDelivery');
+    });
+});
+
 Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::match(['get', 'post'], 'login', 'AuthController@login');
     Route::get('verification', 'AuthController@verification');
@@ -78,6 +85,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
     Route::middleware('admin.login')->group(function() {
         Route::match(['get', 'post'], 'profile', 'AuthController@profile');
+		Route::post('profile/uploadSign', 'AuthController@uploadSign');
         Route::match(['get', 'post'], 'my_activity', 'AuthController@myActivity');
         Route::get('logout', 'AuthController@logout');
         
@@ -87,6 +95,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
         Route::prefix('notification')->group(function() {
             Route::get('/', 'NotificationController@index');
+			Route::get('datatable', 'NotificationController@datatable');
         });
 
         Route::prefix('approval')->group(function() {
@@ -98,11 +107,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         Route::prefix('select2')->group(function() {
             Route::get('type', 'Select2Controller@type');
             Route::get('product', 'Select2Controller@product');
+			Route::get('user', 'Select2Controller@user');
 			Route::get('warehouse', 'Select2Controller@warehouse');
+			Route::get('supplier', 'Select2Controller@supplier');
+			Route::get('customer', 'Select2Controller@customer');
+			Route::get('city', 'Select2Controller@city');
+			Route::get('country', 'Select2Controller@country');
+			Route::get('currency', 'Select2Controller@currency');
+			Route::get('vendor', 'Select2Controller@vendor');
         });
 
         Route::prefix('master_data')->group(function() {
-            Route::prefix('product')->group(function() {
+            Route::prefix('product')->middleware('admin.role:1|2|10')->group(function() {
                 Route::prefix('company')->group(function() {
                     Route::get('/', 'CompanyController@index');
                     Route::get('datatable', 'CompanyController@datatable');
@@ -246,6 +262,8 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::prefix('stock')->group(function() {
                     Route::get('/', 'StockController@index');
                     Route::get('datatable', 'StockController@datatable');
+					Route::get('export','StockController@export');
+					Route::get('print','StockController@print');
                 });
 
                 Route::prefix('product_type')->group(function() {
@@ -271,7 +289,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 });
             });
 
-            Route::prefix('cogs_master')->group(function() {
+            Route::prefix('cogs_master')->middleware('admin.role:1|2|3|4')->group(function() {
                 Route::prefix('buy_exchange_rate')->group(function() {
                     Route::get('/', 'CurrencyRateController@index');
                     Route::get('datatable', 'CurrencyRateController@datatable');
@@ -364,7 +382,16 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 });
             });
 
-            Route::prefix('delivery')->group(function() {
+            Route::prefix('delivery')->middleware('admin.role:1|2|5|6|9|10|11')->group(function() {
+				Route::prefix('dropshipper')->group(function() {
+                    Route::get('/', 'DropshipperController@index');
+                    Route::get('datatable', 'DropshipperController@datatable');
+                    Route::post('create', 'DropshipperController@create');
+                    Route::get('show', 'DropshipperController@show');
+                    Route::post('update/{id}', 'DropshipperController@update');
+                    Route::post('destroy', 'DropshipperController@destroy');
+                });
+				
                 Route::prefix('delivery_company')->group(function() {
                     Route::get('/', 'VendorController@index');
                     Route::get('datatable', 'VendorController@datatable');
@@ -393,27 +420,21 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 });
             });
 
-            Route::prefix('finance_accounting')->group(function() {
+            Route::prefix('finance_accounting')->middleware('admin.role:1|2|3|4')->group(function() {
                 Route::prefix('coa')->group(function() {
                     Route::get('/', 'CoaController@index');
                     Route::get('datatable', 'CoaController@datatable');
                     Route::post('create', 'CoaController@create');
+					Route::get('show', 'CoaController@show');
                     Route::post('show', 'CoaController@show');
                     Route::post('update/{id}', 'CoaController@update');
                     Route::post('destroy', 'CoaController@destroy');
-                });
-
-                Route::prefix('list_of_bank')->group(function() {
-                    Route::get('/', 'BankController@index');
-                    Route::get('datatable', 'BankController@datatable');
-                    Route::post('create', 'BankController@create');
-                    Route::post('show', 'BankController@show');
-                    Route::post('update/{id}', 'BankController@update');
-                    Route::post('destroy', 'BankController@destroy');
+					Route::get('export','CoaController@export');
+					Route::get('print','CoaController@print');
                 });
             });
 
-            Route::prefix('digital')->group(function() {
+            Route::prefix('digital')->middleware('admin.role:1|2|5|8')->group(function() {
                 Route::prefix('banner')->group(function() {
                     Route::get('/', 'BannerController@index');
                     Route::get('datatable', 'BannerController@datatable');
@@ -451,7 +472,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 });
             });
 
-            Route::prefix('voucher')->group(function() {
+            Route::prefix('voucher')->middleware('admin.role:1|2|5')->group(function() {
                 Route::prefix('brand')->group(function() {
                     Route::get('/', 'VoucherBrandController@index');
                     Route::get('datatable', 'VoucherBrandController@datatable');
@@ -480,26 +501,46 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 });
             });
 
-            Route::prefix('customer')->group(function() {
+            Route::prefix('customer')->middleware('admin.role:1|2|5')->group(function() {
                 Route::get('/', 'CustomerController@index');
                 Route::get('datatable', 'CustomerController@datatable');
                 Route::post('create', 'CustomerController@create');
                 Route::post('show', 'CustomerController@show');
                 Route::post('update/{id}', 'CustomerController@update');
                 Route::post('destroy', 'CustomerController@destroy');
+				Route::get('export','CustomerController@export');
+				Route::get('print','CustomerController@print');
             });
         });
 
-        Route::prefix('sales')->group(function() {
+        Route::prefix('sales')->middleware('admin.role:1|2|5|6')->group(function() {
             Route::prefix('project')->group(function() {
                 Route::get('/', 'ProjectController@index');
                 Route::get('datatable', 'ProjectController@datatable');
                 Route::post('create', 'ProjectController@create');
+				Route::post('approval', 'ProjectController@approval');
                 Route::get('get_product', 'ProjectController@getProduct');
                 Route::get('get_delivery', 'ProjectController@getDelivery');
                 Route::get('print/{param}/{id}', 'ProjectController@print');
                 Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
                 Route::get('detail/{id}', 'ProjectController@detail');
+				Route::get('get_sales_product', 'ProjectController@getSalesProduct');
+				Route::get('get_sales_info', 'ProjectController@getSalesInfo');
+				Route::get('get_shipment_info', 'ProjectController@getShipmentInfo');
+				Route::get('get_shipment_product', 'ProjectController@getShipmentProduct');
+				Route::get('get_purchase_info', 'ProjectController@getPurchaseInfo');
+				Route::get('get_supplier_currency', 'ProjectController@getSupplierCurrency');
+				Route::get('get_purchase_product', 'ProjectController@getPurchaseProduct');
+				Route::get('get_shading_product', 'ProjectController@getShadingProduct');
+				Route::post('update_status_sample', 'ProjectController@updateStatusSample');
+				Route::post('skip_form', 'ProjectController@skipForm');
+				Route::post('add_shipment_tracking','ProjectController@addShipmentTracking');
+				Route::post('delete_shipment_tracking','ProjectController@deleteShipmentTracking');
+				Route::get('get_tracking_shipment','ProjectController@getShipmentTracking');
+				Route::get('get_tracking_delivery','ProjectController@getDeliveryTracking');
+				Route::get('getShadingFromVentura','ProjectController@getShadingVentura');
+				Route::post('add_delivery_tracking','ProjectController@addDeliveryTracking');
+				Route::post('delete_delivery_tracking','ProjectController@deleteDeliveryTracking');
             });
 
             Route::prefix('retail')->group(function() {
@@ -509,7 +550,36 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
-        Route::prefix('invoice')->group(function() {
+        Route::prefix('invoice')->middleware('admin.role:1|2|5|6|7|10')->group(function() {
+			Route::prefix('project')->group(function() {
+                Route::get('/', 'ProjectController@index');
+                Route::get('datatable', 'ProjectController@datatable');
+                Route::post('create', 'ProjectController@create');
+				Route::post('approval', 'ProjectController@approval');
+                Route::get('get_product', 'ProjectController@getProduct');
+                Route::get('get_delivery', 'ProjectController@getDelivery');
+                Route::get('print/{param}/{id}', 'ProjectController@print');
+                Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
+                Route::get('detail/{id}', 'ProjectController@detail');
+				Route::get('get_sales_product', 'ProjectController@getSalesProduct');
+				Route::get('get_sales_info', 'ProjectController@getSalesInfo');
+				Route::get('get_shipment_info', 'ProjectController@getShipmentInfo');
+				Route::get('get_shipment_product', 'ProjectController@getShipmentProduct');
+				Route::get('get_purchase_info', 'ProjectController@getPurchaseInfo');
+				Route::get('get_supplier_currency', 'ProjectController@getSupplierCurrency');
+				Route::get('get_purchase_product', 'ProjectController@getPurchaseProduct');
+				Route::get('get_shading_product', 'ProjectController@getShadingProduct');
+				Route::post('update_status_sample', 'ProjectController@updateStatusSample');
+				Route::post('skip_form', 'ProjectController@skipForm');
+				Route::post('add_shipment_tracking','ProjectController@addShipmentTracking');
+				Route::post('delete_shipment_tracking','ProjectController@deleteShipmentTracking');
+				Route::get('get_tracking_shipment','ProjectController@getShipmentTracking');
+				Route::get('get_tracking_delivery','ProjectController@getDeliveryTracking');
+				Route::get('getShadingFromVentura','ProjectController@getShadingVentura');
+				Route::post('add_delivery_tracking','ProjectController@addDeliveryTracking');
+				Route::post('delete_delivery_tracking','ProjectController@deleteDeliveryTracking');
+            });
+			
             Route::prefix('retail')->group(function() {
                 Route::get('/', 'OrderInvoiceController@index');
                 Route::get('datatable', 'OrderInvoiceController@datatable');
@@ -518,7 +588,37 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
-        Route::prefix('purchase_order')->group(function() {
+        Route::prefix('purchase_order')->middleware('admin.role:1|2|7|9|11')->group(function() {
+			Route::prefix('project')->group(function() {
+                Route::get('/', 'ProjectController@index');
+                Route::get('datatable', 'ProjectController@datatable');
+                Route::post('create', 'ProjectController@create');
+				Route::post('approval', 'ProjectController@approval');
+                Route::get('get_product', 'ProjectController@getProduct');
+                Route::get('get_delivery', 'ProjectController@getDelivery');
+                Route::get('print/{param}/{id}', 'ProjectController@print');
+                Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
+                Route::get('detail/{id}', 'ProjectController@detail');
+				Route::get('get_sales_product', 'ProjectController@getSalesProduct');
+				Route::get('get_sales_info', 'ProjectController@getSalesInfo');
+				Route::get('get_shipment_info', 'ProjectController@getShipmentInfo');
+				Route::get('get_shipment_product', 'ProjectController@getShipmentProduct');
+				Route::get('get_purchase_info', 'ProjectController@getPurchaseInfo');
+				Route::get('get_supplier_currency', 'ProjectController@getSupplierCurrency');
+				Route::get('get_purchase_product', 'ProjectController@getPurchaseProduct');
+				Route::get('get_shading_product', 'ProjectController@getShadingProduct');
+				Route::post('update_status_sample', 'ProjectController@updateStatusSample');
+				Route::post('skip_form', 'ProjectController@skipForm');
+				Route::post('add_shipment_tracking','ProjectController@addShipmentTracking');
+				Route::post('delete_shipment_tracking','ProjectController@deleteShipmentTracking');
+				Route::get('get_tracking_shipment','ProjectController@getShipmentTracking');
+				Route::get('get_tracking_delivery','ProjectController@getDeliveryTracking');
+				Route::get('getShadingFromVentura','ProjectController@getShadingVentura');
+				Route::post('add_delivery_tracking','ProjectController@addDeliveryTracking');
+				Route::post('delete_delivery_tracking','ProjectController@deleteDeliveryTracking');
+				Route::post('email_tracking_shipment','ProjectController@emailTrackingShipment');
+            });
+			
             Route::prefix('retail')->group(function() {
                 Route::get('/', 'OrderPoController@index');
                 Route::get('datatable', 'OrderPoController@datatable');
@@ -527,7 +627,37 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
-        Route::prefix('delivery_order')->group(function() {
+        Route::prefix('delivery_order')->middleware('admin.role:1|2|10|11')->group(function() {
+			Route::prefix('project')->group(function() {
+                Route::get('/', 'ProjectController@index');
+                Route::get('datatable', 'ProjectController@datatable');
+                Route::post('create', 'ProjectController@create');
+				Route::post('approval', 'ProjectController@approval');
+                Route::get('get_product', 'ProjectController@getProduct');
+                Route::get('get_delivery', 'ProjectController@getDelivery');
+                Route::get('print/{param}/{id}', 'ProjectController@print');
+                Route::match(['get', 'post'], 'progress/{id}', 'ProjectController@progress');
+                Route::get('detail/{id}', 'ProjectController@detail');
+				Route::get('get_sales_product', 'ProjectController@getSalesProduct');
+				Route::get('get_sales_info', 'ProjectController@getSalesInfo');
+				Route::get('get_shipment_info', 'ProjectController@getShipmentInfo');
+				Route::get('get_shipment_product', 'ProjectController@getShipmentProduct');
+				Route::get('get_purchase_info', 'ProjectController@getPurchaseInfo');
+				Route::get('get_supplier_currency', 'ProjectController@getSupplierCurrency');
+				Route::get('get_purchase_product', 'ProjectController@getPurchaseProduct');
+				Route::get('get_shading_product', 'ProjectController@getShadingProduct');
+				Route::post('update_status_sample', 'ProjectController@updateStatusSample');
+				Route::post('skip_form', 'ProjectController@skipForm');
+				Route::post('add_shipment_tracking','ProjectController@addShipmentTracking');
+				Route::post('delete_shipment_tracking','ProjectController@deleteShipmentTracking');
+				Route::get('get_tracking_shipment','ProjectController@getShipmentTracking');
+				Route::get('get_tracking_delivery','ProjectController@getDeliveryTracking');
+				Route::get('getShadingFromVentura','ProjectController@getShadingVentura');
+				Route::post('add_delivery_tracking','ProjectController@addDeliveryTracking');
+				Route::post('delete_delivery_tracking','ProjectController@deleteDeliveryTracking');
+				Route::post('email_tracking_delivery','ProjectController@emailTrackingDelivery');
+            });
+			
             Route::prefix('retail')->group(function() {
                 Route::get('/', 'OrderDoController@index');
                 Route::get('datatable', 'OrderDoController@datatable');
@@ -536,7 +666,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
             });
         });
 
-        Route::prefix('finance')->group(function() {
+        Route::prefix('finance')->middleware('admin.role:1|2|3|4')->group(function() {
             Route::prefix('cash_bank')->group(function() {
                 Route::get('/', 'CashBankController@index');
                 Route::get('suggest_code', 'CashBankController@suggestCode');
@@ -544,15 +674,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                 Route::get('datatable', 'CashBankController@datatable');
                 Route::post('create', 'CashBankController@create');
                 Route::get('show', 'CashBankController@show');
+				Route::get('project', 'CashBankController@getProject');
                 Route::post('update/{id}', 'CashBankController@update');
+				Route::get('print/{id}', 'CashBankController@print');
                 Route::post('destroy', 'CashBankController@destroy');
             });
         });
 
-        Route::prefix('accounting')->group(function() {
+        Route::prefix('accounting')->middleware('admin.role:1|2|3|4')->group(function() {
             Route::prefix('budgeting')->group(function() {
                 Route::get('/', 'BudgetingController@index');
                 Route::get('datatable', 'BudgetingController@datatable');
+				Route::match(['get', 'post'], 'yearly', 'BudgetingController@yearly');
                 Route::post('create', 'BudgetingController@create');
                 Route::get('show', 'BudgetingController@show');
                 Route::post('update/{id}', 'BudgetingController@update');
@@ -561,9 +694,55 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
         });
 
         Route::prefix('report')->group(function() {
-            Route::prefix('accounting')->group(function() {
+			Route::prefix('project')->middleware('admin.role:1')->group(function() {
+                Route::get('/', 'ReportProjectController@index');
+                Route::get('datatable', 'ReportProjectController@datatable');
+				Route::post('create', 'ReportProjectController@create');
+				Route::post('approval', 'ReportProjectController@approval');
+                Route::get('get_product', 'ReportProjectController@getProduct');
+                Route::get('get_delivery', 'ReportProjectController@getDelivery');
+				Route::get('print/{param}/{id}', 'ReportProjectController@print');
+				Route::match(['get', 'post'], 'progress/{id}', 'ReportProjectController@progress');
+				Route::get('detail/{id}', 'ReportProjectController@detail');
+				Route::get('get_sales_product', 'ReportProjectController@getSalesProduct');
+				Route::get('get_sales_info', 'ReportProjectController@getSalesInfo');
+				Route::get('get_shipment_info', 'ReportProjectController@getShipmentInfo');
+				Route::get('get_shipment_product', 'ReportProjectController@getShipmentProduct');
+				Route::get('get_purchase_info', 'ReportProjectController@getPurchaseInfo');
+				Route::get('get_supplier_currency', 'ReportProjectController@getSupplierCurrency');
+				Route::get('get_purchase_product', 'ReportProjectController@getPurchaseProduct');
+				Route::get('get_shading_product', 'ReportProjectController@getShadingProduct');
+				Route::post('update_status_sample', 'ReportProjectController@updateStatusSample');
+				Route::post('skip_form', 'ReportProjectController@skipForm');
+				Route::post('add_shipment_tracking','ReportProjectController@addShipmentTracking');
+				Route::post('delete_shipment_tracking','ReportProjectController@deleteShipmentTracking');
+				Route::get('get_tracking_shipment','ReportProjectController@getShipmentTracking');
+				Route::get('get_tracking_delivery','ReportProjectController@getDeliveryTracking');
+				Route::get('getShadingFromVentura','ReportProjectController@getShadingVentura');
+				Route::post('add_delivery_tracking','ReportProjectController@addDeliveryTracking');
+				Route::post('delete_delivery_tracking','ReportProjectController@deleteDeliveryTracking');
+            });
+			
+			Route::prefix('finance')->middleware('admin.role:1|2|3|4')->group(function() {
+				Route::prefix('outstanding_a_r')->group(function() {
+                    Route::get('/', 'ReportAccountingController@outstandingAR');
+                });
+				Route::prefix('outstanding_a_p')->group(function() {
+                    Route::get('/', 'ReportAccountingController@outstandingAP');
+                });
+			});
+			
+            Route::prefix('accounting')->middleware('admin.role:1|2|3|4')->group(function() {
                 Route::prefix('balance_sheet')->group(function() {
                     Route::get('/', 'ReportAccountingController@balanceSheet');
+                });
+				
+				Route::prefix('aging_receivable')->group(function() {
+                    Route::get('/', 'ReportAccountingController@agingReceivable');
+                });
+				
+				Route::prefix('aging_payable')->group(function() {
+                    Route::get('/', 'ReportAccountingController@agingPayable');
                 });
 
                 Route::prefix('profit_loss')->group(function() {
@@ -580,12 +759,22 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
                     Route::get('/', 'ReportAccountingController@trialBalance');
                     Route::get('datatable', 'ReportAccountingController@trialBalanceDatatable');
                 });
+				
+				Route::prefix('cash_bank')->group(function() {
+                    Route::get('/', 'ReportAccountingController@cashBank');
+                    Route::post('detail', 'ReportAccountingController@cashBankDetail');
+                    Route::post('upload_file', 'ReportAccountingController@cashBankUploadFile');
+                });
             });
         });
 
-        Route::prefix('hrd')->group(function() {
+        Route::prefix('hrd')->middleware('admin.role:1|2|14')->group(function() {
             Route::prefix('job_desc')->group(function() {
                 Route::get('/', 'JobDescController@index');
+            });
+			
+			Route::prefix('employee')->group(function() {
+                Route::get('/', 'EmployeeController@index');
             });
         });
 

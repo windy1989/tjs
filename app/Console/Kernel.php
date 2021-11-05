@@ -25,9 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->command('queue:work --stop-when-empty')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
+        #$schedule->command('warehouse:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        #$schedule->command('stock:sync')->everyFiveMinutes()->withoutOverlapping()->runInBackground();
+        #$schedule->command('queue:work --stop-when-empty')->everyTwoMinutes()->withoutOverlapping()->runInBackground();
     }
 
     /**

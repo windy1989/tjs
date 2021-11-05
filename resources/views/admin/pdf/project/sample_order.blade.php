@@ -5,6 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Sample Order {{ $project->code }}</title>
 		<style>
+			body {
+				font-family: 'Lato', sans-serif;
+			}
+			
+			th {
+				font-size:14px;
+			}
+			
 			.invoice-box {
 				font-size: 16px;
 				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -34,8 +42,8 @@
 			}
 
 			.invoice-box table tr.heading td {
-				background: #1a73e8;
-				border-bottom: 1px solid #1a73e8;
+				background: #eb3c28;
+				border-bottom: 1px solid #eb3c28;
 				color: white;
 				font-weight: bold;
 			}
@@ -90,23 +98,25 @@
 	</head>
 	<body>
 		<div class="invoice-box">
-			<h3 style="text-align:right;">PT. PERWIRA TAMARAYA ABADI</h3>
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
 					<td colspan="2">
 						<table>
 							<tr>
-								<td class="title">
-									<img src="{{ asset('website/logo-black.png') }}" width="150">
+								<td class="title" rowspan="2">
+									<img src="{{ asset('website/logo-black.png') }}" width="275">
 								</td>
-								<td>
+								<td colspan="2" style="text-align:right;"><h3><img src="website/pta_small.png" height="13px" style="margin-right:5px;">PT. PERWIRA TAMARAYA ABADI</h3></td>
+							</tr>
+							<tr>
+								<td style="padding-right:25px;">
 									<div style="font-size:9px; font-weight:bold;">JAGAT BUILDING</div>
 									<div style="font-size:9px; font-weight:500;">St. Tomang Raya No 28 - 30</div>
 									<div style="font-size:9px; font-weight:500;">Jakarta 11430</div>
 									<div style="font-size:9px; font-weight:500;">Phone : 0811257180 / 081225575295</div>
 									<div style="font-size:9px; font-weight:500;">Email : infojkt@smartmarbleandbath.com</div>
 								</td>
-								<td style="text-align:right;">
+								<td style="border-left: 3px solid #51b6bc; text-align:right;">
 									<div style="font-size:9px; font-weight:bold;">MODERN CERAMIC</div>
 									<div style="font-size:9px; font-weight:500;">St. Baliwerti 119 - 121</div>
 									<div style="font-size:9px; font-weight:500;">Surabaya, Jawa Timur 60174</div>
@@ -120,18 +130,10 @@
 			</table>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td colspan="2">
-						<table>
-							<tr>
-								@foreach($brand as $b)
-									<td>
-										<center>
-											<img src="{{ asset(Storage::url($b->image)) }}" width="200px">
-										</center>
-									</td>
-								@endforeach
-							</tr>
-						</table>
+					<td colspan="2" style="vertical-align: middle;padding-top:15px;padding-bottom:15px;">
+						<center>
+							<img src="website/kop_brand_report.png" width="100%">
+						</center>
 					</td>
 				</tr>
 			</table>
@@ -139,9 +141,9 @@
 				<tr>
 					<td colspan="2">
 						<table>
-							<tr>
-								<td style="text-align:center;">
-									<h4><b>SAMPLE ORDER</b></h4>
+							<tr style="background-color:#eb3c28;">
+								<td style="text-align:center;color:white;padding-top:10px;padding-bottom:10px;">
+									<h3><b>SAMPLE ORDER</b></h3>
 								</td>
 							</tr>
 						</table>
@@ -153,28 +155,40 @@
 					<td colspan="2">
 						<table width="100%">
 							<tr style="line-height:0 !important;">
-								<td width="20%" style="font-size:10px;">ATTENTION</td>
-								<td style="text-align:left; font-size:10px;">: {{ strtoupper($project->customer->name) }}</td>
+								<td width="20%" style="font-size:12px;">ATTENTION</td>
+								<td style="text-align:left; font-size:12px;">: {{ strtoupper($project->project->customer->name) }}</td>
 								<td></td>
 								<td></td>
-								<td width="20%" style="font-size:10px;">DATE</td>
-								<td style="text-align:left; font-size:10px;">: {{ date('d F Y', strtotime($project->created_at)) }}</td>
+								<td width="20%" style="font-size:12px;">PROJECT NUMBER</td>
+								<td style="text-align:left; font-size:12px;">: {{ $project->project->code }}</td>
 							</tr>
 							<tr style="line-height:0 !important;">
-								<td width="20%" style="font-size:10px;">PROJECT NAME</td>
-								<td style="text-align:left; font-size:10px;">: {{ $project->name }}</td>
+								<td width="20%" style="font-size:12px;">PROJECT NAME</td>
+								<td style="text-align:left; font-size:12px;">: {{ $project->project->name }}</td>
 								<td></td>
 								<td></td>
-								<td width="20%" style="font-size:10px;">PROJECT NO</td>
-								<td style="text-align:left; font-size:10px;">: {{ $project->code }}</td>
+								<td width="20%" style="font-size:12px;">SAMPLE NUMBER</td>
+								<td style="text-align:left; font-size:12px;">: {{ $project->code }}</td>
 							</tr>
 							<tr style="line-height:0 !important;">
-								<td width="20%" style="font-size:10px;">CITY</td>
-								<td style="text-align:left; font-size:10px;">: {{ $project->city->name }}</td>
+								<td width="20%" style="font-size:12px;">CITY</td>
+								<td style="text-align:left; font-size:12px;">: {{ $project->project->city->name }}</td>
 								<td></td>
 								<td></td>
+								<td width="20%" style="font-size:12px;">STATUS</td>
+								<td style="text-align:left; font-size:12px;">: {!! $project->status() !!}</td>
+							</tr>
+							<tr style="line-height:0 !important;">
+								<td width="20%" style="font-size:12px;">DATE</td>
+								<td style="text-align:left; font-size:12px;">: {{ date('d F Y', strtotime($project->sent_date)).' to '.date('d F Y', strtotime($project->return_date)) }}</td>
 								<td></td>
 								<td></td>
+								<td width="20%" style="font-size:12px;">
+									{{ $project->status == '2' ? 'DATE RETURNED' : '' }}
+								</td>
+								<td style="text-align:left; font-size:12px;">
+									{{ $project->status == '2' ? ': '.$project->returned_at : '' }}
+								</td>
 							</tr>
 						</table>
 					</td>
@@ -182,7 +196,7 @@
 				<tr><td colspan="2"></td></tr>
 				<tr>
 					<td colspan="2">
-						<!-- <p style="font-size:10px;">Dear mr. {{ $project->customer->name }}<br>
+						<!-- <p style="font-size:10px;">Dear mr. {{ $project->project->customer->name }}<br>
 						We are delighted to provide a price offer for this exciting project . The quotation and details are as follow :</p> -->
 					</td>
 				</tr>
@@ -190,29 +204,18 @@
 			
 			<table border="1" cellpadding="5" cellspacing="0" style="width:100%; font-size:10px;">
 				<thead>
-					<tr style="background:#1a73e8;text-align:center;">
-						<th style="color:white;" rowspan="2"><center>NO</center></th>
-						<th style="color:white;" rowspan="2"><center>CODE</center></th>
-						<th style="color:white;" rowspan="2"><center>NAME</center></th>
-						<th style="color:white;" rowspan="2"><center>PICTURE</center></th>
-						<th style="color:white;" rowspan="2"><center>BRAND</center></th>
-						<th style="color:white;" rowspan="2"><center>SIZE(cm)</center></th>
-						<th style="color:white;" rowspan="2"><center>CATEGORY</center></th>
-						<th style="color:white;" rowspan="2"><center>COLOR</center></th>
-						<th style="color:white;" colspan="2"><center>VOL/CTN</center></th>
-						<th style="color:white;" rowspan="2"><center>DATE</center></th>
-						<th style="color:white;" rowspan="2"><center>QTY</center></th>
-						<th style="color:white;" rowspan="2"><center>UNIT</center></th>
-						<th style="color:white;" rowspan="2"><center>SIZE</center></th>
-						<th style="color:white;" rowspan="2"><center>TOTAL(sqm)</center></th>
+					<tr style="background:#eb3c28;text-align:center;">
+						<th style="color:white;"><center>NO</center></th>
+						<th style="color:white;"><center>NAME</center></th>
+						<th style="color:white;"><center>BRAND</center></th>
+						<th style="color:white;"><center>COLOR</center></th>
+						<th style="color:white;"><center>QTY</center></th>
+						<th style="color:white;"><center>UNIT</center></th>
+						<th style="color:white;"><center>SIZE</center></th>
 					</tr>
-					<tr style="background:#1a73e8;text-align:center;">
-						<th style="color:white;">(M<sup>2</sup>)</th>
-						<th style="color:white;">(Pcs)</th>
-					</th>
 				</thead>
 				<tbody>
-					@foreach($project->projectSample as $key => $ps)
+					@foreach($project->projectSampleProduct as $key => $psp)
 						<tr>
 							<td style="vertical-align:center;">
 								<center>
@@ -221,86 +224,74 @@
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $ps->product->type->code }}
+									{{ $psp->product->name() }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $ps->product->name() }}
+									{{ $psp->product->brand->name }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									<img src="{{ $ps->product->type->image() }}" style="max-width:28px; border:1px solid #ddd; border-radius:4px; padding: 5px;" class="img-fluid img-thumbnail">
+									{{ $psp->product->type->color->name }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $ps->product->brand->name }}
+									{{ $psp->qty }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $ps->product->type->length }}x{{ $ps->product->type->width }}
+									{{ $psp->unit() }}
 								</center>
 							</td>
 							<td style="vertical-align:center;">
 								<center>
-									{{ $ps->product->type->category->name }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->product->type->color->name }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ (($ps->product->type->length/100) * ($ps->product->type->width / 100)) * $ps->product->carton_pcs }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->product->carton_pcs }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->date }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->qty }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->unit() }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->size }}
-								</center>
-							</td>
-							<td style="vertical-align:center;">
-								<center>
-									{{ $ps->qty * ((($ps->product->type->length/100) * ($ps->product->type->width / 100)) * $ps->product->carton_pcs) }}
+									{{ $psp->size }}
 								</center>
 							</td>
 						</tr>
 					@endforeach
 				</tbody>
-			</table><br>
+			</table><br><br><br>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td style="text-align:center;">
+					<td style="text-align:center;" width="33%">
 						<div style="font-size:10px;">Created By</div>
-						<br><br><br>
-						<div style="font-size:10px;">{{ $project->user->name }}</div>
-						<div style="font-size:10px;">( {{ $project->user->email }} )</div>
+						@if(isset($project->project->user->sign))
+							<div><img src="{{ asset(Storage::url($project->project->user->sign)) }}" height="65px"></div>
+						@else
+							<br><br><br>
+						@endif
+						<div style="font-size:10px;">{{ $project->project->user->name }}</div>
+						<div style="font-size:10px;">( {{ $project->project->user->email }} )</div>
 					</td>
+					@if(isset($project->approved_1->name))
+					<td style="text-align:center;" width="33%">
+						<div style="font-size:10px;">Validated By</div>
+						@if(isset($project->approved_1->sign))
+							<div><img src="{{ asset(Storage::url($project->approved_1->sign)) }}" height="65px"></div>
+						@else
+							<br><br><br>
+						@endif
+						<div style="font-size:10px;">{{ $project->approved_1->name }}</div>
+						<div style="font-size:10px;">( {{ $project->approved_1->email }} )</div>
+					</td>
+					@endif
+					@if(isset($project->approved_2->name))
+					<td style="text-align:center;" width="33%">
+						<div style="font-size:10px;">Approved By</div>
+						@if(isset($project->approved_2->sign))
+							<div><img src="{{ asset(Storage::url($project->approved_2->sign)) }}" height="65px"></div>
+						@else
+							<br><br><br>
+						@endif
+						<div style="font-size:10px;">{{ $project->approved_2->name }}</div>
+						<div style="font-size:10px;">( {{ $project->approved_2->email }} )</div>
+					</td>
+					@endif
 				</tr>
 			</table>
 		</div>

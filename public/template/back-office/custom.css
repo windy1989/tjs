@@ -86,3 +86,23 @@ input[type=number] {
 .field-gray {
    background: lightgray !important;
 }
+
+.page-header,.sidebar-light,.card-body,.breadcrumb-line-light,.modal-body,.card-header,.modal-footer {
+	background-color:#e6e6e6 !important;
+}
+
+.table-secondary, .modal-body > #accordion-group > .card > .card-header {
+	background-color:#bfbfbf !important;
+}
+
+.table-striped {
+	background-color:#d9d9d9 !important;
+}
+
+hr {
+  border-top: 2px solid #8c8c8c;
+}
+
+*:focus{
+	outline:3px solid black !important;
+}

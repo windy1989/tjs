@@ -134,6 +134,9 @@
                             <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'delivery' ? 'nav-item-expanded nav-item-open' : '' }}">
                                 <a href="#" class="nav-link">Delivery</a>
                                 <ul class="nav nav-group-sub">
+									<li class="nav-item">
+                                        <a href="{{ url('admin/master_data/delivery/dropshipper') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'delivery' && Request::segment(4) == 'dropshipper' ? 'active' : '' }}">Dropshipper</a>
+                                    </li>
                                     <li class="nav-item">
                                         <a href="{{ url('admin/master_data/delivery/delivery_company') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'delivery' && Request::segment(4) == 'delivery_company' ? 'active' : '' }}">Delivery Company</a>
                                     </li>
@@ -151,9 +154,9 @@
                                     <li class="nav-item">
                                         <a href="{{ url('admin/master_data/finance_accounting/coa') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'finance_accounting' && Request::segment(4) == 'coa' ? 'active' : '' }}">COA</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="{{ url('admin/master_data/finance_accounting/list_of_bank') }}" class="nav-link {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'finance_accounting' && Request::segment(4) == 'list_of_bank' ? 'active' : '' }}">List Of Bank</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'master_data' && Request::segment(3) == 'digital' ? 'nav-item-expanded nav-item-open' : '' }}">
@@ -276,6 +279,9 @@
                             <span>Report</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Report">
+							<li class="nav-item">
+                                <a href="{{ url('admin/report/project') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'project' ? 'active' : '' }}">Project</a>
+                            </li>
                             <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'report' && Request::segment(3) == 'purchase_order' ? 'nav-item-expanded nav-item-open' : '' }}">
                                 <a href="#" class="nav-link">Purchase Order</a>
                                 <ul class="nav nav-group-sub">
@@ -324,6 +330,9 @@
                                     <li class="nav-item">
                                         <a href="{{ url('admin/report/accounting/trial_balance') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'trial_balance' ? 'active' : '' }}">Trial Balance</a>
                                     </li>
+									<li class="nav-item">
+                                        <a href="{{ url('admin/report/accounting/cash_bank') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'cash_bank' ? 'active' : '' }}">Cash & Bank</a>
+                                    </li>
                                     <li class="nav-item">
                                         <a href="{{ url('admin/report/accounting/aging_receivable') }}" class="nav-link {{ Request::segment(2) == 'report' && Request::segment(3) == 'accounting' && Request::segment(4) == 'aging_receivable' ? 'active' : '' }}">Aging Receivable</a>
                                     </li>
@@ -360,14 +369,14 @@
                     <li class="nav-item nav-item-submenu {{ Request::segment(2) == 'settings' ? 'nav-item-expanded nav-item-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="icon-gear"></i>
-                            <span>Settings</span>
+                            <span>Setting</span>
                         </a>
                         <ul class="nav nav-group-sub" data-submenu-title="Settings">
                             <li class="nav-item">
-                                <a href="{{ url('admin/settings/user') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
+                                <a href="{{ url('admin/setting/user') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == 'user' ? 'active' : '' }}">User</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/settings/2fa') }}" class="nav-link {{ Request::segment(2) == 'settings' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
+                                <a href="{{ url('admin/setting/2fa') }}" class="nav-link {{ Request::segment(2) == 'setting' && Request::segment(3) == '2fa' ? 'active' : '' }}">2FA</a>
                             </li>
                         </ul>
                     </li>

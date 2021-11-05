@@ -46,17 +46,8 @@
                      </select>
                   </div>
                </div>
+               
                <div class="col-md-9">
-                  <div class="form-group">
-                     <label>Nominal :</label>
-                     <div class="input-group-prepend">
-                        <input type="number" name="filter_start_date" id="filter_start_nominal" class="form-control" placeholder="0">
-                        <span class="input-group-text">-</span>
-                        <input type="number" name="filter_finish_date" id="filter_finish_nominal" class="form-control" placeholder="0">
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-12">
                   <div class="form-group">
                      <label>Date :</label>
                      <div class="input-group-prepend">
@@ -77,13 +68,13 @@
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
                      <input type="radio" name="filter_type" value="1" class="form-check-input">
-                     Cash
+                     Cash / Bank In
                   </label>
                </div>
                <div class="form-check form-check-inline">
                   <label class="form-check-label">
                      <input type="radio" name="filter_type" value="2" class="form-check-input">
-                     Bank
+                     Cash / Bank Out
                   </label>
                </div>
                <div class="form-check form-check-inline">
@@ -100,7 +91,7 @@
          </div>
       </div>
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
 			</div>
 			<div class="card-body">
@@ -138,30 +129,82 @@
                <div class="alert alert-danger" id="validation_alert" style="display:none;">
                   <ul id="validation_content"></ul>
                </div>
+				<h5 class="card-title"><b>Main Information</b></h5>
                <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                      <div class="form-group">
                         <label>Code :<sup class="text-danger">*</sup></label>
                         <input type="text" name="code" id="code" class="form-control" placeholder="Enter code">
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                      <div class="form-group">
                         <label>Date :<sup class="text-danger">*</sup></label>
                         <input type="date" name="date" id="date" class="form-control">
                      </div>
                   </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+					  <label>Description :<sup class="text-danger">*</sup></label>
+					  <textarea name="description" id="description" class="form-control" placeholder="Enter description" rows="1"></textarea>
+					</div>
+				  </div>
                </div>
-               <div class="form-group">
-                  <label>Description :<sup class="text-danger">*</sup></label>
-                  <textarea name="description" id="description" style="resize:none;" class="form-control" placeholder="Enter description"></textarea>
-               </div>
+				
                <div class="form-group"><hr></div>
+			   <h5 class="card-title"><b>Project Link (Optional)</b></h5>
+			   <div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Project :</label>
+							<select name="project_id" id="project_id" class="select2" onchange="resetProject()">
+							   <option value="">-- None --</option>
+							   @foreach($project as $p)
+								  <option value="{{ $p->id }}">[{{ $p->code }}] {{ $p->customer->name }}</option>
+							   @endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Type :</label>
+							<select name="reference" id="reference" class="form-control" onchange="getProjectInfo(this)">
+							   <option value="">-- None --</option>
+							   <option value="1">Sales</option>
+							   <option value="2">Purchase</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Code :</label>
+							<select name="project_detail" id="project_detail" class="select2">
+							   <option value="">-- None --</option>
+							</select>
+						</div>
+					</div>
+			   </div>
+			   <div class="form-group"><hr></div>
+			   <h5 class="card-title"><b>Details Coa</b></h5>
+			   <div class="form-group text-center mt-4">
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="mode" value="1" checked>
+                        Debet
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="mode" value="2">
+                        Credit
+                     </label>
+                  </div>
+			   </div>
                <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 mx-auto">
                      <div class="form-group">
-                        <label>Debit :<sup class="text-danger">*</sup></label>
-                        <select name="debit_detail" id="debit_detail" class="select2">
+                        <label>Coa :<sup class="text-danger">*</sup></label>
+                        <select name="coa_id" id="coa_id" class="select2">
                            <option value="">-- Choose --</option>
                            @foreach($coa as $c)
                               <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
@@ -169,26 +212,15 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 mx-auto">
                      <div class="form-group">
-                        <label>Credit :</label>
-                        <select name="credit_detail" id="credit_detail" class="select2">
-                           <option value="">-- Choose --</option>
-                           @foreach($coa as $c)
-                              <option value="{{ $c->id }}">[{{ $c->code }}] {{ $c->name }}</option>
-                           @endforeach
-                        </select>
+                        <label>Nominal :<sup class="text-danger">*</sup></label>
+                        <input type="text" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0" onkeyup="formatRupiah(this)">
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 mx-auto">
                      <div class="form-group">
-                        <label>Nominal :</label>
-                        <input type="text" name="nominal_detail" id="nominal_detail" class="form-control" placeholder="0">
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Note :</label>
+                        <label>Note :<sup class="text-danger">*</sup></label>
                         <input type="text" name="note_detail" id="note_detail" class="form-control" placeholder="Enter note">
                      </div>
                   </div>
@@ -198,32 +230,46 @@
                      </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <table class="table table-bordered">
-                     <thead class="table-secondary">
-                        <tr class="text-center">
-                           <th>Debit</th>
-                           <th>Credit</th>
-                           <th>Nominal</th>
-                           <th>Note</th>
-                           <th>Delete</th>
-                        </tr>
-                     </thead>
-                     <tbody id="data_content"></tbody>
-                  </table>
-               </div>
+			   <div class="row">
+					<div class="form-group col-md-6">
+						<table class="table table-bordered">
+						 <thead class="table-secondary">
+							<tr class="text-center">
+							   <th>Debit</th>
+							   <th>Nominal</th>
+							   <th>Note</th>
+							   <th>#</th>
+							</tr>
+						 </thead>
+						 <tbody id="data_content_debit"></tbody>
+						</table>
+					</div>
+					<div class="form-group col-md-6">
+						<table class="table table-bordered">
+						 <thead class="table-secondary">
+							<tr class="text-center">
+							   <th>Credit</th>
+							   <th>Nominal</th>
+							   <th>Note</th>
+							   <th>#</th>
+							</tr>
+						 </thead>
+						 <tbody id="data_content_credit"></tbody>
+					  </table>
+					</div>
+				</div>
                <div class="form-group"><hr></div>
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="type" value="1" checked>
-                        Cash
+                        Cash / Bank In
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="type" value="2">
-                        Bank
+                        Cash / Bank Out
                      </label>
                   </div>
                   <div class="form-check form-check-inline">
@@ -284,7 +330,10 @@
          }
       });
       
-      $('#data_content').on('click', '#delete_data_content', function() {
+      $('#data_content_debit').on('click', '#delete_data_content_debit', function() {
+         $(this).closest('tr').remove();
+      });
+	  $('#data_content_credit').on('click', '#delete_data_content_credit', function() {
          $(this).closest('tr').remove();
       });
    });
@@ -314,36 +363,55 @@
    }
 
    function addContent() {
-      let debit_detail   = $('#debit_detail option:selected');
-      let credit_detail  = $('#credit_detail option:selected');
+      let coa_id   = $('#coa_id option:selected');
       let nominal_detail = $('#nominal_detail');
       let note_detail    = $('#note_detail');
+	  var mode = $('input[name="mode"]:checked').val();
 
-      if(debit_detail.val() && credit_detail.val() && nominal_detail.val() && note_detail.val()) {
-         $('#data_content').append(`
-            <tr class="text-center">
-               <input type="hidden" name="debit_detail[]" value="` + debit_detail.val() + `">
-               <input type="hidden" name="credit_detail[]" value="` + credit_detail.val() + `">
-               <input type="hidden" name="note_detail[]" value="` + note_detail.val() + `">
+      if(coa_id.val() && nominal_detail.val() && note_detail.val()) {
+		 if(mode == '1'){
+			$('#data_content_debit').append(`
+				<tr class="text-center">
+				   <input type="hidden" name="coa_detail[]" value="` + coa_id.val() + `">
+				   <input type="hidden" name="type_detail[]" value="` + mode + `">
+				   <input type="hidden" name="note_detail[]" value="` + note_detail.val() + `">
 
-               <td class="align-middle">` + debit_detail.text() + `</td>   
-               <td class="align-middle">` + credit_detail.text() + `</td>   
-               <td class="align-middle">
-                  <div class="form-group">
-                     <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `">
-                  </div>
-               </td>   
-               <td class="align-middle">` + note_detail.val() + `</td>   
-               <td class="align-middle">
-                  <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
-               </td>
-            </tr>
-         `);
+				   <td class="align-middle">` + coa_id.text() + `</td>   
+				   <td class="align-middle">
+					  <div class="form-group">
+						 <input type="text" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `" onkeyup="formatRupiah(this)">
+					  </div>
+				   </td>   
+				   <td class="align-middle">` + note_detail.val() + `</td>   
+				   <td class="align-middle">
+					  <button type="button" id="delete_data_content_debit" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+				   </td>
+				</tr>
+			`);
+		 }else{
+			$('#data_content_credit').append(`
+				<tr class="text-center">
+				   <input type="hidden" name="coa_detail[]" value="` + coa_id.val() + `">
+				   <input type="hidden" name="type_detail[]" value="` + mode + `">
+				   <input type="hidden" name="note_detail[]" value="` + note_detail.val() + `">
 
-         $('#debit_detail').val(null).change();
-         $('#credit_detail').val(null).change();
-         nominal_detail.val(null);
-         note_detail.val(null);
+				   <td class="align-middle">` + coa_id.text() + `</td>   
+				   <td class="align-middle">
+					  <div class="form-group">
+						 <input type="text" name="nominal_detail[]" class="form-control" placeholder="0" value="` + nominal_detail.val() + `" onkeyup="formatRupiah(this)">
+					  </div>
+				   </td>   
+				   <td class="align-middle">` + note_detail.val() + `</td>   
+				   <td class="align-middle">
+					  <button type="button" id="delete_data_content_credit" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+				   </td>
+				</tr>
+			`);
+		 }
+
+         //$('#coa_id').val(null).change();
+         //nominal_detail.val(null);
+         //note_detail.val(null);
       } else {
          swalInit.fire('Ooppsss!', 'Please entry all field', 'info');
       }
@@ -358,7 +426,8 @@
    }
 
    function toShow() {
-      $('#data_content').html('');
+      $('#data_content_credit').html('');
+	  $('#data_content_debit').html('');
       $('#modal_form').modal('show');
       $('#validation_alert').hide();
       $('#validation_content').html('');
@@ -386,7 +455,11 @@
 
    function reset() {
       $('#form_data').trigger('reset');
-      $('#data_content').html('');
+      $('#data_content_debit').html('');
+	  $('#data_content_credit').html('');
+	  $('#project_id').val('').change();
+	  $('#project_detail').empty().append(`<option value="">-- None --</option>`);
+	  $('#project_detail').val('').change();
       $('input[name="type"][value="1"]').prop('checked', true);
       $('#validation_alert').hide();
       $('#validation_content').html('');
@@ -505,31 +578,62 @@
          },
          success: function(response) {
             loadingClose('.modal-content');
+			$('#project_id').val(response.project_id).change();
+			$('#reference').val(response.reference);
+			if(response.reference_id){
+				$('#project_detail').empty();
+				$('#project_detail').append(`
+					<option value="` + response.reference_id + `" selected>` + response.reference_code + ` Total IDR ` + response.reference_total + `</option>
+				`);
+			}
             $('#code').val(response.code);
             $('#date').val(response.date);
             $('#description').val(response.description);
             $('input[name="type"][value="' + response.type + '"]').prop('checked', true);
-
+			
+			$('#data_content_debit').empty();
+			$('#data_content_credit').empty();
+			
             $.each(response.cash_bank_detail, function(i, val) {
-               $('#data_content').append(`
-                  <tr class="text-center">
-                     <input type="hidden" name="debit_detail[]" value="` + val.debit_id + `">
-                     <input type="hidden" name="credit_detail[]" value="` + val.credit_id + `">
-                     <input type="hidden" name="note_detail[]" value="` + val.note + `">
+				if(val.type == '1'){
+					$('#data_content_debit').append(`
+						<tr class="text-center">
+						   <input type="hidden" name="coa_detail[]" value="` + val.coa_id + `">
+						   <input type="hidden" name="type_detail[]" value="` + val.type + `">
+						   <input type="hidden" name="note_detail[]" value="` + val.note + `">
 
-                     <td class="align-middle">` + val.debit_name + `</td>   
-                     <td class="align-middle">` + val.credit_name + `</td>   
-                     <td class="align-middle">
-                        <div class="form-group">
-                           <input type="number" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `">
-                        </div>
-                     </td>   
-                     <td class="align-middle">` + val.note + `</td>   
-                     <td class="align-middle">
-                        <button type="button" id="delete_data_content" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
-                     </td>
-                  </tr>
-               `);
+						   <td class="align-middle">` + val.coa_info + `</td>   
+						   <td class="align-middle">
+							  <div class="form-group">
+								 <input type="text" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `" onkeyup="formatRupiah(this)">
+							  </div>
+						   </td>   
+						   <td class="align-middle">` + val.note + `</td>   
+						   <td class="align-middle">
+							  <button type="button" id="delete_data_content_debit" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+						   </td>
+						</tr>
+					`);
+				 }else if(val.type == '2'){
+					$('#data_content_credit').append(`
+						<tr class="text-center">
+						   <input type="hidden" name="coa_detail[]" value="` + val.coa_id + `">
+						   <input type="hidden" name="type_detail[]" value="` + val.type + `">
+						   <input type="hidden" name="note_detail[]" value="` + val.note + `">
+
+						   <td class="align-middle">` + val.coa_info + `</td>   
+						   <td class="align-middle">
+							  <div class="form-group">
+								 <input type="text" name="nominal_detail[]" class="form-control" placeholder="0" value="` + val.nominal + `" onkeyup="formatRupiah(this)">
+							  </div>
+						   </td>   
+						   <td class="align-middle">` + val.note + `</td>   
+						   <td class="align-middle">
+							  <button type="button" id="delete_data_content_credit" class="btn bg-danger btn-sm"><i class="icon-trash"></i></button>   
+						   </td>
+						</tr>
+					`);
+				 }
             });
 
             $('#btn_update').attr('onclick', 'update(' + id + ')');
@@ -592,7 +696,57 @@
          }
       });
    }
-
+	
+	function resetProject(){
+		$('#reference').val('');
+		$('#project_detail').val('');
+		$('#reference').focus();
+	}
+	
+	function getProjectInfo(ini) 
+	{
+		var project_id = $('#project_id').val();
+		
+		if(ini.value !== '' && project_id !== ''){
+			$.ajax({
+				 url: '{{ url("admin/finance/cash_bank/project") }}',
+				 type: 'GET',
+				 dataType: 'JSON',
+				 data: {
+					id: project_id, reference: ini.value
+				 },
+				 beforeSend: function() {
+					loadingOpen('.modal-content');
+				 },
+				 success: function(response) {
+					loadingClose('.modal-content');
+					
+					if(response.length > 0){
+						$('#project_detail').empty();
+						$('#project_detail').append(`<option value="">-- None --</option>`);
+						$.each(response, function(i, val) {
+							$('#project_detail').append(`
+								<option value="` + val.id + `">` + val.code + ` Total IDR ` + val.total + `</option>
+							`);
+						});
+					}
+				 },
+				 error: function() {
+					cancel();
+					loadingClose('.modal-content');
+					swalInit.fire({
+					   title: 'Server Error',
+					   text: 'Please contact developer',
+					   type: 'error'
+					});
+				 }
+			  });
+			
+			
+			$('#project_detail').focus();
+		}
+	}
+	
    function destroy(id) {
       var notyConfirm = new Noty({
          theme: 'limitless',

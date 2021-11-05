@@ -1,0 +1,58 @@
+[15-Sep-2021 01:51:12 UTC] PHP Fatal error:  During class fetch: Uncaught ErrorException: include(): read of 13706 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'include(): read...', '/home/smartmar/...', 444, Array)
+#1 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include()
+#2 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Carbon\\Traits\\M...')
+#4 /home/smartmar/public_html/vendor/nesbot/carbon/src/Carbon/Traits/Date.php(528): spl_autoload_call('Carbon\\Traits\\M...')
+#5 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include('/home/smartmar/...')
+#6 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#7 [i in /home/smartmar/public_html/vendor/nesbot/carbon/src/Carbon/Traits/Date.php on line 528
+[15-Sep-2021 09:15:51 Asia/Jakarta] PHP Fatal error:  During class fetch: Uncaught ErrorException: include(): read of 3997 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'include(): read...', '/home/smartmar/...', 444, Array)
+#1 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include()
+#2 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\View...')
+#4 /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php(15): spl_autoload_call('Illuminate\\View...')
+#5 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include('/home/smartmar/...')
+#6 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+ in /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/View/Factory.php on line 15
+[16-Sep-2021 06:49:23 UTC] PHP Fatal error:  During class fetch: Uncaught ErrorException: include(): read of 5843 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'include(): read...', '/home/smartmar/...', 444, Array)
+#1 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include()
+#2 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Carbon\\Traits\\S...')
+#4 /home/smartmar/public_html/vendor/nesbot/carbon/src/Carbon/Traits/Date.php(528): spl_autoload_call('Carbon\\Traits\\S...')
+#5 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include('/home/smartmar/...')
+#6 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#7 [in in /home/smartmar/public_html/vendor/nesbot/carbon/src/Carbon/Traits/Date.php on line 528
+[16-Sep-2021 16:19:27 Asia/Jakarta] PHP Fatal error:  During class fetch: Uncaught ErrorException: include(): read of 602 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'include(): read...', '/home/smartmar/...', 444, Array)
+#1 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include()
+#2 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Auth...')
+#4 /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Auth/User.php(14): spl_autoload_call('Illuminate\\Auth...')
+#5 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include('/home/smartmar/...')
+#6 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar in /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Auth/User.php on line 14
+[16-Sep-2021 10:15:03 UTC] PHP Notice:  require(): read of 1532 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/autoload_real.php on line 71
+[17-Sep-2021 17:15:03 Asia/Jakarta] PHP Fatal error:  During class fetch: Uncaught ErrorException: include(): read of 1025 bytes failed with errno=12 Cannot allocate memory in /home/smartmar/public_html/vendor/composer/ClassLoader.php:444
+Stack trace:
+#0 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'include(): read...', '/home/smartmar/...', 444, Array)
+#1 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include()
+#2 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/smartmar/...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Supp...')
+#4 /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php(19): spl_autoload_call('Illuminate\\Supp...')
+#5 /home/smartmar/public_html/vendor/composer/ClassLoader.php(444): include('/home/smartmar/...')
+#6 /home/smartmar/public_html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/h in /home/smartmar/public_html/vendor/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php on line 19
+[05-Oct-2021 09:16:44 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\Project::projectSample() in /home/smartmar/public_html/app/Models/Project.php on line 188
+[14-Oct-2021 09:09:39 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\ProjectPayment::bank() in /home/smartmar/public_html/app/Models/ProjectPayment.php on line 59
+[14-Oct-2021 09:09:42 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\ProjectPayment::bank() in /home/smartmar/public_html/app/Models/ProjectPayment.php on line 59
+[01-Nov-2021 15:12:45 Asia/Jakarta] PHP Fatal error:  Class App\Exports\CustomersExport contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Maatwebsite\Excel\Concerns\WithMapping::map) in /home/smartmar/public_html/app/Exports/CustomersExport.php on line 11
+[03-Nov-2021 09:00:24 Asia/Jakarta] PHP Fatal error:  Class App\Exports\CustomersExport contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Maatwebsite\Excel\Concerns\FromQuery::query) in /home/smartmar/public_html/app/Exports/CustomersExport.php on line 10
+[03-Nov-2021 09:49:42 Asia/Jakarta] PHP Fatal error:  Class App\Exports\CustomersExport contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Maatwebsite\Excel\Concerns\WithColumnFormatting::columnFormats) in /home/smartmar/public_html/app/Exports/CustomersExport.php on line 12
+[05-Nov-2021 08:56:35 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\ProjectPurchase::supplier() in /home/smartmar/public_html/app/Models/ProjectPurchase.php on line 122
+[05-Nov-2021 08:56:55 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\ProjectPurchase::supplier() in /home/smartmar/public_html/app/Models/ProjectPurchase.php on line 122
+[05-Nov-2021 08:58:12 Asia/Jakarta] PHP Fatal error:  Cannot redeclare App\Models\ProjectPurchase::supplier() in /home/smartmar/public_html/app/Models/ProjectPurchase.php on line 122

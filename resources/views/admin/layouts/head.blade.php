@@ -3,21 +3,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
 	<link href="{{ asset('template/back-office/global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('template/back-office/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('template/back-office/assets/css/bootstrap.min.css?v=5') }}" rel="stylesheet">
 	<link href="{{ asset('template/back-office/assets/css/bootstrap_limitless.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('template/back-office/assets/css/layout.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('template/back-office/assets/css/layout.min.css?v=1') }}" rel="stylesheet">
 	<link href="{{ asset('template/back-office/assets/css/components.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/back-office/assets/css/colors.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/lightbox/dist/css/lightbox.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('template/plugins/jquery-ui/jquery-ui.theme.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('template/back-office/custom.css') }}" rel="stylesheet">
+	<link href="{{ asset('template/back-office/custom.css?v=31') }}" rel="stylesheet">
 	<script src="{{ asset('template/back-office/global_assets/js/main/jquery.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
@@ -38,15 +39,5 @@
 	<script src="{{ asset('template/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 	<script src="{{ asset('template/back-office/assets/js/app.js') }}"></script>
 	<script src="{{ asset('template/back-office/custom.js?v=3') }}"></script>
-	<link href="{{ asset('template/back-office/assets/css/buttons.dataTables.min.css') }}" rel="stylesheet">
-	<script src="{{ asset('template/back-office/assets/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/buttons.colVis.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/buttons.flash.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/jszip.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/pdfmake.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/vfs_fonts.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/buttons.html5.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('template/back-office/assets/js/buttons.print.min.js') }}" type="text/javascript"></script>
 	<title>SMB Admin - {{ $title }}</title>
 </head>

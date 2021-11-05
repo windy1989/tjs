@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Coa;
 use App\Models\Budgeting;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,8 @@ class BudgetingController extends Controller {
     {
         $data = [
             'title'   => 'Budgeting',
-            'coa'     => Coa::oldest('code')->get(),    
+			'project' => Project::all(),
+            'coa'     => Coa::oldest('code')->get(),
             'content' => 'admin.accounting.budgeting'
         ];
 
@@ -123,16 +125,71 @@ class BudgetingController extends Controller {
         return response()->json($response);
     }
 
+	 public function yearly(Request $request)
+    {
+        if($request->has('_token') && session()->token() == $request->_token) {
+            $validation = Validator::make($request->all(), [
+                'year'      => 'required',
+                'coa_id.*'    => 'required',
+                'month.*'   => 'required',
+                'nominal.*' => 'required'
+            ], [
+                'year.required'      => 'Year cannot be empty.',
+                'coa_id.*.required'    => 'Coa must be filled all.',
+                'month.*.required'   => 'Month must be filled all.',
+                'nominal.*.required' => 'Nominal must be filled all.'
+            ]);
+
+            if($validation->fails()) {
+                return redirect()->back()->withErrors($validation)->withInput();
+            } else {
+                foreach($request->month as $key => $m) {
+					$query = Budgeting::where('coa_id',$request->coa_id[$key])->where('month',date('Y-m', strtotime($request->year . '-' . $m)))->first();
+					
+					if($query !== null){
+						$query->update([
+							'nominal' => str_replace(',','.',str_replace('.','',$request->nominal[$key]))
+						]);
+					}else{
+						$query = Budgeting::create([
+							'coa_id'  => $request->coa_id[$key],
+							'month'   => date('Y-m', strtotime($request->year . '-' . $m)),
+							'nominal' => str_replace(',','.',str_replace('.','',$request->nominal[$key]))
+						]);
+					}
+
+                    activity()
+                        ->performedOn(new Budgeting())
+                        ->causedBy(session('bo_id'))
+                        ->withProperties($query)
+                        ->log('Add yearly accounting budgeting data');
+                }
+
+                return redirect()->back()->with(['success' => 'Data added successfully.']);
+            }
+        } else {
+            $data = [
+                'title'   => 'Create New Budgeting',
+                'coa'     => Coa::oldest('code')->get(),
+                'content' => 'admin.accounting.budgeting_yearly'
+            ];
+
+            return view('admin.layouts.index', ['data' => $data]);
+        }
+    }
+
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'coa_id'  => 'required',
-            'month'   => 'required',
-            'nominal' => 'required'
+            'coa_id.*'		=> 'required',
+            'startmonth'   	=> 'required',
+			'endmonth'   	=> 'required',
+            'nominal.*' 	=> 'required'
         ], [
-            'coa_id.required'  => 'Please select a coa.',
-            'month.required'   => 'Month cannot be a empty.',
-            'nominal.required' => 'Nominal cannot be a empty.'
+            'coa_id.*.required'    	=> 'Coa must be filled all.',
+            'startmonth.required'   => 'Start month cannot be a empty.',
+			'endmonth.required'   	=> 'End month cannot be a empty.',
+            'nominal.*.required' 	=> 'Nominal must be filled all.'
         ]);
 
         if($validation->fails()) {
@@ -141,29 +198,42 @@ class BudgetingController extends Controller {
                 'error'  => $validation->errors()
             ];
         } else {
-            $query = Budgeting::create([
-                'coa_id'  => $request->coa_id,
-                'month'   => $request->month,
-                'nominal' => $request->nominal
-            ]);
+			
+			$startmonth = $request->startmonth;
+			$endmonth = $request->endmonth;
+			
+			$month = strtotime($startmonth);
+			$end = strtotime($endmonth);
+			while($month <= $end)
+			{
+				foreach($request->coa_id as $key => $m) {
+					$query = Budgeting::create([
+						'project_id'	=> $request->project_id,
+						'coa_id'  		=> $request->coa_id[$key],
+						'month'   		=> date('Y-m', $month),
+						'nominal'		=> str_replace(',','.',str_replace('.','',$request->nominal[$key]))
+					]);
+					
+					activity()
+						->performedOn(new Budgeting())
+						->causedBy(session('bo_id'))
+						->withProperties($query)
+						->log('Add accounting budgeting data');
+				}
+				$month = strtotime("+1 month", $month);
+			}
 
-            if($query) {
-                activity()
-                    ->performedOn(new Budgeting())
-                    ->causedBy(session('bo_id'))
-                    ->withProperties($query)
-                    ->log('Add accounting budgeting data');
-
+            //if($query) {
                 $response = [
                     'status'  => 200,
                     'message' => 'Data added successfully.'
                 ];
-            } else {
+            /* } else {
                 $response = [
                     'status'  => 500,
                     'message' => 'Data failed to add.'
                 ];
-            }
+            } */
         }
 
         return response()->json($response);
@@ -178,13 +248,13 @@ class BudgetingController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'coa_id'  => 'required',
-            'month'   => 'required',
-            'nominal' => 'required'
+            'coa_id'  		=> 'required',
+            'monthdetail'   => 'required',
+            'nominaldetail' => 'required'
         ], [
-            'coa_id.required'  => 'Please select a coa.',
-            'month.required'   => 'Month cannot be a empty.',
-            'nominal.required' => 'Nominal cannot be a empty.'
+            'coa_id.required'  			=> 'Please select a coa.',
+            'monthdetail.required'  	=> 'Month cannot be a empty.',
+            'nominaldetail.required' 	=> 'Nominal cannot be a empty.'
         ]);
 
         if($validation->fails()) {
@@ -194,9 +264,10 @@ class BudgetingController extends Controller {
             ];
         } else {
             $query = Budgeting::where('id', $id)->update([
+				'project_id' => $request->project_id_detail,
                 'coa_id'  => $request->coa_id,
-                'month'   => $request->month,
-                'nominal' => $request->nominal
+                'month'   => $request->monthdetail,
+                'nominal' => str_replace(',','.',str_replace('.','',$request->nominaldetail))
             ]);
 
             if($query) {

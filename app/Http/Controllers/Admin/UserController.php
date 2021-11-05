@@ -133,13 +133,28 @@ class UserController extends Controller {
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'photo'     => 'image|max:200|mimes:jpg,jpeg,png',
-            'name'      => 'required',
-            'email'     => 'required|unique:users,email',
-            'password'  => 'required',
-            'branch'    => 'required',
-            'role'      => 'required|array',
-            'status'    => 'required'
+            'photo'     		=> 'image|max:200|mimes:jpg,jpeg,png',
+            'name'      		=> 'required',
+            'email'     		=> 'required|unique:users,email',
+            'password'  		=> 'required',
+            'branch'    		=> 'required',
+			'pob'				=> 'required',
+			'dob'				=> 'required',
+			'gender'			=> 'required',
+			'marital_status'	=> 'required',
+			'blood_type'		=> 'required',
+			'religion'			=> 'required',
+			'id_card'			=> 'required',
+			'id_number'			=> 'required',
+			'postcode'			=> 'required',
+			'address_id'		=> 'required',
+			'address_residence'	=> 'required',
+			'ispkp'				=> 'required',
+			'account_number'	=> 'required',
+			'account_bank'		=> 'required',
+			'account_name'		=> 'required',
+            'role'      		=> 'required|array',
+            'status'    		=> 'required'
         ], [
             'photo.image'        => 'Photo must be image.',
             'photo.max'          => 'Photo max 200KB.',
@@ -149,6 +164,21 @@ class UserController extends Controller {
             'email.unique'       => 'Email already exists.',
             'password.required'  => 'Password cannot be empty.',
             'branch.required'    => 'Please select a branch.',
+			'pob.required'		 => 'Please enter place of birth.',
+			'dob.required'		 => 'Please enter date of birth.',
+			'gender.required'	 => 'Please gender.',
+			'marital_status.required'	 => 'Please select marital status.',
+			'blood_type.required'=> 'Please enter blood_type.',
+			'religion.required'	 => 'Please select a religion.',
+			'id_card.required'	 => 'Please select id card.',
+			'id_number.required' => 'Please enter id card number.',
+			'postcode.required'	 => 'Please enter post code.',
+			'address_id.required'=> 'Please enter address as shown on id card.',
+			'address_residence.required' => 'Please enter address now.',
+			'ispkp.required' => 'Please select whether he/she is taxpayer or no.',
+			'account_number.required' => 'Please enter account number.',
+			'account_bank.required' => 'Please enter account bank.',
+			'account_name.required' => 'Please enter account owner name.',
             'role.required'      => 'Please select a role.',
             'role.array'         => 'Role must be array.',
             'status.required'    => 'Please select a status.'
@@ -167,12 +197,30 @@ class UserController extends Controller {
             }
 
             $query = User::create([
-                'photo'    => $photo,
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'password' => bcrypt($request->password),
-                'branch'   => $request->branch,
-                'status'   => $request->status
+                'photo'    			=> $photo,
+                'name'     			=> $request->name,
+                'email'    			=> $request->email,
+                'password' 			=> bcrypt($request->password),
+                'branch'   			=> $request->branch,
+				'place_of_birth'	=> $request->pob,
+				'date_of_birth'		=> $request->dob,
+				'gender'			=> $request->gender,
+				'marital_status'	=> $request->marital_status,
+				'blood_type'		=> $request->blood_type,
+				'religion'			=> $request->religion,
+				'id_type'			=> $request->id_card,
+				'id_no'				=> $request->id_number,
+				'postcode'			=> $request->postcode,
+				'address_id'		=> $request->address_id,
+				'address_residence'	=> $request->address_residence,
+				'npwp'				=> $request->npwp,
+				'ispkp'				=> $request->ispkp,
+				'ptkp_type'			=> $request->ptkp_type,
+				'tax_type'			=> $request->tax_type,
+				'account_number'	=> $request->account_number,
+				'account_bank'		=> $request->account_bank,
+				'account_name'		=> $request->account_name,
+                'status'   			=> $request->status
             ]);
 
             if($query) {
@@ -232,13 +280,31 @@ class UserController extends Controller {
         }
 
         return response()->json([
-            'photo'     => $data->photo ? asset(Storage::url($data->photo)) : asset('website/user.png'),
-            'name'      => $data->name,
-            'email'     => $data->email,
-            'password'  => $data->password,
-            'branch'    => $data->branch,
-            'status'    => $data->status,
-            'role'      => $role
+            'photo'     		=> $data->photo ? asset(Storage::url($data->photo)) : asset('website/user.png'),
+            'name'      		=> $data->name,
+            'email'     		=> $data->email,
+            'password'  		=> $data->password,
+            'branch'    		=> $data->branch,
+			'place_of_birth'	=> $data->place_of_birth,
+			'date_of_birth'		=> $data->date_of_birth,
+			'gender'			=> $data->gender,
+			'marital_status'	=> $data->marital_status,
+			'blood_type'		=> $data->blood_type,
+			'religion'			=> $data->religion,
+			'id_type'			=> $data->id_type,
+			'id_no'				=> $data->id_no,
+			'postcode'			=> $data->postcode,
+			'address_id'		=> $data->address_id,
+			'address_residence'	=> $data->address_residence,
+			'npwp'				=> $data->npwp,
+			'ispkp'				=> $data->ispkp,
+			'ptkp_type'			=> $data->ptkp_type,
+			'tax_type'			=> $data->tax_type,
+			'account_number'	=> $data->account_number,
+			'account_bank'		=> $data->account_bank,
+			'account_name'		=> $data->account_name,
+            'status'   			=> $data->status,
+            'role'      		=> $role
         ]);
     }
 
@@ -246,12 +312,27 @@ class UserController extends Controller {
     {
         $user       = User::find($id);
         $validation = Validator::make($request->all(), [
-            'photo'     => 'image|max:200|mimes:jpg,jpeg,png',
-            'name'      => 'required',
-            'email'     => ['required', Rule::unique('users', 'email')->ignore($id)],
-            'branch'    => 'required',
-            'role'      => 'required|array',
-            'status'    => 'required'
+            'photo'     		=> 'image|max:200|mimes:jpg,jpeg,png',
+            'name'      		=> 'required',
+            'email'     		=> ['required', Rule::unique('users', 'email')->ignore($id)],
+            'branch'    		=> 'required',
+			'pob'				=> 'required',
+			'dob'				=> 'required',
+			'gender'			=> 'required',
+			'marital_status'	=> 'required',
+			'blood_type'		=> 'required',
+			'religion'			=> 'required',
+			'id_card'			=> 'required',
+			'id_number'			=> 'required',
+			'postcode'			=> 'required',
+			'address_id'		=> 'required',
+			'address_residence'	=> 'required',
+			'ispkp'				=> 'required',
+			'account_number'	=> 'required',
+			'account_bank'		=> 'required',
+			'account_name'		=> 'required',
+            'role'      		=> 'required|array',
+            'status'    		=> 'required'
         ], [
             'photo.image'        => 'Photo must be image.',
             'photo.max'          => 'Photo max 200KB.',
@@ -260,6 +341,21 @@ class UserController extends Controller {
             'email.required'     => 'Email cannot be empty.',
             'email.unique'       => 'Email already exists.',
             'branch.required'    => 'Please select a branch.',
+			'pob.required'		 => 'Please enter place of birth.',
+			'dob.required'		 => 'Please enter date of birth.',
+			'gender.required'	 => 'Please gender.',
+			'marital_status.required'	 => 'Please select marital status.',
+			'blood_type.required'=> 'Please enter blood_type.',
+			'religion.required'	 => 'Please select a religion.',
+			'id_card.required'	 => 'Please select id card.',
+			'id_number.required' => 'Please enter id card number.',
+			'postcode.required'	 => 'Please enter post code.',
+			'address_id.required'=> 'Please enter address as shown on id card.',
+			'address_residence.required' => 'Please enter address now.',
+			'ispkp.required' => 'Please select whether he/she is taxpayer or no.',
+			'account_number.required' => 'Please enter account number.',
+			'account_bank.required' => 'Please enter account bank.',
+			'account_name.required' => 'Please enter account owner name.',
             'role.required'      => 'Please select a role.',
             'role.array'         => 'Role must be array.',
             'status.required'    => 'Please select a status.'
@@ -282,11 +378,29 @@ class UserController extends Controller {
             }
 
             $user->update([
-                'photo'    => $photo,
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'branch'   => $request->branch,
-                'status'   => $request->status
+                'photo'    			=> $photo,
+                'name'     			=> $request->name,
+                'email'    			=> $request->email,
+                'branch'   			=> $request->branch,
+				'place_of_birth'	=> $request->pob,
+				'date_of_birth'		=> $request->dob,
+				'gender'			=> $request->gender,
+				'marital_status'	=> $request->marital_status,
+				'blood_type'		=> $request->blood_type,
+				'religion'			=> $request->religion,
+				'id_type'			=> $request->id_card,
+				'id_no'				=> $request->id_number,
+				'postcode'			=> $request->postcode,
+				'address_id'		=> $request->address_id,
+				'address_residence'	=> $request->address_residence,
+				'npwp'				=> $request->npwp,
+				'ispkp'				=> $request->ispkp,
+				'ptkp_type'			=> $request->ptkp_type,
+				'tax_type'			=> $request->tax_type,
+				'account_number'	=> $request->account_number,
+				'account_bank'		=> $request->account_bank,
+				'account_name'		=> $request->account_name,
+                'status'   			=> $request->status
             ]);
 
             if($user) {

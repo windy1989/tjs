@@ -140,6 +140,16 @@
                         </select>
                      </div>
                   </div>
+				  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Supply Method :<sup class="text-danger">*</sup></label>
+                        <select name="supply_method" id="supply_method" class="custom-select">
+                           <option value="">-- Choose --</option>
+                           <option value="1">Full</option>
+                           <option value="2">Partial</option>
+                        </select>
+                     </div>
+                  </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Payment Method :<sup class="text-danger">*</sup></label>
@@ -150,16 +160,26 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-4">
+				  <div class="col-md-4">
                      <div class="form-group">
-                        <label>Supply Method :<sup class="text-danger">*</sup></label>
-                        <select name="supply_method" id="supply_method" class="custom-select">
+                        <label>Detail Payment :<sup class="text-danger">*</sup></label>
+                        <select name="detail_payment" id="detail_payment" class="custom-select">
                            <option value="">-- Choose --</option>
-                           <option value="1">Full</option>
-                           <option value="2">Partial</option>
                         </select>
                      </div>
                   </div>
+				  <div class="col-md-4">
+					 <div class="form-group">
+						<label>Term Payment :</label>
+						<select name="term_payment" id="term_payment" class="custom-select">
+						   <option value="0">Default</option>
+						   <option value="7">7 Days</option>
+						   <option value="14">14 Days</option>
+						   <option value="30">30 Days</option>
+						   <option value="45">45 Days</option>
+						</select>
+					 </div>
+				  </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>PPN :<sup class="text-danger">*</sup></label>
@@ -283,4 +303,14 @@
          }
       });
    }
+
+	$('#payment_method').on('change', function() {
+		if($(this).val() == '1'){
+			$('#detail_payment').empty().append('<option value="">-- Choose --</option><option value="11">Cash Before Delivery</option><option value="12">Cash After Delivery</option><option value="13">Cash with DP</option>');
+		}else if($(this).val() == '2'){
+			$('#detail_payment').empty().append('<option value="">-- Choose --</option><option value="21">Cover BG</option><option value="22">SKBDN</option><option value="23">SCF</option><option value="24">Credit with DP</option>');
+		}else{
+			$('#detail_payment').empty().append('<option value="">-- Choose --</option>');
+		}
+	});
 </script>

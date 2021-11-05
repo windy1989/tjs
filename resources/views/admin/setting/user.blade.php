@@ -30,7 +30,7 @@
 	</div>
 	<div class="content">
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
@@ -81,53 +81,216 @@
                         <img src="{{ asset("website/user.png") }}" class="img-fluid img-thumbnail w-100" style="max-width:200px;">
                      </a>
                   </center>
-                  <label>Photo :</label>
-                  <input type="file" id="photo" name="photo" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
+                  
                </div>
                <div class="row">
-                  <div class="col-md-6">
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Photo :</label>
+						<input type="file" id="photo" name="photo" class="form-control h-auto" accept="image/x-png,image/jpg,image/jpeg" onchange="previewImage(this, '#preview_photo')">
+					</div>
+				  </div>
+                  <div class="col-md-4">
                      <div class="form-group">
                         <label>Name :<span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name">
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name" value="{{ old('name') }}">
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                      <div class="form-group">
                         <label>Email :<span class="text-danger">*</span></label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter email">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter email" value="{{ old('email') }}">
                      </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <label>Branch :<span class="text-danger">*</span></label>
-                  <select name="branch" id="branch" class="custom-select">
-                     <option value="">-- Choose --</option>
-                     <option value="1">Surabaya</option>
-                     <option value="2">Jakarta</option>
-                  </select>
-               </div>
-               <div class="form-group field_password">
-                  <label>Password :<span class="text-danger">*</span></label>
-                  <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
-               </div>
-               <div class="form-group">
-                  <label>Role :<span class="text-danger">*</span></label>
-                  <select name="role[]" id="role" class="select2" multiple>
-                     <option value="1">Director</option>
-                     <option value="2">Secretary</option>
-                     <option value="3">Head Of Finance</option>
-                     <option value="4">Head Of Accounting</option>
-                     <option value="5">Sales & Marketing Manager</option>
-                     <option value="6">Sales Project</option>
-                     <option value="7">Head Of Administration</option>
-                     <option value="8">Digital Marketing</option>
-                     <option value="9">Purchasing</option>
-                     <option value="10">Admin Sales & Stock</option>
-                     <option value="11">Piutang & Pengiriman</option>
-                     <option value="12">Assisten Hiro</option>
-                     <option value="13">Assisten</option>
-                  </select>
-               </div>
+			   <div class="row">
+                  <div class="col-md-4">
+					<div class="form-group">
+					  <label>Branch :<span class="text-danger">*</span></label>
+					  <select name="branch" id="branch" class="custom-select">
+						 <option value="">-- Choose --</option>
+						 <option value="1">Surabaya</option>
+						 <option value="2">Jakarta</option>
+					  </select>
+				   </div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group field_password">
+					  <label>Password :<span class="text-danger">*</span></label>
+					  <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+				   </div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+					  <label>Role :<span class="text-danger">*</span></label>
+					  <select name="role[]" id="role" class="select2" multiple>
+						 <option value="1">Director</option>
+						 <option value="2">Secretary</option>
+						 <option value="3">Head Of Finance</option>
+						 <option value="4">Head Of Accounting</option>
+						 <option value="5">Sales & Marketing Manager</option>
+						 <option value="6">Sales Project</option>
+						 <option value="7">Head Of Administration</option>
+						 <option value="8">Digital Marketing</option>
+						 <option value="9">Purchasing</option>
+						 <option value="10">Admin Sales & Stock</option>
+						 <option value="11">Piutang & Pengiriman</option>
+						 <option value="12">Assisten Hiro</option>
+						 <option value="13">Assisten</option>
+						 <option value="14">Head Of HRD</option>
+					  </select>
+				   </div>
+				  </div>
+			   </div>
+			   <div class="row">
+                  <div class="col-md-4">
+                     <div class="form-group">
+                        <label>Place of Birth :<span class="text-danger">*</span></label>
+                        <input type="text" name="pob" id="pob" class="form-control" placeholder="Enter place of birth" value="{{ old('pob') }}">
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Date of Birth :<span class="text-danger">*</span></label>
+                        <input type="date" name="dob" id="dob" class="form-control" placeholder="Enter date of birth" value="{{ old('dob') }}">
+                     </div>
+                  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Gender :<span class="text-danger">*</span></label>
+						<select name="gender" id="gender" class="custom-select">
+							<option value="1">Male</option>
+							<option value="2">Female</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Marital Status :<span class="text-danger">*</span></label>
+						<select name="marital_status" id="marital_status" class="custom-select">
+							<option value="1">Single</option>
+							<option value="2">Married</option>
+							<option value="3">Widow</option>
+							<option value="4">Widower</option>
+							<option value="5">Divorced</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Blood Type :<span class="text-danger">*</span></label>
+						<input type="text" name="blood_type" id="blood_type" class="form-control" placeholder="Enter type of blood" value="{{ old('blood_type') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Religion :<span class="text-danger">*</span></label>
+						<select name="religion" id="religion" class="custom-select">
+							<option value="1">Islam</option>
+							<option value="2">Kristen</option>
+							<option value="3">Katolik</option>
+							<option value="4">Hindu</option>
+							<option value="5">Budha</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>ID Card :<span class="text-danger">*</span></label>
+						<select name="id_card" id="id_card" class="custom-select">
+							<option value="1">KTP</option>
+							<option value="2">SIM</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>ID Number :<span class="text-danger">*</span></label>
+						<input type="text" name="id_number" id="id_number" class="form-control" placeholder="Enter choosen id card number" value="{{ old('id_number') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Post Code :<span class="text-danger">*</span></label>
+						<input type="text" name="postcode" id="postcode" class="form-control" placeholder="Enter post code" value="{{ old('postcode') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>ID Card Address :<span class="text-danger">*</span></label>
+						<input type="text" name="address_id" id="address_id" class="form-control" placeholder="Enter id card address" value="{{ old('address_id') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Residence Address :<span class="text-danger">*</span></label>
+						<input type="text" name="address_residence" id="address_residence" class="form-control" placeholder="Enter residence address" value="{{ old('address_residence') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Taxpayer :<span class="text-danger">*</span></label>
+						<select name="ispkp" id="ispkp" class="custom-select">
+							<option value="1">Yes</option>
+							<option value="2">No</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>NPWP :</label>
+						<input type="text" name="npwp" id="npwp" class="form-control" placeholder="Enter npwp" value="{{ old('npwp') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>PTKP Type :</label>
+						<select name="ptkp_type" id="ptkp_type" class="custom-select">
+							<option value="">None</option>
+							<option value="TK0">TK/0</option>
+							<option value="TK1">TK/1</option>
+							<option value="TK2">TK/2</option>
+							<option value="TK3">TK/3</option>
+							<option value="K0">K/0</option>
+							<option value="K1">K/1</option>
+							<option value="K2">K/2</option>
+							<option value="K3">K/3</option>
+							<option value="KI0">K/I/0</option>
+							<option value="KI1">K/I/1</option>
+							<option value="KI2">K/I/2</option>
+							<option value="KI3">K/I/3</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Tax Type :</label>
+						<select name="tax_type" id="tax_type" class="custom-select">
+							<option value="1">Gross</option>
+							<option value="2">Gross Up</option>
+							<option value="3">Netto</option>
+						</select>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Account Number :<span class="text-danger">*</span></label>
+						<input type="text" name="account_number" id="account_number" class="form-control" placeholder="Enter account number" value="{{ old('account_number') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Account Bank :<span class="text-danger">*</span></label>
+						<input type="text" name="account_bank" id="account_bank" class="form-control" placeholder="Enter account bank" value="{{ old('account_bank') }}">
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="form-group">
+						<label>Account Name :<span class="text-danger">*</span></label>
+						<input type="text" name="account_name" id="account_name" class="form-control" placeholder="Enter account bank" value="{{ old('account_name') }}">
+					</div>
+				  </div>
+			   </div>
                <div class="form-group text-center mt-4">
                   <div class="form-check form-check-inline">
                      <label class="form-check-label">
@@ -365,6 +528,24 @@
             $('#name').val(response.name);
             $('#email').val(response.email);
             $('#branch').val(response.branch);
+			$('#pob').val(response.place_of_birth);
+			$('#dob').val(response.date_of_birth);
+			$('#gender').val(response.gender);
+			$('#marital_status').val(response.marital_status);
+			$('#blood_type').val(response.blood_type);
+			$('#religion').val(response.religion);
+			$('#id_card').val(response.id_type);
+			$('#id_number').val(response.id_no);
+			$('#postcode').val(response.postcode);
+			$('#address_id').val(response.address_id);
+			$('#address_residence').val(response.address_residence);
+			$('#npwp').val(response.npwp);
+			$('#ispkp').val(response.ispkp);
+			$('#ptkp_type').val(response.ptkp_type);
+			$('#tax_type').val(response.tax_type);
+			$('#account_number').val(response.account_number);
+			$('#account_bank').val(response.account_bank);
+			$('#account_name').val(response.account_name);
             $('#role').val(response.role).change();
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
             $('#btn_update').attr('onclick', 'update(' + id + ')');

@@ -16,15 +16,19 @@ class Journal extends Model {
     protected $fillable   = [
         'journalable_type',
         'journalable_id',
-        'debit',
-        'credit',
+        'coa_id',
+        'type',
         'nominal',
-        'description'
     ];
 
     public function journalable()
     {
         return $this->morphTo();
+    }
+	
+	public function coa()
+    {
+        return $this->belongsTo('App\Models\Coa');
     }
 
 }

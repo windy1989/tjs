@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Coa;
 use Illuminate\Http\Request;
+use App\Exports\CoasExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -162,7 +165,8 @@ class CoaController extends Controller {
     public function update(Request $request, $id)
     {
         $validation = Validator::make($request->all(), [
-            'code'      => ['required', Rule::unique('coas', 'code')->ignore($id)],
+            #'code'      => ['required', Rule::unique('coas', 'code')->ignore($id)],
+			'code'      => ['required', Rule::unique('brands', 'code')->ignore($id)],
             'name'      => 'required',
             'parent_id' => 'required',
             'status'    => 'required'
@@ -231,4 +235,43 @@ class CoaController extends Controller {
         return response()->json($response);
     }
     
+	public function export(Request $request){
+		$search = $request->search ? $request->search : '';
+		$numrow = $request->numrow;
+		$start = $request->start;
+		$status = $request->status ? $request->status : '';
+		
+		return Excel::download(new CoasExport($search, $numrow, $start, $status), 'coas.xlsx');
+	}
+	
+	public function print(Request $request)
+    {
+		$search = $request->search ? $request->search : '';
+		$numrow = $request->numrow;
+		$start = $request->start;
+		$status = $request->status ? $request->status : '';
+		
+		$coa = Coa::where('name','like','%'.$search.'%')
+				->where('status','like','%'.$status.'%')
+				->orderBy('code','asc')
+				->offset($start)
+				->limit($numrow)
+				->get();
+
+		if(!$coa) {
+			abort(404);
+		}
+		
+		$pdf = PDF::loadView('admin.pdf.master_data.coa', [
+				'coa' => $coa
+			],
+			[],
+			[ 
+			  'format' => 'A4-P',
+			  'orientation' => 'P'
+			]
+		);
+
+        return $pdf->stream('coa_report.pdf');
+    }
 }

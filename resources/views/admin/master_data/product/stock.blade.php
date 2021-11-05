@@ -7,6 +7,16 @@
 					<span class="font-weight-semibold">Stock</span>
 				</h4>
 			</div>
+			<div class="header-elements">
+				<div class="d-flex justify-content-center">
+					<button class="btn bg-indigo-400 btn-labeled mr-2 btn-labeled-left" onclick="exportData()">
+						<b><i class="icon-file-excel"></i></b> Export Data
+					</button>
+					<button class="btn bg-pink-400 btn-labeled mr-2 btn-labeled-left" onclick="printData()">
+						<b><i class="icon-printer2"></i></b> Print Data
+					</button>
+				</div>
+			</div>
 		</div>
 		<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
 			<div class="d-flex">
@@ -82,3 +92,16 @@
 			</div>
 		</div>
 	</div>
+<script>
+	function exportData(){
+		var search = $('#search').val();
+		
+		window.location = "{{ url('admin/master_data/product/stock/export') }}?search=" + search;
+   }
+   
+   function printData(){
+		var search = $('#search').val(), page = {{ Request::get('page') ? Request::get('page') : '1' }};
+		
+		window.open("{{ url('admin/master_data/product/stock/print') }}?search=" + search + "&page=" + page, "_blank");
+   }
+</script>

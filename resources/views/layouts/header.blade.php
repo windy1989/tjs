@@ -144,10 +144,10 @@
 					<div class="header-row justify-content-lg-between bg-white">
 						<div id="logo">
 							<a href="{{ url('/') }}" class="standard-logo">
-								<img src="{{ asset('website/logo-black.png') }}" class="img-fluid" alt="Logo">
+								<img src="{{ asset('website/logo-black.png?v=0') }}" class="img-fluid" alt="Logo">
 							</a>
 							<a href="{{ url('/') }}" class="retina-logo">
-								<img src="{{ asset('website/logo-black.png') }}" class="img-fluid" alt="Logo">
+								<img src="{{ asset('website/logo-black.png?v=0') }}" class="img-fluid" alt="Logo">
 							</a>
 						</div>
 						<div class="header-misc">

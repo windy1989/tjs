@@ -27,7 +27,7 @@ class AuthController extends Controller {
             $user = User::where('email', $request->email)->first();
             if($user) {
 
-                $passToken = false;
+                /* $passToken = false;
                 
                 if(Cookie::get('temp') == null){
                     if($user->token_device == ''){
@@ -45,7 +45,7 @@ class AuthController extends Controller {
 					}
                 }
 
-                if($passToken == true){
+                if($passToken == true){ */
                     if($user->verification) {
                         if(Hash::check($request->password, $user->password)) {
                             $role = [];
@@ -69,9 +69,9 @@ class AuthController extends Controller {
                     } else {
                         return redirect()->back()->with(['info' => 'Account not verified']);
                     }
-                } else {
+                /* } else {
                     return redirect()->back()->with(['info' => 'Multiple device login detected']);
-                }
+                }*/
             } else {
                 return redirect()->back()->with(['failed' => 'Account not found']);
             }
@@ -293,4 +293,58 @@ class AuthController extends Controller {
         return redirect('admin/login')->with(['success' => 'You successfully logout.']);
     }
 
+	public function uploadSign(Request $request)
+    {
+		$validation = Validator::make($request->all(), [
+            'image'  => 'image|mimes:jpg,jpeg,png|max:250|dimensions:max_width=700,max_height=700'
+        ], [
+            'image.image'      => 'File must be an image.',
+            'image.mimes'      => 'Image must have an extension jpg, jpeg, png.',
+            'image.max'        => 'Image max 250KB.',
+            'image.dimensions' => 'Image max size 700x700.'
+        ]);
+		
+		if($validation->fails()) {
+            $response = [
+                'status' => 422,
+                'error'  => $validation->errors()
+            ];
+        } else {
+            $query = User::find(session('bo_id'));
+            
+            if($request->has('image')) {
+                if(Storage::exists($query->sign)) {
+                    Storage::delete($query->sign);
+                }
+
+                $image = $request->file('image')->store('public/user');
+            } else {
+                $image = $query->sign;
+            }
+
+            $query->update([
+                'sign'  => $image
+            ]);
+
+            if($query) {
+                activity()
+                    ->performedOn(new User())
+                    ->causedBy(session('bo_id'))
+                    ->withProperties($query)
+                    ->log('Update user sign image.');
+
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data added successfully.'
+                ];
+            } else {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data failed to add.'
+                ];
+            }
+        }
+
+        return response()->json($response);
+	}
 }

@@ -1,3 +1,6 @@
+<style>
+	.table-bordered td, .table-bordered th { border: 1px solid #818181; }
+</style>
 <div class="content-wrapper">
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">

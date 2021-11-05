@@ -14,11 +14,11 @@
    <meta name="keywords" content="smb, smartmarble, ceramic, ecommerce, online shop, indonesian tiles, surabaya tiles, ceramic surabaya, tiles ecommerce, jual keramik surabaya, keramik online">
    <meta itemprop="name" content="Smart Marble & Bath">
    <meta itemprop="description" content="Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.">
-   <meta itemprop="image" content="{{ asset('website/logo-black.png') }}">
+   <meta itemprop="image" content="{{ asset('website/logo-black.png?v=0') }}">
    <meta property="og:title" content="{{ isset($meta_title) ? $meta_title : 'Smart Marble & Bath | ' . $title }}">
    <meta property="og:description" content="{{ isset($meta_description) ? $meta_description : 'Smart marble and bath focuses on in-store and online e-commerce for best quality tiles and sanitary ware at reaonable price. Experienced supplier of tiles and Sanitary since 1976. Located in city of Jakarta and Surabaya, indonesia.' }}">
    <meta property="og:url" content="{{ url()->current() }}">
-   <meta property="og:image" content="{{ isset($meta_image) ? $meta_image : asset('website/logo-black.png') }}">
+   <meta property="og:image" content="{{ isset($meta_image) ? $meta_image : asset('website/logo-black.png?v=0') }}">
    <meta property="og:locale" content="id_ID">
    <meta property="product:brand" content="{{ isset($meta_brand) ? $meta_brand : '' }}">
    <meta property="product:category" content="{{ isset($meta_category) ? $meta_category : '' }}">
@@ -36,7 +36,7 @@
    <link rel="alternate" href="{{ url('/') }}" hreflang="in">
    <link rel="shortcut icon" href="{{ asset('website/icon.png') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/style.css?v=9') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/dark.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/css/swiper.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/front-office/demos/shop/shop.css') }}">
@@ -47,7 +47,7 @@
    <link rel="stylesheet" href="{{ asset('template/plugins/waitMe/waitMe.min.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/countdown/resources/default.css') }}">
    <link rel="stylesheet" href="{{ asset('template/plugins/notification/css/jquery.notifyBar.css') }}">
-	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/front-office/custom.css?v=1') }}">
    <script src="{{ asset('template/front-office/js/jquery.js') }}"></script>
    <script src="{{ asset('template/plugins/waitMe/waitMe.min.js') }}"></script>
    <script src="{{ asset('template/plugins/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
@@ -82,4 +82,13 @@
       })();
    </script>
    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=867667750621417&ev=PageView&noscript=1"></noscript>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKMJ900FZ5"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-PKMJ900FZ5');
+	</script>
 </head>

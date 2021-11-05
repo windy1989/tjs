@@ -55,7 +55,7 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-4">
+               <div class="col-md-3">
                   <div class="form-group">
                      <label>Stock :</label>
                      <select name="filter_stock" id="filter_stock" class="custom-select">
@@ -66,7 +66,7 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-4">
+               <div class="col-md-3">
                   <div class="form-group">
                      <label>Shading :</label>
                      <select name="filter_shading" id="filter_shading" class="custom-select">
@@ -76,13 +76,23 @@
                   </select>
                   </div>
                </div>
-               <div class="col-md-4">
+               <div class="col-md-3">
                   <div class="form-group">
                      <label>Status :</label>
                      <select name="filter_status" id="filter_status" class="custom-select">
                      <option value="">All</option>
                      <option value="1">Active</option>
                      <option value="2">Not Active</option>
+                  </select>
+                  </div>
+               </div>
+			   <div class="col-md-3">
+                  <div class="form-group">
+                     <label>Check :</label>
+                     <select name="filter_check" id="filter_check" class="custom-select">
+                     <option value="">All</option>
+                     <option value="1">Not Checked</option>
+                     <option value="2">Already Checked</option>
                   </select>
                   </div>
                </div>
@@ -97,18 +107,20 @@
 			</div>
 		</div>
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
-               <table id="datatable_serverside" class="table table-bordered table-striped w-100">
+               <table id="datatable_serverside" class="table table-bordered table-striped">
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
                         <th>Shading</th>
+						<th>Code</th>
                         <th>Name</th>
                         <th>Stock</th>
+						<th>Check</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -205,7 +217,7 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-4">
                               <div class="form-group">
                                  <label>Supplier :<span class="text-danger">*</span></label>
                                  <select name="supplier_id" id="supplier_id" class="select2">
@@ -216,7 +228,7 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="col-md-6">
+                           <div class="col-md-4">
                               <div class="form-group">
                                  <label>Grade :<span class="text-danger">*</span></label>
                                  <select name="grade_id" id="grade_id" class="select2" onchange="generateCode()">
@@ -224,6 +236,15 @@
                                     @foreach($grade as $g)
                                        <option value="{{ $g->id }}">{{ $g->name }}</option>
                                     @endforeach
+                                 </select>
+                              </div>
+                           </div>
+						   <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Check :<span class="text-danger">*</span></label>
+                                 <select name="check" id="check" class="custom-select">
+                                    <option value="1">Not Checked</option>
+                                    <option value="2">Already Checked</option>
                                  </select>
                               </div>
                            </div>
@@ -309,7 +330,7 @@
                                  <select name="shading_warehouse" id="shading_warehouse" class="select2">
                                     <option value="">-- Choose --</option>
                                     @foreach($warehouse as $w)
-                                       <option value="{{ $w->code }};{{ $w->name }}">{{ $w->name }}</option>
+                                       <option value="{{ $w->code }};{{ $w->name }}">{{ '['.$w->code.']'.$w->name }}</option>
                                     @endforeach
                                  </select>
                               </div>
@@ -383,8 +404,12 @@
 
 <script>
    $(function() {
+	  ckEditor('description');
+	   
       loadDataTable();
-      $('#datatable_shading').DataTable();
+      $('#datatable_shading').DataTable({
+		lengthMenu : [ [-1], ["All"] ]
+	  });
 
       $('#datatable_shading tbody').on('click', '#delete_data_shading', function () {
          $('#datatable_shading').DataTable().row($(this).parents('tr')).remove().draw();
@@ -403,6 +428,7 @@
       $('#filter_stock').val(null);
       $('#filter_shading').val(null);
       $('#filter_status').val(null);
+	  $('#filter_check').val(null);
       loadDataTable();
    }
 
@@ -538,6 +564,7 @@
                brand_id: $('#filter_brand_id').val(),
                country_id: $('#filter_country_id').val(),
                stock: $('#filter_stock').val(),
+			   check: $('#filter_check').val(),
                shading: $('#filter_shading').val(),
                status: $('#filter_status').val()
             },
@@ -559,8 +586,10 @@
          columns: [
             { name: 'id', searchable: false, className: 'text-center align-middle' },
             { name: 'shading', searchable: false, orderable: false, className: 'text-center align-middle' },
+			{ name: 'code', orderable: false, searchable: false, className: 'text-center align-middle' },
             { name: 'name', orderable: false, searchable: false, className: 'text-center align-middle' },
-            { name: 'stock', orderable: false, searchable: false, className: 'text-center align-middle' },
+            { name: 'stock', searchable: false, className: 'text-center align-middle' },
+			{ name: 'check', searchable: false, className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
          ]
@@ -641,7 +670,8 @@
             $('#container_standart').val(response.container_standart);
             $('#container_stock').val(response.container_stock);
             $('#container_max_stock').val(response.container_max_stock);
-            $('#description').val(response.description);
+			CKEDITOR.instances['description'].setData(response.description);
+			$('#check').val(response.check);
             $('input[name="status"][value="' + response.status + '"]').prop('checked', true);
 
             $.each(response.shading, function(i, val) {
@@ -673,6 +703,7 @@
    }
 
    function update(id) {
+	  CKEDITOR.instances['description'].updateElement();
       $.ajax({
          url: '{{ url("admin/master_data/product/product_code/update") }}' + '/' + id,
          type: 'POST',

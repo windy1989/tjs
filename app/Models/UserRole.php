@@ -58,6 +58,9 @@ class UserRole extends Model {
             case '13':
                 $role = 'Assisten';
                 break;
+			case '14':
+                $role = 'Head Of HRD';
+                break;
             default:
                 $role = 'Invalid';
                 break;

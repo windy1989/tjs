@@ -53,7 +53,7 @@
                                 <div class="row text-center">
                                     <div class="col-md-4">Code : <b>{{ $cash_bank->code }}</b></div>
                                     <div class="col-md-4">Date : <b>{{ $cash_bank->created_at->format('d M Y') }}</b></div>
-                                    <div class="col-md-4">Amount : <b>{{ number_format($cash_bank->cashBankDetail->sum('nominal'), 2, ',', '.') }}</b></div>
+                                    <div class="col-md-4">Amount : <b>{{ number_format($cash_bank->cashBankDetail->where('type','1')->sum('nominal'), 2, ',', '.') }}</b></div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <h6 class="card-title font-weight-bold">Deposit To :</h6>
                                     <p class="mb-0">
                                         @foreach($cash_bank->cashBankDetail as $cbd)
-                                            <div class="badge badge-light badge-striped badge-striped-left border-left-danger mb-1 mr-1 text-uppercase">[{{ $cbd->coaDebit->code }}] {{ $cbd->coaDebit->name }}</div>
+                                            <div class="badge badge-light badge-striped badge-striped-left border-left-danger mb-1 mr-1 text-uppercase">[{{ $cbd->coa->code }}] {{ $cbd->coa->name }}</div>
                                         @endforeach
                                     </p>
                                 </div>
@@ -78,7 +78,7 @@
                                     <h6 class="card-title font-weight-bold">Paid From :</h6>
                                     <p class="mb-0">
                                         @foreach($cash_bank->cashBankDetail as $cbd)
-                                            <div class="badge badge-light badge-striped badge-striped-left border-left-success mb-1 mr-1 text-uppercase">[{{ $cbd->coaCredit->code }}] {{ $cbd->coaCredit->name }}</div>
+                                            <div class="badge badge-light badge-striped badge-striped-left border-left-success mb-1 mr-1 text-uppercase">[{{ $cbd->coa->code }}] {{ $cbd->coa->name }}</div>
                                         @endforeach
                                     </p>
                                 </div>
@@ -98,40 +98,54 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $total = 0; @endphp
-                            @foreach($cash_bank->cashBankDetail as $cbd)
-                                @php $total += $cbd->nominal; @endphp
+                            @php $totaldebet = 0; $totalcredit = 0; @endphp
+                            @foreach($cash_bank->cashBankDetail()->orderBy('type')->get() as $cbd)
+                                @php 
+									if($cbd->type == 1){
+										$totaldebet += $cbd->nominal;
+									}elseif($cbd->type == 2){
+										$totalcredit += $cbd->nominal;
+									}
+								@endphp
                                 @if($cash_bank->type == 1)
+									@php if($cbd->type == '2'){ @endphp
                                     <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaCredit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaCredit->name }}</td>
+                                        <td class="align-middle">{{ $cbd->coa->code }}</td>
+                                        <td class="align-middle">{{ $cbd->coa->name }}</td>
                                         <td class="align-middle">0</td>
                                         <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
                                         <td class="align-middle">{{ $cbd->note }}</td>
                                     </tr>
+									@php } @endphp
                                 @elseif($cash_bank->type == 2)
+									@php if($cbd->type == '1'){ @endphp
                                     <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaDebit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaDebit->name }}</td>
-                                        <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->coa->code : '' }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->coa->name : '' }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? number_format($cbd->nominal, 2, ',', '.') : 0 }}</td>
                                         <td class="align-middle">0</td>
-                                        <td class="align-middle">{{ $cbd->note }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->note : '' }}</td>
                                     </tr>
+									@php } @endphp
                                 @else
+                                    @php if($cbd->type == '1'){ @endphp
                                     <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaDebit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaDebit->name }}</td>
-                                        <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->coa->code : '' }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->coa->name : '' }}</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? number_format($cbd->nominal, 2, ',', '.') : 0 }}</td>
                                         <td class="align-middle">0</td>
+                                        <td class="align-middle">{{ $cbd->type == '1' ? $cbd->note : '' }}</td>
+                                    </tr>
+									@php } @endphp
+                                    @php if($cbd->type == '2'){ @endphp
+                                    <tr class="text-center">
+                                        <td class="align-middle">{{ $cbd->coa->code }}</td>
+                                        <td class="align-middle">{{ $cbd->coa->name }}</td>
+                                        <td class="align-middle">0</td>
+                                        <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
                                         <td class="align-middle">{{ $cbd->note }}</td>
                                     </tr>
-                                    <tr class="text-center">
-                                        <td class="align-middle">{{ $cbd->coaCredit->code }}</td>
-                                        <td class="align-middle">{{ $cbd->coaCredit->name }}</td>
-                                        <td class="align-middle">0</td>
-                                        <td class="align-middle">{{ number_format($cbd->nominal, 2, ',', '.') }}</td>
-                                        <td class="align-middle">{{ $cbd->note }}</td>
-                                    </tr>
+									@php } @endphp
                                 @endif
                             @endforeach
                         </tbody>
@@ -139,30 +153,30 @@
                             @if($cash_bank->type == 1 || $cash_bank->type == 2)
                                 <tr>
                                     <td colspan="4" class="align-middle">
-                                        Say : <span class="font-italic">{{ App\Helper\SMB::say($total) }}</span>
+                                        Say : <span class="font-italic">{{ App\Helper\SMB::say($totaldebet) }}</span>
                                     </td>
                                     <td class="align-middle font-weight-bold text-uppercase">
                                         @if($cash_bank->type == 1)
-                                            Total Deposit : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
+                                            Total Deposit : <span class="float-right">{{ number_format($totaldebet, 2, ',', '.') }}</span>
                                         @else
-                                            Total Payment : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
+                                            Total Payment : <span class="float-right">{{ number_format($totalcredit, 2, ',', '.') }}</span>
                                         @endif
                                     </td>
                                 </tr>
                             @else
                                 <tr>
                                     <td colspan="4" rowspan="3" class="align-middle">
-                                        Say : <span class="font-italic">{{ App\Helper\SMB::say($total) }}</span>
+                                        Say : <span class="font-italic">{{ App\Helper\SMB::say($totalcredit) }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="align-middle font-weight-bold text-uppercase">
-                                        Total Debit : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
+                                        Total Debit : <span class="float-right">{{ number_format($totaldebet, 2, ',', '.') }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="align-middle font-weight-bold text-uppercase">
-                                        Total Credit : <span class="float-right">{{ number_format($total, 2, ',', '.') }}</span>
+                                        Total Credit : <span class="float-right">{{ number_format($totalcredit, 2, ',', '.') }}</span>
                                     </td>
                                 </tr>
                             @endif

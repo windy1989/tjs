@@ -14,22 +14,29 @@ class ProjectProduction extends Model {
     protected $primaryKey = 'id';
     protected $fillable   = [
         'project_id',
+		'project_purchase_id',
         'image',
         'start_date',
         'finish_date',
+		'progress',
         'note',
 		'progress'
     ];
 	
-	public function image() 
+	public function projectPurchase()
+    {
+        return $this->belongsTo('App\Models\ProjectPurchase', 'project_purchase_id', 'id');
+    }
+	
+	public function attachment() 
     {
         if(Storage::exists($this->image)) {
-            $image = asset(Storage::url($this->image));
+            $attachment = asset(Storage::url($this->image));
         } else {
-            $image = asset('website/empty.jpg');
+            $attachment = asset('website/empty.jpg');
         }
 
-        return $image;
+        return $attachment;
     }
 
 }

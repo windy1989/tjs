@@ -12,6 +12,7 @@ class ProductShading extends Model {
     protected $table      = 'product_shadings';
     protected $primaryKey = 'id';
     protected $fillable   = [
+		'id',
         'product_id',
         'warehouse_code',
         'stock_code',
@@ -24,4 +25,8 @@ class ProductShading extends Model {
         return $this->belongsTo('App\Models\Warehouse', 'warehouse_code');
     }
 
+	public function product()
+    {
+        return $this->belongsTo('App\Models\Product','product_id','id');
+    }
 }

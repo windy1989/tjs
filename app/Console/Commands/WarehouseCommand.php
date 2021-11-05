@@ -39,11 +39,11 @@ class WarehouseCommand extends Command
      */
     public function handle()
     {
-        $get_page   = json_decode(Http::post('http://203.161.31.109/ventura/warehouse'));
+        $get_page   = json_decode(Http::post(env('VENTURA') . 'ventura/warehouse'));
         $total_page = $get_page->result->total_page;
 
         for($i = 1; $i <= $total_page; $i++) {
-            $warehouse = json_decode(Http::post('http://203.161.31.109/ventura/warehouse', [
+            $warehouse = json_decode(Http::post(env('VENTURA') . 'ventura/warehouse', [
                 'page' => $i
             ]));
 

@@ -32,7 +32,7 @@
 	</div>
 	<div class="content">
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
@@ -44,7 +44,7 @@
 			</div>
 			<div class="card-body">
             <div class="table-responsive">
-               <table id="datatable_serverside" class="table table-bordered table-striped w-100 responsive">
+               <table id="datatable_serverside" class="table table-bordered table-striped">
                   <thead class="bg-dark">
                      <tr class="text-center">
                         <th>No</th>
@@ -177,10 +177,6 @@
             { name: 'name', className: 'text-center align-middle' },
             { name: 'status', searchable: false, className: 'text-center align-middle' },
             { name: 'action', searchable: false, orderable: false, className: 'text-center nowrap align-middle' }
-         ],
-         dom: 'Blfrtip',
-         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print',
          ]
       }); 
    }

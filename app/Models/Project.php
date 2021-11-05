@@ -12,6 +12,7 @@ class Project extends Model {
     protected $table      = 'projects';
     protected $primaryKey = 'id';
     protected $fillable   = [
+		'id',
         'user_id',
         'country_id',
         'city_id',
@@ -24,10 +25,10 @@ class Project extends Model {
         'owner',
 		'coa_id',
         'payment_method',
+		'term_payment',
         'supply_method',
         'ppn',
         'progress',
-		'so_file',
 		'delivery_cost',
 		'cutting_cost',
 		'misc_cost'
@@ -53,11 +54,26 @@ class Project extends Model {
     public function paymentMethod() 
     {
         switch($this->payment_method) {
-            case '1':
-                $payment_method = 'Cash';
+            case '11':
+                $payment_method = 'Cash Before Delivery';
                 break;
-            case '2':
-                $payment_method = 'Credit';
+            case '12':
+                $payment_method = 'Cash After Delivery';
+                break;
+			case '13':
+                $payment_method = 'Cash with Down Payment';
+                break;
+			case '21':
+                $payment_method = 'Credit with Cover BG';
+                break;
+			case '22':
+                $payment_method = 'Credit with SKBDN';
+                break;
+			case '23':
+                $payment_method = 'Credit with SCF';
+                break;
+			case '24':
+                $payment_method = 'Credit with Down Payment';
                 break;
             default:
                 $payment_method = 'Invalid';
@@ -65,6 +81,32 @@ class Project extends Model {
         }
 
         return $payment_method;
+    }
+	
+	public function paymentTerm() 
+    {
+        switch($this->term_payment) {
+            case '0':
+                $payment_term = 'Default (0 days)';
+                break;
+            case '7':
+                $payment_term = '7 Days';
+                break;
+			case '14':
+                $payment_term = '14 Days';
+                break;
+			case '30':
+                $payment_term = '30 Days';
+                break;
+			case '45':
+                $payment_term = '45 Days';
+                break;
+            default:
+                $payment_term = 'Invalid';
+                break;
+        }
+
+        return $payment_term;
     }
 
     public function supplyMethod() 
@@ -175,4 +217,45 @@ class Project extends Model {
     {
         return $this->hasMany('App\Models\ProjectQuotation');
     }
+	
+	public function projectNegotiation()
+    {
+        return $this->hasMany('App\Models\ProjectNegotiation');
+    }
+	
+	public function projectSale()
+    {
+        return $this->hasMany('App\Models\ProjectSale');
+    }
+	
+	public function projectPurchase()
+    {
+        return $this->hasMany('App\Models\ProjectPurchase');
+    }
+	
+	public function projectProforma()
+    {
+        return $this->hasMany('App\Models\ProjectProforma');
+    }
+	
+	public function projectPurchaseReturn()
+    {
+        return $this->hasMany('App\Models\ProjectPurchaseReturn');
+    }
+	
+	public function projectSaleReturn()
+    {
+        return $this->hasMany('App\Models\ProjectSaleReturn');
+    }
+	
+	public function projectTroubleshooting()
+    {
+        return $this->hasMany('App\Models\ProjectTroubleshooting');
+    }
+	
+	public function getApprovalQuotation()
+	{
+		$data = ProjectQuotation::where('project_id', $this->id)->orderByDesc('id')->first();
+		return $data;
+	}
 }

@@ -37,7 +37,7 @@
 				<li class="nav-item nav-item-dropdown-lg dropdown">
 					@php 
 						$notify = App\Models\Notification::where('user_id', session('bo_id'))
-							->where('seen', 0)
+							->where('seen', 1)
 							->whereDate('created_at', date('Y-m-d')); 
 					@endphp
 					<a href="#" class="navbar-nav-link navbar-nav-link-toggler" data-toggle="dropdown" data-popup="tooltip" title="Notification">

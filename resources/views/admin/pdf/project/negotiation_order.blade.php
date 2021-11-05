@@ -90,7 +90,7 @@
 	</head>
 	<body>
 		<div class="invoice-box">
-			<h3 style="text-align:right;">PT. PERWIRA TAMARAYA ABADI</h3>
+			<h3 style="text-align:right;"><img src="website/pta_small.png" height="13px" style="margin-right:5px;"> PT. PERWIRA TAMARAYA ABADI</h3>
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
 					<td colspan="2">
@@ -120,18 +120,10 @@
 			</table>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
-					<td colspan="2">
-						<table>
-							<tr>
-								@foreach($brand as $b)
-									<td>
-										<center>
-											<img src="{{ asset(Storage::url($b->image)) }}" width="200px">
-										</center>
-									</td>
-								@endforeach
-							</tr>
-						</table>
+					<td colspan="2" style="vertical-align: middle;padding-top:15px;padding-bottom:15px;">
+						<center>
+							<img src="website/kop_brand_report.png" width="100%">
+						</center>
 					</td>
 				</tr>
 			</table>

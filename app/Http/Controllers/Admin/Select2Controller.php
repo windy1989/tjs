@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Type;
 use App\Models\Product;
 use App\Models\Warehouse;
+use App\Models\Customer;
+use App\Models\Currency;
+use App\Models\Country;
+use App\Models\City;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -33,6 +39,119 @@ class Select2Controller extends Controller {
         $response = [];
         $search   = $request->search;
         $data     = Warehouse::select('id', 'name')
+            ->where('name', 'like', "%$search%")
+			->orWhere('code', 'like', "%$search%")
+			->where('status', 2)
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function supplier(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = Supplier::select('id', 'name', 'code')
+			->where('code', 'like', "%$search%")
+			->orWhere('name', 'like', "%$search%")
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function user(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = User::select('id', 'name')
+            ->where('name', 'like', "%$search%")
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function customer(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = Customer::select('id', 'name')
+            ->where('name', 'like', "%$search%")
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function country(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = Country::select('id', 'name')
+            ->where('name', 'like', "%$search%")
+			->where('status', 1)
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function currency(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = Currency::select('id', 'name', 'code')
+            ->where('code', 'like', "%$search%")
+			->where('status', 1)
+            ->get();
+
+        foreach($data as $d) {
+            $response[] = [
+                'id'   => $d->id,
+                'text' => $d->name.' - '.$d->code
+            ];
+        }
+
+        return response()->json(['items' => $response]);
+    }
+	
+	public function city(Request $request)
+    {
+        $response = [];
+        $search   = $request->search;
+        $data     = City::select('id', 'name')
             ->where('name', 'like', "%$search%")
             ->get();
 

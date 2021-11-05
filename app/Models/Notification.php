@@ -23,5 +23,19 @@ class Notification extends Model {
     {
         return $this->belongsTo('App\Models\User');
     }
+	
+	public static function sendNotif($role,$title,$description,$link)
+    {
+        $row = UserRole::whereIn('role',$role)->get();
 
+		foreach($row as $r){
+			Notification::create([
+				'user_id' 		=> $r->user_id,
+				'seen'			=> 1,
+				'title'			=> $title,
+				'description'	=> $description,
+				'link'			=> $link
+			]);
+		}
+    }
 }

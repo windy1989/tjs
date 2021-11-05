@@ -12,6 +12,12 @@
 					<button type="button" class="btn bg-success btn-labeled mr-2 btn-labeled-left" onclick="loadDataTable()">
 						<b><i class="icon-sync"></i></b> Refresh Data
 					</button>
+					<button class="btn bg-indigo-400 btn-labeled mr-2 btn-labeled-left" onclick="exportData()">
+						<b><i class="icon-file-excel"></i></b> Export Data
+					</button>
+					<button class="btn bg-pink-400 btn-labeled mr-2 btn-labeled-left" onclick="printData()">
+						<b><i class="icon-printer2"></i></b> Print Data
+					</button>
 					<button type="button" class="btn bg-primary btn-labeled btn-labeled-left" onclick="cancel()" data-toggle="modal" data-target="#modal_form">
 						<b><i class="icon-plus3"></i></b> Add Data
 					</button>
@@ -31,7 +37,7 @@
 	</div>
 	<div class="content">
 		<div class="card">
-			<div class="card-header header-elements-inline mb-3">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title">List Data</h5>
 				<div class="header-elements">
 					<select name="filter_status" id="filter_status" class="custom-select" onchange="loadDataTable()">
@@ -366,4 +372,20 @@
          ]
       }).show();
    }
+	
+	function exportData(){
+		var table = $('#datatable_serverside').DataTable();
+		var info = table.page.info();
+		var search = table.search(), numrow = info.length, start = info.start, status = $('#filter_status').val();
+		
+		window.location = "{{ url('admin/master_data/finance_accounting/coa/export') }}?search=" + search + "&numrow=" + numrow + "&start=" + start + "&status=" + status;
+	}
+   
+	function printData(){
+		var table = $('#datatable_serverside').DataTable();
+		var info = table.page.info();
+		var search = table.search(), numrow = info.length, start = info.start, status = $('#filter_status').val();
+		
+		window.open("{{ url('admin/master_data/finance_accounting/coa/print') }}?search=" + search + "&numrow=" + numrow + "&start=" + start + "&status=" + status, "_blank");
+	}
 </script>
